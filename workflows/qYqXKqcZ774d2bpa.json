@@ -7,7 +7,7 @@
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "My workflow",
+  "name": "PRUEBASHOPIFY",
   "nodes": [
     {
       "parameters": {
@@ -44,6 +44,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-11-28T17:25:28.000Z",
-  "versionId": "af4e4d5c-e32f-40bb-b0c1-cf7cb4352d47"
+  "updatedAt": "2025-11-28T18:32:20.000Z",
+  "versionId": "f326d1e2-6d61-4733-9d83-4b603e82ab11"
 }
