@@ -1,0 +1,121 @@
+{
+  "active": true,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Send email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-11-28T09:20:31.945Z",
+  "folder_calculated": "General",
+  "folder_name": "General",
+  "id": "qYqXKqcZ774d2bpa",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "PruebaShopify",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "7f3151ea-c1b2-4870-842c-bc45ba991b8b",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1248,
+        -224
+      ],
+      "id": "151860ff-6463-4121-9c1e-18a742b70932",
+      "name": "Webhook",
+      "webhookId": "7f3151ea-c1b2-4870-842c-bc45ba991b8b"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "d96f5655-a3e3-4b45-b4ec-210dd809a69c",
+              "leftValue": "={{ $json.body.variants[0].inventory_quantity }}",
+              "rightValue": 4,
+              "operator": {
+                "type": "number",
+                "operation": "lt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        -1024,
+        -224
+      ],
+      "id": "a639439f-a822-48a7-9c49-a4b0b6e84bb0",
+      "name": "Filter"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        -816,
+        -224
+      ],
+      "id": "c79d1c12-fb20-490d-bd78-3cd96688f791",
+      "name": "Send email",
+      "webhookId": "2de8c0a3-f36a-4a6a-8409-8d1c187d1e70"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-11-28T09:20:31.947Z",
+      "createdAt": "2025-11-28T09:20:31.947Z",
+      "role": "workflow:owner",
+      "workflowId": "qYqXKqcZ774d2bpa",
+      "projectId": "x5UZcmGQw2OWHuXb"
+    }
+  ],
+  "staticData": {
+    "node:Shopify Trigger": {}
+  },
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-11-29T08:16:45.000Z",
+  "versionId": "b5a833b7-fe62-44ca-b315-11c61689f502"
+}
