@@ -1,11 +1,22 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "Webhook": {
       "main": [
         [
           {
             "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Send email",
             "type": "main",
             "index": 0
           }
@@ -30,8 +41,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -896,
-        -128
+        -1248,
+        -224
       ],
       "id": "151860ff-6463-4121-9c1e-18a742b70932",
       "name": "Webhook",
@@ -49,12 +60,11 @@
           "conditions": [
             {
               "id": "d96f5655-a3e3-4b45-b4ec-210dd809a69c",
-              "leftValue": "tus muerto",
-              "rightValue": "23",
+              "leftValue": "={{ $json.body.variants[0].inventory_quantity }}",
+              "rightValue": 4,
               "operator": {
-                "type": "string",
-                "operation": "equals",
-                "name": "filter.operator.equals"
+                "type": "number",
+                "operation": "lt"
               }
             }
           ],
@@ -65,11 +75,25 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2.2,
       "position": [
-        -688,
-        -128
+        -1024,
+        -224
       ],
       "id": "a639439f-a822-48a7-9c49-a4b0b6e84bb0",
       "name": "Filter"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        -816,
+        -224
+      ],
+      "id": "c79d1c12-fb20-490d-bd78-3cd96688f791",
+      "name": "Send email",
+      "webhookId": "2de8c0a3-f36a-4a6a-8409-8d1c187d1e70"
     }
   ],
   "pinData": {},
@@ -90,6 +114,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-11-29T07:56:58.000Z",
-  "versionId": "7570c3ec-d797-4f65-83e7-60b8c0c64677"
+  "updatedAt": "2025-11-29T08:16:45.000Z",
+  "versionId": "b5a833b7-fe62-44ca-b315-11c61689f502"
 }
