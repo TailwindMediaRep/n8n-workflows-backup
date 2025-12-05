@@ -1,0 +1,811 @@
+{
+  "active": false,
+  "connections": {
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request2": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "modas_cielo",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "zonas abiertas",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "minimos y maximos",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "valores fijos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "modas_cielo": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "zonas abiertas": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "minimos y maximos": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "valores fijos": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 3
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "DATOS FINALES",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DATOS FINALES": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Facebook Graph API": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Facebook Graph API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Facebook Graph API1": {
+      "main": [
+        []
+      ]
+    },
+    "HTTP Request3": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-11-29T11:04:16.100Z",
+  "id": "kldleYUPha6bnarR",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Canva",
+  "nodes": [
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.canva.com/rest/v1/autofills",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"brand_template_id\": \"EAG6RY1SNp4\",\n  \"export_name\": \"Historia dia hoy\",\n  \"data\": {\n    \"fecha\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.fecha }}\"\n    },\n    \"calidadnieve_general\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.calidadnieve_general }}\"\n    },\n    \"estadogeneral\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.estadogeneral }}\"\n    },\n    \"visibilidadgeneral\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.visibilidadgeneral }}\"\n    },\n    \"temperaturaminima\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.temperaturaminima }}\"\n    },\n    \"temperaturamaxima\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.temperaturamaxima }}\"\n    },\n    \"vientominimo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.vientominimo }}\"\n    },\n    \"vientomaximo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.vientomaximo }}\"\n    },\n    \"espesorminimo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.espesorminimo }}\"\n    },\n    \"espesormaximo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.espesormaximo }}\"\n    },\n    \"remontes_abiertos\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.remontes_abiertos }}\"\n    },\n    \"km_esquiables\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.km_esquiables }}\"\n    },\n    \"zonasabiertaslista\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.zonasabiertaslista }}\" \n    }\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        992,
+        -240
+      ],
+      "id": "bfba9031-2760-4a1e-9cd5-df0d4919a417",
+      "name": "HTTP Request",
+      "credentials": {
+        "oAuth2Api": {
+          "id": "eHEbZK7oC3pW1LQr",
+          "name": "Canva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://api.canva.com/rest/v1/autofills/{{ $json.job.id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        1408,
+        -240
+      ],
+      "id": "729b74ec-4d44-4bd9-8516-730063fdba90",
+      "name": "HTTP Request1",
+      "credentials": {
+        "oAuth2Api": {
+          "id": "eHEbZK7oC3pW1LQr",
+          "name": "Canva"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -752,
+        -256
+      ],
+      "id": "7cec119c-980b-4784-a457-6f958bb441b9",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "url": "https://umb.sierranevada.es/umbraco/api/parte/previsiones?culture=es",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -528,
+        -256
+      ],
+      "id": "44b366ed-35e3-4931-9a9a-1270702b606e",
+      "name": "HTTP Request2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2c343f86-96ba-4add-bb62-c9b4047163d8",
+              "name": "Partes[0].Parte.partenieve.nieve.calidadveleta",
+              "value": "={{ $json.Partes[0].Parte.partenieve.nieve.calidadveleta }}",
+              "type": "string"
+            },
+            {
+              "id": "9568f3de-97e5-4c4e-a0b4-29ebb15cc588",
+              "name": "Partes[0].Parte.partenieve.nieve.calidadlaguna",
+              "value": "={{ $json.Partes[0].Parte.partenieve.nieve.calidadlaguna }}",
+              "type": "string"
+            },
+            {
+              "id": "0b3205d5-f1f9-4825-b695-76341043285e",
+              "name": "Partes[0].Parte.partenieve.nieve.calidadborreguiles",
+              "value": "={{ $json.Partes[0].Parte.partenieve.nieve.calidadborreguiles }}",
+              "type": "string"
+            },
+            {
+              "id": "badc888b-644c-4a62-b5a7-220b54c8de67",
+              "name": "Partes[0].Parte.partenieve.nieve.calidadlomadilar",
+              "value": "={{ $json.Partes[0].Parte.partenieve.nieve.calidadlomadilar }}",
+              "type": "string"
+            },
+            {
+              "id": "9204ab72-668f-443a-914d-a2c1df5fea2a",
+              "name": "Partes[0].Parte.partenieve.nieve.calidadrio",
+              "value": "={{ $json.Partes[0].Parte.partenieve.nieve.calidadrio }}",
+              "type": "string"
+            },
+            {
+              "id": "453e4f07-9050-48f5-98d2-131ee2a78440",
+              "name": "Partes[0].Parte.partenieve.nieve.calidadparador",
+              "value": "={{ $json.Partes[0].Parte.partenieve.nieve.calidadparador }}",
+              "type": "string"
+            },
+            {
+              "id": "17a4d0da-eed5-4f49-91d1-bc42e59e49be",
+              "name": "Partes[0].Parte.partenieve.pistas['@kilometrosesquiables']",
+              "value": "={{ $json.Partes[0].Parte.partenieve.pistas['@kilometrosesquiables'] }}",
+              "type": "string"
+            },
+            {
+              "id": "d37b4d79-8526-4f07-913a-bf4100735a12",
+              "name": "Partes[0].Parte.partenieve.remontes['@totalremontesabiertos']",
+              "value": "={{ $json.Partes[0].Parte.partenieve.remontes['@totalremontesabiertos'] }}",
+              "type": "string"
+            },
+            {
+              "id": "73738d3a-e5e9-4753-a330-03d8f5a7c6f7",
+              "name": "Partes[0].Parte.partenieve.nieve.espesorminimo",
+              "value": "={{ $json.Partes[0].Parte.partenieve.nieve.espesorminimo }}",
+              "type": "string"
+            },
+            {
+              "id": "6eb84e27-f771-4e0a-b842-ae4da7fa4f80",
+              "name": "Partes[0].Parte.partenieve.nieve.espesormaximo",
+              "value": "={{ $json.Partes[0].Parte.partenieve.nieve.espesormaximo }}",
+              "type": "string"
+            },
+            {
+              "id": "c822b071-c5d1-4a5c-aeac-835970153de8",
+              "name": "Partes[0].Parte.partenieve.nieve.calidadnieve",
+              "value": "={{ $json.Partes[0].Parte.partenieve.nieve.calidadnieve }}",
+              "type": "string"
+            },
+            {
+              "id": "6fba9b10-697c-441c-ae3f-b6b7548f6ce5",
+              "name": "Partes[0].Parte.partenieve.meteorologia.paginas.pagina[0].estadocieloveleta",
+              "value": "={{ $json.Partes[0].Parte.partenieve.meteorologia.paginas.pagina[0].estadocieloveleta }}",
+              "type": "string"
+            },
+            {
+              "id": "c7e7063f-a581-4148-88f0-77c20998d9b3",
+              "name": "Partes[0].Parte.partenieve.meteorologia.paginas.pagina[0].estadocieloborreguiles",
+              "value": "={{ $json.Partes[0].Parte.partenieve.meteorologia.paginas.pagina[0].estadocieloborreguiles }}",
+              "type": "string"
+            },
+            {
+              "id": "73ce8782-b451-4d72-8af7-3ebecb6f6026",
+              "name": "Partes[0].Parte.partenieve.meteorologia.paginas.pagina[0].estadocielopradollano",
+              "value": "={{ $json.Partes[0].Parte.partenieve.meteorologia.paginas.pagina[0].estadocielopradollano }}",
+              "type": "string"
+            },
+            {
+              "id": "7cd9d768-fa96-47e3-9f93-091618dd04e1",
+              "name": "Partes[0].Parte.partenieve.meteorologia.paginas.pagina[0].temperaturaveleta",
+              "value": "={{ $json.Partes[0].Parte.partenieve.meteorologia.paginas.pagina[0].temperaturaveleta }}",
+              "type": "string"
+            },
+            {
+              "id": "8a5cff23-c16e-4630-854d-277c05a27978",
+              "name": "Partes[0].Parte.partenieve.meteorologia.paginas.pagina[0].temperaturaborreguiles",
+              "value": "={{ $json.Partes[0].Parte.partenieve.meteorologia.paginas.pagina[0].temperaturaborreguiles }}",
+              "type": "string"
+            },
+            {
+              "id": "c2ed9074-c608-455e-ba9f-569ce4071379",
+              "name": "Partes[0].Parte.partenieve.meteorologia.paginas.pagina[0].temperaturapradollano",
+              "value": "={{ $json.Partes[0].Parte.partenieve.meteorologia.paginas.pagina[0].temperaturapradollano }}",
+              "type": "string"
+            },
+            {
+              "id": "c034b6ee-2460-4973-b524-8120c7006880",
+              "name": "Partes[0].Parte.partenieve.meteorologia.paginas.pagina[0].vientoveleta",
+              "value": "={{ $json.Partes[0].Parte.partenieve.meteorologia.paginas.pagina[0].vientoveleta }}",
+              "type": "string"
+            },
+            {
+              "id": "41d12c6b-84b0-44a1-8eee-442860463cab",
+              "name": "Partes[0].Parte.partenieve.meteorologia.paginas.pagina[0].vientoborreguiles",
+              "value": "={{ $json.Partes[0].Parte.partenieve.meteorologia.paginas.pagina[0].vientoborreguiles }}",
+              "type": "string"
+            },
+            {
+              "id": "cd034b10-f073-4414-afba-6f5590174eb2",
+              "name": "Partes[0].Parte.partenieve.meteorologia.paginas.pagina[0].vientopradollano",
+              "value": "={{ $json.Partes[0].Parte.partenieve.meteorologia.paginas.pagina[0].vientopradollano }}",
+              "type": "string"
+            },
+            {
+              "id": "15830aac-1426-4ea8-aa48-1ad4b39356f9",
+              "name": "Partes[0].Parte.partenieve.meteorologia.paginas.pagina[0].visibilidadveleta",
+              "value": "={{ $json.Partes[0].Parte.partenieve.meteorologia.paginas.pagina[0].visibilidadveleta }}",
+              "type": "string"
+            },
+            {
+              "id": "a3447f40-4ed9-4625-856c-0eacc51bd239",
+              "name": "Partes[0].Parte.partenieve.meteorologia.paginas.pagina[0].visibilidadborreguiles",
+              "value": "={{ $json.Partes[0].Parte.partenieve.meteorologia.paginas.pagina[0].visibilidadborreguiles }}",
+              "type": "string"
+            },
+            {
+              "id": "2d13f42d-11ba-4922-9a48-04d694ba76c8",
+              "name": "Partes[0].Parte.partenieve.meteorologia.paginas.pagina[0].visibilidadpradollano",
+              "value": "={{ $json.Partes[0].Parte.partenieve.meteorologia.paginas.pagina[0].visibilidadpradollano }}",
+              "type": "string"
+            },
+            {
+              "id": "d64f22c9-1186-420b-93b4-6a21d06afbdb",
+              "name": "Partes[0].Parte.partenieve.general.fecha",
+              "value": "={{ $json.Partes[0].Parte.partenieve.general.fecha }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -368,
+        -256
+      ],
+      "id": "322a55fd-abb5-42e1-95ee-8a0c5c9ff5f1",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Navegamos al objeto principal anidado\nconst item = $input.first().json.Partes[0].Parte.partenieve;\nconst nieve = item.nieve;\nconst meteorologia = item.meteorologia.paginas.pagina[0];\nconst pistas = item.pistas;\nconst remontes = item.remontes;\nconst general = item.general;\n\nreturn [{\n    json: {\n        // DATOS DE CALIDAD DE NIEVE (7 CAMPOS - 6 de zona + 1 general)\n        calidadveleta: nieve.calidadveleta.trim(),\n        calidadborreguiles: nieve.calidadborreguiles.trim(),\n        calidadlomadilar: nieve.calidadlomadilar.trim(),\n        calidadlaguna: nieve.calidadlaguna.trim(),\n        calidadrio: nieve.calidadrio.trim(),\n        calidadparador: nieve.calidadparador.trim(),\n        calidadnieve_general: nieve.calidadnieve.trim(), // <--- CAMPO AÑADIDO (Calidad General)\n\n        // DATOS METEOROLÓGICOS NUMÉRICOS (6 CAMPOS)\n        temperaturaveleta: parseInt(meteorologia.temperaturaveleta),\n        temperaturaborreguiles: parseInt(meteorologia.temperaturaborreguiles),\n        temperaturapradollano: parseInt(meteorologia.temperaturapradollano),\n        vientoveleta: parseInt(meteorologia.vientoveleta),\n        vientoborreguiles: parseInt(meteorologia.vientoborreguiles),\n        vientopradollano: parseInt(meteorologia.vientopradollano),\n\n        // DATOS METEOROLÓGICOS DE TEXTO (6 CAMPOS)\n        estadocieloveleta: meteorologia.estadocieloveleta.trim(),\n        estadocieloborreguiles: meteorologia.estadocieloborreguiles.trim(),\n        estadocielopradollano: meteorologia.estadocielopradollano.trim(),\n        visibilidadveleta: meteorologia.visibilidadveleta.trim(),\n        visibilidadborreguiles: meteorologia.visibilidadborreguiles.trim(),\n        visibilidadpradollano: meteorologia.visibilidadpradollano.trim(),\n        \n        // DATOS FIJOS/ESTADÍSTICOS (5 CAMPOS)\n        espesorminimo: nieve.espesorminimo,\n        espesormaximo: nieve.espesormaximo,\n        km_esquiables: pistas[\"@kilometrosesquiables\"],\n        remontes_abiertos: remontes[\"@totalremontesabiertos\"],\n        fecha: general[\"fecha\"]\n    }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -224,
+        -256
+      ],
+      "id": "f0ab0b3a-8465-4c12-a52f-6e22fb0b8cae",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "jsCode": "const data = $input.first().json;\n\n// Función auxiliar para calcular la moda (el valor más repetido)\nfunction calcularModa(valores) {\n    const mapa = {};\n    let moda = '';\n    let maxCount = 0;\n    \n    for (const val of valores) {\n        // Normalizamos a mayúsculas\n        const cleanedVal = val.toUpperCase(); \n        \n        mapa[cleanedVal] = (mapa[cleanedVal] || 0) + 1;\n        \n        if (mapa[cleanedVal] > maxCount) {\n            maxCount = mapa[cleanedVal];\n            moda = cleanedVal;\n        }\n    }\n    return moda;\n}\n\n// 1. CÁLCULO DE LA MODA DEL ESTADO DEL CIELO\nconst estadosCielo = [\n    data.estadocieloveleta,\n    data.estadocieloborreguiles,\n    data.estadocielopradollano\n];\nconst modaEstadoCielo = calcularModa(estadosCielo);\n\n\n// 2. CÁLCULO DE LA MODA DE LA VISIBILIDAD (Nuevo cálculo solicitado)\nconst visibilidades = [\n    data.visibilidadveleta,\n    data.visibilidadborreguiles,\n    data.visibilidadpradollano\n];\nconst modaVisibilidad = calcularModa(visibilidades);\n\n\n// 3. RETORNO DE LOS DATOS CON EL FORMATO ESPECÍFICO\nreturn [{\n    json: {\n        // Output solicitado: Moda de los estados del cielo\n        estadogeneral: modaEstadoCielo,\n        \n        // Output solicitado: Moda de la visibilidad\n        visibilidadgeneral: modaVisibilidad\n    }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        32,
+        -608
+      ],
+      "id": "50542e04-469a-4512-b518-018e20cb6819",
+      "name": "modas_cielo"
+    },
+    {
+      "parameters": {
+        "jsCode": "const data = $input.first().json;\n\n// Lista de todas las claves de calidad de zona\nconst calidadKeys = [\n    'calidadveleta',\n    'calidadlaguna',\n    'calidadborreguiles',\n    'calidadlomadilar',\n    'calidadrio',\n    'calidadparador'\n];\n\nconst zonasAbiertas = [];\n\nfor (const key of calidadKeys) {\n    // Obtenemos el valor (ej: \"CERRADA\" o \"Polvo/Dura\")\n    const estado = data[key];\n    \n    // Filtramos: Si el estado NO es estrictamente \"CERRADA\"\n    if (estado.toUpperCase() !== 'CERRADA') {\n        \n        // Limpiamos la clave para obtener solo el nombre de la zona (ej: \"borreguiles\")\n        const nombreLimpio = key.replace(/calidad/i, ''); \n        \n        // Añadimos el nombre limpio a la lista\n        zonasAbiertas.push(nombreLimpio);\n    }\n}\n\n// 1. Contamos el número de zonas abiertas\nconst numeroZonas = zonasAbiertas.length;\n\n// 2. Convertimos la lista de nombres a una cadena de texto separada por coma\nconst listaZonasTexto = zonasAbiertas.join(', ');\n\n// 3. Formateamos la cadena final como \"(N), Zona1, Zona2\"\nconst resultadoTextoFinal = `(${numeroZonas}), ${listaZonasTexto}`;\n\n\nreturn [{\n    json: {\n        // Devolvemos el campo con el nuevo formato\n        zonasabiertaslista: resultadoTextoFinal\n    }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        32,
+        -384
+      ],
+      "id": "5c073de5-cce8-46a7-aa9d-f38f48309fe1",
+      "name": "zonas abiertas"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1200,
+        -240
+      ],
+      "id": "e8490937-5403-45fc-8fb8-970aac8b0f7e",
+      "name": "Wait",
+      "webhookId": "32c288d1-b381-45c0-8e20-ea1349a9fa27"
+    },
+    {
+      "parameters": {
+        "jsCode": "const data = $input.first().json;\n\n// 1. TEMPERATURAS\nconst temperaturas = [\n    data.temperaturaveleta,\n    data.temperaturaborreguiles,\n    data.temperaturapradollano\n];\n\n// Usamos Math.min() y Math.max() con el spread operator (...)\nconst temperaturaMinima = Math.min(...temperaturas);\nconst temperaturaMaxima = Math.max(...temperaturas);\n\n\n// 2. VIENTOS\nconst vientos = [\n    data.vientoveleta,\n    data.vientoborreguiles,\n    data.vientopradollano\n];\n\nconst vientoMinimo = Math.min(...vientos);\nconst vientoMaximo = Math.max(...vientos);\n\n\n// 3. RETORNO DE LOS DATOS CON EL FORMATO ESPECÍFICO\nreturn [{\n    json: {\n        temperaturaminima: temperaturaMinima,\n        temperaturamaxima: temperaturaMaxima,\n        vientominimo: vientoMinimo,\n        vientomaximo: vientoMaximo\n    }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        32,
+        -144
+      ],
+      "id": "6f277312-5000-4400-9d19-5f689a8b2f3b",
+      "name": "minimos y maximos"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "9347a76b-1fdb-471e-90a5-51c201646f9d",
+              "name": "calidadnieve_general",
+              "value": "={{ $json.calidadnieve_general }}",
+              "type": "string"
+            },
+            {
+              "id": "9b2fc4d8-8b66-4dd9-ba63-3aeffbe475d8",
+              "name": "espesorminimo",
+              "value": "={{ $json.espesorminimo }}",
+              "type": "string"
+            },
+            {
+              "id": "2917468c-ef4f-4649-bac9-4bd8f6a8a9fd",
+              "name": "espesormaximo",
+              "value": "={{ $json.espesormaximo }}",
+              "type": "string"
+            },
+            {
+              "id": "f383d61a-768e-4fba-abc7-42a7bbb09082",
+              "name": "km_esquiables",
+              "value": "={{ $json.km_esquiables }}",
+              "type": "string"
+            },
+            {
+              "id": "d6de1293-50d9-4938-b80b-0356d224d649",
+              "name": "remontes_abiertos",
+              "value": "={{ $json.remontes_abiertos }}",
+              "type": "string"
+            },
+            {
+              "id": "0de0faec-da33-403b-9174-ffe40f700277",
+              "name": "fecha",
+              "value": "={{ $json.fecha }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        32,
+        80
+      ],
+      "id": "9d35a22b-1962-47ef-a5b6-15aff35f3386",
+      "name": "valores fijos"
+    },
+    {
+      "parameters": {
+        "numberInputs": 4
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        352,
+        -272
+      ],
+      "id": "ffa466bf-db81-44ed-918f-c179a6c089c8",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "jsCode": "// $input.all() toma el array completo de ítems que salió del Merge Node.\nconst inputItems = $input.all(); \nconst mergedData = {};\n\n// Iteramos sobre los 4 ítems separados\nfor (const item of inputItems) {\n    // El método Object.assign() fusiona todas las propiedades (claves y valores) \n    // del item actual (item.json) en el objeto final (mergedData).\n    Object.assign(mergedData, item.json);\n}\n\n// Devolvemos el array con el único ítem fusionado.\nreturn [{\n    json: mergedData\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        576,
+        -240
+      ],
+      "id": "c1ecc89a-b660-422f-beb4-281847d85609",
+      "name": "DATOS FINALES"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Obtiene el único ítem de entrada que contiene todos los datos fusionados\nconst item = $input.first();\n\n// La fecha está en formato DD/MM/AAAA (ej: \"02/12/2025\")\nconst fechaString = item.json.fecha;\n\n// --- 1. PREPARAR LA CADENA PARA CONVERTIR A OBJETO DATE ---\n// JavaScript prefiere el formato AAAA-MM-DD para crear fechas.\n// Invertimos la cadena de fecha de DD/MM/AAAA a AAAA-MM-DD.\nconst partes = fechaString.split('/');\n// Asegúrate de que las partes existen antes de usar sus índices\nif (partes.length === 3) {\n    // La nueva cadena será AAAA-MM-DD\n    const fechaISO = `${partes[2]}-${partes[1]}-${partes[0]}`;\n    \n    // --- 2. CREAR EL OBJETO DATE ---\n    // Creamos el objeto Date (restamos 1 al mes porque JS los cuenta de 0 a 11)\n    const fechaObj = new Date(fechaISO); \n\n    // --- 3. FORMATEAR AL ESPAÑOL ---\n    // Usamos Intl.DateTimeFormat para el formato completo y en español\n    const opciones = { \n        weekday: 'long', \n        year: 'numeric', \n        month: '2-digit', \n        day: '2-digit' \n    };\n    \n    // Formato de salida: \"Martes, 02/12/2025\"\n    const fechaFormateadaCompleta = fechaObj.toLocaleDateString('es-ES', opciones);\n\n    // Ajustamos el formato para que sea exactamente \"DíaSemana dd/mm/aaaa\" (sin la coma)\n    const [diaSemana, fechaSimple] = fechaFormateadaCompleta.split(', ');\n    const fechaFinal = `${diaSemana} ${fechaSimple}`;\n\n    // --- 4. ACTUALIZAR EL CAMPO EN EL JSON ---\n    item.json.fecha = fechaFinal;\n\n} else {\n    // Si la cadena de fecha no tiene el formato esperado, la dejamos como está.\n    item.json.fecha = \"Formato de fecha inválido\"; \n}\n\n// Devolvemos el ítem modificado\nreturn [item];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        736,
+        -240
+      ],
+      "id": "d6af07ac-16f1-404e-b94d-84d7970540b7",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "content": "POST a Canva",
+        "height": 272,
+        "width": 704,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        928,
+        -320
+      ],
+      "id": "8db568f6-0a55-4b13-bed2-cd0160177c03",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "PROCESAR DATOS",
+        "height": 912,
+        "width": 1488,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -560,
+        -640
+      ],
+      "id": "a1577750-a2b6-4adb-9664-b594e04a21f7",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "httpRequestMethod": "POST",
+        "graphApiVersion": "v23.0",
+        "node": "17841470046184468",
+        "edge": "=media",
+        "options": {
+          "queryParametersJson": "={\n\"video_url\": \"{{ $json.image_url }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
+        }
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        1904,
+        -240
+      ],
+      "id": "d4025cc9-6c98-422b-a3b5-2ec8c749dca2",
+      "name": "Facebook Graph API",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "F7VbX8jWKCXdAM47",
+          "name": "Facebook Graph account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpRequestMethod": "POST",
+        "graphApiVersion": "v23.0",
+        "node": "17841470046184468",
+        "edge": "media_publish",
+        "options": {
+          "queryParametersJson": "={\n  \"creation_id\": \"{{$json.id}}\"\n}"
+        }
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        2112,
+        -544
+      ],
+      "id": "0b16b58e-3d0c-40cb-a45f-56b2b26b7aa6",
+      "name": "Facebook Graph API1",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "F7VbX8jWKCXdAM47",
+          "name": "Facebook Graph account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1f4472e5-da22-4fc9-9e88-34b42f3ee8f7",
+              "name": "image_url",
+              "value": "={{ $json.job.result.design.url }}",
+              "type": "string"
+            },
+            {
+              "id": "3e54ac96-1177-4007-918d-177e71d92d0e",
+              "name": "media_type",
+              "value": "IMAGE",
+              "type": "string"
+            },
+            {
+              "id": "aa706f2b-df30-436f-a34c-f061a2a87506",
+              "name": "is_story",
+              "value": "true",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1680,
+        -240
+      ],
+      "id": "60a311cb-76e6-4e88-9ddc-7d83bbd5c959",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "url": "=https://graph.facebook.com/v20.0/{{ $json.id }}?fields=status,status_code",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "facebookGraphApi",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "access_token",
+              "value": "EAAKmVLVrJjwBQPzMiaFGS9h51FfDJVzSqfro6PJKk1ZBhd4bpDeF95MFSedfCRTWcMbExIZCSYyVUUZAsZBaRB6AgzRAqclZBgcYnux5onNTUwYchiXH4ckclskiAipmqeGqgDbLT7NbdBUFWGZANW5h9fMBIJ6JTGV5T2gOV9EnVTgMHjYHilSRZC3uFOgppRvdAZDZD"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        2144,
+        -240
+      ],
+      "id": "b9af122c-db1b-4494-82a7-6a53c5d1eda2",
+      "name": "HTTP Request3",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "F7VbX8jWKCXdAM47",
+          "name": "Facebook Graph account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "b4f16a6d-f121-4b47-ab09-627eb7d39e74",
+              "leftValue": "",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2336,
+        -240
+      ],
+      "id": "3fb5a534-5647-4843-ac96-eb1ee952f4b0",
+      "name": "If"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-11-29T11:04:16.105Z",
+      "createdAt": "2025-11-29T11:04:16.105Z",
+      "role": "workflow:owner",
+      "workflowId": "kldleYUPha6bnarR",
+      "projectId": "x5UZcmGQw2OWHuXb"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-12-05T12:42:46.000Z",
+  "versionId": "c506d561-d82a-4a64-8026-f79dd86a82a2"
+}
