@@ -1,0 +1,290 @@
+{
+  "active": false,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Producto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Producto": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-12-03T10:25:57.653Z",
+  "id": "s453S4YZkDDjynYN",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Aviso falta de stock en categorías",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "actualizacionProducto",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -208,
+        -48
+      ],
+      "id": "46e2ea27-3804-4f57-b5ed-07fbf6efd5b8",
+      "name": "Webhook",
+      "webhookId": "b1b5f542-4806-4184-9c71-3659929cd77e"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "f3d98979-14ca-4e2f-8b97-a84e9c696838",
+              "leftValue": "={{ $json.body.available }}",
+              "rightValue": 1,
+              "operator": {
+                "type": "number",
+                "operation": "lte"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        -48
+      ],
+      "id": "38f79625-bc3a-4cf4-8fa7-db853ae29acc",
+      "name": "Filter"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
+        "query": "query ProductFromInventoryItem($id: ID!) {\n  inventoryItem(id: $id) {\n    id\n    sku\n    variant {\n      id\n      title\n      sku\n      selectedOptions {\n        name\n        value\n      }\n      product {\n        id\n        title\n        handle\n        onlineStoreUrl\n        productType\n        productTypeForMapping: productType\n        collections(first: 50) {\n          edges {\n            node {\n              id\n              title\n              handle\n              collectionTitleForMapping: title\n            }\n          }\n        }\n      }\n    }\n  }\n}\n",
+        "variables": "={\n  \"id\": \"gid://shopify/InventoryItem/{{ $json.body.inventory_item_id }}\"\n}"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        208,
+        -48
+      ],
+      "id": "153ad507-6f66-43d0-b9f1-a3b97b28aad8",
+      "name": "Producto",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1666UwMaXD1Wg9aLis0924Pd1OBWdkS6ShF9Qu_baspM",
+          "mode": "list",
+          "cachedResultName": "Informe falta de stock",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1666UwMaXD1Wg9aLis0924Pd1OBWdkS6ShF9Qu_baspM/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1666UwMaXD1Wg9aLis0924Pd1OBWdkS6ShF9Qu_baspM/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "CATEGORÍA": "={{ $('Producto').item.json.data.inventoryItem.variant.product.productType }}",
+            "PRODUCTO": "={{ $('Producto').item.json.data.inventoryItem.variant.product.title }}",
+            "TAMAÑO": "={{ $('Producto').item.json.data.inventoryItem.variant.selectedOptions[1].value }}",
+            "COLOR": "={{ $('Producto').item.json.data.inventoryItem.variant.selectedOptions[0].value }}",
+            "CANTIDAD_ACTUAL": "={{ $('Webhook').item.json.body.available }}",
+            "TOTAL_COLORES_FALTANTE": "="
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "CATEGORÍA",
+              "displayName": "CATEGORÍA",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "PRODUCTO",
+              "displayName": "PRODUCTO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "COLOR",
+              "displayName": "COLOR",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "TAMAÑO",
+              "displayName": "TAMAÑO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "CANTIDAD_ACTUAL",
+              "displayName": "CANTIDAD_ACTUAL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "TOTAL_COLORES_FALTANTE",
+              "displayName": "TOTAL_COLORES_FALTANTE",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "TOTAL_TALLAS_FALTANTE",
+              "displayName": "TOTAL_TALLAS_FALTANTE",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "TOTAL_PRODUCTOS_FALTANTE",
+              "displayName": "TOTAL_PRODUCTOS_FALTANTE",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        608,
+        -48
+      ],
+      "id": "cb66714b-11fa-4603-9892-3188b1deebf4",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "RCuKUCifcA4jENcY",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const out = [];\n\nfor (const item of items) {\n  const product = item.json.data.inventoryItem.variant.product;\n  const productType = product.productTypeForMapping;\n\n  const collections = product.collections.edges || [];\n\n  const matching = collections.filter(edge => \n    edge.node.collectionTitleForMapping === productType\n  );\n\n  out.push({\n    json: {\n      productId: product.id,\n      productTitle: product.title,\n      productType,\n      matchingCollections: matching.map(m => m.node)\n    }\n  });\n}\n\nreturn out;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        416,
+        -48
+      ],
+      "id": "01ca387d-e8b5-4a30-bf4a-b622ece644f3",
+      "name": "Code in JavaScript"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-12-03T10:25:57.656Z",
+      "createdAt": "2025-12-03T10:25:57.656Z",
+      "role": "workflow:owner",
+      "workflowId": "s453S4YZkDDjynYN",
+      "projectId": "x5UZcmGQw2OWHuXb"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-12-05T09:57:15.000Z",
+  "versionId": "b3416648-578d-4a7f-9532-8a2b1debbeca"
+}
