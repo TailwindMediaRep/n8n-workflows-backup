@@ -1,0 +1,70 @@
+{
+  "active": false,
+  "connections": {
+    "WebHookSage": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-12-03T13:14:51.813Z",
+  "id": "uymWV8HEAzXC95Zk",
+  "isArchived": false,
+  "meta": null,
+  "name": "Sage Datos de Venta",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "WebHookSage",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -48,
+        -80
+      ],
+      "id": "cef1c8a7-ffbe-4bc8-a705-62e305fe2eff",
+      "name": "WebHookSage",
+      "webhookId": "52d10d42-b772-428d-a7af-2daf1c1c1149"
+    },
+    {
+      "parameters": {
+        "jsCode": "return items.map(item => {\n    const order = item.json.body; // <-- Aquí está el cambio\n\n    // Cliente\n    const cliente = order.customer\n        ? {\n            id: order.customer.id,\n            nombre: `${order.customer.first_name || ''} ${order.customer.last_name || ''}`.trim(),\n            email: order.customer.email || \"\",\n            telefono: order.customer.phone || \"\",\n            direccion: order.customer.default_address || {}\n        }\n        : { nombre: \"Cliente Invitado\" };\n\n    // Productos\n    const productos = Array.isArray(order.line_items)\n        ? order.line_items.map(prod => ({\n            id: prod.id,\n            sku: prod.sku,\n            nombre: prod.name,\n            cantidad: prod.quantity,\n            precio_unitario: prod.price_set?.presentment_money?.amount\n                ? parseFloat(prod.price_set.presentment_money.amount)\n                : parseFloat(prod.price || 0),\n            total_producto: prod.total_discount_set?.presentment_money?.amount\n                ? parseFloat(prod.price_set.presentment_money.amount) * (prod.quantity || 1) - parseFloat(prod.total_discount_set.presentment_money.amount)\n                : parseFloat(prod.price || 0) * (prod.quantity || 1) - parseFloat(prod.total_discount || 0),\n            descuento: prod.total_discount_set?.presentment_money?.amount\n                ? parseFloat(prod.total_discount_set.presentment_money.amount)\n                : parseFloat(prod.total_discount || 0),\n            impuestos: Array.isArray(prod.tax_lines) \n                ? prod.tax_lines.map(t => ({\n                    title: t.title,\n                    price: parseFloat(t.price_set?.presentment_money?.amount || t.price || 0)\n                })) : []\n        }))\n        : [];\n\n    // Envío\n    const envio = Array.isArray(order.shipping_lines)\n        ? order.shipping_lines.map(ship => ({\n            title: ship.title,\n            price: ship.price_set?.presentment_money?.amount\n                ? parseFloat(ship.price_set.presentment_money.amount)\n                : parseFloat(ship.price || 0)\n        }))\n        : [];\n\n    // Totales de la orden\n    const totales = {\n        subtotal: order.current_subtotal_price_set?.presentment_money?.amount\n            ? parseFloat(order.current_subtotal_price_set.presentment_money.amount)\n            : parseFloat(order.current_subtotal_price || 0),\n        impuestos: order.current_total_tax_set?.presentment_money?.amount\n            ? parseFloat(order.current_total_tax_set.presentment_money.amount)\n            : parseFloat(order.current_total_tax || 0),\n        descuentos: order.total_discounts_set?.presentment_money?.amount\n            ? parseFloat(order.total_discounts_set.presentment_money.amount)\n            : parseFloat(order.total_discounts || 0),\n        envio: envio.reduce((acc, s) => acc + s.price, 0),\n        total: order.current_total_price_set?.presentment_money?.amount\n            ? parseFloat(order.current_total_price_set.presentment_money.amount)\n            : parseFloat(order.current_total_price || 0)\n    };\n\n    // Forma de pago\n    const pagos = Array.isArray(order.payment_gateway_names)\n        ? order.payment_gateway_names\n        : [\"Desconocida\"];\n\n    return {\n        json: {\n            shopify_order_id: order.id || null,\n            numero_orden: order.order_number || null,\n            fecha: order.created_at || new Date().toISOString(),\n            estado_pago: order.financial_status || \"pendiente\",\n            estado_envio: order.fulfillment_status || \"pendiente\",\n            moneda: order.currency || \"EUR\",\n            cliente,\n            productos,\n            envio,\n            totales,\n            pagos,\n            nota: order.note || \"\",\n            tags: order.tags || \"\",\n            url_orden: order.order_status_url || \"\"\n        }\n    };\n});\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        160,
+        -80
+      ],
+      "id": "ef2546b5-a5a6-4f95-a529-a27bab5be350",
+      "name": "Code in JavaScript"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-12-03T13:14:51.819Z",
+      "createdAt": "2025-12-03T13:14:51.819Z",
+      "role": "workflow:owner",
+      "workflowId": "uymWV8HEAzXC95Zk",
+      "projectId": "x5UZcmGQw2OWHuXb"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-12-03T13:58:17.000Z",
+  "versionId": "603b22af-f147-4da0-84d9-76345371f0c3"
+}
