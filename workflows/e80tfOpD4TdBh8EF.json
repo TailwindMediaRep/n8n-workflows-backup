@@ -5,7 +5,7 @@
       "main": [
         [
           {
-            "node": "GraphQL",
+            "node": "conseguir contador",
             "type": "main",
             "index": 0
           }
@@ -34,11 +34,6 @@
         ]
       ]
     },
-    "When clicking ‘Execute workflow’": {
-      "main": [
-        []
-      ]
-    },
     "Copy file": {
       "main": [
         [
@@ -54,7 +49,7 @@
       "main": [
         [
           {
-            "node": "actualizar documento",
+            "node": "GraphQL",
             "type": "main",
             "index": 0
           }
@@ -70,7 +65,7 @@
       "main": [
         [
           {
-            "node": "conseguir contador",
+            "node": "actualizar documento",
             "type": "main",
             "index": 0
           }
@@ -131,6 +126,16 @@
           }
         ]
       ]
+    },
+    "Send email": {
+      "main": [
+        []
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        []
+      ]
     }
   },
   "createdAt": "2025-12-03T09:13:23.128Z",
@@ -150,7 +155,7 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -1648,
+        -1632,
         -528
       ],
       "id": "5f83faeb-2187-42c6-8d19-747cdcad6d45",
@@ -162,7 +167,7 @@
         "authentication": "headerAuth",
         "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-07/graphql.json",
         "query": "query getOrder($id: ID!) {\n  order(id: $id) {\n    id\n    name\n    createdAt\n    email\n    totalPriceSet {\n      shopMoney {\n        amount\n        currencyCode\n      }\n    }\n    lineItems(first: 10) {\n      edges {\n        node {\n          title\n          quantity\n          originalUnitPriceSet {\n            shopMoney {\n              amount\n              currencyCode\n            }\n          }\n        }\n      }\n    }\n    fulfillments {\n      id\n      location {\n        name\n        address {\n          address1\n          city\n          province\n          country\n          zip\n        }\n      }\n    }\n    transactions(first: 5) {\n      formattedGateway\n      kind\n      status\n    }\n    customer {\n      firstName\n      lastName\n      email\n    }\n  }\n}\n\n",
-        "variables": "={\n  \"id\": \"gid://shopify/Order/{{ $json.body.id }}\"\n}\n",
+        "variables": "={\n  \"id\": \"gid://shopify/Order/{{ $('Webhook').item.json.body.id }}\"\n}",
         "headerParametersUi": {
           "parameter": [
             {
@@ -175,7 +180,7 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        -1456,
+        -1312,
         -528
       ],
       "id": "8e12a512-d98b-4ffc-b3b5-8b199d655ceb",
@@ -253,17 +258,6 @@
       "name": "Sticky Note1"
     },
     {
-      "parameters": {},
-      "type": "n8n-nodes-base.manualTrigger",
-      "typeVersion": 1,
-      "position": [
-        -1920,
-        -528
-      ],
-      "id": "f027e5ec-8715-4ee3-8b89-1972fdcefbf1",
-      "name": "When clicking ‘Execute workflow’"
-    },
-    {
       "parameters": {
         "operation": "copy",
         "fileId": {
@@ -328,7 +322,7 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1,
       "position": [
-        -880,
+        -1472,
         -528
       ],
       "id": "a1ff8038-7431-4353-80e1-1356833b1a05",
@@ -354,7 +348,7 @@
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "numero": "={{ $('conseguir contador').item.json.numero + 1 }}"
+            "numero": "={{ $json.row_number + 1}}"
           },
           "matchingColumns": [
             "numero"
@@ -379,7 +373,7 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1,
       "position": [
-        -528,
+        -608,
         -528
       ],
       "id": "c71add0b-77a2-463b-a5ff-1afd049084ce",
@@ -399,7 +393,7 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1,
       "position": [
-        -1072,
+        -976,
         -528
       ],
       "id": "d87b944a-6f6e-42fb-86d6-92da02d29e6a",
@@ -412,7 +406,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -1456,
+        -1424,
         -816
       ],
       "id": "4fb748b4-d336-478b-b9ff-e9219a8a094d",
@@ -522,12 +516,12 @@
     },
     {
       "parameters": {
-        "jsCode": "// Tomamos el pedido del output del nodo GraphQL\nconst order = items[0].json.data.order;\n\n// Sucursal: si no hay fulfillment, ponemos \"Sin sucursal\"\nconst branch = order.fulfillments && order.fulfillments.length > 0 \n    ? order.fulfillments[0].location.name \n    : \"Sin sucursal\";\n\n// Método de pago: si no hay transacciones, ponemos \"Desconocido\"\nconst paymentMethod = order.transactions && order.transactions.length > 0 \n    ? order.transactions[0].formattedGateway \n    : \"Desconocido\";\n\n// Creamos un array con cada producto como fila\nlet result = [];\n\norder.lineItems.edges.forEach(itemEdge => {\n    const item = itemEdge.node;\n    result.push({\n        \"NOMBRE DE PRODUCTO\": item.title,\n        \"COSTE DE PRODUCTO\": item.originalUnitPriceSet.shopMoney.amount + \" \" + item.originalUnitPriceSet.shopMoney.currencyCode,\n        \"MÉTODO DE PAGO\": paymentMethod,\n        \"SUCURSAL\": branch\n    });\n});\n\n// Devolver en formato que n8n entiende como tabla\nreturn result.map(r => ({ json: r }));\n"
+        "jsCode": "// Tomamos el pedido del output del nodo GraphQL\nconst order = items[0].json.data.order;\n\n// Asegúrate de obtener el valor inicial del contador.\n// ASUME que el contador 'startRow' viene del ítem 0 del nodo anterior.\nlet startRow = parseInt($('conseguir contador').first().json.numero)\n\n// --- Lógica del Pedido ---\n\n// Sucursal: si no hay fulfillment, ponemos \"Sin sucursal\"\nconst branch = order.fulfillments && order.fulfillments.length > 0 \n    ? order.fulfillments[0].location.name \n    : \"Sin sucursal\";\n\n// Método de pago: si no hay transacciones, ponemos \"Desconocido\"\nconst paymentMethod = order.transactions && order.transactions.length > 0 \n    ? order.transactions[0].formattedGateway \n    : \"Desconocido\";\n\n// Creamos un array con cada producto como fila\nlet result = [];\n\norder.lineItems.edges.forEach(itemEdge => {\n    const item = itemEdge.node;\n    result.push({\n        \"NOMBRE DE PRODUCTO\": item.title,\n        \"COSTE DE PRODUCTO\": item.originalUnitPriceSet.shopMoney.amount + \" \" + item.originalUnitPriceSet.shopMoney.currencyCode,\n        \"MÉTODO DE PAGO\": paymentMethod,\n        \"SUCURSAL DE VENTA\": branch,\n        \"row_number\": startRow // Asignamos el número de fila actual\n    });\n    \n    // IMPORTANTE: Incrementamos el número de fila para el siguiente producto\n    startRow++; \n});\n\n// Devolver en formato que n8n entiende como tabla:\n// SOLO devolvemos los ítems de 'result'.\nreturn result.map(r => ({ json: r }));\n"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -1264,
+        -1152,
         -528
       ],
       "id": "d8735ae5-f6e0-4e09-8270-298b488570db",
@@ -551,11 +545,11 @@
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "SUCURSAL DE VENTA": "={{ $('procesar datos').item.json.SUCURSAL }}",
+            "SUCURSAL DE VENTA": "={{ $('procesar datos').item.json['SUCURSAL DE VENTA'] }}",
             "MÉTODO DE PAGO": "={{ $('procesar datos').item.json['MÉTODO DE PAGO'] }}",
             "COSTE DE PRODUCTO": "={{ $('procesar datos').item.json['COSTE DE PRODUCTO'] }}",
             "NOMBRE DE PRODUCTO": "={{ $('procesar datos').item.json['NOMBRE DE PRODUCTO'] }}",
-            "row_number": "={{ $json.numero }}"
+            "row_number": "={{ $('procesar datos').item.json.row_number }}"
           },
           "matchingColumns": [
             "row_number"
@@ -617,7 +611,7 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -688,
+        -784,
         -528
       ],
       "id": "a3217a6b-00e3-4b93-bb36-3f4276f25339",
@@ -634,7 +628,7 @@
       "parameters": {
         "content": "OBTENER DATOS VENTA Y ACTUALIZAR DOCUMENTO",
         "height": 192,
-        "width": 1344,
+        "width": 1248,
         "color": 3
       },
       "type": "n8n-nodes-base.stickyNote",
@@ -662,6 +656,17 @@
       ],
       "id": "b248728b-6b35-4520-be9a-fcc77b399479",
       "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1024,
+        -256
+      ],
+      "id": "2af5c064-df49-4280-956a-646d59e20107",
+      "name": "When clicking ‘Execute workflow’"
     }
   ],
   "pinData": {},
@@ -684,6 +689,6 @@
   },
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2025-12-05T12:19:20.000Z",
-  "versionId": "6466715b-b333-49f4-86b1-079397c1514e"
+  "updatedAt": "2025-12-10T13:46:30.000Z",
+  "versionId": "f024599b-a728-40eb-a0ce-c0d4f6bbc52f"
 }
