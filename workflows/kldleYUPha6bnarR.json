@@ -172,13 +172,7 @@
     },
     "HTTP Request1": {
       "main": [
-        [
-          {
-            "node": "Edit Fields1",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Edit Fields1": {
@@ -652,8 +646,8 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        1904,
-        -240
+        1216,
+        -528
       ],
       "id": "d4025cc9-6c98-422b-a3b5-2ec8c749dca2",
       "name": "Facebook Graph API",
@@ -677,8 +671,8 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        2112,
-        -544
+        1424,
+        -832
       ],
       "id": "0b16b58e-3d0c-40cb-a45f-56b2b26b7aa6",
       "name": "Facebook Graph API1",
@@ -718,8 +712,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1680,
-        -240
+        992,
+        -528
       ],
       "id": "60a311cb-76e6-4e88-9ddc-7d83bbd5c959",
       "name": "Edit Fields1"
@@ -743,8 +737,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2144,
-        -240
+        1456,
+        -528
       ],
       "id": "b9af122c-db1b-4494-82a7-6a53c5d1eda2",
       "name": "HTTP Request3",
@@ -783,11 +777,95 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        2336,
-        -240
+        1648,
+        -528
       ],
       "id": "3fb5a534-5647-4843-ac96-eb1ee952f4b0",
       "name": "If"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.canva.com/rest/v1/exports",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"design_id\": \"DAG6piPnSQc\",\n  \"format\": {\n    \"type\": \"mp4\",\n    \"quality\": \"vertical_720p\",\n    \"export_quality\": \"regular\"\n  }\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        1712,
+        -240
+      ],
+      "id": "11983f2b-04f4-4201-aeb4-c1858ac6639f",
+      "name": "HTTP Request4",
+      "credentials": {
+        "oAuth2Api": {
+          "id": "eHEbZK7oC3pW1LQr",
+          "name": "Canva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://api.canva.com/rest/v1/designs/DAG6pq0MnMk/export-formats",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        1024,
+        80
+      ],
+      "id": "d24b002e-fc13-4491-b93a-994c8aeb1a3a",
+      "name": "PRUEBA",
+      "credentials": {
+        "oAuth2Api": {
+          "id": "eHEbZK7oC3pW1LQr",
+          "name": "Canva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "exports",
+        "designId": "DAG6pgi024o",
+        "exportFormat": "mp4",
+        "pageNumbers": "1",
+        "requestOptions": {}
+      },
+      "type": "n8n-nodes-canva.canva",
+      "typeVersion": 1,
+      "position": [
+        1984,
+        -544
+      ],
+      "id": "c90703fa-1dde-41f6-acb4-00e906f4f56a",
+      "name": "Create export job"
     }
   ],
   "pinData": {},
@@ -806,6 +884,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-12-05T12:42:46.000Z",
-  "versionId": "c506d561-d82a-4a64-8026-f79dd86a82a2"
+  "updatedAt": "2025-12-05T14:31:12.000Z",
+  "versionId": "1b08fa30-482e-4c05-8466-61a75d48e41c"
 }
