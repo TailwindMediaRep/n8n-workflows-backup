@@ -5,7 +5,7 @@
       "main": [
         [
           {
-            "node": "Replace me with your logic",
+            "node": "Code in Python (Beta)",
             "type": "main",
             "index": 0
           }
@@ -20,25 +20,31 @@
   "name": "My Sub-Workflow 1",
   "nodes": [
     {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
       "id": "c055762a-8fe7-4141-a639-df2372f30060",
       "typeVersion": 1.1,
       "name": "When Executed by Another Workflow",
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "position": [
-        260,
-        340
-      ],
-      "parameters": {}
+        272,
+        352
+      ]
     },
     {
-      "id": "b5942df6-0160-4ef7-965d-57583acdc8aa",
-      "name": "Replace me with your logic",
-      "type": "n8n-nodes-base.noOp",
+      "parameters": {
+        "language": "python",
+        "pythonCode": "# Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor item in _input.all():\n  item.json.myNewField = 1\nreturn _input.all()"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
       "position": [
-        520,
-        340
+        480,
+        352
       ],
-      "parameters": {}
+      "id": "c24fac9d-a9ac-4beb-8957-cda9847d1ecd",
+      "name": "Code in Python (Beta)"
     }
   ],
   "pinData": {},
@@ -57,6 +63,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-12-11T07:57:47.380Z",
-  "versionId": "fefed30c-3b2d-4463-b9ec-f33faf18376d"
+  "updatedAt": "2025-12-11T11:18:42.000Z",
+  "versionId": "3604c531-4bd1-4a9d-9700-b964d182f701"
 }
