@@ -136,7 +136,7 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -992,
+        -960,
         -48
       ],
       "id": "2a09d9fa-748a-41ca-abc8-1b35a8edeeaa",
@@ -247,7 +247,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -256,
+        -224,
         -48
       ],
       "id": "714060e4-f46c-41ec-8ac8-6927ae6bca21",
@@ -362,10 +362,10 @@
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "SUCURSAL DE VENTA": "SEPARADOR",
             "MÉTODO DE PAGO": "SEPARADOR",
             "COSTE DE PRODUCTO": "SEPARADOR",
-            "NOMBRE DE PRODUCTO": "SEPARADOR"
+            "NOMBRE DE PRODUCTO": "SEPARADOR",
+            "SUCURSAL DE VENTA": "={{ $('Code in JavaScript').item.json.fecha }}"
           },
           "matchingColumns": [],
           "schema": [
@@ -418,7 +418,7 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        944,
+        960,
         -32
       ],
       "id": "b8a96aa4-d564-447b-9ee0-a0c4892630d2",
@@ -522,6 +522,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-12-11T08:01:29.000Z",
-  "versionId": "2a7d5bd1-e232-49bc-b5a4-ee59f239ad1e"
+  "updatedAt": "2025-12-11T14:09:57.000Z",
+  "versionId": "04fa218e-ff3f-4d2e-8504-61d86f48ce60"
 }
