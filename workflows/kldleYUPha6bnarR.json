@@ -12,17 +12,6 @@
         ]
       ]
     },
-    "When clicking ‘Execute workflow’": {
-      "main": [
-        [
-          {
-            "node": "HTTP Request2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "HTTP Request2": {
       "main": [
         [
@@ -287,6 +276,28 @@
           }
         ]
       ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-11-29T11:04:16.100Z",
@@ -344,17 +355,6 @@
           "name": "Canva"
         }
       }
-    },
-    {
-      "parameters": {},
-      "type": "n8n-nodes-base.manualTrigger",
-      "typeVersion": 1,
-      "position": [
-        -752,
-        -256
-      ],
-      "id": "7cec119c-980b-4784-a457-6f958bb441b9",
-      "name": "When clicking ‘Execute workflow’"
     },
     {
       "parameters": {
@@ -1005,6 +1005,37 @@
       ],
       "id": "3a600618-1d81-46a9-8b72-7443cca68c39",
       "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 10
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -768,
+        -256
+      ],
+      "id": "8df0b3b7-32c1-4c86-8cbb-007eeaf1b049",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -784,
+        -64
+      ],
+      "id": "ea65fc37-43b6-4ade-81bc-3e0cca7f58b9",
+      "name": "When clicking ‘Execute workflow’"
     }
   ],
   "pinData": {},
@@ -1020,9 +1051,13 @@
       "projectId": "x5UZcmGQw2OWHuXb"
     }
   ],
-  "staticData": null,
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrenceRules": []
+    }
+  },
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2025-12-11T10:27:07.000Z",
-  "versionId": "a5f11878-43ec-466e-b605-9b69dac26b8d"
+  "triggerCount": 1,
+  "updatedAt": "2025-12-11T14:23:17.000Z",
+  "versionId": "a676e5f3-139b-4f11-ab8e-c1bf51f9eaeb"
 }
