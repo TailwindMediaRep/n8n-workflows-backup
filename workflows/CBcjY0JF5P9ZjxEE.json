@@ -1,0 +1,137 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Code in Python (Beta)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in Python (Beta)": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Call 'My Sub-Workflow 1'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call 'My Sub-Workflow 1'": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-12-11T11:14:07.985Z",
+  "id": "CBcjY0JF5P9ZjxEE",
+  "isArchived": false,
+  "meta": null,
+  "name": "PruebaSubWorkflow",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -336,
+        -64
+      ],
+      "id": "bcc28c4a-7b57-4da4-8384-a8b385cdce76",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "language": "python",
+        "pythonCode": "prueba = {\"nombre\": \"adrian\", \"apellido\": \"azorin\", \"tema\": \"prueba\"}\nprueba2 = {\"nombre\": \"adrian\", \"apellido\": \"azorin\", \"tema\": \"prueba\"}\n\nreturn prueba"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -128,
+        -64
+      ],
+      "id": "0a982463-730d-4fe4-956a-ecb442e70ae6",
+      "name": "Code in Python (Beta)"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        112,
+        -64
+      ],
+      "id": "45db9122-5dbf-4832-bcd6-b7825a227baa",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "YUPMjmLvnBwe9nE5",
+          "cachedResultName": "My Sub-Workflow 1"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {}
+        },
+        "mode": "each",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        320,
+        -48
+      ],
+      "id": "239db9c0-7616-4633-8218-8831830708b6",
+      "name": "Call 'My Sub-Workflow 1'"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-12-11T11:14:07.991Z",
+      "createdAt": "2025-12-11T11:14:07.991Z",
+      "role": "workflow:owner",
+      "workflowId": "CBcjY0JF5P9ZjxEE",
+      "projectId": "x5UZcmGQw2OWHuXb"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-12-11T11:42:02.000Z",
+  "versionId": "7b55e8c7-6419-4fa4-b015-78fd7f8456dc"
+}
