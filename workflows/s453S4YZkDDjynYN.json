@@ -496,7 +496,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// Definimos las opciones que siempre deben existir en la salida,\n// usando los nombres exactos que tiene Shopify.\nconst REQUIRED_OPTIONS = [\n    \"Tamaño\", // Si usas \"Talla\" en Shopify, cámbialo aquí\n    \"Color\",\n    \"Año\"\n];\n\n// Procesamos todos los ítems que llegan al nodo Code (las respuestas de GraphQL)\nfor (const item of items) {\n    // --- 1. Normalizar el Tipo de Producto (productType) ---\n    let productType = item.json.data.productVariant.product.productType;\n\n    // Verificar si el tipo de producto está ausente, nulo o es una cadena vacía\n    if (!productType || productType.trim() === '') {\n        item.json.data.productVariant.product.productType = \"no definido\";\n    }\n\n    // --- 2. Normalizar las Opciones de la Variante (selectedOptions) ---\n    const selectedOptions = item.json.data.productVariant.selectedOptions || [];\n    \n    // Convertimos el array de opciones en un objeto clave-valor para facilitar la búsqueda\n    const optionsMap = selectedOptions.reduce((map, option) => {\n        map[option.name] = option.value;\n        return map;\n    }, {});\n\n    let newOptionsArray = [];\n\n    // Iteramos sobre las opciones requeridas y las añadimos al array\n    for (const requiredName of REQUIRED_OPTIONS) {\n        newOptionsArray.push({\n            name: requiredName,\n            // Si la opción existe en el mapa, usamos su valor; si no, usamos \"no definido\".\n            value: optionsMap[requiredName] || \"no definido\"\n        });\n    }\n\n    // Reemplazamos el array de opciones original con el nuevo array normalizado\n    item.json.data.productVariant.normalizedOptions = newOptionsArray;\n}\n\nreturn items;"
+        "jsCode": "// Definimos las opciones que siempre deben existir en la salida,\n// usando los nombres exactos que tiene Shopify.\nconst REQUIRED_OPTIONS = [\n    \"Tamaño\", // Si usas \"Talla\" en Shopify, cámbialo aquí\n    \"Color\",\n    \"Año\"\n];\n\n// Procesamos todos los ítems que llegan al nodo Code (las respuestas de GraphQL)\nfor (const item of items) {\n    // --- 1. Normalizar el Tipo de Producto (productType) ---\n    let productType = item.json.data.productVariant.product.productType;\n\n    // Verificar si el tipo de producto está ausente, nulo o es una cadena vacía\n    if (!productType || productType.trim() === '') {\n        item.json.data.productVariant.product.productType = \"no definido\";\n    }\n\n    // --- 2. Normalizar las Opciones de la Variante (selectedOptions) ---\n    const selectedOptions = item.json.data.productVariant.selectedOptions || [];\n    \n    // Convertimos el array de opciones en un objeto clave-valor para facilitar la búsqueda.\n    // Además añadimos las claves en minúsculas para permitir detectar \"size\".\n    const optionsMap = selectedOptions.reduce((map, option) => {\n        map[option.name] = option.value;            // clave tal cual viene (ej: \"Tamaño\")\n        map[option.name.toLowerCase()] = option.value; // clave normalizada (ej: \"tamaño\", \"size\")\n        return map;\n    }, {});\n\n    let newOptionsArray = [];\n\n    // Iteramos sobre las opciones requeridas y las añadimos al array\n    for (const requiredName of REQUIRED_OPTIONS) {\n\n        let value = \"no definido\";\n\n        // --- Regla especial SOLO para \"Tamaño\" ---\n        if (requiredName === \"Tamaño\") {\n            value =\n                optionsMap[\"size\"] ||        // prioridad 1 → size\n                optionsMap[\"tamaño\"] ||      // prioridad 2 → tamaño (cualquier idioma)\n                optionsMap[\"Tamaño\"] ||      // por si viene con mayúscula exacta\n                \"no definido\";               // fallback\n        } \n        else {\n            // Para el resto de opciones (Color, Año) usamos tu lógica original\n            value = optionsMap[requiredName] || \"no definido\";\n        }\n\n        newOptionsArray.push({\n            name: requiredName,\n            value\n        });\n    }\n\n    // Reemplazamos el array de opciones original con el nuevo array normalizado\n    item.json.data.productVariant.normalizedOptions = newOptionsArray;\n}\n\nreturn items;"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -796,12 +796,12 @@
   "staticData": {
     "node:Schedule Trigger": {
       "recurrenceRules": [
-        4
+        8
       ]
     }
   },
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2025-12-10T13:04:09.000Z",
-  "versionId": "38ec0bac-c10a-43a2-a2d8-1f946c165508"
+  "updatedAt": "2025-12-11T12:53:41.000Z",
+  "versionId": "d28af32d-94b2-4d05-b81e-b120cac7d784"
 }
