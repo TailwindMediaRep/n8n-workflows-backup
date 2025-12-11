@@ -136,6 +136,17 @@
       "main": [
         []
       ]
+    },
+    "restablecer numero contador": {
+      "main": [
+        [
+          {
+            "node": "Insert row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-12-03T09:13:23.128Z",
@@ -289,7 +300,7 @@
       "parameters": {
         "content": "CREAR DOCUMENTO",
         "height": 208,
-        "width": 976,
+        "width": 1232,
         "color": 6
       },
       "type": "n8n-nodes-base.stickyNote",
@@ -667,6 +678,49 @@
       ],
       "id": "2af5c064-df49-4280-956a-646d59e20107",
       "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "dataTableId": {
+          "__rl": true,
+          "value": "8GDVj673ag0hCrVt",
+          "mode": "list",
+          "cachedResultName": "Informe Mensual",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/8GDVj673ag0hCrVt"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "ID_Documento": "={{ $('Copy file').item.json.id }}"
+          },
+          "matchingColumns": [
+            "ID_Documento"
+          ],
+          "schema": [
+            {
+              "id": "ID_Documento",
+              "displayName": "ID_Documento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        -672,
+        -816
+      ],
+      "id": "36b3f39f-9b27-4a29-83a6-bb28e092b197",
+      "name": "Insert row"
     }
   ],
   "pinData": {},
@@ -689,6 +743,6 @@
   },
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2025-12-10T13:46:30.000Z",
-  "versionId": "f024599b-a728-40eb-a0ce-c0d4f6bbc52f"
+  "updatedAt": "2025-12-11T08:02:47.000Z",
+  "versionId": "9bf2375b-2aa1-473b-a3c8-b501c69688e3"
 }
