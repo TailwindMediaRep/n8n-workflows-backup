@@ -1,0 +1,632 @@
+{
+  "active": false,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GraphQL": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "GraphQL",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        []
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "GraphQL1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GraphQL1": {
+      "main": [
+        [
+          {
+            "node": "Filter1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Delete rows or columns from sheet": {
+      "main": [
+        []
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Replace Me",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Replace Me": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Delete rows or columns from sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-12-11T12:26:10.539Z",
+  "id": "hXSd72PLpx6CIiA7",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Prueba Tallas",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "prueba",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -288,
+        -192
+      ],
+      "id": "abf6ffc1-627e-4877-9a78-d85ed74d38cf",
+      "name": "Webhook",
+      "webhookId": "5cf1b801-28c5-4cc1-af13-2fe0fd42baf2"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
+        "query": "query GetVariantInfo($variantId: ID!) {\n  productVariant(id: $variantId) {\n    # 1. Cantidad en Inventario\n    inventoryQuantity\n    \n    # 2. Nombre y Tipo del Producto (desde el producto padre)\n    product {\n      title\n      productType \n    }\n    \n    # 3. Opciones de la Variante\n    selectedOptions {\n      name\n      value\n    }\n  }\n}",
+        "variables": "={\n  \"variantId\": \"gid://shopify/ProductVariant/51686219678043\"\n}",
+        "headerParametersUi": {
+          "parameter": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        288,
+        -208
+      ],
+      "id": "abdbfdaf-7835-4c7b-879a-c7724f14fb49",
+      "name": "GraphQL",
+      "alwaysOutputData": false,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// El JSON del Webhook se encuentra en el primer item del flujo\nconst webhookBody = items[0].json.body;\n\n// 1. Obtener los datos del pedido y los artículos de línea\nconst orderId = webhookBody.id;\nconst lineItems = webhookBody.line_items;\n\n// 2. Definir una estructura para almacenar el resultado\nlet result = [];\n\n// 3. Iterar sobre cada artículo de línea (producto)\nlineItems.forEach(item => {\n    // Extraemos el nombre (título) y la ID de la variante (variant_id)\n    const productName = item.title;\n    const variantId = item.variant_id;\n    const sku = item.sku; // El SKU también es útil\n\n    // Añadimos un nuevo objeto al array 'result' con los campos deseados\n    result.push({\n        \"ID_PEDIDO\": orderId,\n        \"NOMBRE_PRODUCTO\": productName,\n        \"VARIANT_ID_NUMERICO\": variantId,\n        \"SKU\": sku\n    });\n});\n\n// 4. Devolver en el formato que n8n espera para el siguiente nodo:\n// Cada objeto en 'result' se convierte en un ítem de flujo separado.\nreturn result.map(r => ({ json: r }));"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -128,
+        -192
+      ],
+      "id": "2b20c5f0-d468-423b-bdd1-7e542049b2d5",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "b44bf53c-1b2e-4ebc-875f-832f873ad0bb",
+              "leftValue": "={{ $json.VARIANT_ID_NUMERICO }}",
+              "rightValue": "=null",
+              "operator": {
+                "type": "number",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        48,
+        -192
+      ],
+      "id": "bd4608da-5ac0-4e9f-b5fa-8dffb81d04dd",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ff5bb628-1eec-4702-8ecf-bf02e12918c2",
+              "name": "NOMBRE_PRODUCTO",
+              "value": "={{ $json.data.productVariant.product.title }}",
+              "type": "string"
+            },
+            {
+              "id": "e8222b21-77fe-441a-b415-d54ade4ed36c",
+              "name": "CANTIDAD_PRODUCTO",
+              "value": "={{ $json.data.productVariant.inventoryQuantity }}",
+              "type": "number"
+            },
+            {
+              "id": "bcf3251f-0698-4fed-b19c-acb7f2e8e091",
+              "name": "TIPO DE PRODUCTO",
+              "value": "={{ $json.data.productVariant.product.productType }}",
+              "type": "string"
+            },
+            {
+              "id": "b03e9e78-3839-4abc-8566-338261012bab",
+              "name": "COLOR",
+              "value": "={{ $json.data.productVariant.normalizedOptions[1].value }}",
+              "type": "string"
+            },
+            {
+              "id": "f335b947-5e2a-4d09-af62-29ff27a24174",
+              "name": "TALLA",
+              "value": "={{ $json.data.productVariant.normalizedOptions[0].value }}",
+              "type": "string"
+            },
+            {
+              "id": "ab04fe4e-f197-4ad4-86d3-cd8da75ed34d",
+              "name": "AÑO",
+              "value": "={{ $json.data.productVariant.normalizedOptions[2].value }}",
+              "type": "string"
+            },
+            {
+              "id": "e41e6093-3994-4e5c-b1e5-93ae00e4dca0",
+              "name": "ID PRODUCTO",
+              "value": "={{ $('If').item.json.VARIANT_ID_NUMERICO }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        672,
+        -208
+      ],
+      "id": "747f4b12-5517-46fc-be29-77cd36d84360",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Definimos las opciones que siempre deben existir en la salida,\n// usando los nombres exactos que tiene Shopify.\nconst REQUIRED_OPTIONS = [\n    \"Tamaño\", // Si usas \"Talla\" en Shopify, cámbialo aquí\n    \"Color\",\n    \"Año\"\n];\n\n// Procesamos todos los ítems que llegan al nodo Code (las respuestas de GraphQL)\nfor (const item of items) {\n    // --- 1. Normalizar el Tipo de Producto (productType) ---\n    let productType = item.json.data.productVariant.product.productType;\n\n    // Verificar si el tipo de producto está ausente, nulo o es una cadena vacía\n    if (!productType || productType.trim() === '') {\n        item.json.data.productVariant.product.productType = \"no definido\";\n    }\n\n    // --- 2. Normalizar las Opciones de la Variante (selectedOptions) ---\n    const selectedOptions = item.json.data.productVariant.selectedOptions || [];\n    \n    // Convertimos el array de opciones en un objeto clave-valor para facilitar la búsqueda.\n    // Además añadimos las claves en minúsculas para permitir detectar \"size\".\n    const optionsMap = selectedOptions.reduce((map, option) => {\n        map[option.name] = option.value;            // clave tal cual viene (ej: \"Tamaño\")\n        map[option.name.toLowerCase()] = option.value; // clave normalizada (ej: \"tamaño\", \"size\")\n        return map;\n    }, {});\n\n    let newOptionsArray = [];\n\n    // Iteramos sobre las opciones requeridas y las añadimos al array\n    for (const requiredName of REQUIRED_OPTIONS) {\n\n        let value = \"no definido\";\n\n        // --- Regla especial SOLO para \"Tamaño\" ---\n        if (requiredName === \"Tamaño\") {\n            value =\n                optionsMap[\"size\"] ||        // prioridad 1 → size\n                optionsMap[\"tamaño\"] ||      // prioridad 2 → tamaño (cualquier idioma)\n                optionsMap[\"Tamaño\"] ||      // por si viene con mayúscula exacta\n                \"no definido\";               // fallback\n        } \n        else {\n            // Para el resto de opciones (Color, Año) usamos tu lógica original\n            value = optionsMap[requiredName] || \"no definido\";\n        }\n\n        newOptionsArray.push({\n            name: requiredName,\n            value\n        });\n    }\n\n    // Reemplazamos el array de opciones original con el nuevo array normalizado\n    item.json.data.productVariant.normalizedOptions = newOptionsArray;\n}\n\nreturn items;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        -208
+      ],
+      "id": "05b73e68-043b-4f34-b183-f018c63e4fc9",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        288,
+        -32
+      ],
+      "id": "c233f02e-1986-4cd3-ac9b-29c944d5cf24",
+      "name": "No Operation, do nothing"
+    },
+    {
+      "parameters": {
+        "content": "ENVIAR DATOS A SHEETS",
+        "height": 384,
+        "width": 1680,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -336,
+        -272
+      ],
+      "id": "9fbaffd9-bfdc-4f1b-913e-f7b309d52048",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "Este flow consigue los datos de shopify, los procesa y los envia a la hoja de calculo de info@tailwind.es",
+        "height": 80,
+        "width": 304,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -336,
+        -368
+      ],
+      "id": "2c4c91fd-eebb-438e-babb-be14ccf52905",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1666UwMaXD1Wg9aLis0924Pd1OBWdkS6ShF9Qu_baspM",
+          "mode": "list",
+          "cachedResultName": "Informe falta de stock",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1666UwMaXD1Wg9aLis0924Pd1OBWdkS6ShF9Qu_baspM/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1666UwMaXD1Wg9aLis0924Pd1OBWdkS6ShF9Qu_baspM/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -128,
+        432
+      ],
+      "id": "09ae5919-1e83-4d45-bd8c-f963be299881",
+      "name": "Get row(s) in sheet",
+      "alwaysOutputData": false,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "RCuKUCifcA4jENcY",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "aa5fdde7-1cd6-47b8-91c3-6b1414fd9ea6",
+              "name": "ID PRODUCTO",
+              "value": "={{ $json.ID }}",
+              "type": "number"
+            },
+            {
+              "id": "ef9b1a1d-8a78-48a4-999e-1447b8c07af4",
+              "name": "NUMERO FILA",
+              "value": "={{ $json.row_number }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        80,
+        432
+      ],
+      "id": "7c379746-d8e4-4559-b227-9100d462af05",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
+        "query": "query GetVariantInfo($variantId: ID!) {\n  productVariant(id: $variantId) {\n    inventoryQuantity\n  } \n}",
+        "variables": "={\n  \"variantId\": \"{{ 'gid://shopify/ProductVariant/' + $json['ID PRODUCTO'] }}\"\n}"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        320,
+        432
+      ],
+      "id": "fb5f25bf-aa10-477f-903b-3347b6bdfd93",
+      "name": "GraphQL1",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "f8572f00-ce9e-4a9f-b3d0-44796326775c",
+              "leftValue": "={{ $json.data.productVariant.inventoryQuantity }}",
+              "rightValue": 4,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        528,
+        432
+      ],
+      "id": "3a15030d-56dc-43aa-b7a7-ee39b5a1464c",
+      "name": "Filter1"
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "documentId": {
+          "__rl": true,
+          "value": "1666UwMaXD1Wg9aLis0924Pd1OBWdkS6ShF9Qu_baspM",
+          "mode": "list",
+          "cachedResultName": "Informe falta de stock",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1666UwMaXD1Wg9aLis0924Pd1OBWdkS6ShF9Qu_baspM/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1666UwMaXD1Wg9aLis0924Pd1OBWdkS6ShF9Qu_baspM/edit#gid=0"
+        },
+        "startIndex": "={{ $('Edit Fields1').item.json['NUMERO FILA'] }}"
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1120,
+        432
+      ],
+      "id": "353aba9b-e574-4316-a3e6-c50e3dfe4702",
+      "name": "Delete rows or columns from sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "RCuKUCifcA4jENcY",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {
+          "reset": false
+        }
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        720,
+        432
+      ],
+      "id": "690371e1-eede-40ad-b4b3-b9d98ff0da94",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "name": "Replace Me",
+      "typeVersion": 1,
+      "position": [
+        944,
+        432
+      ],
+      "id": "a9b4b67b-c5af-4ed5-9480-e9c4b4513afb"
+    },
+    {
+      "parameters": {
+        "content": "ELIMINAR PRODUCTOS",
+        "height": 272,
+        "width": 1712,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -368,
+        368
+      ],
+      "typeVersion": 1,
+      "id": "2eeafd59-013f-4afe-80f0-c0c5ca69a8d5",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "Este flow comprueba periodicamente que productos se han repuesto y los elimina de la lista",
+        "height": 96,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -368,
+        256
+      ],
+      "id": "e2cf7519-dbe9-4454-a198-b4318206b395",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 2
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -320,
+        432
+      ],
+      "id": "62d42d92-d24a-4e7e-89f8-bd93a11d14ec",
+      "name": "Schedule Trigger"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-12-11T12:26:10.546Z",
+      "createdAt": "2025-12-11T12:26:10.546Z",
+      "role": "workflow:owner",
+      "workflowId": "hXSd72PLpx6CIiA7",
+      "projectId": "x5UZcmGQw2OWHuXb"
+    }
+  ],
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrenceRules": [
+        6
+      ]
+    }
+  },
+  "tags": [],
+  "triggerCount": 2,
+  "updatedAt": "2025-12-11T12:43:08.000Z",
+  "versionId": "d59ca4a3-1e6e-4799-87f4-69c9c8ce4112"
+}
