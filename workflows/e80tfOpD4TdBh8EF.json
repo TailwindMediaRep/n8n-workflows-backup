@@ -167,7 +167,7 @@
       "typeVersion": 2.1,
       "position": [
         -1632,
-        -528
+        -784
       ],
       "id": "5f83faeb-2187-42c6-8d19-747cdcad6d45",
       "name": "Webhook",
@@ -192,7 +192,7 @@
       "typeVersion": 1.1,
       "position": [
         -1312,
-        -528
+        -784
       ],
       "id": "8e12a512-d98b-4ffc-b3b5-8b199d655ceb",
       "name": "GraphQL",
@@ -284,8 +284,8 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        -1248,
-        -816
+        -1264,
+        -528
       ],
       "id": "593a73be-8034-446e-a2df-f540ca2f76d0",
       "name": "Copy file",
@@ -306,8 +306,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -1664,
-        -864
+        -1680,
+        -576
       ],
       "id": "eef4721a-3b13-46f6-bbbc-a277f211edf4",
       "name": "Sticky Note2"
@@ -334,7 +334,7 @@
       "typeVersion": 1,
       "position": [
         -1472,
-        -528
+        -784
       ],
       "id": "a1ff8038-7431-4353-80e1-1356833b1a05",
       "name": "conseguir contador"
@@ -385,7 +385,7 @@
       "typeVersion": 1,
       "position": [
         -608,
-        -528
+        -784
       ],
       "id": "c71add0b-77a2-463b-a5ff-1afd049084ce",
       "name": "sumar contador"
@@ -405,7 +405,7 @@
       "typeVersion": 1,
       "position": [
         -976,
-        -528
+        -784
       ],
       "id": "d87b944a-6f6e-42fb-86d6-92da02d29e6a",
       "name": "conseguir ID documento"
@@ -417,8 +417,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -1424,
-        -816
+        -1440,
+        -528
       ],
       "id": "4fb748b4-d336-478b-b9ff-e9219a8a094d",
       "name": "obtener fecha"
@@ -468,8 +468,8 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1,
       "position": [
-        -1072,
-        -816
+        -1088,
+        -528
       ],
       "id": "d4605f99-a6cc-43b9-af9f-0b8291feb902",
       "name": "actualizar tabla id archivo"
@@ -519,8 +519,8 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1,
       "position": [
-        -880,
-        -816
+        -896,
+        -528
       ],
       "id": "3feb5aad-9d95-43f5-a7b9-df66e1ceafbe",
       "name": "restablecer numero contador"
@@ -533,7 +533,7 @@
       "typeVersion": 2,
       "position": [
         -1152,
-        -528
+        -784
       ],
       "id": "d8735ae5-f6e0-4e09-8270-298b488570db",
       "name": "procesar datos"
@@ -623,7 +623,7 @@
       "typeVersion": 4.7,
       "position": [
         -784,
-        -528
+        -784
       ],
       "id": "a3217a6b-00e3-4b93-bb36-3f4276f25339",
       "name": "actualizar documento",
@@ -646,7 +646,7 @@
       "typeVersion": 1,
       "position": [
         -1680,
-        -576
+        -832
       ],
       "id": "ee4caabd-620f-4b47-a5a9-8631b230ca7d",
       "name": "Sticky Note"
@@ -662,8 +662,8 @@
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.3,
       "position": [
-        -1632,
-        -816
+        -1648,
+        -528
       ],
       "id": "b248728b-6b35-4520-be9a-fcc77b399479",
       "name": "Schedule Trigger"
@@ -716,8 +716,8 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1,
       "position": [
-        -672,
-        -816
+        -688,
+        -528
       ],
       "id": "36b3f39f-9b27-4a29-83a6-bb28e092b197",
       "name": "Insert row"
@@ -743,6 +743,6 @@
   },
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2025-12-11T08:02:47.000Z",
-  "versionId": "9bf2375b-2aa1-473b-a3c8-b501c69688e3"
+  "updatedAt": "2025-12-11T22:09:25.000Z",
+  "versionId": "73acc7c2-4d94-4556-8847-85a5b14bd74a"
 }
