@@ -1,0 +1,28 @@
+{
+  "active": false,
+  "connections": {},
+  "createdAt": "2025-12-12T07:23:55.975Z",
+  "id": "cnuDKnZrHmDy4QDh",
+  "isArchived": false,
+  "meta": null,
+  "name": "pruebaInformeDiariov2",
+  "nodes": [],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2025-12-12T07:23:55.982Z",
+      "createdAt": "2025-12-12T07:23:55.982Z",
+      "role": "workflow:owner",
+      "workflowId": "cnuDKnZrHmDy4QDh",
+      "projectId": "x5UZcmGQw2OWHuXb"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-12-12T07:23:55.000Z",
+  "versionId": "79b9da53-63fe-4d90-811e-a3aeaabaf8b0"
+}
