@@ -48,12 +48,12 @@
             "index": 0
           },
           {
-            "node": "minimos y maximos",
+            "node": "valores fijos",
             "type": "main",
             "index": 0
           },
           {
-            "node": "valores fijos",
+            "node": "minimos y maximos",
             "type": "main",
             "index": 0
           }
@@ -413,13 +413,13 @@
             {
               "id": "17a4d0da-eed5-4f49-91d1-bc42e59e49be",
               "name": "Partes[0].Parte.partenieve.pistas['@kilometrosesquiables']",
-              "value": "={{ $json.Partes[0].Parte.partenieve.pistas['@kilometrosesquiables'] }}",
+              "value": "={{ $json.Partes[1].Parte.partenieve.pistas['@kilometrosesquiables'] }}",
               "type": "string"
             },
             {
               "id": "d37b4d79-8526-4f07-913a-bf4100735a12",
               "name": "Partes[0].Parte.partenieve.remontes['@totalremontesabiertos']",
-              "value": "={{ $json.Partes[0].Parte.partenieve.remontes['@totalremontesabiertos'] }}",
+              "value": "={{ $json.Partes[1].Parte.partenieve.remontes['@totalremontesprevision'] }}",
               "type": "string"
             },
             {
@@ -521,7 +521,7 @@
             {
               "id": "311e6198-9218-40a2-abdb-2158e34fd58f",
               "name": "Partes[0].Parte.partenieve.pistas['@totalpistasabiertas']",
-              "value": "={{ $json.Partes[0].Parte.partenieve.pistas['@totalpistasabiertas'] }}",
+              "value": "={{ $json.Partes[1].Parte.partenieve.pistas['@totalpistasabiertas'] }}",
               "type": "string"
             },
             {
@@ -537,7 +537,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -368,
+        -384,
         -256
       ],
       "id": "322a55fd-abb5-42e1-95ee-8a0c5c9ff5f1",
@@ -577,7 +577,7 @@
       "typeVersion": 2,
       "position": [
         32,
-        -384
+        -416
       ],
       "id": "5c073de5-cce8-46a7-aa9d-f38f48309fe1",
       "name": "zonas abiertas"
@@ -596,13 +596,13 @@
     },
     {
       "parameters": {
-        "jsCode": "const data = $input.first().json;\n\n// 1. TEMPERATURAS\nconst temperaturas = [\n    data.temperaturaveleta,\n    data.temperaturaborreguiles,\n    data.temperaturapradollano\n];\n\n// Usamos Math.min() y Math.max() con el spread operator (...)\nconst temperaturaMinima = Math.min(...temperaturas);\nconst temperaturaMaxima = Math.max(...temperaturas);\n\n\n// 2. VIENTOS\nconst vientos = [\n    data.vientoveleta,\n    data.vientoborreguiles,\n    data.vientopradollano\n];\n\nconst vientoMinimo = Math.min(...vientos);\nconst vientoMaximo = Math.max(...vientos);\n\n\n// 3. RETORNO DE LOS DATOS CON EL FORMATO ESPECÍFICO\nreturn [{\n    json: {\n        temperaturaminima: temperaturaMinima,\n        temperaturamaxima: temperaturaMaxima,\n        vientominimo: vientoMinimo,\n        vientomaximo: vientoMaximo\n    }\n}];"
+        "jsCode": "// Obtiene el primer (y único) ítem del array de entrada\nconst item = items[0].json;\n\n// Inicializa las variables para la temperatura y el viento\nlet tempMin = Infinity;\nlet tempMax = -Infinity;\nlet vientoMin = Infinity;\nlet vientoMax = -Infinity;\n\n// Objeto que mapea las claves de calidad de nieve a sus claves de temperatura y viento correspondientes\n// Usamos un array si la temperatura/viento de una zona abierta debe tomarse de un punto de medición diferente\nconst mapaZonas = {\n    // Zona: [Clave de Calidad, Clave de Temperatura, Clave de Viento]\n    \"borreguiles\": [\"calidadborreguiles\", \"temperaturaborreguiles\", \"vientoborreguiles\"],\n    \"veleta\": [\"calidadveleta\", \"temperaturaveleta\", \"vientoveleta\"],\n    \"rio\": [\"calidadrio\", \"temperaturaborreguiles\", \"vientoborreguiles\"], // Asumimos temp/viento del Río se toman de Borreguiles\n    \"lomadilar\": [\"calidadlomadilar\", null, null], // No tienen datos de temp/viento en tu JSON de ejemplo\n    \"laguna\": [\"calidadlaguna\", null, null],\n    \"parador\": [\"calidadparador\", null, null]\n};\n\n// **1. Iterar sobre las zonas y procesar las abiertas**\nfor (const zona in mapaZonas) {\n    \n    const [calidadKey, tempKey, vientoKey] = mapaZonas[zona];\n    \n    // 1.1. Verificar si la zona está ABIERTA\n    if (item.hasOwnProperty(calidadKey) && item[calidadKey] !== \"CERRADA\" && item[calidadKey] !== \"cerrada\") {\n        \n        // 1.2. Calcular Temperaturas\n        if (tempKey && item.hasOwnProperty(tempKey)) {\n            const temperatura = item[tempKey];\n            if (typeof temperatura === 'number') {\n                if (temperatura < tempMin) { tempMin = temperatura; }\n                if (temperatura > tempMax) { tempMax = temperatura; }\n            }\n        }\n        \n        // 1.3. Calcular Viento\n        if (vientoKey && item.hasOwnProperty(vientoKey)) {\n            const viento = item[vientoKey];\n            if (typeof viento === 'number') {\n                if (viento < vientoMin) { vientoMin = viento; }\n                if (viento > vientoMax) { vientoMax = viento; }\n            }\n        }\n    }\n}\n\n// **2. Incluir la temperatura y viento de Pradollano (Base)**\n// La base se incluye siempre que los datos existan.\nconst tempPradollano = item.temperaturapradollano;\nif (typeof tempPradollano === 'number') {\n    if (tempPradollano < tempMin) { tempMin = tempPradollano; }\n    if (tempPradollano > tempMax) { tempMax = tempPradollano; }\n}\n\nconst vientoPradollano = item.vientopradollano;\nif (typeof vientoPradollano === 'number') {\n    if (vientoPradollano < vientoMin) { vientoMin = vientoPradollano; }\n    if (vientoPradollano > vientoMax) { vientoMax = vientoPradollano; }\n}\n\n\n// **3. Crear el nuevo objeto de resultado**\n\n// Ajustar valores si no se encontraron datos válidos\nif (tempMin === Infinity) { tempMin = null; }\nif (tempMax === -Infinity) { tempMax = null; }\nif (vientoMin === Infinity) { vientoMin = null; }\nif (vientoMax === -Infinity) { vientoMax = null; }\n\n// El nodo de n8n solo devolverá el objeto resultante con las cuatro variables\nconst output = {\n    temperaturaminima: tempMin,\n    temperaturamaxima: tempMax,\n    vientominimo: vientoMin,\n    vientomaximo: vientoMax\n};\n\n// Se retorna el resultado dentro del formato de array que espera n8n\nreturn [\n    { json: output }\n];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        32,
-        -144
+        48,
+        -112
       ],
       "id": "6f277312-5000-4400-9d19-5f689a8b2f3b",
       "name": "minimos y maximos"
@@ -654,7 +654,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        32,
+        48,
         80
       ],
       "id": "9d35a22b-1962-47ef-a5b6-15aff35f3386",
@@ -1058,6 +1058,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-12-11T14:23:17.000Z",
-  "versionId": "a676e5f3-139b-4f11-ab8e-c1bf51f9eaeb"
+  "updatedAt": "2025-12-12T08:23:36.000Z",
+  "versionId": "429bcc88-bba6-498c-874d-a724976541c1"
 }
