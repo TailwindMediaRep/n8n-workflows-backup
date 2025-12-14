@@ -673,8 +673,8 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -1024,
-        -256
+        -1776,
+        -656
       ],
       "id": "2af5c064-df49-4280-956a-646d59e20107",
       "name": "When clicking ‘Execute workflow’"
@@ -743,6 +743,6 @@
   },
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2025-12-11T22:09:25.000Z",
-  "versionId": "73acc7c2-4d94-4556-8847-85a5b14bd74a"
+  "updatedAt": "2025-12-13T12:53:26.000Z",
+  "versionId": "e9f61121-153c-4745-9f2c-062ff618d259"
 }
