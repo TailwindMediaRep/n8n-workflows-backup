@@ -18,7 +18,7 @@
           {
             "node": "Merge",
             "type": "main",
-            "index": 0
+            "index": 1
           }
         ]
       ]
@@ -78,7 +78,7 @@
           {
             "node": "Merge",
             "type": "main",
-            "index": 1
+            "index": 2
           }
         ]
       ]
@@ -139,6 +139,11 @@
             "node": "Code in JavaScript",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -148,6 +153,28 @@
         [
           {
             "node": "Update row(s)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GraphQL1": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "GraphQL1",
             "type": "main",
             "index": 0
           }
@@ -172,8 +199,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -1664,
-        -896
+        -1728,
+        -880
       ],
       "id": "8d04931c-f304-4821-a338-c378c50a52a5",
       "name": "Webhook",
@@ -184,7 +211,7 @@
         "authentication": "headerAuth",
         "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-07/graphql.json",
         "query": "query getOrder($id: ID!) {\n\n  order(id: $id) {\n\n    id\n\n    name\n\n    createdAt\n\n    email\n\n    totalPriceSet {\n\n      shopMoney {\n\n        amount\n\n        currencyCode\n\n      }\n\n    }\n\n    lineItems(first: 10) {\n\n      edges {\n\n        node {\n\n          title\n\n          quantity\n\n          originalUnitPriceSet {\n\n            shopMoney {\n\n              amount\n\n              currencyCode\n\n            }\n\n          }\n\n        }\n\n      }\n\n    }\n\n    fulfillments {\n\n      id\n\n      location {\n\n        name\n\n        address {\n\n          address1\n\n          city\n\n          province\n\n          country\n\n          zip\n\n        }\n\n      }\n\n    }\n\n    transactions(first: 5) {\n\n      formattedGateway\n\n      kind\n\n      status\n\n    }\n\n    customer {\n\n      firstName\n\n      lastName\n\n      email\n\n    }\n\n  }\n\n}\n",
-        "variables": "={\n  \"id\": \"gid://shopify/Order/{{ $('Webhook').item.json.body[0].body.id }}\"\n}",
+        "variables": "={\n  \"id\": \"gid://shopify/Order/{{ $('Webhook').item.json.body.id }}\"\n}",
         "headerParametersUi": {
           "parameter": [
             {
@@ -197,8 +224,8 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        -1152,
-        -1072
+        -1360,
+        -880
       ],
       "id": "f2b989f7-e790-4b8f-83aa-abfa484470ea",
       "name": "GraphQL",
@@ -358,7 +385,8 @@
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "ID_Documento": "={{ $('Copy file').item.json.id }}"
+            "ID_Documento": "={{ $('Copy file').item.json.id }}",
+            "fecha": "={{ $('obtener fecha').item.json.formattedDate }}"
           },
           "matchingColumns": [
             "ID_Documento"
@@ -367,6 +395,16 @@
             {
               "id": "ID_Documento",
               "displayName": "ID_Documento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "fecha",
+              "displayName": "fecha",
               "required": false,
               "defaultMatch": false,
               "display": true,
@@ -391,24 +429,26 @@
     },
     {
       "parameters": {
-        "jsCode": "// El nodo Code de n8n espera que devolvamos un array de objetos.\nconst outputItems = [];\n\n// Obtenemos el valor del contador del nodo anterior\n// items[0].json.Contador → 2 en tu ejemplo\nlet numeroFila = items[0].json.Contador;\nlet ID_documento = items[0].json.ID_Documento;\n\n// 1. Accedemos al cuerpo real del pedido de Shopify, que está anidado.\nconst orderBody = $node['Webhook'].json.body[0].body; \n\n// 2. Extraemos los artículos de línea (productos) y la moneda.\nconst lineItems = orderBody.line_items;\nconst orderCurrency = orderBody.currency;\n\n// Iteramos sobre cada producto individual\nfor (const item of lineItems) {\n\n  const originalPrice = parseFloat(item.price);\n\n  let totalDiscountAmount = 0;\n  for (const allocation of item.discount_allocations) {\n    totalDiscountAmount += parseFloat(allocation.amount);\n  }\n\n  const finalPaidPrice = originalPrice - totalDiscountAmount;\n\n  // Creamos un nuevo objeto y añadimos \"numero_fila\"\n  outputItems.push({\n    json: {\n      ID_documento: ID_documento,\n      numero_fila: numeroFila,   // ← Nuevo campo\n      product_name: item.title,\n      sku: item.sku,\n      variant_title: item.variant_title,\n      original_price: originalPrice.toFixed(2),\n      total_discount_applied: totalDiscountAmount.toFixed(2),\n      final_paid_price: finalPaidPrice.toFixed(2),\n      currency: orderCurrency\n    }\n  });\n\n  // ↑ Incrementamos para el siguiente item\n  numeroFila++;\n}\n\n// Devolvemos el array con los nuevos objetos.\nreturn outputItems;\n"
+        "jsCode": "// El nodo Code de n8n espera que devolvamos un array de objetos.\nconst outputItems = [];\n\n// Obtenemos el valor del contador del nodo anterior\n// items[0].json.Contador → 2 en tu ejemplo\nlet numeroFila = items[0].json.Contador;\nlet ID_documento = items[0].json.ID_Documento;\n\n// 1. Accedemos al cuerpo real del pedido de Shopify, que está anidado.\nconst orderBody = $node['Webhook'].json.body; \n\n// 2. Extraemos los artículos de línea (productos) y la moneda.\nconst lineItems = orderBody.line_items;\nconst orderCurrency = orderBody.currency;\n\n// Iteramos sobre cada producto individual\nfor (const item of lineItems) {\n\n  const originalPrice = parseFloat(item.price);\n\n  let totalDiscountAmount = 0;\n  for (const allocation of item.discount_allocations) {\n    totalDiscountAmount += parseFloat(allocation.amount);\n  }\n\n  const finalPaidPrice = originalPrice - totalDiscountAmount;\n\n  // Creamos un nuevo objeto y añadimos \"numero_fila\"\n  outputItems.push({\n    json: {\n      ID_documento: ID_documento,\n      numero_fila: numeroFila,   // ← Nuevo campo\n      product_name: item.title,\n      sku: item.sku,\n      variant_title: item.variant_title,\n      original_price: originalPrice.toFixed(2),\n      total_discount_applied: totalDiscountAmount.toFixed(2),\n      final_paid_price: finalPaidPrice.toFixed(2),\n      currency: orderCurrency\n    }\n  });\n\n  // ↑ Incrementamos para el siguiente item\n  numeroFila++;\n}\n\n// Devolvemos el array con los nuevos objetos.\nreturn outputItems;\n"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -1152,
-        -768
+        -1360,
+        -736
       ],
       "id": "9e8a8feb-92c7-440b-b194-4ee2d05fe221",
       "name": "Code in JavaScript"
     },
     {
-      "parameters": {},
+      "parameters": {
+        "numberInputs": 3
+      },
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        -880,
-        -912
+        -1008,
+        -896
       ],
       "id": "5f0365d1-36ab-4077-a2dd-3552421b7e0d",
       "name": "Merge"
@@ -478,21 +518,21 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -512,
-        -912
+        -672,
+        -896
       ],
       "id": "6f545319-847f-4c62-8469-9e364d274988",
       "name": "Edit Fields"
     },
     {
       "parameters": {
-        "jsCode": "// La variable 'items' ahora contiene:\n// items[0] y items[1] = Detalles de los productos (ej. nombre, SKU, precios finales)\n// items[2] = Datos de la orden de Shopify (ej. ID, precios totales, cliente, transacciones)\n\n// 1. Verificar la longitud esperada. Ahora esperamos al menos 3 ítems (1 orden + 2 o más productos)\n// Para simplificar, asumiremos que los items de la orden están al final.\nif (items.length < 3) {\n  throw new Error(\"Se esperaban al menos 3 ítems de entrada (1 orden y al menos 2 productos).\");\n}\n\n// 2. Extraer los datos de la orden del último ítem que tiene la estructura de orden.\n// Asumimos que la ORDEN es el ítem items[2]\nconst orderItemIndex = items.findIndex(item => item.json && item.json.data && item.json.data.order);\n\nif (orderItemIndex === -1) {\n    throw new Error(\"No se encontró el ítem de la orden de Shopify en la entrada.\");\n}\n\nconst orderData = items[orderItemIndex].json.data.order;\n\n// 3. Extraer los detalles de los productos\n// Asumimos que los ítems del producto son todos los demás.\nconst productItems = items.filter((_, index) => index !== orderItemIndex);\n\n// Array para almacenar los nuevos ítems fusionados\nconst combinedItems = [];\n\n// 4. Crear un objeto de base con los datos de la orden (que son comunes a todos los productos)\nconst baseOrderData = {\n  id: orderData.id,\n  name: orderData.name,\n  createdAt: orderData.createdAt,\n  totalPrice: orderData.totalPriceSet?.shopMoney?.amount || 'N/A',\n  currencyCode: orderData.totalPriceSet?.shopMoney?.currencyCode || 'N/A',\n \n  // Datos del cliente\n  customer: orderData.customer,\n \n  // Datos de envío (uso encadenamiento opcional para evitar errores si no hay fulfillment)\n  fulfillmentLocation: orderData.fulfillments?.[0]?.location?.name || 'N/A',\n  fulfillmentAddress: orderData.fulfillments?.[0]?.location?.address || 'N/A',\n \n  // Datos de la transacción (uso encadenamiento opcional para evitar errores si no hay transacción)\n  transactionGateway: orderData.transactions?.[0]?.formattedGateway || 'N/A',\n  transactionKind: orderData.transactions?.[0]?.kind || 'N/A',\n  transactionStatus: orderData.transactions?.[0]?.status || 'N/A',\n};\n\n// 5. Iterar sobre cada ítem de producto y fusionarlo con los datos base de la orden\nfor (const productItem of productItems) {\n  // El detalle del producto se accede directamente a productItem.json\n  const productData = productItem.json;\n \n  const combinedItem = {\n    ...baseOrderData, // Incluye todos los datos de la orden\n \n    // --- Datos detallados del producto específico ---\n    product: {\n      ID_documento: productData.ID_documento,\n      numero_fila: productData.numero_fila,\n      product_name: productData.product_name,\n      sku: productData.sku,\n      variant_title: productData.variant_title,\n      original_price: productData.original_price,\n      total_discount_applied: productData.total_discount_applied,\n      final_paid_price: productData.final_paid_price,\n      currency: productData.currency\n    }\n  };\n \n  combinedItems.push({\n    json: combinedItem,\n  });\n}\n\n// 6. Devolver el array de nuevos ítems fusionados (uno por cada producto)\nreturn combinedItems;"
+        "jsCode": "// Este código asume que:\n// - Hay un ítem con la estructura completa de la orden (item.json.data.order).\n// - Hay uno o más ítems con la información detallada del producto (item.json.ID_documento).\n\n// 1. Verificar la longitud esperada. Mínimo 2 ítems (1 orden + 1 producto)\nif (items.length < 2) {\n    throw new Error(\"Se esperaban al menos 2 ítems de entrada (1 orden y al menos 1 producto).\");\n}\n\n// 2. Identificar el índice del ítem de la ORDEN\nconst orderItemIndex = items.findIndex(item => item.json && item.json.data && item.json.data.order);\n\nif (orderItemIndex === -1) {\n    throw new Error(\"No se encontró el ítem de la orden de Shopify en la entrada (buscando en item.json.data.order).\");\n}\n\nconst orderData = items[orderItemIndex].json.data.order;\n\n// 3. Extraer los ítems de PRODUCTO\n// Los ítems de producto son todos los que NO son la orden.\nconst productItems = items.filter((_, index) => index !== orderItemIndex);\n\nif (productItems.length === 0) {\n    throw new Error(\"Se encontró la orden, pero no se encontraron ítems de producto separados para fusionar.\");\n}\n\n// 4. Crear un objeto de base con los datos de la orden (comunes a todos los productos)\nconst baseOrderData = {\n    id: orderData.id,\n    name: orderData.name,\n    createdAt: orderData.createdAt,\n    totalPrice: orderData.totalPriceSet?.shopMoney?.amount || 'N/A',\n    currencyCode: orderData.totalPriceSet?.shopMoney?.currencyCode || 'N/A',\n    \n    // Datos del cliente\n    customer: orderData.customer,\n    \n    // Datos de envío\n    // Si hay fulfillments, usa el primero.\n    fulfillmentLocation: orderData.fulfillments?.[0]?.location?.name || 'N/A',\n    fulfillmentAddress: orderData.fulfillments?.[0]?.location?.address || 'N/A',\n    \n    // Datos de la transacción\n    // Si hay transacciones, usa la primera.\n    transactionGateway: orderData.transactions?.[0]?.formattedGateway || 'N/A',\n    transactionKind: orderData.transactions?.[0]?.kind || 'N/A',\n    transactionStatus: orderData.transactions?.[0]?.status || 'N/A',\n};\n\n// 5. Iterar sobre cada ítem de producto y fusionarlo con los datos base de la orden\nconst combinedItems = [];\nfor (const productItem of productItems) {\n    // El detalle del producto se accede directamente a productItem.json (que ahora es el objeto de producto)\n    const productData = productItem.json;\n    const variantData = productItem.json.productVariant;\n    \n    // Verificamos que sea un objeto de producto (ej. que tenga ID_documento) antes de fusionar.\n    if (!productData.ID_documento) {\n        console.warn('Ítem omitido: No parece ser un ítem de producto válido (falta ID_documento).');\n        continue;\n    }\n\n    const combinedItem = {\n        ...baseOrderData, // Incluye todos los datos de la orden\n        \n        // --- Datos detallados del producto específico ---\n        product: {\n            ID_documento: productData.ID_documento,\n            numero_fila: productData.numero_fila,\n            product_name: productData.product_name,\n            sku: productData.sku,\n            variant_title: productData.variant_title,\n            original_price: productData.original_price,\n            total_discount_applied: productData.total_discount_applied,\n            final_paid_price: productData.final_paid_price,\n            currency: productData.currency\n        }\n    };\n    \n    combinedItems.push({\n        json: combinedItem,\n    });\n}\n\n// 6. Devolver el array de nuevos ítems fusionados (uno por cada producto)\nreturn combinedItems;"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -704,
-        -912
+        -832,
+        -896
       ],
       "id": "44c1b76f-eedb-42ae-bc71-e31442c0e5cc",
       "name": "Code in JavaScript1"
@@ -578,8 +618,8 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1,
       "position": [
-        -1440,
-        -896
+        -1552,
+        -880
       ],
       "id": "0380bebf-1df7-437f-85d0-a3536c40472d",
       "name": "Get row(s)"
@@ -734,8 +774,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -336,
-        -912
+        -496,
+        -896
       ],
       "id": "56b5d05d-137f-4d64-9536-fc63537c088e",
       "name": "Update row in sheet",
@@ -801,11 +841,64 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1,
       "position": [
-        -128,
-        -912
+        -336,
+        -896
       ],
       "id": "4dfa361c-f4ee-490c-a9e9-651276b5c324",
       "name": "Update row(s)1"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-07/graphql.json",
+        "query": "query getVariantCost($id: ID!) {\n  productVariant(id: $id) {\n    id\n    sku\n    title\n    inventoryItem {\n      id\n      unitCost {\n        amount\n        currencyCode\n      }\n    }\n  }\n}\n\n",
+        "variables": "={\n  \"id\": \"{{ $json['ID VARIANTE'] }}\"\n}",
+        "headerParametersUi": {
+          "parameter": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        -1232,
+        -1024
+      ],
+      "id": "dff99538-fd0c-49e3-805d-709b32d70e0a",
+      "name": "GraphQL1",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "711be730-983a-47e6-99f2-d818a44482be",
+              "name": "ID VARIANTE",
+              "value": "=gid://shopify/ProductVariant/{{ $('Webhook').item.json.body.line_items[0].variant_id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1360,
+        -1024
+      ],
+      "id": "b127f142-72c0-4160-95a7-c8b7cc4a5371",
+      "name": "Edit Fields1"
     }
   ],
   "pinData": {},
@@ -828,6 +921,6 @@
   },
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2025-12-12T14:28:09.000Z",
-  "versionId": "fe41fc50-0c50-452e-8071-53c54ac5bb7f"
+  "updatedAt": "2025-12-13T11:32:36.000Z",
+  "versionId": "4c1d2ae7-f656-4297-a71a-bcc07b25419d"
 }
