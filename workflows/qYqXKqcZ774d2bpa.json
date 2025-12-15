@@ -285,7 +285,10 @@
             "SUCURSAL DE VENTA": "={{ $json['SUCURSAL DE VENTA'] }}",
             "MÉTODO DE PAGO": "={{ $json['MÉTODO DE PAGO'] }}",
             "COSTE DE PRODUCTO": "={{ $json['COSTE DE PRODUCTO'] }}",
-            "NOMBRE DE PRODUCTO": "={{ $json['NOMBRE DE PRODUCTO'] }}"
+            "NOMBRE DE PRODUCTO": "={{ $json['NOMBRE DE PRODUCTO'] }}",
+            "PRECIO PAGADO": "={{ $json['PRECIO PAGADO'] }}",
+            "DESCUENTO": "={{ $json.DESCUENTO }}",
+            "VARIANTE": "={{ $json.VARIANTE }}"
           },
           "matchingColumns": [],
           "schema": [
@@ -317,6 +320,26 @@
               "canBeUsedToMatch": true
             },
             {
+              "id": "PRECIO PAGADO",
+              "displayName": "PRECIO PAGADO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "DESCUENTO",
+              "displayName": "DESCUENTO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
               "id": "NOMBRE DE PRODUCTO",
               "displayName": "NOMBRE DE PRODUCTO",
               "required": false,
@@ -324,6 +347,16 @@
               "display": true,
               "type": "string",
               "canBeUsedToMatch": true
+            },
+            {
+              "id": "VARIANTE",
+              "displayName": "VARIANTE",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
             }
           ],
           "attemptToConvertTypes": false,
@@ -365,7 +398,10 @@
             "MÉTODO DE PAGO": "SEPARADOR",
             "COSTE DE PRODUCTO": "SEPARADOR",
             "NOMBRE DE PRODUCTO": "SEPARADOR",
-            "SUCURSAL DE VENTA": "={{ $('Code in JavaScript').item.json.fecha }}"
+            "SUCURSAL DE VENTA": "={{ $('Code in JavaScript').item.json.fecha }}",
+            "PRECIO PAGADO": "SEPARADOR",
+            "DESCUENTO": "SEPARADOR",
+            "VARIANTE": "SEPARADOR"
           },
           "matchingColumns": [],
           "schema": [
@@ -400,8 +436,38 @@
               "removed": false
             },
             {
+              "id": "PRECIO PAGADO",
+              "displayName": "PRECIO PAGADO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "DESCUENTO",
+              "displayName": "DESCUENTO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
               "id": "NOMBRE DE PRODUCTO",
               "displayName": "NOMBRE DE PRODUCTO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "VARIANTE",
+              "displayName": "VARIANTE",
               "required": false,
               "defaultMatch": false,
               "display": true,
@@ -522,6 +588,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-12-11T14:09:57.000Z",
-  "versionId": "04fa218e-ff3f-4d2e-8504-61d86f48ce60"
+  "updatedAt": "2025-12-15T09:10:37.000Z",
+  "versionId": "5e8345d4-6bfd-4edf-8526-f54b6a47ae2c"
 }
