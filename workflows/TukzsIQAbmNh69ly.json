@@ -45,17 +45,6 @@
         ]
       ]
     },
-    "obtener fecha": {
-      "main": [
-        [
-          {
-            "node": "Copy file",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Schedule Trigger": {
       "main": [
         [
@@ -180,6 +169,28 @@
           }
         ]
       ]
+    },
+    "obtener fecha": {
+      "main": [
+        [
+          {
+            "node": "formatear fecha",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "formatear fecha": {
+      "main": [
+        [
+          {
+            "node": "Copy file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-12-12T07:24:14.681Z",
@@ -224,7 +235,7 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        -1360,
+        -1296,
         -880
       ],
       "id": "f2b989f7-e790-4b8f-83aa-abfa484470ea",
@@ -309,13 +320,13 @@
           "value": "1QZ-GBz6D6EL4fZh3lh9PyAjwWzyjVn8nN0wy4mUjg04",
           "mode": "id"
         },
-        "name": "=PruebaInformeDiarioV2 {{ $json.formattedDate }}",
+        "name": "=PruebaInformeDiarioV2 {{ $json.FECHA }}",
         "options": {}
       },
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        -1312,
+        -1200,
         -528
       ],
       "id": "7c991240-6515-4268-98db-37bdea8a494d",
@@ -331,30 +342,17 @@
       "parameters": {
         "content": "CREAR DOCUMENTO",
         "height": 208,
-        "width": 912,
+        "width": 960,
         "color": 6
       },
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -1680,
+        -1664,
         -576
       ],
       "id": "0316b82a-37aa-4054-a571-03ce6f7d5811",
       "name": "Sticky Note2"
-    },
-    {
-      "parameters": {
-        "jsCode": "// Este código se ejecuta en un nodo Function de n8n.\n\n// 1. Obtener la fecha y hora actuales del sistema (servidor)\nconst dateObject = new Date();\n\n// 2. Definir las opciones de formato para España.\n// 'es-ES' garantiza el orden del formato local.\n// 'Europe/Madrid' corrige la zona horaria del servidor al horario de España.\nconst options = {\n    year: 'numeric',\n    month: '2-digit',\n    day: '2-digit',\n    timeZone: 'Europe/Madrid' // <<-- ¡Ajuste de Zona Horaria!\n};\n\n// 3. Crear el formateador y aplicar el formato.\n// El resultado será una cadena como \"04/12/2025\"\nconst formatter = new Intl.DateTimeFormat('es-ES', options);\nconst formattedDateSlash = formatter.format(dateObject);\n\n// 4. Reemplazar las barras (/) por guiones (-) para obtener dd-mm-aaaa\nconst formattedDate = formattedDateSlash.replace(/\\//g, '-'); // Resultado: 04-12-2025\n\n// 5. Retornar el resultado en la estructura de datos de n8n\nreturn [{\n    json: {\n        formattedDate: formattedDate,\n        // Puedes añadir más campos si los necesitas, por ejemplo, la hora:\n        // formattedTime: new Intl.DateTimeFormat('es-ES', {hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Madrid'}).format(dateObject)\n    }\n}];"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        -1472,
-        -528
-      ],
-      "id": "da955a52-4eed-4b33-be5a-ead0f6e06504",
-      "name": "obtener fecha"
     },
     {
       "parameters": {
@@ -421,7 +419,7 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1,
       "position": [
-        -1024,
+        -912,
         -528
       ],
       "id": "08668728-f413-42a5-a7ea-de06088c173d",
@@ -434,7 +432,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -1360,
+        -1296,
         -736
       ],
       "id": "9e8a8feb-92c7-440b-b194-4ee2d05fe221",
@@ -467,6 +465,12 @@
               "id": "e89736ae-2f29-40c8-80b4-2181722ee3f5",
               "name": "METODO DE PAGO",
               "value": "={{ $json.transactionGateway }}",
+              "type": "string"
+            },
+            {
+              "id": "dc4a77f5-966d-4efc-b755-1f0fe34f6958",
+              "name": "COSTO POR UNIDAD",
+              "value": "={{ $json.product.unit_cost }}",
               "type": "string"
             },
             {
@@ -526,7 +530,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// Este código asume que:\n// - Hay un ítem con la estructura completa de la orden (item.json.data.order).\n// - Hay uno o más ítems con la información detallada del producto (item.json.ID_documento).\n\n// 1. Verificar la longitud esperada. Mínimo 2 ítems (1 orden + 1 producto)\nif (items.length < 2) {\n    throw new Error(\"Se esperaban al menos 2 ítems de entrada (1 orden y al menos 1 producto).\");\n}\n\n// 2. Identificar el índice del ítem de la ORDEN\nconst orderItemIndex = items.findIndex(item => item.json && item.json.data && item.json.data.order);\n\nif (orderItemIndex === -1) {\n    throw new Error(\"No se encontró el ítem de la orden de Shopify en la entrada (buscando en item.json.data.order).\");\n}\n\nconst orderData = items[orderItemIndex].json.data.order;\n\n// 3. Extraer los ítems de PRODUCTO\n// Los ítems de producto son todos los que NO son la orden.\nconst productItems = items.filter((_, index) => index !== orderItemIndex);\n\nif (productItems.length === 0) {\n    throw new Error(\"Se encontró la orden, pero no se encontraron ítems de producto separados para fusionar.\");\n}\n\n// 4. Crear un objeto de base con los datos de la orden (comunes a todos los productos)\nconst baseOrderData = {\n    id: orderData.id,\n    name: orderData.name,\n    createdAt: orderData.createdAt,\n    totalPrice: orderData.totalPriceSet?.shopMoney?.amount || 'N/A',\n    currencyCode: orderData.totalPriceSet?.shopMoney?.currencyCode || 'N/A',\n    \n    // Datos del cliente\n    customer: orderData.customer,\n    \n    // Datos de envío\n    // Si hay fulfillments, usa el primero.\n    fulfillmentLocation: orderData.fulfillments?.[0]?.location?.name || 'N/A',\n    fulfillmentAddress: orderData.fulfillments?.[0]?.location?.address || 'N/A',\n    \n    // Datos de la transacción\n    // Si hay transacciones, usa la primera.\n    transactionGateway: orderData.transactions?.[0]?.formattedGateway || 'N/A',\n    transactionKind: orderData.transactions?.[0]?.kind || 'N/A',\n    transactionStatus: orderData.transactions?.[0]?.status || 'N/A',\n};\n\n// 5. Iterar sobre cada ítem de producto y fusionarlo con los datos base de la orden\nconst combinedItems = [];\nfor (const productItem of productItems) {\n    // El detalle del producto se accede directamente a productItem.json (que ahora es el objeto de producto)\n    const productData = productItem.json;\n    const variantData = productItem.json.productVariant;\n    \n    // Verificamos que sea un objeto de producto (ej. que tenga ID_documento) antes de fusionar.\n    if (!productData.ID_documento) {\n        console.warn('Ítem omitido: No parece ser un ítem de producto válido (falta ID_documento).');\n        continue;\n    }\n\n    const combinedItem = {\n        ...baseOrderData, // Incluye todos los datos de la orden\n        \n        // --- Datos detallados del producto específico ---\n        product: {\n            ID_documento: productData.ID_documento,\n            numero_fila: productData.numero_fila,\n            product_name: productData.product_name,\n            sku: productData.sku,\n            variant_title: productData.variant_title,\n            original_price: productData.original_price,\n            total_discount_applied: productData.total_discount_applied,\n            final_paid_price: productData.final_paid_price,\n            currency: productData.currency\n        }\n    };\n    \n    combinedItems.push({\n        json: combinedItem,\n    });\n}\n\n// 6. Devolver el array de nuevos ítems fusionados (uno por cada producto)\nreturn combinedItems;"
+        "jsCode": "// 1. Validaciones básicas\nif (items.length < 2) {\n    throw new Error(\"Se esperaban al menos 2 ítems de entrada.\");\n}\n\n// Inicializamos variables\nlet orderData = null;\nconst productRows = []; // Aquí guardaremos los ítems que tienen ID_documento\nconst costMap = {}; // Aquí guardaremos los costos indexados por SKU\n\n// 2. Clasificar los ítems de entrada\nfor (const item of items) {\n    const json = item.json;\n\n    // A) Es la ORDEN (tiene data.order)\n    if (json.data && json.data.order) {\n        orderData = json.data.order;\n    } \n    // B) Es información de COSTO de Shopify (tiene data.productVariant)\n    else if (json.data && json.data.productVariant) {\n        const variant = json.data.productVariant;\n        const sku = variant.sku;\n        const costAmount = variant.inventoryItem?.unitCost?.amount;\n        \n        // Guardamos el costo en un objeto usando el SKU como clave para buscarlo rápido después\n        if (sku && costAmount) {\n            costMap[sku] = costAmount;\n        }\n    }\n    // C) Es el ítem procesado (tiene ID_documento)\n    else if (json.ID_documento) {\n        productRows.push(json);\n    }\n}\n\nif (!orderData) {\n    throw new Error(\"No se encontró el ítem de la orden de Shopify.\");\n}\n\nif (productRows.length === 0) {\n    throw new Error(\"No se encontraron ítems de producto con ID_documento.\");\n}\n\n// 3. Crear objeto base de la orden\nconst baseOrderData = {\n    id: orderData.id,\n    name: orderData.name,\n    createdAt: orderData.createdAt,\n    totalPrice: orderData.totalPriceSet?.shopMoney?.amount || 'N/A',\n    currencyCode: orderData.totalPriceSet?.shopMoney?.currencyCode || 'N/A',\n    \n    // Datos del cliente\n    customer: orderData.customer,\n    \n    // Datos de envío\n    fulfillmentLocation: orderData.fulfillments?.[0]?.location?.name || 'N/A',\n    fulfillmentAddress: orderData.fulfillments?.[0]?.location?.address || 'N/A',\n    \n    // Datos de la transacción\n    transactionGateway: orderData.transactions?.[0]?.formattedGateway || 'N/A',\n    transactionKind: orderData.transactions?.[0]?.kind || 'N/A',\n    transactionStatus: orderData.transactions?.[0]?.status || 'N/A',\n};\n\n// 4. Iterar sobre los productos y fusionar (incluyendo el costo encontrado)\nconst combinedItems = [];\n\nfor (const productData of productRows) {\n    \n    // Buscamos si existe un costo guardado para este SKU\n    const sku = productData.sku;\n    const unitCost = costMap[sku] || '0.00'; // Si no encuentra match, pone 0.00 o N/A\n\n    const combinedItem = {\n        ...baseOrderData,\n        \n        product: {\n            ID_documento: productData.ID_documento,\n            numero_fila: productData.numero_fila,\n            product_name: productData.product_name,\n            sku: productData.sku,\n            variant_title: productData.variant_title,\n            original_price: productData.original_price,\n            total_discount_applied: productData.total_discount_applied,\n            final_paid_price: productData.final_paid_price,\n            currency: productData.currency,\n            // Aquí agregamos el campo solicitado\n            unit_cost: unitCost \n        }\n    };\n    \n    combinedItems.push({\n        json: combinedItem,\n    });\n}\n\nreturn combinedItems;"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -591,7 +595,7 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1,
       "position": [
-        -1168,
+        -1056,
         -528
       ],
       "id": "05e63673-e364-4131-9bec-ac7e7f58eff3",
@@ -644,12 +648,13 @@
           "value": {
             "SUCURSAL DE VENTA": "={{ $json['SUCURSAL DE VENTA'] }}",
             "MÉTODO DE PAGO": "={{ $json['METODO DE PAGO'] }}",
-            "COSTE DE PRODUCTO": "={{ $json['COSTE DE PRODUCTO'] }}",
             "PRECIO PAGADO": "={{ $json['PRECIO PAGADO'] }}",
             "DESCUENTO": "={{ $json.DESCUENTO }}",
             "NOMBRE DE PRODUCTO": "={{ $json['NOMBRE DE PRODUCTO'] }}",
             "VARIANTE": "={{ $json.VARIANTE }}",
-            "row_number": "={{ $json.NUMERO_FILA }}"
+            "row_number": "={{ $json.NUMERO_FILA }}",
+            "COSTE POR UNIDAD": "={{ $json['COSTO POR UNIDAD'] }}",
+            "PRECIO DE PRODUCTO": "={{ $json['COSTE DE PRODUCTO'] }}"
           },
           "matchingColumns": [
             "row_number"
@@ -674,13 +679,24 @@
               "canBeUsedToMatch": true
             },
             {
-              "id": "COSTE DE PRODUCTO",
-              "displayName": "COSTE DE PRODUCTO",
+              "id": "COSTE POR UNIDAD",
+              "displayName": "COSTE POR UNIDAD",
               "required": false,
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "PRECIO DE PRODUCTO",
+              "displayName": "PRECIO DE PRODUCTO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
             },
             {
               "id": "PRECIO PAGADO",
@@ -899,6 +915,44 @@
       ],
       "id": "b127f142-72c0-4160-95a7-c8b7cc4a5371",
       "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "87a5aeba-2adf-47d1-8d7b-b55d5016266a",
+              "name": "FECHA",
+              "value": "={{ $today }}",
+              "type": "object"
+            }
+          ]
+        },
+        "options": {
+          "ignoreConversionErrors": true
+        }
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1472,
+        -528
+      ],
+      "id": "ebc149b0-5181-4a06-9bc3-3d8d1a75c549",
+      "name": "obtener fecha"
+    },
+    {
+      "parameters": {
+        "jsCode": "return items.map(item => {\n  const fecha = new Date(item.json.FECHA);\n\n  const dia = String(fecha.getDate()).padStart(2, '0');\n  const mes = String(fecha.getMonth() + 1).padStart(2, '0');\n  const anio = fecha.getFullYear();\n\n  item.json.FECHA = `${dia}/${mes}/${anio}`;\n\n  return item;\n});\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1344,
+        -528
+      ],
+      "id": "59f08d5a-ebac-4083-a723-97275f4f9f86",
+      "name": "formatear fecha"
     }
   ],
   "pinData": {},
@@ -921,6 +975,6 @@
   },
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2025-12-13T11:32:36.000Z",
-  "versionId": "4c1d2ae7-f656-4297-a71a-bcc07b25419d"
+  "updatedAt": "2025-12-15T13:04:59.000Z",
+  "versionId": "c58f19df-c281-4090-9b0a-aedfbecd9a4c"
 }
