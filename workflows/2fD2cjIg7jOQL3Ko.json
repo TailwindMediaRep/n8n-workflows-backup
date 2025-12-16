@@ -314,8 +314,8 @@
       "name": "Get File",
       "type": "n8n-nodes-base.httpRequest",
       "position": [
-        992,
-        720
+        976,
+        736
       ],
       "typeVersion": 4.2
     },
@@ -741,6 +741,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-12-10T14:39:59.000Z",
-  "versionId": "abb93aeb-b8c4-466d-b2e6-995b7dea8a9d"
+  "updatedAt": "2025-12-15T13:06:49.000Z",
+  "versionId": "ae79ec6a-7b89-42d8-b622-f5061abf942b"
 }
