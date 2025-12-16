@@ -5,18 +5,7 @@
       "main": [
         [
           {
-            "node": "Code in Python (Beta)",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Code in Python (Beta)": {
-      "main": [
-        [
-          {
-            "node": "Loop Over Items",
+            "node": "Update row(s)",
             "type": "main",
             "index": 0
           }
@@ -45,6 +34,72 @@
           }
         ]
       ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Get row(s)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row(s)": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s)": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Update row(s)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row(s)1": {
+      "main": [
+        [
+          {
+            "node": "Get row(s)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-12-11T11:14:07.985Z",
@@ -66,26 +121,12 @@
     },
     {
       "parameters": {
-        "language": "python",
-        "pythonCode": "prueba = {\"nombre\": \"adrian\", \"apellido\": \"azorin\", \"tema\": \"prueba\"}\nprueba2 = {\"nombre\": \"adrian\", \"apellido\": \"azorin\", \"tema\": \"prueba\"}\n\nreturn prueba"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        -128,
-        -64
-      ],
-      "id": "0a982463-730d-4fe4-956a-ecb442e70ae6",
-      "name": "Code in Python (Beta)"
-    },
-    {
-      "parameters": {
         "options": {}
       },
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 3,
       "position": [
-        112,
+        160,
         -64
       ],
       "id": "45db9122-5dbf-4832-bcd6-b7825a227baa",
@@ -95,13 +136,17 @@
       "parameters": {
         "workflowId": {
           "__rl": true,
-          "mode": "list",
-          "value": "YUPMjmLvnBwe9nE5",
-          "cachedResultName": "My Sub-Workflow 1"
+          "value": "={{ $workflow.id }}",
+          "mode": "id",
+          "cachedResultUrl": "/workflow/=%7B%7B%20$workflow.id%20%7D%7D"
         },
         "workflowInputs": {
           "mappingMode": "defineBelow",
-          "value": {}
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
         },
         "mode": "each",
         "options": {}
@@ -109,11 +154,237 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.3,
       "position": [
-        320,
-        -48
+        368,
+        -64
       ],
       "id": "239db9c0-7616-4633-8218-8831830708b6",
       "name": "Call 'My Sub-Workflow 1'"
+    },
+    {
+      "parameters": {
+        "content": "## Main\n",
+        "height": 240,
+        "width": 912
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -384,
+        -112
+      ],
+      "id": "737e6244-f576-4897-9051-81622b547fe0",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -352,
+        256
+      ],
+      "id": "e5b15c19-2195-4d31-bbb5-4ee734a3aa4f",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "jsCode": "const numeroItems = 5;\nconst returnData = [];\n\nfor (let i = 1; i <= numeroItems; i++) {\n  returnData.push({\n    // IMPORTANTE: La propiedad 'json' le dice a n8n que esto es un ítem\n    json: {\n      nombre: `item${i}`,\n      myNewField: 1\n    }\n  });\n}\n\nreturn returnData;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -16,
+        -64
+      ],
+      "id": "0a982463-730d-4fe4-956a-ecb442e70ae6",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "dataTableId": {
+          "__rl": true,
+          "value": "AD0QThH3qyX9numR",
+          "mode": "list",
+          "cachedResultName": "pruebas",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/AD0QThH3qyX9numR"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "1"
+            }
+          ]
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "contador": 1
+          },
+          "matchingColumns": [
+            "contador"
+          ],
+          "schema": [
+            {
+              "id": "contador",
+              "displayName": "contador",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        -176,
+        -64
+      ],
+      "id": "50dd8170-8532-416e-9874-a404d264a2cb",
+      "name": "Update row(s)"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "AD0QThH3qyX9numR",
+          "mode": "list",
+          "cachedResultName": "pruebas",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/AD0QThH3qyX9numR"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "1"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        -192,
+        256
+      ],
+      "id": "a6a033ff-9dbd-4e45-bb04-25a20d4e7e17",
+      "name": "Get row(s)"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "821ca677-9e8a-4a10-a775-8602a51a99ea",
+              "name": "contador",
+              "value": "={{ $json.contador }}",
+              "type": "number"
+            },
+            {
+              "id": "1557e3a1-d4f0-407f-9b3f-e0a274613bd2",
+              "name": "",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -32,
+        256
+      ],
+      "id": "c1f4d8b0-b38f-464e-be24-2cece7fc958c",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "dataTableId": {
+          "__rl": true,
+          "value": "AD0QThH3qyX9numR",
+          "mode": "list",
+          "cachedResultName": "pruebas",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/AD0QThH3qyX9numR"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "1"
+            }
+          ]
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "contador": "={{ $json.contador + 1}}"
+          },
+          "matchingColumns": [
+            "contador"
+          ],
+          "schema": [
+            {
+              "id": "contador",
+              "displayName": "contador",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        128,
+        256
+      ],
+      "id": "eb538bc7-e8a7-4a9d-ac04-42893c3c9298",
+      "name": "Update row(s)1"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "AD0QThH3qyX9numR",
+          "mode": "list",
+          "cachedResultName": "pruebas",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/AD0QThH3qyX9numR"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "1"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        288,
+        256
+      ],
+      "id": "25e75d8b-1a15-4fca-bbbc-c557d4b4c28d",
+      "name": "Get row(s)1"
     }
   ],
   "pinData": {},
@@ -132,6 +403,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-12-11T11:42:02.000Z",
-  "versionId": "7b55e8c7-6419-4fa4-b015-78fd7f8456dc"
+  "updatedAt": "2025-12-15T13:37:11.000Z",
+  "versionId": "497ab1cc-a631-4c9a-968c-2ebe867bfd9c"
 }
