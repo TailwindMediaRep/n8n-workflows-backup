@@ -5,7 +5,7 @@
       "main": [
         [
           {
-            "node": "Send message",
+            "node": "Send email",
             "type": "main",
             "index": 0
           }
@@ -16,15 +16,17 @@
   "createdAt": "2025-11-29T08:38:38.521Z",
   "id": "3EsLWbaigVn4UtgZ",
   "isArchived": false,
-  "meta": null,
-  "name": "PruebaWSBusiness",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "PruebaCorreo",
   "nodes": [
     {
       "parameters": {},
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -304,
+        -416,
         0
       ],
       "id": "e761cd4d-472a-4960-968d-b20d594ce243",
@@ -32,18 +34,26 @@
     },
     {
       "parameters": {
-        "operation": "send",
-        "additionalFields": {}
+        "fromEmail": "info@tailwind.es",
+        "toEmail": "adrianazorinsanchez@gmail.com",
+        "subject": "TAILWIND correo de prueba",
+        "options": {}
       },
-      "type": "n8n-nodes-base.whatsApp",
-      "typeVersion": 1.1,
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
       "position": [
-        -96,
+        -224,
         0
       ],
-      "id": "f5d87697-b394-4f81-a379-6e505c50ed41",
-      "name": "Send message",
-      "webhookId": "d63d1bc9-5129-4c51-a1ce-4e230b3f23a3"
+      "id": "1d9a6744-904f-4a98-a2d2-9824906fcb11",
+      "name": "Send email",
+      "webhookId": "ed7062f7-b04e-4261-8425-9a2459f6fbc4",
+      "credentials": {
+        "smtp": {
+          "id": "MiD3YXIjExt0Aik1",
+          "name": "Correo"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -62,6 +72,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-12-15T13:06:19.000Z",
-  "versionId": "033d1cd5-f6de-4bb9-9dab-75a84f480964"
+  "updatedAt": "2025-12-16T08:25:35.000Z",
+  "versionId": "3dbbead7-4696-4d59-8682-c35809050846"
 }
