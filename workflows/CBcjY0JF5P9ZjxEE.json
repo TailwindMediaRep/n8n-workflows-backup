@@ -190,7 +190,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const numeroItems = 5;\nconst returnData = [];\n\nfor (let i = 1; i <= numeroItems; i++) {\n  returnData.push({\n    // IMPORTANTE: La propiedad 'json' le dice a n8n que esto es un ítem\n    json: {\n      nombre: `item${i}`,\n      myNewField: 1\n    }\n  });\n}\n\nreturn returnData;"
+        "jsCode": "const numeroItems = 12;\nconst returnData = [];\n\nfor (let i = 1; i <= numeroItems; i++) {\n  returnData.push({\n    // IMPORTANTE: La propiedad 'json' le dice a n8n que esto es un ítem\n    json: {\n      nombre: `item${i}`,\n      myNewField: 1\n    }\n  });\n}\n\nreturn returnData;"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -403,6 +403,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-12-15T13:37:11.000Z",
-  "versionId": "497ab1cc-a631-4c9a-968c-2ebe867bfd9c"
+  "updatedAt": "2025-12-16T07:42:03.000Z",
+  "versionId": "72e3e98a-40a1-4e17-8097-b72b4e2dae9f"
 }
