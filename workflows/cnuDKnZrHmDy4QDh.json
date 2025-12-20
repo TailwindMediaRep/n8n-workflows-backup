@@ -5,8 +5,20 @@
   "id": "cnuDKnZrHmDy4QDh",
   "isArchived": false,
   "meta": null,
-  "name": "pruebaTraeN8N",
-  "nodes": [],
+  "name": "pruebaDuplicados",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "f2b85d1f-9a8c-4f70-9a39-3b40a46e7a21",
+      "name": "When clicking ‘Execute workflow’"
+    }
+  ],
   "pinData": {},
   "settings": {
     "executionOrder": "v1"
@@ -23,6 +35,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-12-16T12:49:32.000Z",
-  "versionId": "da7e5839-44ad-408c-bc0e-5931b39a1380"
+  "updatedAt": "2025-12-19T13:37:36.000Z",
+  "versionId": "4a1714a5-121f-4420-bddb-a489f9a546ef"
 }
