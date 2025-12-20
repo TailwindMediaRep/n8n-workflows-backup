@@ -16,7 +16,7 @@
       "main": [
         [
           {
-            "node": "Append row in sheet",
+            "node": "Append or update row in sheet",
             "type": "main",
             "index": 0
           }
@@ -230,131 +230,6 @@
       ],
       "id": "38f79625-bc3a-4cf4-8fa7-db853ae29acc",
       "name": "Filter"
-    },
-    {
-      "parameters": {
-        "operation": "append",
-        "documentId": {
-          "__rl": true,
-          "value": "1666UwMaXD1Wg9aLis0924Pd1OBWdkS6ShF9Qu_baspM",
-          "mode": "list",
-          "cachedResultName": "Informe falta de stock",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1666UwMaXD1Wg9aLis0924Pd1OBWdkS6ShF9Qu_baspM/edit?usp=drivesdk"
-        },
-        "sheetName": {
-          "__rl": true,
-          "value": "gid=0",
-          "mode": "list",
-          "cachedResultName": "Hoja 1",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1666UwMaXD1Wg9aLis0924Pd1OBWdkS6ShF9Qu_baspM/edit#gid=0"
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "PRODUCTO": "={{ $json.NOMBRE_PRODUCTO }}",
-            "CANTIDAD_ACTUAL": "={{ $json.CANTIDAD_PRODUCTO }}",
-            "AÑO": "={{ $json['AÑO'] }}",
-            "TALLA": "={{ $json.TALLA }}",
-            "COLOR": "={{ $json.COLOR }}",
-            "CATEGORÍA": "={{ $json['TIPO DE PRODUCTO'] }}",
-            "ID": "={{ $json['ID PRODUCTO'] }}"
-          },
-          "matchingColumns": [],
-          "schema": [
-            {
-              "id": "PRODUCTO",
-              "displayName": "PRODUCTO",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "ID",
-              "displayName": "ID",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "CATEGORÍA",
-              "displayName": "CATEGORÍA",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "COLOR",
-              "displayName": "COLOR",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "TALLA",
-              "displayName": "TALLA",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "AÑO",
-              "displayName": "AÑO",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "CANTIDAD_ACTUAL",
-              "displayName": "CANTIDAD_ACTUAL",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "ESTADO INFORME",
-              "displayName": "ESTADO INFORME",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4.7,
-      "position": [
-        1024,
-        -208
-      ],
-      "id": "cb66714b-11fa-4603-9892-3188b1deebf4",
-      "name": "Append row in sheet",
-      "credentials": {
-        "googleSheetsOAuth2Api": {
-          "id": "RCuKUCifcA4jENcY",
-          "name": "Google Sheets account"
-        }
-      }
     },
     {
       "parameters": {
@@ -778,6 +653,133 @@
       ],
       "id": "9d0c5d8c-30d7-4683-833a-a3ee1acbd654",
       "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1666UwMaXD1Wg9aLis0924Pd1OBWdkS6ShF9Qu_baspM",
+          "mode": "list",
+          "cachedResultName": "Informe falta de stock",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1666UwMaXD1Wg9aLis0924Pd1OBWdkS6ShF9Qu_baspM/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1666UwMaXD1Wg9aLis0924Pd1OBWdkS6ShF9Qu_baspM/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "PRODUCTO": "={{ $json.NOMBRE_PRODUCTO }}",
+            "CANTIDAD_ACTUAL": "={{ $json.CANTIDAD_PRODUCTO }}",
+            "AÑO": "={{ $json['AÑO'] }}",
+            "TALLA": "={{ $json.TALLA }}",
+            "COLOR": "={{ $json.COLOR }}",
+            "CATEGORÍA": "={{ $json['TIPO DE PRODUCTO'] }}",
+            "ID": "={{ $json['ID PRODUCTO'] }}"
+          },
+          "matchingColumns": [
+            "ID"
+          ],
+          "schema": [
+            {
+              "id": "PRODUCTO",
+              "displayName": "PRODUCTO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "CATEGORÍA",
+              "displayName": "CATEGORÍA",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "COLOR",
+              "displayName": "COLOR",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "TALLA",
+              "displayName": "TALLA",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "AÑO",
+              "displayName": "AÑO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "CANTIDAD_ACTUAL",
+              "displayName": "CANTIDAD_ACTUAL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ESTADO INFORME",
+              "displayName": "ESTADO INFORME",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1024,
+        -208
+      ],
+      "id": "cb66714b-11fa-4603-9892-3188b1deebf4",
+      "name": "Append or update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "RCuKUCifcA4jENcY",
+          "name": "Google Sheets account"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -802,6 +804,6 @@
   },
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2025-12-11T12:53:41.000Z",
-  "versionId": "d28af32d-94b2-4d05-b81e-b120cac7d784"
+  "updatedAt": "2025-12-19T13:18:52.000Z",
+  "versionId": "4c86d13f-c890-4676-a723-4ed6c1c1b2b8"
 }
