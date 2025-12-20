@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "HTTP Request": {
       "main": [
@@ -290,13 +290,7 @@
     },
     "When clicking ‘Execute workflow’": {
       "main": [
-        [
-          {
-            "node": "HTTP Request2",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     }
   },
@@ -527,7 +521,7 @@
             {
               "id": "8db21f40-d33f-4c63-b835-a075779c8c1d",
               "name": "Partes[0].Parte.partenieve.pistas.paginas",
-              "value": "={{ $json.Partes[0].Parte.partenieve.pistas.paginas }}",
+              "value": "={{ $json.Partes[1].Parte.partenieve.pistas.paginas }}",
               "type": "object"
             }
           ]
@@ -537,7 +531,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -384,
+        -368,
         -256
       ],
       "id": "322a55fd-abb5-42e1-95ee-8a0c5c9ff5f1",
@@ -1011,8 +1005,8 @@
         "rule": {
           "interval": [
             {
-              "field": "minutes",
-              "minutesInterval": 10
+              "field": "cronExpression",
+              "expression": "30 9 * * *"
             }
           ]
         }
@@ -1058,6 +1052,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-12-13T11:10:44.000Z",
-  "versionId": "5daa43fd-7908-4845-b6ec-ec7e0e9cc4ad"
+  "updatedAt": "2025-12-19T08:20:55.000Z",
+  "versionId": "72ec947b-cf69-4224-802e-221356c027fd"
 }
