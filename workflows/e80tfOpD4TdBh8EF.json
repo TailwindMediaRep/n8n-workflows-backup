@@ -1,115 +1,27 @@
 {
-  "active": true,
+  "active": false,
   "connections": {
-    "Webhook": {
-      "main": [
-        [
-          {
-            "node": "conseguir contador",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "GraphQL": {
-      "main": [
-        [
-          {
-            "node": "procesar datos",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Download file": {
-      "main": [
-        [
-          {
-            "node": "Send email",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Copy file": {
-      "main": [
-        [
-          {
-            "node": "actualizar tabla id archivo",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "conseguir contador": {
-      "main": [
-        [
-          {
-            "node": "GraphQL",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "sumar contador": {
+    "When clicking ‘Execute workflow’": {
       "main": [
         []
       ]
     },
-    "conseguir ID documento": {
+    "Filter": {
       "main": [
         [
           {
-            "node": "actualizar documento",
+            "node": "Append or update row in sheet",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "obtener fecha": {
+    "obtener informe falta de stock": {
       "main": [
         [
           {
-            "node": "Copy file",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "actualizar tabla id archivo": {
-      "main": [
-        [
-          {
-            "node": "restablecer numero contador",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "procesar datos": {
-      "main": [
-        [
-          {
-            "node": "conseguir ID documento",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "actualizar documento": {
-      "main": [
-        [
-          {
-            "node": "sumar contador",
+            "node": "Filter",
             "type": "main",
             "index": 0
           }
@@ -120,28 +32,89 @@
       "main": [
         [
           {
-            "node": "obtener fecha",
+            "node": "obtener vendidos sin stock",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "obtener falta de stock",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Send email": {
-      "main": [
-        []
-      ]
-    },
-    "When clicking ‘Execute workflow’": {
-      "main": [
-        []
-      ]
-    },
-    "restablecer numero contador": {
+    "obtener vendidos sin stock": {
       "main": [
         [
           {
-            "node": "Insert row",
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "obtener falta de stock": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Replace Me",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Replace Me": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Delete rows or columns from sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Delete rows or columns from sheet": {
+      "main": [
+        []
+      ]
+    },
+    "Schedule Trigger1": {
+      "main": [
+        [
+          {
+            "node": "obtener informe falta de stock",
             "type": "main",
             "index": 0
           }
@@ -155,420 +128,120 @@
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "Correo Datos Ventas",
+  "name": "Productos vendidos sin Stock",
   "nodes": [
     {
-      "parameters": {
-        "httpMethod": "POST",
-        "path": "correoVentas",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2.1,
-      "position": [
-        -1632,
-        -784
-      ],
-      "id": "5f83faeb-2187-42c6-8d19-747cdcad6d45",
-      "name": "Webhook",
-      "webhookId": "7872b127-b6c8-4d2e-bf88-84bc0e9eea23"
-    },
-    {
-      "parameters": {
-        "authentication": "headerAuth",
-        "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-07/graphql.json",
-        "query": "query getOrder($id: ID!) {\n  order(id: $id) {\n    id\n    name\n    createdAt\n    email\n    totalPriceSet {\n      shopMoney {\n        amount\n        currencyCode\n      }\n    }\n    lineItems(first: 10) {\n      edges {\n        node {\n          title\n          quantity\n          originalUnitPriceSet {\n            shopMoney {\n              amount\n              currencyCode\n            }\n          }\n        }\n      }\n    }\n    fulfillments {\n      id\n      location {\n        name\n        address {\n          address1\n          city\n          province\n          country\n          zip\n        }\n      }\n    }\n    transactions(first: 5) {\n      formattedGateway\n      kind\n      status\n    }\n    customer {\n      firstName\n      lastName\n      email\n    }\n  }\n}\n\n",
-        "variables": "={\n  \"id\": \"gid://shopify/Order/{{ $('Webhook').item.json.body.id }}\"\n}",
-        "headerParametersUi": {
-          "parameter": [
-            {
-              "name": "Content-Type",
-              "value": "application/json"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.graphql",
-      "typeVersion": 1.1,
-      "position": [
-        -1312,
-        -784
-      ],
-      "id": "8e12a512-d98b-4ffc-b3b5-8b199d655ceb",
-      "name": "GraphQL",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "OPt2Cl0dnwcU4qRk",
-          "name": "ShopifyInformes"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "download",
-        "fileId": {
-          "__rl": true,
-          "value": "https://docs.google.com/spreadsheets/d/1gj4W5JT98BZYR-XSb06YS8xBy_MV2sIdZ9wROdbQ3v8/edit?gid=0#gid=0",
-          "mode": "url",
-          "__regex": "https:\\/\\/(?:drive|docs)\\.google\\.com(?:\\/.*|)\\/d\\/([0-9a-zA-Z\\-_]+)(?:\\/.*|)"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.googleDrive",
-      "typeVersion": 3,
-      "position": [
-        -1632,
-        -256
-      ],
-      "id": "19ce615c-8228-42c4-8b8b-8bae86004179",
-      "name": "Download file",
-      "credentials": {
-        "googleDriveOAuth2Api": {
-          "id": "N7JXWgOiVoyCTaVL",
-          "name": "Google Drive account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "fromEmail": "info@tailwind.es",
-        "toEmail": "adrianazorinsanchez@gmail.com",
-        "subject": "Informe Diario",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.emailSend",
-      "typeVersion": 2.1,
-      "position": [
-        -1456,
-        -256
-      ],
-      "id": "6aa242f6-e5aa-4227-92f6-a44308825660",
-      "name": "Send email",
-      "webhookId": "a1861add-2cbb-4467-9848-4e3c05cd4471",
-      "credentials": {
-        "smtp": {
-          "id": "MiD3YXIjExt0Aik1",
-          "name": "Correo"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "content": "ENVIAR CORREO",
-        "height": 208,
-        "width": 416,
-        "color": 4
-      },
-      "type": "n8n-nodes-base.stickyNote",
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -1680,
-        -304
+        -1296,
+        -448
       ],
-      "id": "de44cae1-4f17-4f8c-8e0e-bae3bd29c959",
-      "name": "Sticky Note1"
+      "id": "7e10859b-8615-49cc-af97-467c92a337e0",
+      "name": "When clicking ‘Execute workflow’"
     },
     {
       "parameters": {
-        "operation": "copy",
-        "fileId": {
-          "__rl": true,
-          "value": "1g5kYqcBsPA48_M_K7dU2l1kl69hSmzW0mntwpDDgv5Q",
-          "mode": "list",
-          "cachedResultName": "Plantilla Informe Diario",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1g5kYqcBsPA48_M_K7dU2l1kl69hSmzW0mntwpDDgv5Q/edit?usp=drivesdk"
-        },
-        "name": "=Informe Diario {{ $json.formattedDate }}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.googleDrive",
-      "typeVersion": 3,
-      "position": [
-        -1264,
-        -528
-      ],
-      "id": "593a73be-8034-446e-a2df-f540ca2f76d0",
-      "name": "Copy file",
-      "credentials": {
-        "googleDriveOAuth2Api": {
-          "id": "N7JXWgOiVoyCTaVL",
-          "name": "Google Drive account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "content": "CREAR DOCUMENTO",
-        "height": 208,
-        "width": 1232,
-        "color": 6
-      },
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        -1680,
-        -576
-      ],
-      "id": "eef4721a-3b13-46f6-bbbc-a277f211edf4",
-      "name": "Sticky Note2"
-    },
-    {
-      "parameters": {
-        "operation": "get",
-        "dataTableId": {
-          "__rl": true,
-          "value": "NMbDpuxCCVRyjA1E",
-          "mode": "list",
-          "cachedResultName": "ContadorSheets",
-          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/NMbDpuxCCVRyjA1E"
-        },
-        "filters": {
-          "conditions": [
-            {
-              "keyValue": "1"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.dataTable",
-      "typeVersion": 1,
-      "position": [
-        -1472,
-        -784
-      ],
-      "id": "a1ff8038-7431-4353-80e1-1356833b1a05",
-      "name": "conseguir contador"
-    },
-    {
-      "parameters": {
-        "operation": "update",
-        "dataTableId": {
-          "__rl": true,
-          "value": "NMbDpuxCCVRyjA1E",
-          "mode": "list",
-          "cachedResultName": "ContadorSheets",
-          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/NMbDpuxCCVRyjA1E"
-        },
-        "filters": {
-          "conditions": [
-            {
-              "keyValue": "1"
-            }
-          ]
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "numero": "={{ $json.row_number + 1}}"
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
           },
-          "matchingColumns": [
-            "numero"
-          ],
-          "schema": [
-            {
-              "id": "numero",
-              "displayName": "numero",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "number",
-              "readOnly": false,
-              "removed": false
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.dataTable",
-      "typeVersion": 1,
-      "position": [
-        -608,
-        -784
-      ],
-      "id": "c71add0b-77a2-463b-a5ff-1afd049084ce",
-      "name": "sumar contador"
-    },
-    {
-      "parameters": {
-        "operation": "get",
-        "dataTableId": {
-          "__rl": true,
-          "value": "FnOKQ90bd0CxI2H5",
-          "mode": "list",
-          "cachedResultName": "Sheets",
-          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/FnOKQ90bd0CxI2H5"
-        }
-      },
-      "type": "n8n-nodes-base.dataTable",
-      "typeVersion": 1,
-      "position": [
-        -976,
-        -784
-      ],
-      "id": "d87b944a-6f6e-42fb-86d6-92da02d29e6a",
-      "name": "conseguir ID documento"
-    },
-    {
-      "parameters": {
-        "jsCode": "// Este código se ejecuta en un nodo Function de n8n.\n\n// 1. Obtener la fecha y hora actuales del sistema (servidor)\nconst dateObject = new Date();\n\n// 2. Definir las opciones de formato para España.\n// 'es-ES' garantiza el orden del formato local.\n// 'Europe/Madrid' corrige la zona horaria del servidor al horario de España.\nconst options = {\n    year: 'numeric',\n    month: '2-digit',\n    day: '2-digit',\n    timeZone: 'Europe/Madrid' // <<-- ¡Ajuste de Zona Horaria!\n};\n\n// 3. Crear el formateador y aplicar el formato.\n// El resultado será una cadena como \"04/12/2025\"\nconst formatter = new Intl.DateTimeFormat('es-ES', options);\nconst formattedDateSlash = formatter.format(dateObject);\n\n// 4. Reemplazar las barras (/) por guiones (-) para obtener dd-mm-aaaa\nconst formattedDate = formattedDateSlash.replace(/\\//g, '-'); // Resultado: 04-12-2025\n\n// 5. Retornar el resultado en la estructura de datos de n8n\nreturn [{\n    json: {\n        formattedDate: formattedDate,\n        // Puedes añadir más campos si los necesitas, por ejemplo, la hora:\n        // formattedTime: new Intl.DateTimeFormat('es-ES', {hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Madrid'}).format(dateObject)\n    }\n}];"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        -1440,
-        -528
-      ],
-      "id": "4fb748b4-d336-478b-b9ff-e9219a8a094d",
-      "name": "obtener fecha"
-    },
-    {
-      "parameters": {
-        "operation": "update",
-        "dataTableId": {
-          "__rl": true,
-          "value": "FnOKQ90bd0CxI2H5",
-          "mode": "list",
-          "cachedResultName": "Sheets",
-          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/FnOKQ90bd0CxI2H5"
-        },
-        "filters": {
           "conditions": [
             {
-              "keyValue": "1"
-            }
-          ]
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "Id_Documento": "={{ $json.id }}"
-          },
-          "matchingColumns": [
-            "Id_Documento"
-          ],
-          "schema": [
-            {
-              "id": "Id_Documento",
-              "displayName": "Id_Documento",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "readOnly": false,
-              "removed": false
+              "id": "7d660935-b301-40a0-9979-bd3a9ef0b975",
+              "leftValue": "={{ $json.CANTIDAD_ACTUAL }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "lt"
+              }
             }
           ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
+          "combinator": "and"
         },
         "options": {}
       },
-      "type": "n8n-nodes-base.dataTable",
-      "typeVersion": 1,
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
       "position": [
-        -1088,
-        -528
+        16,
+        576
       ],
-      "id": "d4605f99-a6cc-43b9-af9f-0b8291feb902",
-      "name": "actualizar tabla id archivo"
+      "id": "7ea95390-9a1c-45eb-87e4-e848c00c2337",
+      "name": "Filter"
     },
     {
       "parameters": {
-        "operation": "update",
-        "dataTableId": {
-          "__rl": true,
-          "value": "NMbDpuxCCVRyjA1E",
-          "mode": "list",
-          "cachedResultName": "ContadorSheets",
-          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/NMbDpuxCCVRyjA1E"
-        },
-        "filters": {
-          "conditions": [
-            {
-              "keyValue": "1"
-            }
-          ]
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "numero": 2
-          },
-          "matchingColumns": [
-            "numero"
-          ],
-          "schema": [
-            {
-              "id": "numero",
-              "displayName": "numero",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "number",
-              "readOnly": false,
-              "removed": false
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.dataTable",
-      "typeVersion": 1,
-      "position": [
-        -896,
-        -528
-      ],
-      "id": "3feb5aad-9d95-43f5-a7b9-df66e1ceafbe",
-      "name": "restablecer numero contador"
-    },
-    {
-      "parameters": {
-        "jsCode": "// Tomamos el pedido del output del nodo GraphQL\nconst order = items[0].json.data.order;\n\n// Asegúrate de obtener el valor inicial del contador.\n// ASUME que el contador 'startRow' viene del ítem 0 del nodo anterior.\nlet startRow = parseInt($('conseguir contador').first().json.numero)\n\n// --- Lógica del Pedido ---\n\n// Sucursal: si no hay fulfillment, ponemos \"Sin sucursal\"\nconst branch = order.fulfillments && order.fulfillments.length > 0 \n    ? order.fulfillments[0].location.name \n    : \"Sin sucursal\";\n\n// Método de pago: si no hay transacciones, ponemos \"Desconocido\"\nconst paymentMethod = order.transactions && order.transactions.length > 0 \n    ? order.transactions[0].formattedGateway \n    : \"Desconocido\";\n\n// Creamos un array con cada producto como fila\nlet result = [];\n\norder.lineItems.edges.forEach(itemEdge => {\n    const item = itemEdge.node;\n    result.push({\n        \"NOMBRE DE PRODUCTO\": item.title,\n        \"COSTE DE PRODUCTO\": item.originalUnitPriceSet.shopMoney.amount + \" \" + item.originalUnitPriceSet.shopMoney.currencyCode,\n        \"MÉTODO DE PAGO\": paymentMethod,\n        \"SUCURSAL DE VENTA\": branch,\n        \"row_number\": startRow // Asignamos el número de fila actual\n    });\n    \n    // IMPORTANTE: Incrementamos el número de fila para el siguiente producto\n    startRow++; \n});\n\n// Devolver en formato que n8n entiende como tabla:\n// SOLO devolvemos los ítems de 'result'.\nreturn result.map(r => ({ json: r }));\n"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        -1152,
-        -784
-      ],
-      "id": "d8735ae5-f6e0-4e09-8270-298b488570db",
-      "name": "procesar datos"
-    },
-    {
-      "parameters": {
-        "operation": "update",
         "documentId": {
           "__rl": true,
-          "value": "={{ $('conseguir ID documento').item.json.Id_Documento }}",
-          "mode": "id"
+          "value": "1666UwMaXD1Wg9aLis0924Pd1OBWdkS6ShF9Qu_baspM",
+          "mode": "list",
+          "cachedResultName": "Informe falta de stock",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1666UwMaXD1Wg9aLis0924Pd1OBWdkS6ShF9Qu_baspM/edit?usp=drivesdk"
         },
         "sheetName": {
           "__rl": true,
           "value": "gid=0",
           "mode": "list",
           "cachedResultName": "Hoja 1",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1pPYy4NN5b7qp4uPCSRGUxKqSvqIUoW0eZTSGAN1Y4qA/edit#gid=0"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1666UwMaXD1Wg9aLis0924Pd1OBWdkS6ShF9Qu_baspM/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -160,
+        576
+      ],
+      "id": "3fd20126-5560-4ab3-865a-bf7442c53682",
+      "name": "obtener informe falta de stock",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "RCuKUCifcA4jENcY",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1SE7PRebuK5kzzW9uI3VIHHCC-aRMxZuwGLiFlxGnrRw",
+          "mode": "list",
+          "cachedResultName": "Productos vendidos sin stock",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1SE7PRebuK5kzzW9uI3VIHHCC-aRMxZuwGLiFlxGnrRw/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1SE7PRebuK5kzzW9uI3VIHHCC-aRMxZuwGLiFlxGnrRw/edit#gid=0"
         },
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "SUCURSAL DE VENTA": "={{ $('procesar datos').item.json['SUCURSAL DE VENTA'] }}",
-            "MÉTODO DE PAGO": "={{ $('procesar datos').item.json['MÉTODO DE PAGO'] }}",
-            "COSTE DE PRODUCTO": "={{ $('procesar datos').item.json['COSTE DE PRODUCTO'] }}",
-            "NOMBRE DE PRODUCTO": "={{ $('procesar datos').item.json['NOMBRE DE PRODUCTO'] }}",
-            "row_number": "={{ $('procesar datos').item.json.row_number }}"
+            "PRODUCTO": "={{ $json.PRODUCTO }}",
+            "CATEGORÍA": "={{ $json['CATEGORÍA'] }}",
+            "COLOR": "={{ $json.COLOR }}",
+            "AÑO": "={{ $json['AÑO'] }}",
+            "TALLA": "={{ $json.TALLA }}",
+            "CANTIDAD_ACTUAL": "={{ $json.CANTIDAD_ACTUAL }}",
+            "ID": "={{ $json.ID }}"
           },
           "matchingColumns": [
-            "row_number"
+            "ID"
           ],
           "schema": [
             {
-              "id": "SUCURSAL DE VENTA",
-              "displayName": "SUCURSAL DE VENTA",
+              "id": "PRODUCTO",
+              "displayName": "PRODUCTO",
               "required": false,
               "defaultMatch": false,
               "display": true,
@@ -576,41 +249,68 @@
               "canBeUsedToMatch": true
             },
             {
-              "id": "MÉTODO DE PAGO",
-              "displayName": "MÉTODO DE PAGO",
+              "id": "ID",
+              "displayName": "ID",
               "required": false,
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "COSTE DE PRODUCTO",
-              "displayName": "COSTE DE PRODUCTO",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "NOMBRE DE PRODUCTO",
-              "displayName": "NOMBRE DE PRODUCTO",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "row_number",
-              "displayName": "row_number",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "number",
               "canBeUsedToMatch": true,
-              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "CATEGORÍA",
+              "displayName": "CATEGORÍA",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "COLOR",
+              "displayName": "COLOR",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "TALLA",
+              "displayName": "TALLA",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "AÑO",
+              "displayName": "AÑO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "CANTIDAD_ACTUAL",
+              "displayName": "CANTIDAD_ACTUAL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "#REF!",
+              "displayName": "#REF!",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
               "removed": false
             }
           ],
@@ -622,12 +322,11 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -784,
-        -784
+        224,
+        576
       ],
-      "id": "a3217a6b-00e3-4b93-bb36-3f4276f25339",
-      "name": "actualizar documento",
-      "alwaysOutputData": true,
+      "id": "e266c974-7a63-432e-ac5e-2041c0a3736c",
+      "name": "Append or update row in sheet",
       "credentials": {
         "googleSheetsOAuth2Api": {
           "id": "RCuKUCifcA4jENcY",
@@ -637,90 +336,183 @@
     },
     {
       "parameters": {
-        "content": "OBTENER DATOS VENTA Y ACTUALIZAR DOCUMENTO",
-        "height": 192,
-        "width": 1248,
-        "color": 3
-      },
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        -1680,
-        -832
-      ],
-      "id": "ee4caabd-620f-4b47-a5a9-8631b230ca7d",
-      "name": "Sticky Note"
-    },
-    {
-      "parameters": {
         "rule": {
           "interval": [
-            {}
+            {
+              "field": "cronExpression",
+              "expression": "0 6 * * *"
+            }
           ]
         }
       },
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.3,
       "position": [
-        -1648,
-        -528
+        -352,
+        112
       ],
-      "id": "b248728b-6b35-4520-be9a-fcc77b399479",
+      "id": "f3dc6eb4-4d01-46ae-a50a-f89505f4450c",
       "name": "Schedule Trigger"
     },
     {
-      "parameters": {},
-      "type": "n8n-nodes-base.manualTrigger",
-      "typeVersion": 1,
-      "position": [
-        -1776,
-        -656
-      ],
-      "id": "2af5c064-df49-4280-956a-646d59e20107",
-      "name": "When clicking ‘Execute workflow’"
-    },
-    {
       "parameters": {
-        "dataTableId": {
+        "documentId": {
           "__rl": true,
-          "value": "8GDVj673ag0hCrVt",
+          "value": "1SE7PRebuK5kzzW9uI3VIHHCC-aRMxZuwGLiFlxGnrRw",
           "mode": "list",
-          "cachedResultName": "Informe Mensual",
-          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/8GDVj673ag0hCrVt"
+          "cachedResultName": "Productos vendidos sin stock",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1SE7PRebuK5kzzW9uI3VIHHCC-aRMxZuwGLiFlxGnrRw/edit?usp=drivesdk"
         },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "ID_Documento": "={{ $('Copy file').item.json.id }}"
-          },
-          "matchingColumns": [
-            "ID_Documento"
-          ],
-          "schema": [
-            {
-              "id": "ID_Documento",
-              "displayName": "ID_Documento",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "readOnly": false,
-              "removed": false
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1SE7PRebuK5kzzW9uI3VIHHCC-aRMxZuwGLiFlxGnrRw/edit#gid=0"
         },
         "options": {}
       },
-      "type": "n8n-nodes-base.dataTable",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -96,
+        32
+      ],
+      "id": "596cdb99-59ca-4589-bfb6-219e164fc80b",
+      "name": "obtener vendidos sin stock",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "RCuKUCifcA4jENcY",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1666UwMaXD1Wg9aLis0924Pd1OBWdkS6ShF9Qu_baspM",
+          "mode": "list",
+          "cachedResultName": "Informe falta de stock",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1666UwMaXD1Wg9aLis0924Pd1OBWdkS6ShF9Qu_baspM/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1666UwMaXD1Wg9aLis0924Pd1OBWdkS6ShF9Qu_baspM/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -96,
+        240
+      ],
+      "id": "baae7480-9dbc-4719-a158-b1d76e2a4146",
+      "name": "obtener falta de stock",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "RCuKUCifcA4jENcY",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "fieldsToMatchString": "ID",
+        "joinMode": "keepNonMatches",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        96,
+        128
+      ],
+      "id": "3fc8cd4c-0811-4aad-a360-785d76fbd397",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "documentId": {
+          "__rl": true,
+          "value": "1SE7PRebuK5kzzW9uI3VIHHCC-aRMxZuwGLiFlxGnrRw",
+          "mode": "list",
+          "cachedResultName": "Productos vendidos sin stock",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1SE7PRebuK5kzzW9uI3VIHHCC-aRMxZuwGLiFlxGnrRw/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1SE7PRebuK5kzzW9uI3VIHHCC-aRMxZuwGLiFlxGnrRw/edit#gid=0"
+        },
+        "startIndex": "={{ $json.row_number }}"
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        688,
+        144
+      ],
+      "id": "9832d64a-1d08-47eb-9b2d-797b2a1b2f5f",
+      "name": "Delete rows or columns from sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "RCuKUCifcA4jENcY",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        256,
+        128
+      ],
+      "id": "fbb3d69f-d53a-4a2d-82bb-0fb87b28dad5",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "name": "Replace Me",
       "typeVersion": 1,
       "position": [
-        -688,
-        -528
+        480,
+        144
       ],
-      "id": "36b3f39f-9b27-4a29-83a6-bb28e092b197",
-      "name": "Insert row"
+      "id": "84b1d0d1-b0c2-422d-a396-a8f7e797fb06"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "30 6 * * *"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -384,
+        576
+      ],
+      "id": "98f8c5d3-fad0-4a46-8159-b1e3dcccafe2",
+      "name": "Schedule Trigger1"
     }
   ],
   "pinData": {},
@@ -743,6 +535,6 @@
   },
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2025-12-13T12:53:26.000Z",
-  "versionId": "e9f61121-153c-4745-9f2c-062ff618d259"
+  "updatedAt": "2025-12-19T14:01:12.000Z",
+  "versionId": "8947d055-8052-48fb-8732-d39e4356b973"
 }
