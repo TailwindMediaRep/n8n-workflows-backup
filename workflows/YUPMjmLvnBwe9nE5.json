@@ -1,52 +1,12 @@
 {
   "active": false,
-  "connections": {
-    "When Executed by Another Workflow": {
-      "main": [
-        [
-          {
-            "node": "Code in Python (Beta)",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    }
-  },
+  "connections": {},
   "createdAt": "2025-12-11T07:57:47.380Z",
   "id": "YUPMjmLvnBwe9nE5",
   "isArchived": false,
   "meta": null,
-  "name": "My Sub-Workflow 1",
-  "nodes": [
-    {
-      "parameters": {
-        "inputSource": "passthrough"
-      },
-      "id": "c055762a-8fe7-4141-a639-df2372f30060",
-      "typeVersion": 1.1,
-      "name": "When Executed by Another Workflow",
-      "type": "n8n-nodes-base.executeWorkflowTrigger",
-      "position": [
-        272,
-        352
-      ]
-    },
-    {
-      "parameters": {
-        "language": "python",
-        "pythonCode": "# Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor item in _input.all():\n  item.json.myNewField = 1\nreturn _input.all()"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        480,
-        352
-      ],
-      "id": "c24fac9d-a9ac-4beb-8957-cda9847d1ecd",
-      "name": "Code in Python (Beta)"
-    }
-  ],
+  "name": "vacio3",
+  "nodes": [],
   "pinData": {},
   "settings": {
     "executionOrder": "v1"
@@ -63,6 +23,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-12-11T11:18:42.000Z",
-  "versionId": "3604c531-4bd1-4a9d-9700-b964d182f701"
+  "updatedAt": "2025-12-19T12:05:24.000Z",
+  "versionId": "f013768f-3e10-4d39-a61d-3fd78b20b186"
 }
