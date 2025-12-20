@@ -244,7 +244,7 @@
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "BACKUPS to GITHUB (V7 - Fixed Code Loop)",
+  "name": "vacio2",
   "nodes": [
     {
       "parameters": {},
@@ -774,6 +774,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2025-12-03T14:02:22.000Z",
-  "versionId": "a06f38de-9243-4533-9986-31e636b947f6"
+  "updatedAt": "2025-12-19T12:05:11.000Z",
+  "versionId": "ca500915-5477-4eed-8de3-0aa466b3cd90"
 }
