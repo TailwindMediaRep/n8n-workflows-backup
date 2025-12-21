@@ -738,7 +738,7 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        2704,
+        2736,
         -256
       ],
       "id": "d4025cc9-6c98-422b-a3b5-2ec8c749dca2",
@@ -1052,6 +1052,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-12-19T08:20:55.000Z",
-  "versionId": "72ec947b-cf69-4224-802e-221356c027fd"
+  "updatedAt": "2025-12-20T07:57:49.000Z",
+  "versionId": "6d386223-0a12-461e-9564-5657c09a9ebc"
 }
