@@ -384,7 +384,7 @@
           "mappingMode": "defineBelow",
           "value": {
             "ID_Documento": "={{ $('Copy file').item.json.id }}",
-            "fecha": "={{ $('obtener fecha').item.json.formattedDate }}"
+            "fecha": "={{ $('formatear fecha').item.json.FECHA }}"
           },
           "matchingColumns": [
             "ID_Documento"
@@ -991,6 +991,6 @@
   },
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2025-12-19T08:37:05.000Z",
-  "versionId": "4e756d34-40a1-4dd9-bec1-6392124af804"
+  "updatedAt": "2025-12-20T08:10:29.000Z",
+  "versionId": "b5a09c06-3ff4-4bb8-b1ad-1627f1e33d34"
 }
