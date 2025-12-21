@@ -103,7 +103,13 @@
     },
     "Append row in sheet1": {
       "main": [
-        []
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Replace Me": {
@@ -284,10 +290,11 @@
           "value": {
             "SUCURSAL DE VENTA": "={{ $json['SUCURSAL DE VENTA'] }}",
             "MÉTODO DE PAGO": "={{ $json['MÉTODO DE PAGO'] }}",
-            "COSTE DE PRODUCTO": "={{ $json['COSTE DE PRODUCTO'] }}",
-            "NOMBRE DE PRODUCTO": "={{ $json['NOMBRE DE PRODUCTO'] }}",
+            "COSTE POR UNIDAD": "={{ $json['COSTE POR UNIDAD'] }}",
+            "PRECIO DE PRODUCTO": "={{ $json['PRECIO DE PRODUCTO'] }}",
             "PRECIO PAGADO": "={{ $json['PRECIO PAGADO'] }}",
             "DESCUENTO": "={{ $json.DESCUENTO }}",
+            "NOMBRE DE PRODUCTO": "={{ $json['NOMBRE DE PRODUCTO'] }}",
             "VARIANTE": "={{ $json.VARIANTE }}"
           },
           "matchingColumns": [],
@@ -299,7 +306,8 @@
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true
+              "canBeUsedToMatch": true,
+              "removed": false
             },
             {
               "id": "MÉTODO DE PAGO",
@@ -308,16 +316,28 @@
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true
+              "canBeUsedToMatch": true,
+              "removed": false
             },
             {
-              "id": "COSTE DE PRODUCTO",
-              "displayName": "COSTE DE PRODUCTO",
+              "id": "COSTE POR UNIDAD",
+              "displayName": "COSTE POR UNIDAD",
               "required": false,
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "PRECIO DE PRODUCTO",
+              "displayName": "PRECIO DE PRODUCTO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
             },
             {
               "id": "PRECIO PAGADO",
@@ -346,7 +366,8 @@
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true
+              "canBeUsedToMatch": true,
+              "removed": false
             },
             {
               "id": "VARIANTE",
@@ -396,12 +417,13 @@
           "mappingMode": "defineBelow",
           "value": {
             "MÉTODO DE PAGO": "SEPARADOR",
-            "COSTE DE PRODUCTO": "SEPARADOR",
-            "NOMBRE DE PRODUCTO": "SEPARADOR",
-            "SUCURSAL DE VENTA": "={{ $('Code in JavaScript').item.json.fecha }}",
+            "COSTE POR UNIDAD": "SEPARADOR",
+            "PRECIO DE PRODUCTO": "SEPARADOR",
             "PRECIO PAGADO": "SEPARADOR",
             "DESCUENTO": "SEPARADOR",
-            "VARIANTE": "SEPARADOR"
+            "NOMBRE DE PRODUCTO": "SEPARADOR",
+            "VARIANTE": "SEPARADOR",
+            "SUCURSAL DE VENTA": "={{ DateTime.fromISO($('Get row(s)').item.json.createdAt).toFormat('yyyy-MM-dd') }}\n"
           },
           "matchingColumns": [],
           "schema": [
@@ -426,8 +448,18 @@
               "removed": false
             },
             {
-              "id": "COSTE DE PRODUCTO",
-              "displayName": "COSTE DE PRODUCTO",
+              "id": "COSTE POR UNIDAD",
+              "displayName": "COSTE POR UNIDAD",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "PRECIO DE PRODUCTO",
+              "displayName": "PRECIO DE PRODUCTO",
               "required": false,
               "defaultMatch": false,
               "display": true,
@@ -495,7 +527,8 @@
           "id": "RCuKUCifcA4jENcY",
           "name": "Google Sheets account"
         }
-      }
+      },
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
@@ -557,7 +590,7 @@
       "parameters": {
         "content": "INSERTAR DATOS",
         "height": 224,
-        "width": 768,
+        "width": 992,
         "color": 6
       },
       "type": "n8n-nodes-base.stickyNote",
@@ -568,6 +601,21 @@
       ],
       "id": "bf5b0450-480b-4cdd-bf22-b6da517a8030",
       "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "amount": 1,
+        "unit": "minutes"
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1168,
+        -32
+      ],
+      "id": "18a9c1db-f663-45dc-baff-350baaef4f98",
+      "name": "Wait",
+      "webhookId": "57fcb88d-214c-4872-943f-39a9fec0b079"
     }
   ],
   "pinData": {},
@@ -588,6 +636,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-12-15T09:10:37.000Z",
-  "versionId": "5e8345d4-6bfd-4edf-8526-f54b6a47ae2c"
+  "updatedAt": "2025-12-20T08:22:54.000Z",
+  "versionId": "17b64832-a9ae-4086-b6ea-61ad60f82941"
 }
