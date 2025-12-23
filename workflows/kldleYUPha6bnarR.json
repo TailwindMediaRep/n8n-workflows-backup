@@ -75,9 +75,9 @@
       "main": [
         [
           {
-            "node": "Merge",
+            "node": "Code in JavaScript2",
             "type": "main",
-            "index": 1
+            "index": 0
           }
         ]
       ]
@@ -288,9 +288,15 @@
         ]
       ]
     },
-    "When clicking ‘Execute workflow’": {
+    "Code in JavaScript2": {
       "main": [
-        []
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
       ]
     }
   },
@@ -316,7 +322,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        992,
+        1200,
         -240
       ],
       "id": "bfba9031-2760-4a1e-9cd5-df0d4919a417",
@@ -338,7 +344,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1408,
+        1616,
         -240
       ],
       "id": "729b74ec-4d44-4bd9-8516-730063fdba90",
@@ -557,8 +563,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        32,
-        -608
+        112,
+        -624
       ],
       "id": "50542e04-469a-4512-b518-018e20cb6819",
       "name": "modas_cielo"
@@ -581,7 +587,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        1200,
+        1408,
         -240
       ],
       "id": "e8490937-5403-45fc-8fb8-970aac8b0f7e",
@@ -595,8 +601,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        48,
-        -112
+        128,
+        -176
       ],
       "id": "6f277312-5000-4400-9d19-5f689a8b2f3b",
       "name": "minimos y maximos"
@@ -648,8 +654,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        48,
-        80
+        128,
+        64
       ],
       "id": "9d35a22b-1962-47ef-a5b6-15aff35f3386",
       "name": "valores fijos"
@@ -661,7 +667,7 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        352,
+        560,
         -272
       ],
       "id": "ffa466bf-db81-44ed-918f-c179a6c089c8",
@@ -674,7 +680,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        576,
+        784,
         -240
       ],
       "id": "c1ecc89a-b660-422f-beb4-281847d85609",
@@ -687,7 +693,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        736,
+        944,
         -240
       ],
       "id": "d6af07ac-16f1-404e-b94d-84d7970540b7",
@@ -738,7 +744,7 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        2736,
+        2944,
         -256
       ],
       "id": "d4025cc9-6c98-422b-a3b5-2ec8c749dca2",
@@ -763,7 +769,7 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        3600,
+        3808,
         -272
       ],
       "id": "0b16b58e-3d0c-40cb-a45f-56b2b26b7aa6",
@@ -794,7 +800,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2944,
+        3152,
         -256
       ],
       "id": "b9af122c-db1b-4494-82a7-6a53c5d1eda2",
@@ -833,7 +839,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        2320,
+        2528,
         -240
       ],
       "id": "3fb5a534-5647-4843-ac96-eb1ee952f4b0",
@@ -853,7 +859,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1696,
+        1904,
         -240
       ],
       "id": "d24b002e-fc13-4491-b93a-994c8aeb1a3a",
@@ -875,7 +881,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2512,
+        2720,
         -256
       ],
       "id": "3f4262e7-ed25-44b5-be82-426a1e9886f3",
@@ -894,7 +900,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        2112,
+        2320,
         -240
       ],
       "id": "dbfc385a-22e3-4956-9b30-f054aff2c41e",
@@ -911,7 +917,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1904,
+        2112,
         -240
       ],
       "id": "c14866f1-4a73-4932-9d82-f8fc2926f102",
@@ -928,7 +934,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        3152,
+        3360,
         -256
       ],
       "id": "a35d6451-c070-4e53-a18e-3afb7223e2e1",
@@ -962,7 +968,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        3360,
+        3568,
         -256
       ],
       "id": "b062251a-6073-49c6-ba8c-ccd3a1d7c43b",
@@ -1021,15 +1027,17 @@
       "name": "Schedule Trigger"
     },
     {
-      "parameters": {},
-      "type": "n8n-nodes-base.manualTrigger",
-      "typeVersion": 1,
+      "parameters": {
+        "jsCode": "// Zonas que tú quieres conservar\nconst zonasDeseadas = [\n  'Veleta',\n  'Borreguiles',\n  'Parque Sulayr',\n  'Loma Dilar',\n  'Pista del Mar. (Zona Familiar)',\n  'Rio Monachil',\n  'Jardin de Nieve'\n];\n\nreturn items.map(item => {\n  // Convertimos el string en array\n  const zonas = item.json.zonas_abiertas\n    .split(',')\n    .map(z => z.trim());\n\n  // Filtramos solo las deseadas\n  const zonasFiltradas = zonas.filter(z =>\n    zonasDeseadas.some(zd => z.includes(zd))\n  );\n\n  return {\n    json: {\n      ...item.json,\n      zonas_abiertas: zonasFiltradas\n    }\n  };\n});\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
       "position": [
-        -784,
-        -64
+        224,
+        -416
       ],
-      "id": "ea65fc37-43b6-4ade-81bc-3e0cca7f58b9",
-      "name": "When clicking ‘Execute workflow’"
+      "id": "7bb8a970-9ab2-427f-a582-3b61aafdd502",
+      "name": "Code in JavaScript2"
     }
   ],
   "pinData": {},
@@ -1052,6 +1060,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-12-20T07:57:49.000Z",
-  "versionId": "6d386223-0a12-461e-9564-5657c09a9ebc"
+  "updatedAt": "2025-12-22T08:47:44.000Z",
+  "versionId": "3f2a4cfc-c319-4fa5-8d74-8cece57b717f"
 }
