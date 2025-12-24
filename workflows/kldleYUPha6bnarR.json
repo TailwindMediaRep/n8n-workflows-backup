@@ -141,7 +141,7 @@
       "main": [
         [
           {
-            "node": "HTTP Request",
+            "node": "obtener contador",
             "type": "main",
             "index": 0
           }
@@ -172,7 +172,13 @@
     },
     "Facebook Graph API1": {
       "main": [
-        []
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "HTTP Request3": {
@@ -298,6 +304,46 @@
           }
         ]
       ]
+    },
+    "obtener contador": {
+      "main": [
+        [
+          {
+            "node": "obtener id documento",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "obtener id documento": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "Update row(s)1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Update row(s)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-11-29T11:04:16.100Z",
@@ -316,13 +362,13 @@
         "genericAuthType": "oAuth2Api",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"brand_template_id\": \"EAG7MOm9u9M\",\n  \"export_name\": \"Historia dia hoy\",\n  \"data\": {\n    \"fecha\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.fecha }}\"\n    },\n    \"calidadnieve_general\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.calidadnieve_general }}\"\n    },\n    \"estadogeneral\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.estadogeneral }}\"\n    },\n    \"visibilidadgeneral\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.visibilidadgeneral }}\"\n    },\n    \"temperaturaminima\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.temperaturaminima }}\"\n    },\n    \"temperaturamaxima\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.temperaturamaxima }}\"\n    },\n    \"vientominimo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.vientominimo }}\"\n    },\n    \"vientomaximo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.vientomaximo }}\"\n    },\n    \"espesorminimo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.espesorminimo }}\"\n    },\n    \"espesormaximo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.espesormaximo }}\"\n    },\n    \"remontes_abiertos\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.remontes_abiertos }}\"\n    },\n    \"km_esquiables\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.km_esquiables }}\"\n    },\n    \"pistasabiertas\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.zonas_abiertas }}\" \n    },\n    \"numeropistas\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.numerozonas }}\"\n    }\n  }\n}",
+        "jsonBody": "={\n  \"brand_template_id\": \"{{ $json.id_documento }}\",\n  \"export_name\": \"Historia dia hoy\",\n  \"data\": {\n    \"fecha\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Code in JavaScript1').item.json.fecha }}\"\n    },\n    \"calidadnieve_general\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Code in JavaScript1').item.json.calidadnieve_general }}\"\n    },\n    \"estadogeneral\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Code in JavaScript1').item.json.estadogeneral }}\"\n    },\n    \"visibilidadgeneral\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Code in JavaScript1').item.json.visibilidadgeneral }}\"\n    },\n    \"temperaturaminima\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Code in JavaScript1').item.json.temperaturaminima }}\"\n    },\n    \"temperaturamaxima\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Code in JavaScript1').item.json.temperaturamaxima }}\"\n    },\n    \"vientominimo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Code in JavaScript1').item.json.vientominimo }}\"\n    },\n    \"vientomaximo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Code in JavaScript1').item.json.vientomaximo }}\"\n    },\n    \"espesorminimo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Code in JavaScript1').item.json.espesorminimo }}\"\n    },\n    \"espesormaximo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Code in JavaScript1').item.json.espesormaximo }}\"\n    },\n    \"remontes_abiertos\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Code in JavaScript1').item.json.remontes_abiertos }}\"\n    },\n    \"km_esquiables\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Code in JavaScript1').item.json.km_esquiables }}\"\n    },\n    \"pistasabiertas\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Code in JavaScript1').item.json.zonas_abiertas }}\" \n    },\n    \"numeropistas\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Code in JavaScript1').item.json.numerozonas }}\"\n    }\n  }\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1200,
+        1216,
         -240
       ],
       "id": "bfba9031-2760-4a1e-9cd5-df0d4919a417",
@@ -364,7 +410,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        -528,
+        -896,
         -256
       ],
       "id": "44b366ed-35e3-4931-9a9a-1270702b606e",
@@ -537,7 +583,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -368,
+        -736,
         -256
       ],
       "id": "322a55fd-abb5-42e1-95ee-8a0c5c9ff5f1",
@@ -550,7 +596,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -224,
+        -592,
         -256
       ],
       "id": "f0ab0b3a-8465-4c12-a52f-6e22fb0b8cae",
@@ -563,7 +609,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        112,
+        -256,
         -624
       ],
       "id": "50542e04-469a-4512-b518-018e20cb6819",
@@ -576,7 +622,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        32,
+        -336,
         -416
       ],
       "id": "5c073de5-cce8-46a7-aa9d-f38f48309fe1",
@@ -601,7 +647,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        128,
+        -240,
         -176
       ],
       "id": "6f277312-5000-4400-9d19-5f689a8b2f3b",
@@ -654,7 +700,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        128,
+        -240,
         64
       ],
       "id": "9d35a22b-1962-47ef-a5b6-15aff35f3386",
@@ -667,7 +713,7 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        560,
+        192,
         -272
       ],
       "id": "ffa466bf-db81-44ed-918f-c179a6c089c8",
@@ -680,7 +726,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        784,
+        416,
         -240
       ],
       "id": "c1ecc89a-b660-422f-beb4-281847d85609",
@@ -693,7 +739,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        944,
+        640,
         -240
       ],
       "id": "d6af07ac-16f1-404e-b94d-84d7970540b7",
@@ -703,13 +749,13 @@
       "parameters": {
         "content": "POST a Canva",
         "height": 272,
-        "width": 704,
+        "width": 1072,
         "color": 4
       },
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        928,
+        560,
         -320
       ],
       "id": "8db568f6-0a55-4b13-bed2-cd0160177c03",
@@ -725,7 +771,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -560,
+        -928,
         -640
       ],
       "id": "a1577750-a2b6-4adb-9664-b594e04a21f7",
@@ -769,7 +815,7 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        3808,
+        3760,
         -272
       ],
       "id": "0b16b58e-3d0c-40cb-a45f-56b2b26b7aa6",
@@ -859,7 +905,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1904,
+        1840,
         -240
       ],
       "id": "d24b002e-fc13-4491-b93a-994c8aeb1a3a",
@@ -1020,7 +1066,7 @@
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.3,
       "position": [
-        -768,
+        -1120,
         -256
       ],
       "id": "8df0b3b7-32c1-4c86-8cbb-007eeaf1b049",
@@ -1033,11 +1079,216 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        224,
+        -144,
         -416
       ],
       "id": "7bb8a970-9ab2-427f-a582-3b61aafdd502",
       "name": "Code in JavaScript2"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "AD0QThH3qyX9numR",
+          "mode": "list",
+          "cachedResultName": "Plantillas Canva",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/AD0QThH3qyX9numR"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "5"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        816,
+        -240
+      ],
+      "id": "f7df0692-0ef4-4964-921d-0180091d69d5",
+      "name": "obtener contador"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "dataTableId": {
+          "__rl": true,
+          "value": "AD0QThH3qyX9numR",
+          "mode": "list",
+          "cachedResultName": "Plantillas Canva",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/AD0QThH3qyX9numR"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "5"
+            }
+          ]
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "contador": "={{ $('obtener contador').item.json.contador + 1}}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "id_documento",
+              "displayName": "id_documento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "contador",
+              "displayName": "contador",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        4208,
+        -176
+      ],
+      "id": "e51557e8-deb7-43be-9aae-0d47c1671a37",
+      "name": "Update row(s)"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "AD0QThH3qyX9numR",
+          "mode": "list",
+          "cachedResultName": "Plantillas Canva",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/AD0QThH3qyX9numR"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "={{ $json.contador }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        -240
+      ],
+      "id": "b5c6592a-6fe1-459c-8758-a3d2f6d4325c",
+      "name": "obtener id documento"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "eb25e3cc-d34e-4f71-b49a-8d7c9085c311",
+              "leftValue": "={{ $('obtener contador').item.json.contador }}",
+              "rightValue": 4,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        3968,
+        -272
+      ],
+      "id": "324d0d96-f459-4f94-b3ce-20219db990f5",
+      "name": "If2"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "dataTableId": {
+          "__rl": true,
+          "value": "AD0QThH3qyX9numR",
+          "mode": "list",
+          "cachedResultName": "Plantillas Canva",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/AD0QThH3qyX9numR"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "5"
+            }
+          ]
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "contador": "=1"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "id_documento",
+              "displayName": "id_documento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "contador",
+              "displayName": "contador",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        4208,
+        -368
+      ],
+      "id": "94cd4828-f6b5-4ce2-8a58-2b296800bda0",
+      "name": "Update row(s)1"
     }
   ],
   "pinData": {},
@@ -1060,6 +1311,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-12-22T08:47:44.000Z",
-  "versionId": "3f2a4cfc-c319-4fa5-8d74-8cece57b717f"
+  "updatedAt": "2025-12-23T13:07:56.000Z",
+  "versionId": "c0971f3d-8fea-4efa-a338-28d048e6c886"
 }
