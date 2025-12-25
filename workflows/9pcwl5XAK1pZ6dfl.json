@@ -1,22 +1,16 @@
 {
   "active": true,
   "connections": {
-    "GraphQL": {
-      "main": [
-        [
-          {
-            "node": "If",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Edit Fields": {
       "main": [
         [
           {
-            "node": "GraphQL",
+            "node": "GraphQL1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "GraphQL4",
             "type": "main",
             "index": 0
           }
@@ -34,20 +28,87 @@
         ]
       ]
     },
-    "If": {
+    "GraphQL1": {
       "main": [
         [
           {
-            "node": "GraphQL1",
+            "node": "surfin",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "GraphQL1": {
+    "If": {
+      "main": [
+        [
+          {
+            "node": "GraphQL",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "surfin": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get a product": {
       "main": [
         []
+      ]
+    },
+    "GraphQL": {
+      "main": [
+        [
+          {
+            "node": "GraphQL2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GraphQL2": {
+      "main": [
+        [
+          {
+            "node": "GraphQL3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        []
+      ]
+    },
+    "GraphQL4": {
+      "main": [
+        [
+          {
+            "node": "GraphQL5",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
   },
@@ -61,42 +122,18 @@
   "nodes": [
     {
       "parameters": {
-        "authentication": "headerAuth",
-        "endpoint": "https://nuance-store-spain.myshopify.com/admin/api/2025-10/graphql.json",
-        "query": "=query {\n  inventoryItem(id: \"gid://shopify/InventoryItem/{{ $json.inventory_item_id }}\") {\n    variant {\n      title\n      sku\n      price\n      id\n      product {\n        title\n        handle\n        id\n        featuredImage {\n          url\n        }\n      }\n    }\n  }\n}",
-        "variables": "=",
-        "headerParametersUi": {
-          "parameter": [
-            {
-              "name": "Content-Type",
-              "value": "application/json"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.graphql",
-      "typeVersion": 1.1,
-      "position": [
-        -672,
-        -480
-      ],
-      "id": "f0523ce3-bd3b-4c66-8cff-c9f0df12bfd7",
-      "name": "GraphQL",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "36bBHEvkvYhxPhfA",
-          "name": "Nuance"
-        }
-      }
-    },
-    {
-      "parameters": {
         "assignments": {
           "assignments": [
             {
               "id": "bf2e92f4-f1c3-4881-bc32-1b46d76b6086",
               "name": "inventory_item_id",
               "value": "={{ $json.body.inventory_item_id }}",
+              "type": "number"
+            },
+            {
+              "id": "5e4eb1fc-5dca-4006-b82d-87bcb35d0e91",
+              "name": "location_id",
+              "value": "={{ $json.body.location_id }}",
               "type": "number"
             },
             {
@@ -112,8 +149,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -848,
-        -480
+        -720,
+        -496
       ],
       "id": "5eed9337-fa5c-4d9f-aea0-2fb90945e47f",
       "name": "Edit Fields"
@@ -127,8 +164,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -1024,
-        -480
+        -912,
+        -496
       ],
       "id": "153e86e9-529d-4ebd-a424-351197082e55",
       "name": "Webhook",
@@ -136,43 +173,9 @@
     },
     {
       "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 2
-          },
-          "conditions": [
-            {
-              "id": "abb39ee7-4551-43a5-a2be-d88321ed1675",
-              "leftValue": "={{ $json.data.inventoryItem }}",
-              "rightValue": "",
-              "operator": {
-                "type": "object",
-                "operation": "notExists",
-                "singleValue": true
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.2,
-      "position": [
-        -480,
-        -480
-      ],
-      "id": "5187d349-3418-4700-bea3-6ee226e38e07",
-      "name": "If"
-    },
-    {
-      "parameters": {
         "authentication": "headerAuth",
         "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
-        "query": "=query {\n  inventoryItem(id: \"gid://shopify/InventoryItem/{{ $('Edit Fields').item.json.inventory_item_id }}\") {\n    variant {\n      # Datos de la Variante específica que cambió\n      id\n      title\n      sku\n      price\n      barcode\n      \n      # Datos del Producto Padre\n      product {\n        id\n        title\n        handle # Útil para construir la URL\n        descriptionHtml # La descripción completa con formato\n        vendor\n        productType\n        tags\n        status # (ACTIVE, ARCHIVED, DRAFT)\n        \n        # Imagen principal\n        featuredImage {\n          url\n        }\n        \n        # Todas las imágenes del producto (hasta 10)\n        images(first: 10) {\n          nodes {\n            url\n            altText\n          }\n        }\n        \n        # Opciones (ej: Talla, Color) y sus valores disponibles\n        options {\n          name\n          values\n        }\n      }\n    }\n  }\n}",
+        "query": "=query {\n  inventoryItem(id: \"gid://shopify/InventoryItem/{{ $json.inventory_item_id }}\") {\n    variant {\n      # Datos de la Variante específica que cambió\n      id\n      title\n      sku\n      price\n      barcode\n      \n      # Datos del Producto Padre\n      product {\n        id\n        title\n        handle # Útil para construir la URL\n        descriptionHtml # La descripción completa con formato\n        vendor\n        productType\n        tags\n        status # (ACTIVE, ARCHIVED, DRAFT)\n        \n        # Imagen principal\n        featuredImage {\n          url\n        }\n        \n        # Todas las imágenes del producto (hasta 10)\n        images(first: 10) {\n          nodes {\n            url\n            altText\n          }\n        }\n        \n        # Opciones (ej: Talla, Color) y sus valores disponibles\n        options {\n          name\n          values\n        }\n      }\n    }\n  }\n}",
         "headerParametersUi": {
           "parameter": [
             {
@@ -185,8 +188,8 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        -320,
-        -640
+        -512,
+        -496
       ],
       "id": "63626090-18ea-43d4-82bc-97cb1d169908",
       "name": "GraphQL1",
@@ -199,21 +202,303 @@
     },
     {
       "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "e6010df5-c69d-4e17-aea5-036428c73124",
+              "leftValue": "={{ $json.data.productVariants.edges }}",
+              "rightValue": "",
+              "operator": {
+                "type": "array",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -16,
+        -640
+      ],
+      "id": "0f4d0d8e-2a95-418c-962c-a8743cc39f5b",
+      "name": "If"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        224,
+        -592
+      ],
+      "id": "76d12605-5960-4045-b026-4351c0a40772",
+      "name": "No Operation, do nothing"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://surfin-shop.myshopify.com/admin/api/2025-10/graphql.json",
+        "query": "query ProductBySKU($sku: String!) {\n  productVariants(first: 1, query: $sku) {\n    edges {\n      node {\n        id\n        title\n        sku\n        price\n        barcode\n        product {\n          id\n          title\n          handle\n          vendor\n          productType\n          status\n          featuredImage {\n            url\n          }\n          options {\n            name\n            values\n          }\n        }\n      }\n    }\n  }\n}\n",
+        "variables": "={\n  \"sku\": \"{{ $json.data.inventoryItem.variant.sku }}\"\n}\n"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        -224,
+        -640
+      ],
+      "id": "0b8d884e-ef18-47b7-bb34-7d73458ea25a",
+      "name": "surfin",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "43APInvySPEk52UF",
+          "name": "Surfin"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://surfin-shop.myshopify.com/admin/api/2025-10/graphql.json",
+        "query": "=query {\n  productVariant(id: \"{{ $json.data.productVariants.edges[0].node.id }}\") {\n    id\n    inventoryItem {\n      id\n    }\n  }\n}",
+        "variables": "="
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        224,
+        -752
+      ],
+      "id": "f2a9c1dd-5eed-4d7e-90c0-65a2c5207334",
+      "name": "GraphQL",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "43APInvySPEk52UF",
+          "name": "Surfin"
+        }
+      }
+    },
+    {
+      "parameters": {
         "authentication": "accessToken",
         "resource": "product",
+        "operation": "update",
+        "productId": "={{ $json.data.productVariants.edges[0].node.id }}",
+        "updateFields": {
+          "productOptions": {
+            "option": [
+              {
+                "name": "=",
+                "value": "="
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.shopify",
+      "typeVersion": 1,
+      "position": [
+        -640,
+        -848
+      ],
+      "id": "547a03f8-6209-44c9-9a72-bfc815cc7258",
+      "name": "Update a product1",
+      "credentials": {
+        "shopifyAccessTokenApi": {
+          "id": "z8C885g137mtj4GR",
+          "name": "Surfin"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "accessToken",
+        "resource": "product",
+        "operation": "get",
+        "productId": "={{ $json.data.inventoryItem.variant.id }}",
         "additionalFields": {}
       },
       "type": "n8n-nodes-base.shopify",
       "typeVersion": 1,
       "position": [
-        -528,
-        -816
+        -432,
+        -848
       ],
-      "id": "72c8d58d-6f64-48f1-b360-ba66425484d5",
-      "name": "Create a product",
+      "id": "3a62fd4c-4149-4371-a931-d276e38f01c4",
+      "name": "Get a product",
       "credentials": {
         "shopifyAccessTokenApi": {
           "id": "z8C885g137mtj4GR",
+          "name": "Surfin"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://surfin-shop.myshopify.com/admin/api/2025-10/graphql.json",
+        "query": "=query GetInventoryForVariant($variantId: ID!) {\n  productVariant(id: $variantId) {\n    id\n    title\n    inventoryItem {\n      id\n      inventoryLevels(first: 10) {\n        edges {\n          node {\n            id\n            location {\n              id\n              name\n            }\n            quantities(names: [\"available\"]) {\n              name\n              quantity\n            }\n          }\n        }\n      }\n    }\n  }\n}\n",
+        "variables": "={\n  \"variantId\": \"{{ $json.data.productVariant.id }}\"\n}\n"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        384,
+        -752
+      ],
+      "id": "2ab04736-5b7c-4ea5-aecd-2dd219b2b0a7",
+      "name": "GraphQL2",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "43APInvySPEk52UF",
+          "name": "Surfin"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://surfin-shop.myshopify.com/admin/api/2025-10/graphql.json",
+        "query": "=mutation {\n  inventorySetQuantities(\n    input: {\n      name: \"available\"\n      reason: \"correction\"\n      ignoreCompareQuantity: true\n      quantities: [\n        {\n          inventoryItemId: \"{{ $('GraphQL').item.json.data.productVariant.inventoryItem.id }}\"\n          locationId: \"{{ $json.data.productVariant.inventoryItem.inventoryLevels.edges[2].node.location.id }}\"\n          quantity: {{ $('Code in JavaScript').item.json.quantity }}\n        }\n      ]\n    }\n  ) {\n    inventoryAdjustmentGroup {\n      changes {\n        name\n        delta\n        quantityAfterChange\n      }\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}\n",
+        "variables": "="
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        576,
+        -752
+      ],
+      "id": "a0fb7cc0-2220-4d08-baf2-f9efb862aeeb",
+      "name": "GraphQL3",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "43APInvySPEk52UF",
+          "name": "Surfin"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f3d75231-d7b2-4869-9f00-cb16cd7bc0e6",
+              "name": "StockRulesShop",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "18e7cd2b-3ee3-4d60-9078-69e0b9a993ef",
+              "name": "StockRulesOakley",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "fe4e8c6c-07fe-4b4a-885b-e2ae44de9979",
+              "name": "StockRulesNorthFace",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "a24d71ed-a010-411e-b647-a8ddb1abcadd",
+              "name": "StockSurfinSierraNevada",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "87a89e78-7168-4882-972d-bc68521af7a5",
+              "name": "StockNuance",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "37768451-ff14-446b-a1ff-d1ad2058400b",
+              "name": "StockNuanceLodge",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "f20f8fe5-23a8-46c2-9fd0-84ada0bf6ad4",
+              "name": "StockNuanceNave",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "7b87e451-10f7-4c05-b9b7-738258ddaf76",
+              "name": "StockMeliaSierraNevada",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "8753ba59-3b9b-468e-8923-51b0d8aff037",
+              "name": "sku",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -32,
+        -1104
+      ],
+      "id": "89a8491e-3690-49df-9415-f09953418845",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
+        "query": "query getLocation($locationId: ID!) {\n  location(id: $locationId) {\n    id\n    name\n  }\n}\n",
+        "variables": "={\n  \"locationId\": \"gid://shopify/Location/{{ $json.location_id }}\"\n}\n"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        -464,
+        -320
+      ],
+      "id": "1df89bbe-c447-48a6-a504-034fc9bb3f49",
+      "name": "GraphQL4",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://surfin-store.myshopify.com/admin/api/2025-10/graphql.json",
+        "query": "query getLocationByName($locationName: String!) {\n  locations(first: 10, query: $locationName) {\n    edges {\n      node {\n        id\n        name\n      }\n    }\n  }\n}\n"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        -272,
+        -320
+      ],
+      "id": "e811ed74-4844-477d-9e7e-8f74c44d80a9",
+      "name": "GraphQL5",
+      "alwaysOutputData": false,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "43APInvySPEk52UF",
           "name": "Surfin"
         }
       }
@@ -237,6 +522,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-12-22T13:57:42.000Z",
-  "versionId": "1879f4ee-d020-434c-8844-97ff2a7c0070"
+  "updatedAt": "2025-12-24T14:36:42.000Z",
+  "versionId": "e4c5cacd-f655-4fd1-adc1-665547f00743"
 }
