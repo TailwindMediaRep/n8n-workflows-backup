@@ -1,12 +1,65 @@
 {
-  "active": false,
-  "connections": {},
+  "active": true,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "GraphQL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
   "createdAt": "2025-12-11T07:57:47.380Z",
   "id": "YUPMjmLvnBwe9nE5",
   "isArchived": false,
-  "meta": null,
-  "name": "vacio3",
-  "nodes": [],
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "TRASFERENCIAS SHOPIFY",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "transferenciasn8n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -256,
+        -16
+      ],
+      "id": "83c0b732-698b-413f-b61b-7652706706cb",
+      "name": "Webhook",
+      "webhookId": "7929398a-230d-402b-8dcf-ffbcda973cea"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://nuance-store-spain.myshopify.com/admin/api/2025-10/graphql.json",
+        "query": "query getTransferDetails($id: ID!) {\n  node(id: $id) {\n    ... on InventoryTransfer {\n      id\n      status\n      dateCreated\n      origin {\n        location {\n          name\n        }\n      }\n      destination {\n        location {\n          name\n        }\n      }\n      lineItems(first: 50) {\n        nodes {\n          totalQuantity\n          inventoryItem {\n            id\n            variant {\n              id\n              sku\n              title\n              product {\n                title\n                featuredImage {\n                  url\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}",
+        "variables": "={\n  \"id\": \"{{ $json.body.id }}\"\n}"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        -48,
+        -16
+      ],
+      "id": "57d023c1-61df-4dae-831e-be7d3425ceb2",
+      "name": "GraphQL",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "36bBHEvkvYhxPhfA",
+          "name": "Nuance"
+        }
+      }
+    }
+  ],
   "pinData": {},
   "settings": {
     "executionOrder": "v1"
@@ -22,7 +75,7 @@
   ],
   "staticData": null,
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2025-12-19T12:05:24.000Z",
-  "versionId": "f013768f-3e10-4d39-a61d-3fd78b20b186"
+  "triggerCount": 1,
+  "updatedAt": "2025-12-27T12:57:25.000Z",
+  "versionId": "aa92736a-81a9-40e5-b760-49cd80c85d8a"
 }
