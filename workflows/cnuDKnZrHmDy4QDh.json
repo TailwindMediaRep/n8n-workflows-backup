@@ -1,22 +1,422 @@
 {
   "active": false,
-  "connections": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "GraphQL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update a product": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "chatgpt1": {
+      "main": [
+        [
+          {
+            "node": "chatgpt2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "chatgpt2": {
+      "main": [
+        [
+          {
+            "node": "Update a product",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GraphQL": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "chatgpt1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
   "createdAt": "2025-12-12T07:23:55.975Z",
   "id": "cnuDKnZrHmDy4QDh",
   "isArchived": false,
-  "meta": null,
-  "name": "pruebaDuplicados",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "rellenarInformacionProducto",
   "nodes": [
     {
-      "parameters": {},
-      "type": "n8n-nodes-base.manualTrigger",
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "creacionProducto",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -160,
+        -96
+      ],
+      "id": "ecca582d-ab8c-4c6a-aaa5-45238fef02dc",
+      "name": "Webhook",
+      "webhookId": "86641e84-36c8-46bf-88b7-013e95f596dc"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5fdca14b-6f98-4014-af5d-1213f9d6d9f9",
+              "name": "TITULO",
+              "value": "={{ $json.body.title }}",
+              "type": "string"
+            },
+            {
+              "id": "a75d9110-1c0e-4399-a5e1-81f0a2f1e5cb",
+              "name": "ID_PRODUCTO",
+              "value": "={{ $json.body.admin_graphql_api_id }}",
+              "type": "string"
+            },
+            {
+              "id": "e3f05a9c-ce62-4c85-b9f4-77addbbeecb4",
+              "name": "ID_NUMERICA_PRODUCTO",
+              "value": "={{ $json.body.id }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        16,
+        -96
+      ],
+      "id": "a3489929-d428-4353-bfef-d3277ac233ac",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "authentication": "accessToken",
+        "resource": "product",
+        "operation": "update",
+        "productId": "={{ $('Edit Fields').item.json.ID_NUMERICA_PRODUCTO }}",
+        "updateFields": {
+          "body_html": "={{ $json.output[0].content[0].text }}"
+        }
+      },
+      "type": "n8n-nodes-base.shopify",
       "typeVersion": 1,
       "position": [
-        0,
-        0
+        1248,
+        -272
       ],
-      "id": "f2b85d1f-9a8c-4f70-9a39-3b40a46e7a21",
-      "name": "When clicking ‘Execute workflow’"
+      "id": "c582c2d1-b1e3-4213-83f5-b968f1b01b18",
+      "name": "Update a product",
+      "credentials": {
+        "shopifyAccessTokenApi": {
+          "id": "z8C885g137mtj4GR",
+          "name": "Surfin"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Escribe aquí la ID que tú quieras\nconst productId = $('Edit Fields').first().json.ID_NUMERICA_PRODUCTO; \n\n// 2. Definimos la base de la URL de tu tienda\nconst baseUrl = \"https://admin.shopify.com/store/rulesshop/products/\";\n\n// 3. Concatenamos para crear el enlace final\nconst fullUrl = `${baseUrl}${productId}`;\n\n// 4. Devolvemos el resultado en el formato que n8n exige (JSON)\nreturn [\n  {\n    json: {\n      shopify_url: fullUrl,\n      id_used: productId\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1456,
+        -272
+      ],
+      "id": "410fd7e5-9e0b-48c9-93d5-13c669d646bd",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1vkaaGQNmYu0jvdDk6YiS0HrnoQjl6W_RotRHIXMnDyw",
+          "mode": "list",
+          "cachedResultName": "Productos Descripcion con IA",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1vkaaGQNmYu0jvdDk6YiS0HrnoQjl6W_RotRHIXMnDyw/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1vkaaGQNmYu0jvdDk6YiS0HrnoQjl6W_RotRHIXMnDyw/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "URL": "={{ $json.shopify_url }}",
+            "ID": "={{ $('Edit Fields').item.json.ID_NUMERICA_PRODUCTO }}",
+            "NOMBRE": "={{ $('Edit Fields').item.json.TITULO }}",
+            "DESCRIPCIÓN": "={{ $('chatgpt2').item.json.output[0].content[0].text }}"
+          },
+          "matchingColumns": [
+            "NOMBRE"
+          ],
+          "schema": [
+            {
+              "id": "NOMBRE",
+              "displayName": "NOMBRE",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "URL",
+              "displayName": "URL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "DESCRIPCIÓN",
+              "displayName": "DESCRIPCIÓN",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1648,
+        -272
+      ],
+      "id": "e32abfc0-cf42-4b84-b678-ac5036d3cfdc",
+      "name": "Append or update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "RCuKUCifcA4jENcY",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "GPT-4O"
+        },
+        "responses": {
+          "values": [
+            {
+              "content": "=Actúa como una API de documentación técnica \"Headless\". Tu única función es recuperar y sintetizar información técnica de productos. No eres un asistente conversacional.\n\n1. Busca información detallada y actualizada sobre el siguiente producto: \"{{ $json.TITULO }}\".\n2. Genera una descripción exhaustiva que incluya: características principales, especificaciones técnicas, composición y materiales y casos de uso.\n\n- Tu respuesta debe contener EXCLUSIVAMENTE la descripción.\n- Tu respuesta debe de estar en idioma ESPAÑOL\n- PROHIBIDO usar preámbulos (ej: \"Claro\", \"Aquí tienes\", \"Basado en mi búsqueda\").\n- PROHIBIDO usar despedidas o preguntas finales.\n- PROHIBIDO: Inventar materiales. Si no encuentras la composición exacta, omite ese dato específico, pero no especules.\n- El primer carácter de tu respuesta DEBE ser la primera letra de la descripción del producto.\n- Si no encuentras información, devuelve únicamente el string: \"NULL\".\n\nProducto: {{ $json.TITULO }}"
+            }
+          ]
+        },
+        "builtInTools": {
+          "webSearch": {
+            "searchContextSize": "low"
+          }
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2,
+      "position": [
+        672,
+        -272
+      ],
+      "id": "0ea1fff2-e29b-4b28-bca1-9b5d78f4af15",
+      "name": "chatgpt1",
+      "credentials": {
+        "openAiApi": {
+          "id": "5LrBo3ZRFFg113Tp",
+          "name": "OpenAi"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "GPT-4O"
+        },
+        "responses": {
+          "values": [
+            {
+              "content": "=### ROL\nActúa como un Senior Product Copywriter especializado en e-commerce de moda, lifestyle y tecnología. Tu destreza reside en transformar especificaciones técnicas frías en narrativas de producto atractivas y persuasivas que conectan con el comprador.\n\n### INPUT\nRecibirás un texto con datos técnicos crudos y características de un producto.\n{{ $json.output[0].content[0].text }}\n\n### TAREA\nSintetiza la información técnica proporcionada en una descripción de producto vibrante y orientada a beneficios. El objetivo es que el cliente sienta que *necesita* el producto.\n\n### GUÍA DE ESTILO (CRÍTICO - BASADO EN EJEMPLOS HUMANOS)\nDebes imitar el siguiente enfoque para la redacción:\n1.  **Enfoque en Beneficios:** No te limites a listar características. Explica qué gana el usuario. (Ej: En lugar de solo \"cintura elástica\", escribe \"cintura elástica que asegura un uso sin fricciones y libertad de movimiento\").\n2.  **Integración Fluida:** Teje los materiales y especificaciones técnicas dentro de la narrativa de forma natural, no como una lista de viñetas. (Ej: \"Confeccionado con un tejido de [Material] que ofrece un ajuste...\").\n3.  **Tono:** Atractivo, seguro y profesional. Usa verbos de acción. Comienza con un \"gancho\" fuerte que defina para quién es el producto o qué problema resuelve.\n4.  **Estructura:**\n    * Inicio: Gancho / Propuesta de valor principal.\n    * Cuerpo: Detalles técnicos clave traducidos a beneficios (materiales, ajuste, tecnología).\n    * Cierre: Resumen de la experiencia o mención a la garantía/calidad de la marca.\n\n### RESTRICCIONES DE FORMATO\n- **Longitud:** Aproximadamente 800 caracteres.\n- **Formato de Salida:** HTML Crudo (Raw HTML).\n- **ESTRUCTURA OBLIGATORIA:** Debes encerrar el texto en etiquetas <p>. Si hay varios párrafos, usa varias etiquetas <p>.\n- **SUBRAYADO:** Las especificaciones más importantes irán en negrita, por lo que estará encerrado entre etiquetas <b>\n- **PROHIBIDO:** Usar bloques de código Markdown (```html o ```). NO pongas comillas al principio ni al final.\n- **PROHIBIDO:** Añadir introducciones o texto fuera de las etiquetas HTML.\n-**PROHIBIDO: ** Usar asteriscos (***, ** o *) para marcar las negritas, ya que estas tienen que ir encerradas en etiquetas <b>\n- **INICIO:** Tu respuesta DEBE empezar obligatoriamente con el carácter: <\n\n### TU RESPUESTA FINAL:\n"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2,
+      "position": [
+        960,
+        -272
+      ],
+      "id": "483ec84c-360a-48f2-8b8c-ea920450b1ea",
+      "name": "chatgpt2",
+      "credentials": {
+        "openAiApi": {
+          "id": "5LrBo3ZRFFg113Tp",
+          "name": "OpenAi"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://surfin-shop.myshopify.com/admin/api/2025-10/graphql.json",
+        "query": "query getProductMetafields($id: ID!) {\n  product(id: $id) {\n    id\n    title\n    handle\n    metafields(first: 20) {\n      edges {\n        node {\n          namespace\n          key\n          value\n          type\n          id\n        }\n      }\n    }\n  }\n}",
+        "variables": "={\n  \"id\": \"{{ $json.ID_PRODUCTO }}\"\n}"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        192,
+        -96
+      ],
+      "id": "9c6166c1-4a81-410d-9e45-75fb19faa53f",
+      "name": "GraphQL",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "43APInvySPEk52UF",
+          "name": "Surfin"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "4d43a86f-0a6a-4a9d-bf10-d09883c9186d",
+              "leftValue": "={{ $json.data.product.metafields.edges[0].node.value }}",
+              "rightValue": "=true",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        400,
+        -96
+      ],
+      "id": "0a8b5611-f652-4bac-9c72-27586dfa5539",
+      "name": "If"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        672,
+        16
+      ],
+      "id": "34c6618e-596b-4926-aaba-176fabb488f9",
+      "name": "No Operation, do nothing"
     }
   ],
   "pinData": {},
@@ -34,7 +434,7 @@
   ],
   "staticData": null,
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2025-12-19T13:37:36.000Z",
-  "versionId": "4a1714a5-121f-4420-bddb-a489f9a546ef"
+  "triggerCount": 1,
+  "updatedAt": "2025-12-26T15:53:59.000Z",
+  "versionId": "5b60799b-ca38-4ca0-9dc0-07c05a64fea1"
 }
