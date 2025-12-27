@@ -168,7 +168,7 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2.2,
       "position": [
-        -64,
+        -128,
         80
       ],
       "id": "7ea95390-9a1c-45eb-87e4-e848c00c2337",
@@ -195,7 +195,7 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -240,
+        -304,
         80
       ],
       "id": "3fd20126-5560-4ab3-865a-bf7442c53682",
@@ -322,7 +322,7 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        144,
+        80,
         80
       ],
       "id": "e266c974-7a63-432e-ac5e-2041c0a3736c",
@@ -508,7 +508,7 @@
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.3,
       "position": [
-        -464,
+        -528,
         80
       ],
       "id": "98f8c5d3-fad0-4a46-8159-b1e3dcccafe2",
@@ -535,6 +535,6 @@
   },
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2025-12-22T08:25:16.000Z",
-  "versionId": "f5343ad8-922f-486c-a554-a53d5890bbc3"
+  "updatedAt": "2025-12-27T12:17:07.000Z",
+  "versionId": "e8be9a38-fed7-4ac5-a9fa-74c9babc942b"
 }
