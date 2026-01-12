@@ -1,0 +1,274 @@
+{
+  "active": false,
+  "connections": {
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Code (Preparador)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code (Preparador)": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge Recolector",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Merge Recolector",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge Recolector": {
+      "main": [
+        [
+          {
+            "node": "Resumen Final",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-01-03T10:12:59.518Z",
+  "id": "IzwlNjQAbu9RNfOD",
+  "isArchived": false,
+  "meta": null,
+  "name": "Reporte Diciembre Shopify - Final",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1504,
+        128
+      ],
+      "id": "091acd36-346c-4272-87ab-2a8dcd5c28f0",
+      "name": "Manual Trigger"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "url-init",
+              "name": "url_proxima",
+              "value": "https://rulesshop.myshopify.com/admin/api/2025-01/orders.json?limit=250&status=any&created_at_min=2025-12-01T00:00:00Z&created_at_max=2025-12-31T23:59:59Z&fields=id,name,total_price,user_id",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1328,
+        128
+      ],
+      "id": "4a3ec4d1-95a5-4829-923b-6899448474b6",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url_proxima }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -1120,
+        128
+      ],
+      "id": "f24d1b3d-ef96-4ba4-9976-14c347419729",
+      "name": "HTTP Request",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "Rules"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "return {\n  pedidos: $json.body.orders,\n  link_paginacion: $json.headers.link\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -928,
+        128
+      ],
+      "id": "6f61b57d-72c8-4610-82e9-6984c373f344",
+      "name": "Code (Preparador)"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "cond-next",
+              "leftValue": "={{ $json.link_paginacion }}",
+              "rightValue": "next",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -720,
+        128
+      ],
+      "id": "53ee4e39-b5c0-41fa-b9c9-d2b81d9c1822",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "url-next",
+              "name": "url_proxima",
+              "value": "={{ $json.link_paginacion.match(/<([^>]+)>;\\s*rel=\"next\"/)[1] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -576,
+        -32
+      ],
+      "id": "c1d6548f-4cc6-4c6c-b02a-72967deeec6f",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        -480,
+        224
+      ],
+      "id": "6d5d6050-d208-420e-8e61-ff0fa292b463",
+      "name": "Merge Recolector"
+    },
+    {
+      "parameters": {
+        "jsCode": "const resumen = {};\nconst todasLasPaginas = $input.all();\nconst listaTotal = [];\n\n// 1. Aplanamos la lista\nfor (const pagina of todasLasPaginas) {\n  const pedidos = pagina.json.pedidos || [];\n  for (const p of pedidos) {\n    listaTotal.push(p);\n  }\n}\n\n// 2. Sumamos por Vendedor\nfor (const pedido of listaTotal) {\n  const id = pedido.user_id ? pedido.user_id.toString() : \"Venta Web\";\n  const total = parseFloat(pedido.total_price) || 0;\n\n  if (!resumen[id]) {\n    resumen[id] = { \n       id_vendedor: id, \n       total_facturado: 0, \n       pedidos: 0 \n    };\n  }\n  resumen[id].total_facturado += total;\n  resumen[id].pedidos += 1;\n}\n\nreturn Object.values(resumen).sort((a, b) => b.total_facturado - a.total_facturado);"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -304,
+        240
+      ],
+      "id": "03a5c7ea-3fbc-47a3-bec9-54175ca91d7f",
+      "name": "Resumen Final"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-01-03T10:12:59.526Z",
+      "createdAt": "2026-01-03T10:12:59.526Z",
+      "role": "workflow:owner",
+      "workflowId": "IzwlNjQAbu9RNfOD",
+      "projectId": "x5UZcmGQw2OWHuXb"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2026-01-05T08:54:37.000Z",
+  "versionId": "c0a9cce5-964d-453a-a79b-3c412d5c1526"
+}
