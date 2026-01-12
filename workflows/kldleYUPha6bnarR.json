@@ -141,7 +141,7 @@
       "main": [
         [
           {
-            "node": "obtener contador",
+            "node": "Code in JavaScript3",
             "type": "main",
             "index": 0
           }
@@ -172,13 +172,7 @@
     },
     "Facebook Graph API1": {
       "main": [
-        [
-          {
-            "node": "If2",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "HTTP Request3": {
@@ -309,36 +303,29 @@
       "main": [
         [
           {
-            "node": "obtener id documento",
+            "node": "Sort",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "obtener id documento": {
+    "Code in JavaScript3": {
+      "main": [
+        [
+          {
+            "node": "obtener contador",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sort": {
       "main": [
         [
           {
             "node": "HTTP Request",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "If2": {
-      "main": [
-        [
-          {
-            "node": "Update row(s)1",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Update row(s)",
             "type": "main",
             "index": 0
           }
@@ -368,7 +355,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1216,
+        1408,
         -240
       ],
       "id": "bfba9031-2760-4a1e-9cd5-df0d4919a417",
@@ -382,7 +369,7 @@
     },
     {
       "parameters": {
-        "url": "=https://api.canva.com/rest/v1/autofills/{{ $json.job.id }}",
+        "url": "=https://api.canva.com/rest/v1/autofills/{{ $('HTTP Request').item.json.job.id }}",
         "authentication": "genericCredentialType",
         "genericAuthType": "oAuth2Api",
         "options": {}
@@ -390,7 +377,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1616,
+        1904,
         -240
       ],
       "id": "729b74ec-4d44-4bd9-8516-730063fdba90",
@@ -633,12 +620,13 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        1408,
+        1680,
         -240
       ],
       "id": "e8490937-5403-45fc-8fb8-970aac8b0f7e",
       "name": "Wait",
-      "webhookId": "32c288d1-b381-45c0-8e20-ea1349a9fa27"
+      "webhookId": "32c288d1-b381-45c0-8e20-ea1349a9fa27",
+      "executeOnce": true
     },
     {
       "parameters": {
@@ -748,7 +736,7 @@
     {
       "parameters": {
         "content": "POST a Canva",
-        "height": 272,
+        "height": 288,
         "width": 1072,
         "color": 4
       },
@@ -790,7 +778,7 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        2944,
+        3152,
         -256
       ],
       "id": "d4025cc9-6c98-422b-a3b5-2ec8c749dca2",
@@ -815,7 +803,7 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        3760,
+        3968,
         -272
       ],
       "id": "0b16b58e-3d0c-40cb-a45f-56b2b26b7aa6",
@@ -846,7 +834,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        3152,
+        3360,
         -256
       ],
       "id": "b9af122c-db1b-4494-82a7-6a53c5d1eda2",
@@ -885,7 +873,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        2528,
+        2736,
         -240
       ],
       "id": "3fb5a534-5647-4843-ac96-eb1ee952f4b0",
@@ -905,7 +893,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1840,
+        2080,
         -240
       ],
       "id": "d24b002e-fc13-4491-b93a-994c8aeb1a3a",
@@ -927,7 +915,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2720,
+        2928,
         -256
       ],
       "id": "3f4262e7-ed25-44b5-be82-426a1e9886f3",
@@ -946,7 +934,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        2320,
+        2528,
         -240
       ],
       "id": "dbfc385a-22e3-4956-9b30-f054aff2c41e",
@@ -963,7 +951,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2112,
+        2320,
         -240
       ],
       "id": "c14866f1-4a73-4932-9d82-f8fc2926f102",
@@ -980,7 +968,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        3360,
+        3568,
         -256
       ],
       "id": "a35d6451-c070-4e53-a18e-3afb7223e2e1",
@@ -1014,7 +1002,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        3568,
+        3744,
         -256
       ],
       "id": "b062251a-6073-49c6-ba8c-ccd3a1d7c43b",
@@ -1040,7 +1028,7 @@
       "parameters": {
         "content": "SUBIDA HISTORIA\n",
         "height": 288,
-        "width": 1200,
+        "width": 1440,
         "color": 6
       },
       "type": "n8n-nodes-base.stickyNote",
@@ -1057,8 +1045,7 @@
         "rule": {
           "interval": [
             {
-              "field": "cronExpression",
-              "expression": "45 2 * * *"
+              "field": "minutes"
             }
           ]
         }
@@ -1066,7 +1053,7 @@
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.3,
       "position": [
-        -1120,
+        -1136,
         -256
       ],
       "id": "8df0b3b7-32c1-4c86-8cbb-007eeaf1b049",
@@ -1098,93 +1085,8 @@
         "filters": {
           "conditions": [
             {
-              "keyValue": "5"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.dataTable",
-      "typeVersion": 1,
-      "position": [
-        816,
-        -240
-      ],
-      "id": "f7df0692-0ef4-4964-921d-0180091d69d5",
-      "name": "obtener contador"
-    },
-    {
-      "parameters": {
-        "operation": "update",
-        "dataTableId": {
-          "__rl": true,
-          "value": "AD0QThH3qyX9numR",
-          "mode": "list",
-          "cachedResultName": "Plantillas Canva",
-          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/AD0QThH3qyX9numR"
-        },
-        "filters": {
-          "conditions": [
-            {
-              "keyValue": "5"
-            }
-          ]
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "contador": "={{ $('obtener contador').item.json.contador + 1}}"
-          },
-          "matchingColumns": [],
-          "schema": [
-            {
-              "id": "id_documento",
-              "displayName": "id_documento",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "readOnly": false,
-              "removed": false
-            },
-            {
-              "id": "contador",
-              "displayName": "contador",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "number",
-              "readOnly": false,
-              "removed": false
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.dataTable",
-      "typeVersion": 1,
-      "position": [
-        4208,
-        -176
-      ],
-      "id": "e51557e8-deb7-43be-9aae-0d47c1671a37",
-      "name": "Update row(s)"
-    },
-    {
-      "parameters": {
-        "operation": "get",
-        "dataTableId": {
-          "__rl": true,
-          "value": "AD0QThH3qyX9numR",
-          "mode": "list",
-          "cachedResultName": "Plantillas Canva",
-          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/AD0QThH3qyX9numR"
-        },
-        "filters": {
-          "conditions": [
-            {
-              "keyValue": "={{ $json.contador }}"
+              "keyName": "Nombre_Documento",
+              "keyValue": "={{ $json.estado_simple }}"
             }
           ]
         }
@@ -1195,100 +1097,35 @@
         1040,
         -240
       ],
-      "id": "b5c6592a-6fe1-459c-8758-a3d2f6d4325c",
-      "name": "obtener id documento"
+      "id": "f7df0692-0ef4-4964-921d-0180091d69d5",
+      "name": "obtener contador",
+      "executeOnce": false
     },
     {
       "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 2
-          },
-          "conditions": [
-            {
-              "id": "eb25e3cc-d34e-4f71-b49a-8d7c9085c311",
-              "leftValue": "={{ $('obtener contador').item.json.contador }}",
-              "rightValue": 4,
-              "operator": {
-                "type": "number",
-                "operation": "equals"
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
+        "jsCode": "// Iteramos sobre todos los elementos que entran al nodo\nreturn $input.all().map(item => {\n  // Obtenemos el valor actual, asegurando que existe y pasándolo a mayúsculas\n  const estadoOriginal = (item.json.estadogeneral || \"\").toUpperCase();\n  \n  let estadoFinal = \"NUBOSO\"; // Valor por defecto (fallback)\n\n  // Lógica de mapeo\n  if (estadoOriginal.includes(\"NEVANDO\")) {\n    estadoFinal = \"NEVANDO\";\n  } \n  else if (estadoOriginal === \"DESPEJADO\") {\n    estadoFinal = \"DESPEJADO\";\n  } \n  else if (estadoOriginal === \"POCO NUBOSO\") {\n    // Asignamos 'SOLEADO' a 'POCO NUBOSO' ya que es la mejor coincidencia\n    estadoFinal = \"SOLEADO\";\n  } \n  else {\n    // Aquí caerán: \"NUBOSO\", \"MUY NUBOSO\", \"CUBIERTO\", \n    // \"CUBIERTO PARCIAL\" y \"NUBOSO PARCIAL\"\n    estadoFinal = \"NUBOSO\";\n  }\n\n  // Escribimos el resultado en el JSON. \n  // Nota: He creado un campo nuevo 'estado_simple' para no borrar el original,\n  // pero puedes cambiarlo a 'item.json.estadogeneral' si prefieres sobreescribirlo.\n  item.json.estado_simple = estadoFinal;\n\n  return item;\n});"
       },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.2,
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
       "position": [
-        3968,
-        -272
+        848,
+        -240
       ],
-      "id": "324d0d96-f459-4f94-b3ce-20219db990f5",
-      "name": "If2"
+      "id": "3da29849-1121-4a7c-afa3-7dd0820ef659",
+      "name": "Code in JavaScript3"
     },
     {
       "parameters": {
-        "operation": "update",
-        "dataTableId": {
-          "__rl": true,
-          "value": "AD0QThH3qyX9numR",
-          "mode": "list",
-          "cachedResultName": "Plantillas Canva",
-          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/AD0QThH3qyX9numR"
-        },
-        "filters": {
-          "conditions": [
-            {
-              "keyValue": "5"
-            }
-          ]
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "contador": "=1"
-          },
-          "matchingColumns": [],
-          "schema": [
-            {
-              "id": "id_documento",
-              "displayName": "id_documento",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "readOnly": false,
-              "removed": false
-            },
-            {
-              "id": "contador",
-              "displayName": "contador",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "number",
-              "readOnly": false,
-              "removed": false
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        },
-        "options": {}
+        "type": "random"
       },
-      "type": "n8n-nodes-base.dataTable",
+      "type": "n8n-nodes-base.sort",
       "typeVersion": 1,
       "position": [
-        4208,
-        -368
+        1216,
+        -240
       ],
-      "id": "94cd4828-f6b5-4ce2-8a58-2b296800bda0",
-      "name": "Update row(s)1"
+      "id": "406fd0ba-2d05-46b3-834e-66d722f684d9",
+      "name": "Sort"
     }
   ],
   "pinData": {},
@@ -1307,10 +1144,13 @@
   "staticData": {
     "node:Schedule Trigger": {
       "recurrenceRules": []
+    },
+    "node:Schedule Trigger1": {
+      "recurrenceRules": []
     }
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-12-24T10:48:57.000Z",
-  "versionId": "f80fac1a-3d3e-41ed-bdc2-66f9defad2bd"
+  "updatedAt": "2026-01-12T07:51:26.000Z",
+  "versionId": "994cee73-9a7f-4c3e-a637-c6a862ba7631"
 }
