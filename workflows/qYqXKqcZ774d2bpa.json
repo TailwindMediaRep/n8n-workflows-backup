@@ -142,7 +142,7 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -960,
+        -912,
         -48
       ],
       "id": "2a09d9fa-748a-41ca-abc8-1b35a8edeeaa",
@@ -636,6 +636,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-12-20T08:22:54.000Z",
-  "versionId": "17b64832-a9ae-4086-b6ea-61ad60f82941"
+  "updatedAt": "2026-01-12T07:50:29.000Z",
+  "versionId": "95acecad-e738-4cae-b541-b86069d9844a"
 }
