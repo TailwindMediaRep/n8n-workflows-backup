@@ -497,7 +497,7 @@
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "Transferencias Shopify",
+  "name": "SincronizarStockTiendas",
   "nodes": [
     {
       "parameters": {
@@ -1532,7 +1532,8 @@
           "id": "43APInvySPEk52UF",
           "name": "Surfin"
         }
-      }
+      },
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
@@ -1554,7 +1555,8 @@
           "id": "OPt2Cl0dnwcU4qRk",
           "name": "Rules"
         }
-      }
+      },
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
@@ -1576,7 +1578,8 @@
           "id": "36bBHEvkvYhxPhfA",
           "name": "Nuance"
         }
-      }
+      },
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
@@ -2068,6 +2071,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2025-12-27T13:06:57.000Z",
-  "versionId": "0910e641-06d6-4c0b-b1c5-4ec48016c537"
+  "updatedAt": "2025-12-29T08:40:02.000Z",
+  "versionId": "0f95dc13-8da9-4a90-ab18-8cfe2653b04e"
 }
