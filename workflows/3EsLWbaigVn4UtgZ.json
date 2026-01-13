@@ -87,7 +87,24 @@
     },
     "Coincidencias con Shopify1": {
       "main": [
-        []
+        [
+          {
+            "node": "Existe en Shopify",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Existe en Shopify": {
+      "main": [
+        [
+          {
+            "node": "Quitar etiqueta del Cliente",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
   },
@@ -315,11 +332,33 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        752,
+        784,
         -320
       ],
       "id": "57315a37-61f5-45f4-a00b-3b421f1c9949",
-      "name": "No existe en Shopify1"
+      "name": "Existe en Shopify"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
+        "query": "mutation removeEmployeeTag($id: ID!, $tags: [String!]!) {\n  tagsRemove(id: $id, tags: $tags) {\n    node {\n      id\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
+        "variables": "={\n  \"id\": \"{{ $json.shopify_id }}\",\n  \"tags\": [\"Empleado\"]\n}"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        1136,
+        -320
+      ],
+      "id": "be5c8642-9b62-4589-9d97-673f7bc77f50",
+      "name": "Quitar etiqueta del Cliente",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "Rules"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -342,6 +381,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-01-12T08:50:42.000Z",
-  "versionId": "6ed7e1dd-39f0-41ab-9f83-23b6605e6944"
+  "updatedAt": "2026-01-12T09:20:12.000Z",
+  "versionId": "6b743954-f0db-44bd-838b-3dfaf77584e3"
 }
