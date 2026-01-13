@@ -1,5 +1,5 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
     "HTTP Request": {
       "main": [
@@ -616,9 +616,7 @@
       "name": "zonas abiertas"
     },
     {
-      "parameters": {
-        "path": "8cce73b4-0a6e-4db3-b503-1267489be04b"
-      },
+      "parameters": {},
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
@@ -787,8 +785,8 @@
       "name": "Facebook Graph API",
       "credentials": {
         "facebookGraphApi": {
-          "id": "F7VbX8jWKCXdAM47",
-          "name": "Facebook Graph account"
+          "id": "xJc4LGSUQcLpNlqs",
+          "name": "Facebook Graph Account SNG"
         }
       }
     },
@@ -812,8 +810,8 @@
       "name": "Facebook Graph API1",
       "credentials": {
         "facebookGraphApi": {
-          "id": "F7VbX8jWKCXdAM47",
-          "name": "Facebook Graph account"
+          "id": "xJc4LGSUQcLpNlqs",
+          "name": "Facebook Graph Account SNG"
         }
       }
     },
@@ -843,8 +841,8 @@
       "name": "HTTP Request3",
       "credentials": {
         "facebookGraphApi": {
-          "id": "F7VbX8jWKCXdAM47",
-          "name": "Facebook Graph account"
+          "id": "xJc4LGSUQcLpNlqs",
+          "name": "Facebook Graph Account SNG"
         }
       }
     },
@@ -931,8 +929,7 @@
     },
     {
       "parameters": {
-        "amount": 10,
-        "path": "82707f0f-e107-4b71-9887-ad1255db0d8d"
+        "amount": 10
       },
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
@@ -967,9 +964,7 @@
       }
     },
     {
-      "parameters": {
-        "path": "4e9e9bda-286b-4bd6-b112-9133762c2724"
-      },
+      "parameters": {},
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
@@ -1157,6 +1152,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-01-05T20:47:05.000Z",
-  "versionId": "9e039a72-4059-4f6b-93f4-03d6b406420f"
+  "updatedAt": "2026-01-12T13:03:15.000Z",
+  "versionId": "72f2b63a-1868-45f3-b5ca-32573a39a2cc"
 }
