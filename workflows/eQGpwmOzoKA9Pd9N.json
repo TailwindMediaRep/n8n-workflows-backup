@@ -769,7 +769,7 @@
       "parameters": {
         "httpRequestMethod": "POST",
         "graphApiVersion": "v23.0",
-        "node": "17841470046184468",
+        "node": "17841407565799162",
         "edge": "=media",
         "options": {
           "queryParametersJson": "={\n\"video_url\": \"{{ $json.job.urls[0] }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
@@ -794,7 +794,7 @@
       "parameters": {
         "httpRequestMethod": "POST",
         "graphApiVersion": "v23.0",
-        "node": "17841470046184468",
+        "node": "17841407565799162",
         "edge": "media_publish",
         "options": {
           "queryParametersJson": "={\n  \"creation_id\": \"{{$json.id}}\"\n}"
@@ -1152,6 +1152,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-01-12T13:03:15.000Z",
-  "versionId": "72f2b63a-1868-45f3-b5ca-32573a39a2cc"
+  "updatedAt": "2026-01-13T11:26:28.000Z",
+  "versionId": "6363412a-614c-47fd-8c9f-aac21e98c424"
 }
