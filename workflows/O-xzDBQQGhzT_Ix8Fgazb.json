@@ -1,0 +1,114 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "GraphQL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GraphQL": {
+      "main": [
+        [
+          {
+            "node": "Get row(s)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-01-14T08:09:23.972Z",
+  "id": "O-xzDBQQGhzT_Ix8Fgazb",
+  "isArchived": false,
+  "meta": null,
+  "name": "Transferencias",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "transferenciasn8n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "c7323e81-ab99-4f71-92e4-a06315bf9564",
+      "name": "Webhook",
+      "webhookId": "7929398a-230d-402b-8dcf-ffbcda973cea"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://nuance-store-spain.myshopify.com/admin/api/2025-10/graphql.json",
+        "query": "query getTransferDetails($id: ID!) {\n  node(id: $id) {\n    ... on InventoryTransfer {\n      id\n      status\n      dateCreated\n      origin {\n        location {\n          name\n        }\n      }\n      destination {\n        location {\n          name\n        }\n      }\n      lineItems(first: 50) {\n        nodes {\n          totalQuantity\n          inventoryItem {\n            id\n            variant {\n              id\n              sku\n              title\n              product {\n                title\n                featuredImage {\n                  url\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}",
+        "variables": "={\n  \"id\": \"{{ $json.body[0].data.node.id }}\"\n}"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "eab194e4-dfd3-4d45-836e-d075afdd8331",
+      "name": "GraphQL"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "xPjOMLaJ5cFSqmvs",
+          "mode": "list",
+          "cachedResultName": "id_locations",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/xPjOMLaJ5cFSqmvs"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "3"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1,
+      "position": [
+        416,
+        0
+      ],
+      "id": "d4fade51-e834-4a2b-bfdd-dafb6b694029",
+      "name": "Get row(s)"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-01-14T08:09:23.978Z",
+      "createdAt": "2026-01-14T08:09:23.978Z",
+      "role": "workflow:owner",
+      "workflowId": "O-xzDBQQGhzT_Ix8Fgazb",
+      "projectId": "x5UZcmGQw2OWHuXb"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2026-01-15T08:01:24.337Z",
+  "versionId": "9c6697eb-101c-4e48-9ae6-f1472399d144"
+}
