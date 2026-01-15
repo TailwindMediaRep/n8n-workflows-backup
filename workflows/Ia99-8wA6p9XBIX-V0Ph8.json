@@ -1,0 +1,4138 @@
+{
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-01-15T07:59:14.000Z",
+    "createdAt": "2026-01-14T11:59:05.304Z",
+    "versionId": "c8f3c11a-43af-4def-b39a-4b076f0c1251",
+    "workflowId": "Ia99-8wA6p9XBIX-V0Ph8",
+    "nodes": [
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "bf2e92f4-f1c3-4881-bc32-1b46d76b6086",
+                "name": "product_variant",
+                "value": "=gid://shopify/ProductVariant/{{ $json.body.line_items[0].variant_id }}",
+                "type": "string"
+              },
+              {
+                "id": "5e4eb1fc-5dca-4006-b82d-87bcb35d0e91",
+                "name": "location_id",
+                "value": "={{ $json.body.location_id }}",
+                "type": "number"
+              },
+              {
+                "id": "c41bdb67-f5a4-4578-8cc8-71429dd293f1",
+                "name": "shop_domain",
+                "value": "={{ $json.headers['x-shopify-shop-domain'] }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          80,
+          704
+        ],
+        "id": "2534bc1b-d887-4530-9681-4c6ef5a774c4",
+        "name": "Edit Fields"
+      },
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "transferencia",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -144,
+          704
+        ],
+        "id": "b84e72ef-3a94-4280-be07-46c7c3adbc36",
+        "name": "Webhook",
+        "webhookId": "b3cfca99-ff48-4fda-9f50-b635c09e5cdc"
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
+          "query": "=query {\n  inventoryItem(id: \"{{ $('GraphQL13').item.json.data.productVariant.inventoryItem.id }}\") {\n    variant {\n      # Datos de la Variante específica que cambió\n      id\n      title\n      sku\n      price\n      barcode\n      \n      # Datos del Producto Padre\n      product {\n        id\n        title\n        handle # Útil para construir la URL\n        descriptionHtml # La descripción completa con formato\n        vendor\n        productType\n        tags\n        status # (ACTIVE, ARCHIVED, DRAFT)\n        \n        # Imagen principal\n        featuredImage {\n          url\n        }\n        \n        # Todas las imágenes del producto (hasta 10)\n        images(first: 10) {\n          nodes {\n            url\n            altText\n          }\n        }\n        \n        # Opciones (ej: Talla, Color) y sus valores disponibles\n        options {\n          name\n          values\n        }\n      }\n    }\n  }\n}",
+          "headerParametersUi": {
+            "parameter": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          976,
+          512
+        ],
+        "id": "92a88ad7-3f6d-47c8-97b7-76439a662626",
+        "name": "GraphQL1",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        },
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "e6010df5-c69d-4e17-aea5-036428c73124",
+                "leftValue": "={{ $json.data.productVariants.edges }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "array",
+                  "operation": "notEmpty",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          2544,
+          1088
+        ],
+        "id": "da30b497-b420-4552-b431-5e4421f624cc",
+        "name": "If1"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          2768,
+          1184
+        ],
+        "id": "b851802e-8e4a-4646-8b2c-f8619644180a",
+        "name": "No Operation, do nothing1"
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://nuance-store-spain.myshopify.com/admin/api/2025-10/graphql.json",
+          "query": "=query GetInventoryForVariant($variantId: ID!) {\n  productVariant(id: $variantId) {\n    id\n    title\n    inventoryItem {\n      id\n      inventoryLevels(first: 10) {\n        edges {\n          node {\n            id\n            location {\n              id\n              name\n            }\n            quantities(names: [\"available\"]) {\n              name\n              quantity\n            }\n          }\n        }\n      }\n    }\n  }\n}\n",
+          "variables": "={\n  \"variantId\": \"{{ $('nuance').item.json.data.productVariants.edges[0].node.id }}\"\n}\n"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          3440,
+          992
+        ],
+        "id": "a938fb4e-9733-4042-8737-fe0cff2f7475",
+        "name": "GraphQL5",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://nuance-store-spain.myshopify.com/admin/api/2025-10/graphql.json",
+          "query": "=mutation {\n  inventorySetQuantities(\n    input: {\n      name: \"available\"\n      reason: \"correction\"\n      ignoreCompareQuantity: true\n      quantities: [\n        {\n          inventoryItemId: \"{{ $('GraphQL4').item.json.data.productVariant.inventoryItem.id }}\"\n          locationId: \"{{ $('Filtrar Sucursal').item.json.locationId }}\"\n          quantity: {{ $('datosFinales').item.json.available }}\n        }\n      ]\n    }\n  ) {\n    inventoryAdjustmentGroup {\n      changes {\n        name\n        delta\n        quantityAfterChange\n      }\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}\n",
+          "variables": "="
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          3664,
+          992
+        ],
+        "id": "e7d7a800-5e56-4906-97f1-ef145c5ee919",
+        "name": "GraphQL6",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://nuance-store-spain.myshopify.com/admin/api/2025-10/graphql.json",
+          "query": "query ProductBySKU($sku: String!) {\n  productVariants(first: 1, query: $sku) {\n    edges {\n      node {\n        id\n        title\n        sku\n        price\n        barcode\n        product {\n          id\n          title\n          handle\n          vendor\n          productType\n          status\n          featuredImage {\n            url\n          }\n          options {\n            name\n            values\n          }\n        }\n      }\n    }\n  }\n}\n",
+          "variables": "={\n  \"sku\": \"{{ $json.sku }}\"\n}\n"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          2320,
+          1088
+        ],
+        "id": "89a3ff45-a283-48b9-8389-5a542e182922",
+        "name": "nuance",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://nuance-store-spain.myshopify.com/admin/api/2025-10/graphql.json",
+          "query": "=query getAllLocations {\n  locations(first: 50) {\n    edges {\n      node {\n        name\n        id\n      }\n    }\n  }\n}",
+          "variables": "="
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          2992,
+          992
+        ],
+        "id": "c81b8215-72ee-454d-9257-60d9611a7d15",
+        "name": "sucursalesNuance",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://nuance-store-spain.myshopify.com/admin/api/2025-10/graphql.json",
+          "query": "=query {\n  productVariant(id: \"{{ $json.data.productVariants.edges[0].node.id }}\") {\n    id\n    inventoryItem {\n      id\n    }\n  }\n}",
+          "variables": "="
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          2768,
+          992
+        ],
+        "id": "cdb9dbbf-97d6-4624-8b89-a6469e1e3045",
+        "name": "GraphQL4",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
+          "query": "query getBranchName($id: ID!) {\n  location(id: $id) {\n    name\n    id\n  }\n}",
+          "variables": "={\n  \"id\": \"gid://shopify/Location/{{ $('Edit Fields').item.json.location_id }}\"\n}",
+          "operationName": "="
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          752,
+          512
+        ],
+        "id": "b770a93c-76c4-4a49-8e9b-3c9e3f8ea354",
+        "name": "ObtenerSucursal",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "// 1. Traemos el nombre de la sucursal origen desde el nodo \"ObtenerSucursal\"\n// Usamos el selector $('NombreNodo') para ir atrás en el tiempo\nconst targetName = $('datosFinales').first().json.location_name;\n\n// 2. Traemos la lista de sucursales destino del nodo anterior inmediato\nconst locations = items[0].json.data.locations.edges;\n\n// 3. Buscamos la sucursal cuyo nombre sea idéntico\nconst found = locations.find(loc => loc.node.name === targetName);\n\n// 4. Retornamos el resultado\nif (found) {\n  return [\n    {\n      json: {\n        locationId: found.node.id,\n        matchedName: targetName\n      }\n    }\n  ];\n} else {\n  // Es buena práctica retornar algo visible si falla para depurar\n  return [\n    {\n      json: {\n        error: \"Sucursal no encontrada\",\n        buscaba: targetName\n      }\n    }\n  ];\n}"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          3216,
+          992
+        ],
+        "id": "26723503-e508-436a-b11a-7b66443f23f0",
+        "name": "Filtrar Sucursal"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "e6010df5-c69d-4e17-aea5-036428c73124",
+                "leftValue": "={{ $json.data.productVariants.edges }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "array",
+                  "operation": "notEmpty",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          2544,
+          704
+        ],
+        "id": "18b4c69c-a71d-4363-8c94-bf47913492d2",
+        "name": "If"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          2768,
+          800
+        ],
+        "id": "9d6a2bd4-aebc-46b3-87df-0d791a198c98",
+        "name": "No Operation, do nothing"
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://surfin-shop.myshopify.com/admin/api/2025-10/graphql.json",
+          "query": "=query GetInventoryForVariant($variantId: ID!) {\n  productVariant(id: $variantId) {\n    id\n    title\n    inventoryItem {\n      id\n      inventoryLevels(first: 10) {\n        edges {\n          node {\n            id\n            location {\n              id\n              name\n            }\n            quantities(names: [\"available\"]) {\n              name\n              quantity\n            }\n          }\n        }\n      }\n    }\n  }\n}\n",
+          "variables": "={\n  \"variantId\": \"{{ $('surfin').item.json.data.productVariants.edges[0].node.id }}\"\n}\n"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          3440,
+          608
+        ],
+        "id": "524f17d5-6c7a-471d-b4f5-463af2961bdf",
+        "name": "GraphQL",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://surfin-shop.myshopify.com/admin/api/2025-10/graphql.json",
+          "query": "=mutation {\n  inventorySetQuantities(\n    input: {\n      name: \"available\"\n      reason: \"correction\"\n      ignoreCompareQuantity: true\n      quantities: [\n        {\n          inventoryItemId: \"{{ $('GraphQL8').item.json.data.productVariant.inventoryItem.id }}\"\n          locationId: \"{{ $('Filtrar Sucursal1').item.json.locationId }}\"\n          quantity: {{ $('datosFinales').item.json.available }}\n        }\n      ]\n    }\n  ) {\n    inventoryAdjustmentGroup {\n      changes {\n        name\n        delta\n        quantityAfterChange\n      }\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}\n",
+          "variables": "="
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          3664,
+          608
+        ],
+        "id": "5864ed03-aca0-472c-b40c-90d4938061e2",
+        "name": "GraphQL7",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://surfin-shop.myshopify.com/admin/api/2025-10/graphql.json",
+          "query": "=query {\n  productVariant(id: \"{{ $json.data.productVariants.edges[0].node.id }}\") {\n    id\n    inventoryItem {\n      id\n    }\n  }\n}",
+          "variables": "="
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          2768,
+          608
+        ],
+        "id": "4ddd2530-6a5b-484c-80ac-f26f8fc42c94",
+        "name": "GraphQL8",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "// 1. Traemos el nombre de la sucursal origen desde el nodo \"ObtenerSucursal\"\n// Usamos el selector $('NombreNodo') para ir atrás en el tiempo\nconst targetName = $('datosFinales').first().json.location_name;\n\n// 2. Traemos la lista de sucursales destino del nodo anterior inmediato\nconst locations = items[0].json.data.locations.edges;\n\n// 3. Buscamos la sucursal cuyo nombre sea idéntico\nconst found = locations.find(loc => loc.node.name === targetName);\n\n// 4. Retornamos el resultado\nif (found) {\n  return [\n    {\n      json: {\n        locationId: found.node.id,\n        matchedName: targetName\n      }\n    }\n  ];\n} else {\n  // Es buena práctica retornar algo visible si falla para depurar\n  return [\n    {\n      json: {\n        error: \"Sucursal no encontrada\",\n        buscaba: targetName\n      }\n    }\n  ];\n}"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          3216,
+          608
+        ],
+        "id": "76a23564-2324-4022-a28f-6d7c073c097b",
+        "name": "Filtrar Sucursal1"
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://surfin-shop.myshopify.com/admin/api/2025-10/graphql.json",
+          "query": "query ProductBySKU($sku: String!) {\n  productVariants(first: 1, query: $sku) {\n    edges {\n      node {\n        id\n        title\n        sku\n        price\n        barcode\n        product {\n          id\n          title\n          handle\n          vendor\n          productType\n          status\n          featuredImage {\n            url\n          }\n          options {\n            name\n            values\n          }\n        }\n      }\n    }\n  }\n}\n",
+          "variables": "={\n  \"sku\": \"{{ $json.sku }}\"\n}\n"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          2320,
+          704
+        ],
+        "id": "2dd6036d-47b8-4e0c-be7f-b2b4b0389c4f",
+        "name": "surfin",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://surfin-shop.myshopify.com/admin/api/2025-10/graphql.json",
+          "query": "=query getAllLocations {\n  locations(first: 50) {\n    edges {\n      node {\n        name\n        id\n      }\n    }\n  }\n}",
+          "variables": "="
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          2992,
+          608
+        ],
+        "id": "45139b74-9d6d-44f6-8e0f-c4f3be4239a8",
+        "name": "sucursalesSurfin",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "e6010df5-c69d-4e17-aea5-036428c73124",
+                "leftValue": "={{ $json.data.productVariants.edges }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "array",
+                  "operation": "notEmpty",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          2544,
+          320
+        ],
+        "id": "125651f8-00f6-4939-9d87-3c6fcaa32368",
+        "name": "If2"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          2768,
+          416
+        ],
+        "id": "4e7cad39-9a16-4935-9a20-9bffaaedf3cf",
+        "name": "No Operation, do nothing2"
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
+          "query": "=query GetInventoryForVariant($variantId: ID!) {\n  productVariant(id: $variantId) {\n    id\n    title\n    inventoryItem {\n      id\n      inventoryLevels(first: 10) {\n        edges {\n          node {\n            id\n            location {\n              id\n              name\n            }\n            quantities(names: [\"available\"]) {\n              name\n              quantity\n            }\n          }\n        }\n      }\n    }\n  }\n}\n",
+          "variables": "={\n  \"variantId\": \"{{ $('rules').item.json.data.productVariants.edges[0].node.id }}\"\n}\n"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          3440,
+          224
+        ],
+        "id": "b4fa1a8a-5ce3-4c3c-8b56-40363cbe5e5b",
+        "name": "GraphQL2",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
+          "query": "=mutation {\n  inventorySetQuantities(\n    input: {\n      name: \"available\"\n      reason: \"correction\"\n      ignoreCompareQuantity: true\n      quantities: [\n        {\n          inventoryItemId: \"{{ $('GraphQL10').item.json.data.productVariant.inventoryItem.id }}\"\n          locationId: \"{{ $('Filtrar Sucursal2').item.json.locationId }}\"\n          quantity: {{ $('datosFinales').item.json.available }}\n        }\n      ]\n    }\n  ) {\n    inventoryAdjustmentGroup {\n      changes {\n        name\n        delta\n        quantityAfterChange\n      }\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}\n",
+          "variables": "="
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          3664,
+          224
+        ],
+        "id": "e70ff783-c802-4e4e-bada-cc0824a0b3de",
+        "name": "GraphQL9",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
+          "query": "=query {\n  productVariant(id: \"{{ $json.data.productVariants.edges[0].node.id }}\") {\n    id\n    inventoryItem {\n      id\n    }\n  }\n}",
+          "variables": "="
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          2768,
+          224
+        ],
+        "id": "993bb67c-4486-4e48-b316-00270318ca35",
+        "name": "GraphQL10",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "// 1. Traemos el nombre de la sucursal origen desde el nodo \"ObtenerSucursal\"\n// Usamos el selector $('NombreNodo') para ir atrás en el tiempo\nconst targetName = $('datosFinales').first().json.location_name;\n\n// 2. Traemos la lista de sucursales destino del nodo anterior inmediato\nconst locations = items[0].json.data.locations.edges;\n\n// 3. Buscamos la sucursal cuyo nombre sea idéntico\nconst found = locations.find(loc => loc.node.name === targetName);\n\n// 4. Retornamos el resultado\nif (found) {\n  return [\n    {\n      json: {\n        locationId: found.node.id,\n        matchedName: targetName\n      }\n    }\n  ];\n} else {\n  // Es buena práctica retornar algo visible si falla para depurar\n  return [\n    {\n      json: {\n        error: \"Sucursal no encontrada\",\n        buscaba: targetName\n      }\n    }\n  ];\n}"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          3216,
+          224
+        ],
+        "id": "73a7643b-5b3c-49e1-8a56-6c835ca2801c",
+        "name": "Filtrar Sucursal2"
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
+          "query": "query ProductBySKU($sku: String!) {\n  productVariants(first: 1, query: $sku) {\n    edges {\n      node {\n        id\n        title\n        sku\n        price\n        barcode\n        product {\n          id\n          title\n          handle\n          vendor\n          productType\n          status\n          featuredImage {\n            url\n          }\n          options {\n            name\n            values\n          }\n        }\n      }\n    }\n  }\n}\n",
+          "variables": "={\n  \"sku\": \"{{ $json.sku }}\"\n}\n"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          2320,
+          320
+        ],
+        "id": "d4f829f4-6862-4c39-8bc9-e7471e7d4970",
+        "name": "rules",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
+          "query": "=query getAllLocations {\n  locations(first: 50) {\n    edges {\n      node {\n        name\n        id\n      }\n    }\n  }\n}",
+          "variables": "="
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          2992,
+          224
+        ],
+        "id": "0eabf326-4f8d-4436-b8fc-b3a984033c6f",
+        "name": "sucursalesRules",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "rules": {
+            "values": [
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $('Edit Fields').item.json.shop_domain }}",
+                      "rightValue": "surfin-store-spain.myshopify.com",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      },
+                      "id": "47aa9abd-eb33-4242-ad44-0851b86c6884"
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "4a909aab-50e9-455b-a3dc-6cc458e31d6c",
+                      "leftValue": "={{ $('Edit Fields').item.json.shop_domain }}",
+                      "rightValue": "rules-shop-es.myshopify.com",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 2
+                  },
+                  "conditions": [
+                    {
+                      "id": "5722569c-10e9-42c5-bbcc-86e12f09856f",
+                      "leftValue": "={{ $('Edit Fields').item.json.shop_domain }}",
+                      "rightValue": "nuance-store-spain.myshopify.com",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.3,
+        "position": [
+          2096,
+          688
+        ],
+        "id": "45425f40-6bc1-4c88-9cf5-2769d8b13f7d",
+        "name": "Switch"
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "=https://surfin-shop.myshopify.com/admin/api/2025-10/graphql.json",
+          "query": "query getBranchName($id: ID!) {\n  location(id: $id) {\n    name\n    id\n  }\n}",
+          "variables": "={\n  \"id\": \"gid://shopify/Location/{{ $('Edit Fields').item.json.location_id }}\"\n}",
+          "operationName": "="
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          752,
+          704
+        ],
+        "id": "40caed15-c9b0-4d2e-8855-b707bb2cdcc0",
+        "name": "ObtenerSucursal1",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        },
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "=https://nuance-store-spain.myshopify.com/admin/api/2025-10/graphql.json",
+          "query": "query getBranchName($id: ID!) {\n  location(id: $id) {\n    name\n    id\n  }\n}",
+          "variables": "={\n  \"id\": \"gid://shopify/Location/{{ $('Edit Fields').item.json.location_id }}\"\n}",
+          "operationName": "="
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          752,
+          896
+        ],
+        "id": "f3129fee-abe0-4959-81e2-8e600da9fac3",
+        "name": "ObtenerSucursal2",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        },
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "numberInputs": 3
+        },
+        "type": "n8n-nodes-base.merge",
+        "typeVersion": 3.2,
+        "position": [
+          1424,
+          688
+        ],
+        "id": "715150a4-e895-4188-b7a3-5abb8b0fdda0",
+        "name": "Merge"
+      },
+      {
+        "parameters": {
+          "jsCode": "// Filtramos la lista de items que entran al nodo\nreturn items.filter(item => {\n  // Extraemos los valores para mayor claridad\n  const variant = item.json.product_variant;\n  const location = item.json.location_id;\n\n  // Condición: Mantenemos el item solo si AMBOS son distintos de null\n  // (Si prefieres que baste con que uno no sea null, cambia '&&' por '||')\n  return variant !== null && location !== null;\n});"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          1648,
+          704
+        ],
+        "id": "83d35153-7e19-4f8b-8dfe-61b713fd9dd5",
+        "name": "Code in JavaScript1"
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://surfin-shop.myshopify.com/admin/api/2025-10/graphql.json",
+          "query": "=query {\n  inventoryItem(id: \"{{ $('GraphQL12').item.json.data.productVariant.inventoryItem.id }}\") {\n    variant {\n      # Datos de la Variante específica que cambió\n      id\n      title\n      sku\n      price\n      barcode\n      \n      # Datos del Producto Padre\n      product {\n        id\n        title\n        handle # Útil para construir la URL\n        descriptionHtml # La descripción completa con formato\n        vendor\n        productType\n        tags\n        status # (ACTIVE, ARCHIVED, DRAFT)\n        \n        # Imagen principal\n        featuredImage {\n          url\n        }\n        \n        # Todas las imágenes del producto (hasta 10)\n        images(first: 10) {\n          nodes {\n            url\n            altText\n          }\n        }\n        \n        # Opciones (ej: Talla, Color) y sus valores disponibles\n        options {\n          name\n          values\n        }\n      }\n    }\n  }\n}",
+          "headerParametersUi": {
+            "parameter": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          976,
+          704
+        ],
+        "id": "22a70df7-74ba-44b1-83e0-e382f6aa29f2",
+        "name": "GraphQL3",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        },
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://nuance-store-spain.myshopify.com/admin/api/2025-10/graphql.json",
+          "query": "=query {\n  inventoryItem(id: \"g{{ $('GraphQL14').item.json.data.productVariant.inventoryItem.id }}\") {\n    variant {\n      # Datos de la Variante específica que cambió\n      id\n      title\n      sku\n      price\n      barcode\n      \n      # Datos del Producto Padre\n      product {\n        id\n        title\n        handle # Útil para construir la URL\n        descriptionHtml # La descripción completa con formato\n        vendor\n        productType\n        tags\n        status # (ACTIVE, ARCHIVED, DRAFT)\n        \n        # Imagen principal\n        featuredImage {\n          url\n        }\n        \n        # Todas las imágenes del producto (hasta 10)\n        images(first: 10) {\n          nodes {\n            url\n            altText\n          }\n        }\n        \n        # Opciones (ej: Talla, Color) y sus valores disponibles\n        options {\n          name\n          values\n        }\n      }\n    }\n  }\n}",
+          "headerParametersUi": {
+            "parameter": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          976,
+          896
+        ],
+        "id": "238937c4-1e8c-436b-a8f2-2b2b1c85f915",
+        "name": "GraphQL11",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        },
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "73aa9d1a-392a-4e9e-bb66-2538539a1dc8",
+                "name": "product_variant",
+                "value": "={{ $json.data.inventoryItem.variant.id }}",
+                "type": "string"
+              },
+              {
+                "id": "e3fa2762-086f-41f8-bf92-6eba9a1ca596",
+                "name": "location_id",
+                "value": "={{ $('ObtenerSucursal').item.json.data.location.id }}",
+                "type": "string"
+              },
+              {
+                "id": "9a9832f9-5a76-474b-b17d-2eed1dc7d80a",
+                "name": "data.location.name",
+                "value": "={{ $('ObtenerSucursal').item.json.data.location.name }}",
+                "type": "string"
+              },
+              {
+                "id": "8a17e7e9-9ddb-460b-81c2-3ea708bf600b",
+                "name": "sku",
+                "value": "={{ $json.data.inventoryItem.variant.sku }}",
+                "type": "string"
+              },
+              {
+                "id": "819e6564-455c-412f-b098-66d57672db43",
+                "name": "available",
+                "value": "={{ $('Code in JavaScript').item.json.available }}",
+                "type": "number"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1200,
+          512
+        ],
+        "id": "8cdf4f60-be7e-4eb5-a028-6c67a24d8e2a",
+        "name": "Edit Fields1",
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "b6c12529-f254-487b-bef7-8a1c8a744dbc",
+                "name": "product_variant",
+                "value": "={{ $json.data.inventoryItem.variant.id }}",
+                "type": "string"
+              },
+              {
+                "id": "9a49a69b-a376-47de-b8f7-8328bff2752e",
+                "name": "location_id",
+                "value": "={{ $('ObtenerSucursal1').item.json.data.location.id }}",
+                "type": "string"
+              },
+              {
+                "id": "e5ce16da-2e60-4032-b2d0-72bae2a0059b",
+                "name": "data.location.name",
+                "value": "={{ $('ObtenerSucursal1').item.json.data.location.name }}",
+                "type": "string"
+              },
+              {
+                "id": "c2c3d9a0-7816-4ad2-8835-4196b8ac0f44",
+                "name": "sku",
+                "value": "={{ $json.data.inventoryItem.variant.sku }}",
+                "type": "string"
+              },
+              {
+                "id": "8a6dc63e-4e52-47d8-a42d-ed7bf96b4f1a",
+                "name": "available",
+                "value": "={{ $('Code in JavaScript2').item.json.available }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1200,
+          704
+        ],
+        "id": "b62803c6-7786-401d-ba67-0434d9440ecb",
+        "name": "Edit Fields2",
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "695cbe4d-2d85-4b6f-9384-121625c3af2e",
+                "name": "product_variant",
+                "value": "={{ $json.data.inventoryItem.variant.id }}",
+                "type": "string"
+              },
+              {
+                "id": "9526134b-0f92-4945-9989-c8d567da075d",
+                "name": "location_id",
+                "value": "={{ $('ObtenerSucursal2').item.json.data.location.id }}",
+                "type": "string"
+              },
+              {
+                "id": "dbfb5aaa-1fa4-400c-b367-09b5286c8787",
+                "name": "data.location.name",
+                "value": "={{ $('ObtenerSucursal2').item.json.data.location.name }}",
+                "type": "string"
+              },
+              {
+                "id": "e99c21af-d71e-4a8b-82d3-051800cbf6be",
+                "name": "sku",
+                "value": "={{ $json.data.inventoryItem.variant.sku }}",
+                "type": "string"
+              },
+              {
+                "id": "697067f7-4653-4e32-b8db-c36cf96a27e1",
+                "name": "available",
+                "value": "={{ $('Code in JavaScript3').item.json.available }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1200,
+          896
+        ],
+        "id": "c6dea1cc-7765-4185-b7e7-67243e6078c3",
+        "name": "Edit Fields3",
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "98f26b26-0bbc-4b7b-bc9e-7a9c2c0586ac",
+                "name": "product_variant",
+                "value": "={{ $json.product_variant }}",
+                "type": "string"
+              },
+              {
+                "id": "a5ef8806-d539-485c-92e9-b791cbdb2194",
+                "name": "location_id",
+                "value": "={{ $json.location_id }}",
+                "type": "string"
+              },
+              {
+                "id": "5ed642f5-e1b4-4fff-8a55-4a28b548f663",
+                "name": "location_name",
+                "value": "={{ $json.data.location.name }}",
+                "type": "string"
+              },
+              {
+                "id": "31f4424c-8941-47e9-be46-564ea686c9ba",
+                "name": "sku",
+                "value": "={{ $json.sku }}",
+                "type": "string"
+              },
+              {
+                "id": "2ff12d82-a436-44b1-b02e-b0e30686c9bc",
+                "name": "available",
+                "value": "={{ $json.available }}",
+                "type": "number"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1872,
+          704
+        ],
+        "id": "7e5a055d-7a80-48c8-9906-0ff5b5e1f998",
+        "name": "datosFinales"
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://surfin-shop.myshopify.com/admin/api/2025-10/graphql.json",
+          "query": "query getInventoryData($variantId: ID!) {\n  productVariant(id: $variantId) {\n    # 1. Obtenemos el ID del InventoryItem\n    inventoryItem {\n      id\n      # 2. Obtenemos los niveles de inventario (Stock)\n      inventoryLevels(first: 10) {\n        edges {\n          node {\n            # ID de la ubicación para saber dónde está el stock\n            location {\n              id\n              name\n            }\n            # La cantidad disponible\n            quantities(names: [\"available\"]) {\n              name\n              quantity\n            }\n          }\n        }\n      }\n    }\n  }\n}",
+          "variables": "={\n  \"variantId\": \"{{ $json.product_variant }}\"\n}"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          304,
+          704
+        ],
+        "id": "32daae31-5fb6-47ee-a515-2bed85126bec",
+        "name": "GraphQL12",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        },
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
+          "query": "query getInventoryData($variantId: ID!) {\n  productVariant(id: $variantId) {\n    # 1. Obtenemos el ID del InventoryItem\n    inventoryItem {\n      id\n      # 2. Obtenemos los niveles de inventario (Stock)\n      inventoryLevels(first: 10) {\n        edges {\n          node {\n            # ID de la ubicación para saber dónde está el stock\n            location {\n              id\n              name\n            }\n            # La cantidad disponible\n            quantities(names: [\"available\"]) {\n              name\n              quantity\n            }\n          }\n        }\n      }\n    }\n  }\n}",
+          "variables": "={\n  \"variantId\": \"{{ $json.product_variant }}\"\n}"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          304,
+          512
+        ],
+        "id": "656cb1b3-938d-4697-9574-97c45b17d233",
+        "name": "GraphQL13",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        },
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://nuance-store-spain.myshopify.com/admin/api/2025-10/graphql.json",
+          "query": "query getInventoryData($variantId: ID!) {\n  productVariant(id: $variantId) {\n    # 1. Obtenemos el ID del InventoryItem\n    inventoryItem {\n      id\n      # 2. Obtenemos los niveles de inventario (Stock)\n      inventoryLevels(first: 10) {\n        edges {\n          node {\n            # ID de la ubicación para saber dónde está el stock\n            location {\n              id\n              name\n            }\n            # La cantidad disponible\n            quantities(names: [\"available\"]) {\n              name\n              quantity\n            }\n          }\n        }\n      }\n    }\n  }\n}",
+          "variables": "={\n  \"variantId\": \"{{ $json.product_variant }}\"\n}"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          304,
+          896
+        ],
+        "id": "a41c17f2-1bdb-4a4d-8525-2d27eb71ff0e",
+        "name": "GraphQL14",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        },
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "jsCode": "// El ID de ubicación que viene del pedido (Webhook original)\n// Nota: Asegúrate de referenciar el nodo del Webhook correctamente si no es el inmediato anterior\nconst orderLocationId = 'gid://shopify/Location/' + $('Webhook').first().json.body.location_id;\n\n// Datos recibidos de Shopify GraphQL\nconst inventoryItem = items[0].json.data.productVariant.inventoryItem;\nconst levels = inventoryItem.inventoryLevels.edges;\n\n// Buscamos el nivel que coincide con la ubicación del pedido\nconst matchedLevel = levels.find(edge => edge.node.location.id === orderLocationId);\n\nreturn [{\n  json: {\n    inventory_item_id: inventoryItem.id,\n    // Si encuentra la ubicación devuelve la cantidad, si no, devuelve 0\n    available: matchedLevel ? matchedLevel.node.quantities[0].quantity : 0,\n    location_name: matchedLevel ? matchedLevel.node.location.name : \"Ubicación no encontrada\"\n  }\n}];"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          528,
+          512
+        ],
+        "id": "4bf0c1f7-f6cd-4790-bd80-97d6f606345a",
+        "name": "Code in JavaScript",
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "jsCode": "// El ID de ubicación que viene del pedido (Webhook original)\n// Nota: Asegúrate de referenciar el nodo del Webhook correctamente si no es el inmediato anterior\nconst orderLocationId = 'gid://shopify/Location/' + $('Webhook').first().json.body.location_id;\n\n// Datos recibidos de Shopify GraphQL\nconst inventoryItem = items[0].json.data.productVariant.inventoryItem;\nconst levels = inventoryItem.inventoryLevels.edges;\n\n// Buscamos el nivel que coincide con la ubicación del pedido\nconst matchedLevel = levels.find(edge => edge.node.location.id === orderLocationId);\n\nreturn [{\n  json: {\n    inventory_item_id: inventoryItem.id,\n    // Si encuentra la ubicación devuelve la cantidad, si no, devuelve 0\n    available: matchedLevel ? matchedLevel.node.quantities[0].quantity : 0,\n    location_name: matchedLevel ? matchedLevel.node.location.name : \"Ubicación no encontrada\"\n  }\n}];"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          528,
+          704
+        ],
+        "id": "5b43c549-94d9-482e-9578-43561c26d34c",
+        "name": "Code in JavaScript2",
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "jsCode": "// El ID de ubicación que viene del pedido (Webhook original)\n// Nota: Asegúrate de referenciar el nodo del Webhook correctamente si no es el inmediato anterior\nconst orderLocationId = 'gid://shopify/Location/' + $('Webhook').first().json.body.location_id;\n\n// Datos recibidos de Shopify GraphQL\nconst inventoryItem = items[0].json.data.productVariant.inventoryItem;\nconst levels = inventoryItem.inventoryLevels.edges;\n\n// Buscamos el nivel que coincide con la ubicación del pedido\nconst matchedLevel = levels.find(edge => edge.node.location.id === orderLocationId);\n\nreturn [{\n  json: {\n    inventory_item_id: inventoryItem.id,\n    // Si encuentra la ubicación devuelve la cantidad, si no, devuelve 0\n    available: matchedLevel ? matchedLevel.node.quantities[0].quantity : 0,\n    location_name: matchedLevel ? matchedLevel.node.location.name : \"Ubicación no encontrada\"\n  }\n}];"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          528,
+          896
+        ],
+        "id": "61e0661c-775a-4b24-843f-7101271c1c02",
+        "name": "Code in JavaScript3",
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "content": "RULES SHOP",
+          "height": 80,
+          "width": 150,
+          "color": 3
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          0,
+          0
+        ],
+        "typeVersion": 1,
+        "id": "c04fe7e9-14eb-442d-85b1-b1ea1403555c",
+        "name": "Sticky Note"
+      },
+      {
+        "parameters": {
+          "content": "SURFIN",
+          "height": 80,
+          "width": 150,
+          "color": 4
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          0,
+          96
+        ],
+        "typeVersion": 1,
+        "id": "7f1c7330-30e4-45cb-8ac9-c5b30eb5f3c7",
+        "name": "Sticky Note1"
+      },
+      {
+        "parameters": {
+          "content": "NUANCE",
+          "height": 80,
+          "width": 150,
+          "color": 5
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          0,
+          192
+        ],
+        "typeVersion": 1,
+        "id": "810b0ef3-c284-4ac2-9b4c-1d4278b35050",
+        "name": "Sticky Note2"
+      },
+      {
+        "parameters": {
+          "content": "PROCESAR DATOS",
+          "height": 976,
+          "width": 2080,
+          "color": 6
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -16,
+          320
+        ],
+        "id": "559f7f0c-8ba4-42b7-8cf8-1d5dcc9f306b",
+        "name": "Sticky Note3"
+      },
+      {
+        "parameters": {
+          "content": "-Inventory Item\n-Available",
+          "height": 864,
+          "width": 166
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          272,
+          352
+        ],
+        "id": "df0f161e-91f7-4808-ab68-85f22dc05bc3",
+        "name": "Sticky Note4"
+      },
+      {
+        "parameters": {
+          "content": "Limpiar available",
+          "height": 864,
+          "width": 166
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          496,
+          352
+        ],
+        "id": "9f82132b-8305-4c0d-8973-9c7296a4c19a",
+        "name": "Sticky Note5"
+      },
+      {
+        "parameters": {
+          "content": "Sucursales",
+          "height": 864,
+          "width": 166
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          720,
+          352
+        ],
+        "id": "70721b18-c33c-4a90-8c8d-5097479702b4",
+        "name": "Sticky Note6"
+      },
+      {
+        "parameters": {
+          "content": "-Variant ID\n-sku",
+          "height": 864,
+          "width": 166
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          944,
+          352
+        ],
+        "id": "f191e7aa-43be-43f5-9fd9-315953746365",
+        "name": "Sticky Note7"
+      },
+      {
+        "parameters": {
+          "content": "Limpiar datos",
+          "height": 864,
+          "width": 166
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          1152,
+          352
+        ],
+        "id": "0ef0217f-7d42-4cb7-8a3b-92e5de1ab87e",
+        "name": "Sticky Note8"
+      },
+      {
+        "parameters": {
+          "content": "Juntar Datos",
+          "height": 864,
+          "width": 166
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          1392,
+          352
+        ],
+        "id": "198a44ff-219a-4a41-b2db-3da0c531cae5",
+        "name": "Sticky Note9"
+      },
+      {
+        "parameters": {
+          "content": "Limpiar Datos",
+          "height": 864,
+          "width": 166
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          1616,
+          352
+        ],
+        "id": "5a611761-45c0-456b-88b7-720b7d199511",
+        "name": "Sticky Note10"
+      },
+      {
+        "parameters": {
+          "content": "Datos Finales",
+          "height": 864,
+          "width": 166
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          1840,
+          352
+        ],
+        "id": "45f4063f-67ea-4121-a123-ac535efbd52d",
+        "name": "Sticky Note11"
+      },
+      {
+        "parameters": {
+          "content": "ENVIAR DATOS",
+          "height": 1344,
+          "width": 1808,
+          "color": 6
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          2080,
+          80
+        ],
+        "id": "417934f0-a689-4f91-b1a2-8cc9e59e1c2b",
+        "name": "Sticky Note12"
+      },
+      {
+        "parameters": {
+          "content": "Comprobar si existe el producto",
+          "height": 1280,
+          "width": 166
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          2288,
+          128
+        ],
+        "id": "4015ad15-4c00-41e8-a2ee-30d0fca35892",
+        "name": "Sticky Note13"
+      },
+      {
+        "parameters": {
+          "content": "Condicional si existe el producto",
+          "height": 1280,
+          "width": 166
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          2512,
+          128
+        ],
+        "id": "94180daa-8b79-49bc-bdb7-1e4f0c7ba7cf",
+        "name": "Sticky Note14"
+      },
+      {
+        "parameters": {
+          "content": "Obtener Información",
+          "height": 1280,
+          "width": 166
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          2736,
+          128
+        ],
+        "id": "a4e0ca58-8b02-4e12-b28a-11f4986e4c09",
+        "name": "Sticky Note15"
+      },
+      {
+        "parameters": {
+          "content": "Obtener sucursal",
+          "height": 1280,
+          "width": 166
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          2960,
+          128
+        ],
+        "id": "4a2d8cde-7b22-4400-a37b-6d5dae6d0ddd",
+        "name": "Sticky Note16"
+      },
+      {
+        "parameters": {
+          "content": "Filtrar sucursal",
+          "height": 1280,
+          "width": 166
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          3184,
+          128
+        ],
+        "id": "67edf27b-eead-47ea-a6a0-120083a352f7",
+        "name": "Sticky Note17"
+      },
+      {
+        "parameters": {
+          "content": "Obtener variante",
+          "height": 1280,
+          "width": 166
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          3408,
+          128
+        ],
+        "id": "ec68e6d4-c601-4a77-9076-04d4aa03924d",
+        "name": "Sticky Note18"
+      },
+      {
+        "parameters": {
+          "content": "Insertar Datos",
+          "height": 1280,
+          "width": 166
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          3632,
+          128
+        ],
+        "id": "f6f133db-671f-4488-866f-fa27714a6527",
+        "name": "Sticky Note19"
+      },
+      {
+        "parameters": {
+          "content": "",
+          "width": 982,
+          "color": 3
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          272,
+          496
+        ],
+        "typeVersion": 1,
+        "id": "291daed8-58ef-4323-b655-493043cb51a7",
+        "name": "Sticky Note20"
+      },
+      {
+        "parameters": {
+          "content": "",
+          "width": 982,
+          "color": 4
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          288,
+          672
+        ],
+        "typeVersion": 1,
+        "id": "44deb015-bcd4-453d-82d0-7641ec4577c4",
+        "name": "Sticky Note21"
+      },
+      {
+        "parameters": {
+          "content": "",
+          "width": 982,
+          "color": 5
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          304,
+          864
+        ],
+        "typeVersion": 1,
+        "id": "77a3f6ab-78a0-481e-b084-1e8917252fae",
+        "name": "Sticky Note22"
+      },
+      {
+        "parameters": {
+          "content": "",
+          "height": 336,
+          "width": 1510,
+          "color": 3
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          2288,
+          208
+        ],
+        "typeVersion": 1,
+        "id": "5c4399ca-408d-4cbf-84a8-e85d8c9cc80c",
+        "name": "Sticky Note23"
+      },
+      {
+        "parameters": {
+          "content": "",
+          "height": 336,
+          "width": 1510,
+          "color": 4
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          2288,
+          592
+        ],
+        "typeVersion": 1,
+        "id": "c2e6c8d3-ea7e-4666-ab64-3444a973be88",
+        "name": "Sticky Note24"
+      },
+      {
+        "parameters": {
+          "content": "",
+          "height": 336,
+          "width": 1510,
+          "color": 5
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "position": [
+          2288,
+          992
+        ],
+        "typeVersion": 1,
+        "id": "809c7af2-e778-463f-8ee9-3f432721316b",
+        "name": "Sticky Note25"
+      },
+      {
+        "parameters": {
+          "content": "FUNCIONES",
+          "height": 80,
+          "width": 150
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          192,
+          0
+        ],
+        "id": "b39a81bd-9c71-433f-99d6-704c22b7886b",
+        "name": "Sticky Note26"
+      },
+      {
+        "parameters": {
+          "content": "SECCIONES",
+          "height": 80,
+          "width": 150,
+          "color": 6
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          192,
+          96
+        ],
+        "id": "b9b93ba2-e51f-40bf-b636-71de20f212e0",
+        "name": "Sticky Note27"
+      }
+    ],
+    "connections": {
+      "Edit Fields": {
+        "main": [
+          [
+            {
+              "node": "GraphQL12",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "GraphQL14",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "GraphQL13",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "Edit Fields",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "GraphQL1": {
+        "main": [
+          [
+            {
+              "node": "Edit Fields1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If1": {
+        "main": [
+          [
+            {
+              "node": "GraphQL4",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "No Operation, do nothing1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "GraphQL5": {
+        "main": [
+          [
+            {
+              "node": "GraphQL6",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "nuance": {
+        "main": [
+          [
+            {
+              "node": "If1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "sucursalesNuance": {
+        "main": [
+          [
+            {
+              "node": "Filtrar Sucursal",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "GraphQL4": {
+        "main": [
+          [
+            {
+              "node": "sucursalesNuance",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "ObtenerSucursal": {
+        "main": [
+          [
+            {
+              "node": "GraphQL1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Filtrar Sucursal": {
+        "main": [
+          [
+            {
+              "node": "GraphQL5",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If": {
+        "main": [
+          [
+            {
+              "node": "GraphQL8",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "No Operation, do nothing",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "GraphQL": {
+        "main": [
+          [
+            {
+              "node": "GraphQL7",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "GraphQL8": {
+        "main": [
+          [
+            {
+              "node": "sucursalesSurfin",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Filtrar Sucursal1": {
+        "main": [
+          [
+            {
+              "node": "GraphQL",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "surfin": {
+        "main": [
+          [
+            {
+              "node": "If",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "sucursalesSurfin": {
+        "main": [
+          [
+            {
+              "node": "Filtrar Sucursal1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If2": {
+        "main": [
+          [
+            {
+              "node": "GraphQL10",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "No Operation, do nothing2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "GraphQL2": {
+        "main": [
+          [
+            {
+              "node": "GraphQL9",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "GraphQL10": {
+        "main": [
+          [
+            {
+              "node": "sucursalesRules",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Filtrar Sucursal2": {
+        "main": [
+          [
+            {
+              "node": "GraphQL2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "rules": {
+        "main": [
+          [
+            {
+              "node": "If2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "sucursalesRules": {
+        "main": [
+          [
+            {
+              "node": "Filtrar Sucursal2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Switch": {
+        "main": [
+          [
+            {
+              "node": "surfin",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "nuance",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "nuance",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "rules",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "rules",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "surfin",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "ObtenerSucursal1": {
+        "main": [
+          [
+            {
+              "node": "GraphQL3",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "ObtenerSucursal2": {
+        "main": [
+          [
+            {
+              "node": "GraphQL11",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Merge": {
+        "main": [
+          [
+            {
+              "node": "Code in JavaScript1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code in JavaScript1": {
+        "main": [
+          [
+            {
+              "node": "datosFinales",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "GraphQL3": {
+        "main": [
+          [
+            {
+              "node": "Edit Fields2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "GraphQL11": {
+        "main": [
+          [
+            {
+              "node": "Edit Fields3",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Edit Fields1": {
+        "main": [
+          [
+            {
+              "node": "Merge",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Edit Fields2": {
+        "main": [
+          [
+            {
+              "node": "Merge",
+              "type": "main",
+              "index": 1
+            }
+          ]
+        ]
+      },
+      "Edit Fields3": {
+        "main": [
+          [
+            {
+              "node": "Merge",
+              "type": "main",
+              "index": 2
+            }
+          ]
+        ]
+      },
+      "datosFinales": {
+        "main": [
+          [
+            {
+              "node": "Switch",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "GraphQL13": {
+        "main": [
+          [
+            {
+              "node": "Code in JavaScript",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "GraphQL12": {
+        "main": [
+          [
+            {
+              "node": "Code in JavaScript2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "GraphQL14": {
+        "main": [
+          [
+            {
+              "node": "Code in JavaScript3",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code in JavaScript": {
+        "main": [
+          [
+            {
+              "node": "ObtenerSucursal",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code in JavaScript2": {
+        "main": [
+          [
+            {
+              "node": "ObtenerSucursal1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code in JavaScript3": {
+        "main": [
+          [
+            {
+              "node": "ObtenerSucursal2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Info Tailwind",
+    "name": "Version c8f3c11a",
+    "description": "",
+    "autosaved": false
+  },
+  "activeVersionId": "c8f3c11a-43af-4def-b39a-4b076f0c1251",
+  "connections": {
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "GraphQL12",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "GraphQL14",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "GraphQL13",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GraphQL1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "GraphQL4",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GraphQL5": {
+      "main": [
+        [
+          {
+            "node": "GraphQL6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "nuance": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "sucursalesNuance": {
+      "main": [
+        [
+          {
+            "node": "Filtrar Sucursal",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GraphQL4": {
+      "main": [
+        [
+          {
+            "node": "sucursalesNuance",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ObtenerSucursal": {
+      "main": [
+        [
+          {
+            "node": "GraphQL1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filtrar Sucursal": {
+      "main": [
+        [
+          {
+            "node": "GraphQL5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "GraphQL8",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GraphQL": {
+      "main": [
+        [
+          {
+            "node": "GraphQL7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GraphQL8": {
+      "main": [
+        [
+          {
+            "node": "sucursalesSurfin",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filtrar Sucursal1": {
+      "main": [
+        [
+          {
+            "node": "GraphQL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "surfin": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "sucursalesSurfin": {
+      "main": [
+        [
+          {
+            "node": "Filtrar Sucursal1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "GraphQL10",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GraphQL2": {
+      "main": [
+        [
+          {
+            "node": "GraphQL9",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GraphQL10": {
+      "main": [
+        [
+          {
+            "node": "sucursalesRules",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filtrar Sucursal2": {
+      "main": [
+        [
+          {
+            "node": "GraphQL2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "rules": {
+      "main": [
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "sucursalesRules": {
+      "main": [
+        [
+          {
+            "node": "Filtrar Sucursal2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "surfin",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "nuance",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "nuance",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "rules",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "rules",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "surfin",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ObtenerSucursal1": {
+      "main": [
+        [
+          {
+            "node": "GraphQL3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ObtenerSucursal2": {
+      "main": [
+        [
+          {
+            "node": "GraphQL11",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "datosFinales",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GraphQL3": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GraphQL11": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Edit Fields3": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    },
+    "datosFinales": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GraphQL13": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GraphQL12": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GraphQL14": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "ObtenerSucursal",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript2": {
+      "main": [
+        [
+          {
+            "node": "ObtenerSucursal1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript3": {
+      "main": [
+        [
+          {
+            "node": "ObtenerSucursal2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-01-14T08:06:45.600Z",
+  "id": "Ia99-8wA6p9XBIX-V0Ph8",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Sincronizar_Stock_Cuentas",
+  "nodes": [
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "bf2e92f4-f1c3-4881-bc32-1b46d76b6086",
+              "name": "product_variant",
+              "value": "=gid://shopify/ProductVariant/{{ $json.body.line_items[0].variant_id }}",
+              "type": "string"
+            },
+            {
+              "id": "5e4eb1fc-5dca-4006-b82d-87bcb35d0e91",
+              "name": "location_id",
+              "value": "={{ $json.body.location_id }}",
+              "type": "number"
+            },
+            {
+              "id": "c41bdb67-f5a4-4578-8cc8-71429dd293f1",
+              "name": "shop_domain",
+              "value": "={{ $json.headers['x-shopify-shop-domain'] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        80,
+        704
+      ],
+      "id": "2534bc1b-d887-4530-9681-4c6ef5a774c4",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "transferencia",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -144,
+        704
+      ],
+      "id": "b84e72ef-3a94-4280-be07-46c7c3adbc36",
+      "name": "Webhook",
+      "webhookId": "b3cfca99-ff48-4fda-9f50-b635c09e5cdc"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
+        "query": "=query {\n  inventoryItem(id: \"{{ $('GraphQL13').item.json.data.productVariant.inventoryItem.id }}\") {\n    variant {\n      # Datos de la Variante específica que cambió\n      id\n      title\n      sku\n      price\n      barcode\n      \n      # Datos del Producto Padre\n      product {\n        id\n        title\n        handle # Útil para construir la URL\n        descriptionHtml # La descripción completa con formato\n        vendor\n        productType\n        tags\n        status # (ACTIVE, ARCHIVED, DRAFT)\n        \n        # Imagen principal\n        featuredImage {\n          url\n        }\n        \n        # Todas las imágenes del producto (hasta 10)\n        images(first: 10) {\n          nodes {\n            url\n            altText\n          }\n        }\n        \n        # Opciones (ej: Talla, Color) y sus valores disponibles\n        options {\n          name\n          values\n        }\n      }\n    }\n  }\n}",
+        "headerParametersUi": {
+          "parameter": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        976,
+        512
+      ],
+      "id": "92a88ad7-3f6d-47c8-97b7-76439a662626",
+      "name": "GraphQL1",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "e6010df5-c69d-4e17-aea5-036428c73124",
+              "leftValue": "={{ $json.data.productVariants.edges }}",
+              "rightValue": "",
+              "operator": {
+                "type": "array",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2544,
+        1088
+      ],
+      "id": "da30b497-b420-4552-b431-5e4421f624cc",
+      "name": "If1"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        2768,
+        1184
+      ],
+      "id": "b851802e-8e4a-4646-8b2c-f8619644180a",
+      "name": "No Operation, do nothing1"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://nuance-store-spain.myshopify.com/admin/api/2025-10/graphql.json",
+        "query": "=query GetInventoryForVariant($variantId: ID!) {\n  productVariant(id: $variantId) {\n    id\n    title\n    inventoryItem {\n      id\n      inventoryLevels(first: 10) {\n        edges {\n          node {\n            id\n            location {\n              id\n              name\n            }\n            quantities(names: [\"available\"]) {\n              name\n              quantity\n            }\n          }\n        }\n      }\n    }\n  }\n}\n",
+        "variables": "={\n  \"variantId\": \"{{ $('nuance').item.json.data.productVariants.edges[0].node.id }}\"\n}\n"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        3440,
+        992
+      ],
+      "id": "a938fb4e-9733-4042-8737-fe0cff2f7475",
+      "name": "GraphQL5",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://nuance-store-spain.myshopify.com/admin/api/2025-10/graphql.json",
+        "query": "=mutation {\n  inventorySetQuantities(\n    input: {\n      name: \"available\"\n      reason: \"correction\"\n      ignoreCompareQuantity: true\n      quantities: [\n        {\n          inventoryItemId: \"{{ $('GraphQL4').item.json.data.productVariant.inventoryItem.id }}\"\n          locationId: \"{{ $('Filtrar Sucursal').item.json.locationId }}\"\n          quantity: {{ $('datosFinales').item.json.available }}\n        }\n      ]\n    }\n  ) {\n    inventoryAdjustmentGroup {\n      changes {\n        name\n        delta\n        quantityAfterChange\n      }\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}\n",
+        "variables": "="
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        3664,
+        992
+      ],
+      "id": "e7d7a800-5e56-4906-97f1-ef145c5ee919",
+      "name": "GraphQL6",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://nuance-store-spain.myshopify.com/admin/api/2025-10/graphql.json",
+        "query": "query ProductBySKU($sku: String!) {\n  productVariants(first: 1, query: $sku) {\n    edges {\n      node {\n        id\n        title\n        sku\n        price\n        barcode\n        product {\n          id\n          title\n          handle\n          vendor\n          productType\n          status\n          featuredImage {\n            url\n          }\n          options {\n            name\n            values\n          }\n        }\n      }\n    }\n  }\n}\n",
+        "variables": "={\n  \"sku\": \"{{ $json.sku }}\"\n}\n"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        2320,
+        1088
+      ],
+      "id": "89a3ff45-a283-48b9-8389-5a542e182922",
+      "name": "nuance",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://nuance-store-spain.myshopify.com/admin/api/2025-10/graphql.json",
+        "query": "=query getAllLocations {\n  locations(first: 50) {\n    edges {\n      node {\n        name\n        id\n      }\n    }\n  }\n}",
+        "variables": "="
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        2992,
+        992
+      ],
+      "id": "c81b8215-72ee-454d-9257-60d9611a7d15",
+      "name": "sucursalesNuance",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://nuance-store-spain.myshopify.com/admin/api/2025-10/graphql.json",
+        "query": "=query {\n  productVariant(id: \"{{ $json.data.productVariants.edges[0].node.id }}\") {\n    id\n    inventoryItem {\n      id\n    }\n  }\n}",
+        "variables": "="
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        2768,
+        992
+      ],
+      "id": "cdb9dbbf-97d6-4624-8b89-a6469e1e3045",
+      "name": "GraphQL4",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
+        "query": "query getBranchName($id: ID!) {\n  location(id: $id) {\n    name\n    id\n  }\n}",
+        "variables": "={\n  \"id\": \"gid://shopify/Location/{{ $('Edit Fields').item.json.location_id }}\"\n}",
+        "operationName": "="
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        752,
+        512
+      ],
+      "id": "b770a93c-76c4-4a49-8e9b-3c9e3f8ea354",
+      "name": "ObtenerSucursal",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Traemos el nombre de la sucursal origen desde el nodo \"ObtenerSucursal\"\n// Usamos el selector $('NombreNodo') para ir atrás en el tiempo\nconst targetName = $('datosFinales').first().json.location_name;\n\n// 2. Traemos la lista de sucursales destino del nodo anterior inmediato\nconst locations = items[0].json.data.locations.edges;\n\n// 3. Buscamos la sucursal cuyo nombre sea idéntico\nconst found = locations.find(loc => loc.node.name === targetName);\n\n// 4. Retornamos el resultado\nif (found) {\n  return [\n    {\n      json: {\n        locationId: found.node.id,\n        matchedName: targetName\n      }\n    }\n  ];\n} else {\n  // Es buena práctica retornar algo visible si falla para depurar\n  return [\n    {\n      json: {\n        error: \"Sucursal no encontrada\",\n        buscaba: targetName\n      }\n    }\n  ];\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3216,
+        992
+      ],
+      "id": "26723503-e508-436a-b11a-7b66443f23f0",
+      "name": "Filtrar Sucursal"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "e6010df5-c69d-4e17-aea5-036428c73124",
+              "leftValue": "={{ $json.data.productVariants.edges }}",
+              "rightValue": "",
+              "operator": {
+                "type": "array",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2544,
+        704
+      ],
+      "id": "18b4c69c-a71d-4363-8c94-bf47913492d2",
+      "name": "If"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        2768,
+        800
+      ],
+      "id": "9d6a2bd4-aebc-46b3-87df-0d791a198c98",
+      "name": "No Operation, do nothing"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://surfin-shop.myshopify.com/admin/api/2025-10/graphql.json",
+        "query": "=query GetInventoryForVariant($variantId: ID!) {\n  productVariant(id: $variantId) {\n    id\n    title\n    inventoryItem {\n      id\n      inventoryLevels(first: 10) {\n        edges {\n          node {\n            id\n            location {\n              id\n              name\n            }\n            quantities(names: [\"available\"]) {\n              name\n              quantity\n            }\n          }\n        }\n      }\n    }\n  }\n}\n",
+        "variables": "={\n  \"variantId\": \"{{ $('surfin').item.json.data.productVariants.edges[0].node.id }}\"\n}\n"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        3440,
+        608
+      ],
+      "id": "524f17d5-6c7a-471d-b4f5-463af2961bdf",
+      "name": "GraphQL",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://surfin-shop.myshopify.com/admin/api/2025-10/graphql.json",
+        "query": "=mutation {\n  inventorySetQuantities(\n    input: {\n      name: \"available\"\n      reason: \"correction\"\n      ignoreCompareQuantity: true\n      quantities: [\n        {\n          inventoryItemId: \"{{ $('GraphQL8').item.json.data.productVariant.inventoryItem.id }}\"\n          locationId: \"{{ $('Filtrar Sucursal1').item.json.locationId }}\"\n          quantity: {{ $('datosFinales').item.json.available }}\n        }\n      ]\n    }\n  ) {\n    inventoryAdjustmentGroup {\n      changes {\n        name\n        delta\n        quantityAfterChange\n      }\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}\n",
+        "variables": "="
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        3664,
+        608
+      ],
+      "id": "5864ed03-aca0-472c-b40c-90d4938061e2",
+      "name": "GraphQL7",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://surfin-shop.myshopify.com/admin/api/2025-10/graphql.json",
+        "query": "=query {\n  productVariant(id: \"{{ $json.data.productVariants.edges[0].node.id }}\") {\n    id\n    inventoryItem {\n      id\n    }\n  }\n}",
+        "variables": "="
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        2768,
+        608
+      ],
+      "id": "4ddd2530-6a5b-484c-80ac-f26f8fc42c94",
+      "name": "GraphQL8",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Traemos el nombre de la sucursal origen desde el nodo \"ObtenerSucursal\"\n// Usamos el selector $('NombreNodo') para ir atrás en el tiempo\nconst targetName = $('datosFinales').first().json.location_name;\n\n// 2. Traemos la lista de sucursales destino del nodo anterior inmediato\nconst locations = items[0].json.data.locations.edges;\n\n// 3. Buscamos la sucursal cuyo nombre sea idéntico\nconst found = locations.find(loc => loc.node.name === targetName);\n\n// 4. Retornamos el resultado\nif (found) {\n  return [\n    {\n      json: {\n        locationId: found.node.id,\n        matchedName: targetName\n      }\n    }\n  ];\n} else {\n  // Es buena práctica retornar algo visible si falla para depurar\n  return [\n    {\n      json: {\n        error: \"Sucursal no encontrada\",\n        buscaba: targetName\n      }\n    }\n  ];\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3216,
+        608
+      ],
+      "id": "76a23564-2324-4022-a28f-6d7c073c097b",
+      "name": "Filtrar Sucursal1"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://surfin-shop.myshopify.com/admin/api/2025-10/graphql.json",
+        "query": "query ProductBySKU($sku: String!) {\n  productVariants(first: 1, query: $sku) {\n    edges {\n      node {\n        id\n        title\n        sku\n        price\n        barcode\n        product {\n          id\n          title\n          handle\n          vendor\n          productType\n          status\n          featuredImage {\n            url\n          }\n          options {\n            name\n            values\n          }\n        }\n      }\n    }\n  }\n}\n",
+        "variables": "={\n  \"sku\": \"{{ $json.sku }}\"\n}\n"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        2320,
+        704
+      ],
+      "id": "2dd6036d-47b8-4e0c-be7f-b2b4b0389c4f",
+      "name": "surfin",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://surfin-shop.myshopify.com/admin/api/2025-10/graphql.json",
+        "query": "=query getAllLocations {\n  locations(first: 50) {\n    edges {\n      node {\n        name\n        id\n      }\n    }\n  }\n}",
+        "variables": "="
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        2992,
+        608
+      ],
+      "id": "45139b74-9d6d-44f6-8e0f-c4f3be4239a8",
+      "name": "sucursalesSurfin",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "e6010df5-c69d-4e17-aea5-036428c73124",
+              "leftValue": "={{ $json.data.productVariants.edges }}",
+              "rightValue": "",
+              "operator": {
+                "type": "array",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2544,
+        320
+      ],
+      "id": "125651f8-00f6-4939-9d87-3c6fcaa32368",
+      "name": "If2"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        2768,
+        416
+      ],
+      "id": "4e7cad39-9a16-4935-9a20-9bffaaedf3cf",
+      "name": "No Operation, do nothing2"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
+        "query": "=query GetInventoryForVariant($variantId: ID!) {\n  productVariant(id: $variantId) {\n    id\n    title\n    inventoryItem {\n      id\n      inventoryLevels(first: 10) {\n        edges {\n          node {\n            id\n            location {\n              id\n              name\n            }\n            quantities(names: [\"available\"]) {\n              name\n              quantity\n            }\n          }\n        }\n      }\n    }\n  }\n}\n",
+        "variables": "={\n  \"variantId\": \"{{ $('rules').item.json.data.productVariants.edges[0].node.id }}\"\n}\n"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        3440,
+        224
+      ],
+      "id": "b4fa1a8a-5ce3-4c3c-8b56-40363cbe5e5b",
+      "name": "GraphQL2",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
+        "query": "=mutation {\n  inventorySetQuantities(\n    input: {\n      name: \"available\"\n      reason: \"correction\"\n      ignoreCompareQuantity: true\n      quantities: [\n        {\n          inventoryItemId: \"{{ $('GraphQL10').item.json.data.productVariant.inventoryItem.id }}\"\n          locationId: \"{{ $('Filtrar Sucursal2').item.json.locationId }}\"\n          quantity: {{ $('datosFinales').item.json.available }}\n        }\n      ]\n    }\n  ) {\n    inventoryAdjustmentGroup {\n      changes {\n        name\n        delta\n        quantityAfterChange\n      }\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}\n",
+        "variables": "="
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        3664,
+        224
+      ],
+      "id": "e70ff783-c802-4e4e-bada-cc0824a0b3de",
+      "name": "GraphQL9",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
+        "query": "=query {\n  productVariant(id: \"{{ $json.data.productVariants.edges[0].node.id }}\") {\n    id\n    inventoryItem {\n      id\n    }\n  }\n}",
+        "variables": "="
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        2768,
+        224
+      ],
+      "id": "993bb67c-4486-4e48-b316-00270318ca35",
+      "name": "GraphQL10",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Traemos el nombre de la sucursal origen desde el nodo \"ObtenerSucursal\"\n// Usamos el selector $('NombreNodo') para ir atrás en el tiempo\nconst targetName = $('datosFinales').first().json.location_name;\n\n// 2. Traemos la lista de sucursales destino del nodo anterior inmediato\nconst locations = items[0].json.data.locations.edges;\n\n// 3. Buscamos la sucursal cuyo nombre sea idéntico\nconst found = locations.find(loc => loc.node.name === targetName);\n\n// 4. Retornamos el resultado\nif (found) {\n  return [\n    {\n      json: {\n        locationId: found.node.id,\n        matchedName: targetName\n      }\n    }\n  ];\n} else {\n  // Es buena práctica retornar algo visible si falla para depurar\n  return [\n    {\n      json: {\n        error: \"Sucursal no encontrada\",\n        buscaba: targetName\n      }\n    }\n  ];\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3216,
+        224
+      ],
+      "id": "73a7643b-5b3c-49e1-8a56-6c835ca2801c",
+      "name": "Filtrar Sucursal2"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
+        "query": "query ProductBySKU($sku: String!) {\n  productVariants(first: 1, query: $sku) {\n    edges {\n      node {\n        id\n        title\n        sku\n        price\n        barcode\n        product {\n          id\n          title\n          handle\n          vendor\n          productType\n          status\n          featuredImage {\n            url\n          }\n          options {\n            name\n            values\n          }\n        }\n      }\n    }\n  }\n}\n",
+        "variables": "={\n  \"sku\": \"{{ $json.sku }}\"\n}\n"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        2320,
+        320
+      ],
+      "id": "d4f829f4-6862-4c39-8bc9-e7471e7d4970",
+      "name": "rules",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
+        "query": "=query getAllLocations {\n  locations(first: 50) {\n    edges {\n      node {\n        name\n        id\n      }\n    }\n  }\n}",
+        "variables": "="
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        2992,
+        224
+      ],
+      "id": "0eabf326-4f8d-4436-b8fc-b3a984033c6f",
+      "name": "sucursalesRules",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Edit Fields').item.json.shop_domain }}",
+                    "rightValue": "surfin-store-spain.myshopify.com",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "47aa9abd-eb33-4242-ad44-0851b86c6884"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "4a909aab-50e9-455b-a3dc-6cc458e31d6c",
+                    "leftValue": "={{ $('Edit Fields').item.json.shop_domain }}",
+                    "rightValue": "rules-shop-es.myshopify.com",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "5722569c-10e9-42c5-bbcc-86e12f09856f",
+                    "leftValue": "={{ $('Edit Fields').item.json.shop_domain }}",
+                    "rightValue": "nuance-store-spain.myshopify.com",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        2096,
+        688
+      ],
+      "id": "45425f40-6bc1-4c88-9cf5-2769d8b13f7d",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "=https://surfin-shop.myshopify.com/admin/api/2025-10/graphql.json",
+        "query": "query getBranchName($id: ID!) {\n  location(id: $id) {\n    name\n    id\n  }\n}",
+        "variables": "={\n  \"id\": \"gid://shopify/Location/{{ $('Edit Fields').item.json.location_id }}\"\n}",
+        "operationName": "="
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        752,
+        704
+      ],
+      "id": "40caed15-c9b0-4d2e-8855-b707bb2cdcc0",
+      "name": "ObtenerSucursal1",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "=https://nuance-store-spain.myshopify.com/admin/api/2025-10/graphql.json",
+        "query": "query getBranchName($id: ID!) {\n  location(id: $id) {\n    name\n    id\n  }\n}",
+        "variables": "={\n  \"id\": \"gid://shopify/Location/{{ $('Edit Fields').item.json.location_id }}\"\n}",
+        "operationName": "="
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        752,
+        896
+      ],
+      "id": "f3129fee-abe0-4959-81e2-8e600da9fac3",
+      "name": "ObtenerSucursal2",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "numberInputs": 3
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1424,
+        688
+      ],
+      "id": "715150a4-e895-4188-b7a3-5abb8b0fdda0",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Filtramos la lista de items que entran al nodo\nreturn items.filter(item => {\n  // Extraemos los valores para mayor claridad\n  const variant = item.json.product_variant;\n  const location = item.json.location_id;\n\n  // Condición: Mantenemos el item solo si AMBOS son distintos de null\n  // (Si prefieres que baste con que uno no sea null, cambia '&&' por '||')\n  return variant !== null && location !== null;\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1648,
+        704
+      ],
+      "id": "83d35153-7e19-4f8b-8dfe-61b713fd9dd5",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://surfin-shop.myshopify.com/admin/api/2025-10/graphql.json",
+        "query": "=query {\n  inventoryItem(id: \"{{ $('GraphQL12').item.json.data.productVariant.inventoryItem.id }}\") {\n    variant {\n      # Datos de la Variante específica que cambió\n      id\n      title\n      sku\n      price\n      barcode\n      \n      # Datos del Producto Padre\n      product {\n        id\n        title\n        handle # Útil para construir la URL\n        descriptionHtml # La descripción completa con formato\n        vendor\n        productType\n        tags\n        status # (ACTIVE, ARCHIVED, DRAFT)\n        \n        # Imagen principal\n        featuredImage {\n          url\n        }\n        \n        # Todas las imágenes del producto (hasta 10)\n        images(first: 10) {\n          nodes {\n            url\n            altText\n          }\n        }\n        \n        # Opciones (ej: Talla, Color) y sus valores disponibles\n        options {\n          name\n          values\n        }\n      }\n    }\n  }\n}",
+        "headerParametersUi": {
+          "parameter": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        976,
+        704
+      ],
+      "id": "22a70df7-74ba-44b1-83e0-e382f6aa29f2",
+      "name": "GraphQL3",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://nuance-store-spain.myshopify.com/admin/api/2025-10/graphql.json",
+        "query": "=query {\n  inventoryItem(id: \"g{{ $('GraphQL14').item.json.data.productVariant.inventoryItem.id }}\") {\n    variant {\n      # Datos de la Variante específica que cambió\n      id\n      title\n      sku\n      price\n      barcode\n      \n      # Datos del Producto Padre\n      product {\n        id\n        title\n        handle # Útil para construir la URL\n        descriptionHtml # La descripción completa con formato\n        vendor\n        productType\n        tags\n        status # (ACTIVE, ARCHIVED, DRAFT)\n        \n        # Imagen principal\n        featuredImage {\n          url\n        }\n        \n        # Todas las imágenes del producto (hasta 10)\n        images(first: 10) {\n          nodes {\n            url\n            altText\n          }\n        }\n        \n        # Opciones (ej: Talla, Color) y sus valores disponibles\n        options {\n          name\n          values\n        }\n      }\n    }\n  }\n}",
+        "headerParametersUi": {
+          "parameter": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        976,
+        896
+      ],
+      "id": "238937c4-1e8c-436b-a8f2-2b2b1c85f915",
+      "name": "GraphQL11",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "73aa9d1a-392a-4e9e-bb66-2538539a1dc8",
+              "name": "product_variant",
+              "value": "={{ $json.data.inventoryItem.variant.id }}",
+              "type": "string"
+            },
+            {
+              "id": "e3fa2762-086f-41f8-bf92-6eba9a1ca596",
+              "name": "location_id",
+              "value": "={{ $('ObtenerSucursal').item.json.data.location.id }}",
+              "type": "string"
+            },
+            {
+              "id": "9a9832f9-5a76-474b-b17d-2eed1dc7d80a",
+              "name": "data.location.name",
+              "value": "={{ $('ObtenerSucursal').item.json.data.location.name }}",
+              "type": "string"
+            },
+            {
+              "id": "8a17e7e9-9ddb-460b-81c2-3ea708bf600b",
+              "name": "sku",
+              "value": "={{ $json.data.inventoryItem.variant.sku }}",
+              "type": "string"
+            },
+            {
+              "id": "819e6564-455c-412f-b098-66d57672db43",
+              "name": "available",
+              "value": "={{ $('Code in JavaScript').item.json.available }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1200,
+        512
+      ],
+      "id": "8cdf4f60-be7e-4eb5-a028-6c67a24d8e2a",
+      "name": "Edit Fields1",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b6c12529-f254-487b-bef7-8a1c8a744dbc",
+              "name": "product_variant",
+              "value": "={{ $json.data.inventoryItem.variant.id }}",
+              "type": "string"
+            },
+            {
+              "id": "9a49a69b-a376-47de-b8f7-8328bff2752e",
+              "name": "location_id",
+              "value": "={{ $('ObtenerSucursal1').item.json.data.location.id }}",
+              "type": "string"
+            },
+            {
+              "id": "e5ce16da-2e60-4032-b2d0-72bae2a0059b",
+              "name": "data.location.name",
+              "value": "={{ $('ObtenerSucursal1').item.json.data.location.name }}",
+              "type": "string"
+            },
+            {
+              "id": "c2c3d9a0-7816-4ad2-8835-4196b8ac0f44",
+              "name": "sku",
+              "value": "={{ $json.data.inventoryItem.variant.sku }}",
+              "type": "string"
+            },
+            {
+              "id": "8a6dc63e-4e52-47d8-a42d-ed7bf96b4f1a",
+              "name": "available",
+              "value": "={{ $('Code in JavaScript2').item.json.available }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1200,
+        704
+      ],
+      "id": "b62803c6-7786-401d-ba67-0434d9440ecb",
+      "name": "Edit Fields2",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "695cbe4d-2d85-4b6f-9384-121625c3af2e",
+              "name": "product_variant",
+              "value": "={{ $json.data.inventoryItem.variant.id }}",
+              "type": "string"
+            },
+            {
+              "id": "9526134b-0f92-4945-9989-c8d567da075d",
+              "name": "location_id",
+              "value": "={{ $('ObtenerSucursal2').item.json.data.location.id }}",
+              "type": "string"
+            },
+            {
+              "id": "dbfb5aaa-1fa4-400c-b367-09b5286c8787",
+              "name": "data.location.name",
+              "value": "={{ $('ObtenerSucursal2').item.json.data.location.name }}",
+              "type": "string"
+            },
+            {
+              "id": "e99c21af-d71e-4a8b-82d3-051800cbf6be",
+              "name": "sku",
+              "value": "={{ $json.data.inventoryItem.variant.sku }}",
+              "type": "string"
+            },
+            {
+              "id": "697067f7-4653-4e32-b8db-c36cf96a27e1",
+              "name": "available",
+              "value": "={{ $('Code in JavaScript3').item.json.available }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1200,
+        896
+      ],
+      "id": "c6dea1cc-7765-4185-b7e7-67243e6078c3",
+      "name": "Edit Fields3",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "98f26b26-0bbc-4b7b-bc9e-7a9c2c0586ac",
+              "name": "product_variant",
+              "value": "={{ $json.product_variant }}",
+              "type": "string"
+            },
+            {
+              "id": "a5ef8806-d539-485c-92e9-b791cbdb2194",
+              "name": "location_id",
+              "value": "={{ $json.location_id }}",
+              "type": "string"
+            },
+            {
+              "id": "5ed642f5-e1b4-4fff-8a55-4a28b548f663",
+              "name": "location_name",
+              "value": "={{ $json.data.location.name }}",
+              "type": "string"
+            },
+            {
+              "id": "31f4424c-8941-47e9-be46-564ea686c9ba",
+              "name": "sku",
+              "value": "={{ $json.sku }}",
+              "type": "string"
+            },
+            {
+              "id": "2ff12d82-a436-44b1-b02e-b0e30686c9bc",
+              "name": "available",
+              "value": "={{ $json.available }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1872,
+        704
+      ],
+      "id": "7e5a055d-7a80-48c8-9906-0ff5b5e1f998",
+      "name": "datosFinales"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://surfin-shop.myshopify.com/admin/api/2025-10/graphql.json",
+        "query": "query getInventoryData($variantId: ID!) {\n  productVariant(id: $variantId) {\n    # 1. Obtenemos el ID del InventoryItem\n    inventoryItem {\n      id\n      # 2. Obtenemos los niveles de inventario (Stock)\n      inventoryLevels(first: 10) {\n        edges {\n          node {\n            # ID de la ubicación para saber dónde está el stock\n            location {\n              id\n              name\n            }\n            # La cantidad disponible\n            quantities(names: [\"available\"]) {\n              name\n              quantity\n            }\n          }\n        }\n      }\n    }\n  }\n}",
+        "variables": "={\n  \"variantId\": \"{{ $json.product_variant }}\"\n}"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        304,
+        704
+      ],
+      "id": "32daae31-5fb6-47ee-a515-2bed85126bec",
+      "name": "GraphQL12",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
+        "query": "query getInventoryData($variantId: ID!) {\n  productVariant(id: $variantId) {\n    # 1. Obtenemos el ID del InventoryItem\n    inventoryItem {\n      id\n      # 2. Obtenemos los niveles de inventario (Stock)\n      inventoryLevels(first: 10) {\n        edges {\n          node {\n            # ID de la ubicación para saber dónde está el stock\n            location {\n              id\n              name\n            }\n            # La cantidad disponible\n            quantities(names: [\"available\"]) {\n              name\n              quantity\n            }\n          }\n        }\n      }\n    }\n  }\n}",
+        "variables": "={\n  \"variantId\": \"{{ $json.product_variant }}\"\n}"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        304,
+        512
+      ],
+      "id": "656cb1b3-938d-4697-9574-97c45b17d233",
+      "name": "GraphQL13",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://nuance-store-spain.myshopify.com/admin/api/2025-10/graphql.json",
+        "query": "query getInventoryData($variantId: ID!) {\n  productVariant(id: $variantId) {\n    # 1. Obtenemos el ID del InventoryItem\n    inventoryItem {\n      id\n      # 2. Obtenemos los niveles de inventario (Stock)\n      inventoryLevels(first: 10) {\n        edges {\n          node {\n            # ID de la ubicación para saber dónde está el stock\n            location {\n              id\n              name\n            }\n            # La cantidad disponible\n            quantities(names: [\"available\"]) {\n              name\n              quantity\n            }\n          }\n        }\n      }\n    }\n  }\n}",
+        "variables": "={\n  \"variantId\": \"{{ $json.product_variant }}\"\n}"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        304,
+        896
+      ],
+      "id": "a41c17f2-1bdb-4a4d-8525-2d27eb71ff0e",
+      "name": "GraphQL14",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "// El ID de ubicación que viene del pedido (Webhook original)\n// Nota: Asegúrate de referenciar el nodo del Webhook correctamente si no es el inmediato anterior\nconst orderLocationId = 'gid://shopify/Location/' + $('Webhook').first().json.body.location_id;\n\n// Datos recibidos de Shopify GraphQL\nconst inventoryItem = items[0].json.data.productVariant.inventoryItem;\nconst levels = inventoryItem.inventoryLevels.edges;\n\n// Buscamos el nivel que coincide con la ubicación del pedido\nconst matchedLevel = levels.find(edge => edge.node.location.id === orderLocationId);\n\nreturn [{\n  json: {\n    inventory_item_id: inventoryItem.id,\n    // Si encuentra la ubicación devuelve la cantidad, si no, devuelve 0\n    available: matchedLevel ? matchedLevel.node.quantities[0].quantity : 0,\n    location_name: matchedLevel ? matchedLevel.node.location.name : \"Ubicación no encontrada\"\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        528,
+        512
+      ],
+      "id": "4bf0c1f7-f6cd-4790-bd80-97d6f606345a",
+      "name": "Code in JavaScript",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "// El ID de ubicación que viene del pedido (Webhook original)\n// Nota: Asegúrate de referenciar el nodo del Webhook correctamente si no es el inmediato anterior\nconst orderLocationId = 'gid://shopify/Location/' + $('Webhook').first().json.body.location_id;\n\n// Datos recibidos de Shopify GraphQL\nconst inventoryItem = items[0].json.data.productVariant.inventoryItem;\nconst levels = inventoryItem.inventoryLevels.edges;\n\n// Buscamos el nivel que coincide con la ubicación del pedido\nconst matchedLevel = levels.find(edge => edge.node.location.id === orderLocationId);\n\nreturn [{\n  json: {\n    inventory_item_id: inventoryItem.id,\n    // Si encuentra la ubicación devuelve la cantidad, si no, devuelve 0\n    available: matchedLevel ? matchedLevel.node.quantities[0].quantity : 0,\n    location_name: matchedLevel ? matchedLevel.node.location.name : \"Ubicación no encontrada\"\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        528,
+        704
+      ],
+      "id": "5b43c549-94d9-482e-9578-43561c26d34c",
+      "name": "Code in JavaScript2",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "// El ID de ubicación que viene del pedido (Webhook original)\n// Nota: Asegúrate de referenciar el nodo del Webhook correctamente si no es el inmediato anterior\nconst orderLocationId = 'gid://shopify/Location/' + $('Webhook').first().json.body.location_id;\n\n// Datos recibidos de Shopify GraphQL\nconst inventoryItem = items[0].json.data.productVariant.inventoryItem;\nconst levels = inventoryItem.inventoryLevels.edges;\n\n// Buscamos el nivel que coincide con la ubicación del pedido\nconst matchedLevel = levels.find(edge => edge.node.location.id === orderLocationId);\n\nreturn [{\n  json: {\n    inventory_item_id: inventoryItem.id,\n    // Si encuentra la ubicación devuelve la cantidad, si no, devuelve 0\n    available: matchedLevel ? matchedLevel.node.quantities[0].quantity : 0,\n    location_name: matchedLevel ? matchedLevel.node.location.name : \"Ubicación no encontrada\"\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        528,
+        896
+      ],
+      "id": "61e0661c-775a-4b24-843f-7101271c1c02",
+      "name": "Code in JavaScript3",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "content": "RULES SHOP",
+        "height": 80,
+        "width": 150,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        0,
+        0
+      ],
+      "typeVersion": 1,
+      "id": "c04fe7e9-14eb-442d-85b1-b1ea1403555c",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "SURFIN",
+        "height": 80,
+        "width": 150,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        0,
+        96
+      ],
+      "typeVersion": 1,
+      "id": "7f1c7330-30e4-45cb-8ac9-c5b30eb5f3c7",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "NUANCE",
+        "height": 80,
+        "width": 150,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        0,
+        192
+      ],
+      "typeVersion": 1,
+      "id": "810b0ef3-c284-4ac2-9b4c-1d4278b35050",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "PROCESAR DATOS",
+        "height": 976,
+        "width": 2080,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -16,
+        320
+      ],
+      "id": "559f7f0c-8ba4-42b7-8cf8-1d5dcc9f306b",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "-Inventory Item\n-Available",
+        "height": 864,
+        "width": 166
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        272,
+        352
+      ],
+      "id": "df0f161e-91f7-4808-ab68-85f22dc05bc3",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "content": "Limpiar available",
+        "height": 864,
+        "width": 166
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        496,
+        352
+      ],
+      "id": "9f82132b-8305-4c0d-8973-9c7296a4c19a",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "content": "Sucursales",
+        "height": 864,
+        "width": 166
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        720,
+        352
+      ],
+      "id": "70721b18-c33c-4a90-8c8d-5097479702b4",
+      "name": "Sticky Note6"
+    },
+    {
+      "parameters": {
+        "content": "-Variant ID\n-sku",
+        "height": 864,
+        "width": 166
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        944,
+        352
+      ],
+      "id": "f191e7aa-43be-43f5-9fd9-315953746365",
+      "name": "Sticky Note7"
+    },
+    {
+      "parameters": {
+        "content": "Limpiar datos",
+        "height": 864,
+        "width": 166
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1152,
+        352
+      ],
+      "id": "0ef0217f-7d42-4cb7-8a3b-92e5de1ab87e",
+      "name": "Sticky Note8"
+    },
+    {
+      "parameters": {
+        "content": "Juntar Datos",
+        "height": 864,
+        "width": 166
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1392,
+        352
+      ],
+      "id": "198a44ff-219a-4a41-b2db-3da0c531cae5",
+      "name": "Sticky Note9"
+    },
+    {
+      "parameters": {
+        "content": "Limpiar Datos",
+        "height": 864,
+        "width": 166
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1616,
+        352
+      ],
+      "id": "5a611761-45c0-456b-88b7-720b7d199511",
+      "name": "Sticky Note10"
+    },
+    {
+      "parameters": {
+        "content": "Datos Finales",
+        "height": 864,
+        "width": 166
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1840,
+        352
+      ],
+      "id": "45f4063f-67ea-4121-a123-ac535efbd52d",
+      "name": "Sticky Note11"
+    },
+    {
+      "parameters": {
+        "content": "ENVIAR DATOS",
+        "height": 1344,
+        "width": 1808,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2080,
+        80
+      ],
+      "id": "417934f0-a689-4f91-b1a2-8cc9e59e1c2b",
+      "name": "Sticky Note12"
+    },
+    {
+      "parameters": {
+        "content": "Comprobar si existe el producto",
+        "height": 1280,
+        "width": 166
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2288,
+        128
+      ],
+      "id": "4015ad15-4c00-41e8-a2ee-30d0fca35892",
+      "name": "Sticky Note13"
+    },
+    {
+      "parameters": {
+        "content": "Condicional si existe el producto",
+        "height": 1280,
+        "width": 166
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2512,
+        128
+      ],
+      "id": "94180daa-8b79-49bc-bdb7-1e4f0c7ba7cf",
+      "name": "Sticky Note14"
+    },
+    {
+      "parameters": {
+        "content": "Obtener Información",
+        "height": 1280,
+        "width": 166
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2736,
+        128
+      ],
+      "id": "a4e0ca58-8b02-4e12-b28a-11f4986e4c09",
+      "name": "Sticky Note15"
+    },
+    {
+      "parameters": {
+        "content": "Obtener sucursal",
+        "height": 1280,
+        "width": 166
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        2960,
+        128
+      ],
+      "id": "4a2d8cde-7b22-4400-a37b-6d5dae6d0ddd",
+      "name": "Sticky Note16"
+    },
+    {
+      "parameters": {
+        "content": "Filtrar sucursal",
+        "height": 1280,
+        "width": 166
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3184,
+        128
+      ],
+      "id": "67edf27b-eead-47ea-a6a0-120083a352f7",
+      "name": "Sticky Note17"
+    },
+    {
+      "parameters": {
+        "content": "Obtener variante",
+        "height": 1280,
+        "width": 166
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3408,
+        128
+      ],
+      "id": "ec68e6d4-c601-4a77-9076-04d4aa03924d",
+      "name": "Sticky Note18"
+    },
+    {
+      "parameters": {
+        "content": "Insertar Datos",
+        "height": 1280,
+        "width": 166
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3632,
+        128
+      ],
+      "id": "f6f133db-671f-4488-866f-fa27714a6527",
+      "name": "Sticky Note19"
+    },
+    {
+      "parameters": {
+        "content": "",
+        "width": 982,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        272,
+        496
+      ],
+      "typeVersion": 1,
+      "id": "291daed8-58ef-4323-b655-493043cb51a7",
+      "name": "Sticky Note20"
+    },
+    {
+      "parameters": {
+        "content": "",
+        "width": 982,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        288,
+        672
+      ],
+      "typeVersion": 1,
+      "id": "44deb015-bcd4-453d-82d0-7641ec4577c4",
+      "name": "Sticky Note21"
+    },
+    {
+      "parameters": {
+        "content": "",
+        "width": 982,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        304,
+        864
+      ],
+      "typeVersion": 1,
+      "id": "77a3f6ab-78a0-481e-b084-1e8917252fae",
+      "name": "Sticky Note22"
+    },
+    {
+      "parameters": {
+        "content": "",
+        "height": 336,
+        "width": 1510,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        2288,
+        208
+      ],
+      "typeVersion": 1,
+      "id": "5c4399ca-408d-4cbf-84a8-e85d8c9cc80c",
+      "name": "Sticky Note23"
+    },
+    {
+      "parameters": {
+        "content": "",
+        "height": 336,
+        "width": 1510,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        2288,
+        592
+      ],
+      "typeVersion": 1,
+      "id": "c2e6c8d3-ea7e-4666-ab64-3444a973be88",
+      "name": "Sticky Note24"
+    },
+    {
+      "parameters": {
+        "content": "",
+        "height": 336,
+        "width": 1510,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        2288,
+        992
+      ],
+      "typeVersion": 1,
+      "id": "809c7af2-e778-463f-8ee9-3f432721316b",
+      "name": "Sticky Note25"
+    },
+    {
+      "parameters": {
+        "content": "FUNCIONES",
+        "height": 80,
+        "width": 150
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        192,
+        0
+      ],
+      "id": "b39a81bd-9c71-433f-99d6-704c22b7886b",
+      "name": "Sticky Note26"
+    },
+    {
+      "parameters": {
+        "content": "SECCIONES",
+        "height": 80,
+        "width": 150,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        192,
+        96
+      ],
+      "id": "b9b93ba2-e51f-40bf-b636-71de20f212e0",
+      "name": "Sticky Note27"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-01-14T08:06:45.606Z",
+      "createdAt": "2026-01-14T08:06:45.606Z",
+      "role": "workflow:owner",
+      "workflowId": "Ia99-8wA6p9XBIX-V0Ph8",
+      "projectId": "x5UZcmGQw2OWHuXb"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2026-01-15T08:00:45.091Z",
+  "versionId": "c8f3c11a-43af-4def-b39a-4b076f0c1251"
+}
