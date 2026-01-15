@@ -1,5 +1,7 @@
 {
-  "active": true,
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
   "connections": {
     "Webhook": {
       "main": [
@@ -18,7 +20,7 @@
           {
             "node": "Merge",
             "type": "main",
-            "index": 1
+            "index": 0
           }
         ]
       ]
@@ -39,6 +41,17 @@
         [
           {
             "node": "Update row(s)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "obtener fecha": {
+      "main": [
+        [
+          {
+            "node": "Copy file",
             "type": "main",
             "index": 0
           }
@@ -67,7 +80,7 @@
           {
             "node": "Merge",
             "type": "main",
-            "index": 2
+            "index": 1
           }
         ]
       ]
@@ -128,11 +141,6 @@
             "node": "Code in JavaScript",
             "type": "main",
             "index": 0
-          },
-          {
-            "node": "Edit Fields1",
-            "type": "main",
-            "index": 0
           }
         ]
       ]
@@ -142,50 +150,6 @@
         [
           {
             "node": "Update row(s)1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "GraphQL1": {
-      "main": [
-        [
-          {
-            "node": "Merge",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Edit Fields1": {
-      "main": [
-        [
-          {
-            "node": "GraphQL1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "obtener fecha": {
-      "main": [
-        [
-          {
-            "node": "formatear fecha",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "formatear fecha": {
-      "main": [
-        [
-          {
-            "node": "Copy file",
             "type": "main",
             "index": 0
           }
@@ -221,7 +185,7 @@
       "parameters": {
         "authentication": "headerAuth",
         "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-07/graphql.json",
-        "query": "query getOrder($id: ID!) {\n\n  order(id: $id) {\n\n    id\n\n    name\n\n    createdAt\n\n    email\n\n    totalPriceSet {\n\n      shopMoney {\n\n        amount\n\n        currencyCode\n\n      }\n\n    }\n\n    lineItems(first: 10) {\n\n      edges {\n\n        node {\n\n          title\n\n          quantity\n\n          originalUnitPriceSet {\n\n            shopMoney {\n\n              amount\n\n              currencyCode\n\n            }\n\n          }\n\n        }\n\n      }\n\n    }\n\n    fulfillments {\n\n      id\n\n      location {\n\n        name\n\n        address {\n\n          address1\n\n          city\n\n          province\n\n          country\n\n          zip\n\n        }\n\n      }\n\n    }\n\n    transactions(first: 5) {\n\n      formattedGateway\n\n      kind\n\n      status\n\n    }\n\n    customer {\n\n      firstName\n\n      lastName\n\n      email\n\n    }\n\n  }\n\n}\n",
+        "query": "query getOrder($id: ID!) {\n  order(id: $id) {\n    id\n    name\n    createdAt\n    email\n    totalPriceSet {\n      shopMoney {\n        amount\n        currencyCode\n      }\n    }\n    lineItems(first: 10) {\n      edges {\n        node {\n          title\n          quantity\n          originalUnitPriceSet {\n            shopMoney {\n              amount\n              currencyCode\n            }\n          }\n          # --- AQUÍ EMPIEZA LO NUEVO ---\n          variant {\n            inventoryItem {\n              unitCost {\n                amount\n                currencyCode\n              }\n            }\n          }\n          # --- AQUÍ TERMINA LO NUEVO ---\n        }\n      }\n    }\n    fulfillments {\n      id\n      location {\n        name\n        address {\n          address1\n          city\n          province\n          country\n          zip\n        }\n      }\n    }\n    transactions(first: 5) {\n      formattedGateway\n      kind\n      status\n    }\n    customer {\n      firstName\n      lastName\n      email\n    }\n  }\n}",
         "variables": "={\n  \"id\": \"gid://shopify/Order/{{ $('Webhook').item.json.body.id }}\"\n}",
         "headerParametersUi": {
           "parameter": [
@@ -235,8 +199,8 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        -1200,
-        -896
+        -1312,
+        -1040
       ],
       "id": "f2b989f7-e790-4b8f-83aa-abfa484470ea",
       "name": "GraphQL",
@@ -306,7 +270,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -1664,
+        -1680,
         -304
       ],
       "id": "bccf6dd5-1066-44c5-bcc2-24c2eb899253",
@@ -320,13 +284,13 @@
           "value": "1QZ-GBz6D6EL4fZh3lh9PyAjwWzyjVn8nN0wy4mUjg04",
           "mode": "id"
         },
-        "name": "=Informe_Diario_{{ $json.FECHA }}",
+        "name": "=Informe Diario {{ $json.formattedDate }}",
         "options": {}
       },
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        -1200,
+        -1312,
         -528
       ],
       "id": "7c991240-6515-4268-98db-37bdea8a494d",
@@ -342,17 +306,30 @@
       "parameters": {
         "content": "CREAR DOCUMENTO",
         "height": 208,
-        "width": 960,
+        "width": 912,
         "color": 6
       },
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -1664,
+        -1680,
         -576
       ],
       "id": "0316b82a-37aa-4054-a571-03ce6f7d5811",
       "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Este código se ejecuta en un nodo Function de n8n.\n\n// 1. Obtener la fecha y hora actuales del sistema (servidor)\nconst dateObject = new Date();\n\n// 2. Definir las opciones de formato para España.\n// 'es-ES' garantiza el orden del formato local.\n// 'Europe/Madrid' corrige la zona horaria del servidor al horario de España.\nconst options = {\n    year: 'numeric',\n    month: '2-digit',\n    day: '2-digit',\n    timeZone: 'Europe/Madrid' // <<-- ¡Ajuste de Zona Horaria!\n};\n\n// 3. Crear el formateador y aplicar el formato.\n// El resultado será una cadena como \"04/12/2025\"\nconst formatter = new Intl.DateTimeFormat('es-ES', options);\nconst formattedDateSlash = formatter.format(dateObject);\n\n// 4. Reemplazar las barras (/) por guiones (-) para obtener dd-mm-aaaa\nconst formattedDate = formattedDateSlash.replace(/\\//g, '-'); // Resultado: 04-12-2025\n\n// 5. Retornar el resultado en la estructura de datos de n8n\nreturn [{\n    json: {\n        formattedDate: formattedDate,\n        // Puedes añadir más campos si los necesitas, por ejemplo, la hora:\n        // formattedTime: new Intl.DateTimeFormat('es-ES', {hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Madrid'}).format(dateObject)\n    }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1472,
+        -528
+      ],
+      "id": "da955a52-4eed-4b33-be5a-ead0f6e06504",
+      "name": "obtener fecha"
     },
     {
       "parameters": {
@@ -383,8 +360,7 @@
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "ID_Documento": "={{ $('Copy file').item.json.id }}",
-            "fecha": "={{ $('formatear fecha').item.json.FECHA }}"
+            "ID_Documento": "={{ $('Copy file').item.json.id }}"
           },
           "matchingColumns": [
             "ID_Documento"
@@ -393,16 +369,6 @@
             {
               "id": "ID_Documento",
               "displayName": "ID_Documento",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "readOnly": false,
-              "removed": false
-            },
-            {
-              "id": "fecha",
-              "displayName": "fecha",
               "required": false,
               "defaultMatch": false,
               "display": true,
@@ -419,7 +385,7 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1,
       "position": [
-        -912,
+        -1008,
         -528
       ],
       "id": "08668728-f413-42a5-a7ea-de06088c173d",
@@ -432,21 +398,19 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -1200,
-        -752
+        -1312,
+        -768
       ],
       "id": "9e8a8feb-92c7-440b-b194-4ee2d05fe221",
       "name": "Code in JavaScript"
     },
     {
-      "parameters": {
-        "numberInputs": 3
-      },
+      "parameters": {},
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        -912,
-        -912
+        -1152,
+        -896
       ],
       "id": "5f0365d1-36ab-4077-a2dd-3552421b7e0d",
       "name": "Merge"
@@ -465,12 +429,6 @@
               "id": "e89736ae-2f29-40c8-80b4-2181722ee3f5",
               "name": "METODO DE PAGO",
               "value": "={{ $json.transactionGateway }}",
-              "type": "string"
-            },
-            {
-              "id": "dc4a77f5-966d-4efc-b755-1f0fe34f6958",
-              "name": "COSTO POR UNIDAD",
-              "value": "={{ $json.product.unit_cost }}",
               "type": "string"
             },
             {
@@ -514,6 +472,18 @@
               "name": "ID_DOCUMENTO",
               "value": "={{ $json.product.ID_documento }}",
               "type": "string"
+            },
+            {
+              "id": "46a41980-f2f0-42a3-8abd-5d8a31996c81",
+              "name": "PRECIO_UNITARIO",
+              "value": "={{ $json.product.unit_cost }}",
+              "type": "string"
+            },
+            {
+              "id": "c71f070a-6aca-4cb5-b1e2-73bdff571f45",
+              "name": "PRECIO_PRODUCTO",
+              "value": "={{ $json.product.original_price }}",
+              "type": "string"
             }
           ]
         },
@@ -522,21 +492,21 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -576,
-        -912
+        -848,
+        -896
       ],
       "id": "6f545319-847f-4c62-8469-9e364d274988",
       "name": "Edit Fields"
     },
     {
       "parameters": {
-        "jsCode": "// 1. Validaciones básicas\nif (items.length < 2) {\n    throw new Error(\"Se esperaban al menos 2 ítems de entrada.\");\n}\n\n// Inicializamos variables\nlet orderData = null;\nconst productRows = []; // Aquí guardaremos los ítems que tienen ID_documento\nconst costMap = {}; // Aquí guardaremos los costos indexados por SKU\n\n// 2. Clasificar los ítems de entrada\nfor (const item of items) {\n    const json = item.json;\n\n    // A) Es la ORDEN (tiene data.order)\n    if (json.data && json.data.order) {\n        orderData = json.data.order;\n    } \n    // B) Es información de COSTO de Shopify (tiene data.productVariant)\n    else if (json.data && json.data.productVariant) {\n        const variant = json.data.productVariant;\n        const sku = variant.sku;\n        const costAmount = variant.inventoryItem?.unitCost?.amount;\n        \n        // Guardamos el costo en un objeto usando el SKU como clave para buscarlo rápido después\n        if (sku && costAmount) {\n            costMap[sku] = costAmount;\n        }\n    }\n    // C) Es el ítem procesado (tiene ID_documento)\n    else if (json.ID_documento) {\n        productRows.push(json);\n    }\n}\n\nif (!orderData) {\n    throw new Error(\"No se encontró el ítem de la orden de Shopify.\");\n}\n\nif (productRows.length === 0) {\n    throw new Error(\"No se encontraron ítems de producto con ID_documento.\");\n}\n\n// 3. Crear objeto base de la orden\nconst baseOrderData = {\n    id: orderData.id,\n    name: orderData.name,\n    createdAt: orderData.createdAt,\n    totalPrice: orderData.totalPriceSet?.shopMoney?.amount || 'N/A',\n    currencyCode: orderData.totalPriceSet?.shopMoney?.currencyCode || 'N/A',\n    \n    // Datos del cliente\n    customer: orderData.customer,\n    \n    // Datos de envío\n    fulfillmentLocation: orderData.fulfillments?.[0]?.location?.name || 'N/A',\n    fulfillmentAddress: orderData.fulfillments?.[0]?.location?.address || 'N/A',\n    \n    // Datos de la transacción\n    transactionGateway: orderData.transactions?.[0]?.formattedGateway || 'N/A',\n    transactionKind: orderData.transactions?.[0]?.kind || 'N/A',\n    transactionStatus: orderData.transactions?.[0]?.status || 'N/A',\n};\n\n// 4. Iterar sobre los productos y fusionar (incluyendo el costo encontrado)\nconst combinedItems = [];\n\nfor (const productData of productRows) {\n    \n    // Buscamos si existe un costo guardado para este SKU\n    const sku = productData.sku;\n    const unitCost = costMap[sku] || '0.00'; // Si no encuentra match, pone 0.00 o N/A\n\n    const combinedItem = {\n        ...baseOrderData,\n        \n        product: {\n            ID_documento: productData.ID_documento,\n            numero_fila: productData.numero_fila,\n            product_name: productData.product_name,\n            sku: productData.sku,\n            variant_title: productData.variant_title,\n            original_price: productData.original_price,\n            total_discount_applied: productData.total_discount_applied,\n            final_paid_price: productData.final_paid_price,\n            currency: productData.currency,\n            // Aquí agregamos el campo solicitado\n            unit_cost: unitCost \n        }\n    };\n    \n    combinedItems.push({\n        json: combinedItem,\n    });\n}\n\nreturn combinedItems;"
+        "jsCode": "// Validar que haya al menos 2 ítems (1 orden + 1 producto mínimo)\nif (items.length < 2) {\n  return []; // O lanza error si prefieres\n}\n\n// 1. Identificar cuál ítem es la ORDEN de Shopify\nconst orderItemIndex = items.findIndex(item => \n  item.json && \n  item.json.data && \n  item.json.data.order && \n  item.json.data.order.id\n);\n\nif (orderItemIndex === -1) {\n  throw new Error(\"No se encontró el ítem de la orden de Shopify en la entrada.\");\n}\n\n// Extraemos los datos de la orden\nconst orderData = items[orderItemIndex].json.data.order;\n\n// 2. Identificar los PRODUCTOS (todo lo que no sea la orden)\nconst productItems = items.filter((_, index) => index !== orderItemIndex);\n\nif (productItems.length === 0) {\n   throw new Error(\"Se encontró la orden, pero no hay ítems de productos para procesar.\");\n}\n\n// Array para almacenar el resultado\nconst combinedItems = [];\n\n// 3. Preparar los datos base de la orden (comunes para todos)\nconst baseOrderData = {\n  order_id: orderData.id,\n  order_name: orderData.name,\n  order_createdAt: orderData.createdAt,\n  order_totalPrice: orderData.totalPriceSet?.shopMoney?.amount || '0.00',\n  order_currency: orderData.totalPriceSet?.shopMoney?.currencyCode || 'N/A',\n  \n  customer_email: orderData.customer?.email || 'N/A',\n  customer_id: orderData.customer?.id || 'N/A',\n  \n  fulfillmentLocation: orderData.fulfillments?.[0]?.location?.name || 'N/A',\n  fulfillmentAddress1: orderData.fulfillments?.[0]?.location?.address?.address1 || 'N/A',\n  fulfillmentCity: orderData.fulfillments?.[0]?.location?.address?.city || 'N/A',\n  \n  transactionGateway: orderData.transactions?.[0]?.formattedGateway || 'N/A',\n  transactionKind: orderData.transactions?.[0]?.kind || 'N/A',\n  transactionStatus: orderData.transactions?.[0]?.status || 'N/A',\n};\n\n// 4. Fusionar cada producto con los datos de la orden\nfor (const productItem of productItems) {\n  const productData = productItem.json;\n  \n  // --- LÓGICA NUEVA PARA EL UNIT COST ---\n  // Buscamos dentro de los lineItems de la orden de Shopify el ítem que coincida \n  // con el nombre del producto actual para sacar su costo.\n  // Nota: Usamos el título porque el SKU no venía en la parte de Shopify de tu query anterior,\n  // si añades SKU a la query de Shopify, es mejor comparar por SKU.\n  const matchedShopifyItem = orderData.lineItems?.edges?.find(edge => \n      edge.node.title === productData.product_name\n  );\n\n  // Extraemos el costo con seguridad (si no existe o es null, devolvemos null o '0.00')\n  const costAmount = matchedShopifyItem?.node?.variant?.inventoryItem?.unitCost?.amount || null;\n  // -------------------------------------\n\n  const combinedItem = {\n    ...baseOrderData, \n\n    // Datos del producto específico\n    product: {\n      ID_documento: productData.ID_documento,\n      numero_fila: productData.numero_fila,\n      product_name: productData.product_name,\n      sku: productData.sku,\n      variant_title: productData.variant_title,\n      \n      // Precios de venta\n      original_price: productData.original_price,\n      total_discount_applied: productData.total_discount_applied,\n      final_paid_price: productData.final_paid_price,\n      currency: productData.currency,\n\n      // --- AQUÍ AÑADIMOS EL COSTO ---\n      unit_cost: costAmount \n    }\n  };\n  \n  combinedItems.push({\n    json: combinedItem,\n  });\n}\n\n// 5. Devolver el resultado\nreturn combinedItems;"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -736,
-        -912
+        -1008,
+        -896
       ],
       "id": "44c1b76f-eedb-42ae-bc71-e31442c0e5cc",
       "name": "Code in JavaScript1"
@@ -595,7 +565,7 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1,
       "position": [
-        -1056,
+        -1152,
         -528
       ],
       "id": "05e63673-e364-4131-9bec-ac7e7f58eff3",
@@ -622,7 +592,7 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1,
       "position": [
-        -1456,
+        -1472,
         -896
       ],
       "id": "0380bebf-1df7-437f-85d0-a3536c40472d",
@@ -653,8 +623,8 @@
             "NOMBRE DE PRODUCTO": "={{ $json['NOMBRE DE PRODUCTO'] }}",
             "VARIANTE": "={{ $json.VARIANTE }}",
             "row_number": "={{ $json.NUMERO_FILA }}",
-            "COSTE POR UNIDAD": "={{ $json['COSTO POR UNIDAD'] }}",
-            "PRECIO DE PRODUCTO": "={{ $json['COSTE DE PRODUCTO'] }}"
+            "PRECIO DE PRODUCTO": "={{ $json.PRECIO_PRODUCTO }}",
+            "COSTE POR UNIDAD": "={{ $json.PRECIO_UNITARIO }}"
           },
           "matchingColumns": [
             "row_number"
@@ -762,6 +732,16 @@
               "canBeUsedToMatch": true
             },
             {
+              "id": "Venta Web",
+              "displayName": "Venta Web",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
               "id": "TOTAL",
               "displayName": "TOTAL",
               "required": false,
@@ -790,8 +770,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -400,
-        -912
+        -704,
+        -896
       ],
       "id": "56b5d05d-137f-4d64-9536-fc63537c088e",
       "name": "Update row in sheet",
@@ -857,117 +837,26 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1,
       "position": [
-        -240,
-        -912
+        -528,
+        -896
       ],
       "id": "4dfa361c-f4ee-490c-a9e9-651276b5c324",
       "name": "Update row(s)1"
     },
     {
       "parameters": {
-        "authentication": "headerAuth",
-        "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-07/graphql.json",
-        "query": "query getVariantCost($id: ID!) {\n  productVariant(id: $id) {\n    id\n    sku\n    title\n    inventoryItem {\n      id\n      unitCost {\n        amount\n        currencyCode\n      }\n    }\n  }\n}\n\n",
-        "variables": "={\n  \"id\": \"{{ $json['ID VARIANTE'] }}\"\n}",
-        "headerParametersUi": {
-          "parameter": [
-            {
-              "name": "Content-Type",
-              "value": "application/json"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.graphql",
-      "typeVersion": 1.1,
-      "position": [
-        -1136,
-        -1040
-      ],
-      "id": "dff99538-fd0c-49e3-805d-709b32d70e0a",
-      "name": "GraphQL1",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "OPt2Cl0dnwcU4qRk",
-          "name": "ShopifyInformes"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "711be730-983a-47e6-99f2-d818a44482be",
-              "name": "ID VARIANTE",
-              "value": "=gid://shopify/ProductVariant/{{ $('Webhook').item.json.body.line_items[0].variant_id }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        -1264,
-        -1040
-      ],
-      "id": "b127f142-72c0-4160-95a7-c8b7cc4a5371",
-      "name": "Edit Fields1"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "87a5aeba-2adf-47d1-8d7b-b55d5016266a",
-              "name": "FECHA",
-              "value": "={{ $today }}",
-              "type": "object"
-            }
-          ]
-        },
-        "options": {
-          "ignoreConversionErrors": true
-        }
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        -1488,
-        -528
-      ],
-      "id": "ebc149b0-5181-4a06-9bc3-3d8d1a75c549",
-      "name": "obtener fecha"
-    },
-    {
-      "parameters": {
-        "jsCode": "return items.map(item => {\n  const fecha = new Date(item.json.FECHA);\n\n  const dia = String(fecha.getDate()).padStart(2, '0');\n  const mes = String(fecha.getMonth() + 1).padStart(2, '0');\n  const anio = fecha.getFullYear();\n\n  item.json.FECHA = `${dia}/${mes}/${anio}`;\n\n  return item;\n});\n"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        -1344,
-        -528
-      ],
-      "id": "59f08d5a-ebac-4083-a723-97275f4f9f86",
-      "name": "formatear fecha"
-    },
-    {
-      "parameters": {
-        "content": "ACTUALIZAR DOCUMENTO CON CADA PEDIDO",
+        "content": "PROCESAR PEDIDO AL DOCUMENTO",
         "height": 448,
-        "width": 1632,
+        "width": 1360,
         "color": 3
       },
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -1664,
+        -1680,
         -1072
       ],
-      "id": "534666d8-4de3-45c9-b3eb-dcf514400f19",
+      "id": "d0b2caaf-3338-4d6c-b9b5-0d40d4f76fff",
       "name": "Sticky Note"
     }
   ],
@@ -991,6 +880,6 @@
   },
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2025-12-20T08:10:29.000Z",
-  "versionId": "b5a09c06-3ff4-4bb8-b1ad-1627f1e33d34"
+  "updatedAt": "2026-01-14T14:22:53.989Z",
+  "versionId": "02347f65-1fc1-4909-b54d-93b541f14652"
 }
