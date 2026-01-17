@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-01-15T07:45:58.000Z",
-    "createdAt": "2026-01-14T09:06:06.705Z",
-    "versionId": "9abb499a-1fcd-4eaf-825d-ec877116f8fe",
+    "updatedAt": "2026-01-17T07:43:13.000Z",
+    "createdAt": "2026-01-17T07:43:10.905Z",
+    "versionId": "27d54e63-8872-4fe9-9fa3-7401473b03fa",
     "workflowId": "KLZaLoaqR-lWUkANfNGAn",
     "nodes": [
       {
@@ -580,7 +580,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          3856,
+          3872,
           384
         ],
         "id": "126c738f-73e7-4ed3-9e25-68531cd7de60",
@@ -743,10 +743,10 @@
           "operation": "get",
           "dataTableId": {
             "__rl": true,
-            "value": "AD0QThH3qyX9numR",
+            "value": "YhO4ZRxZ7YiJDe7A",
             "mode": "list",
             "cachedResultName": "Plantillas Canva",
-            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/AD0QThH3qyX9numR"
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/YhO4ZRxZ7YiJDe7A"
           },
           "filters": {
             "conditions": [
@@ -1123,11 +1123,11 @@
       }
     },
     "authors": "Info Tailwind",
-    "name": "Version 9abb499a",
+    "name": "Version 27d54e63",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "9abb499a-1fcd-4eaf-825d-ec877116f8fe",
+  "activeVersionId": "27d54e63-8872-4fe9-9fa3-7401473b03fa",
   "connections": {
     "HTTP Request": {
       "main": [
@@ -2038,7 +2038,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        3856,
+        3872,
         384
       ],
       "id": "126c738f-73e7-4ed3-9e25-68531cd7de60",
@@ -2269,6 +2269,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-01-16T08:24:08.242Z",
-  "versionId": "c83522ce-7d7d-4519-bc74-d95a91313c9e"
+  "updatedAt": "2026-01-17T07:43:10.904Z",
+  "versionId": "27d54e63-8872-4fe9-9fa3-7401473b03fa"
 }
