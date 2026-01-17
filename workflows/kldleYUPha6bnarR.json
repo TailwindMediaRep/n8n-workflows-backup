@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-01-14T09:43:58.000Z",
-    "createdAt": "2025-12-12T08:23:36.163Z",
-    "versionId": "429bcc88-bba6-498c-874d-a724976541c1",
+    "updatedAt": "2026-01-16T11:55:42.000Z",
+    "createdAt": "2026-01-16T11:55:09.099Z",
+    "versionId": "9b206ef3-3455-4de4-83fe-4165a2c702e0",
     "workflowId": "kldleYUPha6bnarR",
     "nodes": [
       {
@@ -14,16 +14,16 @@
           "genericAuthType": "oAuth2Api",
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "={\n  \"brand_template_id\": \"EAG7MOm9u9M\",\n  \"export_name\": \"Historia dia hoy\",\n  \"data\": {\n    \"fecha\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.fecha }}\"\n    },\n    \"calidadnieve_general\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.calidadnieve_general }}\"\n    },\n    \"estadogeneral\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.estadogeneral }}\"\n    },\n    \"visibilidadgeneral\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.visibilidadgeneral }}\"\n    },\n    \"temperaturaminima\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.temperaturaminima }}\"\n    },\n    \"temperaturamaxima\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.temperaturamaxima }}\"\n    },\n    \"vientominimo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.vientominimo }}\"\n    },\n    \"vientomaximo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.vientomaximo }}\"\n    },\n    \"espesorminimo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.espesorminimo }}\"\n    },\n    \"espesormaximo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.espesormaximo }}\"\n    },\n    \"remontes_abiertos\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.remontes_abiertos }}\"\n    },\n    \"km_esquiables\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.km_esquiables }}\"\n    },\n    \"pistasabiertas\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.zonas_abiertas }}\" \n    },\n    \"numeropistas\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.numerozonas }}\"\n    }\n  }\n}",
+          "jsonBody": "={\n  \"brand_template_id\": \"{{ $json.id_documento }}\",\n  \"export_name\": \"Historia dia hoy\",\n  \"data\": {\n    \"fecha\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Code in JavaScript1').item.json.fecha }}\"\n    },\n    \"calidadnieve_general\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Code in JavaScript1').item.json.calidadnieve_general }}\"\n    },\n    \"estadogeneral\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Code in JavaScript1').item.json.estadogeneral }}\"\n    },\n    \"visibilidadgeneral\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Code in JavaScript1').item.json.visibilidadgeneral }}\"\n    },\n    \"temperaturaminima\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Code in JavaScript1').item.json.temperaturaminima }}\"\n    },\n    \"temperaturamaxima\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Code in JavaScript1').item.json.temperaturamaxima }}\"\n    },\n    \"vientominimo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Code in JavaScript1').item.json.vientominimo }}\"\n    },\n    \"vientomaximo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Code in JavaScript1').item.json.vientomaximo }}\"\n    },\n    \"espesorminimo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Code in JavaScript1').item.json.espesorminimo }}\"\n    },\n    \"espesormaximo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Code in JavaScript1').item.json.espesormaximo }}\"\n    },\n    \"remontes_abiertos\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Code in JavaScript1').item.json.remontes_abiertos }}\"\n    },\n    \"km_esquiables\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Code in JavaScript1').item.json.km_esquiables }}\"\n    },\n    \"pistasabiertas\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Code in JavaScript1').item.json.zonas_abiertas }}\" \n    },\n    \"numeropistas\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Code in JavaScript1').item.json.numerozonas }}\"\n    }\n  }\n}",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          992,
-          -240
+          1664,
+          -1760
         ],
-        "id": "bfba9031-2760-4a1e-9cd5-df0d4919a417",
+        "id": "9654ecf1-32ab-4757-adb0-87b9f07315aa",
         "name": "HTTP Request",
         "credentials": {
           "oAuth2Api": {
@@ -34,7 +34,7 @@
       },
       {
         "parameters": {
-          "url": "=https://api.canva.com/rest/v1/autofills/{{ $json.job.id }}",
+          "url": "=https://api.canva.com/rest/v1/autofills/{{ $('HTTP Request').item.json.job.id }}",
           "authentication": "genericCredentialType",
           "genericAuthType": "oAuth2Api",
           "options": {}
@@ -42,10 +42,10 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          1408,
-          -240
+          2144,
+          -1760
         ],
-        "id": "729b74ec-4d44-4bd9-8516-730063fdba90",
+        "id": "6222d526-1ca0-4ae2-b996-d6ae44f671c0",
         "name": "HTTP Request1",
         "credentials": {
           "oAuth2Api": {
@@ -62,10 +62,10 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          -528,
-          -256
+          -656,
+          -1776
         ],
-        "id": "44b366ed-35e3-4931-9a9a-1270702b606e",
+        "id": "da8026f8-8ac5-4354-b419-8fa2725b22de",
         "name": "HTTP Request2"
       },
       {
@@ -225,7 +225,7 @@
               {
                 "id": "8db21f40-d33f-4c63-b835-a075779c8c1d",
                 "name": "Partes[0].Parte.partenieve.pistas.paginas",
-                "value": "={{ $json.Partes[0].Parte.partenieve.pistas.paginas }}",
+                "value": "={{ $json.Partes[1].Parte.partenieve.pistas.paginas }}",
                 "type": "object"
               }
             ]
@@ -235,10 +235,10 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          -384,
-          -256
+          -496,
+          -1776
         ],
-        "id": "322a55fd-abb5-42e1-95ee-8a0c5c9ff5f1",
+        "id": "5c19cfc0-2462-49d8-b3d5-a6889f5d8a3d",
         "name": "Edit Fields"
       },
       {
@@ -248,10 +248,10 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          -224,
-          -256
+          -352,
+          -1776
         ],
-        "id": "f0ab0b3a-8465-4c12-a52f-6e22fb0b8cae",
+        "id": "eb515338-92e6-4e67-bad5-2216ef5ac98f",
         "name": "Code in JavaScript"
       },
       {
@@ -261,10 +261,10 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          32,
-          -608
+          -16,
+          -2144
         ],
-        "id": "50542e04-469a-4512-b518-018e20cb6819",
+        "id": "0e36311c-5edf-4f2c-ab91-6b6a8bae6a3b",
         "name": "modas_cielo"
       },
       {
@@ -274,10 +274,10 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          32,
-          -416
+          -96,
+          -1936
         ],
-        "id": "5c073de5-cce8-46a7-aa9d-f38f48309fe1",
+        "id": "155d582c-754f-49ce-b06b-d57274c0749d",
         "name": "zonas abiertas"
       },
       {
@@ -285,12 +285,13 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          1200,
-          -240
+          1920,
+          -1760
         ],
-        "id": "e8490937-5403-45fc-8fb8-970aac8b0f7e",
+        "id": "c9f8f9ca-6547-4340-bce6-580f2621e75b",
         "name": "Wait",
-        "webhookId": "32c288d1-b381-45c0-8e20-ea1349a9fa27"
+        "webhookId": "8cce73b4-0a6e-4db3-b503-1267489be04b",
+        "executeOnce": true
       },
       {
         "parameters": {
@@ -299,10 +300,10 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          48,
-          -112
+          0,
+          -1696
         ],
-        "id": "6f277312-5000-4400-9d19-5f689a8b2f3b",
+        "id": "44c3ca04-f48f-4386-a2fa-2db76f0b20f2",
         "name": "minimos y maximos"
       },
       {
@@ -352,10 +353,10 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          48,
-          80
+          0,
+          -1456
         ],
-        "id": "9d35a22b-1962-47ef-a5b6-15aff35f3386",
+        "id": "1f268b96-cbc6-452c-9009-b7b8dcf0738d",
         "name": "valores fijos"
       },
       {
@@ -365,10 +366,10 @@
         "type": "n8n-nodes-base.merge",
         "typeVersion": 3.2,
         "position": [
-          352,
-          -272
+          432,
+          -1792
         ],
-        "id": "ffa466bf-db81-44ed-918f-c179a6c089c8",
+        "id": "28ca7694-4e79-4474-a916-6729a987d344",
         "name": "Merge"
       },
       {
@@ -378,10 +379,10 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          576,
-          -240
+          656,
+          -1760
         ],
-        "id": "c1ecc89a-b660-422f-beb4-281847d85609",
+        "id": "6dde6bba-db88-46c4-a311-bec39dea1f1e",
         "name": "DATOS FINALES"
       },
       {
@@ -391,26 +392,26 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          736,
-          -240
+          880,
+          -1760
         ],
-        "id": "d6af07ac-16f1-404e-b94d-84d7970540b7",
+        "id": "ae929dc9-30d3-4b32-b6bd-82aedc943b96",
         "name": "Code in JavaScript1"
       },
       {
         "parameters": {
           "content": "POST a Canva",
-          "height": 272,
-          "width": 704,
+          "height": 288,
+          "width": 1072,
           "color": 4
         },
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          928,
-          -320
+          800,
+          -1840
         ],
-        "id": "8db568f6-0a55-4b13-bed2-cd0160177c03",
+        "id": "eb20ae75-0ecf-4d7b-86a3-29eaa41bbb78",
         "name": "Sticky Note"
       },
       {
@@ -423,10 +424,10 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          -560,
-          -640
+          -688,
+          -2160
         ],
-        "id": "a1577750-a2b6-4adb-9664-b594e04a21f7",
+        "id": "25b1f672-708d-4239-b5f9-95a772b42924",
         "name": "Sticky Note1"
       },
       {
@@ -442,10 +443,10 @@
         "type": "n8n-nodes-base.facebookGraphApi",
         "typeVersion": 1,
         "position": [
-          2704,
-          -256
+          3392,
+          -1776
         ],
-        "id": "d4025cc9-6c98-422b-a3b5-2ec8c749dca2",
+        "id": "7da66ccf-8fd7-48d5-8c6d-db816b75171b",
         "name": "Facebook Graph API",
         "credentials": {
           "facebookGraphApi": {
@@ -467,17 +468,18 @@
         "type": "n8n-nodes-base.facebookGraphApi",
         "typeVersion": 1,
         "position": [
-          3600,
-          -272
+          4208,
+          -1792
         ],
-        "id": "0b16b58e-3d0c-40cb-a45f-56b2b26b7aa6",
+        "id": "3bb41e32-f010-4102-acc1-fd96e8892501",
         "name": "Facebook Graph API1",
         "credentials": {
           "facebookGraphApi": {
             "id": "F7VbX8jWKCXdAM47",
             "name": "Facebook Graph account"
           }
-        }
+        },
+        "onError": "continueRegularOutput"
       },
       {
         "parameters": {
@@ -489,7 +491,7 @@
             "parameters": [
               {
                 "name": "access_token",
-                "value": "EAAKmVLVrJjwBQPzMiaFGS9h51FfDJVzSqfro6PJKk1ZBhd4bpDeF95MFSedfCRTWcMbExIZCSYyVUUZAsZBaRB6AgzRAqclZBgcYnux5onNTUwYchiXH4ckclskiAipmqeGqgDbLT7NbdBUFWGZANW5h9fMBIJ6JTGV5T2gOV9EnVTgMHjYHilSRZC3uFOgppRvdAZDZD"
+                "value": "EAF2z8nVLTA8BQVHL88vghg4RRZBH9svUgZCP93NSZAB9iSDKxTAMvz8DFby8KVqXp6DWFxfFDiSKOUXvXPVVrJcNxjFOmr0ZCXphOZBUUWRkP8sTZC9wwapmP8vlJQN4NHH2eW9zPRmg2SHrQ0AhjI3n2kx1vAa8nOtr6tbQMhcaP0X0eMtOComwFl3zR7zd7HowZDZD"
               }
             ]
           },
@@ -498,10 +500,10 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          2944,
-          -256
+          3600,
+          -1776
         ],
-        "id": "b9af122c-db1b-4494-82a7-6a53c5d1eda2",
+        "id": "06240652-f050-41e7-a406-a611f53d1746",
         "name": "HTTP Request3",
         "credentials": {
           "facebookGraphApi": {
@@ -537,10 +539,10 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          2320,
-          -240
+          2976,
+          -1760
         ],
-        "id": "3fb5a534-5647-4843-ac96-eb1ee952f4b0",
+        "id": "88a07af8-5d4d-4c7e-9a1f-4db66d843eef",
         "name": "If"
       },
       {
@@ -557,10 +559,10 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          1696,
-          -240
+          2336,
+          -1760
         ],
-        "id": "d24b002e-fc13-4491-b93a-994c8aeb1a3a",
+        "id": "c1aa6ddb-952c-4894-a11b-d3f37a039c68",
         "name": "PRUEBA",
         "credentials": {
           "oAuth2Api": {
@@ -579,10 +581,10 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          2512,
-          -256
+          3168,
+          -1776
         ],
-        "id": "3f4262e7-ed25-44b5-be82-426a1e9886f3",
+        "id": "7555d978-506b-45aa-bf1a-cdfafabbe297",
         "name": "HTTP Request6",
         "credentials": {
           "oAuth2Api": {
@@ -598,12 +600,12 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          2112,
-          -240
+          2768,
+          -1760
         ],
-        "id": "dbfc385a-22e3-4956-9b30-f054aff2c41e",
+        "id": "5531d7ae-3e1e-4e70-a013-b7a468dfde34",
         "name": "Wait1",
-        "webhookId": "dfb45883-55c0-4ead-816d-921403288e5e"
+        "webhookId": "82707f0f-e107-4b71-9887-ad1255db0d8d"
       },
       {
         "parameters": {
@@ -615,10 +617,10 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          1904,
-          -240
+          2560,
+          -1760
         ],
-        "id": "c14866f1-4a73-4932-9d82-f8fc2926f102",
+        "id": "87ba9b82-c2a0-491d-a90b-251cc2de0db3",
         "name": "HTTP Request7",
         "credentials": {
           "oAuth2Api": {
@@ -632,12 +634,12 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          3152,
-          -256
+          3808,
+          -1776
         ],
-        "id": "a35d6451-c070-4e53-a18e-3afb7223e2e1",
+        "id": "475281c7-f520-4d18-8b3a-e8dc41dadfd9",
         "name": "Wait2",
-        "webhookId": "cc062afa-db26-4ebb-bbd8-c5da5d5138a7"
+        "webhookId": "4e9e9bda-286b-4bd6-b112-9133762c2724"
       },
       {
         "parameters": {
@@ -666,10 +668,10 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          3360,
-          -256
+          3984,
+          -1776
         ],
-        "id": "b062251a-6073-49c6-ba8c-ccd3a1d7c43b",
+        "id": "c3ad2eff-8c1a-4047-ba71-69acd0745b05",
         "name": "If1"
       },
       {
@@ -682,26 +684,26 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          1648,
-          -320
+          1888,
+          -1840
         ],
-        "id": "a758bdfe-fcdd-4e4a-816d-3c3ff3ff02ca",
+        "id": "4fcecff3-9ea7-4a71-9b49-c724b9345c25",
         "name": "Sticky Note2"
       },
       {
         "parameters": {
           "content": "SUBIDA HISTORIA\n",
           "height": 288,
-          "width": 1200,
+          "width": 1440,
           "color": 6
         },
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          2688,
-          -320
+          2928,
+          -1840
         ],
-        "id": "3a600618-1d81-46a9-8b72-7443cca68c39",
+        "id": "a3e2cce6-de1f-4d87-89c9-2e53de712c07",
         "name": "Sticky Note3"
       },
       {
@@ -710,7 +712,7 @@
             "interval": [
               {
                 "field": "minutes",
-                "minutesInterval": 10
+                "minutesInterval": 3
               }
             ]
           }
@@ -718,22 +720,132 @@
         "type": "n8n-nodes-base.scheduleTrigger",
         "typeVersion": 1.3,
         "position": [
-          -768,
-          -256
+          -896,
+          -1776
         ],
-        "id": "8df0b3b7-32c1-4c86-8cbb-007eeaf1b049",
+        "id": "c860e63b-41b3-49b3-8ce3-5cf84eeee5c0",
         "name": "Schedule Trigger"
       },
       {
-        "parameters": {},
-        "type": "n8n-nodes-base.manualTrigger",
+        "parameters": {
+          "jsCode": "// Zonas que tú quieres conservar\nconst zonasDeseadas = [\n  'Veleta',\n  'Borreguiles',\n  'Parque Sulayr',\n  'Loma Dilar',\n  'Pista del Mar. (Zona Familiar)',\n  'Rio Monachil',\n  'Jardin de Nieve'\n];\n\nreturn items.map(item => {\n  // Convertimos el string en array\n  const zonas = item.json.zonas_abiertas\n    .split(',')\n    .map(z => z.trim());\n\n  // Filtramos solo las deseadas\n  const zonasFiltradas = zonas.filter(z =>\n    zonasDeseadas.some(zd => z.includes(zd))\n  );\n\n  return {\n    json: {\n      ...item.json,\n      zonas_abiertas: zonasFiltradas\n    }\n  };\n});\n"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          96,
+          -1936
+        ],
+        "id": "8db1f2c7-070d-4dd9-b7f1-711abfa9e919",
+        "name": "Code in JavaScript2"
+      },
+      {
+        "parameters": {
+          "operation": "get",
+          "dataTableId": {
+            "__rl": true,
+            "value": "YhO4ZRxZ7YiJDe7A",
+            "mode": "list",
+            "cachedResultName": "Plantillas Canva",
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/YhO4ZRxZ7YiJDe7A"
+          },
+          "filters": {
+            "conditions": [
+              {
+                "keyName": "Nombre_Documento",
+                "keyValue": "={{ $json.estado_simple }}"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.dataTable",
         "typeVersion": 1,
         "position": [
-          -784,
-          -64
+          1280,
+          -1760
         ],
-        "id": "ea65fc37-43b6-4ade-81bc-3e0cca7f58b9",
-        "name": "When clicking ‘Execute workflow’"
+        "id": "9c7cc8ad-30f3-4ec4-a45f-97179ec78eae",
+        "name": "obtener contador",
+        "executeOnce": false
+      },
+      {
+        "parameters": {
+          "jsCode": "// Iteramos sobre todos los elementos que entran al nodo\nreturn $input.all().map(item => {\n  // Obtenemos el valor actual, asegurando que existe y pasándolo a mayúsculas\n  const estadoOriginal = (item.json.estadogeneral || \"\").toUpperCase();\n  \n  let estadoFinal = \"NUBOSO\"; // Valor por defecto (fallback)\n\n  // Lógica de mapeo\n  if (estadoOriginal.includes(\"NEVANDO\")) {\n    estadoFinal = \"NEVANDO\";\n  } \n  else if (estadoOriginal === \"DESPEJADO\") {\n    estadoFinal = \"DESPEJADO\";\n  } \n  else if (estadoOriginal === \"POCO NUBOSO\") {\n    // Asignamos 'SOLEADO' a 'POCO NUBOSO' ya que es la mejor coincidencia\n    estadoFinal = \"SOLEADO\";\n  } \n  else {\n    // Aquí caerán: \"NUBOSO\", \"MUY NUBOSO\", \"CUBIERTO\", \n    // \"CUBIERTO PARCIAL\" y \"NUBOSO PARCIAL\"\n    estadoFinal = \"NUBOSO\";\n  }\n\n  // Escribimos el resultado en el JSON. \n  // Nota: He creado un campo nuevo 'estado_simple' para no borrar el original,\n  // pero puedes cambiarlo a 'item.json.estadogeneral' si prefieres sobreescribirlo.\n  item.json.estado_simple = estadoFinal;\n\n  return item;\n});"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          1088,
+          -1760
+        ],
+        "id": "926fb2bc-48de-4d7b-b925-e3ea3c9cb073",
+        "name": "Code in JavaScript3"
+      },
+      {
+        "parameters": {
+          "type": "random"
+        },
+        "type": "n8n-nodes-base.sort",
+        "typeVersion": 1,
+        "position": [
+          1456,
+          -1760
+        ],
+        "id": "2529ddd5-e228-48e7-a21c-9620590d8f41",
+        "name": "Sort"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "e5f15ada-1e3d-43a0-87d6-17cb5e1222ac",
+                "name": "ID DOCUMENTO",
+                "value": "={{ $('HTTP Request7').item.json.job.urls[0].match(/(DA[A-Za-z0-9-]+)/)[0] }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          4416,
+          -1792
+        ],
+        "id": "7eae2c4f-9d5b-4c4d-8417-1d9d218cbffe",
+        "name": "Edit Fields1"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "=https://api.canva.com/rest/v1/folders/move",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "oAuth2Api",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"item_id\": \"{{ $json['ID DOCUMENTO'] }}\",\n  \"to_folder_id\": \"FAF-k76AhRE\"\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          4624,
+          -1792
+        ],
+        "id": "b3eeaaf6-1eca-4fe1-bc18-add61e7dfa6d",
+        "name": "HTTP Request4",
+        "credentials": {
+          "canvaApi": {
+            "id": "tuy7V3JiiZVTJf5e",
+            "name": "Canva account"
+          },
+          "oAuth2Api": {
+            "id": "eHEbZK7oC3pW1LQr",
+            "name": "Canva"
+          }
+        }
       }
     ],
     "connections": {
@@ -742,6 +854,17 @@
           [
             {
               "node": "Wait",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "HTTP Request1": {
+        "main": [
+          [
+            {
+              "node": "PRUEBA",
               "type": "main",
               "index": 0
             }
@@ -811,9 +934,9 @@
         "main": [
           [
             {
-              "node": "Merge",
+              "node": "Code in JavaScript2",
               "type": "main",
-              "index": 1
+              "index": 0
             }
           ]
         ]
@@ -877,7 +1000,7 @@
         "main": [
           [
             {
-              "node": "HTTP Request",
+              "node": "Code in JavaScript3",
               "type": "main",
               "index": 0
             }
@@ -895,38 +1018,11 @@
           ]
         ]
       },
-      "HTTP Request1": {
-        "main": [
-          [
-            {
-              "node": "PRUEBA",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Facebook Graph API1": {
-        "main": [
-          []
-        ]
-      },
       "HTTP Request3": {
         "main": [
           [
             {
               "node": "Wait2",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "PRUEBA": {
-        "main": [
-          [
-            {
-              "node": "HTTP Request7",
               "type": "main",
               "index": 0
             }
@@ -951,6 +1047,28 @@
           ]
         ]
       },
+      "PRUEBA": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request7",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "HTTP Request6": {
+        "main": [
+          [
+            {
+              "node": "Facebook Graph API",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
       "Wait1": {
         "main": [
           [
@@ -967,17 +1085,6 @@
           [
             {
               "node": "Wait1",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "HTTP Request6": {
-        "main": [
-          [
-            {
-              "node": "Facebook Graph API",
               "type": "main",
               "index": 0
             }
@@ -1024,11 +1131,66 @@
           ]
         ]
       },
-      "When clicking ‘Execute workflow’": {
+      "Code in JavaScript2": {
         "main": [
           [
             {
-              "node": "HTTP Request2",
+              "node": "Merge",
+              "type": "main",
+              "index": 1
+            }
+          ]
+        ]
+      },
+      "obtener contador": {
+        "main": [
+          [
+            {
+              "node": "Sort",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code in JavaScript3": {
+        "main": [
+          [
+            {
+              "node": "obtener contador",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Sort": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Facebook Graph API1": {
+        "main": [
+          [
+            {
+              "node": "Edit Fields1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Edit Fields1": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request4",
               "type": "main",
               "index": 0
             }
@@ -1037,17 +1199,28 @@
       }
     },
     "authors": "Info Tailwind",
-    "name": "Version 429bcc88",
+    "name": "Version 9b206ef3",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "429bcc88-bba6-498c-874d-a724976541c1",
+  "activeVersionId": "9b206ef3-3455-4de4-83fe-4165a2c702e0",
   "connections": {
     "HTTP Request": {
       "main": [
         [
           {
             "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "PRUEBA",
             "type": "main",
             "index": 0
           }
@@ -1117,9 +1290,9 @@
       "main": [
         [
           {
-            "node": "Merge",
+            "node": "Code in JavaScript2",
             "type": "main",
-            "index": 1
+            "index": 0
           }
         ]
       ]
@@ -1183,7 +1356,7 @@
       "main": [
         [
           {
-            "node": "HTTP Request",
+            "node": "Code in JavaScript3",
             "type": "main",
             "index": 0
           }
@@ -1201,38 +1374,11 @@
         ]
       ]
     },
-    "HTTP Request1": {
-      "main": [
-        [
-          {
-            "node": "PRUEBA",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Facebook Graph API1": {
-      "main": [
-        []
-      ]
-    },
     "HTTP Request3": {
       "main": [
         [
           {
             "node": "Wait2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "PRUEBA": {
-      "main": [
-        [
-          {
-            "node": "HTTP Request7",
             "type": "main",
             "index": 0
           }
@@ -1257,6 +1403,28 @@
         ]
       ]
     },
+    "PRUEBA": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request6": {
+      "main": [
+        [
+          {
+            "node": "Facebook Graph API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
     "Wait1": {
       "main": [
         [
@@ -1273,17 +1441,6 @@
         [
           {
             "node": "Wait1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "HTTP Request6": {
-      "main": [
-        [
-          {
-            "node": "Facebook Graph API",
             "type": "main",
             "index": 0
           }
@@ -1330,11 +1487,66 @@
         ]
       ]
     },
-    "When clicking ‘Execute workflow’": {
+    "Code in JavaScript2": {
       "main": [
         [
           {
-            "node": "HTTP Request2",
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "obtener contador": {
+      "main": [
+        [
+          {
+            "node": "Sort",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript3": {
+      "main": [
+        [
+          {
+            "node": "obtener contador",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sort": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Facebook Graph API1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request4",
             "type": "main",
             "index": 0
           }
@@ -1358,16 +1570,16 @@
         "genericAuthType": "oAuth2Api",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"brand_template_id\": \"EAG7MOm9u9M\",\n  \"export_name\": \"Historia dia hoy\",\n  \"data\": {\n    \"fecha\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.fecha }}\"\n    },\n    \"calidadnieve_general\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.calidadnieve_general }}\"\n    },\n    \"estadogeneral\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.estadogeneral }}\"\n    },\n    \"visibilidadgeneral\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.visibilidadgeneral }}\"\n    },\n    \"temperaturaminima\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.temperaturaminima }}\"\n    },\n    \"temperaturamaxima\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.temperaturamaxima }}\"\n    },\n    \"vientominimo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.vientominimo }}\"\n    },\n    \"vientomaximo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.vientomaximo }}\"\n    },\n    \"espesorminimo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.espesorminimo }}\"\n    },\n    \"espesormaximo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.espesormaximo }}\"\n    },\n    \"remontes_abiertos\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.remontes_abiertos }}\"\n    },\n    \"km_esquiables\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.km_esquiables }}\"\n    },\n    \"pistasabiertas\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.zonas_abiertas }}\" \n    },\n    \"numeropistas\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $json.numerozonas }}\"\n    }\n  }\n}",
+        "jsonBody": "={\n  \"brand_template_id\": \"{{ $json.id_documento }}\",\n  \"export_name\": \"Historia dia hoy\",\n  \"data\": {\n    \"fecha\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Code in JavaScript1').item.json.fecha }}\"\n    },\n    \"calidadnieve_general\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Code in JavaScript1').item.json.calidadnieve_general }}\"\n    },\n    \"estadogeneral\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Code in JavaScript1').item.json.estadogeneral }}\"\n    },\n    \"visibilidadgeneral\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Code in JavaScript1').item.json.visibilidadgeneral }}\"\n    },\n    \"temperaturaminima\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Code in JavaScript1').item.json.temperaturaminima }}\"\n    },\n    \"temperaturamaxima\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Code in JavaScript1').item.json.temperaturamaxima }}\"\n    },\n    \"vientominimo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Code in JavaScript1').item.json.vientominimo }}\"\n    },\n    \"vientomaximo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Code in JavaScript1').item.json.vientomaximo }}\"\n    },\n    \"espesorminimo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Code in JavaScript1').item.json.espesorminimo }}\"\n    },\n    \"espesormaximo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Code in JavaScript1').item.json.espesormaximo }}\"\n    },\n    \"remontes_abiertos\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Code in JavaScript1').item.json.remontes_abiertos }}\"\n    },\n    \"km_esquiables\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Code in JavaScript1').item.json.km_esquiables }}\"\n    },\n    \"pistasabiertas\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Code in JavaScript1').item.json.zonas_abiertas }}\" \n    },\n    \"numeropistas\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Code in JavaScript1').item.json.numerozonas }}\"\n    }\n  }\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        992,
-        -240
+        1664,
+        -1760
       ],
-      "id": "bfba9031-2760-4a1e-9cd5-df0d4919a417",
+      "id": "9654ecf1-32ab-4757-adb0-87b9f07315aa",
       "name": "HTTP Request",
       "credentials": {
         "oAuth2Api": {
@@ -1378,7 +1590,7 @@
     },
     {
       "parameters": {
-        "url": "=https://api.canva.com/rest/v1/autofills/{{ $json.job.id }}",
+        "url": "=https://api.canva.com/rest/v1/autofills/{{ $('HTTP Request').item.json.job.id }}",
         "authentication": "genericCredentialType",
         "genericAuthType": "oAuth2Api",
         "options": {}
@@ -1386,10 +1598,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1408,
-        -240
+        2144,
+        -1760
       ],
-      "id": "729b74ec-4d44-4bd9-8516-730063fdba90",
+      "id": "6222d526-1ca0-4ae2-b996-d6ae44f671c0",
       "name": "HTTP Request1",
       "credentials": {
         "oAuth2Api": {
@@ -1406,10 +1618,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        -528,
-        -256
+        -656,
+        -1776
       ],
-      "id": "44b366ed-35e3-4931-9a9a-1270702b606e",
+      "id": "da8026f8-8ac5-4354-b419-8fa2725b22de",
       "name": "HTTP Request2"
     },
     {
@@ -1569,7 +1781,7 @@
             {
               "id": "8db21f40-d33f-4c63-b835-a075779c8c1d",
               "name": "Partes[0].Parte.partenieve.pistas.paginas",
-              "value": "={{ $json.Partes[0].Parte.partenieve.pistas.paginas }}",
+              "value": "={{ $json.Partes[1].Parte.partenieve.pistas.paginas }}",
               "type": "object"
             }
           ]
@@ -1579,10 +1791,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -384,
-        -256
+        -496,
+        -1776
       ],
-      "id": "322a55fd-abb5-42e1-95ee-8a0c5c9ff5f1",
+      "id": "5c19cfc0-2462-49d8-b3d5-a6889f5d8a3d",
       "name": "Edit Fields"
     },
     {
@@ -1592,10 +1804,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -224,
-        -256
+        -352,
+        -1776
       ],
-      "id": "f0ab0b3a-8465-4c12-a52f-6e22fb0b8cae",
+      "id": "eb515338-92e6-4e67-bad5-2216ef5ac98f",
       "name": "Code in JavaScript"
     },
     {
@@ -1605,10 +1817,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        32,
-        -608
+        -16,
+        -2144
       ],
-      "id": "50542e04-469a-4512-b518-018e20cb6819",
+      "id": "0e36311c-5edf-4f2c-ab91-6b6a8bae6a3b",
       "name": "modas_cielo"
     },
     {
@@ -1618,10 +1830,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        32,
-        -416
+        -96,
+        -1936
       ],
-      "id": "5c073de5-cce8-46a7-aa9d-f38f48309fe1",
+      "id": "155d582c-754f-49ce-b06b-d57274c0749d",
       "name": "zonas abiertas"
     },
     {
@@ -1629,12 +1841,13 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        1200,
-        -240
+        1920,
+        -1760
       ],
-      "id": "e8490937-5403-45fc-8fb8-970aac8b0f7e",
+      "id": "c9f8f9ca-6547-4340-bce6-580f2621e75b",
       "name": "Wait",
-      "webhookId": "32c288d1-b381-45c0-8e20-ea1349a9fa27"
+      "webhookId": "8cce73b4-0a6e-4db3-b503-1267489be04b",
+      "executeOnce": true
     },
     {
       "parameters": {
@@ -1643,10 +1856,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        48,
-        -112
+        0,
+        -1696
       ],
-      "id": "6f277312-5000-4400-9d19-5f689a8b2f3b",
+      "id": "44c3ca04-f48f-4386-a2fa-2db76f0b20f2",
       "name": "minimos y maximos"
     },
     {
@@ -1696,10 +1909,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        48,
-        80
+        0,
+        -1456
       ],
-      "id": "9d35a22b-1962-47ef-a5b6-15aff35f3386",
+      "id": "1f268b96-cbc6-452c-9009-b7b8dcf0738d",
       "name": "valores fijos"
     },
     {
@@ -1709,10 +1922,10 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        352,
-        -272
+        432,
+        -1792
       ],
-      "id": "ffa466bf-db81-44ed-918f-c179a6c089c8",
+      "id": "28ca7694-4e79-4474-a916-6729a987d344",
       "name": "Merge"
     },
     {
@@ -1722,10 +1935,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        576,
-        -240
+        656,
+        -1760
       ],
-      "id": "c1ecc89a-b660-422f-beb4-281847d85609",
+      "id": "6dde6bba-db88-46c4-a311-bec39dea1f1e",
       "name": "DATOS FINALES"
     },
     {
@@ -1735,26 +1948,26 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        736,
-        -240
+        880,
+        -1760
       ],
-      "id": "d6af07ac-16f1-404e-b94d-84d7970540b7",
+      "id": "ae929dc9-30d3-4b32-b6bd-82aedc943b96",
       "name": "Code in JavaScript1"
     },
     {
       "parameters": {
         "content": "POST a Canva",
-        "height": 272,
-        "width": 704,
+        "height": 288,
+        "width": 1072,
         "color": 4
       },
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        928,
-        -320
+        800,
+        -1840
       ],
-      "id": "8db568f6-0a55-4b13-bed2-cd0160177c03",
+      "id": "eb20ae75-0ecf-4d7b-86a3-29eaa41bbb78",
       "name": "Sticky Note"
     },
     {
@@ -1767,10 +1980,10 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -560,
-        -640
+        -688,
+        -2160
       ],
-      "id": "a1577750-a2b6-4adb-9664-b594e04a21f7",
+      "id": "25b1f672-708d-4239-b5f9-95a772b42924",
       "name": "Sticky Note1"
     },
     {
@@ -1786,10 +1999,10 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        2704,
-        -256
+        3392,
+        -1776
       ],
-      "id": "d4025cc9-6c98-422b-a3b5-2ec8c749dca2",
+      "id": "7da66ccf-8fd7-48d5-8c6d-db816b75171b",
       "name": "Facebook Graph API",
       "credentials": {
         "facebookGraphApi": {
@@ -1811,17 +2024,18 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        3600,
-        -272
+        4208,
+        -1792
       ],
-      "id": "0b16b58e-3d0c-40cb-a45f-56b2b26b7aa6",
+      "id": "3bb41e32-f010-4102-acc1-fd96e8892501",
       "name": "Facebook Graph API1",
       "credentials": {
         "facebookGraphApi": {
           "id": "F7VbX8jWKCXdAM47",
           "name": "Facebook Graph account"
         }
-      }
+      },
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
@@ -1833,7 +2047,7 @@
           "parameters": [
             {
               "name": "access_token",
-              "value": "EAAKmVLVrJjwBQPzMiaFGS9h51FfDJVzSqfro6PJKk1ZBhd4bpDeF95MFSedfCRTWcMbExIZCSYyVUUZAsZBaRB6AgzRAqclZBgcYnux5onNTUwYchiXH4ckclskiAipmqeGqgDbLT7NbdBUFWGZANW5h9fMBIJ6JTGV5T2gOV9EnVTgMHjYHilSRZC3uFOgppRvdAZDZD"
+              "value": "EAF2z8nVLTA8BQVHL88vghg4RRZBH9svUgZCP93NSZAB9iSDKxTAMvz8DFby8KVqXp6DWFxfFDiSKOUXvXPVVrJcNxjFOmr0ZCXphOZBUUWRkP8sTZC9wwapmP8vlJQN4NHH2eW9zPRmg2SHrQ0AhjI3n2kx1vAa8nOtr6tbQMhcaP0X0eMtOComwFl3zR7zd7HowZDZD"
             }
           ]
         },
@@ -1842,10 +2056,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2944,
-        -256
+        3600,
+        -1776
       ],
-      "id": "b9af122c-db1b-4494-82a7-6a53c5d1eda2",
+      "id": "06240652-f050-41e7-a406-a611f53d1746",
       "name": "HTTP Request3",
       "credentials": {
         "facebookGraphApi": {
@@ -1881,10 +2095,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        2320,
-        -240
+        2976,
+        -1760
       ],
-      "id": "3fb5a534-5647-4843-ac96-eb1ee952f4b0",
+      "id": "88a07af8-5d4d-4c7e-9a1f-4db66d843eef",
       "name": "If"
     },
     {
@@ -1901,10 +2115,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1696,
-        -240
+        2336,
+        -1760
       ],
-      "id": "d24b002e-fc13-4491-b93a-994c8aeb1a3a",
+      "id": "c1aa6ddb-952c-4894-a11b-d3f37a039c68",
       "name": "PRUEBA",
       "credentials": {
         "oAuth2Api": {
@@ -1923,10 +2137,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2512,
-        -256
+        3168,
+        -1776
       ],
-      "id": "3f4262e7-ed25-44b5-be82-426a1e9886f3",
+      "id": "7555d978-506b-45aa-bf1a-cdfafabbe297",
       "name": "HTTP Request6",
       "credentials": {
         "oAuth2Api": {
@@ -1942,12 +2156,12 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        2112,
-        -240
+        2768,
+        -1760
       ],
-      "id": "dbfc385a-22e3-4956-9b30-f054aff2c41e",
+      "id": "5531d7ae-3e1e-4e70-a013-b7a468dfde34",
       "name": "Wait1",
-      "webhookId": "dfb45883-55c0-4ead-816d-921403288e5e"
+      "webhookId": "82707f0f-e107-4b71-9887-ad1255db0d8d"
     },
     {
       "parameters": {
@@ -1959,10 +2173,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1904,
-        -240
+        2560,
+        -1760
       ],
-      "id": "c14866f1-4a73-4932-9d82-f8fc2926f102",
+      "id": "87ba9b82-c2a0-491d-a90b-251cc2de0db3",
       "name": "HTTP Request7",
       "credentials": {
         "oAuth2Api": {
@@ -1976,12 +2190,12 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        3152,
-        -256
+        3808,
+        -1776
       ],
-      "id": "a35d6451-c070-4e53-a18e-3afb7223e2e1",
+      "id": "475281c7-f520-4d18-8b3a-e8dc41dadfd9",
       "name": "Wait2",
-      "webhookId": "cc062afa-db26-4ebb-bbd8-c5da5d5138a7"
+      "webhookId": "4e9e9bda-286b-4bd6-b112-9133762c2724"
     },
     {
       "parameters": {
@@ -2010,10 +2224,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        3360,
-        -256
+        3984,
+        -1776
       ],
-      "id": "b062251a-6073-49c6-ba8c-ccd3a1d7c43b",
+      "id": "c3ad2eff-8c1a-4047-ba71-69acd0745b05",
       "name": "If1"
     },
     {
@@ -2026,26 +2240,26 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1648,
-        -320
+        1888,
+        -1840
       ],
-      "id": "a758bdfe-fcdd-4e4a-816d-3c3ff3ff02ca",
+      "id": "4fcecff3-9ea7-4a71-9b49-c724b9345c25",
       "name": "Sticky Note2"
     },
     {
       "parameters": {
         "content": "SUBIDA HISTORIA\n",
         "height": 288,
-        "width": 1200,
+        "width": 1440,
         "color": 6
       },
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        2688,
-        -320
+        2928,
+        -1840
       ],
-      "id": "3a600618-1d81-46a9-8b72-7443cca68c39",
+      "id": "a3e2cce6-de1f-4d87-89c9-2e53de712c07",
       "name": "Sticky Note3"
     },
     {
@@ -2053,7 +2267,8 @@
         "rule": {
           "interval": [
             {
-              "field": "minutes"
+              "field": "minutes",
+              "minutesInterval": 3
             }
           ]
         }
@@ -2061,22 +2276,132 @@
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.3,
       "position": [
-        -768,
-        -256
+        -896,
+        -1776
       ],
-      "id": "8df0b3b7-32c1-4c86-8cbb-007eeaf1b049",
+      "id": "c860e63b-41b3-49b3-8ce3-5cf84eeee5c0",
       "name": "Schedule Trigger"
     },
     {
-      "parameters": {},
-      "type": "n8n-nodes-base.manualTrigger",
+      "parameters": {
+        "jsCode": "// Zonas que tú quieres conservar\nconst zonasDeseadas = [\n  'Veleta',\n  'Borreguiles',\n  'Parque Sulayr',\n  'Loma Dilar',\n  'Pista del Mar. (Zona Familiar)',\n  'Rio Monachil',\n  'Jardin de Nieve'\n];\n\nreturn items.map(item => {\n  // Convertimos el string en array\n  const zonas = item.json.zonas_abiertas\n    .split(',')\n    .map(z => z.trim());\n\n  // Filtramos solo las deseadas\n  const zonasFiltradas = zonas.filter(z =>\n    zonasDeseadas.some(zd => z.includes(zd))\n  );\n\n  return {\n    json: {\n      ...item.json,\n      zonas_abiertas: zonasFiltradas\n    }\n  };\n});\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        96,
+        -1936
+      ],
+      "id": "8db1f2c7-070d-4dd9-b7f1-711abfa9e919",
+      "name": "Code in JavaScript2"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "YhO4ZRxZ7YiJDe7A",
+          "mode": "list",
+          "cachedResultName": "Plantillas Canva",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/YhO4ZRxZ7YiJDe7A"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "Nombre_Documento",
+              "keyValue": "={{ $json.estado_simple }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1,
       "position": [
-        -784,
-        -64
+        1280,
+        -1760
       ],
-      "id": "ea65fc37-43b6-4ade-81bc-3e0cca7f58b9",
-      "name": "When clicking ‘Execute workflow’"
+      "id": "9c7cc8ad-30f3-4ec4-a45f-97179ec78eae",
+      "name": "obtener contador",
+      "executeOnce": false
+    },
+    {
+      "parameters": {
+        "jsCode": "// Iteramos sobre todos los elementos que entran al nodo\nreturn $input.all().map(item => {\n  // Obtenemos el valor actual, asegurando que existe y pasándolo a mayúsculas\n  const estadoOriginal = (item.json.estadogeneral || \"\").toUpperCase();\n  \n  let estadoFinal = \"NUBOSO\"; // Valor por defecto (fallback)\n\n  // Lógica de mapeo\n  if (estadoOriginal.includes(\"NEVANDO\")) {\n    estadoFinal = \"NEVANDO\";\n  } \n  else if (estadoOriginal === \"DESPEJADO\") {\n    estadoFinal = \"DESPEJADO\";\n  } \n  else if (estadoOriginal === \"POCO NUBOSO\") {\n    // Asignamos 'SOLEADO' a 'POCO NUBOSO' ya que es la mejor coincidencia\n    estadoFinal = \"SOLEADO\";\n  } \n  else {\n    // Aquí caerán: \"NUBOSO\", \"MUY NUBOSO\", \"CUBIERTO\", \n    // \"CUBIERTO PARCIAL\" y \"NUBOSO PARCIAL\"\n    estadoFinal = \"NUBOSO\";\n  }\n\n  // Escribimos el resultado en el JSON. \n  // Nota: He creado un campo nuevo 'estado_simple' para no borrar el original,\n  // pero puedes cambiarlo a 'item.json.estadogeneral' si prefieres sobreescribirlo.\n  item.json.estado_simple = estadoFinal;\n\n  return item;\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1088,
+        -1760
+      ],
+      "id": "926fb2bc-48de-4d7b-b925-e3ea3c9cb073",
+      "name": "Code in JavaScript3"
+    },
+    {
+      "parameters": {
+        "type": "random"
+      },
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        1456,
+        -1760
+      ],
+      "id": "2529ddd5-e228-48e7-a21c-9620590d8f41",
+      "name": "Sort"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e5f15ada-1e3d-43a0-87d6-17cb5e1222ac",
+              "name": "ID DOCUMENTO",
+              "value": "={{ $('HTTP Request7').item.json.job.urls[0].match(/(DA[A-Za-z0-9-]+)/)[0] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        4416,
+        -1792
+      ],
+      "id": "7eae2c4f-9d5b-4c4d-8417-1d9d218cbffe",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.canva.com/rest/v1/folders/move",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"item_id\": \"{{ $json['ID DOCUMENTO'] }}\",\n  \"to_folder_id\": \"FAF-k76AhRE\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        4624,
+        -1792
+      ],
+      "id": "b3eeaaf6-1eca-4fe1-bc18-add61e7dfa6d",
+      "name": "HTTP Request4",
+      "credentials": {
+        "canvaApi": {
+          "id": "tuy7V3JiiZVTJf5e",
+          "name": "Canva account"
+        },
+        "oAuth2Api": {
+          "id": "eHEbZK7oC3pW1LQr",
+          "name": "Canva"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -2103,6 +2428,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-01-14T09:46:11.660Z",
-  "versionId": "d4e52c94-49b7-4a43-9ac8-b05b94a515ba"
+  "updatedAt": "2026-01-16T11:55:09.097Z",
+  "versionId": "9b206ef3-3455-4de4-83fe-4165a2c702e0"
 }
