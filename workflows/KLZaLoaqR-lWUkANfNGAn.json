@@ -2201,10 +2201,10 @@
         "operation": "get",
         "dataTableId": {
           "__rl": true,
-          "value": "AD0QThH3qyX9numR",
+          "value": "YhO4ZRxZ7YiJDe7A",
           "mode": "list",
           "cachedResultName": "Plantillas Canva",
-          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/AD0QThH3qyX9numR"
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/YhO4ZRxZ7YiJDe7A"
         },
         "filters": {
           "conditions": [
@@ -2269,6 +2269,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-01-14T09:06:06.704Z",
-  "versionId": "9abb499a-1fcd-4eaf-825d-ec877116f8fe"
+  "updatedAt": "2026-01-16T08:24:08.242Z",
+  "versionId": "c83522ce-7d7d-4519-bc74-d95a91313c9e"
 }
