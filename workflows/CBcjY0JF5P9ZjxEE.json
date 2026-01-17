@@ -2,13 +2,451 @@
   "active": false,
   "activeVersion": null,
   "activeVersionId": null,
-  "connections": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request3": {
+      "main": [
+        [
+          {
+            "node": "Wait2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait2": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Facebook Graph API1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Facebook Graph API2": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Upload an asset from file data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload an asset from file data": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Facebook Graph API2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
   "createdAt": "2025-12-11T11:14:07.985Z",
   "id": "CBcjY0JF5P9ZjxEE",
   "isArchived": false,
-  "meta": null,
-  "name": "vacio",
-  "nodes": [],
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Historia_Camaras",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -720,
+        80
+      ],
+      "id": "e592ab28-59d1-4e72-9947-35a971c8baa2",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "httpRequestMethod": "POST",
+        "graphApiVersion": "v23.0",
+        "node": "17841470046184468",
+        "edge": "media_publish",
+        "options": {
+          "queryParametersJson": "={\n  \"creation_id\": \"{{$json.id}}\"\n}"
+        }
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        1216,
+        48
+      ],
+      "id": "70f5be56-bcbd-45e8-b707-d1fe8cd7941a",
+      "name": "Facebook Graph API1",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "F7VbX8jWKCXdAM47",
+          "name": "Facebook Graph account"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "url": "=https://graph.facebook.com/v20.0/{{ $json.id }}?fields=status,status_code",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "facebookGraphApi",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "access_token",
+              "value": "EAF2z8nVLTA8BQVHL88vghg4RRZBH9svUgZCP93NSZAB9iSDKxTAMvz8DFby8KVqXp6DWFxfFDiSKOUXvXPVVrJcNxjFOmr0ZCXphOZBUUWRkP8sTZC9wwapmP8vlJQN4NHH2eW9zPRmg2SHrQ0AhjI3n2kx1vAa8nOtr6tbQMhcaP0X0eMtOComwFl3zR7zd7HowZDZD"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        608,
+        64
+      ],
+      "id": "edf4ba47-a8ca-4343-8394-708f1e0f7712",
+      "name": "HTTP Request3",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "F7VbX8jWKCXdAM47",
+          "name": "Facebook Graph account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        800,
+        64
+      ],
+      "id": "5579777d-f732-4b98-b233-233d14c7baeb",
+      "name": "Wait2",
+      "webhookId": "4e9e9bda-286b-4bd6-b112-9133762c2724"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "49c65dc4-2ebe-451b-9788-cd0999f268f1",
+              "leftValue": "={{ $json.status_code }}",
+              "rightValue": "FINISHED",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        992,
+        64
+      ],
+      "id": "f2e57470-8cb6-4aff-a4f1-776c6d413c60",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "httpRequestMethod": "POST",
+        "graphApiVersion": "v23.0",
+        "node": "17841470046184468",
+        "edge": "=media",
+        "options": {
+          "queryParametersJson": "={\n\"video_url\": \"{{ $('Edit Fields').item.json.story_url }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
+        }
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        400,
+        64
+      ],
+      "id": "0bbfbe8d-31e9-41c6-8d53-89988526abf1",
+      "name": "Facebook Graph API2",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "F7VbX8jWKCXdAM47",
+          "name": "Facebook Graph account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://stsfc001.feratel.com/streams/stsstore054/1/15111_696b5b6a-4a56Vid.mp4?dcsdesign=feratel4",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -528,
+        80
+      ],
+      "id": "2aaa757a-e4c6-4d1a-afa7-70d04f751c29",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4fa17a3a-35cc-4f82-988a-32b82b6223e9",
+              "name": "story_url",
+              "value": "=https://res.cloudinary.com/dglub1vnw/video/upload/vc_h264,ac_aac,c_pad,w_1080,h_1920,b_blurred:400/{{ $json.public_id }}.mp4",
+              "type": "string"
+            },
+            {
+              "id": "281cd629-07ec-4b26-bcb4-085d1a77c5f8",
+              "name": "",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -192,
+        80
+      ],
+      "id": "8ec922b4-00bc-43fc-8fb3-48a2e73f92d2",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "operation": "uploadFile",
+        "resource_type_file": "video",
+        "additionalFieldsFile": {}
+      },
+      "type": "n8n-nodes-cloudinary.cloudinary",
+      "typeVersion": 1,
+      "position": [
+        -352,
+        80
+      ],
+      "id": "4c85ba67-fb60-4a26-8c67-4a5bf0283b78",
+      "name": "Upload an asset from file data",
+      "credentials": {
+        "cloudinaryApi": {
+          "id": "YTnswF3cVMD8a6jX",
+          "name": "Cuenta Cloudinary"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "HEAD",
+        "url": "={{ $json.story_url }}",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "neverError": true,
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -16,
+        80
+      ],
+      "id": "4fecbe0c-ed05-4db3-aa2c-8e9977ab31c2",
+      "name": "HTTP Request1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "23ffd565-77db-41aa-846e-6e4f54f021a7",
+              "leftValue": "={{ $json.statusCode }}",
+              "rightValue": 200,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        192,
+        80
+      ],
+      "id": "4e3544c3-0642-49ef-82b2-ecd3367c560b",
+      "name": "If"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        96,
+        208
+      ],
+      "id": "cdd381ff-6ac2-45ba-9e2a-43a650f57753",
+      "name": "Wait",
+      "webhookId": "2ddadd9e-f14b-4c72-b341-f3ef721110ea"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4fa17a3a-35cc-4f82-988a-32b82b6223e9",
+              "name": "story_url",
+              "value": "=https://res.cloudinary.com/dglub1vnw/video/upload/c_pad,w_1080,h_1920,b_blurred:400/{{ $json.public_id }}.mp4",
+              "type": "string"
+            },
+            {
+              "id": "281cd629-07ec-4b26-bcb4-085d1a77c5f8",
+              "name": "",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -176,
+        -224
+      ],
+      "id": "b782f8d6-c0f9-4a5f-9a96-6fd37f7ea31e",
+      "name": "Edit Fields1"
+    }
+  ],
   "pinData": {},
   "settings": {
     "executionOrder": "v1"
@@ -25,6 +463,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2026-01-15T07:57:59.444Z",
-  "versionId": "5566abfe-3740-4254-bd4a-f19ff6367f5f"
+  "updatedAt": "2026-01-17T11:11:51.366Z",
+  "versionId": "13448455-b2c2-4df5-a509-6c32ee48402c"
 }
