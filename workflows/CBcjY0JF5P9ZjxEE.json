@@ -411,7 +411,7 @@
       "typeVersion": 1.1,
       "position": [
         96,
-        208
+        224
       ],
       "id": "cdd381ff-6ac2-45ba-9e2a-43a650f57753",
       "name": "Wait",
@@ -440,8 +440,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -176,
-        -224
+        -192,
+        -128
       ],
       "id": "b782f8d6-c0f9-4a5f-9a96-6fd37f7ea31e",
       "name": "Edit Fields1"
@@ -463,6 +463,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2026-01-17T11:11:51.366Z",
-  "versionId": "13448455-b2c2-4df5-a509-6c32ee48402c"
+  "updatedAt": "2026-01-17T11:54:12.650Z",
+  "versionId": "b60ab180-9b06-4fff-a5f6-0865fe5c9749"
 }
