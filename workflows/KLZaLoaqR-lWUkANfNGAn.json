@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-01-17T07:43:13.000Z",
-    "createdAt": "2026-01-17T07:43:10.905Z",
-    "versionId": "27d54e63-8872-4fe9-9fa3-7401473b03fa",
+    "updatedAt": "2026-01-17T12:44:50.000Z",
+    "createdAt": "2026-01-17T12:44:48.348Z",
+    "versionId": "0b776f45-7082-406e-9fef-89abba94563a",
     "workflowId": "KLZaLoaqR-lWUkANfNGAn",
     "nodes": [
       {
@@ -711,7 +711,7 @@
             "interval": [
               {
                 "field": "cronExpression",
-                "expression": "10 2 * * *"
+                "expression": "10 8 * * *"
               }
             ]
           }
@@ -719,7 +719,7 @@
         "type": "n8n-nodes-base.scheduleTrigger",
         "typeVersion": 1.3,
         "position": [
-          -208,
+          -192,
           384
         ],
         "id": "b21ca4c8-e4fb-461a-ab5b-51a0453ec5c0",
@@ -1123,11 +1123,11 @@
       }
     },
     "authors": "Info Tailwind",
-    "name": "Version 27d54e63",
+    "name": "Version 0b776f45",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "27d54e63-8872-4fe9-9fa3-7401473b03fa",
+  "activeVersionId": "0b776f45-7082-406e-9fef-89abba94563a",
   "connections": {
     "HTTP Request": {
       "main": [
@@ -2169,7 +2169,7 @@
           "interval": [
             {
               "field": "cronExpression",
-              "expression": "10 2 * * *"
+              "expression": "10 8 * * *"
             }
           ]
         }
@@ -2177,7 +2177,7 @@
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.3,
       "position": [
-        -208,
+        -192,
         384
       ],
       "id": "b21ca4c8-e4fb-461a-ab5b-51a0453ec5c0",
@@ -2255,7 +2255,10 @@
   "pinData": {},
   "settings": {
     "executionOrder": "v1",
-    "availableInMCP": false
+    "availableInMCP": false,
+    "timeSavedMode": "fixed",
+    "timezone": "Europe/Madrid",
+    "callerPolicy": "workflowsFromSameOwner"
   },
   "shared": [
     {
@@ -2269,6 +2272,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-01-17T07:43:10.904Z",
-  "versionId": "27d54e63-8872-4fe9-9fa3-7401473b03fa"
+  "updatedAt": "2026-01-17T12:44:48.347Z",
+  "versionId": "0b776f45-7082-406e-9fef-89abba94563a"
 }
