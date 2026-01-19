@@ -6,9 +6,38 @@
   "createdAt": "2025-12-12T07:23:55.975Z",
   "id": "cnuDKnZrHmDy4QDh",
   "isArchived": false,
-  "meta": null,
-  "name": "vacio",
-  "nodes": [],
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Correos_Profesores",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "filters": {}
+      },
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        0
+      ],
+      "id": "c9f9c18e-158d-4c8a-87f0-a291cb274928",
+      "name": "Gmail Trigger",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "lnBuXVA1CC8B0im1",
+          "name": "Gmail profesionales@rules-shop.es"
+        }
+      }
+    }
+  ],
   "pinData": {},
   "settings": {
     "executionOrder": "v1"
@@ -25,6 +54,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2026-01-15T07:57:45.245Z",
-  "versionId": "79b9da53-63fe-4d90-811e-a3aeaabaf8b0"
+  "updatedAt": "2026-01-18T11:08:23.125Z",
+  "versionId": "8d9cc05d-4b21-4d9a-bc96-a595cbd33427"
 }
