@@ -470,7 +470,7 @@
       "main": [
         [
           {
-            "node": "If",
+            "node": "Switch1",
             "type": "main",
             "index": 0
           }
@@ -604,6 +604,16 @@
             },
             {
               "id": "63ae2e99-37be-4a33-b9fe-ccf3b57c5d9a",
+              "leftValue": "",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "57c2ed83-befc-4006-baf8-de502029b608",
               "leftValue": "",
               "rightValue": "",
               "operator": {
@@ -1011,6 +1021,45 @@
           "name": "ShopifyInformes"
         }
       }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "76df57b4-16f4-4fec-824a-0595dec22e2f"
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -112,
+        -464
+      ],
+      "id": "a63d9214-6090-4494-a17b-ceb06c31a101",
+      "name": "Switch1"
     }
   ],
   "pinData": {},
@@ -1029,6 +1078,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-01-18T10:48:55.127Z",
-  "versionId": "ba76da37-ed25-4978-84a1-e45801e838ef"
+  "updatedAt": "2026-01-19T09:30:38.203Z",
+  "versionId": "198e96f5-2a98-4227-a8ec-ae1abae1f4db"
 }
