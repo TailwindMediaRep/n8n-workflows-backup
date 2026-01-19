@@ -541,7 +541,13 @@
     },
     "If3": {
       "main": [
-        [],
+        [
+          {
+            "node": "GraphQL7",
+            "type": "main",
+            "index": 0
+          }
+        ],
         [
           {
             "node": "GraphQL6",
@@ -614,8 +620,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -144,
-        -192
+        -96,
+        -304
       ],
       "id": "1792b3b7-402d-4fc2-b650-5fee7d89a3c4",
       "name": "If"
@@ -630,8 +636,8 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        80,
-        -208
+        128,
+        -304
       ],
       "id": "c63af4c2-3acc-44a4-a428-1914e3aa6dc2",
       "name": "GraphQL",
@@ -649,8 +655,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        288,
-        -208
+        352,
+        -304
       ],
       "id": "79808ed0-8c8f-496b-98eb-70146dbade26",
       "name": "Code in JavaScript"
@@ -665,8 +671,8 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        496,
-        -208
+        576,
+        -304
       ],
       "id": "b736cc02-9161-49ce-9c33-9a93d25fd005",
       "name": "GraphQL1",
@@ -687,8 +693,8 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        896,
-        -208
+        800,
+        -304
       ],
       "id": "7a4577ca-7b82-4e1f-a2a6-6abe589d29e7",
       "name": "GraphQL2",
@@ -726,8 +732,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        1088,
-        -208
+        1024,
+        -304
       ],
       "id": "137ec5a4-4db7-41aa-a64b-b2a34a4b34a7",
       "name": "If1"
@@ -742,7 +748,7 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        1296,
+        1248,
         -304
       ],
       "id": "cf606e98-5fb4-4539-b2f3-b3e212200fdf",
@@ -810,7 +816,7 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        -336,
+        -320,
         -112
       ],
       "id": "a1d2e1ba-1789-4c70-b38f-240e55ca3d6c",
@@ -826,7 +832,7 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        -144,
+        -96,
         -16
       ],
       "id": "17515f33-ba10-4fb7-93a8-adb753f73cfd",
@@ -875,7 +881,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        48,
+        128,
         -16
       ],
       "id": "3cdfd7ee-99e9-41ce-97cf-319ee5121080",
@@ -888,8 +894,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        288,
-        -64
+        352,
+        -16
       ],
       "id": "1d04e1a3-c103-469c-bb04-417b4d7d7f43",
       "name": "Code in JavaScript1"
@@ -904,8 +910,8 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        496,
-        -64
+        576,
+        -16
       ],
       "id": "abf8fe68-8ad7-4608-91e0-dd34d78cab28",
       "name": "GraphQL5",
@@ -943,8 +949,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        912,
-        -64
+        1024,
+        -16
       ],
       "id": "7c6b1ac5-acb2-4b28-b504-8770e5f3fac2",
       "name": "If3"
@@ -956,221 +962,58 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        704,
-        -64
+        800,
+        -16
       ],
       "id": "cc81afca-d016-47dc-a455-4374be9a52c0",
       "name": "Code in JavaScript2"
     },
     {
-      "parameters": {},
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+        "query": "=mutation addCustomerTag($id: ID!, $tags: [String!]!) {\n  tagsAdd(id: $id, tags: $tags) {\n    node {\n      id\n    }\n    userErrors {\n      message\n    }\n  }\n}",
+        "variables": "={\n  \"id\": \"{{ $('GraphQL4').item.json.data.order.customer.id }}\",\n  \"tags\": [\"DescuentoProfesor\"]\n}"
+      },
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        1120,
-        32
+        1248,
+        80
       ],
       "id": "e6ff384e-60ff-470a-a012-aa48259aa909",
-      "name": "GraphQL6"
-    }
-  ],
-  "pinData": {
-    "Webhook": [
-      {
-        "json": {
-          "headers": {
-            "connection": "upgrade",
-            "host": "n8n.tailwind.es",
-            "x-forwarded-for": "104.199.43.109",
-            "x-forwarded-proto": "https",
-            "content-length": "3005",
-            "user-agent": "Shopify-Captain-Hook",
-            "accept": "*/*",
-            "accept-encoding": "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
-            "content-type": "application/json",
-            "x-shopify-api-version": "2026-01",
-            "x-shopify-event-id": "2259474c-b528-422c-a5d4-ea245fb96478",
-            "x-shopify-hmac-sha256": "a3zyoRE7/UBdBMQs40iZkZl+LaXYR8JAwaZZOwURm30=",
-            "x-shopify-shop-domain": "surfin-store-spain.myshopify.com",
-            "x-shopify-topic": "refunds/create",
-            "x-shopify-triggered-at": "2026-01-17T11:21:41.762554127Z",
-            "x-shopify-webhook-id": "464138cc-d005-5676-8227-7cb76fe30323"
-          },
-          "params": {},
-          "query": {},
-          "body": {
-            "id": 1096576696667,
-            "order_id": 7460212703579,
-            "created_at": "2026-01-17T12:21:41+01:00",
-            "note": null,
-            "user_id": 114932875611,
-            "processed_at": "2026-01-17T12:21:41+01:00",
-            "duties": [],
-            "total_duties_set": {
-              "shop_money": {
-                "amount": "0.00",
-                "currency_code": "EUR"
-              },
-              "presentment_money": {
-                "amount": "0.00",
-                "currency_code": "EUR"
-              }
-            },
-            "return": {
-              "id": 42647585115,
-              "admin_graphql_api_id": "gid://shopify/Return/42647585115"
-            },
-            "restock": true,
-            "refund_shipping_lines": [],
-            "admin_graphql_api_id": "gid://shopify/Refund/1096576696667",
-            "order_adjustments": [],
-            "refund_line_items": [
-              {
-                "id": 816784408923,
-                "line_item_id": 18283117347163,
-                "quantity": 1,
-                "restock_type": "return",
-                "location_id": 108916277595,
-                "subtotal": 94.77,
-                "total_tax": 0,
-                "line_item": {
-                  "id": 18283117347163,
-                  "variant_id": 51188878999899,
-                  "title": "686 Boys Geo Insulated Chaqueta",
-                  "quantity": 1,
-                  "sku": "2100000509478",
-                  "variant_title": "Oxblood/Utlt/Camo / XS",
-                  "vendor": "686",
-                  "fulfillment_service": "manual",
-                  "product_id": 10055200538971,
-                  "requires_shipping": true,
-                  "taxable": true,
-                  "gift_card": false,
-                  "name": "686 Boys Geo Insulated Chaqueta - Oxblood/Utlt/Camo / XS",
-                  "variant_inventory_management": "shopify",
-                  "properties": [],
-                  "product_exists": true,
-                  "fulfillable_quantity": 0,
-                  "grams": 0,
-                  "price": "157.95",
-                  "total_discount": "0.00",
-                  "fulfillment_status": "fulfilled",
-                  "price_set": {
-                    "shop_money": {
-                      "amount": "157.95",
-                      "currency_code": "EUR"
-                    },
-                    "presentment_money": {
-                      "amount": "157.95",
-                      "currency_code": "EUR"
-                    }
-                  },
-                  "total_discount_set": {
-                    "shop_money": {
-                      "amount": "0.00",
-                      "currency_code": "EUR"
-                    },
-                    "presentment_money": {
-                      "amount": "0.00",
-                      "currency_code": "EUR"
-                    }
-                  },
-                  "discount_allocations": [
-                    {
-                      "amount": "63.18",
-                      "discount_application_index": 0,
-                      "amount_set": {
-                        "shop_money": {
-                          "amount": "63.18",
-                          "currency_code": "EUR"
-                        },
-                        "presentment_money": {
-                          "amount": "63.18",
-                          "currency_code": "EUR"
-                        }
-                      }
-                    }
-                  ],
-                  "origin_location": {
-                    "id": 4053794750811,
-                    "country_code": "ES",
-                    "province_code": "GR",
-                    "name": "Nuance Nave",
-                    "address1": "Calle Zamora 123",
-                    "address2": "",
-                    "city": "Ogíjares",
-                    "zip": "18151"
-                  },
-                  "admin_graphql_api_id": "gid://shopify/LineItem/18283117347163",
-                  "duties": [],
-                  "tax_lines": []
-                },
-                "subtotal_set": {
-                  "shop_money": {
-                    "amount": "94.77",
-                    "currency_code": "EUR"
-                  },
-                  "presentment_money": {
-                    "amount": "94.77",
-                    "currency_code": "EUR"
-                  }
-                },
-                "total_tax_set": {
-                  "shop_money": {
-                    "amount": "0.00",
-                    "currency_code": "EUR"
-                  },
-                  "presentment_money": {
-                    "amount": "0.00",
-                    "currency_code": "EUR"
-                  }
-                }
-              }
-            ],
-            "transactions": [
-              {
-                "id": 9003355242843,
-                "order_id": 7460212703579,
-                "kind": "refund",
-                "gateway": "manual",
-                "status": "success",
-                "message": "Refunded 94.77 EUR from manual gateway",
-                "created_at": "2026-01-17T12:21:41+01:00",
-                "test": false,
-                "authorization": null,
-                "location_id": null,
-                "user_id": null,
-                "parent_id": 9003343675739,
-                "processed_at": "2026-01-17T12:21:41+01:00",
-                "device_id": null,
-                "error_code": null,
-                "source_name": "1830279",
-                "receipt": {},
-                "amount": "94.77",
-                "currency": "EUR",
-                "payment_id": "#70615.1",
-                "total_unsettled_set": {
-                  "presentment_money": {
-                    "amount": "0.0",
-                    "currency": "EUR"
-                  },
-                  "shop_money": {
-                    "amount": "0.0",
-                    "currency": "EUR"
-                  }
-                },
-                "manual_payment_gateway": true,
-                "amount_rounding": null,
-                "admin_graphql_api_id": "gid://shopify/OrderTransaction/9003355242843"
-              }
-            ]
-          },
-          "webhookUrl": "https://n8n.tailwind.es/webhook/monto-profesores-40",
-          "executionMode": "production"
+      "name": "GraphQL6",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
         }
       }
-    ]
-  },
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+        "query": "mutation removeCustomerTag($id: ID!, $tags: [String!]!) {\n  tagsRemove(id: $id, tags: $tags) {\n    node {\n      id\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
+        "variables": "={\n  \"id\": \"{{ $('GraphQL4').item.json.data.order.customer.id }}\",\n  \"tags\": [\"DescuentoProfesor\"]\n}"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        1248,
+        -112
+      ],
+      "id": "8fb550af-be3f-4a06-854a-fb0691755b01",
+      "name": "GraphQL7",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    }
+  ],
+  "pinData": {},
   "settings": {
     "executionOrder": "v1"
   },
@@ -1186,6 +1029,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-01-17T13:03:39.681Z",
-  "versionId": "4184d264-df6b-405e-ae20-08464b5e108d"
+  "updatedAt": "2026-01-18T10:48:55.127Z",
+  "versionId": "ba76da37-ed25-4978-84a1-e45801e838ef"
 }
