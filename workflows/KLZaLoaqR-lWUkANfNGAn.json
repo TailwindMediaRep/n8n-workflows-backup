@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-01-17T12:44:50.000Z",
-    "createdAt": "2026-01-17T12:44:48.348Z",
-    "versionId": "0b776f45-7082-406e-9fef-89abba94563a",
+    "updatedAt": "2026-01-19T07:35:55.000Z",
+    "createdAt": "2026-01-18T09:41:22.522Z",
+    "versionId": "8a68dbae-08b7-4821-b6a2-a73d3380b924",
     "workflowId": "KLZaLoaqR-lWUkANfNGAn",
     "nodes": [
       {
@@ -25,6 +25,8 @@
         ],
         "id": "60725765-9791-4b1d-bdeb-356c2c6bd5ed",
         "name": "HTTP Request",
+        "retryOnFail": true,
+        "waitBetweenTries": 3000,
         "credentials": {
           "oAuth2Api": {
             "id": "eHEbZK7oC3pW1LQr",
@@ -1123,11 +1125,11 @@
       }
     },
     "authors": "Info Tailwind",
-    "name": "Version 0b776f45",
+    "name": "Version 8a68dbae",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "0b776f45-7082-406e-9fef-89abba94563a",
+  "activeVersionId": "8a68dbae-08b7-4821-b6a2-a73d3380b924",
   "connections": {
     "HTTP Request": {
       "main": [
