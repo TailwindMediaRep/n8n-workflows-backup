@@ -1483,6 +1483,8 @@
       ],
       "id": "60725765-9791-4b1d-bdeb-356c2c6bd5ed",
       "name": "HTTP Request",
+      "retryOnFail": true,
+      "waitBetweenTries": 3000,
       "credentials": {
         "oAuth2Api": {
           "id": "eHEbZK7oC3pW1LQr",
@@ -2272,6 +2274,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-01-17T12:44:48.347Z",
-  "versionId": "0b776f45-7082-406e-9fef-89abba94563a"
+  "updatedAt": "2026-01-18T09:41:22.520Z",
+  "versionId": "8a68dbae-08b7-4821-b6a2-a73d3380b924"
 }
