@@ -1,0 +1,3038 @@
+{
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-01-19T12:38:18.000Z",
+    "createdAt": "2026-01-19T12:38:15.076Z",
+    "versionId": "fdde8591-a7e1-4f45-a16d-9a59e71aa51b",
+    "workflowId": "lLNWvfVl1rfEZB7T",
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "monto-descuentos",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -544,
+          16
+        ],
+        "id": "a828eef7-7623-4d5d-ad0d-cee054bed81a",
+        "name": "Webhook",
+        "webhookId": "4da06d4d-9f18-473e-b27e-754fd9444a36"
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+          "query": "=query getCustomerMetafield($customerId: ID!) {\n  customer(id: $customerId) {\n    id\n    metafield(namespace: \"custom\", key: \"monto_profesor_40\") {\n      value\n    }\n  }\n}",
+          "variables": "={\n  \"customerId\": \"{{ $json.body.customer.admin_graphql_api_id }}\"\n}"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          128,
+          -464
+        ],
+        "id": "c63af4c2-3acc-44a4-a428-1914e3aa6dc2",
+        "name": "GraphQL",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "// 1. Obtener el monto del NUEVO pedido (del Webhook)\n// Usamos \"total_price\" (87.00)\nconst orderAmount = parseFloat($node[\"Webhook\"].json.body.total_price); \n\n// 2. Obtener el acumulado ACTUAL (de tu nodo GraphQL anterior)\n// El dato viene como texto JSON: \"{\\\"amount\\\":\\\"222.00\\\",\\\"currency_code\\\":\\\"EUR\\\"}\"\nconst graphqlData = $input.item.json.data;\nlet currentAmount = 0;\nlet currency = \"EUR\"; // Moneda por defecto\n\n// Verificamos si existe data previa y la parseamos\nif (graphqlData.customer && graphqlData.customer.metafield && graphqlData.customer.metafield.value) {\n    try {\n        const parsedValue = JSON.parse(graphqlData.customer.metafield.value);\n        currentAmount = parseFloat(parsedValue.amount);\n        currency = parsedValue.currency_code;\n    } catch (e) {\n        // Si falla o está vacío, empezamos en 0\n        console.log(\"No se pudo leer el valor anterior, iniciando en 0\");\n    }\n}\n\n// 3. Hacemos la suma matemática\nconst newTotal = currentAmount + orderAmount;\n\n// 4. PREPARAR EL FORMATO CORRECTO PARA SHOPIFY\n// Como es tipo 'money', debemos devolver un string JSON con amount y currency_code\nconst newValueObject = {\n    amount: newTotal.toFixed(2), // Siempre 2 decimales (ej: \"309.00\")\n    currency_code: currency\n};\n\nreturn {\n  json: {\n    customerId: graphqlData.customer.id, // El ID global (gid://...)\n    // Convertimos el objeto a texto para enviarlo a Shopify\n    newMetafieldValue: JSON.stringify(newValueObject) \n  }\n};"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          352,
+          -464
+        ],
+        "id": "79808ed0-8c8f-496b-98eb-70146dbade26",
+        "name": "Code in JavaScript"
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+          "query": "mutation metafieldsSet($ownerId: ID!, $value: String!) {\n  metafieldsSet(metafields: [\n    {\n      ownerId: $ownerId,\n      namespace: \"custom\",\n      key: \"monto_profesor_40\",\n      type: \"money\", \n      value: $value\n    }\n  ]) {\n    metafields {\n      key\n      value\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
+          "variables": "={\n  \"ownerId\": \"{{ $json.customerId }}\",\n  \"value\": \"{{ $json.newMetafieldValue.replace(/\"/g, '\\\\\"') }}\"\n}"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          576,
+          -464
+        ],
+        "id": "b736cc02-9161-49ce-9c33-9a93d25fd005",
+        "name": "GraphQL1",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+          "query": "=query getCustomerMetafield($customerId: ID!) {\n  customer(id: $customerId) {\n    id\n    metafield(namespace: \"custom\", key: \"monto_profesor_40\") {\n      value\n    }\n  }\n}",
+          "variables": "={\n  \"customerId\": \"{{ $('GraphQL').item.json.data.customer.id }}\"\n}"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          800,
+          -464
+        ],
+        "id": "7a4577ca-7b82-4e1f-a2a6-6abe589d29e7",
+        "name": "GraphQL2",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "4ba19a63-3e01-48e5-b22a-937b5164a949",
+                "leftValue": "={{ $json.resultado }}",
+                "rightValue": 1200,
+                "operator": {
+                  "type": "number",
+                  "operation": "gte"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          1248,
+          -464
+        ],
+        "id": "137ec5a4-4db7-41aa-a64b-b2a34a4b34a7",
+        "name": "If1"
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+          "query": "mutation removeCustomerTag($id: ID!, $tags: [String!]!) {\n  tagsRemove(id: $id, tags: $tags) {\n    node {\n      id\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
+          "variables": "={\n  \"id\": \"{{ $('GraphQL').item.json.data.customer.id }}\",\n  \"tags\": [\"DescuentoProfesor\"]\n}"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          1472,
+          -560
+        ],
+        "id": "cf606e98-5fb4-4539-b2f3-b3e212200fdf",
+        "name": "GraphQL3",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "rules": {
+            "values": [
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $json.headers['x-shopify-topic'] }}",
+                      "rightValue": "orders/create",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      },
+                      "id": "53b44aba-e83f-4c7c-9550-4fbf3bcc0782"
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "5be0f809-09d3-4c27-a057-d181bd82117f",
+                      "leftValue": "={{ $json.headers[\"x-shopify-topic\"] }}",
+                      "rightValue": "refunds/create",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals",
+                        "name": "filter.operator.equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.4,
+        "position": [
+          -320,
+          16
+        ],
+        "id": "a1d2e1ba-1789-4c70-b38f-240e55ca3d6c",
+        "name": "Switch"
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+          "query": "query getOrderData($id: ID!) {\n  order(id: $id) {\n    discountCodes\n    customer {\n      id\n      metafield(namespace: \"custom\", key: \"monto_profesor_40\") {\n        value\n      }\n    }\n  }\n}",
+          "variables": "={\n  \"id\": \"gid://shopify/Order/{{ $json.order_id }}\"\n}"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          576,
+          208
+        ],
+        "id": "17515f33-ba10-4fb7-93a8-adb753f73cfd",
+        "name": "GraphQL4",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "// Detectar si venimos de un Pedido (orders/create) o Devolución (refunds/create)\n// Miramos el \"topic\" del webhook original\nconst topic = $node[\"Webhook\"].json.headers[\"x-shopify-topic\"]; // Asegúrate que tu nodo webhook se llame \"Webhook\"\n\nlet amountToProcess = 0;\nlet customerData = null;\n\nif (topic.includes('orders/create')) {\n    // === ES UN PEDIDO (SUMAR) ===\n    // El dinero viene del total del pedido\n    amountToProcess = parseFloat($node[\"Webhook\"].json.body.total_price);\n    \n    // Los datos del cliente vienen de tu nodo GraphQL de pedidos (ajusta el nombre si es distinto)\n    // Asumo que tu nodo de arriba se llama \"GraphQL\"\n    customerData = $input.item.json.data?.customer;\n\n} else if (topic.includes('refunds/create')) {\n    // === ES UNA DEVOLUCIÓN (RESTAR) ===\n    // El dinero devuelto está en las transacciones del webhook\n    const transactions = $node[\"Webhook\"].json.body.transactions || [];\n    const totalRefunded = transactions.reduce((acc, curr) => acc + parseFloat(curr.amount), 0);\n    \n    // Lo convertimos a negativo para que la suma matemática reste\n    amountToProcess = -Math.abs(totalRefunded);\n    \n    // Los datos del cliente vienen del nodo GraphQL de devoluciones (el nuevo que creaste)\n    // Ajusta el nombre si le pusiste otro, ej: \"Get Info Devolucion\"\n    // $input.item toma el dato del nodo inmediatamente anterior que se ejecutó\n    customerData = $input.item.json.data?.order?.customer;\n}\n\n// === LÓGICA COMÚN: LEER Y CALCULAR ===\nlet currentAmount = 0;\nlet currency = \"EUR\";\n\n// Leemos el metafield actual (si existe)\nif (customerData && customerData.metafield && customerData.metafield.value) {\n    try {\n        const parsedValue = JSON.parse(customerData.metafield.value);\n        currentAmount = parseFloat(parsedValue.amount);\n        currency = parsedValue.currency_code;\n    } catch (e) {\n        console.log(\"Empezando desde 0\");\n    }\n}\n\n// Calculamos\nconst newTotal = currentAmount + amountToProcess;\nconst finalTotal = newTotal < 0 ? 0 : newTotal; // Evitar negativos\n\n// Preparamos la salida para el siguiente nodo\nconst newValueObject = {\n    amount: finalTotal.toFixed(2),\n    currency_code: currency\n};\n\nreturn {\n  json: {\n    customerId: customerData.id,\n    newMetafieldValue: JSON.stringify(newValueObject),\n    finalAmountNumber: finalTotal\n  }\n};"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          800,
+          208
+        ],
+        "id": "1d04e1a3-c103-469c-bb04-417b4d7d7f43",
+        "name": "Code in JavaScript1"
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+          "query": "mutation metafieldsSet($ownerId: ID!, $value: String!) {\n  metafieldsSet(metafields: [\n    {\n      ownerId: $ownerId,\n      namespace: \"custom\",\n      key: \"monto_profesor_40\",\n      type: \"money\",\n      value: $value\n    }\n  ]) {\n    metafields {\n      key\n      value\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
+          "variables": "={\n  \"ownerId\": \"{{ $json.customerId }}\",\n  \"value\": \"{{ $json.newMetafieldValue.replace(/\"/g, '\\\\\"') }}\"\n}"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          1024,
+          208
+        ],
+        "id": "abf8fe68-8ad7-4608-91e0-dd34d78cab28",
+        "name": "GraphQL5",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "e33658c3-ca76-468e-9100-fa33d2fc35ab",
+                "leftValue": "={{ $json.metafieldAmount }}",
+                "rightValue": 1200,
+                "operator": {
+                  "type": "number",
+                  "operation": "gte"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          1696,
+          208
+        ],
+        "id": "7c6b1ac5-acb2-4b28-b504-8770e5f3fac2",
+        "name": "If3"
+      },
+      {
+        "parameters": {
+          "jsCode": "// Obtenemos la data del nodo anterior\nconst data = $input.item.json.data;\nlet cleanValue = 0;\n\n// Verificamos la ruta correcta para una respuesta de \"metafieldsSet\" (Mutation)\n// Ruta: data -> metafieldsSet -> metafields -> [0] -> value\nif (data.metafieldsSet && \n    data.metafieldsSet.metafields && \n    data.metafieldsSet.metafields.length > 0) {\n    \n    const firstMetafield = data.metafieldsSet.metafields[0];\n    \n    if (firstMetafield && firstMetafield.value) {\n        try {\n            // \"Desempaquetamos\" el texto JSON: \"{\\\"amount\\\":\\\"1105.23\\\"...}\"\n            const parsedValue = JSON.parse(firstMetafield.value);\n            \n            // Convertimos el texto \"1105.23\" a número real\n            cleanValue = parseFloat(parsedValue.amount);\n        } catch (e) {\n            console.log(\"Error al leer el valor numérico\");\n        }\n    }\n}\n\nreturn {\n  json: {\n    metafieldAmount: cleanValue\n  }\n};"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          1472,
+          208
+        ],
+        "id": "cc81afca-d016-47dc-a455-4374be9a52c0",
+        "name": "Code in JavaScript2"
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+          "query": "=mutation addCustomerTag($id: ID!, $tags: [String!]!) {\n  tagsAdd(id: $id, tags: $tags) {\n    node {\n      id\n    }\n    userErrors {\n      message\n    }\n  }\n}",
+          "variables": "={\n  \"id\": \"{{ $('GraphQL4').item.json.data.order.customer.id }}\",\n  \"tags\": [\"DescuentoProfesor\"]\n}"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          1920,
+          304
+        ],
+        "id": "e6ff384e-60ff-470a-a012-aa48259aa909",
+        "name": "GraphQL6",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+          "query": "mutation removeCustomerTag($id: ID!, $tags: [String!]!) {\n  tagsRemove(id: $id, tags: $tags) {\n    node {\n      id\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
+          "variables": "={\n  \"id\": \"{{ $('GraphQL4').item.json.data.order.customer.id }}\",\n  \"tags\": [\"DescuentoProfesor\"]\n}"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          1920,
+          112
+        ],
+        "id": "8fb550af-be3f-4a06-854a-fb0691755b01",
+        "name": "GraphQL7",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "rules": {
+            "values": [
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $json.body.discount_codes.some(code => code.code === '40%PROFESOR') }}",
+                      "rightValue": "true",
+                      "operator": {
+                        "type": "boolean",
+                        "operation": "true",
+                        "singleValue": true
+                      },
+                      "id": "76df57b4-16f4-4fec-824a-0595dec22e2f"
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "133c7dba-b685-4681-b230-bab612d43912",
+                      "leftValue": "={{ $json.body.discount_codes.some(code => code.code === '25%EMPLEADO') }}",
+                      "rightValue": "",
+                      "operator": {
+                        "type": "boolean",
+                        "operation": "true",
+                        "singleValue": true
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.4,
+        "position": [
+          -96,
+          -272
+        ],
+        "id": "a63d9214-6090-4494-a17b-ceb06c31a101",
+        "name": "Switch1"
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+          "query": "=query getCustomerMetafield($customerId: ID!) {\n  customer(id: $customerId) {\n    id\n    metafield(namespace: \"custom\", key: \"monto_empleado_25\") {\n      value\n    }\n  }\n}",
+          "variables": "={\n  \"customerId\": \"{{ $json.body.customer.admin_graphql_api_id }}\"\n}"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          128,
+          -80
+        ],
+        "id": "711357f1-a6d9-4e7b-8571-34cc62640b7b",
+        "name": "GraphQL8",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "// 1. Obtener el monto del NUEVO pedido (del Webhook)\n// Usamos \"total_price\" (87.00)\nconst orderAmount = parseFloat($node[\"Webhook\"].json.body.total_price); \n\n// 2. Obtener el acumulado ACTUAL (de tu nodo GraphQL anterior)\n// El dato viene como texto JSON: \"{\\\"amount\\\":\\\"222.00\\\",\\\"currency_code\\\":\\\"EUR\\\"}\"\nconst graphqlData = $input.item.json.data;\nlet currentAmount = 0;\nlet currency = \"EUR\"; // Moneda por defecto\n\n// Verificamos si existe data previa y la parseamos\nif (graphqlData.customer && graphqlData.customer.metafield && graphqlData.customer.metafield.value) {\n    try {\n        const parsedValue = JSON.parse(graphqlData.customer.metafield.value);\n        currentAmount = parseFloat(parsedValue.amount);\n        currency = parsedValue.currency_code;\n    } catch (e) {\n        // Si falla o está vacío, empezamos en 0\n        console.log(\"No se pudo leer el valor anterior, iniciando en 0\");\n    }\n}\n\n// 3. Hacemos la suma matemática\nconst newTotal = currentAmount + orderAmount;\n\n// 4. PREPARAR EL FORMATO CORRECTO PARA SHOPIFY\n// Como es tipo 'money', debemos devolver un string JSON con amount y currency_code\nconst newValueObject = {\n    amount: newTotal.toFixed(2), // Siempre 2 decimales (ej: \"309.00\")\n    currency_code: currency\n};\n\nreturn {\n  json: {\n    customerId: graphqlData.customer.id, // El ID global (gid://...)\n    // Convertimos el objeto a texto para enviarlo a Shopify\n    newMetafieldValue: JSON.stringify(newValueObject) \n  }\n};"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          352,
+          -80
+        ],
+        "id": "09dcabc7-85fa-4eb6-98fa-b3d45c8a3a8f",
+        "name": "Code in JavaScript3"
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+          "query": "mutation metafieldsSet($ownerId: ID!, $value: String!) {\n  metafieldsSet(metafields: [\n    {\n      ownerId: $ownerId,\n      namespace: \"custom\",\n      key: \"monto_empleado_25\",\n      type: \"money\", \n      value: $value\n    }\n  ]) {\n    metafields {\n      key\n      value\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
+          "variables": "={\n  \"ownerId\": \"{{ $json.customerId }}\",\n  \"value\": \"{{ $json.newMetafieldValue.replace(/\"/g, '\\\\\"') }}\"\n}"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          576,
+          -80
+        ],
+        "id": "11eb16c5-9e77-4cb7-9112-bfe7f5419f26",
+        "name": "GraphQL9",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+          "query": "=query getCustomerMetafield($customerId: ID!) {\n  customer(id: $customerId) {\n    id\n    metafield(namespace: \"custom\", key: \"monto_empleado_25\") {\n      value\n    }\n  }\n}",
+          "variables": "={\n  \"customerId\": \"{{ $('GraphQL8').item.json.data.customer.id }}\"\n}"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          800,
+          -80
+        ],
+        "id": "78e87be5-8433-491d-98d6-601142ad1f0b",
+        "name": "GraphQL10",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "4ba19a63-3e01-48e5-b22a-937b5164a949",
+                "leftValue": "={{ $json.resultado }}",
+                "rightValue": 1200,
+                "operator": {
+                  "type": "number",
+                  "operation": "gte"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          1248,
+          -80
+        ],
+        "id": "dcdcc99b-5d98-47fa-bd0e-174e7dca16d4",
+        "name": "If"
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+          "query": "mutation removeCustomerTag($id: ID!, $tags: [String!]!) {\n  tagsRemove(id: $id, tags: $tags) {\n    node {\n      id\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
+          "variables": "={\n  \"id\": \"{{ $('GraphQL8').item.json.data.customer.id }}\",\n  \"tags\": [\"DescuentoEmpleado\"]\n}"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          1472,
+          -176
+        ],
+        "id": "274ede14-9eca-4d5a-8ce6-480526c1bb97",
+        "name": "GraphQL11",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "rules": {
+            "values": [
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "133c7dba-b685-4681-b230-bab612d43912",
+                      "leftValue": "={{ $json.discount_code }}",
+                      "rightValue": "40%PROFESOR",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $json.discount_code }}",
+                      "rightValue": "25%EMPLEADO",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      },
+                      "id": "76df57b4-16f4-4fec-824a-0595dec22e2f"
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.4,
+        "position": [
+          352,
+          400
+        ],
+        "id": "99250775-0e4d-437b-b985-869644aaab70",
+        "name": "Switch2"
+      },
+      {
+        "parameters": {
+          "jsCode": "return $input.all().map(item => {\n  // 1. Obtenemos el string que contiene el JSON escapado\n  const rawValue = item.json.data.customer.metafield.value;\n  \n  // 2. Convertimos ese texto a un objeto real (JSON.parse)\n  const parsedValue = JSON.parse(rawValue);\n  \n  // 3. Extraemos el 'amount' y lo convertimos de texto a número decimal\n  const finalNumber = parseFloat(parsedValue.amount);\n\n  // 4. Devolvemos únicamente ese número en el output\n  return {\n    json: {\n      resultado: finalNumber\n    }\n  };\n});"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          1024,
+          -80
+        ],
+        "id": "2474b020-7d5b-445b-9a51-c88c26bc7ffd",
+        "name": "Code in JavaScript4"
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+          "query": "=mutation addCustomerTag($id: ID!, $tags: [String!]!) {\n  tagsAdd(id: $id, tags: $tags) {\n    node {\n      id\n    }\n    userErrors {\n      message\n    }\n  }\n}",
+          "variables": "={\n  \"id\": \"{{ $('GraphQL8').item.json.data.customer.id }}\",\n  \"tags\": [\"DescuentoEmpleado\"]\n}"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          1472,
+          16
+        ],
+        "id": "c526d000-ce3c-41d4-b1e3-f740ace07e06",
+        "name": "GraphQL12",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+          "query": "=mutation addCustomerTag($id: ID!, $tags: [String!]!) {\n  tagsAdd(id: $id, tags: $tags) {\n    node {\n      id\n    }\n    userErrors {\n      message\n    }\n  }\n}",
+          "variables": "={\n  \"id\": \"{{ $('GraphQL').item.json.data.customer.id }}\",\n  \"tags\": [\"DescuentoProfesor\"]\n}"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          1472,
+          -368
+        ],
+        "id": "9cfe8b3c-7a61-4fcb-b2bf-3c5355674ee7",
+        "name": "GraphQL13",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "return $input.all().map(item => {\n  // 1. Obtenemos el string que contiene el JSON escapado\n  const rawValue = item.json.data.customer.metafield.value;\n  \n  // 2. Convertimos ese texto a un objeto real (JSON.parse)\n  const parsedValue = JSON.parse(rawValue);\n  \n  // 3. Extraemos el 'amount' y lo convertimos de texto a número decimal\n  const finalNumber = parseFloat(parsedValue.amount);\n\n  // 4. Devolvemos únicamente ese número en el output\n  return {\n    json: {\n      resultado: finalNumber\n    }\n  };\n});"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          1024,
+          -464
+        ],
+        "id": "36bd4474-cc2e-43a0-874f-287c3102217a",
+        "name": "Code in JavaScript5"
+      },
+      {
+        "parameters": {
+          "authentication": "accessToken",
+          "operation": "get",
+          "orderId": "={{ $json.body.order_id }}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.shopify",
+        "typeVersion": 1,
+        "position": [
+          -96,
+          400
+        ],
+        "id": "9bd8359d-04c9-4279-9656-c25e82f4bf52",
+        "name": "Get an order",
+        "credentials": {
+          "shopifyAccessTokenApi": {
+            "id": "fboe9KuPkS6rLhs4",
+            "name": "SUMMIT INFORMES"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "// 1. Obtenemos los datos del Pedido (Vienen del nodo anterior inmediato, Shopify Get Order)\nconst orderData = $input.first().json;\n\n// 2. Obtenemos los datos del Reembolso original (Referenciamos al nodo Webhook)\n// IMPORTANTE: Cambia 'Webhook' por el nombre exacto de tu nodo trigger si es diferente.\nconst webhookData = $('Webhook').first().json.body; \n\n// --- LÓGICA DE CUPONES ---\n// Buscamos qué códigos se usaron en el pedido original\nconst discountCodes = orderData.discount_codes || [];\nconst usedCodeName = discountCodes.length > 0 ? discountCodes[0].code : null;\n\n// --- LÓGICA DE MONTOS ---\n// Calculamos cuánto dinero DE DESCUENTO estamos devolviendo.\n// Shopify no te dice \"Devolviste 5€ de descuento\", hay que calcularlo mirando las 'allocations'.\nlet totalDiscountRefunded = 0;\n\n// Recorremos los ítems que se están devolviendo en este reembolso específico\nconst refundLineItems = webhookData.refund_line_items || [];\n\nrefundLineItems.forEach(rItem => {\n  // rItem.line_item es la info original del producto\n  // rItem.quantity es cuántos se devuelven\n  \n  // Miramos si este producto tenía descuentos aplicados en el pedido original\n  const allocations = rItem.line_item.discount_allocations || [];\n  \n  allocations.forEach(alloc => {\n      // Sumamos el monto del descuento asociado a este producto\n      // NOTA: Esto asume que se devuelve la línea completa o que Shopify ajusta el allocation.\n      // Para mayor precisión si es devolución parcial, se prorratea, pero usualmente tomamos el valor del allocation del item.\n      totalDiscountRefunded += parseFloat(alloc.amount);\n  });\n});\n\nreturn {\n  json: {\n    order_id: orderData.id,\n    customer_id: orderData.customer ? orderData.customer.id : null,\n    // Aquí sale el nombre del cupón (ej: \"40%PROFESOR\") para tu Switch2\n    discount_code: usedCodeName, \n    // Aquí sale el número (ej: 35.00) para tu GraphQL de restar saldo\n    discount_amount_refunded: totalDiscountRefunded,\n    // Un booleano rápido para saber si hubo descuento\n    has_discount: !!usedCodeName\n  }\n};"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          128,
+          400
+        ],
+        "id": "2631cfdc-29ff-441f-ae56-3f43bb54082c",
+        "name": "Code in JavaScript8"
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+          "query": "query getOrderData($id: ID!) {\n  order(id: $id) {\n    discountCodes\n    customer {\n      id\n      metafield(namespace: \"custom\", key: \"monto_empleado_25\") {\n        value\n      }\n    }\n  }\n}",
+          "variables": "={\n  \"id\": \"gid://shopify/Order/{{ $json.order_id }}\"\n}"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          576,
+          592
+        ],
+        "id": "5161e155-a187-4bd1-96bf-dcdef254c56d",
+        "name": "GraphQL19",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "// Detectar si venimos de un Pedido (orders/create) o Devolución (refunds/create)\n// Miramos el \"topic\" del webhook original\nconst topic = $node[\"Webhook\"].json.headers[\"x-shopify-topic\"]; // Asegúrate que tu nodo webhook se llame \"Webhook\"\n\nlet amountToProcess = 0;\nlet customerData = null;\n\nif (topic.includes('orders/create')) {\n    // === ES UN PEDIDO (SUMAR) ===\n    // El dinero viene del total del pedido\n    amountToProcess = parseFloat($node[\"Webhook\"].json.body.total_price);\n    \n    // Los datos del cliente vienen de tu nodo GraphQL de pedidos (ajusta el nombre si es distinto)\n    // Asumo que tu nodo de arriba se llama \"GraphQL\"\n    customerData = $input.item.json.data?.customer;\n\n} else if (topic.includes('refunds/create')) {\n    // === ES UNA DEVOLUCIÓN (RESTAR) ===\n    // El dinero devuelto está en las transacciones del webhook\n    const transactions = $node[\"Webhook\"].json.body.transactions || [];\n    const totalRefunded = transactions.reduce((acc, curr) => acc + parseFloat(curr.amount), 0);\n    \n    // Lo convertimos a negativo para que la suma matemática reste\n    amountToProcess = -Math.abs(totalRefunded);\n    \n    // Los datos del cliente vienen del nodo GraphQL de devoluciones (el nuevo que creaste)\n    // Ajusta el nombre si le pusiste otro, ej: \"Get Info Devolucion\"\n    // $input.item toma el dato del nodo inmediatamente anterior que se ejecutó\n    customerData = $input.item.json.data?.order?.customer;\n}\n\n// === LÓGICA COMÚN: LEER Y CALCULAR ===\nlet currentAmount = 0;\nlet currency = \"EUR\";\n\n// Leemos el metafield actual (si existe)\nif (customerData && customerData.metafield && customerData.metafield.value) {\n    try {\n        const parsedValue = JSON.parse(customerData.metafield.value);\n        currentAmount = parseFloat(parsedValue.amount);\n        currency = parsedValue.currency_code;\n    } catch (e) {\n        console.log(\"Empezando desde 0\");\n    }\n}\n\n// Calculamos\nconst newTotal = currentAmount + amountToProcess;\nconst finalTotal = newTotal < 0 ? 0 : newTotal; // Evitar negativos\n\n// Preparamos la salida para el siguiente nodo\nconst newValueObject = {\n    amount: finalTotal.toFixed(2),\n    currency_code: currency\n};\n\nreturn {\n  json: {\n    customerId: customerData.id,\n    newMetafieldValue: JSON.stringify(newValueObject),\n    finalAmountNumber: finalTotal\n  }\n};"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          800,
+          592
+        ],
+        "id": "f21e0299-bcb9-4b95-a2c5-75bf13e8e8d9",
+        "name": "Code in JavaScript9"
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+          "query": "mutation metafieldsSet($ownerId: ID!, $value: String!) {\n  metafieldsSet(metafields: [\n    {\n      ownerId: $ownerId,\n      namespace: \"custom\",\n      key: \"monto_empleado_25\",\n      type: \"money\",\n      value: $value\n    }\n  ]) {\n    metafields {\n      key\n      value\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
+          "variables": "={\n  \"ownerId\": \"{{ $json.customerId }}\",\n  \"value\": \"{{ $json.newMetafieldValue.replace(/\"/g, '\\\\\"') }}\"\n}"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          1024,
+          592
+        ],
+        "id": "8b8ec1b6-0c8a-48ee-89b3-cf9d8ec227da",
+        "name": "GraphQL15",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "e33658c3-ca76-468e-9100-fa33d2fc35ab",
+                "leftValue": "={{ $json.metafieldAmount }}",
+                "rightValue": 600,
+                "operator": {
+                  "type": "number",
+                  "operation": "gte"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          1696,
+          592
+        ],
+        "id": "7d11839d-6682-45de-9104-d28f2461446b",
+        "name": "If4"
+      },
+      {
+        "parameters": {
+          "jsCode": "// Obtenemos la data del nodo anterior\nconst data = $input.item.json.data;\nlet cleanValue = 0;\n\n// Verificamos la ruta correcta para una respuesta de \"metafieldsSet\" (Mutation)\n// Ruta: data -> metafieldsSet -> metafields -> [0] -> value\nif (data.metafieldsSet && \n    data.metafieldsSet.metafields && \n    data.metafieldsSet.metafields.length > 0) {\n    \n    const firstMetafield = data.metafieldsSet.metafields[0];\n    \n    if (firstMetafield && firstMetafield.value) {\n        try {\n            // \"Desempaquetamos\" el texto JSON: \"{\\\"amount\\\":\\\"1105.23\\\"...}\"\n            const parsedValue = JSON.parse(firstMetafield.value);\n            \n            // Convertimos el texto \"1105.23\" a número real\n            cleanValue = parseFloat(parsedValue.amount);\n        } catch (e) {\n            console.log(\"Error al leer el valor numérico\");\n        }\n    }\n}\n\nreturn {\n  json: {\n    metafieldAmount: cleanValue\n  }\n};"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          1472,
+          592
+        ],
+        "id": "36d29e24-83ef-452b-ae1c-260a922b0ff0",
+        "name": "Code in JavaScript6"
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+          "query": "=mutation addCustomerTag($id: ID!, $tags: [String!]!) {\n  tagsAdd(id: $id, tags: $tags) {\n    node {\n      id\n    }\n    userErrors {\n      message\n    }\n  }\n}",
+          "variables": "={\n  \"id\": \"{{ $('GraphQL19').item.json.data.order.customer.id }}\",\n  \"tags\": [\"DescuentoEmpleado\"]\n}"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          1920,
+          688
+        ],
+        "id": "8fca0c22-d166-4459-8e09-8b4ef92a1293",
+        "name": "GraphQL16",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+          "query": "mutation removeCustomerTag($id: ID!, $tags: [String!]!) {\n  tagsRemove(id: $id, tags: $tags) {\n    node {\n      id\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
+          "variables": "={\n  \"id\": \"{{ $('GraphQL4').item.json.data.order.customer.id }}\",\n  \"tags\": [\"DescuentoEmpleado\"]\n}"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          1920,
+          496
+        ],
+        "id": "37dfcf1e-aca3-4e13-9c08-8164da8b4e91",
+        "name": "GraphQL17",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+          "query": "=query getCustomerMetafield($customerId: ID!) {\n  customer(id: $customerId) {\n    id\n    metafield(namespace: \"custom\", key: \"monto_empleado_25\") {\n      value\n    }\n  }\n}",
+          "variables": "={\n  \"customerId\": \"gid://shopify/Customer/{{ $('Code in JavaScript8').item.json.customer_id }}\"\n}"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          1248,
+          208
+        ],
+        "id": "62b1b263-cf1b-4fe4-902d-1b1925e45031",
+        "name": "GraphQL14",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+          "query": "=query getCustomerMetafield($customerId: ID!) {\n  customer(id: $customerId) {\n    id\n    metafield(namespace: \"custom\", key: \"monto_empleado_25\") {\n      value\n    }\n  }\n}",
+          "variables": "={\n  \"customerId\": \"gid://shopify/Customer/{{ $('Code in JavaScript8').item.json.customer_id }}\"\n}"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          1248,
+          592
+        ],
+        "id": "0872d38a-0bf3-4ed2-b0dc-301a7ad982ff",
+        "name": "GraphQL18",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      }
+    ],
+    "connections": {
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "Switch",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "GraphQL": {
+        "main": [
+          [
+            {
+              "node": "Code in JavaScript",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code in JavaScript": {
+        "main": [
+          [
+            {
+              "node": "GraphQL1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "GraphQL1": {
+        "main": [
+          [
+            {
+              "node": "GraphQL2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "GraphQL2": {
+        "main": [
+          [
+            {
+              "node": "Code in JavaScript5",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If1": {
+        "main": [
+          [
+            {
+              "node": "GraphQL3",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "GraphQL13",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Switch": {
+        "main": [
+          [
+            {
+              "node": "Switch1",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Get an order",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "GraphQL4": {
+        "main": [
+          [
+            {
+              "node": "Code in JavaScript1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code in JavaScript1": {
+        "main": [
+          [
+            {
+              "node": "GraphQL5",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "GraphQL5": {
+        "main": [
+          [
+            {
+              "node": "GraphQL14",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code in JavaScript2": {
+        "main": [
+          [
+            {
+              "node": "If3",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If3": {
+        "main": [
+          [
+            {
+              "node": "GraphQL7",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "GraphQL6",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Switch1": {
+        "main": [
+          [
+            {
+              "node": "GraphQL",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "GraphQL8",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "GraphQL8": {
+        "main": [
+          [
+            {
+              "node": "Code in JavaScript3",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code in JavaScript3": {
+        "main": [
+          [
+            {
+              "node": "GraphQL9",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "GraphQL9": {
+        "main": [
+          [
+            {
+              "node": "GraphQL10",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "GraphQL10": {
+        "main": [
+          [
+            {
+              "node": "Code in JavaScript4",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If": {
+        "main": [
+          [
+            {
+              "node": "GraphQL11",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "GraphQL12",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Switch2": {
+        "main": [
+          [
+            {
+              "node": "GraphQL4",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "GraphQL19",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code in JavaScript4": {
+        "main": [
+          [
+            {
+              "node": "If",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code in JavaScript5": {
+        "main": [
+          [
+            {
+              "node": "If1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Get an order": {
+        "main": [
+          [
+            {
+              "node": "Code in JavaScript8",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code in JavaScript8": {
+        "main": [
+          [
+            {
+              "node": "Switch2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "GraphQL19": {
+        "main": [
+          [
+            {
+              "node": "Code in JavaScript9",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code in JavaScript9": {
+        "main": [
+          [
+            {
+              "node": "GraphQL15",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "GraphQL15": {
+        "main": [
+          [
+            {
+              "node": "GraphQL18",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If4": {
+        "main": [
+          [
+            {
+              "node": "GraphQL17",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "GraphQL16",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code in JavaScript6": {
+        "main": [
+          [
+            {
+              "node": "If4",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "GraphQL14": {
+        "main": [
+          [
+            {
+              "node": "Code in JavaScript2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "GraphQL18": {
+        "main": [
+          [
+            {
+              "node": "Code in JavaScript6",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Info Tailwind",
+    "name": "Version fdde8591",
+    "description": "",
+    "autosaved": false
+  },
+  "activeVersionId": "fdde8591-a7e1-4f45-a16d-9a59e71aa51b",
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GraphQL": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "GraphQL1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GraphQL1": {
+      "main": [
+        [
+          {
+            "node": "GraphQL2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GraphQL2": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "GraphQL3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "GraphQL13",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Switch1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get an order",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GraphQL4": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "GraphQL5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GraphQL5": {
+      "main": [
+        [
+          {
+            "node": "GraphQL14",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript2": {
+      "main": [
+        [
+          {
+            "node": "If3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If3": {
+      "main": [
+        [
+          {
+            "node": "GraphQL7",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "GraphQL6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch1": {
+      "main": [
+        [
+          {
+            "node": "GraphQL",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "GraphQL8",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GraphQL8": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript3": {
+      "main": [
+        [
+          {
+            "node": "GraphQL9",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GraphQL9": {
+      "main": [
+        [
+          {
+            "node": "GraphQL10",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GraphQL10": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "GraphQL11",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "GraphQL12",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch2": {
+      "main": [
+        [
+          {
+            "node": "GraphQL4",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "GraphQL19",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript4": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript5": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get an order": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript8",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript8": {
+      "main": [
+        [
+          {
+            "node": "Switch2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GraphQL19": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript9",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript9": {
+      "main": [
+        [
+          {
+            "node": "GraphQL15",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GraphQL15": {
+      "main": [
+        [
+          {
+            "node": "GraphQL18",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If4": {
+      "main": [
+        [
+          {
+            "node": "GraphQL17",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "GraphQL16",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript6": {
+      "main": [
+        [
+          {
+            "node": "If4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GraphQL14": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GraphQL18": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-01-19T09:30:45.523Z",
+  "id": "lLNWvfVl1rfEZB7T",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Monto_Codigos_de_Descuento",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "monto-descuentos",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -544,
+        16
+      ],
+      "id": "a828eef7-7623-4d5d-ad0d-cee054bed81a",
+      "name": "Webhook",
+      "webhookId": "4da06d4d-9f18-473e-b27e-754fd9444a36"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+        "query": "=query getCustomerMetafield($customerId: ID!) {\n  customer(id: $customerId) {\n    id\n    metafield(namespace: \"custom\", key: \"monto_profesor_40\") {\n      value\n    }\n  }\n}",
+        "variables": "={\n  \"customerId\": \"{{ $json.body.customer.admin_graphql_api_id }}\"\n}"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        128,
+        -464
+      ],
+      "id": "c63af4c2-3acc-44a4-a428-1914e3aa6dc2",
+      "name": "GraphQL",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Obtener el monto del NUEVO pedido (del Webhook)\n// Usamos \"total_price\" (87.00)\nconst orderAmount = parseFloat($node[\"Webhook\"].json.body.total_price); \n\n// 2. Obtener el acumulado ACTUAL (de tu nodo GraphQL anterior)\n// El dato viene como texto JSON: \"{\\\"amount\\\":\\\"222.00\\\",\\\"currency_code\\\":\\\"EUR\\\"}\"\nconst graphqlData = $input.item.json.data;\nlet currentAmount = 0;\nlet currency = \"EUR\"; // Moneda por defecto\n\n// Verificamos si existe data previa y la parseamos\nif (graphqlData.customer && graphqlData.customer.metafield && graphqlData.customer.metafield.value) {\n    try {\n        const parsedValue = JSON.parse(graphqlData.customer.metafield.value);\n        currentAmount = parseFloat(parsedValue.amount);\n        currency = parsedValue.currency_code;\n    } catch (e) {\n        // Si falla o está vacío, empezamos en 0\n        console.log(\"No se pudo leer el valor anterior, iniciando en 0\");\n    }\n}\n\n// 3. Hacemos la suma matemática\nconst newTotal = currentAmount + orderAmount;\n\n// 4. PREPARAR EL FORMATO CORRECTO PARA SHOPIFY\n// Como es tipo 'money', debemos devolver un string JSON con amount y currency_code\nconst newValueObject = {\n    amount: newTotal.toFixed(2), // Siempre 2 decimales (ej: \"309.00\")\n    currency_code: currency\n};\n\nreturn {\n  json: {\n    customerId: graphqlData.customer.id, // El ID global (gid://...)\n    // Convertimos el objeto a texto para enviarlo a Shopify\n    newMetafieldValue: JSON.stringify(newValueObject) \n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        352,
+        -464
+      ],
+      "id": "79808ed0-8c8f-496b-98eb-70146dbade26",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+        "query": "mutation metafieldsSet($ownerId: ID!, $value: String!) {\n  metafieldsSet(metafields: [\n    {\n      ownerId: $ownerId,\n      namespace: \"custom\",\n      key: \"monto_profesor_40\",\n      type: \"money\", \n      value: $value\n    }\n  ]) {\n    metafields {\n      key\n      value\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
+        "variables": "={\n  \"ownerId\": \"{{ $json.customerId }}\",\n  \"value\": \"{{ $json.newMetafieldValue.replace(/\"/g, '\\\\\"') }}\"\n}"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        576,
+        -464
+      ],
+      "id": "b736cc02-9161-49ce-9c33-9a93d25fd005",
+      "name": "GraphQL1",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+        "query": "=query getCustomerMetafield($customerId: ID!) {\n  customer(id: $customerId) {\n    id\n    metafield(namespace: \"custom\", key: \"monto_profesor_40\") {\n      value\n    }\n  }\n}",
+        "variables": "={\n  \"customerId\": \"{{ $('GraphQL').item.json.data.customer.id }}\"\n}"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        800,
+        -464
+      ],
+      "id": "7a4577ca-7b82-4e1f-a2a6-6abe589d29e7",
+      "name": "GraphQL2",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "4ba19a63-3e01-48e5-b22a-937b5164a949",
+              "leftValue": "={{ $json.resultado }}",
+              "rightValue": 1200,
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1248,
+        -464
+      ],
+      "id": "137ec5a4-4db7-41aa-a64b-b2a34a4b34a7",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+        "query": "mutation removeCustomerTag($id: ID!, $tags: [String!]!) {\n  tagsRemove(id: $id, tags: $tags) {\n    node {\n      id\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
+        "variables": "={\n  \"id\": \"{{ $('GraphQL').item.json.data.customer.id }}\",\n  \"tags\": [\"DescuentoProfesor\"]\n}"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        1472,
+        -560
+      ],
+      "id": "cf606e98-5fb4-4539-b2f3-b3e212200fdf",
+      "name": "GraphQL3",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.headers['x-shopify-topic'] }}",
+                    "rightValue": "orders/create",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "53b44aba-e83f-4c7c-9550-4fbf3bcc0782"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "5be0f809-09d3-4c27-a057-d181bd82117f",
+                    "leftValue": "={{ $json.headers[\"x-shopify-topic\"] }}",
+                    "rightValue": "refunds/create",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -320,
+        16
+      ],
+      "id": "a1d2e1ba-1789-4c70-b38f-240e55ca3d6c",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+        "query": "query getOrderData($id: ID!) {\n  order(id: $id) {\n    discountCodes\n    customer {\n      id\n      metafield(namespace: \"custom\", key: \"monto_profesor_40\") {\n        value\n      }\n    }\n  }\n}",
+        "variables": "={\n  \"id\": \"gid://shopify/Order/{{ $json.order_id }}\"\n}"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        576,
+        208
+      ],
+      "id": "17515f33-ba10-4fb7-93a8-adb753f73cfd",
+      "name": "GraphQL4",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Detectar si venimos de un Pedido (orders/create) o Devolución (refunds/create)\n// Miramos el \"topic\" del webhook original\nconst topic = $node[\"Webhook\"].json.headers[\"x-shopify-topic\"]; // Asegúrate que tu nodo webhook se llame \"Webhook\"\n\nlet amountToProcess = 0;\nlet customerData = null;\n\nif (topic.includes('orders/create')) {\n    // === ES UN PEDIDO (SUMAR) ===\n    // El dinero viene del total del pedido\n    amountToProcess = parseFloat($node[\"Webhook\"].json.body.total_price);\n    \n    // Los datos del cliente vienen de tu nodo GraphQL de pedidos (ajusta el nombre si es distinto)\n    // Asumo que tu nodo de arriba se llama \"GraphQL\"\n    customerData = $input.item.json.data?.customer;\n\n} else if (topic.includes('refunds/create')) {\n    // === ES UNA DEVOLUCIÓN (RESTAR) ===\n    // El dinero devuelto está en las transacciones del webhook\n    const transactions = $node[\"Webhook\"].json.body.transactions || [];\n    const totalRefunded = transactions.reduce((acc, curr) => acc + parseFloat(curr.amount), 0);\n    \n    // Lo convertimos a negativo para que la suma matemática reste\n    amountToProcess = -Math.abs(totalRefunded);\n    \n    // Los datos del cliente vienen del nodo GraphQL de devoluciones (el nuevo que creaste)\n    // Ajusta el nombre si le pusiste otro, ej: \"Get Info Devolucion\"\n    // $input.item toma el dato del nodo inmediatamente anterior que se ejecutó\n    customerData = $input.item.json.data?.order?.customer;\n}\n\n// === LÓGICA COMÚN: LEER Y CALCULAR ===\nlet currentAmount = 0;\nlet currency = \"EUR\";\n\n// Leemos el metafield actual (si existe)\nif (customerData && customerData.metafield && customerData.metafield.value) {\n    try {\n        const parsedValue = JSON.parse(customerData.metafield.value);\n        currentAmount = parseFloat(parsedValue.amount);\n        currency = parsedValue.currency_code;\n    } catch (e) {\n        console.log(\"Empezando desde 0\");\n    }\n}\n\n// Calculamos\nconst newTotal = currentAmount + amountToProcess;\nconst finalTotal = newTotal < 0 ? 0 : newTotal; // Evitar negativos\n\n// Preparamos la salida para el siguiente nodo\nconst newValueObject = {\n    amount: finalTotal.toFixed(2),\n    currency_code: currency\n};\n\nreturn {\n  json: {\n    customerId: customerData.id,\n    newMetafieldValue: JSON.stringify(newValueObject),\n    finalAmountNumber: finalTotal\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        800,
+        208
+      ],
+      "id": "1d04e1a3-c103-469c-bb04-417b4d7d7f43",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+        "query": "mutation metafieldsSet($ownerId: ID!, $value: String!) {\n  metafieldsSet(metafields: [\n    {\n      ownerId: $ownerId,\n      namespace: \"custom\",\n      key: \"monto_profesor_40\",\n      type: \"money\",\n      value: $value\n    }\n  ]) {\n    metafields {\n      key\n      value\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
+        "variables": "={\n  \"ownerId\": \"{{ $json.customerId }}\",\n  \"value\": \"{{ $json.newMetafieldValue.replace(/\"/g, '\\\\\"') }}\"\n}"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        1024,
+        208
+      ],
+      "id": "abf8fe68-8ad7-4608-91e0-dd34d78cab28",
+      "name": "GraphQL5",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "e33658c3-ca76-468e-9100-fa33d2fc35ab",
+              "leftValue": "={{ $json.metafieldAmount }}",
+              "rightValue": 1200,
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1696,
+        208
+      ],
+      "id": "7c6b1ac5-acb2-4b28-b504-8770e5f3fac2",
+      "name": "If3"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Obtenemos la data del nodo anterior\nconst data = $input.item.json.data;\nlet cleanValue = 0;\n\n// Verificamos la ruta correcta para una respuesta de \"metafieldsSet\" (Mutation)\n// Ruta: data -> metafieldsSet -> metafields -> [0] -> value\nif (data.metafieldsSet && \n    data.metafieldsSet.metafields && \n    data.metafieldsSet.metafields.length > 0) {\n    \n    const firstMetafield = data.metafieldsSet.metafields[0];\n    \n    if (firstMetafield && firstMetafield.value) {\n        try {\n            // \"Desempaquetamos\" el texto JSON: \"{\\\"amount\\\":\\\"1105.23\\\"...}\"\n            const parsedValue = JSON.parse(firstMetafield.value);\n            \n            // Convertimos el texto \"1105.23\" a número real\n            cleanValue = parseFloat(parsedValue.amount);\n        } catch (e) {\n            console.log(\"Error al leer el valor numérico\");\n        }\n    }\n}\n\nreturn {\n  json: {\n    metafieldAmount: cleanValue\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1472,
+        208
+      ],
+      "id": "cc81afca-d016-47dc-a455-4374be9a52c0",
+      "name": "Code in JavaScript2"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+        "query": "=mutation addCustomerTag($id: ID!, $tags: [String!]!) {\n  tagsAdd(id: $id, tags: $tags) {\n    node {\n      id\n    }\n    userErrors {\n      message\n    }\n  }\n}",
+        "variables": "={\n  \"id\": \"{{ $('GraphQL4').item.json.data.order.customer.id }}\",\n  \"tags\": [\"DescuentoProfesor\"]\n}"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        1920,
+        304
+      ],
+      "id": "e6ff384e-60ff-470a-a012-aa48259aa909",
+      "name": "GraphQL6",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+        "query": "mutation removeCustomerTag($id: ID!, $tags: [String!]!) {\n  tagsRemove(id: $id, tags: $tags) {\n    node {\n      id\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
+        "variables": "={\n  \"id\": \"{{ $('GraphQL4').item.json.data.order.customer.id }}\",\n  \"tags\": [\"DescuentoProfesor\"]\n}"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        1920,
+        112
+      ],
+      "id": "8fb550af-be3f-4a06-854a-fb0691755b01",
+      "name": "GraphQL7",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body.discount_codes.some(code => code.code === '40%PROFESOR') }}",
+                    "rightValue": "true",
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "true",
+                      "singleValue": true
+                    },
+                    "id": "76df57b4-16f4-4fec-824a-0595dec22e2f"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "133c7dba-b685-4681-b230-bab612d43912",
+                    "leftValue": "={{ $json.body.discount_codes.some(code => code.code === '25%EMPLEADO') }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "true",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -96,
+        -272
+      ],
+      "id": "a63d9214-6090-4494-a17b-ceb06c31a101",
+      "name": "Switch1"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+        "query": "=query getCustomerMetafield($customerId: ID!) {\n  customer(id: $customerId) {\n    id\n    metafield(namespace: \"custom\", key: \"monto_empleado_25\") {\n      value\n    }\n  }\n}",
+        "variables": "={\n  \"customerId\": \"{{ $json.body.customer.admin_graphql_api_id }}\"\n}"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        128,
+        -80
+      ],
+      "id": "711357f1-a6d9-4e7b-8571-34cc62640b7b",
+      "name": "GraphQL8",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Obtener el monto del NUEVO pedido (del Webhook)\n// Usamos \"total_price\" (87.00)\nconst orderAmount = parseFloat($node[\"Webhook\"].json.body.total_price); \n\n// 2. Obtener el acumulado ACTUAL (de tu nodo GraphQL anterior)\n// El dato viene como texto JSON: \"{\\\"amount\\\":\\\"222.00\\\",\\\"currency_code\\\":\\\"EUR\\\"}\"\nconst graphqlData = $input.item.json.data;\nlet currentAmount = 0;\nlet currency = \"EUR\"; // Moneda por defecto\n\n// Verificamos si existe data previa y la parseamos\nif (graphqlData.customer && graphqlData.customer.metafield && graphqlData.customer.metafield.value) {\n    try {\n        const parsedValue = JSON.parse(graphqlData.customer.metafield.value);\n        currentAmount = parseFloat(parsedValue.amount);\n        currency = parsedValue.currency_code;\n    } catch (e) {\n        // Si falla o está vacío, empezamos en 0\n        console.log(\"No se pudo leer el valor anterior, iniciando en 0\");\n    }\n}\n\n// 3. Hacemos la suma matemática\nconst newTotal = currentAmount + orderAmount;\n\n// 4. PREPARAR EL FORMATO CORRECTO PARA SHOPIFY\n// Como es tipo 'money', debemos devolver un string JSON con amount y currency_code\nconst newValueObject = {\n    amount: newTotal.toFixed(2), // Siempre 2 decimales (ej: \"309.00\")\n    currency_code: currency\n};\n\nreturn {\n  json: {\n    customerId: graphqlData.customer.id, // El ID global (gid://...)\n    // Convertimos el objeto a texto para enviarlo a Shopify\n    newMetafieldValue: JSON.stringify(newValueObject) \n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        352,
+        -80
+      ],
+      "id": "09dcabc7-85fa-4eb6-98fa-b3d45c8a3a8f",
+      "name": "Code in JavaScript3"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+        "query": "mutation metafieldsSet($ownerId: ID!, $value: String!) {\n  metafieldsSet(metafields: [\n    {\n      ownerId: $ownerId,\n      namespace: \"custom\",\n      key: \"monto_empleado_25\",\n      type: \"money\", \n      value: $value\n    }\n  ]) {\n    metafields {\n      key\n      value\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
+        "variables": "={\n  \"ownerId\": \"{{ $json.customerId }}\",\n  \"value\": \"{{ $json.newMetafieldValue.replace(/\"/g, '\\\\\"') }}\"\n}"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        576,
+        -80
+      ],
+      "id": "11eb16c5-9e77-4cb7-9112-bfe7f5419f26",
+      "name": "GraphQL9",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+        "query": "=query getCustomerMetafield($customerId: ID!) {\n  customer(id: $customerId) {\n    id\n    metafield(namespace: \"custom\", key: \"monto_empleado_25\") {\n      value\n    }\n  }\n}",
+        "variables": "={\n  \"customerId\": \"{{ $('GraphQL8').item.json.data.customer.id }}\"\n}"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        800,
+        -80
+      ],
+      "id": "78e87be5-8433-491d-98d6-601142ad1f0b",
+      "name": "GraphQL10",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "4ba19a63-3e01-48e5-b22a-937b5164a949",
+              "leftValue": "={{ $json.resultado }}",
+              "rightValue": 1200,
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1248,
+        -80
+      ],
+      "id": "dcdcc99b-5d98-47fa-bd0e-174e7dca16d4",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+        "query": "mutation removeCustomerTag($id: ID!, $tags: [String!]!) {\n  tagsRemove(id: $id, tags: $tags) {\n    node {\n      id\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
+        "variables": "={\n  \"id\": \"{{ $('GraphQL8').item.json.data.customer.id }}\",\n  \"tags\": [\"DescuentoEmpleado\"]\n}"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        1472,
+        -176
+      ],
+      "id": "274ede14-9eca-4d5a-8ce6-480526c1bb97",
+      "name": "GraphQL11",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "133c7dba-b685-4681-b230-bab612d43912",
+                    "leftValue": "={{ $json.discount_code }}",
+                    "rightValue": "40%PROFESOR",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.discount_code }}",
+                    "rightValue": "25%EMPLEADO",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "76df57b4-16f4-4fec-824a-0595dec22e2f"
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        352,
+        400
+      ],
+      "id": "99250775-0e4d-437b-b985-869644aaab70",
+      "name": "Switch2"
+    },
+    {
+      "parameters": {
+        "jsCode": "return $input.all().map(item => {\n  // 1. Obtenemos el string que contiene el JSON escapado\n  const rawValue = item.json.data.customer.metafield.value;\n  \n  // 2. Convertimos ese texto a un objeto real (JSON.parse)\n  const parsedValue = JSON.parse(rawValue);\n  \n  // 3. Extraemos el 'amount' y lo convertimos de texto a número decimal\n  const finalNumber = parseFloat(parsedValue.amount);\n\n  // 4. Devolvemos únicamente ese número en el output\n  return {\n    json: {\n      resultado: finalNumber\n    }\n  };\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1024,
+        -80
+      ],
+      "id": "2474b020-7d5b-445b-9a51-c88c26bc7ffd",
+      "name": "Code in JavaScript4"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+        "query": "=mutation addCustomerTag($id: ID!, $tags: [String!]!) {\n  tagsAdd(id: $id, tags: $tags) {\n    node {\n      id\n    }\n    userErrors {\n      message\n    }\n  }\n}",
+        "variables": "={\n  \"id\": \"{{ $('GraphQL8').item.json.data.customer.id }}\",\n  \"tags\": [\"DescuentoEmpleado\"]\n}"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        1472,
+        16
+      ],
+      "id": "c526d000-ce3c-41d4-b1e3-f740ace07e06",
+      "name": "GraphQL12",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+        "query": "=mutation addCustomerTag($id: ID!, $tags: [String!]!) {\n  tagsAdd(id: $id, tags: $tags) {\n    node {\n      id\n    }\n    userErrors {\n      message\n    }\n  }\n}",
+        "variables": "={\n  \"id\": \"{{ $('GraphQL').item.json.data.customer.id }}\",\n  \"tags\": [\"DescuentoProfesor\"]\n}"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        1472,
+        -368
+      ],
+      "id": "9cfe8b3c-7a61-4fcb-b2bf-3c5355674ee7",
+      "name": "GraphQL13",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "return $input.all().map(item => {\n  // 1. Obtenemos el string que contiene el JSON escapado\n  const rawValue = item.json.data.customer.metafield.value;\n  \n  // 2. Convertimos ese texto a un objeto real (JSON.parse)\n  const parsedValue = JSON.parse(rawValue);\n  \n  // 3. Extraemos el 'amount' y lo convertimos de texto a número decimal\n  const finalNumber = parseFloat(parsedValue.amount);\n\n  // 4. Devolvemos únicamente ese número en el output\n  return {\n    json: {\n      resultado: finalNumber\n    }\n  };\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1024,
+        -464
+      ],
+      "id": "36bd4474-cc2e-43a0-874f-287c3102217a",
+      "name": "Code in JavaScript5"
+    },
+    {
+      "parameters": {
+        "authentication": "accessToken",
+        "operation": "get",
+        "orderId": "={{ $json.body.order_id }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.shopify",
+      "typeVersion": 1,
+      "position": [
+        -96,
+        400
+      ],
+      "id": "9bd8359d-04c9-4279-9656-c25e82f4bf52",
+      "name": "Get an order",
+      "credentials": {
+        "shopifyAccessTokenApi": {
+          "id": "fboe9KuPkS6rLhs4",
+          "name": "SUMMIT INFORMES"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Obtenemos los datos del Pedido (Vienen del nodo anterior inmediato, Shopify Get Order)\nconst orderData = $input.first().json;\n\n// 2. Obtenemos los datos del Reembolso original (Referenciamos al nodo Webhook)\n// IMPORTANTE: Cambia 'Webhook' por el nombre exacto de tu nodo trigger si es diferente.\nconst webhookData = $('Webhook').first().json.body; \n\n// --- LÓGICA DE CUPONES ---\n// Buscamos qué códigos se usaron en el pedido original\nconst discountCodes = orderData.discount_codes || [];\nconst usedCodeName = discountCodes.length > 0 ? discountCodes[0].code : null;\n\n// --- LÓGICA DE MONTOS ---\n// Calculamos cuánto dinero DE DESCUENTO estamos devolviendo.\n// Shopify no te dice \"Devolviste 5€ de descuento\", hay que calcularlo mirando las 'allocations'.\nlet totalDiscountRefunded = 0;\n\n// Recorremos los ítems que se están devolviendo en este reembolso específico\nconst refundLineItems = webhookData.refund_line_items || [];\n\nrefundLineItems.forEach(rItem => {\n  // rItem.line_item es la info original del producto\n  // rItem.quantity es cuántos se devuelven\n  \n  // Miramos si este producto tenía descuentos aplicados en el pedido original\n  const allocations = rItem.line_item.discount_allocations || [];\n  \n  allocations.forEach(alloc => {\n      // Sumamos el monto del descuento asociado a este producto\n      // NOTA: Esto asume que se devuelve la línea completa o que Shopify ajusta el allocation.\n      // Para mayor precisión si es devolución parcial, se prorratea, pero usualmente tomamos el valor del allocation del item.\n      totalDiscountRefunded += parseFloat(alloc.amount);\n  });\n});\n\nreturn {\n  json: {\n    order_id: orderData.id,\n    customer_id: orderData.customer ? orderData.customer.id : null,\n    // Aquí sale el nombre del cupón (ej: \"40%PROFESOR\") para tu Switch2\n    discount_code: usedCodeName, \n    // Aquí sale el número (ej: 35.00) para tu GraphQL de restar saldo\n    discount_amount_refunded: totalDiscountRefunded,\n    // Un booleano rápido para saber si hubo descuento\n    has_discount: !!usedCodeName\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        128,
+        400
+      ],
+      "id": "2631cfdc-29ff-441f-ae56-3f43bb54082c",
+      "name": "Code in JavaScript8"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+        "query": "query getOrderData($id: ID!) {\n  order(id: $id) {\n    discountCodes\n    customer {\n      id\n      metafield(namespace: \"custom\", key: \"monto_empleado_25\") {\n        value\n      }\n    }\n  }\n}",
+        "variables": "={\n  \"id\": \"gid://shopify/Order/{{ $json.order_id }}\"\n}"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        576,
+        592
+      ],
+      "id": "5161e155-a187-4bd1-96bf-dcdef254c56d",
+      "name": "GraphQL19",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Detectar si venimos de un Pedido (orders/create) o Devolución (refunds/create)\n// Miramos el \"topic\" del webhook original\nconst topic = $node[\"Webhook\"].json.headers[\"x-shopify-topic\"]; // Asegúrate que tu nodo webhook se llame \"Webhook\"\n\nlet amountToProcess = 0;\nlet customerData = null;\n\nif (topic.includes('orders/create')) {\n    // === ES UN PEDIDO (SUMAR) ===\n    // El dinero viene del total del pedido\n    amountToProcess = parseFloat($node[\"Webhook\"].json.body.total_price);\n    \n    // Los datos del cliente vienen de tu nodo GraphQL de pedidos (ajusta el nombre si es distinto)\n    // Asumo que tu nodo de arriba se llama \"GraphQL\"\n    customerData = $input.item.json.data?.customer;\n\n} else if (topic.includes('refunds/create')) {\n    // === ES UNA DEVOLUCIÓN (RESTAR) ===\n    // El dinero devuelto está en las transacciones del webhook\n    const transactions = $node[\"Webhook\"].json.body.transactions || [];\n    const totalRefunded = transactions.reduce((acc, curr) => acc + parseFloat(curr.amount), 0);\n    \n    // Lo convertimos a negativo para que la suma matemática reste\n    amountToProcess = -Math.abs(totalRefunded);\n    \n    // Los datos del cliente vienen del nodo GraphQL de devoluciones (el nuevo que creaste)\n    // Ajusta el nombre si le pusiste otro, ej: \"Get Info Devolucion\"\n    // $input.item toma el dato del nodo inmediatamente anterior que se ejecutó\n    customerData = $input.item.json.data?.order?.customer;\n}\n\n// === LÓGICA COMÚN: LEER Y CALCULAR ===\nlet currentAmount = 0;\nlet currency = \"EUR\";\n\n// Leemos el metafield actual (si existe)\nif (customerData && customerData.metafield && customerData.metafield.value) {\n    try {\n        const parsedValue = JSON.parse(customerData.metafield.value);\n        currentAmount = parseFloat(parsedValue.amount);\n        currency = parsedValue.currency_code;\n    } catch (e) {\n        console.log(\"Empezando desde 0\");\n    }\n}\n\n// Calculamos\nconst newTotal = currentAmount + amountToProcess;\nconst finalTotal = newTotal < 0 ? 0 : newTotal; // Evitar negativos\n\n// Preparamos la salida para el siguiente nodo\nconst newValueObject = {\n    amount: finalTotal.toFixed(2),\n    currency_code: currency\n};\n\nreturn {\n  json: {\n    customerId: customerData.id,\n    newMetafieldValue: JSON.stringify(newValueObject),\n    finalAmountNumber: finalTotal\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        800,
+        592
+      ],
+      "id": "f21e0299-bcb9-4b95-a2c5-75bf13e8e8d9",
+      "name": "Code in JavaScript9"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+        "query": "mutation metafieldsSet($ownerId: ID!, $value: String!) {\n  metafieldsSet(metafields: [\n    {\n      ownerId: $ownerId,\n      namespace: \"custom\",\n      key: \"monto_empleado_25\",\n      type: \"money\",\n      value: $value\n    }\n  ]) {\n    metafields {\n      key\n      value\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
+        "variables": "={\n  \"ownerId\": \"{{ $json.customerId }}\",\n  \"value\": \"{{ $json.newMetafieldValue.replace(/\"/g, '\\\\\"') }}\"\n}"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        1024,
+        592
+      ],
+      "id": "8b8ec1b6-0c8a-48ee-89b3-cf9d8ec227da",
+      "name": "GraphQL15",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "e33658c3-ca76-468e-9100-fa33d2fc35ab",
+              "leftValue": "={{ $json.metafieldAmount }}",
+              "rightValue": 600,
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1696,
+        592
+      ],
+      "id": "7d11839d-6682-45de-9104-d28f2461446b",
+      "name": "If4"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Obtenemos la data del nodo anterior\nconst data = $input.item.json.data;\nlet cleanValue = 0;\n\n// Verificamos la ruta correcta para una respuesta de \"metafieldsSet\" (Mutation)\n// Ruta: data -> metafieldsSet -> metafields -> [0] -> value\nif (data.metafieldsSet && \n    data.metafieldsSet.metafields && \n    data.metafieldsSet.metafields.length > 0) {\n    \n    const firstMetafield = data.metafieldsSet.metafields[0];\n    \n    if (firstMetafield && firstMetafield.value) {\n        try {\n            // \"Desempaquetamos\" el texto JSON: \"{\\\"amount\\\":\\\"1105.23\\\"...}\"\n            const parsedValue = JSON.parse(firstMetafield.value);\n            \n            // Convertimos el texto \"1105.23\" a número real\n            cleanValue = parseFloat(parsedValue.amount);\n        } catch (e) {\n            console.log(\"Error al leer el valor numérico\");\n        }\n    }\n}\n\nreturn {\n  json: {\n    metafieldAmount: cleanValue\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1472,
+        592
+      ],
+      "id": "36d29e24-83ef-452b-ae1c-260a922b0ff0",
+      "name": "Code in JavaScript6"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+        "query": "=mutation addCustomerTag($id: ID!, $tags: [String!]!) {\n  tagsAdd(id: $id, tags: $tags) {\n    node {\n      id\n    }\n    userErrors {\n      message\n    }\n  }\n}",
+        "variables": "={\n  \"id\": \"{{ $('GraphQL19').item.json.data.order.customer.id }}\",\n  \"tags\": [\"DescuentoEmpleado\"]\n}"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        1920,
+        688
+      ],
+      "id": "8fca0c22-d166-4459-8e09-8b4ef92a1293",
+      "name": "GraphQL16",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+        "query": "mutation removeCustomerTag($id: ID!, $tags: [String!]!) {\n  tagsRemove(id: $id, tags: $tags) {\n    node {\n      id\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
+        "variables": "={\n  \"id\": \"{{ $('GraphQL4').item.json.data.order.customer.id }}\",\n  \"tags\": [\"DescuentoEmpleado\"]\n}"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        1920,
+        496
+      ],
+      "id": "37dfcf1e-aca3-4e13-9c08-8164da8b4e91",
+      "name": "GraphQL17",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+        "query": "=query getCustomerMetafield($customerId: ID!) {\n  customer(id: $customerId) {\n    id\n    metafield(namespace: \"custom\", key: \"monto_empleado_25\") {\n      value\n    }\n  }\n}",
+        "variables": "={\n  \"customerId\": \"gid://shopify/Customer/{{ $('Code in JavaScript8').item.json.customer_id }}\"\n}"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        1248,
+        208
+      ],
+      "id": "62b1b263-cf1b-4fe4-902d-1b1925e45031",
+      "name": "GraphQL14",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+        "query": "=query getCustomerMetafield($customerId: ID!) {\n  customer(id: $customerId) {\n    id\n    metafield(namespace: \"custom\", key: \"monto_empleado_25\") {\n      value\n    }\n  }\n}",
+        "variables": "={\n  \"customerId\": \"gid://shopify/Customer/{{ $('Code in JavaScript8').item.json.customer_id }}\"\n}"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        1248,
+        592
+      ],
+      "id": "0872d38a-0bf3-4ed2-b0dc-301a7ad982ff",
+      "name": "GraphQL18",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "connection": "upgrade",
+            "host": "n8n.tailwind.es",
+            "x-forwarded-for": "35.241.242.63",
+            "x-forwarded-proto": "https",
+            "content-length": "7010",
+            "user-agent": "Shopify-Captain-Hook",
+            "accept": "*/*",
+            "accept-encoding": "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
+            "content-type": "application/json",
+            "x-shopify-api-version": "2026-01",
+            "x-shopify-event-id": "1d60bcf1-1b5d-4132-8663-e54c6404b680",
+            "x-shopify-hmac-sha256": "ZGATmXckeWwpFQ4AKKvz2QUg7qWjdMq9zSfOv4yuJI0=",
+            "x-shopify-order-id": "7469183664475",
+            "x-shopify-shop-domain": "surfin-store-spain.myshopify.com",
+            "x-shopify-test": "false",
+            "x-shopify-topic": "orders/create",
+            "x-shopify-triggered-at": "2026-01-19T12:29:33.831761802Z",
+            "x-shopify-webhook-id": "a47e0b88-ccf5-5c41-966c-fe77db81b064"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "id": 7469183664475,
+            "admin_graphql_api_id": "gid://shopify/Order/7469183664475",
+            "app_id": 1354745,
+            "browser_ip": "2.136.43.122",
+            "buyer_accepts_marketing": false,
+            "cancel_reason": null,
+            "cancelled_at": null,
+            "cart_token": null,
+            "checkout_id": 48221640917339,
+            "checkout_token": "de4748f78b21668fb330ff5520bdd61e",
+            "client_details": {
+              "accept_language": null,
+              "browser_height": null,
+              "browser_ip": "2.136.43.122",
+              "browser_width": null,
+              "session_hash": null,
+              "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"
+            },
+            "closed_at": null,
+            "company": null,
+            "confirmation_number": "PEI8T5V2Q",
+            "confirmed": true,
+            "contact_email": "emiliano@tailwind.es",
+            "created_at": "2026-01-19T13:29:32+01:00",
+            "currency": "EUR",
+            "current_shipping_price_set": {
+              "shop_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              }
+            },
+            "current_subtotal_price": "322.43",
+            "current_subtotal_price_set": {
+              "shop_money": {
+                "amount": "322.43",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "322.43",
+                "currency_code": "EUR"
+              }
+            },
+            "current_total_additional_fees_set": null,
+            "current_total_discounts": "107.47",
+            "current_total_discounts_set": {
+              "shop_money": {
+                "amount": "107.47",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "107.47",
+                "currency_code": "EUR"
+              }
+            },
+            "current_total_duties_set": null,
+            "current_total_price": "322.43",
+            "current_total_price_set": {
+              "shop_money": {
+                "amount": "322.43",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "322.43",
+                "currency_code": "EUR"
+              }
+            },
+            "current_total_tax": "0.00",
+            "current_total_tax_set": {
+              "shop_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              }
+            },
+            "customer_locale": "es",
+            "device_id": null,
+            "discount_codes": [
+              {
+                "code": "25%EMPLEADO",
+                "amount": "107.47",
+                "type": "percentage"
+              }
+            ],
+            "duties_included": false,
+            "email": "emiliano@tailwind.es",
+            "estimated_taxes": false,
+            "financial_status": "paid",
+            "fulfillment_status": null,
+            "landing_site": null,
+            "landing_site_ref": null,
+            "location_id": null,
+            "merchant_business_entity_id": "MTg3OTg3NjUwOTA3",
+            "merchant_of_record_app_id": null,
+            "name": "#70794",
+            "note": null,
+            "note_attributes": [],
+            "number": 69794,
+            "order_number": 70794,
+            "order_status_url": "https://nuance-store.com/87987650907/orders/bfc8441e07391320b25a7f90023d251e/authenticate?key=7290e2b3bf7cd4d5c278eed0f73ab97a",
+            "original_total_additional_fees_set": null,
+            "original_total_duties_set": null,
+            "payment_gateway_names": [
+              "manual"
+            ],
+            "phone": "+34680866619",
+            "po_number": null,
+            "presentment_currency": "EUR",
+            "processed_at": "2026-01-19T13:29:32+01:00",
+            "reference": null,
+            "referring_site": null,
+            "source_identifier": null,
+            "source_name": "shopify_draft_order",
+            "source_url": null,
+            "subtotal_price": "322.43",
+            "subtotal_price_set": {
+              "shop_money": {
+                "amount": "322.43",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "322.43",
+                "currency_code": "EUR"
+              }
+            },
+            "tags": "",
+            "tax_exempt": false,
+            "tax_lines": [],
+            "taxes_included": true,
+            "test": false,
+            "token": "bfc8441e07391320b25a7f90023d251e",
+            "total_cash_rounding_payment_adjustment_set": {
+              "shop_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              }
+            },
+            "total_cash_rounding_refund_adjustment_set": {
+              "shop_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              }
+            },
+            "total_discounts": "107.47",
+            "total_discounts_set": {
+              "shop_money": {
+                "amount": "107.47",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "107.47",
+                "currency_code": "EUR"
+              }
+            },
+            "total_line_items_price": "429.90",
+            "total_line_items_price_set": {
+              "shop_money": {
+                "amount": "429.90",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "429.90",
+                "currency_code": "EUR"
+              }
+            },
+            "total_outstanding": "0.00",
+            "total_price": "322.43",
+            "total_price_set": {
+              "shop_money": {
+                "amount": "322.43",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "322.43",
+                "currency_code": "EUR"
+              }
+            },
+            "total_shipping_price_set": {
+              "shop_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              }
+            },
+            "total_tax": "0.00",
+            "total_tax_set": {
+              "shop_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              }
+            },
+            "total_tip_received": "0.00",
+            "total_weight": 0,
+            "updated_at": "2026-01-19T13:29:33+01:00",
+            "user_id": 114932875611,
+            "billing_address": {
+              "first_name": "Emiliano",
+              "address1": "",
+              "phone": null,
+              "city": "",
+              "zip": null,
+              "province": "Granada",
+              "country": "Spain",
+              "last_name": "Martinez",
+              "address2": null,
+              "company": null,
+              "latitude": null,
+              "longitude": null,
+              "name": "Emiliano Martinez",
+              "country_code": "ES",
+              "province_code": "GR"
+            },
+            "customer": {
+              "id": 9576566620507,
+              "created_at": "2025-09-18T09:45:01+02:00",
+              "updated_at": "2026-01-19T13:29:33+01:00",
+              "first_name": "Emiliano",
+              "last_name": "Martinez",
+              "state": "disabled",
+              "note": "",
+              "verified_email": true,
+              "multipass_identifier": null,
+              "tax_exempt": false,
+              "email": "emiliano@tailwind.es",
+              "phone": "+34680866619",
+              "currency": "EUR",
+              "tax_exemptions": [],
+              "admin_graphql_api_id": "gid://shopify/Customer/9576566620507",
+              "default_address": {
+                "id": 13395145621851,
+                "customer_id": 9576566620507,
+                "first_name": "Emiliano",
+                "last_name": "Martinez",
+                "company": null,
+                "address1": "",
+                "address2": null,
+                "city": "",
+                "province": "Granada",
+                "country": "Spain",
+                "zip": null,
+                "phone": null,
+                "name": "Emiliano Martinez",
+                "province_code": "GR",
+                "country_code": "ES",
+                "country_name": "Spain",
+                "default": true
+              }
+            },
+            "discount_applications": [
+              {
+                "target_type": "line_item",
+                "type": "discount_code",
+                "value": "25.0",
+                "value_type": "percentage",
+                "allocation_method": "across",
+                "target_selection": "all",
+                "code": "25%EMPLEADO"
+              }
+            ],
+            "fulfillments": [],
+            "line_items": [
+              {
+                "id": 18302586290523,
+                "admin_graphql_api_id": "gid://shopify/LineItem/18302586290523",
+                "attributed_staffs": [],
+                "current_quantity": 1,
+                "fulfillable_quantity": 1,
+                "fulfillment_service": "manual",
+                "fulfillment_status": null,
+                "gift_card": false,
+                "grams": 0,
+                "name": "Arbor Formula Camber  Snowboard - 156 / None / 2019",
+                "price": "429.90",
+                "price_set": {
+                  "shop_money": {
+                    "amount": "429.90",
+                    "currency_code": "EUR"
+                  },
+                  "presentment_money": {
+                    "amount": "429.90",
+                    "currency_code": "EUR"
+                  }
+                },
+                "product_exists": true,
+                "product_id": 10054404211035,
+                "properties": [],
+                "quantity": 1,
+                "requires_shipping": true,
+                "sales_line_item_group_id": null,
+                "sku": "2100000266227",
+                "taxable": true,
+                "title": "Arbor Formula Camber  Snowboard",
+                "total_discount": "0.00",
+                "total_discount_set": {
+                  "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "EUR"
+                  },
+                  "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "EUR"
+                  }
+                },
+                "variant_id": 51185489576283,
+                "variant_inventory_management": "shopify",
+                "variant_title": "156 / None / 2019",
+                "vendor": "Arbor",
+                "tax_lines": [],
+                "duties": [],
+                "discount_allocations": [
+                  {
+                    "amount": "107.47",
+                    "amount_set": {
+                      "shop_money": {
+                        "amount": "107.47",
+                        "currency_code": "EUR"
+                      },
+                      "presentment_money": {
+                        "amount": "107.47",
+                        "currency_code": "EUR"
+                      }
+                    },
+                    "discount_application_index": 0
+                  }
+                ]
+              }
+            ],
+            "payment_terms": null,
+            "refunds": [],
+            "shipping_address": {
+              "first_name": "Emiliano",
+              "address1": "",
+              "phone": null,
+              "city": "",
+              "zip": null,
+              "province": "Granada",
+              "country": "Spain",
+              "last_name": "Martinez",
+              "address2": null,
+              "company": null,
+              "latitude": null,
+              "longitude": null,
+              "name": "Emiliano Martinez",
+              "country_code": "ES",
+              "province_code": "GR"
+            },
+            "shipping_lines": [],
+            "returns": [],
+            "line_item_groups": []
+          },
+          "webhookUrl": "https://n8n.tailwind.es/webhook/monto-descuentos",
+          "executionMode": "production"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-01-19T09:30:45.529Z",
+      "createdAt": "2026-01-19T09:30:45.529Z",
+      "role": "workflow:owner",
+      "workflowId": "lLNWvfVl1rfEZB7T",
+      "projectId": "x5UZcmGQw2OWHuXb"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2026-01-19T12:38:15.075Z",
+  "versionId": "fdde8591-a7e1-4f45-a16d-9a59e71aa51b"
+}
