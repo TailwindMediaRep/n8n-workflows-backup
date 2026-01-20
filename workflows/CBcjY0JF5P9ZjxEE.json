@@ -440,8 +440,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -192,
-        -128
+        -368,
+        -736
       ],
       "id": "b782f8d6-c0f9-4a5f-9a96-6fd37f7ea31e",
       "name": "Edit Fields1"
@@ -455,8 +455,8 @@
       "type": "n8n-nodes-puppeteer.puppeteer",
       "typeVersion": 1,
       "position": [
-        -672,
-        -960
+        -576,
+        -736
       ],
       "id": "217227f1-772e-48a4-97af-79a0c0f95244",
       "name": "Puppeteer"
@@ -478,6 +478,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2026-01-19T12:15:06.661Z",
-  "versionId": "8d8374d9-cd6a-46b6-b45b-9ea001a155f4"
+  "updatedAt": "2026-01-19T13:09:24.949Z",
+  "versionId": "622c2420-2306-4271-bc1c-62ba285dddbb"
 }
