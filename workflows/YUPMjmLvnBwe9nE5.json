@@ -211,6 +211,17 @@
       ],
       "id": "8066a11f-cd98-4cac-baff-240026d2c351",
       "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -240,
+        -304
+      ],
+      "id": "bc972c06-63f5-4f23-84b6-1ed24297b75d",
+      "name": "Sticky Note"
     }
   ],
   "pinData": {},
@@ -229,6 +240,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2026-01-15T09:47:21.813Z",
-  "versionId": "38957ddd-dfd7-4377-a7f0-1bda9e1f9bf7"
+  "updatedAt": "2026-01-19T22:24:08.562Z",
+  "versionId": "7ff832c0-2bea-46b4-80ab-11c99d08aaa6"
 }
