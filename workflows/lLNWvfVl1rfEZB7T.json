@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-01-19T12:38:18.000Z",
-    "createdAt": "2026-01-19T12:38:15.076Z",
-    "versionId": "fdde8591-a7e1-4f45-a16d-9a59e71aa51b",
+    "updatedAt": "2026-01-19T22:37:20.000Z",
+    "createdAt": "2026-01-19T12:47:15.024Z",
+    "versionId": "fb9d8acc-fcfe-4a4f-b1ca-57c595d57467",
     "workflowId": "lLNWvfVl1rfEZB7T",
     "nodes": [
       {
@@ -228,8 +228,8 @@
         "type": "n8n-nodes-base.graphql",
         "typeVersion": 1.1,
         "position": [
-          576,
-          208
+          528,
+          336
         ],
         "id": "17515f33-ba10-4fb7-93a8-adb753f73cfd",
         "name": "GraphQL4",
@@ -247,8 +247,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          800,
-          208
+          752,
+          336
         ],
         "id": "1d04e1a3-c103-469c-bb04-417b4d7d7f43",
         "name": "Code in JavaScript1"
@@ -263,8 +263,8 @@
         "type": "n8n-nodes-base.graphql",
         "typeVersion": 1.1,
         "position": [
-          1024,
-          208
+          976,
+          336
         ],
         "id": "abf8fe68-8ad7-4608-91e0-dd34d78cab28",
         "name": "GraphQL5",
@@ -302,8 +302,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          1696,
-          208
+          1648,
+          336
         ],
         "id": "7c6b1ac5-acb2-4b28-b504-8770e5f3fac2",
         "name": "If3"
@@ -315,8 +315,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          1472,
-          208
+          1424,
+          336
         ],
         "id": "cc81afca-d016-47dc-a455-4374be9a52c0",
         "name": "Code in JavaScript2"
@@ -331,8 +331,8 @@
         "type": "n8n-nodes-base.graphql",
         "typeVersion": 1.1,
         "position": [
-          1920,
-          304
+          1872,
+          432
         ],
         "id": "e6ff384e-60ff-470a-a012-aa48259aa909",
         "name": "GraphQL6",
@@ -353,8 +353,8 @@
         "type": "n8n-nodes-base.graphql",
         "typeVersion": 1.1,
         "position": [
-          1920,
-          112
+          1872,
+          240
         ],
         "id": "8fb550af-be3f-4a06-854a-fb0691755b01",
         "name": "GraphQL7",
@@ -617,8 +617,8 @@
         "type": "n8n-nodes-base.switch",
         "typeVersion": 3.4,
         "position": [
-          352,
-          400
+          304,
+          528
         ],
         "id": "99250775-0e4d-437b-b985-869644aaab70",
         "name": "Switch2"
@@ -703,8 +703,8 @@
         "type": "n8n-nodes-base.shopify",
         "typeVersion": 1,
         "position": [
-          -96,
-          400
+          -144,
+          528
         ],
         "id": "9bd8359d-04c9-4279-9656-c25e82f4bf52",
         "name": "Get an order",
@@ -722,8 +722,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          128,
-          400
+          80,
+          528
         ],
         "id": "2631cfdc-29ff-441f-ae56-3f43bb54082c",
         "name": "Code in JavaScript8"
@@ -738,8 +738,8 @@
         "type": "n8n-nodes-base.graphql",
         "typeVersion": 1.1,
         "position": [
-          576,
-          592
+          528,
+          720
         ],
         "id": "5161e155-a187-4bd1-96bf-dcdef254c56d",
         "name": "GraphQL19",
@@ -757,8 +757,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          800,
-          592
+          752,
+          720
         ],
         "id": "f21e0299-bcb9-4b95-a2c5-75bf13e8e8d9",
         "name": "Code in JavaScript9"
@@ -773,8 +773,8 @@
         "type": "n8n-nodes-base.graphql",
         "typeVersion": 1.1,
         "position": [
-          1024,
-          592
+          976,
+          720
         ],
         "id": "8b8ec1b6-0c8a-48ee-89b3-cf9d8ec227da",
         "name": "GraphQL15",
@@ -812,8 +812,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          1696,
-          592
+          1648,
+          720
         ],
         "id": "7d11839d-6682-45de-9104-d28f2461446b",
         "name": "If4"
@@ -825,8 +825,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          1472,
-          592
+          1424,
+          720
         ],
         "id": "36d29e24-83ef-452b-ae1c-260a922b0ff0",
         "name": "Code in JavaScript6"
@@ -841,8 +841,8 @@
         "type": "n8n-nodes-base.graphql",
         "typeVersion": 1.1,
         "position": [
-          1920,
-          688
+          1872,
+          816
         ],
         "id": "8fca0c22-d166-4459-8e09-8b4ef92a1293",
         "name": "GraphQL16",
@@ -863,8 +863,8 @@
         "type": "n8n-nodes-base.graphql",
         "typeVersion": 1.1,
         "position": [
-          1920,
-          496
+          1872,
+          624
         ],
         "id": "37dfcf1e-aca3-4e13-9c08-8164da8b4e91",
         "name": "GraphQL17",
@@ -885,8 +885,8 @@
         "type": "n8n-nodes-base.graphql",
         "typeVersion": 1.1,
         "position": [
-          1248,
-          208
+          1200,
+          336
         ],
         "id": "62b1b263-cf1b-4fe4-902d-1b1925e45031",
         "name": "GraphQL14",
@@ -907,8 +907,8 @@
         "type": "n8n-nodes-base.graphql",
         "typeVersion": 1.1,
         "position": [
-          1248,
-          592
+          1200,
+          720
         ],
         "id": "0872d38a-0bf3-4ed2-b0dc-301a7ad982ff",
         "name": "GraphQL18",
@@ -918,6 +918,114 @@
             "name": "ShopifyInformes"
           }
         }
+      },
+      {
+        "parameters": {
+          "content": "## Creación del pedido con Código de Descuento",
+          "height": 912,
+          "width": 2256,
+          "color": 4
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -160,
+          -768
+        ],
+        "id": "eef27b20-a656-4bc3-bf57-985a82b2a2a4",
+        "name": "Sticky Note"
+      },
+      {
+        "parameters": {
+          "content": "## Devolución de un pedido con Código de Descuento",
+          "height": 864,
+          "width": 2256,
+          "color": 3
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -160,
+          176
+        ],
+        "id": "258297da-8ad5-4147-afde-989c6cc319f9",
+        "name": "Sticky Note1"
+      },
+      {
+        "parameters": {
+          "content": "## 40%PROFESOR",
+          "height": 352,
+          "width": 1664
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          432,
+          224
+        ],
+        "id": "64358890-ab52-4152-9ae5-cc7f3a025963",
+        "name": "Sticky Note2"
+      },
+      {
+        "parameters": {
+          "content": "## 25%EMPLEADO",
+          "height": 368,
+          "width": 1664
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          432,
+          592
+        ],
+        "id": "05586c1e-7174-427c-88f3-f818f70fd7e2",
+        "name": "Sticky Note3"
+      },
+      {
+        "parameters": {
+          "content": "## 40%PROFESOR",
+          "height": 352,
+          "width": 1664
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          64,
+          -576
+        ],
+        "id": "d10d6a2d-0578-4316-b9d4-1aaaa8537b6a",
+        "name": "Sticky Note4"
+      },
+      {
+        "parameters": {
+          "content": "## 25%EMPLEADO",
+          "height": 368,
+          "width": 1664
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          64,
+          -224
+        ],
+        "id": "574e3f2c-e097-46e4-b9fd-189646fc9b0b",
+        "name": "Sticky Note5"
+      },
+      {
+        "parameters": {
+          "content": "## Webhook",
+          "height": 304,
+          "width": 384,
+          "color": 5
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -576,
+          -80
+        ],
+        "id": "4428f408-5ac6-4d26-a0dd-10965fe3b17a",
+        "name": "Sticky Note6"
       }
     ],
     "connections": {
@@ -1302,11 +1410,11 @@
       }
     },
     "authors": "Info Tailwind",
-    "name": "Version fdde8591",
+    "name": "Version fb9d8acc",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "fdde8591-a7e1-4f45-a16d-9a59e71aa51b",
+  "activeVersionId": "fb9d8acc-fcfe-4a4f-b1ca-57c595d57467",
   "connections": {
     "Webhook": {
       "main": [
@@ -1918,8 +2026,8 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        576,
-        208
+        528,
+        336
       ],
       "id": "17515f33-ba10-4fb7-93a8-adb753f73cfd",
       "name": "GraphQL4",
@@ -1937,8 +2045,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        800,
-        208
+        752,
+        336
       ],
       "id": "1d04e1a3-c103-469c-bb04-417b4d7d7f43",
       "name": "Code in JavaScript1"
@@ -1953,8 +2061,8 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        1024,
-        208
+        976,
+        336
       ],
       "id": "abf8fe68-8ad7-4608-91e0-dd34d78cab28",
       "name": "GraphQL5",
@@ -1992,8 +2100,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        1696,
-        208
+        1648,
+        336
       ],
       "id": "7c6b1ac5-acb2-4b28-b504-8770e5f3fac2",
       "name": "If3"
@@ -2005,8 +2113,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1472,
-        208
+        1424,
+        336
       ],
       "id": "cc81afca-d016-47dc-a455-4374be9a52c0",
       "name": "Code in JavaScript2"
@@ -2021,8 +2129,8 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        1920,
-        304
+        1872,
+        432
       ],
       "id": "e6ff384e-60ff-470a-a012-aa48259aa909",
       "name": "GraphQL6",
@@ -2043,8 +2151,8 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        1920,
-        112
+        1872,
+        240
       ],
       "id": "8fb550af-be3f-4a06-854a-fb0691755b01",
       "name": "GraphQL7",
@@ -2307,8 +2415,8 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        352,
-        400
+        304,
+        528
       ],
       "id": "99250775-0e4d-437b-b985-869644aaab70",
       "name": "Switch2"
@@ -2393,8 +2501,8 @@
       "type": "n8n-nodes-base.shopify",
       "typeVersion": 1,
       "position": [
-        -96,
-        400
+        -144,
+        528
       ],
       "id": "9bd8359d-04c9-4279-9656-c25e82f4bf52",
       "name": "Get an order",
@@ -2412,8 +2520,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        128,
-        400
+        80,
+        528
       ],
       "id": "2631cfdc-29ff-441f-ae56-3f43bb54082c",
       "name": "Code in JavaScript8"
@@ -2428,8 +2536,8 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        576,
-        592
+        528,
+        720
       ],
       "id": "5161e155-a187-4bd1-96bf-dcdef254c56d",
       "name": "GraphQL19",
@@ -2447,8 +2555,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        800,
-        592
+        752,
+        720
       ],
       "id": "f21e0299-bcb9-4b95-a2c5-75bf13e8e8d9",
       "name": "Code in JavaScript9"
@@ -2463,8 +2571,8 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        1024,
-        592
+        976,
+        720
       ],
       "id": "8b8ec1b6-0c8a-48ee-89b3-cf9d8ec227da",
       "name": "GraphQL15",
@@ -2502,8 +2610,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        1696,
-        592
+        1648,
+        720
       ],
       "id": "7d11839d-6682-45de-9104-d28f2461446b",
       "name": "If4"
@@ -2515,8 +2623,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1472,
-        592
+        1424,
+        720
       ],
       "id": "36d29e24-83ef-452b-ae1c-260a922b0ff0",
       "name": "Code in JavaScript6"
@@ -2531,8 +2639,8 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        1920,
-        688
+        1872,
+        816
       ],
       "id": "8fca0c22-d166-4459-8e09-8b4ef92a1293",
       "name": "GraphQL16",
@@ -2553,8 +2661,8 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        1920,
-        496
+        1872,
+        624
       ],
       "id": "37dfcf1e-aca3-4e13-9c08-8164da8b4e91",
       "name": "GraphQL17",
@@ -2575,8 +2683,8 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        1248,
-        208
+        1200,
+        336
       ],
       "id": "62b1b263-cf1b-4fe4-902d-1b1925e45031",
       "name": "GraphQL14",
@@ -2597,8 +2705,8 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        1248,
-        592
+        1200,
+        720
       ],
       "id": "0872d38a-0bf3-4ed2-b0dc-301a7ad982ff",
       "name": "GraphQL18",
@@ -2608,415 +2716,117 @@
           "name": "ShopifyInformes"
         }
       }
+    },
+    {
+      "parameters": {
+        "content": "## Creación del pedido con Código de Descuento",
+        "height": 912,
+        "width": 2256,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -160,
+        -768
+      ],
+      "id": "eef27b20-a656-4bc3-bf57-985a82b2a2a4",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Devolución de un pedido con Código de Descuento",
+        "height": 864,
+        "width": 2256,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -160,
+        176
+      ],
+      "id": "258297da-8ad5-4147-afde-989c6cc319f9",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## 40%PROFESOR",
+        "height": 352,
+        "width": 1664
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        432,
+        224
+      ],
+      "id": "64358890-ab52-4152-9ae5-cc7f3a025963",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "## 25%EMPLEADO",
+        "height": 368,
+        "width": 1664
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        432,
+        592
+      ],
+      "id": "05586c1e-7174-427c-88f3-f818f70fd7e2",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "## 40%PROFESOR",
+        "height": 352,
+        "width": 1664
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        64,
+        -576
+      ],
+      "id": "d10d6a2d-0578-4316-b9d4-1aaaa8537b6a",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "content": "## 25%EMPLEADO",
+        "height": 368,
+        "width": 1664
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        64,
+        -224
+      ],
+      "id": "574e3f2c-e097-46e4-b9fd-189646fc9b0b",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "content": "## Webhook",
+        "height": 304,
+        "width": 384,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -576,
+        -80
+      ],
+      "id": "4428f408-5ac6-4d26-a0dd-10965fe3b17a",
+      "name": "Sticky Note6"
     }
   ],
-  "pinData": {
-    "Webhook": [
-      {
-        "json": {
-          "headers": {
-            "connection": "upgrade",
-            "host": "n8n.tailwind.es",
-            "x-forwarded-for": "35.241.242.63",
-            "x-forwarded-proto": "https",
-            "content-length": "7010",
-            "user-agent": "Shopify-Captain-Hook",
-            "accept": "*/*",
-            "accept-encoding": "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
-            "content-type": "application/json",
-            "x-shopify-api-version": "2026-01",
-            "x-shopify-event-id": "1d60bcf1-1b5d-4132-8663-e54c6404b680",
-            "x-shopify-hmac-sha256": "ZGATmXckeWwpFQ4AKKvz2QUg7qWjdMq9zSfOv4yuJI0=",
-            "x-shopify-order-id": "7469183664475",
-            "x-shopify-shop-domain": "surfin-store-spain.myshopify.com",
-            "x-shopify-test": "false",
-            "x-shopify-topic": "orders/create",
-            "x-shopify-triggered-at": "2026-01-19T12:29:33.831761802Z",
-            "x-shopify-webhook-id": "a47e0b88-ccf5-5c41-966c-fe77db81b064"
-          },
-          "params": {},
-          "query": {},
-          "body": {
-            "id": 7469183664475,
-            "admin_graphql_api_id": "gid://shopify/Order/7469183664475",
-            "app_id": 1354745,
-            "browser_ip": "2.136.43.122",
-            "buyer_accepts_marketing": false,
-            "cancel_reason": null,
-            "cancelled_at": null,
-            "cart_token": null,
-            "checkout_id": 48221640917339,
-            "checkout_token": "de4748f78b21668fb330ff5520bdd61e",
-            "client_details": {
-              "accept_language": null,
-              "browser_height": null,
-              "browser_ip": "2.136.43.122",
-              "browser_width": null,
-              "session_hash": null,
-              "user_agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"
-            },
-            "closed_at": null,
-            "company": null,
-            "confirmation_number": "PEI8T5V2Q",
-            "confirmed": true,
-            "contact_email": "emiliano@tailwind.es",
-            "created_at": "2026-01-19T13:29:32+01:00",
-            "currency": "EUR",
-            "current_shipping_price_set": {
-              "shop_money": {
-                "amount": "0.00",
-                "currency_code": "EUR"
-              },
-              "presentment_money": {
-                "amount": "0.00",
-                "currency_code": "EUR"
-              }
-            },
-            "current_subtotal_price": "322.43",
-            "current_subtotal_price_set": {
-              "shop_money": {
-                "amount": "322.43",
-                "currency_code": "EUR"
-              },
-              "presentment_money": {
-                "amount": "322.43",
-                "currency_code": "EUR"
-              }
-            },
-            "current_total_additional_fees_set": null,
-            "current_total_discounts": "107.47",
-            "current_total_discounts_set": {
-              "shop_money": {
-                "amount": "107.47",
-                "currency_code": "EUR"
-              },
-              "presentment_money": {
-                "amount": "107.47",
-                "currency_code": "EUR"
-              }
-            },
-            "current_total_duties_set": null,
-            "current_total_price": "322.43",
-            "current_total_price_set": {
-              "shop_money": {
-                "amount": "322.43",
-                "currency_code": "EUR"
-              },
-              "presentment_money": {
-                "amount": "322.43",
-                "currency_code": "EUR"
-              }
-            },
-            "current_total_tax": "0.00",
-            "current_total_tax_set": {
-              "shop_money": {
-                "amount": "0.00",
-                "currency_code": "EUR"
-              },
-              "presentment_money": {
-                "amount": "0.00",
-                "currency_code": "EUR"
-              }
-            },
-            "customer_locale": "es",
-            "device_id": null,
-            "discount_codes": [
-              {
-                "code": "25%EMPLEADO",
-                "amount": "107.47",
-                "type": "percentage"
-              }
-            ],
-            "duties_included": false,
-            "email": "emiliano@tailwind.es",
-            "estimated_taxes": false,
-            "financial_status": "paid",
-            "fulfillment_status": null,
-            "landing_site": null,
-            "landing_site_ref": null,
-            "location_id": null,
-            "merchant_business_entity_id": "MTg3OTg3NjUwOTA3",
-            "merchant_of_record_app_id": null,
-            "name": "#70794",
-            "note": null,
-            "note_attributes": [],
-            "number": 69794,
-            "order_number": 70794,
-            "order_status_url": "https://nuance-store.com/87987650907/orders/bfc8441e07391320b25a7f90023d251e/authenticate?key=7290e2b3bf7cd4d5c278eed0f73ab97a",
-            "original_total_additional_fees_set": null,
-            "original_total_duties_set": null,
-            "payment_gateway_names": [
-              "manual"
-            ],
-            "phone": "+34680866619",
-            "po_number": null,
-            "presentment_currency": "EUR",
-            "processed_at": "2026-01-19T13:29:32+01:00",
-            "reference": null,
-            "referring_site": null,
-            "source_identifier": null,
-            "source_name": "shopify_draft_order",
-            "source_url": null,
-            "subtotal_price": "322.43",
-            "subtotal_price_set": {
-              "shop_money": {
-                "amount": "322.43",
-                "currency_code": "EUR"
-              },
-              "presentment_money": {
-                "amount": "322.43",
-                "currency_code": "EUR"
-              }
-            },
-            "tags": "",
-            "tax_exempt": false,
-            "tax_lines": [],
-            "taxes_included": true,
-            "test": false,
-            "token": "bfc8441e07391320b25a7f90023d251e",
-            "total_cash_rounding_payment_adjustment_set": {
-              "shop_money": {
-                "amount": "0.00",
-                "currency_code": "EUR"
-              },
-              "presentment_money": {
-                "amount": "0.00",
-                "currency_code": "EUR"
-              }
-            },
-            "total_cash_rounding_refund_adjustment_set": {
-              "shop_money": {
-                "amount": "0.00",
-                "currency_code": "EUR"
-              },
-              "presentment_money": {
-                "amount": "0.00",
-                "currency_code": "EUR"
-              }
-            },
-            "total_discounts": "107.47",
-            "total_discounts_set": {
-              "shop_money": {
-                "amount": "107.47",
-                "currency_code": "EUR"
-              },
-              "presentment_money": {
-                "amount": "107.47",
-                "currency_code": "EUR"
-              }
-            },
-            "total_line_items_price": "429.90",
-            "total_line_items_price_set": {
-              "shop_money": {
-                "amount": "429.90",
-                "currency_code": "EUR"
-              },
-              "presentment_money": {
-                "amount": "429.90",
-                "currency_code": "EUR"
-              }
-            },
-            "total_outstanding": "0.00",
-            "total_price": "322.43",
-            "total_price_set": {
-              "shop_money": {
-                "amount": "322.43",
-                "currency_code": "EUR"
-              },
-              "presentment_money": {
-                "amount": "322.43",
-                "currency_code": "EUR"
-              }
-            },
-            "total_shipping_price_set": {
-              "shop_money": {
-                "amount": "0.00",
-                "currency_code": "EUR"
-              },
-              "presentment_money": {
-                "amount": "0.00",
-                "currency_code": "EUR"
-              }
-            },
-            "total_tax": "0.00",
-            "total_tax_set": {
-              "shop_money": {
-                "amount": "0.00",
-                "currency_code": "EUR"
-              },
-              "presentment_money": {
-                "amount": "0.00",
-                "currency_code": "EUR"
-              }
-            },
-            "total_tip_received": "0.00",
-            "total_weight": 0,
-            "updated_at": "2026-01-19T13:29:33+01:00",
-            "user_id": 114932875611,
-            "billing_address": {
-              "first_name": "Emiliano",
-              "address1": "",
-              "phone": null,
-              "city": "",
-              "zip": null,
-              "province": "Granada",
-              "country": "Spain",
-              "last_name": "Martinez",
-              "address2": null,
-              "company": null,
-              "latitude": null,
-              "longitude": null,
-              "name": "Emiliano Martinez",
-              "country_code": "ES",
-              "province_code": "GR"
-            },
-            "customer": {
-              "id": 9576566620507,
-              "created_at": "2025-09-18T09:45:01+02:00",
-              "updated_at": "2026-01-19T13:29:33+01:00",
-              "first_name": "Emiliano",
-              "last_name": "Martinez",
-              "state": "disabled",
-              "note": "",
-              "verified_email": true,
-              "multipass_identifier": null,
-              "tax_exempt": false,
-              "email": "emiliano@tailwind.es",
-              "phone": "+34680866619",
-              "currency": "EUR",
-              "tax_exemptions": [],
-              "admin_graphql_api_id": "gid://shopify/Customer/9576566620507",
-              "default_address": {
-                "id": 13395145621851,
-                "customer_id": 9576566620507,
-                "first_name": "Emiliano",
-                "last_name": "Martinez",
-                "company": null,
-                "address1": "",
-                "address2": null,
-                "city": "",
-                "province": "Granada",
-                "country": "Spain",
-                "zip": null,
-                "phone": null,
-                "name": "Emiliano Martinez",
-                "province_code": "GR",
-                "country_code": "ES",
-                "country_name": "Spain",
-                "default": true
-              }
-            },
-            "discount_applications": [
-              {
-                "target_type": "line_item",
-                "type": "discount_code",
-                "value": "25.0",
-                "value_type": "percentage",
-                "allocation_method": "across",
-                "target_selection": "all",
-                "code": "25%EMPLEADO"
-              }
-            ],
-            "fulfillments": [],
-            "line_items": [
-              {
-                "id": 18302586290523,
-                "admin_graphql_api_id": "gid://shopify/LineItem/18302586290523",
-                "attributed_staffs": [],
-                "current_quantity": 1,
-                "fulfillable_quantity": 1,
-                "fulfillment_service": "manual",
-                "fulfillment_status": null,
-                "gift_card": false,
-                "grams": 0,
-                "name": "Arbor Formula Camber  Snowboard - 156 / None / 2019",
-                "price": "429.90",
-                "price_set": {
-                  "shop_money": {
-                    "amount": "429.90",
-                    "currency_code": "EUR"
-                  },
-                  "presentment_money": {
-                    "amount": "429.90",
-                    "currency_code": "EUR"
-                  }
-                },
-                "product_exists": true,
-                "product_id": 10054404211035,
-                "properties": [],
-                "quantity": 1,
-                "requires_shipping": true,
-                "sales_line_item_group_id": null,
-                "sku": "2100000266227",
-                "taxable": true,
-                "title": "Arbor Formula Camber  Snowboard",
-                "total_discount": "0.00",
-                "total_discount_set": {
-                  "shop_money": {
-                    "amount": "0.00",
-                    "currency_code": "EUR"
-                  },
-                  "presentment_money": {
-                    "amount": "0.00",
-                    "currency_code": "EUR"
-                  }
-                },
-                "variant_id": 51185489576283,
-                "variant_inventory_management": "shopify",
-                "variant_title": "156 / None / 2019",
-                "vendor": "Arbor",
-                "tax_lines": [],
-                "duties": [],
-                "discount_allocations": [
-                  {
-                    "amount": "107.47",
-                    "amount_set": {
-                      "shop_money": {
-                        "amount": "107.47",
-                        "currency_code": "EUR"
-                      },
-                      "presentment_money": {
-                        "amount": "107.47",
-                        "currency_code": "EUR"
-                      }
-                    },
-                    "discount_application_index": 0
-                  }
-                ]
-              }
-            ],
-            "payment_terms": null,
-            "refunds": [],
-            "shipping_address": {
-              "first_name": "Emiliano",
-              "address1": "",
-              "phone": null,
-              "city": "",
-              "zip": null,
-              "province": "Granada",
-              "country": "Spain",
-              "last_name": "Martinez",
-              "address2": null,
-              "company": null,
-              "latitude": null,
-              "longitude": null,
-              "name": "Emiliano Martinez",
-              "country_code": "ES",
-              "province_code": "GR"
-            },
-            "shipping_lines": [],
-            "returns": [],
-            "line_item_groups": []
-          },
-          "webhookUrl": "https://n8n.tailwind.es/webhook/monto-descuentos",
-          "executionMode": "production"
-        },
-        "pairedItem": {
-          "item": 0
-        }
-      }
-    ]
-  },
+  "pinData": {},
   "settings": {
     "executionOrder": "v1",
     "availableInMCP": false
@@ -3033,6 +2843,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-01-19T12:38:15.075Z",
-  "versionId": "fdde8591-a7e1-4f45-a16d-9a59e71aa51b"
+  "updatedAt": "2026-01-19T22:18:53.884Z",
+  "versionId": "fb9d8acc-fcfe-4a4f-b1ca-57c595d57467"
 }
