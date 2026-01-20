@@ -5,13 +5,7 @@
   "connections": {
     "When clicking ‘Execute workflow’": {
       "main": [
-        [
-          {
-            "node": "Get row(s)",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "HTTP Request": {
@@ -59,8 +53,8 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -112,
-        128
+        -64,
+        160
       ],
       "id": "8120bade-8ba8-4d49-aa95-d638ee517b5a",
       "name": "When clicking ‘Execute workflow’"
@@ -68,6 +62,8 @@
     {
       "parameters": {
         "url": "https://maps.googleapis.com/maps/api/distancematrix/json",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
         "sendQuery": true,
         "queryParameters": {
           "parameters": [
@@ -86,10 +82,6 @@
             {
               "name": "traffic_model",
               "value": "best_guess"
-            },
-            {
-              "name": "key",
-              "value": "AIzaSyD_GrVLB9vd3OnmOzTr9LIl_Ku9Aao8mhI"
             }
           ]
         },
@@ -98,11 +90,17 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        96,
-        32
+        160,
+        64
       ],
       "id": "24d00402-569e-40bb-9d59-bc4a71925cde",
-      "name": "HTTP Request"
+      "name": "HTTP Request",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "qkAMlj9qGLqx3qqa",
+          "name": "Maps"
+        }
+      }
     },
     {
       "parameters": {
@@ -111,8 +109,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        416,
-        0
+        336,
+        64
       ],
       "id": "43ef161c-0a2d-409d-86a5-20235e8020d8",
       "name": "Code in JavaScript"
@@ -185,8 +183,8 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
       "position": [
-        592,
-        0
+        528,
+        64
       ],
       "id": "c7af029e-a0bf-40a3-b0c1-d49383f03325",
       "name": "Insert row"
@@ -205,8 +203,8 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
       "position": [
-        208,
-        272
+        160,
+        240
       ],
       "id": "4d09815b-d521-4869-b00b-7ed513953fdd",
       "name": "Get row(s)"
@@ -218,8 +216,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        368,
-        272
+        320,
+        240
       ],
       "id": "d674f285-c3cf-46d5-a4eb-760700e1b9c1",
       "name": "Code in JavaScript1"
@@ -241,6 +239,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2026-01-17T12:43:28.976Z",
-  "versionId": "3668c116-d167-4ed5-89b7-9fba85b62b7f"
+  "updatedAt": "2026-01-19T13:02:38.744Z",
+  "versionId": "f79080b0-87fc-44cc-8b8e-6e85aed16d5c"
 }
