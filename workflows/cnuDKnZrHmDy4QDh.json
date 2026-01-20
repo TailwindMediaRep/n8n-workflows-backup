@@ -32,8 +32,8 @@
       "name": "Gmail Trigger",
       "credentials": {
         "gmailOAuth2": {
-          "id": "lnBuXVA1CC8B0im1",
-          "name": "Gmail profesionales@rules-shop.es"
+          "id": "RHR23CJ1w4T4gR4J",
+          "name": "Gmail rulesoutlet@gmail.com"
         }
       }
     }
@@ -54,6 +54,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2026-01-18T11:08:23.125Z",
-  "versionId": "8d9cc05d-4b21-4d9a-bc96-a595cbd33427"
+  "updatedAt": "2026-01-19T22:44:35.691Z",
+  "versionId": "be620931-098c-4209-b4dc-952d67fd0e00"
 }
