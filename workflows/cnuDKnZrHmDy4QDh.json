@@ -135,6 +135,47 @@
       ],
       "id": "3107f929-6b88-45d7-b2b4-dae60dd465e7",
       "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "value": "16auxC5pQ4ydDh1LxCKiPC5ClQ1WCN3R5ogY1Smmbm4c",
+          "mode": "list",
+          "cachedResultName": "Solicitud de Alta - Profesionales Rules Oakley (respuestas)",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/16auxC5pQ4ydDh1LxCKiPC5ClQ1WCN3R5ogY1Smmbm4c/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 114227354,
+          "mode": "list",
+          "cachedResultName": "Respuestas de formulario 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/16auxC5pQ4ydDh1LxCKiPC5ClQ1WCN3R5ogY1Smmbm4c/edit#gid=114227354"
+        },
+        "event": "rowAdded",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [
+        -480,
+        208
+      ],
+      "id": "7ad34ec0-9110-48cf-90b6-691ccbf01cbd",
+      "name": "Google Sheets Trigger",
+      "credentials": {
+        "googleSheetsTriggerOAuth2Api": {
+          "id": "4HkdJcbjLdqN2Ie3",
+          "name": "Google Sheets Trigger info@tailwind.es"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -159,6 +200,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-01-20T19:06:07.954Z",
-  "versionId": "01c5f648-8c7f-40bc-a89c-46e039ce0f7d"
+  "updatedAt": "2026-01-21T10:23:06.985Z",
+  "versionId": "a155a5fd-54fc-4ce3-8f61-59133d147d77"
 }
