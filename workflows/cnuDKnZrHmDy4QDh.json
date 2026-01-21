@@ -80,6 +80,17 @@
           }
         ]
       ]
+    },
+    "Google Sheets Trigger": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-12-12T07:23:55.975Z",
@@ -176,6 +187,29 @@
           "name": "Google Sheets Trigger info@tailwind.es"
         }
       }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d56c1a5f-1dc2-4a0d-86fb-e47d652cbd19",
+              "name": "nombre",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -272,
+        208
+      ],
+      "id": "7166c0e6-3862-4388-aab4-3633ecfc45a4",
+      "name": "Edit Fields"
     }
   ],
   "pinData": {},
@@ -200,6 +234,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-01-21T10:23:06.985Z",
-  "versionId": "a155a5fd-54fc-4ce3-8f61-59133d147d77"
+  "updatedAt": "2026-01-21T10:47:56.705Z",
+  "versionId": "e802d865-1c86-4a9c-bb6c-4540e22e98ca"
 }
