@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-01-15T07:51:36.000Z",
-    "createdAt": "2026-01-15T07:51:05.500Z",
-    "versionId": "5e2d77b7-61e2-458c-91b4-22b298ee2132",
+    "updatedAt": "2026-01-21T10:47:09.000Z",
+    "createdAt": "2026-01-21T10:33:07.367Z",
+    "versionId": "f225cd4b-ca86-48c8-802f-13bb357a2637",
     "workflowId": "sQUNg-VuSIFLaMIdA9znD",
     "nodes": [
       {
@@ -16,7 +16,7 @@
         "typeVersion": 2.1,
         "position": [
           32,
-          176
+          480
         ],
         "id": "3a169d65-fc08-45f0-a1c1-197ef4d4aa08",
         "name": "Webhook",
@@ -41,7 +41,7 @@
         "typeVersion": 1.1,
         "position": [
           464,
-          176
+          480
         ],
         "id": "7255d822-ea0d-446d-83c9-1aee124ad0e8",
         "name": "GraphQL",
@@ -57,17 +57,22 @@
           "operation": "download",
           "fileId": {
             "__rl": true,
-            "value": "https://docs.google.com/spreadsheets/d/1gj4W5JT98BZYR-XSb06YS8xBy_MV2sIdZ9wROdbQ3v8/edit?gid=0#gid=0",
-            "mode": "url",
-            "__regex": "https:\\/\\/(?:drive|docs)\\.google\\.com(?:\\/.*|)\\/d\\/([0-9a-zA-Z\\-_]+)(?:\\/.*|)"
+            "value": "=https://docs.google.com/spreadsheets/d/{{ $json.ID_Documento }}/edit?gid=0#gid=0",
+            "mode": "url"
           },
-          "options": {}
+          "options": {
+            "googleFileConversion": {
+              "conversion": {
+                "sheetsToFormat": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+              }
+            }
+          }
         },
         "type": "n8n-nodes-base.googleDrive",
         "typeVersion": 3,
         "position": [
-          32,
-          816
+          -240,
+          736
         ],
         "id": "7fed0716-d328-4f6b-a512-89cd39e1b746",
         "name": "Download file",
@@ -80,32 +85,9 @@
       },
       {
         "parameters": {
-          "fromEmail": "info@tailwind.es",
-          "toEmail": "adrianazorinsanchez@gmail.com",
-          "subject": "Informe Diario",
-          "options": {}
-        },
-        "type": "n8n-nodes-base.emailSend",
-        "typeVersion": 2.1,
-        "position": [
-          208,
-          816
-        ],
-        "id": "473e91fd-95b9-4678-aa03-ac795b000685",
-        "name": "Send email",
-        "webhookId": "226a034e-8336-48cb-95fb-270066c58247",
-        "credentials": {
-          "smtp": {
-            "id": "MiD3YXIjExt0Aik1",
-            "name": "Correo"
-          }
-        }
-      },
-      {
-        "parameters": {
           "content": "ENVIAR CORREO",
           "height": 208,
-          "width": 416,
+          "width": 736,
           "color": 4
         },
         "type": "n8n-nodes-base.stickyNote",
@@ -132,7 +114,7 @@
         "typeVersion": 3,
         "position": [
           464,
-          544
+          128
         ],
         "id": "67d0cf56-a4b3-432d-9ab3-2b819b9f63a8",
         "name": "Copy file",
@@ -154,7 +136,7 @@
         "typeVersion": 1,
         "position": [
           0,
-          496
+          80
         ],
         "id": "2b6bbfe7-3af9-4eb7-a19d-ec2a3322de91",
         "name": "Sticky Note2"
@@ -171,7 +153,7 @@
         "typeVersion": 1.3,
         "position": [
           32,
-          544
+          128
         ],
         "id": "62e5fa32-0ae7-493b-875f-e37addba632a",
         "name": "Schedule Trigger"
@@ -225,7 +207,7 @@
         "typeVersion": 1,
         "position": [
           752,
-          544
+          128
         ],
         "id": "e5db14bd-7dca-40a9-bee1-b422e5e5f4a0",
         "name": "Insert row"
@@ -238,7 +220,7 @@
         "typeVersion": 2,
         "position": [
           464,
-          320
+          624
         ],
         "id": "f74317cd-37d0-4262-a761-d94cdf479b6a",
         "name": "Code in JavaScript"
@@ -251,7 +233,7 @@
         "typeVersion": 3.2,
         "position": [
           752,
-          160
+          464
         ],
         "id": "5007c6bb-31eb-4b15-be8a-fb06c3e7962e",
         "name": "Merge"
@@ -328,7 +310,7 @@
         "typeVersion": 3.4,
         "position": [
           1088,
-          160
+          464
         ],
         "id": "b52e6336-e7f7-40dd-ad46-c520b057c406",
         "name": "Edit Fields"
@@ -341,7 +323,7 @@
         "typeVersion": 2,
         "position": [
           928,
-          160
+          464
         ],
         "id": "38bbf384-1b40-4d4d-b5cc-97d8454a7303",
         "name": "Code in JavaScript1"
@@ -401,7 +383,7 @@
         "typeVersion": 1,
         "position": [
           608,
-          544
+          128
         ],
         "id": "954c39f5-d1ab-48b0-a72f-d98b54032d3b",
         "name": "Update row(s)"
@@ -428,7 +410,7 @@
         "typeVersion": 1,
         "position": [
           208,
-          176
+          480
         ],
         "id": "4f754bc8-b2f2-4dd8-a946-e584b5dab050",
         "name": "Get row(s)"
@@ -596,7 +578,7 @@
         "typeVersion": 4.7,
         "position": [
           1264,
-          160
+          464
         ],
         "id": "3456907e-1889-4e9d-87b5-40ea7f7453de",
         "name": "Update row in sheet",
@@ -663,7 +645,7 @@
         "typeVersion": 1,
         "position": [
           1424,
-          160
+          464
         ],
         "id": "faf01950-eda5-4601-8b6c-75240e769c87",
         "name": "Update row(s)1"
@@ -687,7 +669,7 @@
         "typeVersion": 1.1,
         "position": [
           528,
-          32
+          336
         ],
         "id": "0547d26f-e2d4-4a83-ad9a-3b3f4097a3c2",
         "name": "GraphQL1",
@@ -716,7 +698,7 @@
         "typeVersion": 3.4,
         "position": [
           400,
-          32
+          336
         ],
         "id": "296715bd-4cb8-4930-a0d7-966761cc3f3b",
         "name": "Edit Fields1"
@@ -741,7 +723,7 @@
         "typeVersion": 3.4,
         "position": [
           176,
-          544
+          128
         ],
         "id": "fccdf808-f4e0-4782-a70b-a6b6e00c2e42",
         "name": "obtener fecha"
@@ -754,7 +736,7 @@
         "typeVersion": 2,
         "position": [
           320,
-          544
+          128
         ],
         "id": "a2ae42c0-c272-4555-ae7f-445636e14ba8",
         "name": "formatear fecha"
@@ -770,10 +752,60 @@
         "typeVersion": 1,
         "position": [
           0,
-          0
+          304
         ],
         "id": "851e0c70-842c-46c7-a56a-b490e4cc792d",
         "name": "Sticky Note"
+      },
+      {
+        "parameters": {
+          "sendTo": "emilianomartinezvrd@gmail.com",
+          "subject": "Informe diario mamawebaso",
+          "message": "=<div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #333333;\">\n  \n  <h2 style=\"color: #2c3e50; border-bottom: 2px solid #007bff; padding-bottom: 10px;\">\n    INFORME DIARIO ({{ $now.toFormat('dd/MM/yyyy') }})\n  </h2>\n\n  <p>Hola,</p>\n  \n  <p>Aquí tienes el informe actualizado correspondiente al día de hoy.</p>\n  <p>Puedes acceder al archivo o recurso haciendo clic en el siguiente botón:</p>\n\n  <div style=\"margin: 30px 0;\">\n    <a href=\"https://docs.google.com/spreadsheets/d/{{ $json.ID_Documento }}/edit?gid=0#gid=0\" \n       style=\"background-color: #007bff; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;\">\n       VER DOCUMENTO\n    </a>\n  </div>\n\n  <p style=\"font-size: 12px; color: #888;\">\n    Este es un mensaje automático enviado por tu flujo de n8n.\n  </p>\n  \n</div>",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.gmail",
+        "typeVersion": 2.2,
+        "position": [
+          192,
+          816
+        ],
+        "id": "e0a1443f-7789-45c3-88a0-4471df57e63a",
+        "name": "Send a message",
+        "webhookId": "395b376a-113e-4e7e-b92d-4afaa0028904",
+        "credentials": {
+          "gmailOAuth2": {
+            "id": "wR7U82S8bmDH4odC",
+            "name": "info@tailwind.es"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "get",
+          "dataTableId": {
+            "__rl": true,
+            "value": "ghO8HECzTZgPqOqM",
+            "mode": "list",
+            "cachedResultName": "InformeDiario",
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/ghO8HECzTZgPqOqM"
+          },
+          "filters": {
+            "conditions": [
+              {
+                "keyValue": "1"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.dataTable",
+        "typeVersion": 1.1,
+        "position": [
+          32,
+          816
+        ],
+        "id": "6762e93d-c33c-4008-9d9c-7fd70d47fbf5",
+        "name": "Get row(s)1"
       }
     ],
     "connections": {
@@ -801,13 +833,7 @@
       },
       "Download file": {
         "main": [
-          [
-            {
-              "node": "Send email",
-              "type": "main",
-              "index": 0
-            }
-          ]
+          []
         ]
       },
       "Copy file": {
@@ -962,14 +988,25 @@
             }
           ]
         ]
+      },
+      "Get row(s)1": {
+        "main": [
+          [
+            {
+              "node": "Send a message",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
     "authors": "Info Tailwind",
-    "name": "Version 5e2d77b7",
+    "name": "Version f225cd4b",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "5e2d77b7-61e2-458c-91b4-22b298ee2132",
+  "activeVersionId": "f225cd4b-ca86-48c8-802f-13bb357a2637",
   "connections": {
     "Webhook": {
       "main": [
@@ -989,17 +1026,6 @@
             "node": "Merge",
             "type": "main",
             "index": 1
-          }
-        ]
-      ]
-    },
-    "Download file": {
-      "main": [
-        [
-          {
-            "node": "Send email",
-            "type": "main",
-            "index": 0
           }
         ]
       ]
@@ -1156,12 +1182,25 @@
           }
         ]
       ]
+    },
+    "Get row(s)1": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2026-01-15T07:50:18.774Z",
   "id": "sQUNg-VuSIFLaMIdA9znD",
   "isArchived": false,
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "Informe_Diario_Definitivo",
   "nodes": [
     {
@@ -1174,7 +1213,7 @@
       "typeVersion": 2.1,
       "position": [
         32,
-        176
+        480
       ],
       "id": "3a169d65-fc08-45f0-a1c1-197ef4d4aa08",
       "name": "Webhook",
@@ -1199,7 +1238,7 @@
       "typeVersion": 1.1,
       "position": [
         464,
-        176
+        480
       ],
       "id": "7255d822-ea0d-446d-83c9-1aee124ad0e8",
       "name": "GraphQL",
@@ -1212,58 +1251,9 @@
     },
     {
       "parameters": {
-        "operation": "download",
-        "fileId": {
-          "__rl": true,
-          "value": "https://docs.google.com/spreadsheets/d/1gj4W5JT98BZYR-XSb06YS8xBy_MV2sIdZ9wROdbQ3v8/edit?gid=0#gid=0",
-          "mode": "url",
-          "__regex": "https:\\/\\/(?:drive|docs)\\.google\\.com(?:\\/.*|)\\/d\\/([0-9a-zA-Z\\-_]+)(?:\\/.*|)"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.googleDrive",
-      "typeVersion": 3,
-      "position": [
-        32,
-        816
-      ],
-      "id": "7fed0716-d328-4f6b-a512-89cd39e1b746",
-      "name": "Download file",
-      "credentials": {
-        "googleDriveOAuth2Api": {
-          "id": "N7JXWgOiVoyCTaVL",
-          "name": "Google Drive account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "fromEmail": "info@tailwind.es",
-        "toEmail": "adrianazorinsanchez@gmail.com",
-        "subject": "Informe Diario",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.emailSend",
-      "typeVersion": 2.1,
-      "position": [
-        208,
-        816
-      ],
-      "id": "473e91fd-95b9-4678-aa03-ac795b000685",
-      "name": "Send email",
-      "webhookId": "226a034e-8336-48cb-95fb-270066c58247",
-      "credentials": {
-        "smtp": {
-          "id": "MiD3YXIjExt0Aik1",
-          "name": "Correo"
-        }
-      }
-    },
-    {
-      "parameters": {
         "content": "ENVIAR CORREO",
         "height": 208,
-        "width": 416,
+        "width": 736,
         "color": 4
       },
       "type": "n8n-nodes-base.stickyNote",
@@ -1290,7 +1280,7 @@
       "typeVersion": 3,
       "position": [
         464,
-        544
+        128
       ],
       "id": "67d0cf56-a4b3-432d-9ab3-2b819b9f63a8",
       "name": "Copy file",
@@ -1312,7 +1302,7 @@
       "typeVersion": 1,
       "position": [
         0,
-        496
+        80
       ],
       "id": "2b6bbfe7-3af9-4eb7-a19d-ec2a3322de91",
       "name": "Sticky Note2"
@@ -1329,7 +1319,7 @@
       "typeVersion": 1.3,
       "position": [
         32,
-        544
+        128
       ],
       "id": "62e5fa32-0ae7-493b-875f-e37addba632a",
       "name": "Schedule Trigger"
@@ -1383,7 +1373,7 @@
       "typeVersion": 1,
       "position": [
         752,
-        544
+        128
       ],
       "id": "e5db14bd-7dca-40a9-bee1-b422e5e5f4a0",
       "name": "Insert row"
@@ -1396,7 +1386,7 @@
       "typeVersion": 2,
       "position": [
         464,
-        320
+        624
       ],
       "id": "f74317cd-37d0-4262-a761-d94cdf479b6a",
       "name": "Code in JavaScript"
@@ -1409,7 +1399,7 @@
       "typeVersion": 3.2,
       "position": [
         752,
-        160
+        464
       ],
       "id": "5007c6bb-31eb-4b15-be8a-fb06c3e7962e",
       "name": "Merge"
@@ -1486,7 +1476,7 @@
       "typeVersion": 3.4,
       "position": [
         1088,
-        160
+        464
       ],
       "id": "b52e6336-e7f7-40dd-ad46-c520b057c406",
       "name": "Edit Fields"
@@ -1499,7 +1489,7 @@
       "typeVersion": 2,
       "position": [
         928,
-        160
+        464
       ],
       "id": "38bbf384-1b40-4d4d-b5cc-97d8454a7303",
       "name": "Code in JavaScript1"
@@ -1559,7 +1549,7 @@
       "typeVersion": 1,
       "position": [
         608,
-        544
+        128
       ],
       "id": "954c39f5-d1ab-48b0-a72f-d98b54032d3b",
       "name": "Update row(s)"
@@ -1586,7 +1576,7 @@
       "typeVersion": 1,
       "position": [
         208,
-        176
+        480
       ],
       "id": "4f754bc8-b2f2-4dd8-a946-e584b5dab050",
       "name": "Get row(s)"
@@ -1754,7 +1744,7 @@
       "typeVersion": 4.7,
       "position": [
         1264,
-        160
+        464
       ],
       "id": "3456907e-1889-4e9d-87b5-40ea7f7453de",
       "name": "Update row in sheet",
@@ -1821,7 +1811,7 @@
       "typeVersion": 1,
       "position": [
         1424,
-        160
+        464
       ],
       "id": "faf01950-eda5-4601-8b6c-75240e769c87",
       "name": "Update row(s)1"
@@ -1845,7 +1835,7 @@
       "typeVersion": 1.1,
       "position": [
         528,
-        32
+        336
       ],
       "id": "0547d26f-e2d4-4a83-ad9a-3b3f4097a3c2",
       "name": "GraphQL1",
@@ -1874,7 +1864,7 @@
       "typeVersion": 3.4,
       "position": [
         400,
-        32
+        336
       ],
       "id": "296715bd-4cb8-4930-a0d7-966761cc3f3b",
       "name": "Edit Fields1"
@@ -1899,7 +1889,7 @@
       "typeVersion": 3.4,
       "position": [
         176,
-        544
+        128
       ],
       "id": "fccdf808-f4e0-4782-a70b-a6b6e00c2e42",
       "name": "obtener fecha"
@@ -1912,7 +1902,7 @@
       "typeVersion": 2,
       "position": [
         320,
-        544
+        128
       ],
       "id": "a2ae42c0-c272-4555-ae7f-445636e14ba8",
       "name": "formatear fecha"
@@ -1928,10 +1918,60 @@
       "typeVersion": 1,
       "position": [
         0,
-        0
+        304
       ],
       "id": "851e0c70-842c-46c7-a56a-b490e4cc792d",
       "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "sendTo": "emilianomartinezvrd@gmail.com",
+        "subject": "Informe diario mamawebaso",
+        "message": "=<div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; color: #333333;\">\n  \n  <h2 style=\"color: #2c3e50; border-bottom: 2px solid #007bff; padding-bottom: 10px;\">\n    INFORME DIARIO ({{ $now.toFormat('dd/MM/yyyy') }})\n  </h2>\n\n  <p>Hola,</p>\n  \n  <p>Aquí tienes el informe actualizado correspondiente al día de hoy.</p>\n  <p>Puedes acceder al archivo o recurso haciendo clic en el siguiente botón:</p>\n\n  <div style=\"margin: 30px 0;\">\n    <a href=\"https://docs.google.com/spreadsheets/d/{{ $json.ID_Documento }}/edit?gid=0#gid=0\" \n       style=\"background-color: #007bff; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;\">\n       VER DOCUMENTO\n    </a>\n  </div>\n\n  <p style=\"font-size: 12px; color: #888;\">\n    Este es un mensaje automático enviado por tu flujo de n8n.\n  </p>\n  \n</div>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        192,
+        816
+      ],
+      "id": "e0a1443f-7789-45c3-88a0-4471df57e63a",
+      "name": "Send a message",
+      "webhookId": "395b376a-113e-4e7e-b92d-4afaa0028904",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "wR7U82S8bmDH4odC",
+          "name": "info@tailwind.es"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "ghO8HECzTZgPqOqM",
+          "mode": "list",
+          "cachedResultName": "InformeDiario",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/ghO8HECzTZgPqOqM"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "1"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        32,
+        816
+      ],
+      "id": "6762e93d-c33c-4008-9d9c-7fd70d47fbf5",
+      "name": "Get row(s)1"
     }
   ],
   "pinData": {
@@ -1969,6 +2009,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2026-01-15T07:51:05.496Z",
-  "versionId": "5e2d77b7-61e2-458c-91b4-22b298ee2132"
+  "updatedAt": "2026-01-21T10:47:12.539Z",
+  "versionId": "12f56532-a454-4c60-8f37-ac22cc6f11b7"
 }
