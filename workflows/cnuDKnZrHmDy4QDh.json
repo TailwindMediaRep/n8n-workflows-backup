@@ -1,8 +1,87 @@
 {
-  "active": false,
-  "activeVersion": null,
-  "activeVersionId": null,
-  "connections": {},
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-01-20T18:56:51.000Z",
+    "createdAt": "2026-01-20T18:56:50.161Z",
+    "versionId": "94d91bc6-5cdd-4755-ad1a-d9d12327a7c8",
+    "workflowId": "cnuDKnZrHmDy4QDh",
+    "nodes": [
+      {
+        "parameters": {
+          "pollTimes": {
+            "item": [
+              {
+                "mode": "everyMinute"
+              }
+            ]
+          },
+          "simple": false,
+          "filters": {
+            "q": "from:me \"Su perfil ha sido autorizado\""
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.gmailTrigger",
+        "typeVersion": 1.3,
+        "position": [
+          -480,
+          0
+        ],
+        "id": "c9f9c18e-158d-4c8a-87f0-a291cb274928",
+        "name": "Gmail Trigger",
+        "credentials": {
+          "gmailOAuth2": {
+            "id": "2piqh63wCF24vapD",
+            "name": "Gmail profesionales@rules-shop.es"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "// Accedemos a la información del remitente\n// La estructura es: json.from.value[0]\nconst senderInfo = $input.item.json.from.value[0];\n\nreturn {\n  json: {\n    nombre: senderInfo.name,   // Esto capturará \"Mateo Ramos\"\n    email: senderInfo.address  // Esto capturará \"tagliaficomateo@gmail.com\"\n  }\n};"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          -272,
+          0
+        ],
+        "id": "3107f929-6b88-45d7-b2b4-dae60dd465e7",
+        "name": "Code in JavaScript"
+      }
+    ],
+    "connections": {
+      "Gmail Trigger": {
+        "main": [
+          [
+            {
+              "node": "Code in JavaScript",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Info Tailwind",
+    "name": "Version 94d91bc6",
+    "description": "",
+    "autosaved": false
+  },
+  "activeVersionId": "94d91bc6-5cdd-4755-ad1a-d9d12327a7c8",
+  "connections": {
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
   "createdAt": "2025-12-12T07:23:55.975Z",
   "id": "cnuDKnZrHmDy4QDh",
   "isArchived": false,
@@ -20,22 +99,42 @@
             }
           ]
         },
-        "filters": {}
+        "simple": false,
+        "filters": {
+          "labelIds": [
+            "SENT"
+          ],
+          "q": "from:me \"Su perfil ha sido autorizado\""
+        },
+        "options": {}
       },
       "type": "n8n-nodes-base.gmailTrigger",
       "typeVersion": 1.3,
       "position": [
-        0,
+        -480,
         0
       ],
       "id": "c9f9c18e-158d-4c8a-87f0-a291cb274928",
       "name": "Gmail Trigger",
       "credentials": {
         "gmailOAuth2": {
-          "id": "RHR23CJ1w4T4gR4J",
-          "name": "Gmail rulesoutlet@gmail.com"
+          "id": "2piqh63wCF24vapD",
+          "name": "Gmail profesionales@rules-shop.es"
         }
       }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Accedemos a la información del remitente\n// La estructura es: json.from.value[0]\nconst senderInfo = $input.item.json.from.value[0];\n\nreturn {\n  json: {\n    nombre: senderInfo.name,   // Esto capturará \"Mateo Ramos\"\n    email: senderInfo.address  // Esto capturará \"tagliaficomateo@gmail.com\"\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -272,
+        0
+      ],
+      "id": "3107f929-6b88-45d7-b2b4-dae60dd465e7",
+      "name": "Code in JavaScript"
     }
   ],
   "pinData": {},
@@ -51,9 +150,15 @@
       "projectId": "x5UZcmGQw2OWHuXb"
     }
   ],
-  "staticData": null,
+  "staticData": {
+    "node:Gmail Trigger": {
+      "Gmail Trigger": {
+        "lastTimeChecked": 1768935411
+      }
+    }
+  },
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2026-01-19T22:44:35.691Z",
-  "versionId": "be620931-098c-4209-b4dc-952d67fd0e00"
+  "triggerCount": 1,
+  "updatedAt": "2026-01-20T19:06:07.954Z",
+  "versionId": "01c5f648-8c7f-40bc-a89c-46e039ce0f7d"
 }
