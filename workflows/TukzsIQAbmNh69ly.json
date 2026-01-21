@@ -40,7 +40,7 @@
       "main": [
         [
           {
-            "node": "autorelleno_canva",
+            "node": "obtener_id_documento",
             "type": "main",
             "index": 0
           }
@@ -68,6 +68,164 @@
           }
         ]
       ]
+    },
+    "comprobar_diseño": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Export",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait1": {
+      "main": [
+        [
+          {
+            "node": "comprobar_diseño",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "crear_contenedor",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "comprobar_export",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait2": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Export": {
+      "main": [
+        [
+          {
+            "node": "comprobar_export",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait3": {
+      "main": [
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "publicar_historia",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "comprobar_contenedor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "crear_contenedor": {
+      "main": [
+        [
+          {
+            "node": "comprobar_contenedor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "comprobar_contenedor": {
+      "main": [
+        [
+          {
+            "node": "Wait3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "comprobar_export": {
+      "main": [
+        [
+          {
+            "node": "Wait2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "publicar_historia": {
+      "main": [
+        []
+      ]
+    },
+    "obtener_id_documento": {
+      "main": [
+        [
+          {
+            "node": "autorelleno_canva",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-12-12T07:24:14.681Z",
@@ -76,14 +234,14 @@
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "Booking",
+  "name": "Calendario_Lodgify",
   "nodes": [
     {
       "parameters": {},
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -304,
+        -512,
         0
       ],
       "id": "8ab0c352-e75d-4666-a0b6-4aaa12cc73b5",
@@ -114,7 +272,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        -96,
+        -304,
         0
       ],
       "id": "dbacd693-8938-49aa-a7fe-91f51acc831b",
@@ -129,12 +287,12 @@
     },
     {
       "parameters": {
-        "jsCode": "// ==========================================\n// 1. CONFIGURACIÓN\n// ==========================================\n// Usamos la fecha del sistema (20 de Enero de 2026 según tu contexto)\nconst today = new Date(); \ntoday.setHours(0, 0, 0, 0); // Reseteamos horas para comparar solo días\n\n// Variables para filtrar \"ESTE MES\"\nconst currentMonth = today.getMonth(); // 0 = Enero\nconst currentYear = today.getFullYear(); // 2026\n\n// ==========================================\n// 2. OBTENER DATOS\n// ==========================================\nconst data = items[0].json;\n\n// Detectamos la estancia mínima (priorizamos la de la habitación, que suele ser la real)\n// En tu JSON: Root = 1 día, Room = 3 días. Usamos la de la Room (3) para ser precisos.\nconst minStay = data.rooms && data.rooms[0] ? data.rooms[0].price_unit_in_days : (data.price_unit_in_days || 1);\n\n// Listas de fechas\nconst allowedCheckInDates = data.in_out.check_in || [];\nconst blockedDates = data.in_out.not_available || [];\n\n// Convertimos los bloqueos a un Set para búsqueda rápida\nconst blockedSet = new Set(blockedDates.map(item => item.date));\n\n// Función auxiliar para sumar días\nfunction addDays(dateStr, days) {\n    const date = new Date(dateStr);\n    date.setDate(date.getDate() + days);\n    return date.toISOString().split('T')[0];\n}\n\n// ==========================================\n// 3. LÓGICA DE FILTRADO\n// ==========================================\nlet validDates = [];\n\nfor (const item of allowedCheckInDates) {\n    const checkInDateStr = item.date;\n    const checkInDateObj = new Date(checkInDateStr);\n    \n    // --- FILTRO 1: ¿Es fecha pasada? ---\n    // Si la fecha es anterior a hoy, la saltamos\n    if (checkInDateObj < today) continue;\n\n    // --- FILTRO 2: ¿Es de ESTE MES? ---\n    // Si el mes o el año no coinciden con hoy, lo saltamos.\n    if (checkInDateObj.getMonth() !== currentMonth || checkInDateObj.getFullYear() !== currentYear) {\n        continue;\n    }\n\n    // --- FILTRO 3: ¿Está ocupado el día de llegada? ---\n    if (blockedSet.has(checkInDateStr)) continue;\n\n    // --- FILTRO 4: Regla de Estancia Mínima ---\n    // Verificamos si los días consecutivos necesarios (según minStay) están libres\n    let isMinStaySatisfied = true;\n\n    // Empezamos desde 1 porque el día 0 (llegada) ya vimos que está libre\n    for (let i = 1; i < minStay; i++) {\n        const nextDay = addDays(checkInDateStr, i);\n        if (blockedSet.has(nextDay)) {\n            isMinStaySatisfied = false;\n            break; // Encontramos un bloqueo en medio de la estancia mínima\n        }\n    }\n\n    // Si pasa todos los filtros, ¡es válido!\n    if (isMinStaySatisfied) {\n        validDates.push(checkInDateStr);\n    }\n}\n\n// ==========================================\n// 4. RESULTADO\n// ==========================================\nreturn [\n    {\n        json: {\n            target_month_name: today.toLocaleString('es-ES', { month: 'long' }),\n            min_stay_rule: minStay,\n            total_valid_days_this_month: validDates.length,\n            days: validDates\n        }\n    }\n];"
+        "jsCode": "// ==========================================\n// 1. CONFIGURACIÓN Y REGLA DEL DÍA 20\n// ==========================================\nconst today = new Date();\ntoday.setHours(0, 0, 0, 0); // Limpiamos horas\n\n// Configuración del límite\nconst switchDay = 20; // Si es día 21 o más, cambiamos de mes\n\n// Creamos una fecha objetivo (targetDate)\n// Por defecto es hoy (mes actual)\nlet targetDate = new Date(today);\n\n// EVALUACIÓN: ¿Hemos pasado del día 20?\nif (today.getDate() > switchDay) {\n    // Si hoy es 21, 22... sumamos 1 mes\n    targetDate.setMonth(today.getMonth() + 1);\n    // IMPORTANTE: Ponemos el día a 1 para evitar errores en meses cortos \n    // (ej: pasar del 31 de Enero al \"31 de Febrero\" daría error, mejor ir al 1 de Febrero)\n    targetDate.setDate(1); \n}\n\n// Extraemos el Mes y Año que finalmente vamos a usar para filtrar\nconst targetMonth = targetDate.getMonth();\nconst targetYear = targetDate.getFullYear();\n\n// ==========================================\n// 2. OBTENER DATOS\n// ==========================================\nconst data = items[0].json;\n\n// Detectamos la estancia mínima\nconst minStay = data.rooms && data.rooms[0] ? data.rooms[0].price_unit_in_days : (data.price_unit_in_days || 1);\n\nconst allowedCheckInDates = data.in_out.check_in || [];\nconst blockedDates = data.in_out.not_available || [];\nconst blockedSet = new Set(blockedDates.map(item => item.date));\n\nfunction addDays(dateStr, days) {\n    const date = new Date(dateStr);\n    date.setDate(date.getDate() + days);\n    return date.toISOString().split('T')[0];\n}\n\n// ==========================================\n// 3. LÓGICA DE FILTRADO\n// ==========================================\nlet validDates = [];\n\nfor (const item of allowedCheckInDates) {\n    const checkInDateStr = item.date;\n    const checkInDateObj = new Date(checkInDateStr);\n    \n    // --- FILTRO 1: Fechas pasadas ---\n    // (Aun si miramos el mes siguiente, esto no estorba, y si es mes actual es vital)\n    if (checkInDateObj < today) continue;\n\n    // --- FILTRO 2: ¿Coincide con el MES OBJETIVO? ---\n    // Aquí es donde la magia ocurre: comparamos con el mes calculado arriba\n    if (checkInDateObj.getMonth() !== targetMonth || checkInDateObj.getFullYear() !== targetYear) {\n        continue;\n    }\n\n    // --- FILTRO 3: ¿Día ocupado? ---\n    if (blockedSet.has(checkInDateStr)) continue;\n\n    // --- FILTRO 4: Estancia Mínima ---\n    let isMinStaySatisfied = true;\n    for (let i = 1; i < minStay; i++) {\n        const nextDay = addDays(checkInDateStr, i);\n        if (blockedSet.has(nextDay)) {\n            isMinStaySatisfied = false;\n            break; \n        }\n    }\n\n    if (isMinStaySatisfied) {\n        validDates.push(checkInDateStr);\n    }\n}\n\n// ==========================================\n// 4. RESULTADO\n// ==========================================\nreturn [\n    {\n        json: {\n            // Información útil para saber qué decisión tomó el código\n            status_message: today.getDate() > switchDay ? \n                `Hoy es día ${today.getDate()}, mostrando mes siguiente.` : \n                `Hoy es día ${today.getDate()}, mostrando mes actual.`,\n            \n            target_month_name: targetDate.toLocaleString('es-ES', { month: 'long' }),\n            target_year: targetYear,\n            min_stay_rule: minStay,\n            total_valid_days: validDates.length,\n            days: validDates\n        }\n    }\n];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        112,
+        -96,
         0
       ],
       "id": "71447863-ab18-4fc5-ba85-e4b80d992a89",
@@ -142,12 +300,12 @@
     },
     {
       "parameters": {
-        "jsCode": "// ==========================================\n// CONFIGURACIÓN\n// ==========================================\nconst crossSymbol = \"X\"; \n// Definimos el tamaño de la rejilla a 42 (6 semanas x 7 días)\n// Esto asegura que sirva para CUALQUIER mes del año\nconst totalGridCells = 42; \n\n// ==========================================\n// LÓGICA\n// ==========================================\nconst input = items[0].json;\n\n// 1. Días disponibles\nconst daysList = input.days || (input.data ? input.data.days : []) || [];\nconst availableDates = new Set(daysList);\n\n// 2. Configuración del Mes (Enero 2026)\n// Enero 2026 empieza en Jueves.\n// En semana L-M-X-J-V-S-D, Jueves es la 4ª posición.\n// Por tanto, hay 3 huecos vacíos al principio (L, M, X).\nconst startOffset = 3; \n\n// Días totales del mes (31 para Enero)\nconst daysInMonth = 31;\n\nconst canvaVariables = {};\n\n// 3. Generamos las 42 variables (p1...p42)\nfor (let pos = 1; pos <= totalGridCells; pos++) {\n    const varName = `p${pos}`; \n    \n    // Calculamos a qué día corresponde esta casilla\n    const dayNumber = pos - startOffset;\n\n    // CASO A: Huecos iniciales (antes del día 1)\n    if (dayNumber <= 0) {\n        canvaVariables[varName] = \"\"; \n        continue;\n    }\n\n    // CASO B: Huecos finales (después del día 31)\n    // Aquí es donde las casillas 36 a 42 se quedarán vacías automáticamente\n    if (dayNumber > daysInMonth) {\n        canvaVariables[varName] = \"\"; \n        continue;\n    }\n\n    // CASO C: Días reales del mes\n    const dateStr = `2026-01-${dayNumber.toString().padStart(2, '0')}`;\n\n    // Lógica de tachado\n    if (availableDates.has(dateStr)) {\n        canvaVariables[varName] = \"\"; // Disponible = Limpio\n    } else {\n        canvaVariables[varName] = crossSymbol; // Ocupado = Tachado\n    }\n}\n\nreturn [{ json: canvaVariables }];"
+        "jsCode": "// ==========================================\n// CONFIGURACIÓN\n// ==========================================\nconst crossSymbol = \"X\"; \nconst totalGridCells = 42; \n\n// ==========================================\n// LÓGICA DE DATOS\n// ==========================================\nconst input = items[0].json;\n\n// 1. Obtenemos la lista de días\nconst daysList = input.days || (input.data ? input.data.days : []) || [];\nconst availableDates = new Set(daysList);\n\n// ==========================================\n// DETECCIÓN INTELIGENTE DE FECHA\n// ==========================================\nlet targetDateStr;\n\nif (daysList.length > 0) {\n    // Si hay datos (ej: \"2026-01-27\"), sacamos \"2026-01\"\n    targetDateStr = daysList[0].slice(0, 7);\n} else {\n    // Fallback al mes actual\n    targetDateStr = new Date().toISOString().slice(0, 7);\n}\n\n// Separamos año y mes (numérico)\nconst [year, month] = targetDateStr.split('-').map(Number);\n\n// ==========================================\n// CÁLCULOS DE CALENDARIO\n// ==========================================\n\n// 2. Calculamos el offset (Día de la semana del día 1)\nconst firstDayOfMonth = new Date(year, month - 1, 1);\nlet jsDay = firstDayOfMonth.getDay(); \nconst startOffset = (jsDay === 0) ? 6 : jsDay - 1; // Ajuste a Lunes=0\n\n// 3. Calculamos días totales del mes\nconst daysInMonth = new Date(year, month, 0).getDate();\n\nconst canvaVariables = {};\n\n// ==========================================\n// GENERACIÓN DE VARIABLES (p1...p42)\n// ==========================================\nfor (let pos = 1; pos <= totalGridCells; pos++) {\n    const varName = `p${pos}`; \n    const dayNumber = pos - startOffset;\n\n    // Huecos vacíos\n    if (dayNumber <= 0 || dayNumber > daysInMonth) {\n        canvaVariables[varName] = \"\"; \n        continue;\n    }\n\n    // Días reales\n    const currentDayStr = dayNumber.toString().padStart(2, '0');\n    const fullDateStr = `${year}-${month.toString().padStart(2, '0')}-${currentDayStr}`;\n\n    if (availableDates.has(fullDateStr)) {\n        canvaVariables[varName] = \"\"; \n    } else {\n        canvaVariables[varName] = crossSymbol; \n    }\n}\n\n// ==========================================\n// NUEVO: TRADUCCIÓN DEL NOMBRE DEL MES\n// ==========================================\n// Lista manual para asegurar que siempre sale en Español\nconst nombresMeses = [\n    \"ENERO\", \"FEBRERO\", \"MARZO\", \"ABRIL\", \"MAYO\", \"JUNIO\", \n    \"JULIO\", \"AGOSTO\", \"SEPTIEMBRE\", \"OCTUBRE\", \"NOVIEMBRE\", \"DICIEMBRE\"\n];\n\n// 'month' es 1 para Enero, pero el array empieza en 0. Restamos 1.\ncanvaVariables['mes_detectado'] = nombresMeses[month - 1];\n\nreturn [{ json: canvaVariables }];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        320,
+        128,
         0
       ],
       "id": "de580307-9b1f-4954-b91b-504f01007d32",
@@ -161,7 +319,7 @@
         "genericAuthType": "oAuth2Api",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"brand_template_id\": \"EAG-9UBJb7g\",\n  \"export_name\": \"Calendario Enero\",\n  \"data\": {\n    \"P1\": { \"type\": \"text\", \"text\": \"{{ $json.p1 }}\" },\n    \"P2\": { \"type\": \"text\", \"text\": \"{{ $json.p2 }}\" },\n    \"P3\": { \"type\": \"text\", \"text\": \"{{ $json.p3 }}\" },\n    \"P4\": { \"type\": \"text\", \"text\": \"{{ $json.p4 }}\" },\n    \"P5\": { \"type\": \"text\", \"text\": \"{{ $json.p5 }}\" },\n    \"P6\": { \"type\": \"text\", \"text\": \"{{ $json.p6 }}\" },\n    \"P7\": { \"type\": \"text\", \"text\": \"{{ $json.p7 }}\" },\n    \"P8\": { \"type\": \"text\", \"text\": \"{{ $json.p8 }}\" },\n    \"P9\": { \"type\": \"text\", \"text\": \"{{ $json.p9 }}\" },\n    \"P10\": { \"type\": \"text\", \"text\": \"{{ $json.p10 }}\" },\n    \"P11\": { \"type\": \"text\", \"text\": \"{{ $json.p11 }}\" },\n    \"P12\": { \"type\": \"text\", \"text\": \"{{ $json.p12 }}\" },\n    \"P13\": { \"type\": \"text\", \"text\": \"{{ $json.p13 }}\" },\n    \"P14\": { \"type\": \"text\", \"text\": \"{{ $json.p14 }}\" },\n    \"P15\": { \"type\": \"text\", \"text\": \"{{ $json.p15 }}\" },\n    \"P16\": { \"type\": \"text\", \"text\": \"{{ $json.p16 }}\" },\n    \"P17\": { \"type\": \"text\", \"text\": \"{{ $json.p17 }}\" },\n    \"P18\": { \"type\": \"text\", \"text\": \"{{ $json.p18 }}\" },\n    \"P19\": { \"type\": \"text\", \"text\": \"{{ $json.p19 }}\" },\n    \"P20\": { \"type\": \"text\", \"text\": \"{{ $json.p20 }}\" },\n    \"P21\": { \"type\": \"text\", \"text\": \"{{ $json.p21 }}\" },\n    \"P22\": { \"type\": \"text\", \"text\": \"{{ $json.p22 }}\" },\n    \"P23\": { \"type\": \"text\", \"text\": \"{{ $json.p23 }}\" },\n    \"P24\": { \"type\": \"text\", \"text\": \"{{ $json.p24 }}\" },\n    \"P25\": { \"type\": \"text\", \"text\": \"{{ $json.p25 }}\" },\n    \"P26\": { \"type\": \"text\", \"text\": \"{{ $json.p26 }}\" },\n    \"P27\": { \"type\": \"text\", \"text\": \"{{ $json.p27 }}\" },\n    \"P28\": { \"type\": \"text\", \"text\": \"{{ $json.p28 }}\" },\n    \"P29\": { \"type\": \"text\", \"text\": \"{{ $json.p29 }}\" },\n    \"P30\": { \"type\": \"text\", \"text\": \"{{ $json.p30 }}\" },\n    \"P31\": { \"type\": \"text\", \"text\": \"{{ $json.p31 }}\" },\n    \"P32\": { \"type\": \"text\", \"text\": \"{{ $json.p32 }}\" },\n    \"P33\": { \"type\": \"text\", \"text\": \"{{ $json.p33 }}\" },\n    \"P34\": { \"type\": \"text\", \"text\": \"{{ $json.p34 }}\" },\n    \"P35\": { \"type\": \"text\", \"text\": \"{{ $json.p35 }}\" },\n    \"P36\": { \"type\": \"text\", \"text\": \"{{ $json.p36 }}\" },\n    \"P37\": { \"type\": \"text\", \"text\": \"{{ $json.p37 }}\" },\n    \"P38\": { \"type\": \"text\", \"text\": \"{{ $json.p38 }}\" },\n    \"P39\": { \"type\": \"text\", \"text\": \"{{ $json.p39 }}\" },\n    \"P40\": { \"type\": \"text\", \"text\": \"{{ $json.p40 }}\" },\n    \"P41\": { \"type\": \"text\", \"text\": \"{{ $json.p41 }}\" },\n    \"P42\": { \"type\": \"text\", \"text\": \"{{ $json.p42 }}\" },\n    \"NOMBRE_MES\": {\"type\": \"text\", \"text\": \"{{ $('dias_libres').item.json.target_month_name }}\" }\n  }\n}",
+        "jsonBody": "={\n  \"brand_template_id\": \"{{ $json.Id_documento }}\",\n  \"export_name\": \"Calendario Enero\",\n  \"data\": {\n    \"P1\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p1 }}\" },\n    \"P2\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p2 }}\" },\n    \"P3\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p3 }}\" },\n    \"P4\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p4 }}\" },\n    \"P5\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p5 }}\" },\n    \"P6\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p6 }}\" },\n    \"P7\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p7 }}\" },\n    \"P8\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p8 }}\" },\n    \"P9\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p9 }}\" },\n    \"P10\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p10 }}\" },\n    \"P11\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p11 }}\" },\n    \"P12\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p12 }}\" },\n    \"P13\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p13 }}\" },\n    \"P14\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p14 }}\" },\n    \"P15\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p15 }}\" },\n    \"P16\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p16 }}\" },\n    \"P17\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p17 }}\" },\n    \"P18\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p18 }}\" },\n    \"P19\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p19 }}\" },\n    \"P20\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p20 }}\" },\n    \"P21\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p21 }}\" },\n    \"P22\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p22 }}\" },\n    \"P23\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p23 }}\" },\n    \"P24\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p24 }}\" },\n    \"P25\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p25 }}\" },\n    \"P26\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p26 }}\" },\n    \"P27\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p27 }}\" },\n    \"P28\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p28 }}\" },\n    \"P29\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p29 }}\" },\n    \"P30\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p30 }}\" },\n    \"P31\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p31 }}\" },\n    \"P32\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p32 }}\" },\n    \"P33\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p33 }}\" },\n    \"P34\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p34 }}\" },\n    \"P35\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p35 }}\" },\n    \"P36\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p36 }}\" },\n    \"P37\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p37 }}\" },\n    \"P38\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p38 }}\" },\n    \"P39\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p39 }}\" },\n    \"P40\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p40 }}\" },\n    \"P41\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p41 }}\" },\n    \"P42\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p42 }}\" }\n  }\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -217,6 +375,301 @@
           "name": "Canva"
         }
       }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "8422a27b-04d1-4929-991b-6d8b5f974305",
+              "leftValue": "={{ $json.job.status }}",
+              "rightValue": "success",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1088,
+        0
+      ],
+      "id": "1223c008-0f5f-4bfd-84c9-a3e8de65f887",
+      "name": "If"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1264,
+        112
+      ],
+      "id": "0713c706-a88c-4a94-b162-3ebc7e484e41",
+      "name": "Wait1",
+      "webhookId": "8f7a8b6d-1034-4418-883b-767f25a64836"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.canva.com/rest/v1/exports",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"design_id\": \"{{ $json.job.result.design.id || $json.job.id}}\",\n  \"format\": {\n    \"type\": \"mp4\",\n    \"quality\": \"vertical_1080p\"\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        1264,
+        -144
+      ],
+      "id": "ddefe22b-260b-422f-bb29-ceb6cf569406",
+      "name": "Export",
+      "credentials": {
+        "oAuth2Api": {
+          "id": "eHEbZK7oC3pW1LQr",
+          "name": "Canva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "b4f16a6d-f121-4b47-ab09-627eb7d39e74",
+              "leftValue": "={{ $json.job.status }}",
+              "rightValue": "success",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1904,
+        -144
+      ],
+      "id": "e18c64c2-27cf-4878-a4c7-b943efe4605b",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1696,
+        -144
+      ],
+      "id": "9fd1def9-18b9-4b34-a98a-dd1bc702b600",
+      "name": "Wait2",
+      "webhookId": "82707f0f-e107-4b71-9887-ad1255db0d8d"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        2496,
+        -160
+      ],
+      "id": "8548b71d-e7f3-4a2b-8f6b-c2735da64c5e",
+      "name": "Wait3",
+      "webhookId": "4e9e9bda-286b-4bd6-b112-9133762c2724"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "49c65dc4-2ebe-451b-9788-cd0999f268f1",
+              "leftValue": "={{ $json.status_code }}",
+              "rightValue": "FINISHED",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2656,
+        -160
+      ],
+      "id": "ce4ef6e2-c250-43c9-8a04-349248a08f5e",
+      "name": "If2"
+    },
+    {
+      "parameters": {
+        "httpRequestMethod": "POST",
+        "graphApiVersion": "v23.0",
+        "node": "17841470046184468",
+        "edge": "=media",
+        "options": {
+          "queryParametersJson": "={\n\"video_url\": \"{{ $json.job.urls[0] }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
+        }
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        2096,
+        -160
+      ],
+      "id": "1d930292-1a9c-4412-976b-18cc8676d73e",
+      "name": "crear_contenedor",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "F7VbX8jWKCXdAM47",
+          "name": "Facebook Graph account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://graph.facebook.com/v20.0/{{ $json.id }}?fields=status,status_code",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "facebookGraphApi",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "access_token",
+              "value": "EAF2z8nVLTA8BQVHL88vghg4RRZBH9svUgZCP93NSZAB9iSDKxTAMvz8DFby8KVqXp6DWFxfFDiSKOUXvXPVVrJcNxjFOmr0ZCXphOZBUUWRkP8sTZC9wwapmP8vlJQN4NHH2eW9zPRmg2SHrQ0AhjI3n2kx1vAa8nOtr6tbQMhcaP0X0eMtOComwFl3zR7zd7HowZDZD"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        2320,
+        -160
+      ],
+      "id": "349cba3b-01df-4e4c-baa5-2be0dca192a6",
+      "name": "comprobar_contenedor",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "F7VbX8jWKCXdAM47",
+          "name": "Facebook Graph account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://api.canva.com/rest/v1/exports/{{ $json[\"job\"][\"id\"] }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        1488,
+        -144
+      ],
+      "id": "98cb7f7f-d492-4734-ae06-fd9d391fd9a5",
+      "name": "comprobar_export",
+      "credentials": {
+        "oAuth2Api": {
+          "id": "eHEbZK7oC3pW1LQr",
+          "name": "Canva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpRequestMethod": "POST",
+        "graphApiVersion": "v23.0",
+        "node": "17841470046184468",
+        "edge": "media_publish",
+        "options": {
+          "queryParametersJson": "={\n  \"creation_id\": \"{{$json.id}}\"\n}"
+        }
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        2864,
+        -176
+      ],
+      "id": "9c8b1f4f-f99e-4360-a451-d1a4f34d6259",
+      "name": "publicar_historia",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "F7VbX8jWKCXdAM47",
+          "name": "Facebook Graph account"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "ANEZ0YfLMwAmVazm",
+          "mode": "list",
+          "cachedResultName": "Skiroom_canva",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/ANEZ0YfLMwAmVazm"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "Nombre",
+              "keyValue": "={{ $json.mes_detectado }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        320,
+        0
+      ],
+      "id": "5379dfd3-64ae-43fd-a7c5-91ae44a394e9",
+      "name": "obtener_id_documento"
     }
   ],
   "pinData": {},
@@ -239,6 +692,6 @@
   },
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2026-01-20T13:37:55.916Z",
-  "versionId": "701d25dd-16f8-4424-b5e5-e6b5ba2dadf9"
+  "updatedAt": "2026-01-21T10:47:31.382Z",
+  "versionId": "41aa4e25-837d-4ec6-a08f-5c800db5b86f"
 }
