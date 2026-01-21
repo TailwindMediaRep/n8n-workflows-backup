@@ -1,19 +1,716 @@
 {
-  "active": false,
-  "activeVersion": null,
-  "activeVersionId": null,
-  "connections": {
-    "When clicking ‘Execute workflow’": {
-      "main": [
-        [
-          {
-            "node": "Edit Fields",
-            "type": "main",
-            "index": 0
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-01-20T09:04:26.000Z",
+    "createdAt": "2026-01-20T09:04:24.451Z",
+    "versionId": "6b60c0db-9257-4c9c-a266-5b97f856803e",
+    "workflowId": "LO_W1orNY8Xnr0cO5BqTQ",
+    "nodes": [
+      {
+        "parameters": {
+          "url": "={{ $json.url_proxima }}",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpHeaderAuth",
+          "options": {
+            "response": {
+              "response": {
+                "fullResponse": true,
+                "neverError": false,
+                "responseFormat": "autodetect"
+              }
+            },
+            "pagination": {}
           }
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          -608,
+          128
+        ],
+        "id": "45e08a6e-6ba8-41b3-ba4d-77b72b07a82d",
+        "name": "HTTP Request",
+        "alwaysOutputData": false,
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "25ac454b-4c2a-45cc-ad86-e5fa23eb0be4",
+                "name": "url_proxima",
+                "value": "=https://rulesshop.myshopify.com/admin/api/2025-01/orders.json?limit=250&status=any&created_at_min={{ $today.minus({months: 1}).startOf('month').format('yyyy-MM-dd') }}T00:00:00Z&created_at_max={{ $today.minus({months: 1}).endOf('month').format('yyyy-MM-dd') }}T23:59:59Z&fields=id,name,total_price,user_id",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -784,
+          128
+        ],
+        "id": "b4827fbb-a646-4632-ba8c-93ffb24cde2c",
+        "name": "Edit Fields"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "199971f1-887b-4c10-82c5-eb907d383db7",
+                "leftValue": "={{ $('HTTP Request').item.json.headers.link }}",
+                "rightValue": "next",
+                "operator": {
+                  "type": "string",
+                  "operation": "contains"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          -208,
+          128
+        ],
+        "id": "a7df202b-1bc8-4036-bdad-91cf61642eb2",
+        "name": "If1"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "bc6c0f06-254e-4091-96c3-9b58a2dcc634",
+                "name": "url_proxima",
+                "value": "={{ $('HTTP Request').item.json.headers.link.match(/<([^>]+)>;\\s*rel=\"next\"/)[1] }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          160,
+          0
+        ],
+        "id": "b0daaacb-d7c6-4f8b-9017-fdcab5a814ab",
+        "name": "Edit Fields1"
+      },
+      {
+        "parameters": {
+          "jsCode": "const staticData = $getWorkflowStaticData('global');\nconst listaAcumulada = staticData.listaTemporal || [];\n\n// 1. MUY IMPORTANTE: Como el camino 'false' no pasa por el acumulador,\n// añadimos aquí los últimos pedidos (los 32 del final de diciembre)\nconst ultimosPedidos = $('Code in JavaScript2').item.json.pedidos || [];\nconst listaCompleta = listaAcumulada.concat(ultimosPedidos);\n\n// 2. Limpiamos la memoria para que la próxima vez que ejecutes el flujo esté vacío\nstaticData.listaTemporal = [];\n\n// 3. Devolvemos la lista de absolutamente todos los pedidos\nreturn listaCompleta.map(pedido => ({ json: pedido }));"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          368,
+          144
+        ],
+        "id": "aeaf2518-81e6-4c47-8dbc-119597e0e83a",
+        "name": "Code in JavaScript1"
+      },
+      {
+        "parameters": {
+          "jsCode": "// Este código prepara los datos de CADA página (iteración)\nconst pedidos = $json.body.orders;\nconst link = $json.headers.link;\n\n// Devolvemos los pedidos para que el IF pueda leer el link \n// y el siguiente nodo pueda ver los datos.\nreturn {\n  pedidos: pedidos,\n  link_paginacion: link\n};"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          -416,
+          128
+        ],
+        "id": "411ff51f-b75f-4673-93dd-fe818a11de3e",
+        "name": "Code in JavaScript2"
+      },
+      {
+        "parameters": {
+          "jsCode": "// 1. Accedemos a la memoria global del flujo (Static Data)\nconst staticData = $getWorkflowStaticData('global');\n\n// 2. Si es la primera vez, creamos la lista vacía\nif (!staticData.listaTemporal) {\n  staticData.listaTemporal = [];\n}\n\n// 3. Traemos los 250 pedidos que vienen del \"Preparador\"\nconst pedidosNuevos = $('Code in JavaScript2').item.json.pedidos;\n\n// 4. Los metemos en nuestra mochila global\nstaticData.listaTemporal.push(...pedidosNuevos);\n\n// 5. Pasamos el item adelante para que el bucle siga su curso\nreturn $input.item;"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          0,
+          0
+        ],
+        "id": "6e790ac5-ad61-4dc1-b807-542a95501bcb",
+        "name": "Code in JavaScript3"
+      },
+      {
+        "parameters": {
+          "jsCode": "// Iteramos sobre todos los elementos de entrada\nconst inputs = $input.all();\n\n// Objeto temporal para ir guardando los grupos\nconst groups = {};\n\nfor (const item of inputs) {\n  // Accedemos a los datos del JSON\n  const data = item.json;\n  \n  const userId = data.user_id;\n  // IMPORTANTE: Convertimos el string \"95.75\" a número flotante.\n  // Si no es un número válido, usamos 0.\n  const price = parseFloat(data.total_price) || 0;\n\n  // Si el usuario no existe aún en nuestro grupo, lo inicializamos\n  if (!groups[userId]) {\n    groups[userId] = {\n      user_id: userId,\n      total_spent: 0,\n      orders_count: 0 // Opcional: para saber cuántos pedidos sumó\n    };\n  }\n\n  // Sumamos el precio al total del usuario\n  groups[userId].total_spent += price;\n  \n  // Incrementamos el contador de pedidos\n  groups[userId].orders_count += 1;\n}\n\n// Convertimos el objeto de grupos de vuelta a un array para n8n\n// y redondeamos los decimales para evitar errores de punto flotante\nconst results = Object.values(groups).map(group => {\n  return {\n    json: {\n      user_id: group.user_id,\n      // toFixed(2) asegura que queden solo 2 decimales (ej: 142.62)\n      // Number() lo convierte de nuevo a número para que no sea texto\n      total_price_sum: Number(group.total_spent.toFixed(2)),\n      orders_count: group.orders_count\n    }\n  };\n});\n\nreturn results;"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          576,
+          144
+        ],
+        "id": "faeebaa2-0a1d-4342-bc39-671d61efa868",
+        "name": "Code in JavaScript"
+      },
+      {
+        "parameters": {
+          "operation": "get",
+          "dataTableId": {
+            "__rl": true,
+            "value": "qoonrW580TdhPzM7",
+            "mode": "list",
+            "cachedResultName": "id_empleados",
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/qoonrW580TdhPzM7"
+          },
+          "filters": {
+            "conditions": [
+              {
+                "keyName": "id_empleado",
+                "keyValue": "={{ $json.user_id }}"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.dataTable",
+        "typeVersion": 1,
+        "position": [
+          752,
+          144
+        ],
+        "id": "e6f69cea-a0f1-434a-ba46-2c01d1592378",
+        "name": "Get row(s)"
+      },
+      {
+        "parameters": {
+          "operation": "copy",
+          "fileId": {
+            "__rl": true,
+            "value": "19ZQZbNKjhr8esauE9UruO5tMkIVGqTXLka1v7NpdfAM",
+            "mode": "id"
+          },
+          "name": "=Informe Bonus {{ $today.minus({ months: 1 }).format('MM/yyyy') }}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleDrive",
+        "typeVersion": 3,
+        "position": [
+          1232,
+          144
+        ],
+        "id": "3417d843-81a9-4b17-9dd1-3740ed03ac48",
+        "name": "Copy file",
+        "executeOnce": true,
+        "credentials": {
+          "googleDriveOAuth2Api": {
+            "id": "N7JXWgOiVoyCTaVL",
+            "name": "Google Drive account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "appendOrUpdate",
+          "documentId": {
+            "__rl": true,
+            "value": "={{ $json.id_documento }}",
+            "mode": "id"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
+            "mode": "list",
+            "cachedResultName": "Hoja 1",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1DwdmZFPSDMtpJ2vHdViIBYPQQGNcD9xVCoXoD5saB3A/edit#gid=0"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "Nombre Empleado": "={{ $('Edit Fields2').item.json.Nombre }}",
+              "Id Empleado": "={{ $('Edit Fields2').item.json.Id_Empleado }}",
+              "Total Vendido": "={{ $('Edit Fields2').item.json.Total_Vendido }}"
+            },
+            "matchingColumns": [
+              "Id Empleado"
+            ],
+            "schema": [
+              {
+                "id": "Id Empleado",
+                "displayName": "Id Empleado",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "Nombre Empleado",
+                "displayName": "Nombre Empleado",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "Total Vendido",
+                "displayName": "Total Vendido",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          1552,
+          320
+        ],
+        "id": "f4e6d416-8440-4338-aaa6-0ac3d45fc756",
+        "name": "Append or update row in sheet",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "RCuKUCifcA4jENcY",
+            "name": "Google Sheets account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "1b81e700-82c9-4962-b6f3-09cfb2c4bce6",
+                "name": "Nombre",
+                "value": "={{ $json.Nombre }}",
+                "type": "string"
+              },
+              {
+                "id": "7557e003-8ac4-437c-8c5a-e4295c679c0b",
+                "name": "Id_Empleado",
+                "value": "={{ $json.id_empleado }}",
+                "type": "string"
+              },
+              {
+                "id": "77e0b77b-c9ab-48c5-be41-fa0b8dd36aa7",
+                "name": "Total_Vendido",
+                "value": "={{ $('Code in JavaScript').item.json.total_price_sum }}",
+                "type": "number"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          928,
+          144
+        ],
+        "id": "b5694acd-dc05-455c-9132-31c1d4b2f84a",
+        "name": "Edit Fields2"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.wait",
+        "typeVersion": 1.1,
+        "position": [
+          1232,
+          320
+        ],
+        "id": "c8e5083e-845d-40d8-a657-c3a48e3d65e5",
+        "name": "Wait",
+        "webhookId": "2b3bf4d6-0ed5-4155-a5a8-052e1534c54d"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "dataTableId": {
+            "__rl": true,
+            "value": "qoonrW580TdhPzM7",
+            "mode": "list",
+            "cachedResultName": "id_empleados",
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/qoonrW580TdhPzM7"
+          },
+          "filters": {
+            "conditions": [
+              {
+                "keyName": "Nombre",
+                "keyValue": "IDDocumento"
+              }
+            ]
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "id_documento": "={{ $json.id }}"
+            },
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "Nombre",
+                "displayName": "Nombre",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "readOnly": false,
+                "removed": false
+              },
+              {
+                "id": "id_empleado",
+                "displayName": "id_empleado",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "readOnly": false,
+                "removed": false
+              },
+              {
+                "id": "id_documento",
+                "displayName": "id_documento",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "readOnly": false,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.dataTable",
+        "typeVersion": 1,
+        "position": [
+          1408,
+          144
+        ],
+        "id": "47b118d5-1852-4496-bbf0-3db5d0e584a1",
+        "name": "Update row(s)"
+      },
+      {
+        "parameters": {
+          "operation": "get",
+          "dataTableId": {
+            "__rl": true,
+            "value": "qoonrW580TdhPzM7",
+            "mode": "list",
+            "cachedResultName": "id_empleados",
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/qoonrW580TdhPzM7"
+          },
+          "filters": {
+            "conditions": [
+              {
+                "keyName": "Nombre",
+                "keyValue": "IDDocumento"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.dataTable",
+        "typeVersion": 1,
+        "position": [
+          1392,
+          320
+        ],
+        "id": "5656b697-6c5e-43c5-b6a9-68c773561b1c",
+        "name": "Get row(s)1"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "documentId": {
+            "__rl": true,
+            "value": "={{ $('Get row(s)1').item.json.id_documento }}",
+            "mode": "id"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": 61663449,
+            "mode": "list",
+            "cachedResultName": "Bonos",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1EtUEvlS8XT8Bsboxt3L6zb2krPVLbol6hL-A4ZcRJBc/edit#gid=61663449"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "row_number": 1,
+              "MES": "={{ $today.minus({ months: 1 }).setLocale('es').format('MMMM').toUpperCase()}}"
+            },
+            "matchingColumns": [
+              "row_number"
+            ],
+            "schema": [
+              {
+                "id": "MES",
+                "displayName": "MES",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "row_number",
+                "displayName": "row_number",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "readOnly": true,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          1744,
+          320
+        ],
+        "id": "dd50e0d3-32a9-4d2c-a21c-ba0a9a9485d1",
+        "name": "Update row in sheet",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "RCuKUCifcA4jENcY",
+            "name": "Google Sheets account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "rule": {
+            "interval": [
+              {
+                "field": "months",
+                "triggerAtHour": 8
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "typeVersion": 1.3,
+        "position": [
+          -1024,
+          128
+        ],
+        "id": "eb8131a2-77ce-4f27-8176-044eccef4d98",
+        "name": "Schedule Trigger"
+      }
+    ],
+    "connections": {
+      "HTTP Request": {
+        "main": [
+          [
+            {
+              "node": "Code in JavaScript2",
+              "type": "main",
+              "index": 0
+            }
+          ]
         ]
-      ]
+      },
+      "Edit Fields": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If1": {
+        "main": [
+          [
+            {
+              "node": "Code in JavaScript3",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Code in JavaScript1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Edit Fields1": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code in JavaScript2": {
+        "main": [
+          [
+            {
+              "node": "If1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code in JavaScript3": {
+        "main": [
+          [
+            {
+              "node": "Edit Fields1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code in JavaScript1": {
+        "main": [
+          [
+            {
+              "node": "Code in JavaScript",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code in JavaScript": {
+        "main": [
+          [
+            {
+              "node": "Get row(s)",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Get row(s)": {
+        "main": [
+          [
+            {
+              "node": "Edit Fields2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Copy file": {
+        "main": [
+          [
+            {
+              "node": "Update row(s)",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Edit Fields2": {
+        "main": [
+          [
+            {
+              "node": "Copy file",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Wait",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Append or update row in sheet": {
+        "main": [
+          [
+            {
+              "node": "Update row in sheet",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Wait": {
+        "main": [
+          []
+        ]
+      },
+      "Get row(s)1": {
+        "main": [
+          [
+            {
+              "node": "Append or update row in sheet",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Schedule Trigger": {
+        "main": [
+          [
+            {
+              "node": "Edit Fields",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
     },
+    "authors": "Info Tailwind",
+    "name": "Version 6b60c0db",
+    "description": "",
+    "autosaved": false
+  },
+  "activeVersionId": "6b60c0db-9257-4c9c-a266-5b97f856803e",
+  "connections": {
     "HTTP Request": {
       "main": [
         [
@@ -173,6 +870,17 @@
           }
         ]
       ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2026-01-14T08:07:57.046Z",
@@ -181,17 +889,6 @@
   "meta": null,
   "name": "Bonus",
   "nodes": [
-    {
-      "parameters": {},
-      "type": "n8n-nodes-base.manualTrigger",
-      "typeVersion": 1,
-      "position": [
-        -944,
-        128
-      ],
-      "id": "86a6ef99-5fa3-4535-86fa-02d9c960b540",
-      "name": "When clicking ‘Execute workflow’"
-    },
     {
       "parameters": {
         "url": "={{ $json.url_proxima }}",
@@ -310,8 +1007,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        240,
-        240
+        368,
+        144
       ],
       "id": "aeaf2518-81e6-4c47-8dbc-119597e0e83a",
       "name": "Code in JavaScript1"
@@ -349,8 +1046,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        448,
-        240
+        576,
+        144
       ],
       "id": "faeebaa2-0a1d-4342-bc39-671d61efa868",
       "name": "Code in JavaScript"
@@ -377,8 +1074,8 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1,
       "position": [
-        624,
-        240
+        752,
+        144
       ],
       "id": "e6f69cea-a0f1-434a-ba46-2c01d1592378",
       "name": "Get row(s)"
@@ -397,8 +1094,8 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        992,
-        240
+        1232,
+        144
       ],
       "id": "3417d843-81a9-4b17-9dd1-3740ed03ac48",
       "name": "Copy file",
@@ -473,8 +1170,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        1312,
-        544
+        1552,
+        320
       ],
       "id": "f4e6d416-8440-4338-aaa6-0ac3d45fc756",
       "name": "Append or update row in sheet",
@@ -514,8 +1211,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        800,
-        240
+        928,
+        144
       ],
       "id": "b5694acd-dc05-455c-9132-31c1d4b2f84a",
       "name": "Edit Fields2"
@@ -525,8 +1222,8 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        992,
-        544
+        1232,
+        320
       ],
       "id": "c8e5083e-845d-40d8-a657-c3a48e3d65e5",
       "name": "Wait",
@@ -596,8 +1293,8 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1,
       "position": [
-        1168,
-        240
+        1408,
+        144
       ],
       "id": "47b118d5-1852-4496-bbf0-3db5d0e584a1",
       "name": "Update row(s)"
@@ -624,8 +1321,8 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1,
       "position": [
-        1152,
-        544
+        1392,
+        320
       ],
       "id": "5656b697-6c5e-43c5-b6a9-68c773561b1c",
       "name": "Get row(s)1"
@@ -684,8 +1381,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        1504,
-        544
+        1744,
+        320
       ],
       "id": "dd50e0d3-32a9-4d2c-a21c-ba0a9a9485d1",
       "name": "Update row in sheet",
@@ -695,6 +1392,26 @@
           "name": "Google Sheets account"
         }
       }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "months",
+              "triggerAtHour": 8
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -1024,
+        128
+      ],
+      "id": "eb8131a2-77ce-4f27-8176-044eccef4d98",
+      "name": "Schedule Trigger"
     }
   ],
   "pinData": {},
@@ -713,7 +1430,7 @@
   ],
   "staticData": null,
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2026-01-15T08:56:43.031Z",
-  "versionId": "6918da00-ab44-43a2-8afe-46328f6581fc"
+  "triggerCount": 1,
+  "updatedAt": "2026-01-20T09:04:24.449Z",
+  "versionId": "6b60c0db-9257-4c9c-a266-5b97f856803e"
 }
