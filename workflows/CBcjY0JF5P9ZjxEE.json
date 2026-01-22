@@ -7,7 +7,7 @@
       "main": [
         [
           {
-            "node": "HTTP Request",
+            "node": "request_página_principal",
             "type": "main",
             "index": 0
           }
@@ -65,17 +65,6 @@
         ]
       ]
     },
-    "HTTP Request": {
-      "main": [
-        [
-          {
-            "node": "Upload an asset from file data",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Upload an asset from file data": {
       "main": [
         [
@@ -100,14 +89,20 @@
     },
     "HTTP Request1": {
       "main": [
-        []
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "If": {
       "main": [
         [
           {
-            "node": "Facebook Graph API2",
+            "node": "Send a message",
             "type": "main",
             "index": 0
           }
@@ -125,7 +120,113 @@
       "main": [
         [
           {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "request_página_principal": {
+      "main": [
+        [
+          {
+            "node": "extraer_url",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "extraer_url": {
+      "main": [
+        [
+          {
+            "node": "request_página_cámaras",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "request_página_cámaras": {
+      "main": [
+        [
+          {
+            "node": "extraer_url2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "filtrar_url_reciente": {
+      "main": [
+        [
+          {
+            "node": "solicitud_url_reciente",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "solicitud_url_reciente": {
+      "main": [
+        [
+          {
+            "node": "Upload an asset from file data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "extraer_url2": {
+      "main": [
+        [
+          {
+            "node": "filtrar_url_reciente",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
             "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "Facebook Graph API2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing",
             "type": "main",
             "index": 0
           }
@@ -146,7 +247,7 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -640,
+        -1456,
         160
       ],
       "id": "e592ab28-59d1-4e72-9947-35a971c8baa2",
@@ -165,8 +266,8 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        1296,
-        128
+        1600,
+        -48
       ],
       "id": "70f5be56-bcbd-45e8-b707-d1fe8cd7941a",
       "name": "Facebook Graph API1",
@@ -197,8 +298,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        688,
-        144
+        1088,
+        -32
       ],
       "id": "edf4ba47-a8ca-4343-8394-708f1e0f7712",
       "name": "HTTP Request3",
@@ -214,8 +315,8 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        880,
-        144
+        1248,
+        -32
       ],
       "id": "5579777d-f732-4b98-b233-233d14c7baeb",
       "name": "Wait2",
@@ -248,8 +349,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        1072,
-        144
+        1408,
+        -32
       ],
       "id": "f2e57470-8cb6-4aff-a4f1-776c6d413c60",
       "name": "If1"
@@ -267,8 +368,8 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        480,
-        144
+        896,
+        -32
       ],
       "id": "0bbfbe8d-31e9-41c6-8d53-89988526abf1",
       "name": "Facebook Graph API2",
@@ -281,32 +382,18 @@
     },
     {
       "parameters": {
-        "url": "https://sts052.feratel.co.at/streams/stsstore053/1/15111_696ca2f1-1161Vid.mp4?dcsdesign=feratel4",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.3,
-      "position": [
-        -448,
-        160
-      ],
-      "id": "2aaa757a-e4c6-4d1a-afa7-70d04f751c29",
-      "name": "HTTP Request"
-    },
-    {
-      "parameters": {
         "assignments": {
           "assignments": [
             {
               "id": "4fa17a3a-35cc-4f82-988a-32b82b6223e9",
               "name": "story_url",
-              "value": "=https://res.cloudinary.com/dglub1vnw/video/upload/vc_h264,ac_aac,c_pad,w_1080,h_1920,b_blurred:400/{{ $json.public_id }}.mp4",
+              "value": "=https://res.cloudinary.com/dglub1vnw/video/upload/vc_h264,ac_aac,c_pad,w_1080,h_1920,b_blurred:400,du_30/l_text:Courier_45_bold:ZONA%20BORREGUILES,co_black,e_outline:3/fl_layer_apply,g_north_west,x_10,y_670/l_text:Courier_45_bold:ZONA%20BORREGUILES,co_white/fl_layer_apply,g_north_west,x_13,y_673/{{ $json.public_id }}.mp4",
               "type": "string"
             },
             {
               "id": "281cd629-07ec-4b26-bcb4-085d1a77c5f8",
-              "name": "",
-              "value": "",
+              "name": "vista_previa",
+              "value": "=https://res.cloudinary.com/dglub1vnw/video/upload/c_pad,w_1080,h_1920,b_black/l_text:Courier_45_bold:ZONA%20BORREGUILES,co_black,e_outline:3/fl_layer_apply,g_north_west,x_10,y_670/l_text:Courier_45_bold:ZONA%20BORREGUILES,co_white/fl_layer_apply,g_north_west,x_13,y_673/{{ $json.public_id }}.jpg",
               "type": "string"
             }
           ]
@@ -316,7 +403,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -112,
+        16,
         160
       ],
       "id": "8ec922b4-00bc-43fc-8fb3-48a2e73f92d2",
@@ -331,7 +418,7 @@
       "type": "n8n-nodes-cloudinary.cloudinary",
       "typeVersion": 1,
       "position": [
-        -272,
+        -144,
         160
       ],
       "id": "4c85ba67-fb60-4a26-8c67-4a5bf0283b78",
@@ -360,7 +447,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        64,
+        224,
         160
       ],
       "id": "4fecbe0c-ed05-4db3-aa2c-8e9977ab31c2",
@@ -393,7 +480,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        272,
+        384,
         160
       ],
       "id": "4e3544c3-0642-49ef-82b2-ecd3367c560b",
@@ -404,12 +491,301 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        176,
-        304
+        528,
+        256
       ],
       "id": "cdd381ff-6ac2-45ba-9e2a-43a650f57753",
       "name": "Wait",
       "webhookId": "2ddadd9e-f14b-4c72-b341-f3ef721110ea"
+    },
+    {
+      "parameters": {
+        "url": "https://sierranevada.es/es/invierno/la-estacion/en-directo/webcams/",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -1200,
+        160
+      ],
+      "id": "2aaa757a-e4c6-4d1a-afa7-70d04f751c29",
+      "name": "request_página_principal"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Obtenemos el HTML gigante\nconst html = items[0].json.data;\n\n// 2. Buscamos el script que tiene todos los datos de la página (Next.js data)\nconst regex = /<script id=\"__NEXT_DATA__\" type=\"application\\/json\">(.*?)<\\/script>/;\nconst match = html.match(regex);\n\nlet resultados = [];\n\nif (match && match[1]) {\n  // 3. Parseamos el texto a JSON real\n  const data = JSON.parse(match[1]);\n\n  // 4. Navegamos por la estructura compleja de Sierra Nevada para encontrar las webcams\n  // La ruta suele ser: props -> pageProps -> model -> MenuPrincipalCustom... o buscando bloques\n  // Para hacerlo fácil, vamos a buscar recursivamente cualquier objeto que parezca una webcam de Feratel\n  \n  // Convertimos todo el objeto a string para buscar patrones de feratel (truco rápido)\n  const jsonString = JSON.stringify(data);\n  \n  // Buscamos patrones de IDs de cámara (ej: cam=15111)\n  const camRegex = /cam=(\\d+)/g;\n  let camMatch;\n  const uniqueCams = new Set();\n\n  while ((camMatch = camRegex.exec(jsonString)) !== null) {\n    uniqueCams.add(camMatch[1]);\n  }\n\n  // Creamos el resultado\n  uniqueCams.forEach(id => {\n    resultados.push({\n      json: {\n        camera_id: id,\n        iframe_url: `https://webtv.feratel.com/webtv/?design=v5&cam=${id}`,\n        video_directo_mp4: `https://sts063.feratel.co.at/streams/stsstore055/1/${id}_vid.mp4` // URL estimada basada en tu ejemplo\n      }\n    });\n  });\n}\n\nreturn resultados;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1024,
+        160
+      ],
+      "id": "182ae0c9-e916-4427-aec4-7a10a39e4a2c",
+      "name": "extraer_url"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.iframe_url }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+            },
+            {
+              "name": "Referer",
+              "value": "https://sierranevada.es/"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -848,
+        160
+      ],
+      "id": "c8780df9-a109-4cee-b438-bbab9e0fdd02",
+      "name": "request_página_cámaras"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Obtenemos la fecha actual\nconst now = new Date();\nlet masCercano = null;\nlet menorDiferencia = Infinity; \n\nfor (const item of items) {\n  // Asegúrate de que item.json existe por seguridad\n  if (!item.json) continue;\n\n  const url = item.json.video_url;\n  \n  // --- BLOQUE DE SEGURIDAD NUEVO ---\n  // Si no hay url, o no es un texto, saltamos al siguiente item del bucle\n  if (!url || typeof url !== 'string') {\n    continue; \n  }\n  // ---------------------------------\n\n  // Ahora es seguro usar .match()\n  const match = url.match(/_([0-9a-fA-F]{8})[-_a-zA-Z]/);\n\n  if (match && match[1]) {\n    const hexTimestamp = match[1];\n    const unixSeconds = parseInt(hexTimestamp, 16);\n    \n    const videoDate = new Date(unixSeconds * 1000);\n    const diff = now - videoDate;\n\n    if (diff >= 0 && diff < menorDiferencia) {\n      menorDiferencia = diff;\n      masCercano = item;\n      masCercano.json.fecha_decodificada = videoDate.toISOString();\n      masCercano.json.segundos_atras = diff / 1000;\n    }\n  }\n}\n\nreturn masCercano ? [masCercano] : [];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -528,
+        160
+      ],
+      "id": "f57b7f7e-dbe8-413c-a885-a19c5054e907",
+      "name": "filtrar_url_reciente"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.video_url }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -368,
+        160
+      ],
+      "id": "777d5a4a-20a7-412f-bc9f-683c3b198f68",
+      "name": "solicitud_url_reciente"
+    },
+    {
+      "parameters": {
+        "operation": "extractHtmlContent",
+        "extractionValues": {
+          "values": [
+            {
+              "key": "video_url",
+              "cssSelector": "div#videoframe video source",
+              "returnValue": "attribute",
+              "attribute": "src"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.html",
+      "typeVersion": 1.2,
+      "position": [
+        -688,
+        160
+      ],
+      "id": "341861a2-cb91-4338-a739-df0b98b10862",
+      "name": "extraer_url2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4fa17a3a-35cc-4f82-988a-32b82b6223e9",
+              "name": "story_url",
+              "value": "={{ $('Edit Fields').item.json.story_url }}",
+              "type": "string"
+            },
+            {
+              "id": "281cd629-07ec-4b26-bcb4-085d1a77c5f8",
+              "name": "",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        672,
+        256
+      ],
+      "id": "e575ea56-dfa1-45c0-859f-96bb45cd6518",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "operation": "sendAndWait",
+        "sendTo": "emiliano@tailwind.es",
+        "subject": "APROBAR HISTORIA WEBCAM",
+        "message": "=<!DOCTYPE html>\n<html>\n<head>\n<style>\n  body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }\n  .container { max-width: 600px; margin: 20px auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }\n  .header { background-color: #333333; color: #ffffff; padding: 20px; text-align: center; }\n  .content { padding: 30px; text-align: center; color: #333333; }\n  .preview-box { margin: 20px 0; border: 1px solid #eeeeee; padding: 10px; border-radius: 5px; background-color: #fafafa; }\n  img { max-width: 100%; height: auto; border-radius: 4px; display: block; margin: 0 auto; }\n</style>\n</head>\n<body>\n\n<div class=\"container\">\n  <div class=\"header\">\n    <h2 style=\"margin:0;\">Aprobación Requerida</h2>\n  </div>\n  \n  <div class=\"content\">\n    <h3>Se requiere aprobación de una historia</h3>\n    \n    <div class=\"preview-box\">\n      <p style=\"margin-top: 0; margin-bottom: 10px; font-weight: bold; color: #555;\">Vista previa:</p>\n      \n      <img src=\"{{ $('Edit Fields').item.json.vista_previa }}\" alt=\"Vista previa de la historia\">\n      \n    </div>\n  </div>\n  \n  <div style=\"background-color: #eeeeee; padding: 10px; text-align: center; font-size: 12px; color: #777;\">\n    Enviado automáticamente desde n8n\n  </div>\n</div>\n\n</body>\n</html>",
+        "approvalOptions": {
+          "values": {
+            "approvalType": "double",
+            "approveLabel": "Aprobar"
+          }
+        },
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        560,
+        64
+      ],
+      "id": "9a9d6c8a-063e-45a0-a848-ba712b6f8fe8",
+      "name": "Send a message",
+      "webhookId": "e9c9c2ba-8c2d-4a9c-a0eb-f52f499cd543",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "wR7U82S8bmDH4odC",
+          "name": "info@tailwind.es"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "2999bf30-121b-46b1-af7f-47fc0f314fb5",
+              "leftValue": "={{ $json.data.approved }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        704,
+        64
+      ],
+      "id": "fc975a37-c27d-4017-a950-fb2c7b0c4a15",
+      "name": "If2"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        896,
+        144
+      ],
+      "id": "1d0d3791-3a09-449b-a578-1f5a98dfdfdd",
+      "name": "No Operation, do nothing"
+    },
+    {
+      "parameters": {
+        "content": "OBTENER VÍDEO DE LA CÁMARA",
+        "height": 288,
+        "width": 1056,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1264,
+        64
+      ],
+      "id": "6acdd7c5-d32a-4c6e-aca2-3acbb08403ea",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "SUBIR VÍDEO Y GENERAR URL",
+        "height": 288,
+        "width": 336,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -192,
+        64
+      ],
+      "id": "c06ee7e0-d0ad-4922-9665-6e79c6076bc9",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "COMPROBAR SI SE HA PROCESADO\n",
+        "height": 416,
+        "width": 672,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        160,
+        32
+      ],
+      "id": "c401de65-2a78-442b-8f19-88f31b8bfc8f",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "ENVIAR CORREO DE VERIFICACIÓN",
+        "height": 192,
+        "width": 336,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        496,
+        16
+      ],
+      "id": "02064db4-3e3f-4cb6-b043-ba8e91701b76",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "SUBIDA A META\n",
+        "height": 192,
+        "width": 928
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        848,
+        -80
+      ],
+      "id": "ab8be564-4726-443a-aae2-3afebc817eaa",
+      "name": "Sticky Note4"
     }
   ],
   "pinData": {},
@@ -428,6 +804,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2026-01-21T11:40:14.255Z",
-  "versionId": "e160d8bd-d4e4-428f-b7b6-a89ef809bb6c"
+  "updatedAt": "2026-01-22T10:47:37.225Z",
+  "versionId": "d160c9d0-7757-438c-87bc-cec5b60f2b52"
 }
