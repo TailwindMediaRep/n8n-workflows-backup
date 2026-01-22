@@ -247,7 +247,7 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -496,
+        -480,
         -96
       ],
       "id": "8ab0c352-e75d-4666-a0b6-4aaa12cc73b5",
@@ -278,7 +278,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        -288,
+        -208,
         -96
       ],
       "id": "dbacd693-8938-49aa-a7fe-91f51acc831b",
@@ -311,7 +311,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        144,
+        48,
         -96
       ],
       "id": "de580307-9b1f-4954-b91b-504f01007d32",
@@ -331,7 +331,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        528,
+        416,
         -96
       ],
       "id": "733346af-b852-4d8e-9fee-506cb1a6f8e6",
@@ -353,7 +353,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        720,
+        560,
         -96
       ],
       "id": "00b76dac-e59a-4f88-9e9f-10d3856d2958",
@@ -370,7 +370,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        912,
+        720,
         -96
       ],
       "id": "f9dc10dd-0f8b-4b47-a900-b9ab0c1eaf17",
@@ -409,7 +409,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        1104,
+        864,
         -96
       ],
       "id": "1223c008-0f5f-4bfd-84c9-a3e8de65f887",
@@ -420,8 +420,8 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        1280,
-        16
+        1024,
+        48
       ],
       "id": "0713c706-a88c-4a94-b162-3ebc7e484e41",
       "name": "Wait1",
@@ -441,7 +441,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1280,
+        1024,
         -240
       ],
       "id": "ddefe22b-260b-422f-bb29-ceb6cf569406",
@@ -480,7 +480,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        1760,
+        1504,
         -240
       ],
       "id": "e18c64c2-27cf-4878-a4c7-b943efe4605b",
@@ -493,7 +493,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        1616,
+        1360,
         -240
       ],
       "id": "9fd1def9-18b9-4b34-a98a-dd1bc702b600",
@@ -505,7 +505,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        2256,
+        2016,
         -256
       ],
       "id": "8548b71d-e7f3-4a2b-8f6b-c2735da64c5e",
@@ -539,7 +539,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        2400,
+        2160,
         -256
       ],
       "id": "ce4ef6e2-c250-43c9-8a04-349248a08f5e",
@@ -558,7 +558,7 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        1936,
+        1696,
         -256
       ],
       "id": "1d930292-1a9c-4412-976b-18cc8676d73e",
@@ -589,7 +589,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2112,
+        1872,
         -256
       ],
       "id": "349cba3b-01df-4e4c-baa5-2be0dca192a6",
@@ -611,7 +611,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1472,
+        1216,
         -240
       ],
       "id": "98cb7f7f-d492-4734-ae06-fd9d391fd9a5",
@@ -636,7 +636,7 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        2560,
+        2320,
         -272
       ],
       "id": "9c8b1f4f-f99e-4360-a451-d1a4f34d6259",
@@ -671,7 +671,7 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
       "position": [
-        336,
+        192,
         -96
       ],
       "id": "5379dfd3-64ae-43fd-a7c5-91ae44a394e9",
@@ -691,7 +691,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2752,
+        2496,
         -272
       ],
       "id": "4c26923b-6dca-4269-abc2-0b2dc5545e3e",
@@ -706,6 +706,54 @@
           "name": "Canva"
         }
       }
+    },
+    {
+      "parameters": {
+        "content": "PROCESAR INFORMACIÓN",
+        "height": 224,
+        "width": 608,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -272,
+        -144
+      ],
+      "id": "c8be76e5-e3cf-4607-8979-8af79c3d939b",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "AUTORELLENO Y EXPORTACIÓN DE CANVA\n",
+        "height": 512,
+        "width": 1312,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        352,
+        -256
+      ],
+      "id": "f26667ad-7bc0-4212-8ba4-17bb854021b7",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "SUBIDA A INSTAGRAM\n",
+        "height": 256,
+        "width": 992,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1664,
+        -288
+      ],
+      "id": "fe1e4341-7bb9-491a-875e-9b7feef7087d",
+      "name": "Sticky Note2"
     }
   ],
   "pinData": {},
@@ -728,6 +776,6 @@
   },
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2026-01-21T11:30:18.783Z",
-  "versionId": "2cebafd0-c733-467f-81dd-8875cf70ac05"
+  "updatedAt": "2026-01-22T11:26:58.933Z",
+  "versionId": "16a96d72-3569-47b6-9613-ca8a623d9e18"
 }
