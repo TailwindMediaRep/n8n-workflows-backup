@@ -213,7 +213,13 @@
     },
     "publicar_historia": {
       "main": [
-        []
+        [
+          {
+            "node": "mover_archivo_papelera",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "obtener_id_documento": {
@@ -241,8 +247,8 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -512,
-        0
+        -496,
+        -96
       ],
       "id": "8ab0c352-e75d-4666-a0b6-4aaa12cc73b5",
       "name": "When clicking ‘Execute workflow’"
@@ -272,8 +278,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        -304,
-        0
+        -288,
+        -96
       ],
       "id": "dbacd693-8938-49aa-a7fe-91f51acc831b",
       "name": "HTTP Request",
@@ -292,8 +298,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -96,
-        0
+        -80,
+        -96
       ],
       "id": "71447863-ab18-4fc5-ba85-e4b80d992a89",
       "name": "dias_libres"
@@ -305,8 +311,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        128,
-        0
+        144,
+        -96
       ],
       "id": "de580307-9b1f-4954-b91b-504f01007d32",
       "name": "rejilla_canva"
@@ -319,14 +325,14 @@
         "genericAuthType": "oAuth2Api",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"brand_template_id\": \"{{ $json.Id_documento }}\",\n  \"export_name\": \"Calendario Enero\",\n  \"data\": {\n    \"P1\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p1 }}\" },\n    \"P2\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p2 }}\" },\n    \"P3\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p3 }}\" },\n    \"P4\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p4 }}\" },\n    \"P5\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p5 }}\" },\n    \"P6\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p6 }}\" },\n    \"P7\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p7 }}\" },\n    \"P8\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p8 }}\" },\n    \"P9\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p9 }}\" },\n    \"P10\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p10 }}\" },\n    \"P11\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p11 }}\" },\n    \"P12\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p12 }}\" },\n    \"P13\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p13 }}\" },\n    \"P14\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p14 }}\" },\n    \"P15\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p15 }}\" },\n    \"P16\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p16 }}\" },\n    \"P17\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p17 }}\" },\n    \"P18\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p18 }}\" },\n    \"P19\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p19 }}\" },\n    \"P20\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p20 }}\" },\n    \"P21\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p21 }}\" },\n    \"P22\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p22 }}\" },\n    \"P23\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p23 }}\" },\n    \"P24\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p24 }}\" },\n    \"P25\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p25 }}\" },\n    \"P26\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p26 }}\" },\n    \"P27\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p27 }}\" },\n    \"P28\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p28 }}\" },\n    \"P29\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p29 }}\" },\n    \"P30\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p30 }}\" },\n    \"P31\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p31 }}\" },\n    \"P32\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p32 }}\" },\n    \"P33\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p33 }}\" },\n    \"P34\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p34 }}\" },\n    \"P35\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p35 }}\" },\n    \"P36\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p36 }}\" },\n    \"P37\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p37 }}\" },\n    \"P38\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p38 }}\" },\n    \"P39\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p39 }}\" },\n    \"P40\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p40 }}\" },\n    \"P41\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p41 }}\" },\n    \"P42\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p42 }}\" }\n  }\n}",
+        "jsonBody": "={\n  \"brand_template_id\": \"{{ $json.Id_documento }}\",\n  \"export_name\": \"[ELIMINAR] CALENDARIO\",\n  \"data\": {\n    \"P1\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p1 }}\" },\n    \"P2\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p2 }}\" },\n    \"P3\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p3 }}\" },\n    \"P4\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p4 }}\" },\n    \"P5\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p5 }}\" },\n    \"P6\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p6 }}\" },\n    \"P7\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p7 }}\" },\n    \"P8\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p8 }}\" },\n    \"P9\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p9 }}\" },\n    \"P10\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p10 }}\" },\n    \"P11\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p11 }}\" },\n    \"P12\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p12 }}\" },\n    \"P13\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p13 }}\" },\n    \"P14\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p14 }}\" },\n    \"P15\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p15 }}\" },\n    \"P16\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p16 }}\" },\n    \"P17\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p17 }}\" },\n    \"P18\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p18 }}\" },\n    \"P19\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p19 }}\" },\n    \"P20\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p20 }}\" },\n    \"P21\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p21 }}\" },\n    \"P22\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p22 }}\" },\n    \"P23\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p23 }}\" },\n    \"P24\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p24 }}\" },\n    \"P25\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p25 }}\" },\n    \"P26\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p26 }}\" },\n    \"P27\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p27 }}\" },\n    \"P28\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p28 }}\" },\n    \"P29\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p29 }}\" },\n    \"P30\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p30 }}\" },\n    \"P31\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p31 }}\" },\n    \"P32\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p32 }}\" },\n    \"P33\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p33 }}\" },\n    \"P34\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p34 }}\" },\n    \"P35\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p35 }}\" },\n    \"P36\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p36 }}\" },\n    \"P37\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p37 }}\" },\n    \"P38\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p38 }}\" },\n    \"P39\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p39 }}\" },\n    \"P40\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p40 }}\" },\n    \"P41\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p41 }}\" },\n    \"P42\": { \"type\": \"text\", \"text\": \"{{ $('rejilla_canva').item.json.p42 }}\" }\n  }\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        512,
-        0
+        528,
+        -96
       ],
       "id": "733346af-b852-4d8e-9fee-506cb1a6f8e6",
       "name": "autorelleno_canva",
@@ -347,8 +353,8 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        704,
-        0
+        720,
+        -96
       ],
       "id": "00b76dac-e59a-4f88-9e9f-10d3856d2958",
       "name": "Wait",
@@ -364,8 +370,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        896,
-        0
+        912,
+        -96
       ],
       "id": "f9dc10dd-0f8b-4b47-a900-b9ab0c1eaf17",
       "name": "comprobar_diseño",
@@ -403,8 +409,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        1088,
-        0
+        1104,
+        -96
       ],
       "id": "1223c008-0f5f-4bfd-84c9-a3e8de65f887",
       "name": "If"
@@ -414,8 +420,8 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        1264,
-        112
+        1280,
+        16
       ],
       "id": "0713c706-a88c-4a94-b162-3ebc7e484e41",
       "name": "Wait1",
@@ -435,8 +441,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1264,
-        -144
+        1280,
+        -240
       ],
       "id": "ddefe22b-260b-422f-bb29-ceb6cf569406",
       "name": "Export",
@@ -474,8 +480,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        1904,
-        -144
+        1760,
+        -240
       ],
       "id": "e18c64c2-27cf-4878-a4c7-b943efe4605b",
       "name": "If1"
@@ -487,8 +493,8 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        1696,
-        -144
+        1616,
+        -240
       ],
       "id": "9fd1def9-18b9-4b34-a98a-dd1bc702b600",
       "name": "Wait2",
@@ -499,8 +505,8 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        2496,
-        -160
+        2256,
+        -256
       ],
       "id": "8548b71d-e7f3-4a2b-8f6b-c2735da64c5e",
       "name": "Wait3",
@@ -533,8 +539,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        2656,
-        -160
+        2400,
+        -256
       ],
       "id": "ce4ef6e2-c250-43c9-8a04-349248a08f5e",
       "name": "If2"
@@ -552,8 +558,8 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        2096,
-        -160
+        1936,
+        -256
       ],
       "id": "1d930292-1a9c-4412-976b-18cc8676d73e",
       "name": "crear_contenedor",
@@ -583,8 +589,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2320,
-        -160
+        2112,
+        -256
       ],
       "id": "349cba3b-01df-4e4c-baa5-2be0dca192a6",
       "name": "comprobar_contenedor",
@@ -605,8 +611,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1488,
-        -144
+        1472,
+        -240
       ],
       "id": "98cb7f7f-d492-4734-ae06-fd9d391fd9a5",
       "name": "comprobar_export",
@@ -630,8 +636,8 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        2864,
-        -176
+        2560,
+        -272
       ],
       "id": "9c8b1f4f-f99e-4360-a451-d1a4f34d6259",
       "name": "publicar_historia",
@@ -665,11 +671,41 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
       "position": [
-        320,
-        0
+        336,
+        -96
       ],
       "id": "5379dfd3-64ae-43fd-a7c5-91ae44a394e9",
       "name": "obtener_id_documento"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.canva.com/rest/v1/folders/move",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"item_id\": \"{{ $('comprobar_diseño').item.json.job.result.design.id }}\",\n  \"to_folder_id\": \"FAF-k76AhRE\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        2752,
+        -272
+      ],
+      "id": "4c26923b-6dca-4269-abc2-0b2dc5545e3e",
+      "name": "mover_archivo_papelera",
+      "credentials": {
+        "canvaApi": {
+          "id": "tuy7V3JiiZVTJf5e",
+          "name": "Canva account"
+        },
+        "oAuth2Api": {
+          "id": "eHEbZK7oC3pW1LQr",
+          "name": "Canva"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -692,6 +728,6 @@
   },
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2026-01-21T10:47:31.382Z",
-  "versionId": "41aa4e25-837d-4ec6-a08f-5c800db5b86f"
+  "updatedAt": "2026-01-21T11:30:18.783Z",
+  "versionId": "2cebafd0-c733-467f-81dd-8875cf70ac05"
 }
