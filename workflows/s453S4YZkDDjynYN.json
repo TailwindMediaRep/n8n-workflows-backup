@@ -2325,16 +2325,15 @@
     },
     "node:Gmail Trigger": {
       "Gmail Trigger": {
-        "lastTimeChecked": 1768919293,
+        "lastTimeChecked": 1769075758,
         "possibleDuplicates": [
-          "19bdbce6024c5d42",
-          "19bda67d121da517"
+          "19be521d8af115d0"
         ]
       }
     }
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-01-20T18:31:39.007Z",
+  "updatedAt": "2026-01-22T10:02:23.392Z",
   "versionId": "e2eac41b-75fc-48ae-8f4d-3c9d09dc0f0d"
 }
