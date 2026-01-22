@@ -100,13 +100,7 @@
     },
     "HTTP Request1": {
       "main": [
-        [
-          {
-            "node": "If",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "If": {
@@ -152,8 +146,8 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -720,
-        80
+        -640,
+        160
       ],
       "id": "e592ab28-59d1-4e72-9947-35a971c8baa2",
       "name": "When clicking ‘Execute workflow’"
@@ -171,8 +165,8 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        1216,
-        48
+        1296,
+        128
       ],
       "id": "70f5be56-bcbd-45e8-b707-d1fe8cd7941a",
       "name": "Facebook Graph API1",
@@ -203,8 +197,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        608,
-        64
+        688,
+        144
       ],
       "id": "edf4ba47-a8ca-4343-8394-708f1e0f7712",
       "name": "HTTP Request3",
@@ -220,8 +214,8 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        800,
-        64
+        880,
+        144
       ],
       "id": "5579777d-f732-4b98-b233-233d14c7baeb",
       "name": "Wait2",
@@ -254,8 +248,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        992,
-        64
+        1072,
+        144
       ],
       "id": "f2e57470-8cb6-4aff-a4f1-776c6d413c60",
       "name": "If1"
@@ -273,8 +267,8 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        400,
-        64
+        480,
+        144
       ],
       "id": "0bbfbe8d-31e9-41c6-8d53-89988526abf1",
       "name": "Facebook Graph API2",
@@ -293,8 +287,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        -528,
-        80
+        -448,
+        160
       ],
       "id": "2aaa757a-e4c6-4d1a-afa7-70d04f751c29",
       "name": "HTTP Request"
@@ -322,8 +316,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -192,
-        80
+        -112,
+        160
       ],
       "id": "8ec922b4-00bc-43fc-8fb3-48a2e73f92d2",
       "name": "Edit Fields"
@@ -337,8 +331,8 @@
       "type": "n8n-nodes-cloudinary.cloudinary",
       "typeVersion": 1,
       "position": [
-        -352,
-        80
+        -272,
+        160
       ],
       "id": "4c85ba67-fb60-4a26-8c67-4a5bf0283b78",
       "name": "Upload an asset from file data",
@@ -366,8 +360,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        -16,
-        80
+        64,
+        160
       ],
       "id": "4fecbe0c-ed05-4db3-aa2c-8e9977ab31c2",
       "name": "HTTP Request1"
@@ -399,8 +393,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        192,
-        80
+        272,
+        160
       ],
       "id": "4e3544c3-0642-49ef-82b2-ecd3367c560b",
       "name": "If"
@@ -410,56 +404,12 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        96,
-        224
+        176,
+        304
       ],
       "id": "cdd381ff-6ac2-45ba-9e2a-43a650f57753",
       "name": "Wait",
       "webhookId": "2ddadd9e-f14b-4c72-b341-f3ef721110ea"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "4fa17a3a-35cc-4f82-988a-32b82b6223e9",
-              "name": "story_url",
-              "value": "=https://res.cloudinary.com/dglub1vnw/video/upload/c_pad,w_1080,h_1920,b_blurred:400/{{ $json.public_id }}.mp4",
-              "type": "string"
-            },
-            {
-              "id": "281cd629-07ec-4b26-bcb4-085d1a77c5f8",
-              "name": "",
-              "value": "",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        -368,
-        -736
-      ],
-      "id": "b782f8d6-c0f9-4a5f-9a96-6fd37f7ea31e",
-      "name": "Edit Fields1"
-    },
-    {
-      "parameters": {
-        "operation": "runCustomScript",
-        "scriptCode": "const browser = await puppeteer.launch({\n    headless: false, // Ponlo en 'true' cuando ya funcione para que no abra ventana\n    args: ['--no-sandbox', '--disable-setuid-sandbox']\n});\nconst page = await browser.newPage();\n\n// 1. DEFINIMOS TUS COOKIES (Aquí es donde se pegan)\nconst mis_cookies = [\n    {\n        \"domain\": \".facebook.com\",\n        \"expirationDate\": 1768824537.524843,\n        \"hostOnly\": false,\n        \"httpOnly\": false,\n        \"name\": \"alsfid\",\n        \"path\": \"/\",\n        \"sameSite\": \"unspecified\",\n        \"secure\": false,\n        \"session\": false,\n        \"storeId\": \"0\",\n        \"value\": \"{\\\"id\\\":\\\"f46fc1545\\\",\\\"timestamp\\\":1768824477524.7}\",\n        \"id\": 1\n    },\n    {\n        \"domain\": \".facebook.com\",\n        \"expirationDate\": 1784374904.859057,\n        \"hostOnly\": false,\n        \"httpOnly\": false,\n        \"name\": \"c_user\",\n        \"path\": \"/\",\n        \"sameSite\": \"no_restriction\",\n        \"secure\": true,\n        \"session\": false,\n        \"storeId\": \"0\",\n        \"value\": \"61568365859993\",\n        \"id\": 2\n    },\n    {\n        \"domain\": \".facebook.com\",\n        \"expirationDate\": 1783770531.141925,\n        \"hostOnly\": false,\n        \"httpOnly\": true,\n        \"name\": \"datr\",\n        \"path\": \"/\",\n        \"sameSite\": \"no_restriction\",\n        \"secure\": true,\n        \"session\": false,\n        \"storeId\": \"0\",\n        \"value\": \"nt9kaUEGwP0ElQiN3EKTHGJA\",\n        \"id\": 3\n    },\n    {\n        \"domain\": \".facebook.com\",\n        \"hostOnly\": false,\n        \"httpOnly\": false,\n        \"name\": \"presence\",\n        \"path\": \"/\",\n        \"sameSite\": \"unspecified\",\n        \"secure\": true,\n        \"session\": true,\n        \"storeId\": \"0\",\n        \"value\": \"C%7B%22t3%22%3A%5B%5D%2C%22utc3%22%3A1768390567447%2C%22v%22%3A1%7D\",\n        \"id\": 4\n    },\n    {\n        \"domain\": \".facebook.com\",\n        \"expirationDate\": 1783853132.481483,\n        \"hostOnly\": false,\n        \"httpOnly\": true,\n        \"name\": \"sb\",\n        \"path\": \"/\",\n        \"sameSite\": \"no_restriction\",\n        \"secure\": true,\n        \"session\": false,\n        \"storeId\": \"0\",\n        \"value\": \"pt9kaRd3VkK2TYv3V4-y8u__\",\n        \"id\": 5\n    },\n    {\n        \"domain\": \".facebook.com\",\n        \"expirationDate\": 1769429271,\n        \"hostOnly\": false,\n        \"httpOnly\": false,\n        \"name\": \"wd\",\n        \"path\": \"/\",\n        \"sameSite\": \"lax\",\n        \"secure\": true,\n        \"session\": false,\n        \"storeId\": \"0\",\n        \"value\": \"1854x967\",\n        \"id\": 6\n    },\n    {\n        \"domain\": \".facebook.com\",\n        \"expirationDate\": 1784374904.859117,\n        \"hostOnly\": false,\n        \"httpOnly\": true,\n        \"name\": \"xs\",\n        \"path\": \"/\",\n        \"sameSite\": \"no_restriction\",\n        \"secure\": true,\n        \"session\": false,\n        \"storeId\": \"0\",\n        \"value\": \"7%3A9vZfuzwAARPEvQ%3A2%3A1768301130%3A-1%3A-1%3A%3AAcxbGXgBlO9A7zopVj9_uFmM7Czhq1ZrmE9mc2B59w\",\n        \"id\": 7\n    }\n];\n\n// 2. INYECTAR COOKIES\n// Usamos el operador \"spread\" (...) para pasar cada objeto cookie individualmente\nawait page.setCookie(...mis_cookies);\n\n// 3. NAVEGACIÓN\nconsole.log('Navegando a Business Suite...');\nawait page.goto('https://business.facebook.com/latest/content_calendar', { waitUntil: 'networkidle2' });\n\n// --- CORRECCIÓN IMPORTANTE SOBRE SELECTORES ---\n// Puppeteer estándar NO usa 'text/Crear historia'. Eso es de Playwright.\n// Tienes que usar XPath para buscar por texto.\n\n// Ejemplo corregido para hacer clic en \"Crear historia\" (tendrás que ajustar esto con inspeccionar elemento real)\ntry {\n    // Buscamos un div o botón que contenga el texto \"Crear historia\"\n    const [button] = await page.$x(\"//div[contains(., 'Crear historia')]\");\n    if (button) {\n        await button.click();\n    } else {\n        console.log(\"No encontré el botón por texto\");\n    }\n} catch (e) {\n    console.log(\"Error buscando el botón: \" + e);\n}\n\n// ... Resto de tu lógica para subir archivo ...\n\n// await browser.close(); // Comenta esto mientras haces pruebas para ver qué pasa\nreturn [{json: {status: \"Done\"}}];",
-        "options": {}
-      },
-      "type": "n8n-nodes-puppeteer.puppeteer",
-      "typeVersion": 1,
-      "position": [
-        -576,
-        -736
-      ],
-      "id": "217227f1-772e-48a4-97af-79a0c0f95244",
-      "name": "Puppeteer"
     }
   ],
   "pinData": {},
@@ -478,6 +428,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2026-01-19T13:09:24.949Z",
-  "versionId": "622c2420-2306-4271-bc1c-62ba285dddbb"
+  "updatedAt": "2026-01-21T11:40:14.255Z",
+  "versionId": "e160d8bd-d4e4-428f-b7b6-a89ef809bb6c"
 }
