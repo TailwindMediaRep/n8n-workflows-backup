@@ -138,8 +138,8 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -960,
-        -48
+        -976,
+        -144
       ],
       "id": "2a09d9fa-748a-41ca-abc8-1b35a8edeeaa",
       "name": "When clicking ‘Execute workflow’"
@@ -161,8 +161,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -688,
-        -48
+        -704,
+        -144
       ],
       "id": "54c47c73-873e-48fa-b5c1-745c2c2a4cce",
       "name": "Edit Fields"
@@ -181,8 +181,8 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1,
       "position": [
-        -400,
-        -48
+        -416,
+        -144
       ],
       "id": "86b9bc3d-0267-444d-a546-8c1a591e9aed",
       "name": "Get row(s)"
@@ -204,8 +204,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        400,
-        -32
+        384,
+        -128
       ],
       "id": "648d8fa4-590a-47eb-92da-f817346e328f",
       "name": "Get row(s) in sheet",
@@ -230,8 +230,8 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        -544,
-        -48
+        -560,
+        -144
       ],
       "id": "fb5c7e8a-ecce-4dbe-8126-e115a1a6af70",
       "name": "Copy file",
@@ -249,8 +249,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -224,
-        -48
+        -240,
+        -144
       ],
       "id": "714060e4-f46c-41ec-8ac8-6927ae6bca21",
       "name": "Code in JavaScript"
@@ -262,8 +262,8 @@
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 3,
       "position": [
-        -16,
-        -48
+        -32,
+        -144
       ],
       "id": "cbeb07fd-d3c0-46de-9b0e-cd77ff5e5cb3",
       "name": "Loop Over Items"
@@ -336,8 +336,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        752,
-        -32
+        736,
+        -128
       ],
       "id": "9926fe5c-b62f-4c36-a9b6-bba6131c6ce0",
       "name": "Append row in sheet",
@@ -420,8 +420,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        960,
-        -32
+        944,
+        -128
       ],
       "id": "b8a96aa4-d564-447b-9ee0-a0c4892630d2",
       "name": "Append row in sheet1",
@@ -440,8 +440,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        576,
-        -32
+        560,
+        -128
       ],
       "id": "ffc853e3-39b5-4fca-9e08-e21335f8e7e5",
       "name": "Code in JavaScript1"
@@ -452,8 +452,8 @@
       "name": "Replace Me",
       "typeVersion": 1,
       "position": [
-        192,
-        -32
+        176,
+        -128
       ],
       "id": "75124723-fc8a-4375-a3cb-f699fc6175f5"
     },
@@ -467,8 +467,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -704,
-        -96
+        -720,
+        -192
       ],
       "id": "fd9e96b5-7f43-410a-925b-18bffea61c44",
       "name": "Sticky Note"
@@ -483,8 +483,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -80,
-        -96
+        -96,
+        -192
       ],
       "id": "d83d5770-f079-4f9b-b3ee-32098ed36e90",
       "name": "Sticky Note1"
@@ -499,8 +499,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        368,
-        -96
+        352,
+        -192
       ],
       "id": "bf5b0450-480b-4cdd-bf22-b6da517a8030",
       "name": "Sticky Note2"
@@ -524,6 +524,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-01-22T10:04:00.066Z",
-  "versionId": "04fa218e-ff3f-4d2e-8504-61d86f48ce60"
+  "updatedAt": "2026-01-22T11:29:34.204Z",
+  "versionId": "dc46dcbf-c54f-42a7-952f-5b63aa61fc72"
 }
