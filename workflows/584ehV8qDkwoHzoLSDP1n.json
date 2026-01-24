@@ -1,323 +1,51 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-01-14T08:05:36.000Z",
-    "createdAt": "2026-01-14T08:05:34.545Z",
-    "versionId": "450c0ba2-edd3-4ee2-aacb-d2984ca3fc05",
+    "updatedAt": "2026-01-23T09:03:49.000Z",
+    "createdAt": "2026-01-23T09:03:47.143Z",
+    "versionId": "05cedf4a-1fe6-4427-9980-f71a68149ac4",
     "workflowId": "584ehV8qDkwoHzoLSDP1n",
     "nodes": [
       {
         "parameters": {
-          "httpMethod": "POST",
-          "path": "informeVentas",
-          "options": {}
-        },
-        "type": "n8n-nodes-base.webhook",
-        "typeVersion": 2.1,
-        "position": [
-          32,
-          176
-        ],
-        "id": "1d7aecae-bbb8-47d6-937a-db656e7714f9",
-        "name": "Webhook",
-        "webhookId": "7c1e3b37-6cc8-4f4a-81e3-c5897bdf497c"
-      },
-      {
-        "parameters": {
-          "authentication": "headerAuth",
-          "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-07/graphql.json",
-          "query": "query getOrder($id: ID!) {\n\n  order(id: $id) {\n\n    id\n\n    name\n\n    createdAt\n\n    email\n\n    totalPriceSet {\n\n      shopMoney {\n\n        amount\n\n        currencyCode\n\n      }\n\n    }\n\n    lineItems(first: 10) {\n\n      edges {\n\n        node {\n\n          title\n\n          quantity\n\n          originalUnitPriceSet {\n\n            shopMoney {\n\n              amount\n\n              currencyCode\n\n            }\n\n          }\n\n        }\n\n      }\n\n    }\n\n    fulfillments {\n\n      id\n\n      location {\n\n        name\n\n        address {\n\n          address1\n\n          city\n\n          province\n\n          country\n\n          zip\n\n        }\n\n      }\n\n    }\n\n    transactions(first: 5) {\n\n      formattedGateway\n\n      kind\n\n      status\n\n    }\n\n    customer {\n\n      firstName\n\n      lastName\n\n      email\n\n    }\n\n  }\n\n}\n",
-          "variables": "={\n  \"id\": \"gid://shopify/Order/{{ $('Webhook').item.json.body.id }}\"\n}",
-          "headerParametersUi": {
-            "parameter": [
-              {
-                "name": "Content-Type",
-                "value": "application/json"
-              }
-            ]
-          }
-        },
-        "type": "n8n-nodes-base.graphql",
-        "typeVersion": 1.1,
-        "position": [
-          464,
-          176
-        ],
-        "id": "bee18971-2878-40a6-9dad-ca89804edb06",
-        "name": "GraphQL",
-        "credentials": {
-          "httpHeaderAuth": {
-            "id": "OPt2Cl0dnwcU4qRk",
-            "name": "ShopifyInformes"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "operation": "download",
-          "fileId": {
-            "__rl": true,
-            "value": "https://docs.google.com/spreadsheets/d/1gj4W5JT98BZYR-XSb06YS8xBy_MV2sIdZ9wROdbQ3v8/edit?gid=0#gid=0",
-            "mode": "url",
-            "__regex": "https:\\/\\/(?:drive|docs)\\.google\\.com(?:\\/.*|)\\/d\\/([0-9a-zA-Z\\-_]+)(?:\\/.*|)"
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.googleDrive",
-        "typeVersion": 3,
-        "position": [
-          32,
-          816
-        ],
-        "id": "7e877dae-04a0-43f0-aea2-15a222bdacfa",
-        "name": "Download file",
-        "credentials": {
-          "googleDriveOAuth2Api": {
-            "id": "N7JXWgOiVoyCTaVL",
-            "name": "Google Drive account"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "fromEmail": "info@tailwind.es",
-          "toEmail": "adrianazorinsanchez@gmail.com",
-          "subject": "Informe Diario",
-          "options": {}
-        },
-        "type": "n8n-nodes-base.emailSend",
-        "typeVersion": 2.1,
-        "position": [
-          208,
-          816
-        ],
-        "id": "e83cf4b9-0b4c-429b-8093-f970b2800026",
-        "name": "Send email",
-        "webhookId": "226a034e-8336-48cb-95fb-270066c58247",
-        "credentials": {
-          "smtp": {
-            "id": "MiD3YXIjExt0Aik1",
-            "name": "Correo"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "content": "ENVIAR CORREO",
-          "height": 208,
-          "width": 416,
-          "color": 4
-        },
-        "type": "n8n-nodes-base.stickyNote",
-        "typeVersion": 1,
-        "position": [
-          0,
-          768
-        ],
-        "id": "3707c9cd-3ce6-49b2-bd28-f4d5080356f8",
-        "name": "Sticky Note1"
-      },
-      {
-        "parameters": {
-          "operation": "copy",
-          "fileId": {
-            "__rl": true,
-            "value": "1QZ-GBz6D6EL4fZh3lh9PyAjwWzyjVn8nN0wy4mUjg04",
-            "mode": "id"
-          },
-          "name": "=Informe_Diario_{{ $json.FECHA }}",
-          "options": {}
-        },
-        "type": "n8n-nodes-base.googleDrive",
-        "typeVersion": 3,
-        "position": [
-          464,
-          544
-        ],
-        "id": "5ab81047-c939-493f-8518-94a58589c4ef",
-        "name": "Copy file",
-        "credentials": {
-          "googleDriveOAuth2Api": {
-            "id": "N7JXWgOiVoyCTaVL",
-            "name": "Google Drive account"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "content": "CREAR DOCUMENTO",
-          "height": 208,
-          "width": 960,
-          "color": 6
-        },
-        "type": "n8n-nodes-base.stickyNote",
-        "typeVersion": 1,
-        "position": [
-          0,
-          496
-        ],
-        "id": "89315784-25bb-4a33-9b5c-11067903de83",
-        "name": "Sticky Note2"
-      },
-      {
-        "parameters": {
           "rule": {
             "interval": [
-              {}
+              {
+                "field": "months",
+                "triggerAtHour": 8
+              }
             ]
           }
         },
         "type": "n8n-nodes-base.scheduleTrigger",
-        "typeVersion": 1.3,
+        "typeVersion": 1.1,
         "position": [
-          32,
-          544
+          -1024,
+          32
         ],
-        "id": "60d9c59b-b41e-4f6a-974c-43b6568cfba0",
-        "name": "Schedule Trigger"
-      },
-      {
-        "parameters": {
-          "dataTableId": {
-            "__rl": true,
-            "value": "8GDVj673ag0hCrVt",
-            "mode": "list",
-            "cachedResultName": "Informe Mensual",
-            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/8GDVj673ag0hCrVt"
-          },
-          "columns": {
-            "mappingMode": "defineBelow",
-            "value": {
-              "ID_Documento": "={{ $('Copy file').item.json.id }}",
-              "fecha": "={{ $('formatear fecha').item.json.FECHA }}"
-            },
-            "matchingColumns": [
-              "ID_Documento"
-            ],
-            "schema": [
-              {
-                "id": "ID_Documento",
-                "displayName": "ID_Documento",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "readOnly": false,
-                "removed": false
-              },
-              {
-                "id": "fecha",
-                "displayName": "fecha",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "readOnly": false,
-                "removed": false
-              }
-            ],
-            "attemptToConvertTypes": false,
-            "convertFieldsToString": false
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.dataTable",
-        "typeVersion": 1,
-        "position": [
-          752,
-          544
-        ],
-        "id": "d3938b9c-ba2f-4c40-a205-002b5b0c050a",
-        "name": "Insert row"
-      },
-      {
-        "parameters": {
-          "jsCode": "// El nodo Code de n8n espera que devolvamos un array de objetos.\nconst outputItems = [];\n\n// Obtenemos el valor del contador del nodo anterior\n// items[0].json.Contador → 2 en tu ejemplo\nlet numeroFila = items[0].json.Contador;\nlet ID_documento = items[0].json.ID_Documento;\n\n// 1. Accedemos al cuerpo real del pedido de Shopify, que está anidado.\nconst orderBody = $node['Webhook'].json.body; \n\n// 2. Extraemos los artículos de línea (productos) y la moneda.\nconst lineItems = orderBody.line_items;\nconst orderCurrency = orderBody.currency;\n\n// Iteramos sobre cada producto individual\nfor (const item of lineItems) {\n\n  const originalPrice = parseFloat(item.price);\n\n  let totalDiscountAmount = 0;\n  for (const allocation of item.discount_allocations) {\n    totalDiscountAmount += parseFloat(allocation.amount);\n  }\n\n  const finalPaidPrice = originalPrice - totalDiscountAmount;\n\n  // Creamos un nuevo objeto y añadimos \"numero_fila\"\n  outputItems.push({\n    json: {\n      ID_documento: ID_documento,\n      numero_fila: numeroFila,   // ← Nuevo campo\n      product_name: item.title,\n      sku: item.sku,\n      variant_title: item.variant_title,\n      original_price: originalPrice.toFixed(2),\n      total_discount_applied: totalDiscountAmount.toFixed(2),\n      final_paid_price: finalPaidPrice.toFixed(2),\n      currency: orderCurrency\n    }\n  });\n\n  // ↑ Incrementamos para el siguiente item\n  numeroFila++;\n}\n\n// Devolvemos el array con los nuevos objetos.\nreturn outputItems;\n"
-        },
-        "type": "n8n-nodes-base.code",
-        "typeVersion": 2,
-        "position": [
-          464,
-          320
-        ],
-        "id": "4cf10d5f-1745-44eb-ac80-e2149e8cddcd",
-        "name": "Code in JavaScript"
-      },
-      {
-        "parameters": {
-          "numberInputs": 3
-        },
-        "type": "n8n-nodes-base.merge",
-        "typeVersion": 3.2,
-        "position": [
-          752,
-          160
-        ],
-        "id": "248a1a12-5704-4498-ad9f-6c76bf29895f",
-        "name": "Merge"
+        "id": "4c23fe05-5690-420a-8ad4-66ef9230ed65",
+        "name": "Inicio de Mes (Día 1)"
       },
       {
         "parameters": {
           "assignments": {
             "assignments": [
               {
-                "id": "31828549-6a33-4e8a-91ad-fdb9692a7e34",
-                "name": "SUCURSAL DE VENTA",
-                "value": "={{ $json.fulfillmentLocation }}",
+                "id": "id_fecha",
+                "name": "NOMBRE_MES",
+                "value": "={{ $today.minus({months: 1}).setLocale('es').format('MMMM').toUpperCase() }}",
                 "type": "string"
               },
               {
-                "id": "e89736ae-2f29-40c8-80b4-2181722ee3f5",
-                "name": "METODO DE PAGO",
-                "value": "={{ $json.transactionGateway }}",
+                "id": "id_rango_inicio",
+                "name": "FECHA_INICIO",
+                "value": "={{ $today.minus({months: 1}).startOf('month').format('yyyy-MM-dd') }}T00:00:00Z",
                 "type": "string"
               },
               {
-                "id": "dc4a77f5-966d-4efc-b755-1f0fe34f6958",
-                "name": "COSTO POR UNIDAD",
-                "value": "={{ $json.product.unit_cost }}",
-                "type": "string"
-              },
-              {
-                "id": "76140f31-efab-4a68-b737-53f04a9a7b81",
-                "name": "COSTE DE PRODUCTO",
-                "value": "={{ $json.product.original_price }}",
-                "type": "string"
-              },
-              {
-                "id": "d295df2e-e935-41ef-a2b1-7923cabd1a92",
-                "name": "PRECIO PAGADO",
-                "value": "={{ $json.product.final_paid_price }}",
-                "type": "string"
-              },
-              {
-                "id": "adb9ae5a-50d9-4923-b706-31a9a5b86e66",
-                "name": "DESCUENTO",
-                "value": "={{ $json.product.total_discount_applied }}",
-                "type": "string"
-              },
-              {
-                "id": "c2b11c61-81c1-4b6d-94ec-c55b6872e5e0",
-                "name": "NOMBRE DE PRODUCTO",
-                "value": "={{ $json.product.product_name }}",
-                "type": "string"
-              },
-              {
-                "id": "f7cbe128-fbe4-4bfb-b5ec-d7eed2f87b84",
-                "name": "VARIANTE",
-                "value": "={{ $json.product.variant_title }}",
-                "type": "string"
-              },
-              {
-                "id": "1e31a3b3-a073-4113-9047-95110c3d7987",
-                "name": "NUMERO_FILA",
-                "value": "={{ $json.product.numero_fila }}",
-                "type": "number"
-              },
-              {
-                "id": "e4c20adf-aa16-46e1-9851-3844e08241a6",
-                "name": "ID_DOCUMENTO",
-                "value": "={{ $json.product.ID_documento }}",
+                "id": "id_rango_fin",
+                "name": "FECHA_FIN",
+                "value": "={{ $today.minus({months: 1}).endOf('month').format('yyyy-MM-dd') }}T23:59:59Z",
                 "type": "string"
               }
             ]
@@ -327,99 +55,231 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          1088,
-          160
+          -800,
+          32
         ],
-        "id": "6a3477d4-0bc6-4150-b653-b515359351c3",
-        "name": "Edit Fields"
+        "id": "4e18e961-e82a-44bc-a08f-203fb6bdb947",
+        "name": "Configurar Fechas"
       },
       {
         "parameters": {
-          "jsCode": "// 1. Validaciones básicas\nif (items.length < 2) {\n    throw new Error(\"Se esperaban al menos 2 ítems de entrada.\");\n}\n\n// Inicializamos variables\nlet orderData = null;\nconst productRows = []; // Aquí guardaremos los ítems que tienen ID_documento\nconst costMap = {}; // Aquí guardaremos los costos indexados por SKU\n\n// 2. Clasificar los ítems de entrada\nfor (const item of items) {\n    const json = item.json;\n\n    // A) Es la ORDEN (tiene data.order)\n    if (json.data && json.data.order) {\n        orderData = json.data.order;\n    } \n    // B) Es información de COSTO de Shopify (tiene data.productVariant)\n    else if (json.data && json.data.productVariant) {\n        const variant = json.data.productVariant;\n        const sku = variant.sku;\n        const costAmount = variant.inventoryItem?.unitCost?.amount;\n        \n        // Guardamos el costo en un objeto usando el SKU como clave para buscarlo rápido después\n        if (sku && costAmount) {\n            costMap[sku] = costAmount;\n        }\n    }\n    // C) Es el ítem procesado (tiene ID_documento)\n    else if (json.ID_documento) {\n        productRows.push(json);\n    }\n}\n\nif (!orderData) {\n    throw new Error(\"No se encontró el ítem de la orden de Shopify.\");\n}\n\nif (productRows.length === 0) {\n    throw new Error(\"No se encontraron ítems de producto con ID_documento.\");\n}\n\n// 3. Crear objeto base de la orden\nconst baseOrderData = {\n    id: orderData.id,\n    name: orderData.name,\n    createdAt: orderData.createdAt,\n    totalPrice: orderData.totalPriceSet?.shopMoney?.amount || 'N/A',\n    currencyCode: orderData.totalPriceSet?.shopMoney?.currencyCode || 'N/A',\n    \n    // Datos del cliente\n    customer: orderData.customer,\n    \n    // Datos de envío\n    fulfillmentLocation: orderData.fulfillments?.[0]?.location?.name || 'N/A',\n    fulfillmentAddress: orderData.fulfillments?.[0]?.location?.address || 'N/A',\n    \n    // Datos de la transacción\n    transactionGateway: orderData.transactions?.[0]?.formattedGateway || 'N/A',\n    transactionKind: orderData.transactions?.[0]?.kind || 'N/A',\n    transactionStatus: orderData.transactions?.[0]?.status || 'N/A',\n};\n\n// 4. Iterar sobre los productos y fusionar (incluyendo el costo encontrado)\nconst combinedItems = [];\n\nfor (const productData of productRows) {\n    \n    // Buscamos si existe un costo guardado para este SKU\n    const sku = productData.sku;\n    const unitCost = costMap[sku] || '0.00'; // Si no encuentra match, pone 0.00 o N/A\n\n    const combinedItem = {\n        ...baseOrderData,\n        \n        product: {\n            ID_documento: productData.ID_documento,\n            numero_fila: productData.numero_fila,\n            product_name: productData.product_name,\n            sku: productData.sku,\n            variant_title: productData.variant_title,\n            original_price: productData.original_price,\n            total_discount_applied: productData.total_discount_applied,\n            final_paid_price: productData.final_paid_price,\n            currency: productData.currency,\n            // Aquí agregamos el campo solicitado\n            unit_cost: unitCost \n        }\n    };\n    \n    combinedItems.push({\n        json: combinedItem,\n    });\n}\n\nreturn combinedItems;"
-        },
-        "type": "n8n-nodes-base.code",
-        "typeVersion": 2,
-        "position": [
-          928,
-          160
-        ],
-        "id": "1fc2eb0c-f281-476c-a628-098602c4cd0e",
-        "name": "Code in JavaScript1"
-      },
-      {
-        "parameters": {
-          "operation": "update",
-          "dataTableId": {
+          "operation": "copy",
+          "fileId": {
             "__rl": true,
-            "value": "ghO8HECzTZgPqOqM",
-            "mode": "list",
-            "cachedResultName": "InformeDiario",
-            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/ghO8HECzTZgPqOqM"
+            "value": "1tsvxi9_RbsJ9PZzj89QC4KmPOSeOUlI2FnsqcM4vmoY",
+            "mode": "id"
           },
-          "filters": {
-            "conditions": [
-              {
-                "keyValue": "1"
-              }
-            ]
-          },
-          "columns": {
-            "mappingMode": "defineBelow",
-            "value": {
-              "ID_Documento": "={{ $json.id }}",
-              "Contador": 2
-            },
-            "matchingColumns": [],
-            "schema": [
-              {
-                "id": "ID_Documento",
-                "displayName": "ID_Documento",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "readOnly": false,
-                "removed": false
-              },
-              {
-                "id": "Contador",
-                "displayName": "Contador",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "number",
-                "readOnly": false,
-                "removed": false
-              }
-            ],
-            "attemptToConvertTypes": false,
-            "convertFieldsToString": false
-          },
+          "name": "=INFORME MENSUAL COMPLETO - {{ $json.NOMBRE_MES }}",
           "options": {}
         },
-        "type": "n8n-nodes-base.dataTable",
-        "typeVersion": 1,
+        "type": "n8n-nodes-base.googleDrive",
+        "typeVersion": 3,
         "position": [
-          608,
-          544
+          -576,
+          32
         ],
-        "id": "12ae992b-e515-475c-a209-2c77ddffffe8",
-        "name": "Update row(s)"
+        "id": "0b17272d-1aa2-4c3f-8811-2d74745ef031",
+        "name": "Crear Informe Maestro",
+        "credentials": {
+          "googleDriveOAuth2Api": {
+            "id": "N7JXWgOiVoyCTaVL",
+            "name": "Google Drive account"
+          }
+        }
       },
       {
         "parameters": {
           "operation": "get",
           "dataTableId": {
             "__rl": true,
-            "value": "ghO8HECzTZgPqOqM",
+            "value": "8GDVj673ag0hCrVt",
             "mode": "list",
-            "cachedResultName": "InformeDiario",
-            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/ghO8HECzTZgPqOqM"
+            "cachedResultName": "Informe Mensual"
+          }
+        },
+        "type": "n8n-nodes-base.dataTable",
+        "typeVersion": 1,
+        "position": [
+          -304,
+          -224
+        ],
+        "id": "966d2a0c-85d6-4139-a9f7-7b3cdf1cc36c",
+        "name": "Obtener Informes Diarios"
+      },
+      {
+        "parameters": {
+          "jsCode": "// Lógica de limpieza original + Agrupación de Top Productos\nconst inputItems = items;\nconst uniqueStrings = new Set();\nconst uniqueItems = [];\nconst productCounts = {};\n\n// 1. Limpieza de duplicados\nfor (const item of inputItems) {\n    const itemString = JSON.stringify(item.json);\n    if (!uniqueStrings.has(itemString)) {\n        uniqueStrings.add(itemString);\n        uniqueItems.push(item);\n        \n        // 2. Contar para Ranking\n        const prodName = item.json['NOMBRE DE PRODUCTO'];\n        if(prodName && prodName !== 'SEPARADOR') {\n             if(!productCounts[prodName]) productCounts[prodName] = 0;\n             productCounts[prodName]++;\n        }\n    }\n}\n\nreturn uniqueItems;"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          -96,
+          -224
+        ],
+        "id": "82dd14a4-55b7-4056-bc0b-58fae0131f59",
+        "name": "Limpiar y Analizar Productos"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "url_shopify",
+                "name": "url_proxima",
+                "value": "=https://rulesshop.myshopify.com/admin/api/2025-01/orders.json?limit=250&status=any&created_at_min={{ $('Configurar Fechas').item.json.FECHA_INICIO }}&created_at_max={{ $('Configurar Fechas').item.json.FECHA_FIN }}&fields=id,name,total_price,user_id",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -304,
+          304
+        ],
+        "id": "baac2c47-e3e0-4413-a657-02e685aeea0f",
+        "name": "Prep Shopify"
+      },
+      {
+        "parameters": {
+          "url": "={{ $json.url_proxima }}",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpHeaderAuth",
+          "options": {
+            "response": {
+              "response": {
+                "fullResponse": true
+              }
+            }
+          }
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          -96,
+          304
+        ],
+        "id": "02d692ea-c717-4ecf-ab9a-d95d81b2eb37",
+        "name": "Shopify API",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "cond_link",
+                "leftValue": "={{ $('Shopify API').item.json.headers.link }}",
+                "rightValue": "next",
+                "operator": {
+                  "type": "string",
+                  "operation": "contains"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          240,
+          304
+        ],
+        "id": "3fed2932-cb89-43c4-86f1-8df62a10ec7c",
+        "name": "Hay más páginas?"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "next_url",
+                "name": "url_proxima",
+                "value": "={{ $json.headers.link.match(/<([^>]+)>;\\s*rel=\"next\"/)[1] }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          432,
+          288
+        ],
+        "id": "74a1ce84-d763-4d42-96a6-b66b3a056bbe",
+        "name": "Set Next Page"
+      },
+      {
+        "parameters": {
+          "jsCode": "const staticData = $getWorkflowStaticData('global');\nconst listaAcumulada = staticData.listaTemporal || [];\nconst nuevosPedidos = $('Shopify API').item.json.body.orders || [];\nconst listaCompleta = listaAcumulada.concat(nuevosPedidos);\nstaticData.listaTemporal = [];\nreturn listaCompleta.map(p => ({ json: p }));"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          432,
+          144
+        ],
+        "id": "76818f9e-1abd-4a3f-89be-6bcfe16956ff",
+        "name": "Unir Todos los Pedidos"
+      },
+      {
+        "parameters": {
+          "jsCode": "const staticData = $getWorkflowStaticData('global');\nif (!staticData.listaTemporal) staticData.listaTemporal = [];\n\n// 1. Capturamos los datos de entrada (incluidos los encabezados/headers)\n// Usamos items[0] porque en n8n v1+ items es el array de entrada\nconst inputData = items[0].json;\nconst pedidos = inputData.body.orders;\n\n// 2. Guardamos los pedidos en la mochila\nstaticData.listaTemporal.push(...pedidos);\n\n// 3. ¡IMPORTANTE! Devolvemos los 'headers' hacia afuera.\n// Así el siguiente nodo podrá leer el link de la página siguiente.\nreturn {\n  json: {\n    status: 'accumulating',\n    headers: inputData.headers\n  }\n};"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          64,
+          304
+        ],
+        "id": "c388a069-3ddc-418e-a9d0-8903192a2fb1",
+        "name": "Acumular en Memoria"
+      },
+      {
+        "parameters": {
+          "jsCode": "// Agrupar por empleado\nconst inputs = items;\nconst groups = {};\nfor (const item of inputs) {\n  const data = item.json;\n  const userId = data.user_id;\n  const price = parseFloat(data.total_price) || 0;\n  if (!groups[userId]) {\n    groups[userId] = { user_id: userId, total_spent: 0, count: 0 };\n  }\n  groups[userId].total_spent += price;\n  groups[userId].count += 1;\n}\nconst sortedEmployees = Object.values(groups)\n  .map(g => ({\n    json: {\n      user_id: g.user_id,\n      total_sales: Number(g.total_spent.toFixed(2)),\n      orders_count: g.count\n    }\n  }))\n  .sort((a, b) => b.json.total_sales - a.json.total_sales);\nreturn sortedEmployees;"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          624,
+          144
+        ],
+        "id": "e2bc4c63-1319-4ac9-8ecd-a66c024022a1",
+        "name": "Calcular Ranking Empleados"
+      },
+      {
+        "parameters": {
+          "operation": "get",
+          "dataTableId": {
+            "__rl": true,
+            "value": "kpIuRe6aSFnpKUOB",
+            "mode": "list",
+            "cachedResultName": "Empleados_ids_Shopify",
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/kpIuRe6aSFnpKUOB"
           },
           "filters": {
             "conditions": [
               {
-                "keyValue": "1"
+                "keyName": "Identificador",
+                "keyValue": "={{ $json.user_id.toString() }}"
               }
             ]
           }
@@ -427,43 +287,137 @@
         "type": "n8n-nodes-base.dataTable",
         "typeVersion": 1,
         "position": [
-          208,
-          176
+          816,
+          144
         ],
-        "id": "774e816e-ac38-4cae-bbca-afd7ed44ee73",
-        "name": "Get row(s)"
+        "id": "46231967-5f86-4143-9f9a-b4f5a426af10",
+        "name": "Obtener Nombres Empleados"
       },
       {
         "parameters": {
-          "operation": "update",
+          "operation": "append",
           "documentId": {
             "__rl": true,
-            "value": "={{ $json.ID_DOCUMENTO }}",
+            "value": "={{ $('Crear Informe Maestro').item.json.id }}",
+            "mode": "id"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "Ranking Empleados",
+            "mode": "name"
+          },
+          "columns": {
+            "mappingMode": "autoMapInputData",
+            "value": {},
+            "matchingColumns": [],
+            "schema": [],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          1024,
+          144
+        ],
+        "id": "f894e18e-33b5-4bc9-9b5a-58b0663b6a26",
+        "name": "Escribir Empleados",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "RCuKUCifcA4jENcY",
+            "name": "Google Sheets account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "content": "RUTA 1: VENTAS\nEl ID del archivo viene del nodo principal, así que ahora podemos escribir directamente.",
+          "height": 140,
+          "width": 304,
+          "color": 4
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -304,
+          -368
+        ],
+        "id": "0e2c598a-0376-4192-9f43-55beb6d61e0a",
+        "name": "Sticky Note"
+      },
+      {
+        "parameters": {
+          "content": "RUTA 2: BONOS\nShopify procesa todo y al final escribe en el archivo creado al principio.",
+          "height": 140,
+          "width": 304,
+          "color": 3
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -304,
+          160
+        ],
+        "id": "2597c927-aa51-4003-a949-419b2158cda7",
+        "name": "Sticky Note1"
+      },
+      {
+        "parameters": {
+          "options": {}
+        },
+        "type": "n8n-nodes-base.splitInBatches",
+        "typeVersion": 3,
+        "position": [
+          112,
+          -224
+        ],
+        "id": "2d5428b2-70e7-4119-8684-7fbcf096a603",
+        "name": "Bucle: Uno a Uno"
+      },
+      {
+        "parameters": {
+          "amount": 1
+        },
+        "type": "n8n-nodes-base.wait",
+        "typeVersion": 1.1,
+        "position": [
+          880,
+          -208
+        ],
+        "id": "7e8d206e-0955-4264-a054-7f52e5aed125",
+        "name": "Espera 1s",
+        "webhookId": "57665f85-f34c-4a9b-81e3-71d620974b94"
+      },
+      {
+        "parameters": {
+          "operation": "append",
+          "documentId": {
+            "__rl": true,
+            "value": "={{ $('Crear Informe Maestro').first().json.id }}",
             "mode": "id"
           },
           "sheetName": {
             "__rl": true,
             "value": "gid=0",
             "mode": "list",
-            "cachedResultName": "Hoja 1",
-            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19bvtVxQK6uMbxP2HZKgGEGM_KWyvJM3vLp1APRSSTEY/edit#gid=0"
+            "cachedResultName": "Detalle Diario",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1JcZHTzdDhiJrjpYVDXaCcsICGGeExMDsYXyXjq-06kg/edit#gid=0"
           },
           "columns": {
             "mappingMode": "defineBelow",
             "value": {
               "SUCURSAL DE VENTA": "={{ $json['SUCURSAL DE VENTA'] }}",
-              "MÉTODO DE PAGO": "={{ $json['METODO DE PAGO'] }}",
+              "MÉTODO DE PAGO": "={{ $json['MÉTODO DE PAGO'] }}",
+              "COSTE POR UNIDAD": "={{ $json['COSTE POR UNIDAD'] }}",
+              "PRECIO DE PRODUCTO": "={{ $json['PRECIO DE PRODUCTO'] }}",
               "PRECIO PAGADO": "={{ $json['PRECIO PAGADO'] }}",
-              "DESCUENTO": "={{ $json.DESCUENTO }}",
+              "DESCUENTO": "={{ $json['DESCUENTO'] }}",
               "NOMBRE DE PRODUCTO": "={{ $json['NOMBRE DE PRODUCTO'] }}",
-              "VARIANTE": "={{ $json.VARIANTE }}",
-              "row_number": "={{ $json.NUMERO_FILA }}",
-              "COSTE POR UNIDAD": "={{ $json['COSTO POR UNIDAD'] }}",
-              "PRECIO DE PRODUCTO": "={{ $json['COSTE DE PRODUCTO'] }}"
+              "VARIANTE": "={{ $json['VARIANTE'] }}"
             },
-            "matchingColumns": [
-              "row_number"
-            ],
+            "matchingColumns": [],
             "schema": [
               {
                 "id": "SUCURSAL DE VENTA",
@@ -490,8 +444,7 @@
                 "defaultMatch": false,
                 "display": true,
                 "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
+                "canBeUsedToMatch": true
               },
               {
                 "id": "PRECIO DE PRODUCTO",
@@ -500,8 +453,7 @@
                 "defaultMatch": false,
                 "display": true,
                 "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
+                "canBeUsedToMatch": true
               },
               {
                 "id": "PRECIO PAGADO",
@@ -549,6 +501,42 @@
                 "canBeUsedToMatch": true
               },
               {
+                "id": "col_10",
+                "displayName": "col_10",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "col_11",
+                "displayName": "col_11",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "col_12",
+                "displayName": "col_12",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "col_13",
+                "displayName": "col_13",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
                 "id": "Tarjeta",
                 "displayName": "Tarjeta",
                 "required": false,
@@ -567,8 +555,8 @@
                 "canBeUsedToMatch": true
               },
               {
-                "id": "TOTAL",
-                "displayName": "TOTAL",
+                "id": "Venta Web",
+                "displayName": "Venta Web",
                 "required": false,
                 "defaultMatch": false,
                 "display": true,
@@ -576,31 +564,30 @@
                 "canBeUsedToMatch": true
               },
               {
-                "id": "row_number",
-                "displayName": "row_number",
+                "id": "TOTAL",
+                "displayName": "TOTAL",
                 "required": false,
                 "defaultMatch": false,
                 "display": true,
-                "type": "number",
-                "canBeUsedToMatch": true,
-                "readOnly": true,
-                "removed": false
+                "type": "string",
+                "canBeUsedToMatch": true
               }
             ],
             "attemptToConvertTypes": false,
             "convertFieldsToString": false
           },
-          "options": {}
+          "options": {
+            "useAppend": true
+          }
         },
         "type": "n8n-nodes-base.googleSheets",
         "typeVersion": 4.7,
         "position": [
-          1264,
-          160
+          720,
+          -208
         ],
-        "id": "c06738ec-b3f7-49ef-8ebf-57c169a09bfb",
-        "name": "Update row in sheet",
-        "executeOnce": false,
+        "id": "7f3e3a25-1af8-4209-af52-c9387dc6cbcb",
+        "name": "Escribir detalle",
         "credentials": {
           "googleSheetsOAuth2Api": {
             "id": "RCuKUCifcA4jENcY",
@@ -610,353 +597,289 @@
       },
       {
         "parameters": {
-          "operation": "update",
-          "dataTableId": {
+          "documentId": {
             "__rl": true,
-            "value": "ghO8HECzTZgPqOqM",
+            "value": "={{ $('Bucle: Uno a Uno').item.json.ID_Documento }}",
+            "mode": "id"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
             "mode": "list",
-            "cachedResultName": "InformeDiario",
-            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/ghO8HECzTZgPqOqM"
-          },
-          "filters": {
-            "conditions": [
-              {
-                "keyValue": "1"
-              }
-            ]
-          },
-          "columns": {
-            "mappingMode": "defineBelow",
-            "value": {
-              "ID_Documento": "={{ $('Edit Fields').item.json.ID_DOCUMENTO }}",
-              "Contador": "={{ $('Edit Fields').item.json.NUMERO_FILA  + 1}}"
-            },
-            "matchingColumns": [],
-            "schema": [
-              {
-                "id": "ID_Documento",
-                "displayName": "ID_Documento",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "readOnly": false,
-                "removed": false
-              },
-              {
-                "id": "Contador",
-                "displayName": "Contador",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "number",
-                "readOnly": false,
-                "removed": false
-              }
-            ],
-            "attemptToConvertTypes": false,
-            "convertFieldsToString": false
+            "cachedResultName": "Hoja 1",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1agYxXaJmYaKnBkYE-H6faln5jcYOxedLmCjE-Nde_S8/edit#gid=0"
           },
           "options": {}
         },
-        "type": "n8n-nodes-base.dataTable",
-        "typeVersion": 1,
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
         "position": [
-          1424,
-          160
+          544,
+          -208
         ],
-        "id": "8c8fc3b1-e4bb-47fa-a5a0-a7c191ec8ce0",
-        "name": "Update row(s)1"
-      },
-      {
-        "parameters": {
-          "authentication": "headerAuth",
-          "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-07/graphql.json",
-          "query": "query getVariantCost($id: ID!) {\n  productVariant(id: $id) {\n    id\n    sku\n    title\n    inventoryItem {\n      id\n      unitCost {\n        amount\n        currencyCode\n      }\n    }\n  }\n}\n\n",
-          "variables": "={\n  \"id\": \"{{ $json['ID VARIANTE'] }}\"\n}",
-          "headerParametersUi": {
-            "parameter": [
-              {
-                "name": "Content-Type",
-                "value": "application/json"
-              }
-            ]
-          }
-        },
-        "type": "n8n-nodes-base.graphql",
-        "typeVersion": 1.1,
-        "position": [
-          528,
-          32
-        ],
-        "id": "a17fad08-f348-4347-9dc4-80146ae32cde",
-        "name": "GraphQL1",
+        "id": "d2ef4873-7d36-41a0-ac61-3662612885c1",
+        "name": "Leer Informe de ese Día",
         "credentials": {
-          "httpHeaderAuth": {
-            "id": "OPt2Cl0dnwcU4qRk",
-            "name": "ShopifyInformes"
+          "googleSheetsOAuth2Api": {
+            "id": "RCuKUCifcA4jENcY",
+            "name": "Google Sheets account"
           }
         }
       },
       {
         "parameters": {
-          "assignments": {
-            "assignments": [
-              {
-                "id": "711be730-983a-47e6-99f2-d818a44482be",
-                "name": "ID VARIANTE",
-                "value": "=gid://shopify/ProductVariant/{{ $('Webhook').item.json.body.line_items[0].variant_id }}",
-                "type": "string"
-              }
-            ]
+          "operation": "append",
+          "documentId": {
+            "__rl": true,
+            "value": "={{ $('Crear Informe Maestro').first().json.id }}",
+            "mode": "id"
           },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.set",
-        "typeVersion": 3.4,
-        "position": [
-          400,
-          32
-        ],
-        "id": "eb06b72f-bde0-4e07-a0e7-718787c25b47",
-        "name": "Edit Fields1"
-      },
-      {
-        "parameters": {
-          "assignments": {
-            "assignments": [
+          "sheetName": {
+            "__rl": true,
+            "value": "Detalle Diario",
+            "mode": "name"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "SUCURSAL DE VENTA": "=📅 DÍA: {{ $('Bucle: Uno a Uno').item.json.fecha }}"
+            },
+            "matchingColumns": [],
+            "schema": [
               {
-                "id": "87a5aeba-2adf-47d1-8d7b-b55d5016266a",
-                "name": "FECHA",
-                "value": "={{ $today }}",
-                "type": "object"
+                "id": "SUCURSAL DE VENTA",
+                "displayName": "SUCURSAL DE VENTA",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
               }
-            ]
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
           },
           "options": {
-            "ignoreConversionErrors": true
+            "useAppend": false
           }
         },
-        "type": "n8n-nodes-base.set",
-        "typeVersion": 3.4,
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
         "position": [
-          176,
-          544
+          352,
+          -208
         ],
-        "id": "f736e8df-5da3-4387-a65d-25852e7341f0",
-        "name": "obtener fecha"
-      },
-      {
-        "parameters": {
-          "jsCode": "return items.map(item => {\n  const fecha = new Date(item.json.FECHA);\n\n  const dia = String(fecha.getDate()).padStart(2, '0');\n  const mes = String(fecha.getMonth() + 1).padStart(2, '0');\n  const anio = fecha.getFullYear();\n\n  item.json.FECHA = `${dia}/${mes}/${anio}`;\n\n  return item;\n});\n"
-        },
-        "type": "n8n-nodes-base.code",
-        "typeVersion": 2,
-        "position": [
-          320,
-          544
-        ],
-        "id": "22739f07-309b-4ff7-ab9e-f966b9bb0cf8",
-        "name": "formatear fecha"
-      },
-      {
-        "parameters": {
-          "content": "ACTUALIZAR DOCUMENTO CON CADA PEDIDO",
-          "height": 448,
-          "width": 1632,
-          "color": 3
-        },
-        "type": "n8n-nodes-base.stickyNote",
-        "typeVersion": 1,
-        "position": [
-          0,
-          0
-        ],
-        "id": "9a075d45-4f44-4ec9-91df-980bb707bf19",
-        "name": "Sticky Note"
+        "id": "d0817cda-d813-4bbd-8d81-edc9d4b1bab7",
+        "name": "Escribir Fecha Cabecera",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "RCuKUCifcA4jENcY",
+            "name": "Google Sheets account"
+          }
+        }
       }
     ],
     "connections": {
-      "Webhook": {
+      "Inicio de Mes (Día 1)": {
         "main": [
           [
             {
-              "node": "Get row(s)",
+              "node": "Configurar Fechas",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "GraphQL": {
+      "Configurar Fechas": {
         "main": [
           [
             {
-              "node": "Merge",
-              "type": "main",
-              "index": 1
-            }
-          ]
-        ]
-      },
-      "Download file": {
-        "main": [
-          [
-            {
-              "node": "Send email",
+              "node": "Crear Informe Maestro",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "Copy file": {
+      "Crear Informe Maestro": {
         "main": [
           [
             {
-              "node": "Update row(s)",
+              "node": "Prep Shopify",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "Schedule Trigger": {
+      "Obtener Informes Diarios": {
         "main": [
           [
             {
-              "node": "obtener fecha",
+              "node": "Limpiar y Analizar Productos",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "Code in JavaScript": {
+      "Prep Shopify": {
         "main": [
           [
             {
-              "node": "Merge",
-              "type": "main",
-              "index": 2
-            }
-          ]
-        ]
-      },
-      "Merge": {
-        "main": [
-          [
-            {
-              "node": "Code in JavaScript1",
+              "node": "Shopify API",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "Code in JavaScript1": {
+      "Set Next Page": {
         "main": [
           [
             {
-              "node": "Edit Fields",
+              "node": "Shopify API",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "Update row(s)": {
+      "Limpiar y Analizar Productos": {
         "main": [
           [
             {
-              "node": "Insert row",
+              "node": "Bucle: Uno a Uno",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "Edit Fields": {
+      "Shopify API": {
         "main": [
           [
             {
-              "node": "Update row in sheet",
+              "node": "Acumular en Memoria",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "Get row(s)": {
+      "Hay más páginas?": {
         "main": [
           [
             {
-              "node": "GraphQL",
+              "node": "Set Next Page",
               "type": "main",
               "index": 0
-            },
+            }
+          ],
+          [
             {
-              "node": "Code in JavaScript",
-              "type": "main",
-              "index": 0
-            },
-            {
-              "node": "Edit Fields1",
+              "node": "Unir Todos los Pedidos",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "Update row in sheet": {
+      "Acumular en Memoria": {
         "main": [
           [
             {
-              "node": "Update row(s)1",
+              "node": "Hay más páginas?",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "GraphQL1": {
+      "Unir Todos los Pedidos": {
         "main": [
           [
             {
-              "node": "Merge",
+              "node": "Calcular Ranking Empleados",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "Edit Fields1": {
+      "Calcular Ranking Empleados": {
         "main": [
           [
             {
-              "node": "GraphQL1",
+              "node": "Obtener Nombres Empleados",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "obtener fecha": {
+      "Obtener Nombres Empleados": {
         "main": [
           [
             {
-              "node": "formatear fecha",
+              "node": "Escribir Empleados",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "formatear fecha": {
+      "Bucle: Uno a Uno": {
+        "main": [
+          [],
+          [
+            {
+              "node": "Escribir Fecha Cabecera",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Espera 1s": {
         "main": [
           [
             {
-              "node": "Copy file",
+              "node": "Bucle: Uno a Uno",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Escribir detalle": {
+        "main": [
+          [
+            {
+              "node": "Espera 1s",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Leer Informe de ese Día": {
+        "main": [
+          [
+            {
+              "node": "Escribir detalle",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Escribir Fecha Cabecera": {
+        "main": [
+          [
+            {
+              "node": "Leer Informe de ese Día",
               "type": "main",
               "index": 0
             }
@@ -965,11 +888,11 @@
       }
     },
     "authors": "Info Tailwind",
-    "name": "Version 450c0ba2",
+    "name": "Version 05cedf4a",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "450c0ba2-edd3-4ee2-aacb-d2984ca3fc05",
+  "activeVersionId": "05cedf4a-1fe6-4427-9980-f71a68149ac4",
   "connections": {
     "Inicio de Mes (Día 1)": {
       "main": [
@@ -982,27 +905,11 @@
         ]
       ]
     },
-    "Configurar Fechas": {
-      "main": [
-        [
-          {
-            "node": "Crear Informe Maestro",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Crear Informe Maestro": {
       "main": [
         [
           {
             "node": "Obtener Informes Diarios",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Prep Shopify",
             "type": "main",
             "index": 0
           }
@@ -1057,7 +964,7 @@
       "main": [
         [
           {
-            "node": "Hay más páginas?",
+            "node": "Acumular en Memoria",
             "type": "main",
             "index": 0
           }
@@ -1075,7 +982,7 @@
         ],
         [
           {
-            "node": "Acumular en Memoria",
+            "node": "Unir Todos los Pedidos",
             "type": "main",
             "index": 0
           }
@@ -1086,7 +993,7 @@
       "main": [
         [
           {
-            "node": "Unir Todos los Pedidos",
+            "node": "Hay más páginas?",
             "type": "main",
             "index": 0
           }
@@ -1128,10 +1035,16 @@
     },
     "Bucle: Uno a Uno": {
       "main": [
-        [],
         [
           {
-            "node": "Escribir Fecha Cabecera",
+            "node": "Calcular Top 10",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Leer Informe de ese Día",
             "type": "main",
             "index": 0
           }
@@ -1151,6 +1064,40 @@
     },
     "Escribir detalle": {
       "main": [
+        [],
+        []
+      ]
+    },
+    "Leer Informe de ese Día": {
+      "main": [
+        [
+          {
+            "node": "Acumular en memoria",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Configurar Fechas2": {
+      "main": [
+        []
+      ]
+    },
+    "Configurar Fechas": {
+      "main": [
+        [
+          {
+            "node": "Crear Informe Maestro",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Acumular en memoria": {
+      "main": [
         [
           {
             "node": "Espera 1s",
@@ -1160,22 +1107,11 @@
         ]
       ]
     },
-    "Leer Informe de ese Día": {
+    "Calcular Top 10": {
       "main": [
         [
           {
             "node": "Escribir detalle",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Escribir Fecha Cabecera": {
-      "main": [
-        [
-          {
-            "node": "Leer Informe de ese Día",
             "type": "main",
             "index": 0
           }
@@ -1186,7 +1122,9 @@
   "createdAt": "2026-01-14T08:04:08.245Z",
   "id": "584ehV8qDkwoHzoLSDP1n",
   "isArchived": false,
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "Informe_Mensual_Definitivo",
   "nodes": [
     {
@@ -1208,41 +1146,6 @@
       ],
       "id": "4c23fe05-5690-420a-8ad4-66ef9230ed65",
       "name": "Inicio de Mes (Día 1)"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "id_fecha",
-              "name": "NOMBRE_MES",
-              "value": "={{ $today.minus({months: 1}).setLocale('es').format('MMMM').toUpperCase() }}",
-              "type": "string"
-            },
-            {
-              "id": "id_rango_inicio",
-              "name": "FECHA_INICIO",
-              "value": "={{ $today.minus({months: 1}).startOf('month').format('yyyy-MM-dd') }}T00:00:00Z",
-              "type": "string"
-            },
-            {
-              "id": "id_rango_fin",
-              "name": "FECHA_FIN",
-              "value": "={{ $today.minus({months: 1}).endOf('month').format('yyyy-MM-dd') }}T23:59:59Z",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        -800,
-        32
-      ],
-      "id": "4e18e961-e82a-44bc-a08f-203fb6bdb947",
-      "name": "Configurar Fechas"
     },
     {
       "parameters": {
@@ -1320,7 +1223,7 @@
       "typeVersion": 3.4,
       "position": [
         -304,
-        208
+        304
       ],
       "id": "baac2c47-e3e0-4413-a657-02e685aeea0f",
       "name": "Prep Shopify"
@@ -1342,7 +1245,7 @@
       "typeVersion": 4.3,
       "position": [
         -96,
-        208
+        304
       ],
       "id": "02d692ea-c717-4ecf-ab9a-d95d81b2eb37",
       "name": "Shopify API",
@@ -1365,7 +1268,7 @@
           "conditions": [
             {
               "id": "cond_link",
-              "leftValue": "={{ $json.headers.link }}",
+              "leftValue": "={{ $('Shopify API').item.json.headers.link }}",
               "rightValue": "next",
               "operator": {
                 "type": "string",
@@ -1380,8 +1283,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        128,
-        208
+        240,
+        304
       ],
       "id": "3fed2932-cb89-43c4-86f1-8df62a10ec7c",
       "name": "Hay más páginas?"
@@ -1403,8 +1306,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        368,
-        192
+        432,
+        288
       ],
       "id": "74a1ce84-d763-4d42-96a6-b66b3a056bbe",
       "name": "Set Next Page"
@@ -1416,21 +1319,21 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        576,
-        48
+        432,
+        496
       ],
       "id": "76818f9e-1abd-4a3f-89be-6bcfe16956ff",
       "name": "Unir Todos los Pedidos"
     },
     {
       "parameters": {
-        "jsCode": "const staticData = $getWorkflowStaticData('global');\nif (!staticData.listaTemporal) staticData.listaTemporal = [];\nconst pedidos = $('Shopify API').item.json.body.orders;\nstaticData.listaTemporal.push(...pedidos);\nreturn { json: { status: 'accumulating' } };"
+        "jsCode": "const staticData = $getWorkflowStaticData('global');\nif (!staticData.listaTemporal) staticData.listaTemporal = [];\n\n// 1. Capturamos los datos de entrada (incluidos los encabezados/headers)\n// Usamos items[0] porque en n8n v1+ items es el array de entrada\nconst inputData = items[0].json;\nconst pedidos = inputData.body.orders;\n\n// 2. Guardamos los pedidos en la mochila\nstaticData.listaTemporal.push(...pedidos);\n\n// 3. ¡IMPORTANTE! Devolvemos los 'headers' hacia afuera.\n// Así el siguiente nodo podrá leer el link de la página siguiente.\nreturn {\n  json: {\n    status: 'accumulating',\n    headers: inputData.headers\n  }\n};"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        384,
-        48
+        64,
+        304
       ],
       "id": "c388a069-3ddc-418e-a9d0-8903192a2fb1",
       "name": "Acumular en Memoria"
@@ -1442,8 +1345,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        768,
-        48
+        624,
+        496
       ],
       "id": "e2bc4c63-1319-4ac9-8ecd-a66c024022a1",
       "name": "Calcular Ranking Empleados"
@@ -1462,7 +1365,7 @@
           "conditions": [
             {
               "keyName": "Identificador",
-              "keyValue": "={{ $json.user_id }}"
+              "keyValue": "={{ $json.user_id.toString() }}"
             }
           ]
         }
@@ -1470,8 +1373,8 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1,
       "position": [
-        960,
-        48
+        816,
+        496
       ],
       "id": "46231967-5f86-4143-9f9a-b4f5a426af10",
       "name": "Obtener Nombres Empleados"
@@ -1481,13 +1384,15 @@
         "operation": "append",
         "documentId": {
           "__rl": true,
-          "value": "={{ $('Crear Informe Maestro').item.json.id }}",
+          "value": "={{ $('Crear Informe Maestro').first().json.id }}",
           "mode": "id"
         },
         "sheetName": {
           "__rl": true,
-          "value": "Ranking Empleados",
-          "mode": "name"
+          "value": 1357749090,
+          "mode": "list",
+          "cachedResultName": "Ranking Empleados",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/154QLNeNQDp7dA-8-gUeGrNSjM97H_QDhoufqiJ9mZLg/edit#gid=1357749090"
         },
         "columns": {
           "mappingMode": "autoMapInputData",
@@ -1502,8 +1407,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        1152,
-        48
+        1024,
+        496
       ],
       "id": "f894e18e-33b5-4bc9-9b5a-58b0663b6a26",
       "name": "Escribir Empleados",
@@ -1518,13 +1423,13 @@
       "parameters": {
         "content": "RUTA 1: VENTAS\nEl ID del archivo viene del nodo principal, así que ahora podemos escribir directamente.",
         "height": 140,
-        "width": 336,
+        "width": 304,
         "color": 4
       },
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -320,
+        -304,
         -368
       ],
       "id": "0e2c598a-0376-4192-9f43-55beb6d61e0a",
@@ -1534,14 +1439,14 @@
       "parameters": {
         "content": "RUTA 2: BONOS\nShopify procesa todo y al final escribe en el archivo creado al principio.",
         "height": 140,
-        "width": 320,
+        "width": 304,
         "color": 3
       },
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
         -304,
-        64
+        160
       ],
       "id": "2597c927-aa51-4003-a949-419b2158cda7",
       "name": "Sticky Note1"
@@ -1566,246 +1471,12 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        880,
+        688,
         -208
       ],
       "id": "7e8d206e-0955-4264-a054-7f52e5aed125",
       "name": "Espera 1s",
       "webhookId": "57665f85-f34c-4a9b-81e3-71d620974b94"
-    },
-    {
-      "parameters": {
-        "operation": "append",
-        "documentId": {
-          "__rl": true,
-          "value": "={{ $('Crear Informe Maestro').first().json.id }}",
-          "mode": "id"
-        },
-        "sheetName": {
-          "__rl": true,
-          "value": "gid=0",
-          "mode": "list",
-          "cachedResultName": "Detalle Diario",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1JcZHTzdDhiJrjpYVDXaCcsICGGeExMDsYXyXjq-06kg/edit#gid=0"
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "SUCURSAL DE VENTA": "={{ $json['SUCURSAL DE VENTA'] }}",
-            "MÉTODO DE PAGO": "={{ $json['MÉTODO DE PAGO'] }}",
-            "COSTE POR UNIDAD": "={{ $json['COSTE POR UNIDAD'] }}",
-            "PRECIO DE PRODUCTO": "={{ $json['PRECIO DE PRODUCTO'] }}",
-            "PRECIO PAGADO": "={{ $json['PRECIO PAGADO'] }}",
-            "DESCUENTO": "={{ $json['DESCUENTO'] }}",
-            "NOMBRE DE PRODUCTO": "={{ $json['NOMBRE DE PRODUCTO'] }}",
-            "VARIANTE": "={{ $json['VARIANTE'] }}"
-          },
-          "matchingColumns": [],
-          "schema": [
-            {
-              "id": "SUCURSAL DE VENTA",
-              "displayName": "SUCURSAL DE VENTA",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "MÉTODO DE PAGO",
-              "displayName": "MÉTODO DE PAGO",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "COSTE POR UNIDAD",
-              "displayName": "COSTE POR UNIDAD",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "PRECIO DE PRODUCTO",
-              "displayName": "PRECIO DE PRODUCTO",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "PRECIO PAGADO",
-              "displayName": "PRECIO PAGADO",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "DESCUENTO",
-              "displayName": "DESCUENTO",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "NOMBRE DE PRODUCTO",
-              "displayName": "NOMBRE DE PRODUCTO",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "VARIANTE",
-              "displayName": "VARIANTE",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "SURFIN SIERRA NEVADA",
-              "displayName": "SURFIN SIERRA NEVADA",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "col_10",
-              "displayName": "col_10",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "col_11",
-              "displayName": "col_11",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "col_12",
-              "displayName": "col_12",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "col_13",
-              "displayName": "col_13",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "Tarjeta",
-              "displayName": "Tarjeta",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "Efectivo",
-              "displayName": "Efectivo",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "Venta Web",
-              "displayName": "Venta Web",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "TOTAL",
-              "displayName": "TOTAL",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4.7,
-      "position": [
-        720,
-        -208
-      ],
-      "id": "7f3e3a25-1af8-4209-af52-c9387dc6cbcb",
-      "name": "Escribir detalle",
-      "credentials": {
-        "googleSheetsOAuth2Api": {
-          "id": "RCuKUCifcA4jENcY",
-          "name": "Google Sheets account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "documentId": {
-          "__rl": true,
-          "value": "={{ $('Bucle: Uno a Uno').item.json.ID_Documento }}",
-          "mode": "id"
-        },
-        "sheetName": {
-          "__rl": true,
-          "value": "gid=0",
-          "mode": "list",
-          "cachedResultName": "Hoja 1",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1agYxXaJmYaKnBkYE-H6faln5jcYOxedLmCjE-Nde_S8/edit#gid=0"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4.7,
-      "position": [
-        544,
-        -208
-      ],
-      "id": "d2ef4873-7d36-41a0-ac61-3662612885c1",
-      "name": "Leer Informe de ese Día",
-      "credentials": {
-        "googleSheetsOAuth2Api": {
-          "id": "RCuKUCifcA4jENcY",
-          "name": "Google Sheets account"
-        }
-      }
     },
     {
       "parameters": {
@@ -1823,18 +1494,65 @@
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "SUCURSAL DE VENTA": "=📅 DÍA: {{ $('Bucle: Uno a Uno').item.json.fecha }}"
+            "NOMBRE PRODUCTO": "={{ $json.Producto }}",
+            "VARIANTE": "={{ $json.Variante }}",
+            "UNIDADES VENDIDAS": "={{ $json['Unidades Vendidas'] }}",
+            "PRECIO": "={{ $json.Precio }}",
+            "TOTAL": "={{ $json.Total }}"
           },
-          "matchingColumns": [],
+          "matchingColumns": [
+            "TOP 10 PRODUCTOS MÁS VENDIDOS"
+          ],
           "schema": [
             {
-              "id": "SUCURSAL DE VENTA",
-              "displayName": "SUCURSAL DE VENTA",
+              "id": "NOMBRE PRODUCTO",
+              "displayName": "NOMBRE PRODUCTO",
               "required": false,
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "VARIANTE",
+              "displayName": "VARIANTE",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "PRECIO",
+              "displayName": "PRECIO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "UNIDADES VENDIDAS",
+              "displayName": "UNIDADES VENDIDAS",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "TOTAL",
+              "displayName": "TOTAL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
             }
           ],
           "attemptToConvertTypes": false,
@@ -1845,17 +1563,145 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        352,
-        -208
+        480,
+        -384
       ],
-      "id": "d0817cda-d813-4bbd-8d81-edc9d4b1bab7",
-      "name": "Escribir Fecha Cabecera",
+      "id": "7f3e3a25-1af8-4209-af52-c9387dc6cbcb",
+      "name": "Escribir detalle",
+      "alwaysOutputData": false,
+      "executeOnce": false,
       "credentials": {
         "googleSheetsOAuth2Api": {
           "id": "RCuKUCifcA4jENcY",
           "name": "Google Sheets account"
         }
       }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $json.ID_Documento }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Hoja 1",
+          "mode": "name"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        320,
+        -208
+      ],
+      "id": "d2ef4873-7d36-41a0-ac61-3662612885c1",
+      "name": "Leer Informe de ese Día",
+      "alwaysOutputData": false,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "RCuKUCifcA4jENcY",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id_fecha",
+              "name": "NOMBRE_MES",
+              "value": "={{ $today.setLocale('es').format('MMMM').toUpperCase() }}",
+              "type": "string"
+            },
+            {
+              "id": "id_rango_inicio",
+              "name": "FECHA_INICIO",
+              "value": "={{ $today.startOf('month').format('yyyy-MM-dd') }}T00:00:00Z",
+              "type": "string"
+            },
+            {
+              "id": "id_rango_fin",
+              "name": "FECHA_FIN",
+              "value": "={{ $today.endOf('month').format('yyyy-MM-dd') }}T23:59:59Z",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1584,
+        96
+      ],
+      "id": "4ec80f18-8912-48eb-aac6-7855b84c109c",
+      "name": "Configurar Fechas2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id_fecha",
+              "name": "NOMBRE_MES",
+              "value": "={{ $today.minus({months: 1}).setLocale('es').format('MMMM').toUpperCase() }}",
+              "type": "string"
+            },
+            {
+              "id": "id_rango_inicio",
+              "name": "FECHA_INICIO",
+              "value": "={{ $today.minus({months: 1}).startOf('month').format('yyyy-MM-dd') }}T00:00:00Z",
+              "type": "string"
+            },
+            {
+              "id": "id_rango_fin",
+              "name": "FECHA_FIN",
+              "value": "={{ $today.minus({months: 1}).endOf('month').format('yyyy-MM-dd') }}T23:59:59Z",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -800,
+        32
+      ],
+      "id": "4e18e961-e82a-44bc-a08f-203fb6bdb947",
+      "name": "Configurar Fechas"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Intentamos recuperar datos de la memoria (si viene del bucle)\nconst staticData = $getWorkflowStaticData('global');\nlet allSales = staticData.allProducts;\n\n// 2. Si la memoria está vacía (porque estás probando el nodo suelto), usamos el input directo\nif (!allSales || allSales.length === 0) {\n  allSales = items.map(item => item.json);\n}\n\nconst productStats = {};\n\n// 3. Recorremos todas las ventas para agruparlas\nfor (const sale of allSales) {\n  // Verificamos que sea una fila válida\n  if (!sale['NOMBRE DE PRODUCTO']) continue;\n\n  const productName = sale['NOMBRE DE PRODUCTO'];\n  const variant = sale['VARIANTE'] || '';\n  const key = `${productName} - ${variant}`;\n  \n  // Limpieza de números (por si vienen con comas en vez de puntos)\n  let priceStr = (sale['PRECIO PAGADO'] || '0').toString();\n  let costStr = (sale['COSTE DE PRODUCTO'] || '0').toString();\n  let unitPriceStr = (sale['PRECIO DE PRODUCTO'] || '0').toString(); \n  \n  const price = parseFloat(priceStr.replace(',', '.')) || 0;\n  const cost = parseFloat(costStr.replace(',', '.')) || 0;\n  const unitPrice = parseFloat(unitPriceStr.replace(',', '.')) || 0;\n\n  // Si es la primera vez que vemos este producto, inicializamos sus contadores\n  if (!productStats[key]) {\n    productStats[key] = {\n      'Producto': productName,\n      'Variante': variant,\n      'Precio Unidad': unitPrice, // Guardamos el precio original\n      'Ventas Totales': 0,        // Dinero real cobrado\n      'Unidades Vendidas': 0,     // Cantidad de artículos\n      'Beneficio': 0\n    };\n  }\n\n  // Sumamos los valores\n  productStats[key]['Ventas Totales'] += price;\n  productStats[key]['Unidades Vendidas'] += 1;\n  productStats[key]['Beneficio'] += (price - cost);\n}\n\n// 4. Ordenamos por Ventas Totales (De mayor a menor)\nconst sortedProducts = Object.values(productStats).sort((a, b) => \n  b['Ventas Totales'] - a['Ventas Totales']\n);\n\n// 5. Cortamos para quedarnos solo con el TOP 10\nconst top10 = sortedProducts.slice(0, 10);\n\n// 6. Formateamos la salida final y CALCULAMOS EL TOTAL AQUÍ\nconst result = top10.map(p => ({\n  json: {\n    'Producto': p['Producto'],\n    'Variante': p['Variante'],\n    'Precio': parseFloat(p['Precio Unidad'].toFixed(2)),\n    'Unidades Vendidas': p['Unidades Vendidas'],\n    // AQUÍ ESTÁ EL TRUCO: Calculamos el total para que no uses fórmulas en Excel\n    'Total': parseFloat((p['Precio Unidad'] * p['Unidades Vendidas']).toFixed(2)),\n    'Beneficio Estimado': parseFloat(p['Beneficio'].toFixed(2))\n  }\n}));\n\n// 7. Limpiamos la memoria para la próxima vez\nstaticData.allProducts = [];\n\nreturn result;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        304,
+        -384
+      ],
+      "id": "6f3cf471-984c-488d-b08c-4f0f350039df",
+      "name": "Calcular Top 10"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Accedemos a la memoria global del flujo\nconst staticData = $getWorkflowStaticData('global');\n\n// Si es la primera vuelta, inicializamos la lista\nif (!staticData.allProducts) {\n  staticData.allProducts = [];\n}\n\n// Añadimos los productos leídos en esta vuelta del bucle\nconst newItems = items.map(item => item.json);\nstaticData.allProducts.push(...newItems);\n\n// Pasamos el testigo para que el flujo siga\nreturn { json: { status: 'guardado', filas: newItems.length } };"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        512,
+        -208
+      ],
+      "id": "a33a17b0-17aa-4d09-8bdb-a41b45ef16d7",
+      "name": "Acumular en memoria"
     }
   ],
   "pinData": {},
@@ -1874,7 +1720,7 @@
   ],
   "staticData": null,
   "tags": [],
-  "triggerCount": 2,
-  "updatedAt": "2026-01-22T13:22:57.100Z",
-  "versionId": "a310d791-d716-4571-8e49-8101d1deae28"
+  "triggerCount": 1,
+  "updatedAt": "2026-01-23T14:31:39.673Z",
+  "versionId": "27dc2742-eb8c-4fb5-b8e7-c6c5e8778082"
 }
