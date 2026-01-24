@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-01-22T09:59:46.000Z",
-    "createdAt": "2026-01-22T09:59:43.786Z",
-    "versionId": "2bd77612-a971-40a6-bed8-1ee44d75be33",
+    "updatedAt": "2026-01-23T16:29:21.000Z",
+    "createdAt": "2026-01-23T16:29:18.205Z",
+    "versionId": "a2e244a7-d51f-464e-aff5-7e8d5449d22a",
     "workflowId": "cnuDKnZrHmDy4QDh",
     "nodes": [
       {
@@ -112,9 +112,15 @@
                 "type": "string"
               },
               {
+                "id": "d74065a3-f051-49f0-ae26-f4412aefdd88",
+                "name": "telefono",
+                "value": "={{ $json[\"Teléfono Móvil\"] }}",
+                "type": "number"
+              },
+              {
                 "id": "a50d5b0a-c301-4ff3-916e-8c2a0508d9ef",
                 "name": "link_aprobar",
-                "value": "=https://n8n.tailwind.es/webhook-test/aprobar-profesor?email={{ $json[\"Correo Electrónico\"] }}&nombre={{ $json.Nombre }}&apellido={{ $json.Apellidos }}",
+                "value": "=https://n8n.tailwind.es/webhook/aprobar-profesor?email={{ $json[\"Correo Electrónico\"] }}&nombre={{ encodeURIComponent($json.Nombre) }}&apellido={{ encodeURIComponent($json.Apellidos) }}&telefono={{ $json[\"Teléfono Móvil\"] }}",
                 "type": "string"
               }
             ]
@@ -150,8 +156,8 @@
         "parameters": {
           "authentication": "headerAuth",
           "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
-          "query": "mutation customerCreate($input: CustomerInput!) {\n  customerCreate(input: $input) {\n    customer {\n      id\n      email\n      firstName\n      lastName\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
-          "variables": "={\n  \"input\": {\n    \"firstName\": \"{{ $json.query.nombre }}\",\n    \"lastName\": \"{{ $json.query.apellido }}\",\n    \"email\": \"{{ $json.query.email }}\",\n    \"tags\": [\"Profesor\", \"DescuentoProfesor\"],\n    \"emailMarketingConsent\": {\n      \"marketingState\": \"SUBSCRIBED\",\n      \"marketingOptInLevel\": \"SINGLE_OPT_IN\"\n    },\n    \"note\": \"Alta validada automáticamente vía WhatsApp el {{ $now.toFormat('dd/MM/yyyy') }}\"\n  }\n}"
+          "query": "mutation customerCreate($input: CustomerInput!) {\n  customerCreate(input: $input) {\n    customer {\n      id\n      email\n      phone\n      firstName\n      lastName\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
+          "variables": "={\n  \"input\": {\n    \"firstName\": \"{{ $json.query.nombre }}\",\n    \"lastName\": \"{{ $json.query.apellido }}\",\n    \"email\": \"{{ $json.query.email }}\",\n    \"phone\": \"{{ $json.query.telefono && $json.query.telefono.toString().replace(/\\\\D/g,'').length > 8 ? ($json.query.telefono.toString().includes('+') ? $json.query.telefono.toString().replace(/ /g,'') : '+34' + $json.query.telefono.toString().replace(/\\\\D/g,'')) : null }}\",\n    \"tags\": [\"Profesor\", \"DescuentoProfesor\"],\n    \"emailMarketingConsent\": {\n      \"marketingState\": \"SUBSCRIBED\",\n      \"marketingOptInLevel\": \"SINGLE_OPT_IN\"\n    },\n    \"note\": \"Alta validada automáticamente vía WhatsApp el {{ $now.toFormat('dd/MM/yyyy') }}\"\n  }\n}"
         },
         "type": "n8n-nodes-base.graphql",
         "typeVersion": 1.1,
@@ -194,7 +200,7 @@
       {
         "parameters": {
           "respondWith": "text",
-          "responseBody": "=<html>\n<body style=\"font-family: sans-serif; text-align: center; padding: 40px; background-color: #f0fdf4;\">\n    <div style=\"background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);\">\n        <h1 style=\"color: #16a34a;\">¡Hecho! ✅</h1>\n        <p>Se ha creado la cuenta en Shopify para:</p>\n        <h3>{{ $json.query.nombre }} {{ $json.query.apellido }}</h3>\n        <p>Y se le ha enviado el correo de bienvenida.</p>\n    </div>\n</body>\n</html>",
+          "responseBody": "=<html>\n<body style=\"font-family: sans-serif; text-align: center; padding: 40px; background-color: #f0fdf4;\">\n    <div style=\"background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);\">\n        <h1 style=\"color: #16a34a;\">¡Hecho! ✅</h1>\n        <p>Se ha creado la cuenta en Shopify para:</p>\n        <h3>{{ $('GraphQL').item.json.data.customerCreate.customer.firstName }} {{ $('GraphQL').item.json.data.customerCreate.customer.lastName }}</h3>\n        <p>Y se le ha enviado el correo de bienvenida.</p>\n    </div>\n</body>\n</html>",
           "options": {}
         },
         "type": "n8n-nodes-base.respondToWebhook",
@@ -209,10 +215,10 @@
       {
         "parameters": {
           "method": "POST",
-          "url": "https://services.leadconnectorhq.com/hooks/50G0wYa58T0KnxpEocxd/webhook-trigger/343b67dc-f4a0-4162-843d-9dd404db2b05",
+          "url": "=https://services.leadconnectorhq.com/hooks/50G0wYa58T0KnxpEocxd/webhook-trigger/343b67dc-f4a0-4162-843d-9dd404db2b05",
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "={\n  \"nombre\": \"{{ $json['nombre_codificado'] }}{{ $json.apellido_codificado }}\",\n  \"email\": \"{{ $('Google Sheets Trigger').item.json['Correo Electrónico'] }}\",\n  \"telefono\": \"{{ $('Google Sheets Trigger').item.json['Teléfono Móvil'] }}\",\n  \"doc_vida_laboral\": \"{{ $('Google Sheets Trigger').item.json['Adjuntar Vida Laboral Actualizada'] }}\",\n  \"doc_titulo\": \"{{ $('Google Sheets Trigger').item.json['Adjuntar Título / Certificación de Profesor'] }}\",\n  \"link_aprobar\": \"https://n8n.tailwind.es/webhook-test/aprobar-profesor?email={{ $('Google Sheets Trigger').item.json['Correo Electrónico'] }}&nombre=&apellido=\"\n}\n",
+          "jsonBody": "={\n  \"nombre\": \"{{ $json.nombre_codificado }}\",\n  \"apellido\": \"{{ $json.apellido_codificado }}\",\n  \"nombre_completo\": \"{{ $json.nombre_codificado }} {{ $json.apellido_codificado }}\",\n  \"email\": \"{{ $('Google Sheets Trigger').item.json['Correo Electrónico'] }}\",\n  \"telefono\": \"{{ $('Google Sheets Trigger').item.json['Teléfono Móvil'] }}\",\n  \"doc_vida_laboral\": \"{{ $('Google Sheets Trigger').item.json['Adjuntar Vida Laboral Actualizada'] }}\",\n  \"doc_titulo\": \"{{ $('Google Sheets Trigger').item.json['Adjuntar Título / Certificación de Profesor'] }}\",\n  \"link_aprobar\": \"{{ $json.link_aprobar }}\"\n}\n",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequest",
@@ -297,7 +303,13 @@
       },
       "Edit Fields": {
         "main": [
-          []
+          [
+            {
+              "node": "HTTP Request",
+              "type": "main",
+              "index": 0
+            }
+          ]
         ]
       },
       "Webhook": {
@@ -340,11 +352,11 @@
       }
     },
     "authors": "Info Tailwind",
-    "name": "Version 2bd77612",
+    "name": "Version a2e244a7",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "2bd77612-a971-40a6-bed8-1ee44d75be33",
+  "activeVersionId": "a2e244a7-d51f-464e-aff5-7e8d5449d22a",
   "connections": {
     "Gmail Trigger": {
       "main": [
@@ -370,7 +382,13 @@
     },
     "Edit Fields": {
       "main": [
-        []
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Webhook": {
@@ -526,9 +544,15 @@
               "type": "string"
             },
             {
+              "id": "d74065a3-f051-49f0-ae26-f4412aefdd88",
+              "name": "telefono",
+              "value": "={{ $json[\"Teléfono Móvil\"] }}",
+              "type": "number"
+            },
+            {
               "id": "a50d5b0a-c301-4ff3-916e-8c2a0508d9ef",
               "name": "link_aprobar",
-              "value": "=https://n8n.tailwind.es/webhook-test/aprobar-profesor?email={{ $json[\"Correo Electrónico\"] }}&nombre={{ $json.Nombre }}&apellido={{ $json.Apellidos }}",
+              "value": "=https://n8n.tailwind.es/webhook/aprobar-profesor?email={{ $json[\"Correo Electrónico\"] }}&nombre={{ encodeURIComponent($json.Nombre) }}&apellido={{ encodeURIComponent($json.Apellidos) }}&telefono={{ $json[\"Teléfono Móvil\"] }}",
               "type": "string"
             }
           ]
@@ -564,8 +588,8 @@
       "parameters": {
         "authentication": "headerAuth",
         "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
-        "query": "mutation customerCreate($input: CustomerInput!) {\n  customerCreate(input: $input) {\n    customer {\n      id\n      email\n      firstName\n      lastName\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
-        "variables": "={\n  \"input\": {\n    \"firstName\": \"{{ $json.query.nombre }}\",\n    \"lastName\": \"{{ $json.query.apellido }}\",\n    \"email\": \"{{ $json.query.email }}\",\n    \"tags\": [\"Profesor\", \"DescuentoProfesor\"],\n    \"emailMarketingConsent\": {\n      \"marketingState\": \"SUBSCRIBED\",\n      \"marketingOptInLevel\": \"SINGLE_OPT_IN\"\n    },\n    \"note\": \"Alta validada automáticamente vía WhatsApp el {{ $now.toFormat('dd/MM/yyyy') }}\"\n  }\n}"
+        "query": "mutation customerCreate($input: CustomerInput!) {\n  customerCreate(input: $input) {\n    customer {\n      id\n      email\n      phone\n      firstName\n      lastName\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
+        "variables": "={\n  \"input\": {\n    \"firstName\": \"{{ $json.query.nombre }}\",\n    \"lastName\": \"{{ $json.query.apellido }}\",\n    \"email\": \"{{ $json.query.email }}\",\n    \"phone\": \"{{ $json.query.telefono && $json.query.telefono.toString().replace(/\\\\D/g,'').length > 8 ? ($json.query.telefono.toString().includes('+') ? $json.query.telefono.toString().replace(/ /g,'') : '+34' + $json.query.telefono.toString().replace(/\\\\D/g,'')) : null }}\",\n    \"tags\": [\"Profesor\", \"DescuentoProfesor\"],\n    \"emailMarketingConsent\": {\n      \"marketingState\": \"SUBSCRIBED\",\n      \"marketingOptInLevel\": \"SINGLE_OPT_IN\"\n    },\n    \"note\": \"Alta validada automáticamente vía WhatsApp el {{ $now.toFormat('dd/MM/yyyy') }}\"\n  }\n}"
       },
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
@@ -608,7 +632,7 @@
     {
       "parameters": {
         "respondWith": "text",
-        "responseBody": "=<html>\n<body style=\"font-family: sans-serif; text-align: center; padding: 40px; background-color: #f0fdf4;\">\n    <div style=\"background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);\">\n        <h1 style=\"color: #16a34a;\">¡Hecho! ✅</h1>\n        <p>Se ha creado la cuenta en Shopify para:</p>\n        <h3>{{ $json.query.nombre }} {{ $json.query.apellido }}</h3>\n        <p>Y se le ha enviado el correo de bienvenida.</p>\n    </div>\n</body>\n</html>",
+        "responseBody": "=<html>\n<body style=\"font-family: sans-serif; text-align: center; padding: 40px; background-color: #f0fdf4;\">\n    <div style=\"background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);\">\n        <h1 style=\"color: #16a34a;\">¡Hecho! ✅</h1>\n        <p>Se ha creado la cuenta en Shopify para:</p>\n        <h3>{{ $('GraphQL').item.json.data.customerCreate.customer.firstName }} {{ $('GraphQL').item.json.data.customerCreate.customer.lastName }}</h3>\n        <p>Y se le ha enviado el correo de bienvenida.</p>\n    </div>\n</body>\n</html>",
         "options": {}
       },
       "type": "n8n-nodes-base.respondToWebhook",
@@ -623,10 +647,10 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://services.leadconnectorhq.com/hooks/50G0wYa58T0KnxpEocxd/webhook-trigger/343b67dc-f4a0-4162-843d-9dd404db2b05",
+        "url": "=https://services.leadconnectorhq.com/hooks/50G0wYa58T0KnxpEocxd/webhook-trigger/343b67dc-f4a0-4162-843d-9dd404db2b05",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"nombre\": \"{{ $json['nombre_codificado'] }}{{ $json.apellido_codificado }}\",\n  \"email\": \"{{ $('Google Sheets Trigger').item.json['Correo Electrónico'] }}\",\n  \"telefono\": \"{{ $('Google Sheets Trigger').item.json['Teléfono Móvil'] }}\",\n  \"doc_vida_laboral\": \"{{ $('Google Sheets Trigger').item.json['Adjuntar Vida Laboral Actualizada'] }}\",\n  \"doc_titulo\": \"{{ $('Google Sheets Trigger').item.json['Adjuntar Título / Certificación de Profesor'] }}\",\n  \"link_aprobar\": \"https://n8n.tailwind.es/webhook-test/aprobar-profesor?email={{ $('Google Sheets Trigger').item.json['Correo Electrónico'] }}&nombre=&apellido=\"\n}\n",
+        "jsonBody": "={\n  \"nombre\": \"{{ $json.nombre_codificado }}\",\n  \"apellido\": \"{{ $json.apellido_codificado }}\",\n  \"nombre_completo\": \"{{ $json.nombre_codificado }} {{ $json.apellido_codificado }}\",\n  \"email\": \"{{ $('Google Sheets Trigger').item.json['Correo Electrónico'] }}\",\n  \"telefono\": \"{{ $('Google Sheets Trigger').item.json['Teléfono Móvil'] }}\",\n  \"doc_vida_laboral\": \"{{ $('Google Sheets Trigger').item.json['Adjuntar Vida Laboral Actualizada'] }}\",\n  \"doc_titulo\": \"{{ $('Google Sheets Trigger').item.json['Adjuntar Título / Certificación de Profesor'] }}\",\n  \"link_aprobar\": \"{{ $json.link_aprobar }}\"\n}\n",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -713,6 +737,6 @@
   },
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2026-01-22T10:04:02.297Z",
-  "versionId": "2bd77612-a971-40a6-bed8-1ee44d75be33"
+  "updatedAt": "2026-01-23T16:29:18.203Z",
+  "versionId": "a2e244a7-d51f-464e-aff5-7e8d5449d22a"
 }
