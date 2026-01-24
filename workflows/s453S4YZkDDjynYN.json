@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-01-20T18:31:41.000Z",
-    "createdAt": "2026-01-20T18:31:39.009Z",
-    "versionId": "e2eac41b-75fc-48ae-8f4d-3c9d09dc0f0d",
+    "updatedAt": "2026-01-23T13:54:46.000Z",
+    "createdAt": "2026-01-23T13:54:36.975Z",
+    "versionId": "84b584a3-8d81-489c-927e-3a51a696d2c4",
     "workflowId": "s453S4YZkDDjynYN",
     "nodes": [
       {
@@ -39,7 +39,7 @@
       },
       {
         "parameters": {
-          "jsCode": "// 1. Obtenemos el texto completo\nconst emailText = $input.item.json.text || $input.item.json.html || \"\";\n\n// Limpiamos saltos de línea y espacios extra\nconst cleanText = emailText.replace(/\\r\\n/g, '\\n').replace(/\\s+/g, ' ');\n\n// --- PATRONES CORREGIDOS (Para soportar los asteriscos * de Gmail) ---\n\n// A. Patrón PRODUCTO\n// Explicación: Busca \"ha comprado\", luego espacios, luego Opcionalmente asteriscos [*]?, luego comillas\nconst productPattern = /ha comprado\\s+[*]*[\"“'](.+?)[\"”']([*]|[\\.])/i;\n\n// B. Patrón EMAIL\nconst emailPattern = /E-mail:\\s*([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.[a-zA-Z0-9._-]+)/i;\n\n// C. Patrón NOMBRE REAL\nconst realNamePattern = /Dirección:\\s*([^,]+),/i;\n\n// D. Patrón USUARIO\nconst usernamePattern = /([^\\s]+)\\s+ha comprado/i;\n\n\n// --- EJECUCIÓN ---\nconst matchProduct = cleanText.match(productPattern);\nconst matchEmail = cleanText.match(emailPattern);\nconst matchRealName = cleanText.match(realNamePattern);\nconst matchUsername = cleanText.match(usernamePattern);\n\n// Variables por defecto\nlet productName = \"Producto Vinted\"; \n// Si encontramos el producto, quitamos posibles comillas o asteriscos extra\nif (matchProduct && matchProduct[1]) {\n  productName = matchProduct[1].replace(/[*]/g, '').trim();\n}\n\nlet finalEmail = \"\";\nlet firstName = \"\";\nlet lastName = \"\";\n\n// 1. EMAIL\nif (matchEmail && matchEmail[1]) {\n  finalEmail = matchEmail[1].trim(); \n} else if (matchUsername && matchUsername[1]) {\n  // Limpiamos asteriscos del usuario si los tiene (*usuario* -> usuario)\n  const cleanUser = matchUsername[1].replace(/\\*/g, '');\n  finalEmail = `${cleanUser}@vinted.tailwind.es`;\n}\n\n// 2. NOMBRE\nif (matchRealName && matchRealName[1]) {\n  const fullName = matchRealName[1].trim();\n  const nameParts = fullName.split(\" \");\n  if (nameParts.length > 1) {\n    lastName = nameParts.pop(); \n    firstName = nameParts.join(\" \"); \n  } else {\n    firstName = fullName;\n    lastName = \"(Vinted)\";\n  }\n} else if (matchUsername && matchUsername[1]) {\n  firstName = matchUsername[1].replace(/\\*/g, '');\n  lastName = \"(Vinted)\";\n}\n\n// Usuario limpio para la nota\nconst cleanUsername = matchUsername ? matchUsername[1].replace(/\\*/g, '') : 'Desconocido';\n\nif (matchProduct || matchEmail) {\n  return {\n    json: {\n      status: \"success\",\n      customer: {\n        first_name: firstName,\n        last_name: lastName,\n        email: finalEmail,\n        tags: [\"Cliente Vinted\"],\n        note: `Comprado en Vinted: ${productName}. Usuario: ${cleanUsername}`\n      },\n      product: {\n        name: productName\n      }\n    }\n  };\n} else {\n  return {\n    json: {\n      error: \"No se pudieron extraer los datos\",\n      debug: cleanText.substring(0, 500)\n    }\n  };\n}"
+          "jsCode": "// 1. Obtenemos el texto de donde esté disponible (text, html o snippet)\n// TU INPUT TIENE EL CONTENIDO EN 'snippet', así que lo añadimos aquí.\nconst emailText = $input.item.json.text || $input.item.json.html || $input.item.json.snippet || \"\";\n\n// 2. Limpieza Previa (CRÍTICO PARA TU INPUT)\n// Reemplazamos &quot; por comillas normales \" para que el Regex funcione\nlet cleanText = emailText.replace(/&quot;/g, '\"').replace(/&#39;/g, \"'\");\n\n// Limpiamos saltos de línea y espacios extra\ncleanText = cleanText.replace(/\\r\\n/g, '\\n').replace(/\\s+/g, ' ');\n\n// --- PATRONES ---\n\n// A. Patrón PRODUCTO\n// Busca: texto entre comillas justo después de \"ha comprado\"\nconst productPattern = /ha comprado\\s+[*]*[\"“'](.+?)[\"”']([*]|[\\.]|$)/i;\n\n// B. Patrón USUARIO\n// Busca: la palabra que está justo antes de \"ha comprado\" (ej: ripride_or_die)\nconst usernamePattern = /([^\\s:,]+)\\s+ha comprado/i;\n\n// C. Patrones Adicionales (Email/Nombre real por si vinieran en el cuerpo completo)\nconst emailPattern = /E-mail:\\s*([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.[a-zA-Z0-9._-]+)/i;\nconst realNamePattern = /Dirección:\\s*([^,]+),/i;\n\n\n// --- EJECUCIÓN ---\nconst matchProduct = cleanText.match(productPattern);\nconst matchUsername = cleanText.match(usernamePattern);\nconst matchEmail = cleanText.match(emailPattern);\nconst matchRealName = cleanText.match(realNamePattern);\n\n// --- PROCESAMIENTO ---\n\n// 1. Producto\nlet productName = \"Producto Vinted\"; \nif (matchProduct && matchProduct[1]) {\n  productName = matchProduct[1].replace(/[*]/g, '').trim();\n}\n\n// 2. Usuario / Nombre\nlet username = \"UsuarioVinted\";\nif (matchUsername && matchUsername[1]) {\n    // Limpiamos asteriscos si los hubiera\n    username = matchUsername[1].replace(/\\*/g, '').trim();\n}\n\nlet firstName = username;\nlet lastName = \"(Vinted)\";\nlet finalEmail = \"\";\n\n// Intentamos sacar nombre real si existe (raro en snippet)\nif (matchRealName && matchRealName[1]) {\n  const fullName = matchRealName[1].trim();\n  const nameParts = fullName.split(\" \");\n  if (nameParts.length > 1) {\n    lastName = nameParts.pop(); \n    firstName = nameParts.join(\" \"); \n  } else {\n    firstName = fullName;\n  }\n}\n\n// 3. Generar Email (Vinted no da el email real, generamos uno ficticio para Shopify)\nif (matchEmail && matchEmail[1]) {\n  finalEmail = matchEmail[1].trim(); \n} else {\n  // Creamos email tipo: riprideordie@vinted.tailwind.es\n  const safeUser = username.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();\n  finalEmail = `${safeUser}@vinted.tailwind.es`;\n}\n\n// --- SALIDA ---\n\nif (matchProduct || username !== \"UsuarioVinted\") {\n  return {\n    json: {\n      status: \"success\",\n      customer: {\n        first_name: firstName,\n        last_name: lastName,\n        email: finalEmail,\n        tags: [\"Cliente Vinted\"],\n        note: `Comprado en Vinted: ${productName}. Usuario: ${username}`\n      },\n      product: {\n        name: productName\n      }\n    }\n  };\n} else {\n  return {\n    json: {\n      error: \"No se pudieron extraer los datos\",\n      debug: cleanText.substring(0, 500)\n    }\n  };\n}"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -177,131 +177,6 @@
       },
       {
         "parameters": {
-          "authentication": "headerAuth",
-          "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
-          "query": "query findStockIds($query: String!) {\n  products(first: 1, query: $query) {\n    edges {\n      node {\n        title\n        variants(first: 1) {\n          edges {\n            node {\n              inventoryItem {\n                id\n                inventoryLevels(first: 1) {\n                  edges {\n                    node {\n                      location {\n                        id\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}",
-          "variables": "={\n  \"query\": \"title:{{ $('Edit Fields').item.json.PRODUCTO }}\"\n}"
-        },
-        "type": "n8n-nodes-base.graphql",
-        "typeVersion": 1.1,
-        "position": [
-          848,
-          464
-        ],
-        "id": "f20f86b5-a2b9-42fb-8629-6b6ba10cea71",
-        "name": "Buscar_producto",
-        "credentials": {
-          "httpHeaderAuth": {
-            "id": "OPt2Cl0dnwcU4qRk",
-            "name": "ShopifyInformes"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "authentication": "headerAuth",
-          "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
-          "query": "mutation adjustStock($input: InventoryAdjustQuantitiesInput!) {\n  inventoryAdjustQuantities(input: $input) {\n    inventoryAdjustmentGroup {\n      changes {\n        delta\n        quantityAfterChange\n      }\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
-          "variables": "={\n  \"input\": {\n    \"reason\": \"correction\",\n    \"name\": \"available\",\n    \"changes\": [\n      {\n        \"delta\": -1,\n        \"inventoryItemId\": \"{{ $json.data.products.edges[0].node.variants.edges[0].node.inventoryItem.id }}\",\n        \"locationId\": \"{{ $json.data.products.edges[0].node.variants.edges[0].node.inventoryItem.inventoryLevels.edges[0].node.location.id }}\"\n      }\n    ]\n  }\n}"
-        },
-        "type": "n8n-nodes-base.graphql",
-        "typeVersion": 1.1,
-        "position": [
-          1008,
-          464
-        ],
-        "id": "ab8aebba-4287-4b13-a305-515ed8f25399",
-        "name": "restar_stock",
-        "alwaysOutputData": true,
-        "credentials": {
-          "httpHeaderAuth": {
-            "id": "OPt2Cl0dnwcU4qRk",
-            "name": "ShopifyInformes"
-          }
-        },
-        "onError": "continueRegularOutput"
-      },
-      {
-        "parameters": {
-          "authentication": "headerAuth",
-          "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
-          "query": "query findStockIds($query: String!) {\n  products(first: 1, query: $query) {\n    edges {\n      node {\n        title\n        variants(first: 1) {\n          edges {\n            node {\n              inventoryItem {\n                id\n                inventoryLevels(first: 1) {\n                  edges {\n                    node {\n                      location {\n                        id\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}",
-          "variables": "={\n  \"query\": \"title:{{ $('Edit Fields').item.json.PRODUCTO }}\"\n}"
-        },
-        "type": "n8n-nodes-base.graphql",
-        "typeVersion": 1.1,
-        "position": [
-          688,
-          672
-        ],
-        "id": "4c19a890-aa0e-44ab-90b1-204ec92702ed",
-        "name": "Buscar_producto1",
-        "credentials": {
-          "httpHeaderAuth": {
-            "id": "OPt2Cl0dnwcU4qRk",
-            "name": "ShopifyInformes"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "authentication": "headerAuth",
-          "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
-          "query": "mutation adjustStock($input: InventoryAdjustQuantitiesInput!) {\n  inventoryAdjustQuantities(input: $input) {\n    inventoryAdjustmentGroup {\n      changes {\n        delta\n        quantityAfterChange\n      }\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
-          "variables": "={\n  \"input\": {\n    \"reason\": \"correction\",\n    \"name\": \"available\",\n    \"changes\": [\n      {\n        \"delta\": -1,\n        \"inventoryItemId\": \"{{ $json.data.products.edges[0].node.variants.edges[0].node.inventoryItem.id }}\",\n        \"locationId\": \"{{ $json.data.products.edges[0].node.variants.edges[0].node.inventoryItem.inventoryLevels.edges[0].node.location.id }}\"\n      }\n    ]\n  }\n}"
-        },
-        "type": "n8n-nodes-base.graphql",
-        "typeVersion": 1.1,
-        "position": [
-          848,
-          672
-        ],
-        "id": "8e64ac46-3900-4875-a0ef-18c385328599",
-        "name": "restar_stock1",
-        "credentials": {
-          "httpHeaderAuth": {
-            "id": "OPt2Cl0dnwcU4qRk",
-            "name": "ShopifyInformes"
-          }
-        },
-        "onError": "continueRegularOutput"
-      },
-      {
-        "parameters": {
-          "conditions": {
-            "options": {
-              "caseSensitive": true,
-              "leftValue": "",
-              "typeValidation": "strict",
-              "version": 3
-            },
-            "conditions": [
-              {
-                "id": "35743f6d-5a5c-4753-b456-a418f8b61963",
-                "leftValue": "={{ $json.errors[0].message }}",
-                "rightValue": "",
-                "operator": {
-                  "type": "string",
-                  "operation": "notEmpty",
-                  "singleValue": true
-                }
-              }
-            ],
-            "combinator": "and"
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.if",
-        "typeVersion": 2.3,
-        "position": [
-          1168,
-          464
-        ],
-        "id": "a909fe50-1c1b-4f9f-ae40-0e3b91cc632f",
-        "name": "If1"
-      },
-      {
-        "parameters": {
           "sendTo": "info@rules-shop.es",
           "subject": "Producto Vendido en Vinted",
           "message": "=<div style=\"font-family: Arial, sans-serif; max-width: 600px; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px; background-color: #ffffff;\">\n  \n  <h2 style=\"color: #D32F2F; margin-top: 0;\">⚠️ Acción Requerida: Stock Vinted</h2>\n  \n  <p style=\"color: #555555; font-size: 16px; line-height: 1.5;\">\n    Hola equipo, se ha vendido un producto en Vinted pero <strong>el nombre no coincide exactamente</strong> con el de Shopify.\n  </p>\n  \n  <p style=\"color: #555555; font-size: 16px; line-height: 1.5;\">\n    Por seguridad, la automatización no ha descontado el stock. <strong>Por favor, cambie el stock manualmente.</strong>\n  </p>\n\n  <hr style=\"border: 0; border-top: 1px solid #eeeeee; margin: 20px 0;\">\n\n  <div style=\"background-color: #f9f9f9; padding: 15px; border-left: 5px solid #D32F2F; border-radius: 4px;\">\n    <p style=\"margin: 0; font-size: 14px; color: #888;\">Producto vendido en Vinted:</p>\n    <p style=\"margin: 5px 0 0 0; font-size: 18px; font-weight: bold; color: #333;\">\n      {{ $('Edit Fields').item.json.PRODUCTO }}\n    </p>\n  </div>\n\n  <p style=\"margin-top: 20px; font-size: 14px; color: #666;\">\n    <strong>Cliente:</strong> {{ $('Edit Fields').item.json.NOMBRE }} {{ $('Edit Fields').item.json.APELLIDO }}\n  </p>\n\n  <p style=\"font-size: 12px; color: #aaaaaa; margin-top: 30px; text-align: center;\">\n    Notificación automática enviada por n8n 🤖\n  </p>\n\n</div>",
@@ -310,8 +185,8 @@
         "type": "n8n-nodes-base.gmail",
         "typeVersion": 2.2,
         "position": [
-          1360,
-          352
+          864,
+          464
         ],
         "id": "09ed8cc6-5578-408e-8ff3-1ecbb8888a74",
         "name": "Send a message",
@@ -324,51 +199,6 @@
         }
       },
       {
-        "parameters": {},
-        "type": "n8n-nodes-base.noOp",
-        "typeVersion": 1,
-        "position": [
-          1360,
-          560
-        ],
-        "id": "2b2db4d5-44ac-4970-8818-ab095e365864",
-        "name": "No Operation, do nothing"
-      },
-      {
-        "parameters": {
-          "conditions": {
-            "options": {
-              "caseSensitive": true,
-              "leftValue": "",
-              "typeValidation": "strict",
-              "version": 3
-            },
-            "conditions": [
-              {
-                "id": "35743f6d-5a5c-4753-b456-a418f8b61963",
-                "leftValue": "={{ $json.errors[0].message }}",
-                "rightValue": "",
-                "operator": {
-                  "type": "string",
-                  "operation": "notEmpty",
-                  "singleValue": true
-                }
-              }
-            ],
-            "combinator": "and"
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.if",
-        "typeVersion": 2.3,
-        "position": [
-          1184,
-          848
-        ],
-        "id": "bf81a752-f9ff-4baf-a060-0a33f423123e",
-        "name": "If2"
-      },
-      {
         "parameters": {
           "sendTo": "info@rules-shop.es",
           "subject": "Producto Vendido en Vinted",
@@ -378,8 +208,8 @@
         "type": "n8n-nodes-base.gmail",
         "typeVersion": 2.2,
         "position": [
-          1376,
-          736
+          688,
+          656
         ],
         "id": "a9b80301-c949-4fbb-85a4-eeeeaa265f30",
         "name": "Send a message1",
@@ -392,19 +222,8 @@
         }
       },
       {
-        "parameters": {},
-        "type": "n8n-nodes-base.noOp",
-        "typeVersion": 1,
-        "position": [
-          1376,
-          944
-        ],
-        "id": "4a1662d9-5d0a-488d-8608-e82719a46545",
-        "name": "No Operation, do nothing1"
-      },
-      {
         "parameters": {
-          "jsCode": "// 1. Obtenemos el HTML crudo del correo\nconst htmlContent = $input.item.json.html || \"\";\n\n// 2. Definimos las Expresiones Regulares (Regex) HÍBRIDAS\n//    Usamos el símbolo \"|\" que significa \"O\" (uno u otro)\n\n// A. PRODUCTO\n// La estructura HTML de margen suele ser idéntica en ambos idiomas.\n// Busca texto dentro de un párrafo con margen específico.\nconst productRegex = /margin:0 8px\">([^<]+)<\\/p>/i;\n\n// B. CLIENTE (NOMBRE) - AQUÍ ESTÁ LA MAGIA\n// Busca \"Purchased by:\" (Inglés) O \"Comprado por:\" (Español)\n// Luego salta el código hasta encontrar el div con el color negro (#000000)\nconst buyerRegex = /(?:Purchased by:|Comprado por:)[\\s\\S]*?color:#000000;\">(.*?)<\\/div>/i;\n\n// C. PRECIO\n// La palabra \"Total\" se escribe igual en Inglés y Español.\n// Busca \"Total\", salta código y busca el precio grande (32px)\nconst priceRegex = /Total[\\s\\S]*?font-size:32px\">([\\d.,]+)€<\\/span>/i;\n\n\n// --- EJECUCIÓN Y EXTRACCIÓN ---\n\nconst matchProduct = htmlContent.match(productRegex);\nconst matchBuyer = htmlContent.match(buyerRegex);\nconst matchPrice = htmlContent.match(priceRegex);\n\n// --- PROCESAMIENTO DE DATOS ---\n\n// 1. PRODUCTO\nlet productName = \"Producto Wallapop Desconocido\";\nif (matchProduct && matchProduct[1]) {\n    productName = matchProduct[1].trim();\n}\n\n// 2. PRECIO\nlet salePrice = \"0.00\";\nif (matchPrice && matchPrice[1]) {\n    salePrice = matchPrice[1].trim();\n}\n\n// 3. CLIENTE Y EMAIL\nlet firstName = \"Cliente\";\nlet lastName = \"Wallapop\";\nlet finalEmail = \"info@wallapop.com\"; \n\nif (matchBuyer && matchBuyer[1]) {\n    const fullName = matchBuyer[1].trim(); \n    \n    // Generar Email Ficticio (normalizar caracteres raros)\n    // Esto convierte \"Pablo M.\" o \"John D.\" en \"pablom\" o \"johnd\"\n    const safeUser = fullName.replace(/[^a-zA-Z0-9]/g, '').toLowerCase(); \n    finalEmail = `${safeUser}@wallapop.local`;\n\n    // Separar Nombre y Apellido\n    const nameParts = fullName.split(\" \");\n    if (nameParts.length > 1) {\n        lastName = nameParts.pop(); \n        firstName = nameParts.join(\" \"); \n    } else {\n        firstName = fullName;\n    }\n}\n\n// --- SALIDA DE DATOS ---\n\nif (matchProduct || matchBuyer) {\n    return {\n        json: {\n            status: \"success\",\n            language_detected: matchBuyer && matchBuyer[0].includes(\"Purchased\") ? \"English\" : \"Spanish\",\n            customer: {\n                first_name: firstName,\n                last_name: lastName,\n                email: finalEmail,\n                tags: [\"Cliente Wallapop\"],\n                note: `Venta Wallapop: ${productName}. Precio: ${salePrice}€. (Detectado auto)`\n            },\n            product: {\n                name: productName,\n                price: salePrice\n            }\n        }\n    };\n} else {\n    return {\n        json: {\n            error: \"No se pudieron encontrar los datos en el HTML\",\n            debug_html_snippet: htmlContent.substring(0, 500)\n        }\n    };\n}"
+          "jsCode": "// 1. Obtenemos el HTML crudo del correo\nconst htmlContent = $input.item.json.html || \"\";\n\n// 2. Definimos las Expresiones Regulares (Regex)\n\n// A. PRODUCTO\nconst productRegex = /margin:0 8px\">([^<]+)<\\/p>/i;\n\n// B. CLIENTE (NOMBRE)\nconst buyerRegex = /(?:Purchased by:|Comprado por:)[\\s\\S]*?color:#000000;\">(.*?)<\\/div>/i;\n\n// C. PRECIO\nconst priceRegex = /Total[\\s\\S]*?font-size:32px\">([\\d.,]+)€<\\/span>/i;\n\n\n// --- EJECUCIÓN Y EXTRACCIÓN ---\n\nconst matchProduct = htmlContent.match(productRegex);\nconst matchBuyer = htmlContent.match(buyerRegex);\nconst matchPrice = htmlContent.match(priceRegex);\n\n// --- PROCESAMIENTO DE DATOS ---\n\n// 1. PRODUCTO\nlet productName = \"Producto Wallapop Desconocido\";\nif (matchProduct && matchProduct[1]) {\n    productName = matchProduct[1].trim();\n}\n\n// 2. PRECIO\nlet salePrice = \"0.00\";\nif (matchPrice && matchPrice[1]) {\n    salePrice = matchPrice[1].trim();\n}\n\n// 3. CLIENTE (Solo Nombre y Apellido)\nlet firstName = \"Cliente\";\nlet lastName = \"Wallapop\";\n\nif (matchBuyer && matchBuyer[1]) {\n    const fullName = matchBuyer[1].trim(); \n    \n    // Separar Nombre y Apellido REALES\n    const nameParts = fullName.split(\" \");\n    if (nameParts.length > 1) {\n        lastName = nameParts.pop(); \n        firstName = nameParts.join(\" \"); \n    } else {\n        firstName = fullName;\n    }\n}\n\n// --- SALIDA DE DATOS ---\n// NOTA: No se envía ningún campo \"email\" en el objeto customer.\n\nif (matchProduct || matchBuyer) {\n    return {\n        json: {\n            status: \"success\",\n            language_detected: matchBuyer && matchBuyer[0].includes(\"Purchased\") ? \"English\" : \"Spanish\",\n            customer: {\n                first_name: firstName,\n                last_name: lastName,\n                tags: [\"Cliente Wallapop\"],\n                note: `Venta Wallapop: ${productName}. Precio: ${salePrice}€. (Detectado auto)`\n            },\n            product: {\n                name: productName,\n                price: salePrice\n            }\n        }\n    };\n} else {\n    return {\n        json: {\n            error: \"No se pudieron encontrar los datos en el HTML\",\n            debug_html_snippet: htmlContent.substring(0, 500)\n        }\n    };\n}"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -442,12 +261,6 @@
                 "name": "ETIQUETAS",
                 "value": "={{ $json.customer.tags[0] }}",
                 "type": "string"
-              },
-              {
-                "id": "4c465cb1-2285-4c68-99a1-4d0b42265f3d",
-                "name": "CORREO",
-                "value": "={{ $json.customer.email }}",
-                "type": "string"
               }
             ]
           },
@@ -467,7 +280,7 @@
           "authentication": "headerAuth",
           "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
           "query": "=query findCustomer($query: String!) {\n  customers(first: 1, query: $query) {\n    edges {\n      node {\n        id\n        firstName\n        lastName\n        email\n        tags\n      }\n    }\n  }\n}",
-          "variables": "={\n  \"query\": \"email:{{ $json.CORREO }}\"\n}"
+          "variables": "={\n  \"query\": \"first_name:{{ $json.NOMBRE }} last_name:{{ $json.APELLIDO }}\"\n}"
         },
         "type": "n8n-nodes-base.graphql",
         "typeVersion": 1.1,
@@ -522,8 +335,8 @@
         "parameters": {
           "authentication": "headerAuth",
           "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
-          "query": "mutation createCustomer($input: CustomerInput!) {\n  customerCreate(input: $input) {\n    customer {\n      id\n      email\n      firstName\n      lastName\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
-          "variables": "={\n  \"input\": {\n    \"firstName\": \"{{ $('Edit Fields1').item.json.NOMBRE }}\",\n    \"lastName\": \"{{ $('Edit Fields1').item.json.APELLIDO }}\",\n    \"email\": \"{{ $('Edit Fields1').item.json.CORREO }}\",\n    \"note\": \"Comprado en Vinted: {{ $('Edit Fields1').item.json.PRODUCTO }}\",\n    \"tags\": [\"{{ $('Edit Fields1').item.json.ETIQUETAS }}\"],\n    \"emailMarketingConsent\": {\n      \"marketingState\": \"NOT_SUBSCRIBED\",\n      \"marketingOptInLevel\": \"SINGLE_OPT_IN\"\n    }\n  }\n}"
+          "query": "mutation createCustomer($input: CustomerInput!) {\n  customerCreate(input: $input) {\n    customer {\n      id\n      firstName\n      lastName\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
+          "variables": "={\n  \"input\": {\n    \"firstName\": \"{{ $('Edit Fields1').item.json.NOMBRE }}\",\n    \"lastName\": \"{{ $('Edit Fields1').item.json.APELLIDO }}\",\n    \"note\": \"Comprado en Wallapop: {{ $('Edit Fields1').item.json.PRODUCTO }}\",\n    \"tags\": [\"{{ $('Edit Fields1').item.json.ETIQUETAS }}\"]\n  }\n}"
         },
         "type": "n8n-nodes-base.graphql",
         "typeVersion": 1.1,
@@ -542,141 +355,16 @@
       },
       {
         "parameters": {
-          "authentication": "headerAuth",
-          "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
-          "query": "query findStockIds($query: String!) {\n  products(first: 1, query: $query) {\n    edges {\n      node {\n        title\n        variants(first: 1) {\n          edges {\n            node {\n              inventoryItem {\n                id\n                inventoryLevels(first: 1) {\n                  edges {\n                    node {\n                      location {\n                        id\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}",
-          "variables": "={\n  \"query\": \"title:{{ $('Edit Fields1').item.json.PRODUCTO }}\"\n}"
-        },
-        "type": "n8n-nodes-base.graphql",
-        "typeVersion": 1.1,
-        "position": [
-          832,
-          -368
-        ],
-        "id": "fc5e3489-8363-4b4a-87e4-620d77469737",
-        "name": "Buscar_producto2",
-        "credentials": {
-          "httpHeaderAuth": {
-            "id": "OPt2Cl0dnwcU4qRk",
-            "name": "ShopifyInformes"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "authentication": "headerAuth",
-          "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
-          "query": "mutation adjustStock($input: InventoryAdjustQuantitiesInput!) {\n  inventoryAdjustQuantities(input: $input) {\n    inventoryAdjustmentGroup {\n      changes {\n        delta\n        quantityAfterChange\n      }\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
-          "variables": "={\n  \"input\": {\n    \"reason\": \"correction\",\n    \"name\": \"available\",\n    \"changes\": [\n      {\n        \"delta\": -1,\n        \"inventoryItemId\": \"{{ $json.data.products.edges[0].node.variants.edges[0].node.inventoryItem.id }}\",\n        \"locationId\": \"{{ $json.data.products.edges[0].node.variants.edges[0].node.inventoryItem.inventoryLevels.edges[0].node.location.id }}\"\n      }\n    ]\n  }\n}"
-        },
-        "type": "n8n-nodes-base.graphql",
-        "typeVersion": 1.1,
-        "position": [
-          992,
-          -368
-        ],
-        "id": "b019dbc0-ecf0-43da-81b8-7d02d69c17fe",
-        "name": "restar_stock2",
-        "alwaysOutputData": true,
-        "credentials": {
-          "httpHeaderAuth": {
-            "id": "OPt2Cl0dnwcU4qRk",
-            "name": "ShopifyInformes"
-          }
-        },
-        "onError": "continueRegularOutput"
-      },
-      {
-        "parameters": {
-          "authentication": "headerAuth",
-          "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
-          "query": "query findStockIds($query: String!) {\n  products(first: 1, query: $query) {\n    edges {\n      node {\n        title\n        variants(first: 1) {\n          edges {\n            node {\n              inventoryItem {\n                id\n                inventoryLevels(first: 1) {\n                  edges {\n                    node {\n                      location {\n                        id\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}",
-          "variables": "={\n  \"query\": \"title:{{ $('Edit Fields1').item.json.PRODUCTO }}\"\n}"
-        },
-        "type": "n8n-nodes-base.graphql",
-        "typeVersion": 1.1,
-        "position": [
-          672,
-          -144
-        ],
-        "id": "14129625-811b-4b14-80ac-5d88882f2dc8",
-        "name": "Buscar_producto3",
-        "credentials": {
-          "httpHeaderAuth": {
-            "id": "OPt2Cl0dnwcU4qRk",
-            "name": "ShopifyInformes"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "authentication": "headerAuth",
-          "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
-          "query": "mutation adjustStock($input: InventoryAdjustQuantitiesInput!) {\n  inventoryAdjustQuantities(input: $input) {\n    inventoryAdjustmentGroup {\n      changes {\n        delta\n        quantityAfterChange\n      }\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
-          "variables": "={\n  \"input\": {\n    \"reason\": \"correction\",\n    \"name\": \"available\",\n    \"changes\": [\n      {\n        \"delta\": -1,\n        \"inventoryItemId\": \"{{ $json.data.products.edges[0].node.variants.edges[0].node.inventoryItem.id }}\",\n        \"locationId\": \"{{ $json.data.products.edges[0].node.variants.edges[0].node.inventoryItem.inventoryLevels.edges[0].node.location.id }}\"\n      }\n    ]\n  }\n}"
-        },
-        "type": "n8n-nodes-base.graphql",
-        "typeVersion": 1.1,
-        "position": [
-          832,
-          -144
-        ],
-        "id": "b47e91da-60fc-4c07-a1e7-4bcff6a19523",
-        "name": "restar_stock3",
-        "credentials": {
-          "httpHeaderAuth": {
-            "id": "OPt2Cl0dnwcU4qRk",
-            "name": "ShopifyInformes"
-          }
-        },
-        "onError": "continueRegularOutput"
-      },
-      {
-        "parameters": {
-          "conditions": {
-            "options": {
-              "caseSensitive": true,
-              "leftValue": "",
-              "typeValidation": "strict",
-              "version": 3
-            },
-            "conditions": [
-              {
-                "id": "35743f6d-5a5c-4753-b456-a418f8b61963",
-                "leftValue": "={{ $json.errors[0].message }}",
-                "rightValue": "",
-                "operator": {
-                  "type": "string",
-                  "operation": "notEmpty",
-                  "singleValue": true
-                }
-              }
-            ],
-            "combinator": "and"
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.if",
-        "typeVersion": 2.3,
-        "position": [
-          1152,
-          -368
-        ],
-        "id": "88ec5680-5129-4826-a8e6-f7102997932a",
-        "name": "If4"
-      },
-      {
-        "parameters": {
           "sendTo": "info@rules-shop.es",
           "subject": "Producto Vendido en Vinted",
-          "message": "=<div style=\"font-family: Arial, sans-serif; max-width: 600px; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px; background-color: #ffffff;\">\n  \n  <h2 style=\"color: #D32F2F; margin-top: 0;\">⚠️ Acción Requerida: Stock Wallapop</h2>\n  \n  <p style=\"color: #555555; font-size: 16px; line-height: 1.5;\">\n    Hola equipo, se ha vendido un producto en Wallapop pero <strong>el nombre no coincide exactamente</strong> con el de Shopify.\n  </p>\n  \n  <p style=\"color: #555555; font-size: 16px; line-height: 1.5;\">\n    Por seguridad, la automatización no ha descontado el stock. <strong>Por favor, cambie el stock manualmente.</strong>\n  </p>\n\n  <hr style=\"border: 0; border-top: 1px solid #eeeeee; margin: 20px 0;\">\n\n  <div style=\"background-color: #f9f9f9; padding: 15px; border-left: 5px solid #D32F2F; border-radius: 4px;\">\n    <p style=\"margin: 0; font-size: 14px; color: #888;\">Producto vendido en Wallapop:</p>\n    <p style=\"margin: 5px 0 0 0; font-size: 18px; font-weight: bold; color: #333;\">\n      {{ $('Edit Fields1').item.json.PRODUCTO }}\n    </p>\n  </div>\n\n  <p style=\"margin-top: 20px; font-size: 14px; color: #666;\">\n    <strong>Cliente:</strong> {{ $('Edit Fields1').item.json.NOMBRE }} {{ $('Edit Fields1').item.json.APELLIDO }}\n  </p>\n\n  <p style=\"font-size: 12px; color: #aaaaaa; margin-top: 30px; text-align: center;\">\n    Notificación automática enviada por n8n 🤖\n  </p>\n\n</div>",
+          "message": "=<div style=\"font-family: Arial, sans-serif; max-width: 600px; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px; background-color: #ffffff;\">\n  \n  <h2 style=\"color: #D32F2F; margin-top: 0;\">⚠️ Acción Requerida: Crear Pedido Wallapop</h2>\n  \n  <p style=\"color: #555555; font-size: 16px; line-height: 1.5;\">\n    Hola equipo, se ha realizado una venta en Wallapop.\n  </p>\n  \n  <p style=\"color: #555555; font-size: 16px; line-height: 1.5;\">\n    <strong>Por favor, crea el pedido para este cliente manualmente en Shopify</strong> (el nombre del producto varía ligeramente).\n  </p>\n\n  <hr style=\"border: 0; border-top: 1px solid #eeeeee; margin: 20px 0;\">\n\n  <div style=\"background-color: #f9f9f9; padding: 15px; border-left: 5px solid #D32F2F; border-radius: 4px; margin-bottom: 20px;\">\n    <p style=\"margin: 0; font-size: 14px; color: #888;\">Producto vendido en Wallapop:</p>\n    <p style=\"margin: 5px 0 0 0; font-size: 18px; font-weight: bold; color: #333;\">\n      {{ $('Edit Fields1').item.json.PRODUCTO }}\n    </p>\n  </div>\n\n  <div style=\"background-color: #e8f5e9; padding: 15px; border-left: 5px solid #2e7d32; border-radius: 4px; margin-bottom: 25px;\">\n    <p style=\"margin: 0; font-size: 14px; color: #2e7d32; font-weight: bold;\">✅ Cliente ya registrado en Shopify:</p>\n    <p style=\"margin: 5px 0 0 0; font-size: 14px; color: #333;\">\n      Datos para asignar el pedido:\n    </p>\n    <ul style=\"margin: 10px 0 0 0; padding-left: 20px; color: #555; font-size: 14px;\">\n       <li><strong>Nombre:</strong> {{ $json.firstName }} {{ $json.lastName }}</li>\n    </ul>\n  </div>\n  <div style=\"text-align: center;\">\n    <a href=\"{{ $json.customer_url }}\" style=\"background-color: #008060; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 16px; display: inline-block;\">\n      Ver Cliente en Shopify ↗\n    </a>\n  </div>\n\n  <p style=\"font-size: 12px; color: #aaaaaa; margin-top: 30px; text-align: center;\">\n    Notificación automática enviada por n8n 🤖\n  </p>\n\n</div>",
           "options": {}
         },
         "type": "n8n-nodes-base.gmail",
         "typeVersion": 2.2,
         "position": [
-          1344,
-          -480
+          1072,
+          -368
         ],
         "id": "c5ac73a8-0655-49ed-b397-32e4c94dbfab",
         "name": "Send a message2",
@@ -689,62 +377,17 @@
         }
       },
       {
-        "parameters": {},
-        "type": "n8n-nodes-base.noOp",
-        "typeVersion": 1,
-        "position": [
-          1344,
-          -256
-        ],
-        "id": "81f6bb15-151d-4313-be55-dd33e82eeee7",
-        "name": "No Operation, do nothing2"
-      },
-      {
-        "parameters": {
-          "conditions": {
-            "options": {
-              "caseSensitive": true,
-              "leftValue": "",
-              "typeValidation": "strict",
-              "version": 3
-            },
-            "conditions": [
-              {
-                "id": "35743f6d-5a5c-4753-b456-a418f8b61963",
-                "leftValue": "={{ $json.errors[0].message }}",
-                "rightValue": "",
-                "operator": {
-                  "type": "array",
-                  "operation": "notEmpty",
-                  "singleValue": true
-                }
-              }
-            ],
-            "combinator": "and"
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.if",
-        "typeVersion": 2.3,
-        "position": [
-          1168,
-          32
-        ],
-        "id": "8bfd2d74-9826-4218-8a54-d0f54d000e39",
-        "name": "If5"
-      },
-      {
         "parameters": {
           "sendTo": "info@rules-shop.es",
           "subject": "Producto Vendido en Vinted",
-          "message": "=<div style=\"font-family: Arial, sans-serif; max-width: 600px; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px; background-color: #ffffff;\">\n  \n  <h2 style=\"color: #D32F2F; margin-top: 0;\">⚠️ Acción Requerida: Stock Wallapop</h2>\n  \n  <p style=\"color: #555555; font-size: 16px; line-height: 1.5;\">\n    Hola equipo, se ha vendido un producto en Wallapop pero <strong>el nombre no coincide exactamente</strong> con el de Shopify.\n  </p>\n  \n  <p style=\"color: #555555; font-size: 16px; line-height: 1.5;\">\n    Por seguridad, la automatización no ha descontado el stock. <strong>Por favor, cambie el stock manualmente.</strong>\n  </p>\n\n  <hr style=\"border: 0; border-top: 1px solid #eeeeee; margin: 20px 0;\">\n\n  <div style=\"background-color: #f9f9f9; padding: 15px; border-left: 5px solid #D32F2F; border-radius: 4px;\">\n    <p style=\"margin: 0; font-size: 14px; color: #888;\">Producto vendido en Wallapop:</p>\n    <p style=\"margin: 5px 0 0 0; font-size: 18px; font-weight: bold; color: #333;\">\n      {{ $('Edit Fields1').item.json.PRODUCTO }}\n    </p>\n  </div>\n\n  <p style=\"margin-top: 20px; font-size: 14px; color: #666;\">\n    <strong>Cliente:</strong> {{ $('Edit Fields1').item.json.NOMBRE }} {{ $('Edit Fields1').item.json.APELLIDO }}\n  </p>\n\n  <p style=\"font-size: 12px; color: #aaaaaa; margin-top: 30px; text-align: center;\">\n    Notificación automática enviada por n8n 🤖\n  </p>\n\n</div>",
+          "message": "=<div style=\"font-family: Arial, sans-serif; max-width: 600px; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px; background-color: #ffffff;\">\n  \n  <h2 style=\"color: #D32F2F; margin-top: 0;\">⚠️ Acción Requerida: Crear Pedido Wallapop</h2>\n  \n  <p style=\"color: #555555; font-size: 16px; line-height: 1.5;\">\n    Hola equipo, se ha realizado una venta en Wallapop.\n  </p>\n  \n  <p style=\"color: #555555; font-size: 16px; line-height: 1.5;\">\n    <strong>Por favor, crea el pedido para este cliente manualmente en Shopify</strong> (el nombre del producto varía ligeramente).\n  </p>\n\n  <hr style=\"border: 0; border-top: 1px solid #eeeeee; margin: 20px 0;\">\n\n  <div style=\"background-color: #f9f9f9; padding: 15px; border-left: 5px solid #D32F2F; border-radius: 4px; margin-bottom: 20px;\">\n    <p style=\"margin: 0; font-size: 14px; color: #888;\">Producto vendido en Wallapop:</p>\n    <p style=\"margin: 5px 0 0 0; font-size: 18px; font-weight: bold; color: #333;\">\n      {{ $('Edit Fields1').item.json.PRODUCTO }}\n    </p>\n  </div>\n\n  <div style=\"background-color: #e8f5e9; padding: 15px; border-left: 5px solid #2e7d32; border-radius: 4px; margin-bottom: 25px;\">\n    <p style=\"margin: 0; font-size: 14px; color: #2e7d32; font-weight: bold;\">✅ Cliente ya registrado en Shopify:</p>\n    <p style=\"margin: 5px 0 0 0; font-size: 14px; color: #333;\">\n      Datos para asignar el pedido:\n    </p>\n    <ul style=\"margin: 10px 0 0 0; padding-left: 20px; color: #555; font-size: 14px;\">\n       <li><strong>Nombre:</strong> {{ $json.firstName }} {{ $json.lastName }}</li>\n    </ul>\n  </div>\n  <div style=\"text-align: center;\">\n    <a href=\"{{ $json.customer_url }}\" style=\"background-color: #008060; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 16px; display: inline-block;\">\n      Ver Cliente en Shopify ↗\n    </a>\n  </div>\n\n  <p style=\"font-size: 12px; color: #aaaaaa; margin-top: 30px; text-align: center;\">\n    Notificación automática enviada por n8n 🤖\n  </p>\n\n</div>",
           "options": {}
         },
         "type": "n8n-nodes-base.gmail",
         "typeVersion": 2.2,
         "position": [
-          1360,
-          -80
+          864,
+          -144
         ],
         "id": "f3adfb9a-00fb-4b05-ba3c-0bfefdad6238",
         "name": "Send a message3",
@@ -755,17 +398,6 @@
             "name": "Gmail info@rules-shop.es"
           }
         }
-      },
-      {
-        "parameters": {},
-        "type": "n8n-nodes-base.noOp",
-        "typeVersion": 1,
-        "position": [
-          1360,
-          128
-        ],
-        "id": "18e53cd3-4282-4ae5-839d-e41de0f9eb99",
-        "name": "No Operation, do nothing3"
       },
       {
         "parameters": {
@@ -804,7 +436,7 @@
         "parameters": {
           "content": "## De Wallapop",
           "height": 864,
-          "width": 1760,
+          "width": 1968,
           "color": 5
         },
         "type": "n8n-nodes-base.stickyNote",
@@ -831,6 +463,32 @@
         ],
         "id": "0402b9a5-e42a-494a-8105-07c95b00002c",
         "name": "Sticky Note1"
+      },
+      {
+        "parameters": {
+          "jsCode": "// CONFIGURACIÓN: Nombre de la tienda\nconst storeName = \"rulesshop\"; \n\nconst results = $input.all().map(item => {\n  \n  // 1. Accedemos a la ruta específica de BÚSQUEDA (customers -> edges -> node)\n  // Usamos '?.' para seguridad por si la búsqueda hubiera venido vacía\n  const customerData = item.json.data?.customers?.edges?.[0]?.node || {};\n  \n  // 2. Preparamos las variables\n  const fullId = customerData.id;\n  let customerUrl = null;\n  let cleanId = null;\n\n  if (fullId) {\n    // Limpiamos el ID (quitamos \"gid://shopify/Customer/\")\n    cleanId = fullId.split('/').pop();\n    \n    // Construimos la URL\n    customerUrl = `https://admin.shopify.com/store/${storeName}/customers/${cleanId}`;\n  }\n\n  // 3. Devolvemos TODO: Datos originales + Campos calculados\n  return {\n    json: {\n      // Copia firstName, lastName, email, tags, etc.\n      ...customerData,\n      \n      // Añade nuestros campos extra\n      customer_id_number: cleanId,\n      customer_url: customerUrl\n    }\n  };\n});\n\nreturn results;"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          672,
+          -144
+        ],
+        "id": "2c939208-ffbf-4f8b-a2a2-90792a9dc5ea",
+        "name": "Code in JavaScript2"
+      },
+      {
+        "parameters": {
+          "jsCode": "// CONFIGURACIÓN: Nombre de la tienda en la URL del admin\nconst storeName = \"rulesshop\"; \n\nconst results = $input.all().map(item => {\n  \n  // 1. Accedemos al objeto 'customer' dentro de la respuesta de creación\n  // Usamos '|| {}' para que no falle si viene vacío\n  const customerData = item.json.data?.customerCreate?.customer || {};\n  \n  // 2. Preparamos las variables de la URL\n  const fullId = customerData.id;\n  let customerUrl = null;\n  let cleanId = null;\n\n  if (fullId) {\n    // Limpiamos el ID (quitamos \"gid://shopify/Customer/\")\n    cleanId = fullId.split('/').pop();\n    \n    // Construimos la URL\n    customerUrl = `https://admin.shopify.com/store/${storeName}/customers/${cleanId}`;\n  }\n\n  // 3. Devolvemos TODO junto\n  return {\n    json: {\n      // El operador '...' (spread) copia todo lo que traiga el cliente (firstName, lastName, id...)\n      ...customerData,\n      \n      // Añadimos nuestros campos calculados\n      customer_id_number: cleanId,\n      customer_url: customerUrl\n    }\n  };\n});\n\nreturn results;"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          864,
+          -368
+        ],
+        "id": "47f30864-04fe-48ae-ac30-c788d656cd55",
+        "name": "Code in JavaScript3"
       }
     ],
     "connections": {
@@ -889,7 +547,7 @@
           ],
           [
             {
-              "node": "Buscar_producto1",
+              "node": "Send a message1",
               "type": "main",
               "index": 0
             }
@@ -900,87 +558,7 @@
         "main": [
           [
             {
-              "node": "Buscar_producto",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Buscar_producto": {
-        "main": [
-          [
-            {
-              "node": "restar_stock",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Buscar_producto1": {
-        "main": [
-          [
-            {
-              "node": "restar_stock1",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "restar_stock": {
-        "main": [
-          [
-            {
-              "node": "If1",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "If1": {
-        "main": [
-          [
-            {
               "node": "Send a message",
-              "type": "main",
-              "index": 0
-            }
-          ],
-          [
-            {
-              "node": "No Operation, do nothing",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "If2": {
-        "main": [
-          [
-            {
-              "node": "Send a message1",
-              "type": "main",
-              "index": 0
-            }
-          ],
-          [
-            {
-              "node": "No Operation, do nothing1",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "restar_stock1": {
-        "main": [
-          [
-            {
-              "node": "If2",
               "type": "main",
               "index": 0
             }
@@ -1031,7 +609,7 @@
           ],
           [
             {
-              "node": "Buscar_producto3",
+              "node": "Code in JavaScript2",
               "type": "main",
               "index": 0
             }
@@ -1042,87 +620,7 @@
         "main": [
           [
             {
-              "node": "Buscar_producto2",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Buscar_producto2": {
-        "main": [
-          [
-            {
-              "node": "restar_stock2",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "restar_stock2": {
-        "main": [
-          [
-            {
-              "node": "If4",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Buscar_producto3": {
-        "main": [
-          [
-            {
-              "node": "restar_stock3",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "restar_stock3": {
-        "main": [
-          [
-            {
-              "node": "If5",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "If4": {
-        "main": [
-          [
-            {
-              "node": "Send a message2",
-              "type": "main",
-              "index": 0
-            }
-          ],
-          [
-            {
-              "node": "No Operation, do nothing2",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "If5": {
-        "main": [
-          [
-            {
-              "node": "Send a message3",
-              "type": "main",
-              "index": 0
-            }
-          ],
-          [
-            {
-              "node": "No Operation, do nothing3",
+              "node": "Code in JavaScript3",
               "type": "main",
               "index": 0
             }
@@ -1138,9 +636,25 @@
               "index": 0
             }
           ],
+          []
+        ]
+      },
+      "Code in JavaScript2": {
+        "main": [
           [
             {
-              "node": "Code in JavaScript",
+              "node": "Send a message3",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code in JavaScript3": {
+        "main": [
+          [
+            {
+              "node": "Send a message2",
               "type": "main",
               "index": 0
             }
@@ -1149,11 +663,11 @@
       }
     },
     "authors": "Info Tailwind",
-    "name": "Version e2eac41b",
+    "name": "Version 84b584a3",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "e2eac41b-75fc-48ae-8f4d-3c9d09dc0f0d",
+  "activeVersionId": "84b584a3-8d81-489c-927e-3a51a696d2c4",
   "connections": {
     "Gmail Trigger": {
       "main": [
@@ -1210,7 +724,7 @@
         ],
         [
           {
-            "node": "Buscar_producto1",
+            "node": "Send a message1",
             "type": "main",
             "index": 0
           }
@@ -1221,87 +735,7 @@
       "main": [
         [
           {
-            "node": "Buscar_producto",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Buscar_producto": {
-      "main": [
-        [
-          {
-            "node": "restar_stock",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Buscar_producto1": {
-      "main": [
-        [
-          {
-            "node": "restar_stock1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "restar_stock": {
-      "main": [
-        [
-          {
-            "node": "If1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "If1": {
-      "main": [
-        [
-          {
             "node": "Send a message",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "No Operation, do nothing",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "If2": {
-      "main": [
-        [
-          {
-            "node": "Send a message1",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "No Operation, do nothing1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "restar_stock1": {
-      "main": [
-        [
-          {
-            "node": "If2",
             "type": "main",
             "index": 0
           }
@@ -1352,7 +786,7 @@
         ],
         [
           {
-            "node": "Buscar_producto3",
+            "node": "Code in JavaScript2",
             "type": "main",
             "index": 0
           }
@@ -1363,87 +797,7 @@
       "main": [
         [
           {
-            "node": "Buscar_producto2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Buscar_producto2": {
-      "main": [
-        [
-          {
-            "node": "restar_stock2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "restar_stock2": {
-      "main": [
-        [
-          {
-            "node": "If4",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Buscar_producto3": {
-      "main": [
-        [
-          {
-            "node": "restar_stock3",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "restar_stock3": {
-      "main": [
-        [
-          {
-            "node": "If5",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "If4": {
-      "main": [
-        [
-          {
-            "node": "Send a message2",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "No Operation, do nothing2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "If5": {
-      "main": [
-        [
-          {
-            "node": "Send a message3",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "No Operation, do nothing3",
+            "node": "Code in JavaScript3",
             "type": "main",
             "index": 0
           }
@@ -1459,9 +813,25 @@
             "index": 0
           }
         ],
+        []
+      ]
+    },
+    "Code in JavaScript2": {
+      "main": [
         [
           {
-            "node": "Code in JavaScript",
+            "node": "Send a message3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript3": {
+      "main": [
+        [
+          {
+            "node": "Send a message2",
             "type": "main",
             "index": 0
           }
@@ -1510,7 +880,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// 1. Obtenemos el texto completo\nconst emailText = $input.item.json.text || $input.item.json.html || \"\";\n\n// Limpiamos saltos de línea y espacios extra\nconst cleanText = emailText.replace(/\\r\\n/g, '\\n').replace(/\\s+/g, ' ');\n\n// --- PATRONES CORREGIDOS (Para soportar los asteriscos * de Gmail) ---\n\n// A. Patrón PRODUCTO\n// Explicación: Busca \"ha comprado\", luego espacios, luego Opcionalmente asteriscos [*]?, luego comillas\nconst productPattern = /ha comprado\\s+[*]*[\"“'](.+?)[\"”']([*]|[\\.])/i;\n\n// B. Patrón EMAIL\nconst emailPattern = /E-mail:\\s*([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.[a-zA-Z0-9._-]+)/i;\n\n// C. Patrón NOMBRE REAL\nconst realNamePattern = /Dirección:\\s*([^,]+),/i;\n\n// D. Patrón USUARIO\nconst usernamePattern = /([^\\s]+)\\s+ha comprado/i;\n\n\n// --- EJECUCIÓN ---\nconst matchProduct = cleanText.match(productPattern);\nconst matchEmail = cleanText.match(emailPattern);\nconst matchRealName = cleanText.match(realNamePattern);\nconst matchUsername = cleanText.match(usernamePattern);\n\n// Variables por defecto\nlet productName = \"Producto Vinted\"; \n// Si encontramos el producto, quitamos posibles comillas o asteriscos extra\nif (matchProduct && matchProduct[1]) {\n  productName = matchProduct[1].replace(/[*]/g, '').trim();\n}\n\nlet finalEmail = \"\";\nlet firstName = \"\";\nlet lastName = \"\";\n\n// 1. EMAIL\nif (matchEmail && matchEmail[1]) {\n  finalEmail = matchEmail[1].trim(); \n} else if (matchUsername && matchUsername[1]) {\n  // Limpiamos asteriscos del usuario si los tiene (*usuario* -> usuario)\n  const cleanUser = matchUsername[1].replace(/\\*/g, '');\n  finalEmail = `${cleanUser}@vinted.tailwind.es`;\n}\n\n// 2. NOMBRE\nif (matchRealName && matchRealName[1]) {\n  const fullName = matchRealName[1].trim();\n  const nameParts = fullName.split(\" \");\n  if (nameParts.length > 1) {\n    lastName = nameParts.pop(); \n    firstName = nameParts.join(\" \"); \n  } else {\n    firstName = fullName;\n    lastName = \"(Vinted)\";\n  }\n} else if (matchUsername && matchUsername[1]) {\n  firstName = matchUsername[1].replace(/\\*/g, '');\n  lastName = \"(Vinted)\";\n}\n\n// Usuario limpio para la nota\nconst cleanUsername = matchUsername ? matchUsername[1].replace(/\\*/g, '') : 'Desconocido';\n\nif (matchProduct || matchEmail) {\n  return {\n    json: {\n      status: \"success\",\n      customer: {\n        first_name: firstName,\n        last_name: lastName,\n        email: finalEmail,\n        tags: [\"Cliente Vinted\"],\n        note: `Comprado en Vinted: ${productName}. Usuario: ${cleanUsername}`\n      },\n      product: {\n        name: productName\n      }\n    }\n  };\n} else {\n  return {\n    json: {\n      error: \"No se pudieron extraer los datos\",\n      debug: cleanText.substring(0, 500)\n    }\n  };\n}"
+        "jsCode": "// 1. Obtenemos el texto de donde esté disponible (text, html o snippet)\n// TU INPUT TIENE EL CONTENIDO EN 'snippet', así que lo añadimos aquí.\nconst emailText = $input.item.json.text || $input.item.json.html || $input.item.json.snippet || \"\";\n\n// 2. Limpieza Previa (CRÍTICO PARA TU INPUT)\n// Reemplazamos &quot; por comillas normales \" para que el Regex funcione\nlet cleanText = emailText.replace(/&quot;/g, '\"').replace(/&#39;/g, \"'\");\n\n// Limpiamos saltos de línea y espacios extra\ncleanText = cleanText.replace(/\\r\\n/g, '\\n').replace(/\\s+/g, ' ');\n\n// --- PATRONES ---\n\n// A. Patrón PRODUCTO\n// Busca: texto entre comillas justo después de \"ha comprado\"\nconst productPattern = /ha comprado\\s+[*]*[\"“'](.+?)[\"”']([*]|[\\.]|$)/i;\n\n// B. Patrón USUARIO\n// Busca: la palabra que está justo antes de \"ha comprado\" (ej: ripride_or_die)\nconst usernamePattern = /([^\\s:,]+)\\s+ha comprado/i;\n\n// C. Patrones Adicionales (Email/Nombre real por si vinieran en el cuerpo completo)\nconst emailPattern = /E-mail:\\s*([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.[a-zA-Z0-9._-]+)/i;\nconst realNamePattern = /Dirección:\\s*([^,]+),/i;\n\n\n// --- EJECUCIÓN ---\nconst matchProduct = cleanText.match(productPattern);\nconst matchUsername = cleanText.match(usernamePattern);\nconst matchEmail = cleanText.match(emailPattern);\nconst matchRealName = cleanText.match(realNamePattern);\n\n// --- PROCESAMIENTO ---\n\n// 1. Producto\nlet productName = \"Producto Vinted\"; \nif (matchProduct && matchProduct[1]) {\n  productName = matchProduct[1].replace(/[*]/g, '').trim();\n}\n\n// 2. Usuario / Nombre\nlet username = \"UsuarioVinted\";\nif (matchUsername && matchUsername[1]) {\n    // Limpiamos asteriscos si los hubiera\n    username = matchUsername[1].replace(/\\*/g, '').trim();\n}\n\nlet firstName = username;\nlet lastName = \"(Vinted)\";\nlet finalEmail = \"\";\n\n// Intentamos sacar nombre real si existe (raro en snippet)\nif (matchRealName && matchRealName[1]) {\n  const fullName = matchRealName[1].trim();\n  const nameParts = fullName.split(\" \");\n  if (nameParts.length > 1) {\n    lastName = nameParts.pop(); \n    firstName = nameParts.join(\" \"); \n  } else {\n    firstName = fullName;\n  }\n}\n\n// 3. Generar Email (Vinted no da el email real, generamos uno ficticio para Shopify)\nif (matchEmail && matchEmail[1]) {\n  finalEmail = matchEmail[1].trim(); \n} else {\n  // Creamos email tipo: riprideordie@vinted.tailwind.es\n  const safeUser = username.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();\n  finalEmail = `${safeUser}@vinted.tailwind.es`;\n}\n\n// --- SALIDA ---\n\nif (matchProduct || username !== \"UsuarioVinted\") {\n  return {\n    json: {\n      status: \"success\",\n      customer: {\n        first_name: firstName,\n        last_name: lastName,\n        email: finalEmail,\n        tags: [\"Cliente Vinted\"],\n        note: `Comprado en Vinted: ${productName}. Usuario: ${username}`\n      },\n      product: {\n        name: productName\n      }\n    }\n  };\n} else {\n  return {\n    json: {\n      error: \"No se pudieron extraer los datos\",\n      debug: cleanText.substring(0, 500)\n    }\n  };\n}"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -1648,131 +1018,6 @@
     },
     {
       "parameters": {
-        "authentication": "headerAuth",
-        "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
-        "query": "query findStockIds($query: String!) {\n  products(first: 1, query: $query) {\n    edges {\n      node {\n        title\n        variants(first: 1) {\n          edges {\n            node {\n              inventoryItem {\n                id\n                inventoryLevels(first: 1) {\n                  edges {\n                    node {\n                      location {\n                        id\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}",
-        "variables": "={\n  \"query\": \"title:{{ $('Edit Fields').item.json.PRODUCTO }}\"\n}"
-      },
-      "type": "n8n-nodes-base.graphql",
-      "typeVersion": 1.1,
-      "position": [
-        848,
-        464
-      ],
-      "id": "f20f86b5-a2b9-42fb-8629-6b6ba10cea71",
-      "name": "Buscar_producto",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "OPt2Cl0dnwcU4qRk",
-          "name": "ShopifyInformes"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "authentication": "headerAuth",
-        "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
-        "query": "mutation adjustStock($input: InventoryAdjustQuantitiesInput!) {\n  inventoryAdjustQuantities(input: $input) {\n    inventoryAdjustmentGroup {\n      changes {\n        delta\n        quantityAfterChange\n      }\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
-        "variables": "={\n  \"input\": {\n    \"reason\": \"correction\",\n    \"name\": \"available\",\n    \"changes\": [\n      {\n        \"delta\": -1,\n        \"inventoryItemId\": \"{{ $json.data.products.edges[0].node.variants.edges[0].node.inventoryItem.id }}\",\n        \"locationId\": \"{{ $json.data.products.edges[0].node.variants.edges[0].node.inventoryItem.inventoryLevels.edges[0].node.location.id }}\"\n      }\n    ]\n  }\n}"
-      },
-      "type": "n8n-nodes-base.graphql",
-      "typeVersion": 1.1,
-      "position": [
-        1008,
-        464
-      ],
-      "id": "ab8aebba-4287-4b13-a305-515ed8f25399",
-      "name": "restar_stock",
-      "alwaysOutputData": true,
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "OPt2Cl0dnwcU4qRk",
-          "name": "ShopifyInformes"
-        }
-      },
-      "onError": "continueRegularOutput"
-    },
-    {
-      "parameters": {
-        "authentication": "headerAuth",
-        "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
-        "query": "query findStockIds($query: String!) {\n  products(first: 1, query: $query) {\n    edges {\n      node {\n        title\n        variants(first: 1) {\n          edges {\n            node {\n              inventoryItem {\n                id\n                inventoryLevels(first: 1) {\n                  edges {\n                    node {\n                      location {\n                        id\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}",
-        "variables": "={\n  \"query\": \"title:{{ $('Edit Fields').item.json.PRODUCTO }}\"\n}"
-      },
-      "type": "n8n-nodes-base.graphql",
-      "typeVersion": 1.1,
-      "position": [
-        688,
-        672
-      ],
-      "id": "4c19a890-aa0e-44ab-90b1-204ec92702ed",
-      "name": "Buscar_producto1",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "OPt2Cl0dnwcU4qRk",
-          "name": "ShopifyInformes"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "authentication": "headerAuth",
-        "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
-        "query": "mutation adjustStock($input: InventoryAdjustQuantitiesInput!) {\n  inventoryAdjustQuantities(input: $input) {\n    inventoryAdjustmentGroup {\n      changes {\n        delta\n        quantityAfterChange\n      }\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
-        "variables": "={\n  \"input\": {\n    \"reason\": \"correction\",\n    \"name\": \"available\",\n    \"changes\": [\n      {\n        \"delta\": -1,\n        \"inventoryItemId\": \"{{ $json.data.products.edges[0].node.variants.edges[0].node.inventoryItem.id }}\",\n        \"locationId\": \"{{ $json.data.products.edges[0].node.variants.edges[0].node.inventoryItem.inventoryLevels.edges[0].node.location.id }}\"\n      }\n    ]\n  }\n}"
-      },
-      "type": "n8n-nodes-base.graphql",
-      "typeVersion": 1.1,
-      "position": [
-        848,
-        672
-      ],
-      "id": "8e64ac46-3900-4875-a0ef-18c385328599",
-      "name": "restar_stock1",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "OPt2Cl0dnwcU4qRk",
-          "name": "ShopifyInformes"
-        }
-      },
-      "onError": "continueRegularOutput"
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 3
-          },
-          "conditions": [
-            {
-              "id": "35743f6d-5a5c-4753-b456-a418f8b61963",
-              "leftValue": "={{ $json.errors[0].message }}",
-              "rightValue": "",
-              "operator": {
-                "type": "string",
-                "operation": "notEmpty",
-                "singleValue": true
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.3,
-      "position": [
-        1168,
-        464
-      ],
-      "id": "a909fe50-1c1b-4f9f-ae40-0e3b91cc632f",
-      "name": "If1"
-    },
-    {
-      "parameters": {
         "sendTo": "info@rules-shop.es",
         "subject": "Producto Vendido en Vinted",
         "message": "=<div style=\"font-family: Arial, sans-serif; max-width: 600px; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px; background-color: #ffffff;\">\n  \n  <h2 style=\"color: #D32F2F; margin-top: 0;\">⚠️ Acción Requerida: Stock Vinted</h2>\n  \n  <p style=\"color: #555555; font-size: 16px; line-height: 1.5;\">\n    Hola equipo, se ha vendido un producto en Vinted pero <strong>el nombre no coincide exactamente</strong> con el de Shopify.\n  </p>\n  \n  <p style=\"color: #555555; font-size: 16px; line-height: 1.5;\">\n    Por seguridad, la automatización no ha descontado el stock. <strong>Por favor, cambie el stock manualmente.</strong>\n  </p>\n\n  <hr style=\"border: 0; border-top: 1px solid #eeeeee; margin: 20px 0;\">\n\n  <div style=\"background-color: #f9f9f9; padding: 15px; border-left: 5px solid #D32F2F; border-radius: 4px;\">\n    <p style=\"margin: 0; font-size: 14px; color: #888;\">Producto vendido en Vinted:</p>\n    <p style=\"margin: 5px 0 0 0; font-size: 18px; font-weight: bold; color: #333;\">\n      {{ $('Edit Fields').item.json.PRODUCTO }}\n    </p>\n  </div>\n\n  <p style=\"margin-top: 20px; font-size: 14px; color: #666;\">\n    <strong>Cliente:</strong> {{ $('Edit Fields').item.json.NOMBRE }} {{ $('Edit Fields').item.json.APELLIDO }}\n  </p>\n\n  <p style=\"font-size: 12px; color: #aaaaaa; margin-top: 30px; text-align: center;\">\n    Notificación automática enviada por n8n 🤖\n  </p>\n\n</div>",
@@ -1781,8 +1026,8 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        1360,
-        352
+        864,
+        464
       ],
       "id": "09ed8cc6-5578-408e-8ff3-1ecbb8888a74",
       "name": "Send a message",
@@ -1795,51 +1040,6 @@
       }
     },
     {
-      "parameters": {},
-      "type": "n8n-nodes-base.noOp",
-      "typeVersion": 1,
-      "position": [
-        1360,
-        560
-      ],
-      "id": "2b2db4d5-44ac-4970-8818-ab095e365864",
-      "name": "No Operation, do nothing"
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 3
-          },
-          "conditions": [
-            {
-              "id": "35743f6d-5a5c-4753-b456-a418f8b61963",
-              "leftValue": "={{ $json.errors[0].message }}",
-              "rightValue": "",
-              "operator": {
-                "type": "string",
-                "operation": "notEmpty",
-                "singleValue": true
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.3,
-      "position": [
-        1184,
-        848
-      ],
-      "id": "bf81a752-f9ff-4baf-a060-0a33f423123e",
-      "name": "If2"
-    },
-    {
       "parameters": {
         "sendTo": "info@rules-shop.es",
         "subject": "Producto Vendido en Vinted",
@@ -1849,8 +1049,8 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        1376,
-        736
+        688,
+        656
       ],
       "id": "a9b80301-c949-4fbb-85a4-eeeeaa265f30",
       "name": "Send a message1",
@@ -1863,19 +1063,8 @@
       }
     },
     {
-      "parameters": {},
-      "type": "n8n-nodes-base.noOp",
-      "typeVersion": 1,
-      "position": [
-        1376,
-        944
-      ],
-      "id": "4a1662d9-5d0a-488d-8608-e82719a46545",
-      "name": "No Operation, do nothing1"
-    },
-    {
       "parameters": {
-        "jsCode": "// 1. Obtenemos el HTML crudo del correo\nconst htmlContent = $input.item.json.html || \"\";\n\n// 2. Definimos las Expresiones Regulares (Regex) HÍBRIDAS\n//    Usamos el símbolo \"|\" que significa \"O\" (uno u otro)\n\n// A. PRODUCTO\n// La estructura HTML de margen suele ser idéntica en ambos idiomas.\n// Busca texto dentro de un párrafo con margen específico.\nconst productRegex = /margin:0 8px\">([^<]+)<\\/p>/i;\n\n// B. CLIENTE (NOMBRE) - AQUÍ ESTÁ LA MAGIA\n// Busca \"Purchased by:\" (Inglés) O \"Comprado por:\" (Español)\n// Luego salta el código hasta encontrar el div con el color negro (#000000)\nconst buyerRegex = /(?:Purchased by:|Comprado por:)[\\s\\S]*?color:#000000;\">(.*?)<\\/div>/i;\n\n// C. PRECIO\n// La palabra \"Total\" se escribe igual en Inglés y Español.\n// Busca \"Total\", salta código y busca el precio grande (32px)\nconst priceRegex = /Total[\\s\\S]*?font-size:32px\">([\\d.,]+)€<\\/span>/i;\n\n\n// --- EJECUCIÓN Y EXTRACCIÓN ---\n\nconst matchProduct = htmlContent.match(productRegex);\nconst matchBuyer = htmlContent.match(buyerRegex);\nconst matchPrice = htmlContent.match(priceRegex);\n\n// --- PROCESAMIENTO DE DATOS ---\n\n// 1. PRODUCTO\nlet productName = \"Producto Wallapop Desconocido\";\nif (matchProduct && matchProduct[1]) {\n    productName = matchProduct[1].trim();\n}\n\n// 2. PRECIO\nlet salePrice = \"0.00\";\nif (matchPrice && matchPrice[1]) {\n    salePrice = matchPrice[1].trim();\n}\n\n// 3. CLIENTE Y EMAIL\nlet firstName = \"Cliente\";\nlet lastName = \"Wallapop\";\nlet finalEmail = \"info@wallapop.com\"; \n\nif (matchBuyer && matchBuyer[1]) {\n    const fullName = matchBuyer[1].trim(); \n    \n    // Generar Email Ficticio (normalizar caracteres raros)\n    // Esto convierte \"Pablo M.\" o \"John D.\" en \"pablom\" o \"johnd\"\n    const safeUser = fullName.replace(/[^a-zA-Z0-9]/g, '').toLowerCase(); \n    finalEmail = `${safeUser}@wallapop.local`;\n\n    // Separar Nombre y Apellido\n    const nameParts = fullName.split(\" \");\n    if (nameParts.length > 1) {\n        lastName = nameParts.pop(); \n        firstName = nameParts.join(\" \"); \n    } else {\n        firstName = fullName;\n    }\n}\n\n// --- SALIDA DE DATOS ---\n\nif (matchProduct || matchBuyer) {\n    return {\n        json: {\n            status: \"success\",\n            language_detected: matchBuyer && matchBuyer[0].includes(\"Purchased\") ? \"English\" : \"Spanish\",\n            customer: {\n                first_name: firstName,\n                last_name: lastName,\n                email: finalEmail,\n                tags: [\"Cliente Wallapop\"],\n                note: `Venta Wallapop: ${productName}. Precio: ${salePrice}€. (Detectado auto)`\n            },\n            product: {\n                name: productName,\n                price: salePrice\n            }\n        }\n    };\n} else {\n    return {\n        json: {\n            error: \"No se pudieron encontrar los datos en el HTML\",\n            debug_html_snippet: htmlContent.substring(0, 500)\n        }\n    };\n}"
+        "jsCode": "// 1. Obtenemos el HTML crudo del correo\nconst htmlContent = $input.item.json.html || \"\";\n\n// 2. Definimos las Expresiones Regulares (Regex)\n\n// A. PRODUCTO\nconst productRegex = /margin:0 8px\">([^<]+)<\\/p>/i;\n\n// B. CLIENTE (NOMBRE)\nconst buyerRegex = /(?:Purchased by:|Comprado por:)[\\s\\S]*?color:#000000;\">(.*?)<\\/div>/i;\n\n// C. PRECIO\nconst priceRegex = /Total[\\s\\S]*?font-size:32px\">([\\d.,]+)€<\\/span>/i;\n\n\n// --- EJECUCIÓN Y EXTRACCIÓN ---\n\nconst matchProduct = htmlContent.match(productRegex);\nconst matchBuyer = htmlContent.match(buyerRegex);\nconst matchPrice = htmlContent.match(priceRegex);\n\n// --- PROCESAMIENTO DE DATOS ---\n\n// 1. PRODUCTO\nlet productName = \"Producto Wallapop Desconocido\";\nif (matchProduct && matchProduct[1]) {\n    productName = matchProduct[1].trim();\n}\n\n// 2. PRECIO\nlet salePrice = \"0.00\";\nif (matchPrice && matchPrice[1]) {\n    salePrice = matchPrice[1].trim();\n}\n\n// 3. CLIENTE (Solo Nombre y Apellido)\nlet firstName = \"Cliente\";\nlet lastName = \"Wallapop\";\n\nif (matchBuyer && matchBuyer[1]) {\n    const fullName = matchBuyer[1].trim(); \n    \n    // Separar Nombre y Apellido REALES\n    const nameParts = fullName.split(\" \");\n    if (nameParts.length > 1) {\n        lastName = nameParts.pop(); \n        firstName = nameParts.join(\" \"); \n    } else {\n        firstName = fullName;\n    }\n}\n\n// --- SALIDA DE DATOS ---\n// NOTA: No se envía ningún campo \"email\" en el objeto customer.\n\nif (matchProduct || matchBuyer) {\n    return {\n        json: {\n            status: \"success\",\n            language_detected: matchBuyer && matchBuyer[0].includes(\"Purchased\") ? \"English\" : \"Spanish\",\n            customer: {\n                first_name: firstName,\n                last_name: lastName,\n                tags: [\"Cliente Wallapop\"],\n                note: `Venta Wallapop: ${productName}. Precio: ${salePrice}€. (Detectado auto)`\n            },\n            product: {\n                name: productName,\n                price: salePrice\n            }\n        }\n    };\n} else {\n    return {\n        json: {\n            error: \"No se pudieron encontrar los datos en el HTML\",\n            debug_html_snippet: htmlContent.substring(0, 500)\n        }\n    };\n}"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -1913,12 +1102,6 @@
               "name": "ETIQUETAS",
               "value": "={{ $json.customer.tags[0] }}",
               "type": "string"
-            },
-            {
-              "id": "4c465cb1-2285-4c68-99a1-4d0b42265f3d",
-              "name": "CORREO",
-              "value": "={{ $json.customer.email }}",
-              "type": "string"
             }
           ]
         },
@@ -1938,7 +1121,7 @@
         "authentication": "headerAuth",
         "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
         "query": "=query findCustomer($query: String!) {\n  customers(first: 1, query: $query) {\n    edges {\n      node {\n        id\n        firstName\n        lastName\n        email\n        tags\n      }\n    }\n  }\n}",
-        "variables": "={\n  \"query\": \"email:{{ $json.CORREO }}\"\n}"
+        "variables": "={\n  \"query\": \"first_name:{{ $json.NOMBRE }} last_name:{{ $json.APELLIDO }}\"\n}"
       },
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
@@ -1993,8 +1176,8 @@
       "parameters": {
         "authentication": "headerAuth",
         "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
-        "query": "mutation createCustomer($input: CustomerInput!) {\n  customerCreate(input: $input) {\n    customer {\n      id\n      email\n      firstName\n      lastName\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
-        "variables": "={\n  \"input\": {\n    \"firstName\": \"{{ $('Edit Fields1').item.json.NOMBRE }}\",\n    \"lastName\": \"{{ $('Edit Fields1').item.json.APELLIDO }}\",\n    \"email\": \"{{ $('Edit Fields1').item.json.CORREO }}\",\n    \"note\": \"Comprado en Vinted: {{ $('Edit Fields1').item.json.PRODUCTO }}\",\n    \"tags\": [\"{{ $('Edit Fields1').item.json.ETIQUETAS }}\"],\n    \"emailMarketingConsent\": {\n      \"marketingState\": \"NOT_SUBSCRIBED\",\n      \"marketingOptInLevel\": \"SINGLE_OPT_IN\"\n    }\n  }\n}"
+        "query": "mutation createCustomer($input: CustomerInput!) {\n  customerCreate(input: $input) {\n    customer {\n      id\n      firstName\n      lastName\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
+        "variables": "={\n  \"input\": {\n    \"firstName\": \"{{ $('Edit Fields1').item.json.NOMBRE }}\",\n    \"lastName\": \"{{ $('Edit Fields1').item.json.APELLIDO }}\",\n    \"note\": \"Comprado en Wallapop: {{ $('Edit Fields1').item.json.PRODUCTO }}\",\n    \"tags\": [\"{{ $('Edit Fields1').item.json.ETIQUETAS }}\"]\n  }\n}"
       },
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
@@ -2013,141 +1196,16 @@
     },
     {
       "parameters": {
-        "authentication": "headerAuth",
-        "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
-        "query": "query findStockIds($query: String!) {\n  products(first: 1, query: $query) {\n    edges {\n      node {\n        title\n        variants(first: 1) {\n          edges {\n            node {\n              inventoryItem {\n                id\n                inventoryLevels(first: 1) {\n                  edges {\n                    node {\n                      location {\n                        id\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}",
-        "variables": "={\n  \"query\": \"title:{{ $('Edit Fields1').item.json.PRODUCTO }}\"\n}"
-      },
-      "type": "n8n-nodes-base.graphql",
-      "typeVersion": 1.1,
-      "position": [
-        832,
-        -368
-      ],
-      "id": "fc5e3489-8363-4b4a-87e4-620d77469737",
-      "name": "Buscar_producto2",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "OPt2Cl0dnwcU4qRk",
-          "name": "ShopifyInformes"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "authentication": "headerAuth",
-        "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
-        "query": "mutation adjustStock($input: InventoryAdjustQuantitiesInput!) {\n  inventoryAdjustQuantities(input: $input) {\n    inventoryAdjustmentGroup {\n      changes {\n        delta\n        quantityAfterChange\n      }\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
-        "variables": "={\n  \"input\": {\n    \"reason\": \"correction\",\n    \"name\": \"available\",\n    \"changes\": [\n      {\n        \"delta\": -1,\n        \"inventoryItemId\": \"{{ $json.data.products.edges[0].node.variants.edges[0].node.inventoryItem.id }}\",\n        \"locationId\": \"{{ $json.data.products.edges[0].node.variants.edges[0].node.inventoryItem.inventoryLevels.edges[0].node.location.id }}\"\n      }\n    ]\n  }\n}"
-      },
-      "type": "n8n-nodes-base.graphql",
-      "typeVersion": 1.1,
-      "position": [
-        992,
-        -368
-      ],
-      "id": "b019dbc0-ecf0-43da-81b8-7d02d69c17fe",
-      "name": "restar_stock2",
-      "alwaysOutputData": true,
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "OPt2Cl0dnwcU4qRk",
-          "name": "ShopifyInformes"
-        }
-      },
-      "onError": "continueRegularOutput"
-    },
-    {
-      "parameters": {
-        "authentication": "headerAuth",
-        "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
-        "query": "query findStockIds($query: String!) {\n  products(first: 1, query: $query) {\n    edges {\n      node {\n        title\n        variants(first: 1) {\n          edges {\n            node {\n              inventoryItem {\n                id\n                inventoryLevels(first: 1) {\n                  edges {\n                    node {\n                      location {\n                        id\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}",
-        "variables": "={\n  \"query\": \"title:{{ $('Edit Fields1').item.json.PRODUCTO }}\"\n}"
-      },
-      "type": "n8n-nodes-base.graphql",
-      "typeVersion": 1.1,
-      "position": [
-        672,
-        -144
-      ],
-      "id": "14129625-811b-4b14-80ac-5d88882f2dc8",
-      "name": "Buscar_producto3",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "OPt2Cl0dnwcU4qRk",
-          "name": "ShopifyInformes"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "authentication": "headerAuth",
-        "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
-        "query": "mutation adjustStock($input: InventoryAdjustQuantitiesInput!) {\n  inventoryAdjustQuantities(input: $input) {\n    inventoryAdjustmentGroup {\n      changes {\n        delta\n        quantityAfterChange\n      }\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
-        "variables": "={\n  \"input\": {\n    \"reason\": \"correction\",\n    \"name\": \"available\",\n    \"changes\": [\n      {\n        \"delta\": -1,\n        \"inventoryItemId\": \"{{ $json.data.products.edges[0].node.variants.edges[0].node.inventoryItem.id }}\",\n        \"locationId\": \"{{ $json.data.products.edges[0].node.variants.edges[0].node.inventoryItem.inventoryLevels.edges[0].node.location.id }}\"\n      }\n    ]\n  }\n}"
-      },
-      "type": "n8n-nodes-base.graphql",
-      "typeVersion": 1.1,
-      "position": [
-        832,
-        -144
-      ],
-      "id": "b47e91da-60fc-4c07-a1e7-4bcff6a19523",
-      "name": "restar_stock3",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "OPt2Cl0dnwcU4qRk",
-          "name": "ShopifyInformes"
-        }
-      },
-      "onError": "continueRegularOutput"
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 3
-          },
-          "conditions": [
-            {
-              "id": "35743f6d-5a5c-4753-b456-a418f8b61963",
-              "leftValue": "={{ $json.errors[0].message }}",
-              "rightValue": "",
-              "operator": {
-                "type": "string",
-                "operation": "notEmpty",
-                "singleValue": true
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.3,
-      "position": [
-        1152,
-        -368
-      ],
-      "id": "88ec5680-5129-4826-a8e6-f7102997932a",
-      "name": "If4"
-    },
-    {
-      "parameters": {
         "sendTo": "info@rules-shop.es",
         "subject": "Producto Vendido en Vinted",
-        "message": "=<div style=\"font-family: Arial, sans-serif; max-width: 600px; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px; background-color: #ffffff;\">\n  \n  <h2 style=\"color: #D32F2F; margin-top: 0;\">⚠️ Acción Requerida: Stock Wallapop</h2>\n  \n  <p style=\"color: #555555; font-size: 16px; line-height: 1.5;\">\n    Hola equipo, se ha vendido un producto en Wallapop pero <strong>el nombre no coincide exactamente</strong> con el de Shopify.\n  </p>\n  \n  <p style=\"color: #555555; font-size: 16px; line-height: 1.5;\">\n    Por seguridad, la automatización no ha descontado el stock. <strong>Por favor, cambie el stock manualmente.</strong>\n  </p>\n\n  <hr style=\"border: 0; border-top: 1px solid #eeeeee; margin: 20px 0;\">\n\n  <div style=\"background-color: #f9f9f9; padding: 15px; border-left: 5px solid #D32F2F; border-radius: 4px;\">\n    <p style=\"margin: 0; font-size: 14px; color: #888;\">Producto vendido en Wallapop:</p>\n    <p style=\"margin: 5px 0 0 0; font-size: 18px; font-weight: bold; color: #333;\">\n      {{ $('Edit Fields1').item.json.PRODUCTO }}\n    </p>\n  </div>\n\n  <p style=\"margin-top: 20px; font-size: 14px; color: #666;\">\n    <strong>Cliente:</strong> {{ $('Edit Fields1').item.json.NOMBRE }} {{ $('Edit Fields1').item.json.APELLIDO }}\n  </p>\n\n  <p style=\"font-size: 12px; color: #aaaaaa; margin-top: 30px; text-align: center;\">\n    Notificación automática enviada por n8n 🤖\n  </p>\n\n</div>",
+        "message": "=<div style=\"font-family: Arial, sans-serif; max-width: 600px; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px; background-color: #ffffff;\">\n  \n  <h2 style=\"color: #D32F2F; margin-top: 0;\">⚠️ Acción Requerida: Crear Pedido Wallapop</h2>\n  \n  <p style=\"color: #555555; font-size: 16px; line-height: 1.5;\">\n    Hola equipo, se ha realizado una venta en Wallapop.\n  </p>\n  \n  <p style=\"color: #555555; font-size: 16px; line-height: 1.5;\">\n    <strong>Por favor, crea el pedido para este cliente manualmente en Shopify</strong> (el nombre del producto varía ligeramente).\n  </p>\n\n  <hr style=\"border: 0; border-top: 1px solid #eeeeee; margin: 20px 0;\">\n\n  <div style=\"background-color: #f9f9f9; padding: 15px; border-left: 5px solid #D32F2F; border-radius: 4px; margin-bottom: 20px;\">\n    <p style=\"margin: 0; font-size: 14px; color: #888;\">Producto vendido en Wallapop:</p>\n    <p style=\"margin: 5px 0 0 0; font-size: 18px; font-weight: bold; color: #333;\">\n      {{ $('Edit Fields1').item.json.PRODUCTO }}\n    </p>\n  </div>\n\n  <div style=\"background-color: #e8f5e9; padding: 15px; border-left: 5px solid #2e7d32; border-radius: 4px; margin-bottom: 25px;\">\n    <p style=\"margin: 0; font-size: 14px; color: #2e7d32; font-weight: bold;\">✅ Cliente ya registrado en Shopify:</p>\n    <p style=\"margin: 5px 0 0 0; font-size: 14px; color: #333;\">\n      Datos para asignar el pedido:\n    </p>\n    <ul style=\"margin: 10px 0 0 0; padding-left: 20px; color: #555; font-size: 14px;\">\n       <li><strong>Nombre:</strong> {{ $json.firstName }} {{ $json.lastName }}</li>\n    </ul>\n  </div>\n  <div style=\"text-align: center;\">\n    <a href=\"{{ $json.customer_url }}\" style=\"background-color: #008060; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 16px; display: inline-block;\">\n      Ver Cliente en Shopify ↗\n    </a>\n  </div>\n\n  <p style=\"font-size: 12px; color: #aaaaaa; margin-top: 30px; text-align: center;\">\n    Notificación automática enviada por n8n 🤖\n  </p>\n\n</div>",
         "options": {}
       },
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        1344,
-        -480
+        1072,
+        -368
       ],
       "id": "c5ac73a8-0655-49ed-b397-32e4c94dbfab",
       "name": "Send a message2",
@@ -2160,62 +1218,17 @@
       }
     },
     {
-      "parameters": {},
-      "type": "n8n-nodes-base.noOp",
-      "typeVersion": 1,
-      "position": [
-        1344,
-        -256
-      ],
-      "id": "81f6bb15-151d-4313-be55-dd33e82eeee7",
-      "name": "No Operation, do nothing2"
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 3
-          },
-          "conditions": [
-            {
-              "id": "35743f6d-5a5c-4753-b456-a418f8b61963",
-              "leftValue": "={{ $json.errors[0].message }}",
-              "rightValue": "",
-              "operator": {
-                "type": "array",
-                "operation": "notEmpty",
-                "singleValue": true
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.3,
-      "position": [
-        1168,
-        32
-      ],
-      "id": "8bfd2d74-9826-4218-8a54-d0f54d000e39",
-      "name": "If5"
-    },
-    {
       "parameters": {
         "sendTo": "info@rules-shop.es",
         "subject": "Producto Vendido en Vinted",
-        "message": "=<div style=\"font-family: Arial, sans-serif; max-width: 600px; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px; background-color: #ffffff;\">\n  \n  <h2 style=\"color: #D32F2F; margin-top: 0;\">⚠️ Acción Requerida: Stock Wallapop</h2>\n  \n  <p style=\"color: #555555; font-size: 16px; line-height: 1.5;\">\n    Hola equipo, se ha vendido un producto en Wallapop pero <strong>el nombre no coincide exactamente</strong> con el de Shopify.\n  </p>\n  \n  <p style=\"color: #555555; font-size: 16px; line-height: 1.5;\">\n    Por seguridad, la automatización no ha descontado el stock. <strong>Por favor, cambie el stock manualmente.</strong>\n  </p>\n\n  <hr style=\"border: 0; border-top: 1px solid #eeeeee; margin: 20px 0;\">\n\n  <div style=\"background-color: #f9f9f9; padding: 15px; border-left: 5px solid #D32F2F; border-radius: 4px;\">\n    <p style=\"margin: 0; font-size: 14px; color: #888;\">Producto vendido en Wallapop:</p>\n    <p style=\"margin: 5px 0 0 0; font-size: 18px; font-weight: bold; color: #333;\">\n      {{ $('Edit Fields1').item.json.PRODUCTO }}\n    </p>\n  </div>\n\n  <p style=\"margin-top: 20px; font-size: 14px; color: #666;\">\n    <strong>Cliente:</strong> {{ $('Edit Fields1').item.json.NOMBRE }} {{ $('Edit Fields1').item.json.APELLIDO }}\n  </p>\n\n  <p style=\"font-size: 12px; color: #aaaaaa; margin-top: 30px; text-align: center;\">\n    Notificación automática enviada por n8n 🤖\n  </p>\n\n</div>",
+        "message": "=<div style=\"font-family: Arial, sans-serif; max-width: 600px; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px; background-color: #ffffff;\">\n  \n  <h2 style=\"color: #D32F2F; margin-top: 0;\">⚠️ Acción Requerida: Crear Pedido Wallapop</h2>\n  \n  <p style=\"color: #555555; font-size: 16px; line-height: 1.5;\">\n    Hola equipo, se ha realizado una venta en Wallapop.\n  </p>\n  \n  <p style=\"color: #555555; font-size: 16px; line-height: 1.5;\">\n    <strong>Por favor, crea el pedido para este cliente manualmente en Shopify</strong> (el nombre del producto varía ligeramente).\n  </p>\n\n  <hr style=\"border: 0; border-top: 1px solid #eeeeee; margin: 20px 0;\">\n\n  <div style=\"background-color: #f9f9f9; padding: 15px; border-left: 5px solid #D32F2F; border-radius: 4px; margin-bottom: 20px;\">\n    <p style=\"margin: 0; font-size: 14px; color: #888;\">Producto vendido en Wallapop:</p>\n    <p style=\"margin: 5px 0 0 0; font-size: 18px; font-weight: bold; color: #333;\">\n      {{ $('Edit Fields1').item.json.PRODUCTO }}\n    </p>\n  </div>\n\n  <div style=\"background-color: #e8f5e9; padding: 15px; border-left: 5px solid #2e7d32; border-radius: 4px; margin-bottom: 25px;\">\n    <p style=\"margin: 0; font-size: 14px; color: #2e7d32; font-weight: bold;\">✅ Cliente ya registrado en Shopify:</p>\n    <p style=\"margin: 5px 0 0 0; font-size: 14px; color: #333;\">\n      Datos para asignar el pedido:\n    </p>\n    <ul style=\"margin: 10px 0 0 0; padding-left: 20px; color: #555; font-size: 14px;\">\n       <li><strong>Nombre:</strong> {{ $json.firstName }} {{ $json.lastName }}</li>\n    </ul>\n  </div>\n  <div style=\"text-align: center;\">\n    <a href=\"{{ $json.customer_url }}\" style=\"background-color: #008060; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 16px; display: inline-block;\">\n      Ver Cliente en Shopify ↗\n    </a>\n  </div>\n\n  <p style=\"font-size: 12px; color: #aaaaaa; margin-top: 30px; text-align: center;\">\n    Notificación automática enviada por n8n 🤖\n  </p>\n\n</div>",
         "options": {}
       },
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        1360,
-        -80
+        864,
+        -144
       ],
       "id": "f3adfb9a-00fb-4b05-ba3c-0bfefdad6238",
       "name": "Send a message3",
@@ -2226,17 +1239,6 @@
           "name": "Gmail info@rules-shop.es"
         }
       }
-    },
-    {
-      "parameters": {},
-      "type": "n8n-nodes-base.noOp",
-      "typeVersion": 1,
-      "position": [
-        1360,
-        128
-      ],
-      "id": "18e53cd3-4282-4ae5-839d-e41de0f9eb99",
-      "name": "No Operation, do nothing3"
     },
     {
       "parameters": {
@@ -2275,7 +1277,7 @@
       "parameters": {
         "content": "## De Wallapop",
         "height": 864,
-        "width": 1760,
+        "width": 1968,
         "color": 5
       },
       "type": "n8n-nodes-base.stickyNote",
@@ -2302,6 +1304,32 @@
       ],
       "id": "0402b9a5-e42a-494a-8105-07c95b00002c",
       "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "jsCode": "// CONFIGURACIÓN: Nombre de la tienda\nconst storeName = \"rulesshop\"; \n\nconst results = $input.all().map(item => {\n  \n  // 1. Accedemos a la ruta específica de BÚSQUEDA (customers -> edges -> node)\n  // Usamos '?.' para seguridad por si la búsqueda hubiera venido vacía\n  const customerData = item.json.data?.customers?.edges?.[0]?.node || {};\n  \n  // 2. Preparamos las variables\n  const fullId = customerData.id;\n  let customerUrl = null;\n  let cleanId = null;\n\n  if (fullId) {\n    // Limpiamos el ID (quitamos \"gid://shopify/Customer/\")\n    cleanId = fullId.split('/').pop();\n    \n    // Construimos la URL\n    customerUrl = `https://admin.shopify.com/store/${storeName}/customers/${cleanId}`;\n  }\n\n  // 3. Devolvemos TODO: Datos originales + Campos calculados\n  return {\n    json: {\n      // Copia firstName, lastName, email, tags, etc.\n      ...customerData,\n      \n      // Añade nuestros campos extra\n      customer_id_number: cleanId,\n      customer_url: customerUrl\n    }\n  };\n});\n\nreturn results;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        672,
+        -144
+      ],
+      "id": "2c939208-ffbf-4f8b-a2a2-90792a9dc5ea",
+      "name": "Code in JavaScript2"
+    },
+    {
+      "parameters": {
+        "jsCode": "// CONFIGURACIÓN: Nombre de la tienda en la URL del admin\nconst storeName = \"rulesshop\"; \n\nconst results = $input.all().map(item => {\n  \n  // 1. Accedemos al objeto 'customer' dentro de la respuesta de creación\n  // Usamos '|| {}' para que no falle si viene vacío\n  const customerData = item.json.data?.customerCreate?.customer || {};\n  \n  // 2. Preparamos las variables de la URL\n  const fullId = customerData.id;\n  let customerUrl = null;\n  let cleanId = null;\n\n  if (fullId) {\n    // Limpiamos el ID (quitamos \"gid://shopify/Customer/\")\n    cleanId = fullId.split('/').pop();\n    \n    // Construimos la URL\n    customerUrl = `https://admin.shopify.com/store/${storeName}/customers/${cleanId}`;\n  }\n\n  // 3. Devolvemos TODO junto\n  return {\n    json: {\n      // El operador '...' (spread) copia todo lo que traiga el cliente (firstName, lastName, id...)\n      ...customerData,\n      \n      // Añadimos nuestros campos calculados\n      customer_id_number: cleanId,\n      customer_url: customerUrl\n    }\n  };\n});\n\nreturn results;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        864,
+        -368
+      ],
+      "id": "47f30864-04fe-48ae-ac30-c788d656cd55",
+      "name": "Code in JavaScript3"
     }
   ],
   "pinData": {},
@@ -2334,6 +1362,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-01-22T10:02:23.392Z",
-  "versionId": "e2eac41b-75fc-48ae-8f4d-3c9d09dc0f0d"
+  "updatedAt": "2026-01-23T13:54:54.012Z",
+  "versionId": "84b584a3-8d81-489c-927e-3a51a696d2c4"
 }
