@@ -1,0 +1,230 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Code in JavaScript2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-01-24T11:52:06.879Z",
+  "id": "ybyk5P0661JeWOCJ",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Informe_Diario_Definitivo_PRUEBAS",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "simple": false,
+        "filters": {
+          "q": "from:(reservas@snowdivision.es)"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        64
+      ],
+      "id": "519a9202-4f3e-43af-876d-4c46b9185575",
+      "name": "Gmail Trigger",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "fha7KwAzrDSA7OXO",
+          "name": "ventas@sierranevadagranada.com"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.from.text }}",
+                    "rightValue": "=reservas@rules-shop.es",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "5702ef6b-4e43-4933-9af3-abf329de5e06"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "1384d8f9-c75c-4be1-a293-98c0d102292b",
+                    "leftValue": "={{ $json.from.text }}",
+                    "rightValue": "reservas@surfin.es",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "fe1d90fc-f649-48e8-9f37-c58ef22f10c7",
+                    "leftValue": "={{ $json.from.text }}",
+                    "rightValue": "reservas@snowdivision.es",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        224,
+        48
+      ],
+      "id": "9198235c-f0ba-42c5-b0f4-9f99af253e82",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "jsCode": "const item = items[0].json;\nconst subject = item.subject || \"\";\n\n// 1. Extraer Nombre y Apellidos del Subject\n// El formato es: Marca - Compra efectuada - NOMBRE APELLIDOS - Canal\n// Dividimos por el guion \"-\" y tomamos la tercera parte (índice 2)\nlet nombreCompleto = \"No encontrado\";\nconst partesAsunto = subject.split(\" - \");\n\nif (partesAsunto.length >= 3) {\n    nombreCompleto = partesAsunto[2].trim();\n}\n\n// Opcional: Separar nombre de apellidos (para tenerlos listos)\nconst nombrePartes = nombreCompleto.split(\" \");\nconst nombre = nombrePartes[0];\nconst apellidos = nombrePartes.slice(1).join(\" \");\n\n// 2. Extraer Email (usando la propiedad 'to' que ya está limpia)\nconst clienteEmail = item.to.value[0].address || \"No encontrado\";\n\n// 3. Extraer el Precio Total del texto (sigue siendo el lugar más fiable)\nconst totalMatch = item.text.match(/TOTAL:\\s*([\\d,.]+)/);\nconst precioTotal = totalMatch ? totalMatch[1].trim() : \"0.00\";\n\n// 4. Identificador del Pedido\nconst orderMatch = item.text.match(/Identificador:\\s*(SO\\d+)/);\nconst idPedido = orderMatch ? orderMatch[1].trim() : \"No encontrado\";\n\nreturn {\n  marca: \"Surfin\",\n  cliente_nombre_completo: nombreCompleto,\n  cliente_nombre: nombre,\n  cliente_apellidos: apellidos,\n  cliente_email: clienteEmail,\n  total_compra: precioTotal,\n  id_pedido: idPedido\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        448,
+        64
+      ],
+      "id": "3642d410-a4e1-4c4b-9a81-4d9ab7c0b8c2",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "jsCode": "const item = items[0].json;\nconst subject = item.subject || \"\";\nconst bodyText = item.text || \"\";\n\n// 1. Extraer Nombre y Apellidos del Subject\n// Formato: Rules - Compra efectuada - JONAS CEPILLO - canal Cajas\nlet nombreCompleto = \"No encontrado\";\nconst partesAsunto = subject.split(\" - \");\n\nif (partesAsunto.length >= 3) {\n    nombreCompleto = partesAsunto[2].trim();\n}\n\n// Separar nombre de apellidos\nconst nombrePartes = nombreCompleto.split(\" \");\nconst nombre = nombrePartes[0];\nconst apellidos = nombrePartes.slice(1).join(\" \");\n\n// 2. Extraer Email del cliente\nconst clienteEmail = item.to.value[0].address || \"No encontrado\";\n\n// 3. Extraer el Precio Total\n// Buscamos \"TOTAL:\" seguido del valor numérico\nconst totalMatch = bodyText.match(/TOTAL:\\s*([\\d,.]+)/);\nconst precioTotal = totalMatch ? totalMatch[1].trim() : \"0.00\";\n\n// 4. Identificador del Pedido (Específico para Rules: PVRCA...)\nconst orderMatch = bodyText.match(/Identificador:\\s*\\n*(PVRCA\\d+)/);\nconst idPedido = orderMatch ? orderMatch[1].trim() : \"No encontrado\";\n\nreturn {\n  marca: \"Rules\",\n  cliente_nombre_completo: nombreCompleto,\n  cliente_nombre: nombre,\n  cliente_apellidos: apellidos,\n  cliente_email: clienteEmail,\n  total_compra: precioTotal,\n  id_pedido: idPedido,\n  canal: partesAsunto[3] ? partesAsunto[3].replace(\"canal \", \"\").trim() : \"Desconocido\"\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        448,
+        -128
+      ],
+      "id": "988a5f2d-be0b-4fa1-80b3-62f5d7d2ee4f",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "jsCode": "const item = items[0].json;\nconst subject = item.subject || \"\";\nconst bodyText = item.text || \"\";\n\n// 1. Extraer Marca, Nombre y Apellidos del Subject\nconst partesAsunto = subject.split(\" - \");\nconst marca = partesAsunto[0] || \"Desconocida\";\nlet nombreCompleto = partesAsunto[2] ? partesAsunto[2].trim() : \"No encontrado\";\n\nconst nombrePartes = nombreCompleto.split(\" \");\nconst nombre = nombrePartes[0];\nconst apellidos = nombrePartes.slice(1).join(\" \");\n\n// 2. Extraer Email\nconst clienteEmail = item.to.value[0].address || \"No encontrado\";\n\n// 3. Extraer el Precio Total\nconst totalMatch = bodyText.match(/TOTAL:\\s*([\\d,.]+)/);\nconst precioTotal = totalMatch ? totalMatch[1].trim() : \"0.00\";\n\n// 4. Identificador del Pedido (Busca cualquier variante: SO, PVRCA, PVsnd)\nconst orderMatch = bodyText.match(/Identificador:\\s*\\n*([A-Z0-9]+)/);\nconst idPedido = orderMatch ? orderMatch[1].trim() : \"No encontrado\";\n\n// 5. EXTRAER PRODUCTOS (Lógica mejorada)\n// Buscamos lo que hay entre \"DETALLES DEL PEDIDO:\" y \"TOTAL:\"\nconst productSection = bodyText.split(/DETALLES DEL PEDIDO:/i)[1]?.split(/TOTAL:/i)[0] || \"\";\n\n// Limpiamos el texto para quedarnos solo con los nombres de los productos\n// Filtramos líneas que contienen importes (€), localizadores, fechas o URLs\nconst lineas = productSection.split('\\n');\nconst productosLimpios = lineas\n  .map(linea => linea.trim())\n  .filter(linea => {\n    return linea.length > 5 && \n           !linea.includes('€') && \n           !linea.includes('Localizador:') && \n           !linea.includes('Fecha:') && \n           !linea.includes('http') &&\n           !linea.includes('Número de días:');\n  });\n\n// Eliminamos duplicados (como cuando sale \"Alquiler de casco\" dos veces)\nconst listaProductos = [...new Set(productosLimpios)].join(\", \");\n\nreturn {\n  marca,\n  id_pedido: idPedido,\n  cliente_nombre: nombre,\n  cliente_apellidos: apellidos,\n  cliente_email: clienteEmail,\n  productos: listaProductos,\n  total_compra: precioTotal,\n  fecha_pedido: item.date\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        448,
+        256
+      ],
+      "id": "964a608d-a968-4cc7-88b6-5621f95b240f",
+      "name": "Code in JavaScript2"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-01-24T11:52:06.883Z",
+      "createdAt": "2026-01-24T11:52:06.883Z",
+      "role": "workflow:owner",
+      "workflowId": "ybyk5P0661JeWOCJ",
+      "projectId": "x5UZcmGQw2OWHuXb"
+    }
+  ],
+  "staticData": {
+    "node:Gmail Trigger": {
+      "Gmail Trigger": {
+        "lastTimeChecked": 1769257415
+      }
+    }
+  },
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2026-01-24T20:12:07.902Z",
+  "versionId": "f5e893b1-a6cc-4762-b3ad-b14659917e32"
+}
