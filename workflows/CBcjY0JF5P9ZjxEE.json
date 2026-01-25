@@ -635,7 +635,7 @@
     {
       "parameters": {
         "operation": "sendAndWait",
-        "sendTo": "emiliano@tailwind.es",
+        "sendTo": "leonardomartinez44@icloud.com",
         "subject": "APROBAR HISTORIA WEBCAM",
         "message": "=<!DOCTYPE html>\n<html>\n<head>\n<style>\n  body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }\n  .container { max-width: 600px; margin: 20px auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }\n  .header { background-color: #333333; color: #ffffff; padding: 20px; text-align: center; }\n  .content { padding: 30px; text-align: center; color: #333333; }\n  .preview-box { margin: 20px 0; border: 1px solid #eeeeee; padding: 10px; border-radius: 5px; background-color: #fafafa; }\n  img { max-width: 100%; height: auto; border-radius: 4px; display: block; margin: 0 auto; }\n</style>\n</head>\n<body>\n\n<div class=\"container\">\n  <div class=\"header\">\n    <h2 style=\"margin:0;\">Aprobación Requerida</h2>\n  </div>\n  \n  <div class=\"content\">\n    <h3>Se requiere aprobación de una historia</h3>\n    \n    <div class=\"preview-box\">\n      <p style=\"margin-top: 0; margin-bottom: 10px; font-weight: bold; color: #555;\">Vista previa:</p>\n      \n      <img src=\"{{ $('Edit Fields').item.json.vista_previa }}\" alt=\"Vista previa de la historia\">\n      \n    </div>\n  </div>\n  \n  <div style=\"background-color: #eeeeee; padding: 10px; text-align: center; font-size: 12px; color: #777;\">\n    Enviado automáticamente desde n8n\n  </div>\n</div>\n\n</body>\n</html>",
         "approvalOptions": {
@@ -804,6 +804,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2026-01-22T10:47:37.225Z",
-  "versionId": "d160c9d0-7757-438c-87bc-cec5b60f2b52"
+  "updatedAt": "2026-01-24T08:37:55.120Z",
+  "versionId": "99e77d87-a8f6-481c-9757-d15c3b18906c"
 }
