@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-01-21T10:47:09.000Z",
-    "createdAt": "2026-01-21T10:33:07.367Z",
-    "versionId": "f225cd4b-ca86-48c8-802f-13bb357a2637",
+    "updatedAt": "2026-01-26T13:46:30.000Z",
+    "createdAt": "2026-01-26T13:46:28.882Z",
+    "versionId": "814575c9-a4c1-4b84-93e7-652a5885507e",
     "workflowId": "sQUNg-VuSIFLaMIdA9znD",
     "nodes": [
       {
@@ -49,37 +49,6 @@
           "httpHeaderAuth": {
             "id": "OPt2Cl0dnwcU4qRk",
             "name": "ShopifyInformes"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "operation": "download",
-          "fileId": {
-            "__rl": true,
-            "value": "=https://docs.google.com/spreadsheets/d/{{ $json.ID_Documento }}/edit?gid=0#gid=0",
-            "mode": "url"
-          },
-          "options": {
-            "googleFileConversion": {
-              "conversion": {
-                "sheetsToFormat": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-              }
-            }
-          }
-        },
-        "type": "n8n-nodes-base.googleDrive",
-        "typeVersion": 3,
-        "position": [
-          -240,
-          736
-        ],
-        "id": "7fed0716-d328-4f6b-a512-89cd39e1b746",
-        "name": "Download file",
-        "credentials": {
-          "googleDriveOAuth2Api": {
-            "id": "N7JXWgOiVoyCTaVL",
-            "name": "Google Drive account"
           }
         }
       },
@@ -309,8 +278,8 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          1088,
-          464
+          1072,
+          480
         ],
         "id": "b52e6336-e7f7-40dd-ad46-c520b057c406",
         "name": "Edit Fields"
@@ -322,8 +291,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          928,
-          464
+          912,
+          480
         ],
         "id": "38bbf384-1b40-4d4d-b5cc-97d8454a7303",
         "name": "Code in JavaScript1"
@@ -420,7 +389,7 @@
           "operation": "update",
           "documentId": {
             "__rl": true,
-            "value": "={{ $json.ID_DOCUMENTO }}",
+            "value": "={{ $json.ID_DOCUMENTO}}",
             "mode": "id"
           },
           "sheetName": {
@@ -433,15 +402,15 @@
           "columns": {
             "mappingMode": "defineBelow",
             "value": {
+              "row_number": "={{ $json.NUMERO_FILA }}",
               "SUCURSAL DE VENTA": "={{ $json['SUCURSAL DE VENTA'] }}",
               "MÉTODO DE PAGO": "={{ $json['METODO DE PAGO'] }}",
+              "COSTE POR UNIDAD": "={{ $json['COSTO POR UNIDAD'] }}",
+              "PRECIO DE PRODUCTO": "={{ $json['COSTE DE PRODUCTO'] }}",
               "PRECIO PAGADO": "={{ $json['PRECIO PAGADO'] }}",
               "DESCUENTO": "={{ $json.DESCUENTO }}",
               "NOMBRE DE PRODUCTO": "={{ $json['NOMBRE DE PRODUCTO'] }}",
-              "VARIANTE": "={{ $json.VARIANTE }}",
-              "row_number": "={{ $json.NUMERO_FILA }}",
-              "COSTE POR UNIDAD": "={{ $json['COSTO POR UNIDAD'] }}",
-              "PRECIO DE PRODUCTO": "={{ $json['COSTE DE PRODUCTO'] }}"
+              "VARIANTE": "={{ $json.VARIANTE }}"
             },
             "matchingColumns": [
               "row_number"
@@ -454,7 +423,8 @@
                 "defaultMatch": false,
                 "display": true,
                 "type": "string",
-                "canBeUsedToMatch": true
+                "canBeUsedToMatch": true,
+                "removed": false
               },
               {
                 "id": "MÉTODO DE PAGO",
@@ -463,7 +433,8 @@
                 "defaultMatch": false,
                 "display": true,
                 "type": "string",
-                "canBeUsedToMatch": true
+                "canBeUsedToMatch": true,
+                "removed": false
               },
               {
                 "id": "COSTE POR UNIDAD",
@@ -492,7 +463,8 @@
                 "defaultMatch": false,
                 "display": true,
                 "type": "string",
-                "canBeUsedToMatch": true
+                "canBeUsedToMatch": true,
+                "removed": false
               },
               {
                 "id": "DESCUENTO",
@@ -501,7 +473,8 @@
                 "defaultMatch": false,
                 "display": true,
                 "type": "string",
-                "canBeUsedToMatch": true
+                "canBeUsedToMatch": true,
+                "removed": false
               },
               {
                 "id": "NOMBRE DE PRODUCTO",
@@ -510,7 +483,8 @@
                 "defaultMatch": false,
                 "display": true,
                 "type": "string",
-                "canBeUsedToMatch": true
+                "canBeUsedToMatch": true,
+                "removed": false
               },
               {
                 "id": "VARIANTE",
@@ -519,7 +493,8 @@
                 "defaultMatch": false,
                 "display": true,
                 "type": "string",
-                "canBeUsedToMatch": true
+                "canBeUsedToMatch": true,
+                "removed": false
               },
               {
                 "id": "SURFIN SIERRA NEVADA",
@@ -528,7 +503,8 @@
                 "defaultMatch": false,
                 "display": true,
                 "type": "string",
-                "canBeUsedToMatch": true
+                "canBeUsedToMatch": true,
+                "removed": false
               },
               {
                 "id": "Tarjeta",
@@ -537,7 +513,8 @@
                 "defaultMatch": false,
                 "display": true,
                 "type": "string",
-                "canBeUsedToMatch": true
+                "canBeUsedToMatch": true,
+                "removed": false
               },
               {
                 "id": "Efectivo",
@@ -546,7 +523,18 @@
                 "defaultMatch": false,
                 "display": true,
                 "type": "string",
-                "canBeUsedToMatch": true
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "Venta Web",
+                "displayName": "Venta Web",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
               },
               {
                 "id": "TOTAL",
@@ -555,7 +543,8 @@
                 "defaultMatch": false,
                 "display": true,
                 "type": "string",
-                "canBeUsedToMatch": true
+                "canBeUsedToMatch": true,
+                "removed": false
               },
               {
                 "id": "row_number",
@@ -577,8 +566,8 @@
         "type": "n8n-nodes-base.googleSheets",
         "typeVersion": 4.7,
         "position": [
-          1264,
-          464
+          1248,
+          480
         ],
         "id": "3456907e-1889-4e9d-87b5-40ea7f7453de",
         "name": "Update row in sheet",
@@ -644,8 +633,8 @@
         "type": "n8n-nodes-base.dataTable",
         "typeVersion": 1,
         "position": [
-          1424,
-          464
+          1408,
+          480
         ],
         "id": "faf01950-eda5-4601-8b6c-75240e769c87",
         "name": "Update row(s)1"
@@ -806,6 +795,1255 @@
         ],
         "id": "6762e93d-c33c-4008-9d9c-7fd70d47fbf5",
         "name": "Get row(s)1"
+      },
+      {
+        "parameters": {
+          "rules": {
+            "values": [
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $('Correo').item.json.from.text }}",
+                      "rightValue": "=reservas@rules-shop.es",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      },
+                      "id": "5702ef6b-4e43-4933-9af3-abf329de5e06"
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "1384d8f9-c75c-4be1-a293-98c0d102292b",
+                      "leftValue": "={{ $('Correo').item.json.from.text }}",
+                      "rightValue": "reservas@surfin.es",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals",
+                        "name": "filter.operator.equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "fe1d90fc-f649-48e8-9f37-c58ef22f10c7",
+                      "leftValue": "={{ $('Correo').item.json.from.text }}",
+                      "rightValue": "reservas@snowdivision.es",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "06d5176e-59be-4584-9efb-c8a5f233789c",
+                      "leftValue": "={{ $('Correo').item.json.from.value[0].address }}",
+                      "rightValue": "info@sierranevadagranada.com",
+                      "operator": {
+                        "type": "string",
+                        "operation": "equals",
+                        "name": "filter.operator.equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.4,
+        "position": [
+          -1040,
+          432
+        ],
+        "id": "fa3ccb4f-aef5-4d7b-a691-90267f5171fe",
+        "name": "Switch"
+      },
+      {
+        "parameters": {
+          "jsCode": "// 1. Accedemos a los datos del email original del nodo \"Correo\"\nconst correoOriginal = $('Correo').item.json;\nconst subject = correoOriginal.subject || \"\";\nconst bodyText = correoOriginal.text || \"\";\n\n// 2. Accedemos al contador base del nodo justo anterior ($input)\nconst datosPrevios = $input.first().json;\nconst contadorBase = parseInt(datosPrevios.contador_alquiler) || 2;\n\n// 3. Extraer Marca y Datos del Cliente\nconst marca = subject.includes(\"Surfin\") ? \"Surfin\" : (subject.includes(\"Snow Division\") ? \"Snow Division\" : \"Rules\");\nlet nombreCompleto = \"No encontrado\";\nconst partesAsunto = subject.split(\" - \");\nif (partesAsunto.length >= 3) {\n    nombreCompleto = partesAsunto[2].trim();\n}\nconst nombrePartes = nombreCompleto.split(\" \");\nconst nombre = nombrePartes[0];\nconst apellidos = nombrePartes.slice(1).join(\" \");\nconst clienteEmail = correoOriginal.to.value[0].address || \"No encontrado\";\n\n// 4. Totales e Identificador (Soporta PVRCA y SO)\nconst totalMatch = bodyText.match(/TOTAL:\\s*([\\d,.]+)/);\nconst precioTotal = totalMatch ? totalMatch[1].trim() : \"0.00\";\nconst orderMatch = bodyText.match(/Identificador:\\s*\\n*([A-Z0-9]+)/);\nconst idPedido = orderMatch ? orderMatch[1].trim() : \"No encontrado\";\n\n// 5. Canal y Método de Pago\nconst canalMatch = bodyText.match(/Canal:\\s*\\n*([^\\n]+)/);\nconst canalVenta = canalMatch ? canalMatch[1].trim() : \"Desconocido\";\nconst pagoMatch = bodyText.match(/Acción requerida\\s+[\\d,.]+€\\s+[\\d/]+\\s+([^\\n\\t]+)\\s+Efectuado/i);\nconst metodoPago = pagoMatch ? pagoMatch[1].trim() : \"No encontrado\";\n\n// 6. Extraer y AGRUPAR Productos\nconst productosMap = {};\nconst productRegex = /([A-Z0-9\\sÁÉÍÓÚÑ\\-]{5,})\\n\\n(\\d+)\\s+([\\d,.]+)€/g;\nlet match;\n\nwhile ((match = productRegex.exec(bodyText)) !== null) {\n    let nombreProd = match[1].trim();\n    if (nombreProd.includes(\"2X1\")) nombreProd = \"EQUIPO ESQUÍ 2X1\";\n    const cantidad = parseInt(match[2]);\n    const precioUnitario = match[3].replace(',', '.');\n\n    if (productosMap[nombreProd]) {\n        productosMap[nombreProd].cantidad += cantidad;\n    } else {\n        productosMap[nombreProd] = { nombre: nombreProd, cantidad, precio_unitario: precioUnitario };\n    }\n}\n\n// 7. Generar salida para Google Sheets (Fila 1 con datos, resto vacías)\nconst productosArray = Object.values(productosMap);\nconst resumenTexto = productosArray.map(p => `${p.nombre} x${p.cantidad}`).join(', ');\n\nreturn productosArray.map((prod, index) => {\n    if (index === 0) {\n        // Primera fila: Todos los datos comunes + el primer producto\n        return {\n            \"numero_fila\": contadorBase + index,\n            \"marca\": marca,\n            \"cliente_nombre\": nombre,\n            \"cliente_apellidos\": apellidos,\n            \"cliente_email\": clienteEmail,\n            \"id_pedido\": idPedido,\n            \"canal\": canalVenta,\n            \"metodo_pago\": metodoPago,\n            \"total_compra\": precioTotal,\n            \"nombre_producto\": prod.nombre,\n            \"cantidad\": prod.cantidad,\n            \"precio_unitario\": prod.precio_unitario,\n            \"productos_resumen\": resumenTexto\n        };\n    } else {\n        // Filas siguientes: Solo datos del producto y el número de fila\n        return {\n            \"numero_fila\": contadorBase + index,\n            \"marca\": \"\",\n            \"cliente_nombre\": \"\",\n            \"cliente_apellidos\": \"\",\n            \"cliente_email\": \"\",\n            \"id_pedido\": \"\",\n            \"canal\": \"\",\n            \"metodo_pago\": \"\",\n            \"total_compra\": \"\",\n            \"nombre_producto\": prod.nombre,\n            \"cantidad\": prod.cantidad,\n            \"precio_unitario\": prod.precio_unitario,\n            \"productos_resumen\": \"\"\n        };\n    }\n});"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          -848,
+          240
+        ],
+        "id": "132c4e3b-b445-4f4b-bdff-7374f9e5ff18",
+        "name": "rules-shop"
+      },
+      {
+        "parameters": {
+          "jsCode": "// 1. Accedemos a los datos del email original\nconst correoOriginal = $('Correo').item.json;\nconst subject = correoOriginal.subject || \"\";\nconst bodyText = correoOriginal.text || \"\";\n\n// 2. Accedemos al contador del nodo anterior\nconst datosPrevios = $input.first().json;\nconst contadorBase = parseInt(datosPrevios.contador_alquiler) || 2;\n\n// 3. Extraer Marca\nconst marca = subject.includes(\"Surfin\") ? \"Surfin\" : (subject.includes(\"Snow Division\") ? \"Snow Division\" : \"Rules\");\n\n// 4. Extraer Datos del Cliente (con protecciones contra errores)\nlet nombreCompleto = \"No indicado\";\nconst partesAsunto = subject.split(\" - \");\nif (partesAsunto.length >= 3 && partesAsunto[2].trim() !== \"\") {\n    nombreCompleto = partesAsunto[2].trim();\n}\n\nconst nombrePartes = nombreCompleto.split(\" \");\nconst nombre = nombrePartes[0] || \"No indicado\";\nconst apellidos = nombrePartes.slice(1).join(\" \") || \"\";\n\n// FIX ERROR 'value': Intentamos varias rutas para el email\nconst clienteEmail = correoOriginal.to?.value?.[0]?.address || correoOriginal.from?.value?.[0]?.address || \"No encontrado\";\n\n// 5. Totales e Identificador\nconst totalMatch = bodyText.match(/TOTAL:\\s*([\\d,.]+)/);\nconst precioTotal = totalMatch ? totalMatch[1].trim() : \"0.00\";\nconst orderMatch = bodyText.match(/Identificador:\\s*\\n*([A-Z0-9]+)/);\nconst idPedido = orderMatch ? orderMatch[1].trim() : \"No encontrado\";\n\n// 6. Canal y Método de Pago\nconst canalMatch = bodyText.match(/Canal:\\s*\\n*([^\\n]+)/);\nconst canalVenta = canalMatch ? canalMatch[1].trim() : \"Desconocido\";\n\n// Regex de pago mejorado para capturar \"Card checkout\" o \"Cash checkout\"\nconst pagoMatch = bodyText.match(/Acción requerida\\s+[\\d,.]+€\\s+[\\d/]+\\s+([^\\n\\t]+)\\s+Efectuado/i);\nconst metodoPago = pagoMatch ? pagoMatch[1].trim() : \"No encontrado\";\n\n// 7. Extraer y AGRUPAR Productos\nconst productosMap = {};\n// Regex flexible para capturar el producto \"calcetines\" u otros\nconst productRegex = /PRODUCTO\\n\\n(\\d+)\\s+([\\d,.]+)€\\n\\nLocalizador:\\s*([a-z0-9]+)\\nConcepto:\\s*([^\\n]+)/gi;\nlet match;\n\nwhile ((match = productRegex.exec(bodyText)) !== null) {\n    let nombreProd = match[4].trim().toUpperCase(); // Usamos el \"Concepto\" como nombre\n    const cantidad = parseInt(match[1]);\n    const precioUnitario = match[2].replace(',', '.');\n\n    if (productosMap[nombreProd]) {\n        productosMap[nombreProd].cantidad += cantidad;\n    } else {\n        productosMap[nombreProd] = { nombre: nombreProd, cantidad, precio_unitario: precioUnitario };\n    }\n}\n\n// 8. Si el anterior falla (formato estándar), intentamos el genérico\nif (Object.keys(productosMap).length === 0) {\n    const fallbackRegex = /([A-Z0-9\\sÁÉÍÓÚÑ\\-]{5,})\\n\\n(\\d+)\\s+([\\d,.]+)€/g;\n    let fallbackMatch;\n    while ((fallbackMatch = fallbackRegex.exec(bodyText)) !== null) {\n        let nProd = fallbackMatch[1].trim();\n        if (nProd.includes(\"2X1\")) nProd = \"EQUIPO ESQUÍ 2X1\";\n        const cant = parseInt(fallbackMatch[2]);\n        const prec = fallbackMatch[3].replace(',', '.');\n        if (productosMap[nProd]) productosMap[nProd].cantidad += cant;\n        else productosMap[nProd] = { nombre: nProd, cantidad: cant, precio_unitario: prec };\n    }\n}\n\n// 9. CREAR SALIDA DIFERENCIADA\nconst productosArray = Object.values(productosMap);\nconst resumenTexto = productosArray.map(p => `${p.nombre} x${p.cantidad}`).join(', ');\n\n// Si no se encontraron productos, enviamos un item genérico para no romper el flujo\nif (productosArray.length === 0) {\n    productosArray.push({ nombre: \"PRODUCTO NO DETECTADO\", cantidad: 1, precio_unitario: \"0.00\" });\n}\n\nreturn productosArray.map((prod, index) => {\n    if (index === 0) {\n        return {\n            \"numero_fila\": contadorBase + index,\n            \"MARCA\": marca,\n            \"NOMBRE CLIENTE\": nombre,\n            \"APELLIDOS\": apellidos,\n            \"ID PEDIDO\": idPedido,\n            \"EMAIL\": clienteEmail,\n            \"CANAL\": canalVenta,\n            \"MÉTODO DE PAGO\": metodoPago,\n            \"TOTAL COMPRA (+IVA)\": precioTotal,\n            \"NOMBRE PRODUCTO\": prod.nombre,\n            \"CANTIDAD\": prod.cantidad,\n            \"PRECIO UNITARIO\": prod.precio_unitario,\n            \"RESUMEN\": resumenTexto\n        };\n    } else {\n        return {\n            \"numero_fila\": contadorBase + index,\n            \"MARCA\": \"\", \n            \"NOMBRE CLIENTE\": \"\",\n            \"APELLIDOS\": \"\",\n            \"ID PEDIDO\": \"\",\n            \"EMAIL\": \"\",\n            \"CANAL\": \"\",\n            \"MÉTODO DE PAGO\": \"\",\n            \"TOTAL COMPRA (+IVA)\": \"\",\n            \"NOMBRE PRODUCTO\": prod.nombre,\n            \"CANTIDAD\": prod.cantidad,\n            \"PRECIO UNITARIO\": prod.precio_unitario,\n            \"RESUMEN\": \"\"\n        };\n    }\n});"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          -848,
+          384
+        ],
+        "id": "d58a6580-401b-4d55-bc2f-a2bcb34c3ee5",
+        "name": "surfin"
+      },
+      {
+        "parameters": {
+          "jsCode": "// 1. Accedemos a los datos del email original\nconst correoOriginal = $('Correo').item.json;\nconst subject = correoOriginal.subject || \"\";\nconst bodyText = correoOriginal.text || \"\";\n\n// 2. Accedemos al contador base del nodo anterior\nconst datosPrevios = $input.first().json;\nconst contadorBase = parseInt(datosPrevios.contador_alquiler) || 2;\n\n// 3. Identificar Marca\nlet marca = \"Rules\";\nif (subject.toLowerCase().includes(\"surfin\")) marca = \"Surfin\";\nif (subject.toLowerCase().includes(\"snow division\")) marca = \"Snow Division\";\n\n// 4. Extraer Datos del Cliente\nlet nombreCompleto = \"No encontrado\";\nconst partesAsunto = subject.split(\" - \");\nif (partesAsunto.length >= 3) {\n    nombreCompleto = partesAsunto[2].trim();\n}\nconst nombrePartes = nombreCompleto.split(\" \");\nconst nombre = nombrePartes[0];\nconst apellidos = nombrePartes.slice(1).join(\" \");\nconst clienteEmail = correoOriginal.to.value[0].address || \"No encontrado\";\n\n// 5. Totales e Identificador\nconst totalMatch = bodyText.match(/TOTAL:\\s*([\\d,.]+)/);\nconst precioTotal = totalMatch ? totalMatch[1].trim() : \"0.00\";\nconst orderMatch = bodyText.match(/Identificador:\\s*\\n*([A-Z0-9]+)/);\nconst idPedido = orderMatch ? orderMatch[1].trim() : \"No encontrado\";\n\n// 6. Canal y Método de Pago\nconst canalMatch = bodyText.match(/Canal:\\s*\\n*([^\\n]+)/);\nconst canalVenta = canalMatch ? canalMatch[1].trim() : \"Desconocido\";\nconst pagoMatch = bodyText.match(/Acción requerida\\s+[\\d,.]+€\\s+[\\d/]+\\s+([^\\n\\t]+)\\s+Efectuado/i);\nconst metodoPago = pagoMatch ? pagoMatch[1].trim() : \"No encontrado\";\n\n// 7. Extraer y AGRUPAR Productos\nconst productosMap = {};\nconst productRegex = /([A-Z0-9\\sÁÉÍÓÚÑ\\-]{5,})\\n\\n(\\d+)\\s+([\\d,.]+)€/g;\nlet match;\n\nwhile ((match = productRegex.exec(bodyText)) !== null) {\n    let nombreProd = match[1].trim();\n    if (nombreProd.includes(\"2X1\")) nombreProd = \"EQUIPO ESQUÍ 2X1\";\n    const cantidad = parseInt(match[2]);\n    const precioUnitario = match[3].replace(',', '.');\n\n    if (productosMap[nombreProd]) {\n        productosMap[nombreProd].cantidad += cantidad;\n    } else {\n        productosMap[nombreProd] = { nombre: nombreProd, cantidad, precio_unitario: precioUnitario };\n    }\n}\n\n// 8. Generar salida plana para Google Sheets (Primera fila vs Resto)\nconst productosArray = Object.values(productosMap);\nconst resumenTexto = productosArray.map(p => `${p.nombre} x${p.cantidad}`).join(', ');\n\nreturn productosArray.map((prod, index) => {\n    if (index === 0) {\n        // Fila 1: Todos los datos\n        return {\n            \"numero_fila\": contadorBase + index,\n            \"marca\": marca,\n            \"cliente_nombre\": nombre,\n            \"cliente_apellidos\": apellidos,\n            \"cliente_email\": clienteEmail,\n            \"id_pedido\": idPedido,\n            \"canal\": canalVenta,\n            \"metodo_pago\": metodoPago,\n            \"total_compra\": precioTotal,\n            \"nombre_producto\": prod.nombre,\n            \"cantidad\": prod.cantidad,\n            \"precio_unitario\": prod.precio_unitario,\n            \"productos_resumen\": resumenTexto\n        };\n    } else {\n        // Filas siguientes: Datos comunes vacíos\n        return {\n            \"numero_fila\": contadorBase + index,\n            \"marca\": \"\",\n            \"cliente_nombre\": \"\",\n            \"cliente_apellidos\": \"\",\n            \"cliente_email\": \"\",\n            \"id_pedido\": \"\",\n            \"canal\": \"\",\n            \"metodo_pago\": \"\",\n            \"total_compra\": \"\",\n            \"nombre_producto\": prod.nombre,\n            \"cantidad\": prod.cantidad,\n            \"precio_unitario\": prod.precio_unitario,\n            \"productos_resumen\": \"\"\n        };\n    }\n});"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          -848,
+          528
+        ],
+        "id": "9031743d-79e1-4b7d-a852-e3aa8b68164a",
+        "name": "snowdivision"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "documentId": {
+            "__rl": true,
+            "value": "={{ $('Get row(s)2').item.json.ID_Documento }}",
+            "mode": "id"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "Alquiler",
+            "mode": "name"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "MARCA": "={{ $json.numero_fila }}",
+              "NOMBRE CLIENTE": "={{ $json.cliente_nombre }}",
+              "APELLIDOS CLIENTE": "={{ $json.cliente_apellidos }}",
+              "EMAIL": "={{ $json.cliente_email }}",
+              "ID PEDIDO": "={{ $json.id_pedido }}",
+              "CANAL": "={{ $json.canal }}",
+              "MÉTODO DE PAGO": "={{ $json.metodo_pago }}",
+              "TOTAL COMPRA (+IVA)": "={{ $json.total_compra }}",
+              "NOMBRE PRODUCTO": "={{ $json.nombre_producto }}",
+              "CANTIDAD": "={{ $json.cantidad }}",
+              "PRECIO UNITARIO": "={{ $json.precio_unitario }}",
+              "RESUMEN": "={{ $json.productos_resumen }}"
+            },
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "MARCA",
+                "displayName": "MARCA",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "NOMBRE CLIENTE",
+                "displayName": "NOMBRE CLIENTE",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "APELLIDOS CLIENTE",
+                "displayName": "APELLIDOS CLIENTE",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "EMAIL",
+                "displayName": "EMAIL",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "ID PEDIDO",
+                "displayName": "ID PEDIDO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "CANAL",
+                "displayName": "CANAL",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "MÉTODO DE PAGO",
+                "displayName": "MÉTODO DE PAGO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "TOTAL COMPRA (+IVA)",
+                "displayName": "TOTAL COMPRA (+IVA)",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "NOMBRE PRODUCTO",
+                "displayName": "NOMBRE PRODUCTO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "CANTIDAD",
+                "displayName": "CANTIDAD",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "PRECIO UNITARIO",
+                "displayName": "PRECIO UNITARIO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "RESUMEN",
+                "displayName": "RESUMEN",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "row_number",
+                "displayName": "row_number",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "readOnly": true,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          -656,
+          528
+        ],
+        "id": "7367a66d-8df9-476b-8c0b-5479607fb339",
+        "name": "Escribir SnowDivision",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "RCuKUCifcA4jENcY",
+            "name": "Google Sheets account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "documentId": {
+            "__rl": true,
+            "value": "={{ $('Get row(s)2').item.json.ID_Documento }}",
+            "mode": "id"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "Alquiler",
+            "mode": "name"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "MARCA": "={{ $json.MARCA }}",
+              "row_number": "={{ $json.numero_fila }}",
+              "NOMBRE CLIENTE": "={{ $json[\"NOMBRE CLIENTE\"] }}",
+              "APELLIDOS CLIENTE": "={{ $json.APELLIDOS }}",
+              "EMAIL": "={{ $json.EMAIL }}",
+              "ID PEDIDO": "={{ $json[\"ID PEDIDO\"] }}",
+              "CANAL": "={{ $json.CANAL }}",
+              "MÉTODO DE PAGO": "={{ $json[\"MÉTODO DE PAGO\"] }}",
+              "TOTAL COMPRA (+IVA)": "={{ $json[\"TOTAL COMPRA (+IVA)\"] }}",
+              "NOMBRE PRODUCTO": "={{ $json[\"NOMBRE PRODUCTO\"] }}",
+              "CANTIDAD": "={{ $json.CANTIDAD }}",
+              "PRECIO UNITARIO": "={{ $json[\"PRECIO UNITARIO\"] }}",
+              "RESUMEN": "={{ $json.RESUMEN }}"
+            },
+            "matchingColumns": [
+              "row_number"
+            ],
+            "schema": [
+              {
+                "id": "MARCA",
+                "displayName": "MARCA",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "NOMBRE CLIENTE",
+                "displayName": "NOMBRE CLIENTE",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "APELLIDOS CLIENTE",
+                "displayName": "APELLIDOS CLIENTE",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "EMAIL",
+                "displayName": "EMAIL",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "ID PEDIDO",
+                "displayName": "ID PEDIDO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "CANAL",
+                "displayName": "CANAL",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "MÉTODO DE PAGO",
+                "displayName": "MÉTODO DE PAGO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "TOTAL COMPRA (+IVA)",
+                "displayName": "TOTAL COMPRA (+IVA)",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "NOMBRE PRODUCTO",
+                "displayName": "NOMBRE PRODUCTO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "CANTIDAD",
+                "displayName": "CANTIDAD",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "PRECIO UNITARIO",
+                "displayName": "PRECIO UNITARIO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "RESUMEN",
+                "displayName": "RESUMEN",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "row_number",
+                "displayName": "row_number",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "readOnly": true,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          -656,
+          384
+        ],
+        "id": "e4cb0885-b4e6-46e5-abc8-ced7e117233d",
+        "name": "Escribir Surfin",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "RCuKUCifcA4jENcY",
+            "name": "Google Sheets account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "documentId": {
+            "__rl": true,
+            "value": "={{ $('Get row(s)2').item.json.ID_Documento }}",
+            "mode": "id"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "Alquiler",
+            "mode": "name"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "row_number": "={{ $json.numero_fila }}",
+              "MARCA": "={{ $json.marca }}",
+              "NOMBRE CLIENTE": "={{ $json.cliente_nombre }}",
+              "APELLIDOS CLIENTE": "={{ $json.cliente_apellidos }}",
+              "EMAIL": "={{ $json.cliente_email }}",
+              "ID PEDIDO": "={{ $json.id_pedido }}",
+              "CANAL": "={{ $json.canal }}",
+              "MÉTODO DE PAGO": "={{ $json.metodo_pago }}",
+              "TOTAL COMPRA (+IVA)": "={{ $json.total_compra }}",
+              "NOMBRE PRODUCTO": "={{ $json.nombre_producto }}",
+              "CANTIDAD": "={{ $json.cantidad }}",
+              "PRECIO UNITARIO": "={{ $json.precio_unitario }}",
+              "RESUMEN": "={{ $json.productos_resumen }}"
+            },
+            "matchingColumns": [
+              "row_number"
+            ],
+            "schema": [
+              {
+                "id": "MARCA",
+                "displayName": "MARCA",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "NOMBRE CLIENTE",
+                "displayName": "NOMBRE CLIENTE",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "APELLIDOS CLIENTE",
+                "displayName": "APELLIDOS CLIENTE",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "EMAIL",
+                "displayName": "EMAIL",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "ID PEDIDO",
+                "displayName": "ID PEDIDO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "CANAL",
+                "displayName": "CANAL",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "MÉTODO DE PAGO",
+                "displayName": "MÉTODO DE PAGO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "TOTAL COMPRA (+IVA)",
+                "displayName": "TOTAL COMPRA (+IVA)",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "NOMBRE PRODUCTO",
+                "displayName": "NOMBRE PRODUCTO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "CANTIDAD",
+                "displayName": "CANTIDAD",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "PRECIO UNITARIO",
+                "displayName": "PRECIO UNITARIO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "RESUMEN",
+                "displayName": "RESUMEN",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "row_number",
+                "displayName": "row_number",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "readOnly": true,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          -656,
+          240
+        ],
+        "id": "9262d50b-9185-4607-81c6-ad91edd89465",
+        "name": "Escribir Rules",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "RCuKUCifcA4jENcY",
+            "name": "Google Sheets account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "dataTableId": {
+            "__rl": true,
+            "value": "IUsdbRMmbgTdrVQp",
+            "mode": "list",
+            "cachedResultName": "informeDiarioPruebas",
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/IUsdbRMmbgTdrVQp"
+          },
+          "filters": {
+            "conditions": [
+              {
+                "keyValue": "1"
+              }
+            ]
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "contador_alquiler": "={{ $json.row_number + 1}}"
+            },
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "id_documento",
+                "displayName": "id_documento",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "readOnly": false,
+                "removed": false
+              },
+              {
+                "id": "contador",
+                "displayName": "contador",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "readOnly": false,
+                "removed": false
+              },
+              {
+                "id": "contador_alquiler",
+                "displayName": "contador_alquiler",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "readOnly": false,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.dataTable",
+        "typeVersion": 1.1,
+        "position": [
+          -464,
+          240
+        ],
+        "id": "520dc12b-583c-40bd-80d8-b54401ade2f1",
+        "name": "actualizar contador rules"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "dataTableId": {
+            "__rl": true,
+            "value": "IUsdbRMmbgTdrVQp",
+            "mode": "list",
+            "cachedResultName": "informeDiarioPruebas",
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/IUsdbRMmbgTdrVQp"
+          },
+          "filters": {
+            "conditions": [
+              {
+                "keyValue": "1"
+              }
+            ]
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "contador_alquiler": "={{ $json.row_number + 1}}"
+            },
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "id_documento",
+                "displayName": "id_documento",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "readOnly": false,
+                "removed": false
+              },
+              {
+                "id": "contador",
+                "displayName": "contador",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "readOnly": false,
+                "removed": false
+              },
+              {
+                "id": "contador_alquiler",
+                "displayName": "contador_alquiler",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "readOnly": false,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.dataTable",
+        "typeVersion": 1.1,
+        "position": [
+          -448,
+          384
+        ],
+        "id": "6b0db584-2a39-46bb-902d-9131fa4ce1e0",
+        "name": "actualizar contador surfin"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "dataTableId": {
+            "__rl": true,
+            "value": "IUsdbRMmbgTdrVQp",
+            "mode": "list",
+            "cachedResultName": "informeDiarioPruebas",
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/IUsdbRMmbgTdrVQp"
+          },
+          "filters": {
+            "conditions": [
+              {
+                "keyValue": "1"
+              }
+            ]
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "contador_alquiler": "={{ $json.row_number + 1}}"
+            },
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "id_documento",
+                "displayName": "id_documento",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "readOnly": false,
+                "removed": false
+              },
+              {
+                "id": "contador",
+                "displayName": "contador",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "readOnly": false,
+                "removed": false
+              },
+              {
+                "id": "contador_alquiler",
+                "displayName": "contador_alquiler",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "readOnly": false,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.dataTable",
+        "typeVersion": 1.1,
+        "position": [
+          -448,
+          528
+        ],
+        "id": "56f1f664-3f3e-480a-84a8-f9067fb0d648",
+        "name": "actualizar contador snowdivision"
+      },
+      {
+        "parameters": {
+          "jsCode": "// 1. Accedemos a los datos del email original del nodo \"Correo\"\nconst correoOriginal = $('Correo').item.json;\nconst subject = correoOriginal.subject || \"\";\nconst bodyText = correoOriginal.text || \"\";\n\n// 2. Accedemos al contador base del nodo anterior ($input)\nconst datosPrevios = $input.first().json;\nconst contadorBase = parseInt(datosPrevios.contador_alquiler) || 2;\n\n// 3. Extraer Marca (Sierra Nevada Granada)\nlet marca = \"Sierra Nevada Granada\";\n\n// 4. Extraer Datos del Cliente del Subject\n// Formato: Localizador pedido - Noelia Ruiz - canal Reservas\nlet nombreCompleto = \"No encontrado\";\nconst partesAsunto = subject.split(\" - \");\nif (partesAsunto.length >= 2) {\n    nombreCompleto = partesAsunto[1].trim();\n}\nconst nombrePartes = nombreCompleto.split(\" \");\nconst nombre = nombrePartes[0];\nconst apellidos = nombrePartes.slice(1).join(\" \");\nconst clienteEmail = correoOriginal.from.value[0].address || \"No encontrado\";\n\n// 5. Identificador del Pedido (Número: SO...)\nconst orderMatch = bodyText.match(/N[úu]mero:\\s*(SO\\d+)/i);\nconst idPedido = orderMatch ? orderMatch[1].trim() : \"No encontrado\";\n\n// 6. Canal de Venta\nconst canalVenta = partesAsunto[2] ? partesAsunto[2].replace(\"canal \", \"\").trim() : \"Reservas\";\n\n// 7. Extraer y AGRUPAR Productos\nconst productosMap = {};\n\n/** * AJUSTE CLAVE: Nuevo Regex para el formato Sierra Nevada \n * Busca el nombre del producto y la cantidad que aparece después de \"Cant.\"\n */\nconst productRegex = /Descripci[óo]n\\s+Cant\\.\\s+([\\w\\sÁÉÍÓÚÑ\\-]+?)\\s+(\\d+[\\d,.]*)/g;\nlet match;\n\nwhile ((match = productRegex.exec(bodyText)) !== null) {\n    let nombreProd = match[1].trim();\n    // Limpiamos posibles fragmentos de texto basura o saltos de línea\n    nombreProd = nombreProd.split('\\n')[0].trim();\n    \n    // Convertimos cantidad \"1,000000\" a número 1\n    const cantidad = parseInt(match[2].split(',')[0]);\n\n    if (productosMap[nombreProd]) {\n        productosMap[nombreProd].cantidad += cantidad;\n    } else {\n        productosMap[nombreProd] = { \n            nombre: nombreProd, \n            cantidad: cantidad, \n            precio_unitario: \"Ver email\" \n        };\n    }\n}\n\n// 8. Si el Regex falló, intentamos una búsqueda de emergencia para Forfaits\nif (Object.keys(productosMap).length === 0) {\n    const forfaitMatch = bodyText.match(/Forfait\\s+D[íi]as\\s+Consecutivos/i);\n    if (forfaitMatch) {\n        productosMap[\"FORFAIT DÍAS CONSECUTIVOS\"] = { nombre: \"FORFAIT DÍAS CONSECUTIVOS\", cantidad: 1, precio_unitario: \"Ver email\" };\n    }\n}\n\n// 9. Generar salida para Google Sheets (Fila 1 con datos, resto vacías)\nconst productosArray = Object.values(productosMap);\nconst resumenTexto = productosArray.map(p => `${p.nombre} x${p.cantidad}`).join(', ');\n\nreturn productosArray.map((prod, index) => {\n    if (index === 0) {\n        return {\n            \"numero_fila\": contadorBase + index,\n            \"marca\": marca,\n            \"cliente_nombre\": nombre,\n            \"cliente_apellidos\": apellidos,\n            \"cliente_email\": clienteEmail,\n            \"id_pedido\": idPedido,\n            \"canal\": canalVenta,\n            \"metodo_pago\": \"Tarjeta\",\n            \"total_compra\": \"Ver justificante\",\n            \"nombre_producto\": prod.nombre,\n            \"cantidad\": prod.cantidad,\n            \"precio_unitario\": prod.precio_unitario,\n            \"productos_resumen\": resumenTexto\n        };\n    } else {\n        return {\n            \"numero_fila\": contadorBase + index,\n            \"marca\": \"\",\n            \"cliente_nombre\": \"\",\n            \"cliente_apellidos\": \"\",\n            \"cliente_email\": \"\",\n            \"id_pedido\": \"\",\n            \"canal\": \"\",\n            \"metodo_pago\": \"\",\n            \"total_compra\": \"\",\n            \"nombre_producto\": prod.nombre,\n            \"cantidad\": prod.cantidad,\n            \"precio_unitario\": prod.precio_unitario,\n            \"productos_resumen\": \"\"\n        };\n    }\n});"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          -848,
+          672
+        ],
+        "id": "639143ee-f6eb-4832-af8e-48d41053a656",
+        "name": "sierranevadagranada"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "documentId": {
+            "__rl": true,
+            "value": "={{ $('Get row(s)2').item.json.ID_Documento }}",
+            "mode": "id"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "Alquiler",
+            "mode": "name"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "row_number": "={{ $json.numero_fila }}",
+              "MARCA": "={{ $json.marca }}",
+              "NOMBRE CLIENTE": "={{ $json.cliente_nombre }}",
+              "APELLIDOS CLIENTE": "={{ $json.cliente_apellidos }}",
+              "EMAIL": "={{ $json.cliente_email }}",
+              "ID PEDIDO": "={{ $json.id_pedido }}",
+              "CANAL": "={{ $json.canal }}",
+              "MÉTODO DE PAGO": "={{ $json.metodo_pago }}",
+              "TOTAL COMPRA (+IVA)": "={{ $json.total_compra }}",
+              "NOMBRE PRODUCTO": "={{ $json.nombre_producto }}",
+              "CANTIDAD": "={{ $json.cantidad }}",
+              "PRECIO UNITARIO": "={{ $json.precio_unitario }}",
+              "RESUMEN": "={{ $json.productos_resumen }}"
+            },
+            "matchingColumns": [
+              "row_number"
+            ],
+            "schema": [
+              {
+                "id": "MARCA",
+                "displayName": "MARCA",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "NOMBRE CLIENTE",
+                "displayName": "NOMBRE CLIENTE",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "APELLIDOS CLIENTE",
+                "displayName": "APELLIDOS CLIENTE",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "EMAIL",
+                "displayName": "EMAIL",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "ID PEDIDO",
+                "displayName": "ID PEDIDO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "CANAL",
+                "displayName": "CANAL",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "MÉTODO DE PAGO",
+                "displayName": "MÉTODO DE PAGO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "TOTAL COMPRA (+IVA)",
+                "displayName": "TOTAL COMPRA (+IVA)",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "NOMBRE PRODUCTO",
+                "displayName": "NOMBRE PRODUCTO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "CANTIDAD",
+                "displayName": "CANTIDAD",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "PRECIO UNITARIO",
+                "displayName": "PRECIO UNITARIO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "RESUMEN",
+                "displayName": "RESUMEN",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "row_number",
+                "displayName": "row_number",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "readOnly": true,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          -656,
+          672
+        ],
+        "id": "bdcbbe12-2485-403b-bbd0-1b060ee75634",
+        "name": "Escribir sierranevadagranada",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "RCuKUCifcA4jENcY",
+            "name": "Google Sheets account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "dataTableId": {
+            "__rl": true,
+            "value": "IUsdbRMmbgTdrVQp",
+            "mode": "list",
+            "cachedResultName": "informeDiarioPruebas",
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/IUsdbRMmbgTdrVQp"
+          },
+          "filters": {
+            "conditions": [
+              {
+                "keyValue": "1"
+              }
+            ]
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "contador_alquiler": "={{ $json.row_number + 1}}"
+            },
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "id_documento",
+                "displayName": "id_documento",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "readOnly": false,
+                "removed": false
+              },
+              {
+                "id": "contador",
+                "displayName": "contador",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "readOnly": false,
+                "removed": false
+              },
+              {
+                "id": "contador_alquiler",
+                "displayName": "contador_alquiler",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "readOnly": false,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.dataTable",
+        "typeVersion": 1.1,
+        "position": [
+          -448,
+          672
+        ],
+        "id": "f91d9064-be06-467e-a244-f6f1999fc426",
+        "name": "actualizar contador sierranevadagranada"
+      },
+      {
+        "parameters": {
+          "operation": "get",
+          "dataTableId": {
+            "__rl": true,
+            "value": "ghO8HECzTZgPqOqM",
+            "mode": "list",
+            "cachedResultName": "InformeDiario",
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/ghO8HECzTZgPqOqM"
+          },
+          "filters": {
+            "conditions": [
+              {
+                "keyValue": "1"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.dataTable",
+        "typeVersion": 1.1,
+        "position": [
+          -1200,
+          464
+        ],
+        "id": "162dccd0-13f7-427e-8032-e9547d607c67",
+        "name": "Get row(s)2"
+      },
+      {
+        "parameters": {
+          "pollTimes": {
+            "item": [
+              {
+                "mode": "everyMinute"
+              }
+            ]
+          },
+          "simple": false,
+          "filters": {
+            "q": "reservas@rules-shop.es"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.gmailTrigger",
+        "typeVersion": 1.3,
+        "position": [
+          -1360,
+          464
+        ],
+        "id": "424c4c3d-50d2-4125-9517-d6184f95d5d8",
+        "name": "Correo",
+        "credentials": {
+          "gmailOAuth2": {
+            "id": "fha7KwAzrDSA7OXO",
+            "name": "ventas@sierranevadagranada.com"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "content": "INFORME DIARIO DE ALQUILERES\n",
+          "height": 896,
+          "width": 1264,
+          "color": 5
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -1408,
+          64
+        ],
+        "id": "62875833-b388-4db3-8958-e726c4d976d9",
+        "name": "Sticky Note3"
       }
     ],
     "connections": {
@@ -829,11 +2067,6 @@
               "index": 1
             }
           ]
-        ]
-      },
-      "Download file": {
-        "main": [
-          []
         ]
       },
       "Copy file": {
@@ -999,14 +2232,156 @@
             }
           ]
         ]
+      },
+      "Switch": {
+        "main": [
+          [
+            {
+              "node": "rules-shop",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "surfin",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "snowdivision",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "sierranevadagranada",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "rules-shop": {
+        "main": [
+          [
+            {
+              "node": "Escribir Rules",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "surfin": {
+        "main": [
+          [
+            {
+              "node": "Escribir Surfin",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "snowdivision": {
+        "main": [
+          [
+            {
+              "node": "Escribir SnowDivision",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Escribir SnowDivision": {
+        "main": [
+          [
+            {
+              "node": "actualizar contador snowdivision",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Escribir Surfin": {
+        "main": [
+          [
+            {
+              "node": "actualizar contador surfin",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Escribir Rules": {
+        "main": [
+          [
+            {
+              "node": "actualizar contador rules",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "sierranevadagranada": {
+        "main": [
+          [
+            {
+              "node": "Escribir sierranevadagranada",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Escribir sierranevadagranada": {
+        "main": [
+          [
+            {
+              "node": "actualizar contador sierranevadagranada",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Get row(s)2": {
+        "main": [
+          [
+            {
+              "node": "Switch",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Correo": {
+        "main": [
+          [
+            {
+              "node": "Get row(s)2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
     "authors": "Info Tailwind",
-    "name": "Version f225cd4b",
+    "name": "Version 814575c9",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "f225cd4b-ca86-48c8-802f-13bb357a2637",
+  "activeVersionId": "814575c9-a4c1-4b84-93e7-652a5885507e",
   "connections": {
     "Webhook": {
       "main": [
@@ -1188,6 +2563,148 @@
         [
           {
             "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "rules-shop",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "surfin",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "snowdivision",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "sierranevadagranada",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "rules-shop": {
+      "main": [
+        [
+          {
+            "node": "Escribir Rules",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "surfin": {
+      "main": [
+        [
+          {
+            "node": "Escribir Surfin",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "snowdivision": {
+      "main": [
+        [
+          {
+            "node": "Escribir SnowDivision",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Escribir SnowDivision": {
+      "main": [
+        [
+          {
+            "node": "actualizar contador snowdivision",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Escribir Surfin": {
+      "main": [
+        [
+          {
+            "node": "actualizar contador surfin",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Escribir Rules": {
+      "main": [
+        [
+          {
+            "node": "actualizar contador rules",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "sierranevadagranada": {
+      "main": [
+        [
+          {
+            "node": "Escribir sierranevadagranada",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Escribir sierranevadagranada": {
+      "main": [
+        [
+          {
+            "node": "actualizar contador sierranevadagranada",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s)2": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Correo": {
+      "main": [
+        [
+          {
+            "node": "Get row(s)2",
             "type": "main",
             "index": 0
           }
@@ -1475,8 +2992,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1088,
-        464
+        1072,
+        480
       ],
       "id": "b52e6336-e7f7-40dd-ad46-c520b057c406",
       "name": "Edit Fields"
@@ -1488,8 +3005,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        928,
-        464
+        912,
+        480
       ],
       "id": "38bbf384-1b40-4d4d-b5cc-97d8454a7303",
       "name": "Code in JavaScript1"
@@ -1586,7 +3103,7 @@
         "operation": "update",
         "documentId": {
           "__rl": true,
-          "value": "={{ $json.ID_DOCUMENTO }}",
+          "value": "={{ $json.ID_DOCUMENTO}}",
           "mode": "id"
         },
         "sheetName": {
@@ -1599,15 +3116,15 @@
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
+            "row_number": "={{ $json.NUMERO_FILA }}",
             "SUCURSAL DE VENTA": "={{ $json['SUCURSAL DE VENTA'] }}",
             "MÉTODO DE PAGO": "={{ $json['METODO DE PAGO'] }}",
+            "COSTE POR UNIDAD": "={{ $json['COSTO POR UNIDAD'] }}",
+            "PRECIO DE PRODUCTO": "={{ $json['COSTE DE PRODUCTO'] }}",
             "PRECIO PAGADO": "={{ $json['PRECIO PAGADO'] }}",
             "DESCUENTO": "={{ $json.DESCUENTO }}",
             "NOMBRE DE PRODUCTO": "={{ $json['NOMBRE DE PRODUCTO'] }}",
-            "VARIANTE": "={{ $json.VARIANTE }}",
-            "row_number": "={{ $json.NUMERO_FILA }}",
-            "COSTE POR UNIDAD": "={{ $json['COSTO POR UNIDAD'] }}",
-            "PRECIO DE PRODUCTO": "={{ $json['COSTE DE PRODUCTO'] }}"
+            "VARIANTE": "={{ $json.VARIANTE }}"
           },
           "matchingColumns": [
             "row_number"
@@ -1620,7 +3137,8 @@
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true
+              "canBeUsedToMatch": true,
+              "removed": false
             },
             {
               "id": "MÉTODO DE PAGO",
@@ -1629,7 +3147,8 @@
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true
+              "canBeUsedToMatch": true,
+              "removed": false
             },
             {
               "id": "COSTE POR UNIDAD",
@@ -1658,7 +3177,8 @@
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true
+              "canBeUsedToMatch": true,
+              "removed": false
             },
             {
               "id": "DESCUENTO",
@@ -1667,7 +3187,8 @@
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true
+              "canBeUsedToMatch": true,
+              "removed": false
             },
             {
               "id": "NOMBRE DE PRODUCTO",
@@ -1676,7 +3197,8 @@
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true
+              "canBeUsedToMatch": true,
+              "removed": false
             },
             {
               "id": "VARIANTE",
@@ -1685,7 +3207,8 @@
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true
+              "canBeUsedToMatch": true,
+              "removed": false
             },
             {
               "id": "SURFIN SIERRA NEVADA",
@@ -1694,7 +3217,8 @@
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true
+              "canBeUsedToMatch": true,
+              "removed": false
             },
             {
               "id": "Tarjeta",
@@ -1703,7 +3227,8 @@
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true
+              "canBeUsedToMatch": true,
+              "removed": false
             },
             {
               "id": "Efectivo",
@@ -1712,7 +3237,18 @@
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Venta Web",
+              "displayName": "Venta Web",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
             },
             {
               "id": "TOTAL",
@@ -1721,7 +3257,8 @@
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true
+              "canBeUsedToMatch": true,
+              "removed": false
             },
             {
               "id": "row_number",
@@ -1743,8 +3280,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        1264,
-        464
+        1248,
+        480
       ],
       "id": "3456907e-1889-4e9d-87b5-40ea7f7453de",
       "name": "Update row in sheet",
@@ -1810,8 +3347,8 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1,
       "position": [
-        1424,
-        464
+        1408,
+        480
       ],
       "id": "faf01950-eda5-4601-8b6c-75240e769c87",
       "name": "Update row(s)1"
@@ -1972,27 +3509,1258 @@
       ],
       "id": "6762e93d-c33c-4008-9d9c-7fd70d47fbf5",
       "name": "Get row(s)1"
-    }
-  ],
-  "pinData": {
-    "Schedule Trigger": [
-      {
-        "json": {
-          "timestamp": "2026-01-15T00:00:44.013-05:00",
-          "Readable date": "January 15th 2026, 12:00:44 am",
-          "Readable time": "12:00:44 am",
-          "Day of week": "Thursday",
-          "Year": "2026",
-          "Month": "January",
-          "Day of month": "15",
-          "Hour": "00",
-          "Minute": "00",
-          "Second": "44",
-          "Timezone": "America/New_York (UTC-05:00)"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Correo').item.json.from.text }}",
+                    "rightValue": "=reservas@rules-shop.es",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "5702ef6b-4e43-4933-9af3-abf329de5e06"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "1384d8f9-c75c-4be1-a293-98c0d102292b",
+                    "leftValue": "={{ $('Correo').item.json.from.text }}",
+                    "rightValue": "reservas@surfin.es",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "fe1d90fc-f649-48e8-9f37-c58ef22f10c7",
+                    "leftValue": "={{ $('Correo').item.json.from.text }}",
+                    "rightValue": "reservas@snowdivision.es",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "06d5176e-59be-4584-9efb-c8a5f233789c",
+                    "leftValue": "={{ $('Correo').item.json.from.value[0].address }}",
+                    "rightValue": "info@sierranevadagranada.com",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -960,
+        432
+      ],
+      "id": "fa3ccb4f-aef5-4d7b-a691-90267f5171fe",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Accedemos a los datos del email original del nodo \"Correo\"\nconst correoOriginal = $('Correo').item.json;\nconst subject = correoOriginal.subject || \"\";\nconst bodyText = correoOriginal.text || \"\";\n\n// 2. Accedemos al contador base del nodo justo anterior ($input)\nconst datosPrevios = $input.first().json;\nconst contadorBase = parseInt(datosPrevios.contador_alquiler) || 2;\n\n// 3. Extraer Marca y Datos del Cliente\nconst marca = subject.includes(\"Surfin\") ? \"Surfin\" : (subject.includes(\"Snow Division\") ? \"Snow Division\" : \"Rules\");\nlet nombreCompleto = \"No encontrado\";\nconst partesAsunto = subject.split(\" - \");\nif (partesAsunto.length >= 3) {\n    nombreCompleto = partesAsunto[2].trim();\n}\nconst nombrePartes = nombreCompleto.split(\" \");\nconst nombre = nombrePartes[0];\nconst apellidos = nombrePartes.slice(1).join(\" \");\nconst clienteEmail = correoOriginal.to.value[0].address || \"No encontrado\";\n\n// 4. Totales e Identificador (Soporta PVRCA y SO)\nconst totalMatch = bodyText.match(/TOTAL:\\s*([\\d,.]+)/);\nconst precioTotal = totalMatch ? totalMatch[1].trim() : \"0.00\";\nconst orderMatch = bodyText.match(/Identificador:\\s*\\n*([A-Z0-9]+)/);\nconst idPedido = orderMatch ? orderMatch[1].trim() : \"No encontrado\";\n\n// 5. Canal y Método de Pago\nconst canalMatch = bodyText.match(/Canal:\\s*\\n*([^\\n]+)/);\nconst canalVenta = canalMatch ? canalMatch[1].trim() : \"Desconocido\";\nconst pagoMatch = bodyText.match(/Acción requerida\\s+[\\d,.]+€\\s+[\\d/]+\\s+([^\\n\\t]+)\\s+Efectuado/i);\nconst metodoPago = pagoMatch ? pagoMatch[1].trim() : \"No encontrado\";\n\n// 6. Extraer y AGRUPAR Productos\nconst productosMap = {};\nconst productRegex = /([A-Z0-9\\sÁÉÍÓÚÑ\\-]{5,})\\n\\n(\\d+)\\s+([\\d,.]+)€/g;\nlet match;\n\nwhile ((match = productRegex.exec(bodyText)) !== null) {\n    let nombreProd = match[1].trim();\n    if (nombreProd.includes(\"2X1\")) nombreProd = \"EQUIPO ESQUÍ 2X1\";\n    const cantidad = parseInt(match[2]);\n    const precioUnitario = match[3].replace(',', '.');\n\n    if (productosMap[nombreProd]) {\n        productosMap[nombreProd].cantidad += cantidad;\n    } else {\n        productosMap[nombreProd] = { nombre: nombreProd, cantidad, precio_unitario: precioUnitario };\n    }\n}\n\n// 7. Generar salida para Google Sheets (Fila 1 con datos, resto vacías)\nconst productosArray = Object.values(productosMap);\nconst resumenTexto = productosArray.map(p => `${p.nombre} x${p.cantidad}`).join(', ');\n\nreturn productosArray.map((prod, index) => {\n    if (index === 0) {\n        // Primera fila: Todos los datos comunes + el primer producto\n        return {\n            \"numero_fila\": contadorBase + index,\n            \"marca\": marca,\n            \"cliente_nombre\": nombre,\n            \"cliente_apellidos\": apellidos,\n            \"cliente_email\": clienteEmail,\n            \"id_pedido\": idPedido,\n            \"canal\": canalVenta,\n            \"metodo_pago\": metodoPago,\n            \"total_compra\": precioTotal,\n            \"nombre_producto\": prod.nombre,\n            \"cantidad\": prod.cantidad,\n            \"precio_unitario\": prod.precio_unitario,\n            \"productos_resumen\": resumenTexto\n        };\n    } else {\n        // Filas siguientes: Solo datos del producto y el número de fila\n        return {\n            \"numero_fila\": contadorBase + index,\n            \"marca\": \"\",\n            \"cliente_nombre\": \"\",\n            \"cliente_apellidos\": \"\",\n            \"cliente_email\": \"\",\n            \"id_pedido\": \"\",\n            \"canal\": \"\",\n            \"metodo_pago\": \"\",\n            \"total_compra\": \"\",\n            \"nombre_producto\": prod.nombre,\n            \"cantidad\": prod.cantidad,\n            \"precio_unitario\": prod.precio_unitario,\n            \"productos_resumen\": \"\"\n        };\n    }\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -768,
+        240
+      ],
+      "id": "132c4e3b-b445-4f4b-bdff-7374f9e5ff18",
+      "name": "rules-shop"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Accedemos a los datos del email original\nconst correoOriginal = $('Correo').item.json;\nconst subject = correoOriginal.subject || \"\";\nconst bodyText = correoOriginal.text || \"\";\n\n// 2. Accedemos al contador del nodo anterior\nconst datosPrevios = $input.first().json;\nconst contadorBase = parseInt(datosPrevios.contador_alquiler) || 2;\n\n// 3. Extraer Marca\nconst marca = subject.includes(\"Surfin\") ? \"Surfin\" : (subject.includes(\"Snow Division\") ? \"Snow Division\" : \"Rules\");\n\n// 4. Extraer Datos del Cliente (con protecciones contra errores)\nlet nombreCompleto = \"No indicado\";\nconst partesAsunto = subject.split(\" - \");\nif (partesAsunto.length >= 3 && partesAsunto[2].trim() !== \"\") {\n    nombreCompleto = partesAsunto[2].trim();\n}\n\nconst nombrePartes = nombreCompleto.split(\" \");\nconst nombre = nombrePartes[0] || \"No indicado\";\nconst apellidos = nombrePartes.slice(1).join(\" \") || \"\";\n\n// FIX ERROR 'value': Intentamos varias rutas para el email\nconst clienteEmail = correoOriginal.to?.value?.[0]?.address || correoOriginal.from?.value?.[0]?.address || \"No encontrado\";\n\n// 5. Totales e Identificador\nconst totalMatch = bodyText.match(/TOTAL:\\s*([\\d,.]+)/);\nconst precioTotal = totalMatch ? totalMatch[1].trim() : \"0.00\";\nconst orderMatch = bodyText.match(/Identificador:\\s*\\n*([A-Z0-9]+)/);\nconst idPedido = orderMatch ? orderMatch[1].trim() : \"No encontrado\";\n\n// 6. Canal y Método de Pago\nconst canalMatch = bodyText.match(/Canal:\\s*\\n*([^\\n]+)/);\nconst canalVenta = canalMatch ? canalMatch[1].trim() : \"Desconocido\";\n\n// Regex de pago mejorado para capturar \"Card checkout\" o \"Cash checkout\"\nconst pagoMatch = bodyText.match(/Acción requerida\\s+[\\d,.]+€\\s+[\\d/]+\\s+([^\\n\\t]+)\\s+Efectuado/i);\nconst metodoPago = pagoMatch ? pagoMatch[1].trim() : \"No encontrado\";\n\n// 7. Extraer y AGRUPAR Productos\nconst productosMap = {};\n// Regex flexible para capturar el producto \"calcetines\" u otros\nconst productRegex = /PRODUCTO\\n\\n(\\d+)\\s+([\\d,.]+)€\\n\\nLocalizador:\\s*([a-z0-9]+)\\nConcepto:\\s*([^\\n]+)/gi;\nlet match;\n\nwhile ((match = productRegex.exec(bodyText)) !== null) {\n    let nombreProd = match[4].trim().toUpperCase(); // Usamos el \"Concepto\" como nombre\n    const cantidad = parseInt(match[1]);\n    const precioUnitario = match[2].replace(',', '.');\n\n    if (productosMap[nombreProd]) {\n        productosMap[nombreProd].cantidad += cantidad;\n    } else {\n        productosMap[nombreProd] = { nombre: nombreProd, cantidad, precio_unitario: precioUnitario };\n    }\n}\n\n// 8. Si el anterior falla (formato estándar), intentamos el genérico\nif (Object.keys(productosMap).length === 0) {\n    const fallbackRegex = /([A-Z0-9\\sÁÉÍÓÚÑ\\-]{5,})\\n\\n(\\d+)\\s+([\\d,.]+)€/g;\n    let fallbackMatch;\n    while ((fallbackMatch = fallbackRegex.exec(bodyText)) !== null) {\n        let nProd = fallbackMatch[1].trim();\n        if (nProd.includes(\"2X1\")) nProd = \"EQUIPO ESQUÍ 2X1\";\n        const cant = parseInt(fallbackMatch[2]);\n        const prec = fallbackMatch[3].replace(',', '.');\n        if (productosMap[nProd]) productosMap[nProd].cantidad += cant;\n        else productosMap[nProd] = { nombre: nProd, cantidad: cant, precio_unitario: prec };\n    }\n}\n\n// 9. CREAR SALIDA DIFERENCIADA\nconst productosArray = Object.values(productosMap);\nconst resumenTexto = productosArray.map(p => `${p.nombre} x${p.cantidad}`).join(', ');\n\n// Si no se encontraron productos, enviamos un item genérico para no romper el flujo\nif (productosArray.length === 0) {\n    productosArray.push({ nombre: \"PRODUCTO NO DETECTADO\", cantidad: 1, precio_unitario: \"0.00\" });\n}\n\nreturn productosArray.map((prod, index) => {\n    if (index === 0) {\n        return {\n            \"numero_fila\": contadorBase + index,\n            \"MARCA\": marca,\n            \"NOMBRE CLIENTE\": nombre,\n            \"APELLIDOS\": apellidos,\n            \"ID PEDIDO\": idPedido,\n            \"EMAIL\": clienteEmail,\n            \"CANAL\": canalVenta,\n            \"MÉTODO DE PAGO\": metodoPago,\n            \"TOTAL COMPRA (+IVA)\": precioTotal,\n            \"NOMBRE PRODUCTO\": prod.nombre,\n            \"CANTIDAD\": prod.cantidad,\n            \"PRECIO UNITARIO\": prod.precio_unitario,\n            \"RESUMEN\": resumenTexto\n        };\n    } else {\n        return {\n            \"numero_fila\": contadorBase + index,\n            \"MARCA\": \"\", \n            \"NOMBRE CLIENTE\": \"\",\n            \"APELLIDOS\": \"\",\n            \"ID PEDIDO\": \"\",\n            \"EMAIL\": \"\",\n            \"CANAL\": \"\",\n            \"MÉTODO DE PAGO\": \"\",\n            \"TOTAL COMPRA (+IVA)\": \"\",\n            \"NOMBRE PRODUCTO\": prod.nombre,\n            \"CANTIDAD\": prod.cantidad,\n            \"PRECIO UNITARIO\": prod.precio_unitario,\n            \"RESUMEN\": \"\"\n        };\n    }\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -768,
+        384
+      ],
+      "id": "d58a6580-401b-4d55-bc2f-a2bcb34c3ee5",
+      "name": "surfin"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Accedemos a los datos del email original\nconst correoOriginal = $('Correo').item.json;\nconst subject = correoOriginal.subject || \"\";\nconst bodyText = correoOriginal.text || \"\";\n\n// 2. Accedemos al contador base del nodo anterior\nconst datosPrevios = $input.first().json;\nconst contadorBase = parseInt(datosPrevios.contador_alquiler) || 2;\n\n// 3. Identificar Marca\nlet marca = \"Rules\";\nif (subject.toLowerCase().includes(\"surfin\")) marca = \"Surfin\";\nif (subject.toLowerCase().includes(\"snow division\")) marca = \"Snow Division\";\n\n// 4. Extraer Datos del Cliente\nlet nombreCompleto = \"No encontrado\";\nconst partesAsunto = subject.split(\" - \");\nif (partesAsunto.length >= 3) {\n    nombreCompleto = partesAsunto[2].trim();\n}\nconst nombrePartes = nombreCompleto.split(\" \");\nconst nombre = nombrePartes[0];\nconst apellidos = nombrePartes.slice(1).join(\" \");\nconst clienteEmail = correoOriginal.to.value[0].address || \"No encontrado\";\n\n// 5. Totales e Identificador\nconst totalMatch = bodyText.match(/TOTAL:\\s*([\\d,.]+)/);\nconst precioTotal = totalMatch ? totalMatch[1].trim() : \"0.00\";\nconst orderMatch = bodyText.match(/Identificador:\\s*\\n*([A-Z0-9]+)/);\nconst idPedido = orderMatch ? orderMatch[1].trim() : \"No encontrado\";\n\n// 6. Canal y Método de Pago\nconst canalMatch = bodyText.match(/Canal:\\s*\\n*([^\\n]+)/);\nconst canalVenta = canalMatch ? canalMatch[1].trim() : \"Desconocido\";\nconst pagoMatch = bodyText.match(/Acción requerida\\s+[\\d,.]+€\\s+[\\d/]+\\s+([^\\n\\t]+)\\s+Efectuado/i);\nconst metodoPago = pagoMatch ? pagoMatch[1].trim() : \"No encontrado\";\n\n// 7. Extraer y AGRUPAR Productos\nconst productosMap = {};\nconst productRegex = /([A-Z0-9\\sÁÉÍÓÚÑ\\-]{5,})\\n\\n(\\d+)\\s+([\\d,.]+)€/g;\nlet match;\n\nwhile ((match = productRegex.exec(bodyText)) !== null) {\n    let nombreProd = match[1].trim();\n    if (nombreProd.includes(\"2X1\")) nombreProd = \"EQUIPO ESQUÍ 2X1\";\n    const cantidad = parseInt(match[2]);\n    const precioUnitario = match[3].replace(',', '.');\n\n    if (productosMap[nombreProd]) {\n        productosMap[nombreProd].cantidad += cantidad;\n    } else {\n        productosMap[nombreProd] = { nombre: nombreProd, cantidad, precio_unitario: precioUnitario };\n    }\n}\n\n// 8. Generar salida plana para Google Sheets (Primera fila vs Resto)\nconst productosArray = Object.values(productosMap);\nconst resumenTexto = productosArray.map(p => `${p.nombre} x${p.cantidad}`).join(', ');\n\nreturn productosArray.map((prod, index) => {\n    if (index === 0) {\n        // Fila 1: Todos los datos\n        return {\n            \"numero_fila\": contadorBase + index,\n            \"marca\": marca,\n            \"cliente_nombre\": nombre,\n            \"cliente_apellidos\": apellidos,\n            \"cliente_email\": clienteEmail,\n            \"id_pedido\": idPedido,\n            \"canal\": canalVenta,\n            \"metodo_pago\": metodoPago,\n            \"total_compra\": precioTotal,\n            \"nombre_producto\": prod.nombre,\n            \"cantidad\": prod.cantidad,\n            \"precio_unitario\": prod.precio_unitario,\n            \"productos_resumen\": resumenTexto\n        };\n    } else {\n        // Filas siguientes: Datos comunes vacíos\n        return {\n            \"numero_fila\": contadorBase + index,\n            \"marca\": \"\",\n            \"cliente_nombre\": \"\",\n            \"cliente_apellidos\": \"\",\n            \"cliente_email\": \"\",\n            \"id_pedido\": \"\",\n            \"canal\": \"\",\n            \"metodo_pago\": \"\",\n            \"total_compra\": \"\",\n            \"nombre_producto\": prod.nombre,\n            \"cantidad\": prod.cantidad,\n            \"precio_unitario\": prod.precio_unitario,\n            \"productos_resumen\": \"\"\n        };\n    }\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -768,
+        528
+      ],
+      "id": "9031743d-79e1-4b7d-a852-e3aa8b68164a",
+      "name": "snowdivision"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Get row(s)2').item.json.ID_Documento }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Alquiler",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "MARCA": "={{ $json.numero_fila }}",
+            "NOMBRE CLIENTE": "={{ $json.cliente_nombre }}",
+            "APELLIDOS CLIENTE": "={{ $json.cliente_apellidos }}",
+            "EMAIL": "={{ $json.cliente_email }}",
+            "ID PEDIDO": "={{ $json.id_pedido }}",
+            "CANAL": "={{ $json.canal }}",
+            "MÉTODO DE PAGO": "={{ $json.metodo_pago }}",
+            "TOTAL COMPRA (+IVA)": "={{ $json.total_compra }}",
+            "NOMBRE PRODUCTO": "={{ $json.nombre_producto }}",
+            "CANTIDAD": "={{ $json.cantidad }}",
+            "PRECIO UNITARIO": "={{ $json.precio_unitario }}",
+            "RESUMEN": "={{ $json.productos_resumen }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "MARCA",
+              "displayName": "MARCA",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "NOMBRE CLIENTE",
+              "displayName": "NOMBRE CLIENTE",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "APELLIDOS CLIENTE",
+              "displayName": "APELLIDOS CLIENTE",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "EMAIL",
+              "displayName": "EMAIL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "ID PEDIDO",
+              "displayName": "ID PEDIDO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "CANAL",
+              "displayName": "CANAL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "MÉTODO DE PAGO",
+              "displayName": "MÉTODO DE PAGO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "TOTAL COMPRA (+IVA)",
+              "displayName": "TOTAL COMPRA (+IVA)",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "NOMBRE PRODUCTO",
+              "displayName": "NOMBRE PRODUCTO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "CANTIDAD",
+              "displayName": "CANTIDAD",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "PRECIO UNITARIO",
+              "displayName": "PRECIO UNITARIO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "RESUMEN",
+              "displayName": "RESUMEN",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -576,
+        528
+      ],
+      "id": "7367a66d-8df9-476b-8c0b-5479607fb339",
+      "name": "Escribir SnowDivision",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "RCuKUCifcA4jENcY",
+          "name": "Google Sheets account"
         }
       }
-    ]
-  },
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Get row(s)2').item.json.ID_Documento }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Alquiler",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "MARCA": "={{ $json.MARCA }}",
+            "row_number": "={{ $json.numero_fila }}",
+            "NOMBRE CLIENTE": "={{ $json[\"NOMBRE CLIENTE\"] }}",
+            "APELLIDOS CLIENTE": "={{ $json.APELLIDOS }}",
+            "EMAIL": "={{ $json.EMAIL }}",
+            "ID PEDIDO": "={{ $json[\"ID PEDIDO\"] }}",
+            "CANAL": "={{ $json.CANAL }}",
+            "MÉTODO DE PAGO": "={{ $json[\"MÉTODO DE PAGO\"] }}",
+            "TOTAL COMPRA (+IVA)": "={{ $json[\"TOTAL COMPRA (+IVA)\"] }}",
+            "NOMBRE PRODUCTO": "={{ $json[\"NOMBRE PRODUCTO\"] }}",
+            "CANTIDAD": "={{ $json.CANTIDAD }}",
+            "PRECIO UNITARIO": "={{ $json[\"PRECIO UNITARIO\"] }}",
+            "RESUMEN": "={{ $json.RESUMEN }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "MARCA",
+              "displayName": "MARCA",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "NOMBRE CLIENTE",
+              "displayName": "NOMBRE CLIENTE",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "APELLIDOS CLIENTE",
+              "displayName": "APELLIDOS CLIENTE",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "EMAIL",
+              "displayName": "EMAIL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "ID PEDIDO",
+              "displayName": "ID PEDIDO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "CANAL",
+              "displayName": "CANAL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "MÉTODO DE PAGO",
+              "displayName": "MÉTODO DE PAGO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "TOTAL COMPRA (+IVA)",
+              "displayName": "TOTAL COMPRA (+IVA)",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "NOMBRE PRODUCTO",
+              "displayName": "NOMBRE PRODUCTO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "CANTIDAD",
+              "displayName": "CANTIDAD",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "PRECIO UNITARIO",
+              "displayName": "PRECIO UNITARIO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "RESUMEN",
+              "displayName": "RESUMEN",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -576,
+        384
+      ],
+      "id": "e4cb0885-b4e6-46e5-abc8-ced7e117233d",
+      "name": "Escribir Surfin",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "RCuKUCifcA4jENcY",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Get row(s)2').item.json.ID_Documento }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Alquiler",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $json.numero_fila }}",
+            "MARCA": "={{ $json.marca }}",
+            "NOMBRE CLIENTE": "={{ $json.cliente_nombre }}",
+            "APELLIDOS CLIENTE": "={{ $json.cliente_apellidos }}",
+            "EMAIL": "={{ $json.cliente_email }}",
+            "ID PEDIDO": "={{ $json.id_pedido }}",
+            "CANAL": "={{ $json.canal }}",
+            "MÉTODO DE PAGO": "={{ $json.metodo_pago }}",
+            "TOTAL COMPRA (+IVA)": "={{ $json.total_compra }}",
+            "NOMBRE PRODUCTO": "={{ $json.nombre_producto }}",
+            "CANTIDAD": "={{ $json.cantidad }}",
+            "PRECIO UNITARIO": "={{ $json.precio_unitario }}",
+            "RESUMEN": "={{ $json.productos_resumen }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "MARCA",
+              "displayName": "MARCA",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "NOMBRE CLIENTE",
+              "displayName": "NOMBRE CLIENTE",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "APELLIDOS CLIENTE",
+              "displayName": "APELLIDOS CLIENTE",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "EMAIL",
+              "displayName": "EMAIL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "ID PEDIDO",
+              "displayName": "ID PEDIDO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "CANAL",
+              "displayName": "CANAL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "MÉTODO DE PAGO",
+              "displayName": "MÉTODO DE PAGO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "TOTAL COMPRA (+IVA)",
+              "displayName": "TOTAL COMPRA (+IVA)",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "NOMBRE PRODUCTO",
+              "displayName": "NOMBRE PRODUCTO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "CANTIDAD",
+              "displayName": "CANTIDAD",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "PRECIO UNITARIO",
+              "displayName": "PRECIO UNITARIO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "RESUMEN",
+              "displayName": "RESUMEN",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -576,
+        240
+      ],
+      "id": "9262d50b-9185-4607-81c6-ad91edd89465",
+      "name": "Escribir Rules",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "RCuKUCifcA4jENcY",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "dataTableId": {
+          "__rl": true,
+          "value": "IUsdbRMmbgTdrVQp",
+          "mode": "list",
+          "cachedResultName": "informeDiarioPruebas",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/IUsdbRMmbgTdrVQp"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "1"
+            }
+          ]
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "contador_alquiler": "={{ $json.row_number + 1}}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "id_documento",
+              "displayName": "id_documento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "contador",
+              "displayName": "contador",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "contador_alquiler",
+              "displayName": "contador_alquiler",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        -384,
+        240
+      ],
+      "id": "520dc12b-583c-40bd-80d8-b54401ade2f1",
+      "name": "actualizar contador rules"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "dataTableId": {
+          "__rl": true,
+          "value": "IUsdbRMmbgTdrVQp",
+          "mode": "list",
+          "cachedResultName": "informeDiarioPruebas",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/IUsdbRMmbgTdrVQp"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "1"
+            }
+          ]
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "contador_alquiler": "={{ $json.row_number + 1}}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "id_documento",
+              "displayName": "id_documento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "contador",
+              "displayName": "contador",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "contador_alquiler",
+              "displayName": "contador_alquiler",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        -368,
+        384
+      ],
+      "id": "6b0db584-2a39-46bb-902d-9131fa4ce1e0",
+      "name": "actualizar contador surfin"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "dataTableId": {
+          "__rl": true,
+          "value": "IUsdbRMmbgTdrVQp",
+          "mode": "list",
+          "cachedResultName": "informeDiarioPruebas",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/IUsdbRMmbgTdrVQp"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "1"
+            }
+          ]
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "contador_alquiler": "={{ $json.row_number + 1}}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "id_documento",
+              "displayName": "id_documento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "contador",
+              "displayName": "contador",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "contador_alquiler",
+              "displayName": "contador_alquiler",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        -368,
+        528
+      ],
+      "id": "56f1f664-3f3e-480a-84a8-f9067fb0d648",
+      "name": "actualizar contador snowdivision"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Accedemos a los datos del email original del nodo \"Correo\"\nconst correoOriginal = $('Correo').item.json;\nconst subject = correoOriginal.subject || \"\";\nconst bodyText = correoOriginal.text || \"\";\n\n// 2. Accedemos al contador base del nodo anterior ($input)\nconst datosPrevios = $input.first().json;\nconst contadorBase = parseInt(datosPrevios.contador_alquiler) || 2;\n\n// 3. Extraer Marca (Sierra Nevada Granada)\nlet marca = \"Sierra Nevada Granada\";\n\n// 4. Extraer Datos del Cliente del Subject\n// Formato: Localizador pedido - Noelia Ruiz - canal Reservas\nlet nombreCompleto = \"No encontrado\";\nconst partesAsunto = subject.split(\" - \");\nif (partesAsunto.length >= 2) {\n    nombreCompleto = partesAsunto[1].trim();\n}\nconst nombrePartes = nombreCompleto.split(\" \");\nconst nombre = nombrePartes[0];\nconst apellidos = nombrePartes.slice(1).join(\" \");\nconst clienteEmail = correoOriginal.from.value[0].address || \"No encontrado\";\n\n// 5. Identificador del Pedido (Número: SO...)\nconst orderMatch = bodyText.match(/N[úu]mero:\\s*(SO\\d+)/i);\nconst idPedido = orderMatch ? orderMatch[1].trim() : \"No encontrado\";\n\n// 6. Canal de Venta\nconst canalVenta = partesAsunto[2] ? partesAsunto[2].replace(\"canal \", \"\").trim() : \"Reservas\";\n\n// 7. Extraer y AGRUPAR Productos\nconst productosMap = {};\n\n/** * AJUSTE CLAVE: Nuevo Regex para el formato Sierra Nevada \n * Busca el nombre del producto y la cantidad que aparece después de \"Cant.\"\n */\nconst productRegex = /Descripci[óo]n\\s+Cant\\.\\s+([\\w\\sÁÉÍÓÚÑ\\-]+?)\\s+(\\d+[\\d,.]*)/g;\nlet match;\n\nwhile ((match = productRegex.exec(bodyText)) !== null) {\n    let nombreProd = match[1].trim();\n    // Limpiamos posibles fragmentos de texto basura o saltos de línea\n    nombreProd = nombreProd.split('\\n')[0].trim();\n    \n    // Convertimos cantidad \"1,000000\" a número 1\n    const cantidad = parseInt(match[2].split(',')[0]);\n\n    if (productosMap[nombreProd]) {\n        productosMap[nombreProd].cantidad += cantidad;\n    } else {\n        productosMap[nombreProd] = { \n            nombre: nombreProd, \n            cantidad: cantidad, \n            precio_unitario: \"Ver email\" \n        };\n    }\n}\n\n// 8. Si el Regex falló, intentamos una búsqueda de emergencia para Forfaits\nif (Object.keys(productosMap).length === 0) {\n    const forfaitMatch = bodyText.match(/Forfait\\s+D[íi]as\\s+Consecutivos/i);\n    if (forfaitMatch) {\n        productosMap[\"FORFAIT DÍAS CONSECUTIVOS\"] = { nombre: \"FORFAIT DÍAS CONSECUTIVOS\", cantidad: 1, precio_unitario: \"Ver email\" };\n    }\n}\n\n// 9. Generar salida para Google Sheets (Fila 1 con datos, resto vacías)\nconst productosArray = Object.values(productosMap);\nconst resumenTexto = productosArray.map(p => `${p.nombre} x${p.cantidad}`).join(', ');\n\nreturn productosArray.map((prod, index) => {\n    if (index === 0) {\n        return {\n            \"numero_fila\": contadorBase + index,\n            \"marca\": marca,\n            \"cliente_nombre\": nombre,\n            \"cliente_apellidos\": apellidos,\n            \"cliente_email\": clienteEmail,\n            \"id_pedido\": idPedido,\n            \"canal\": canalVenta,\n            \"metodo_pago\": \"Tarjeta\",\n            \"total_compra\": \"Ver justificante\",\n            \"nombre_producto\": prod.nombre,\n            \"cantidad\": prod.cantidad,\n            \"precio_unitario\": prod.precio_unitario,\n            \"productos_resumen\": resumenTexto\n        };\n    } else {\n        return {\n            \"numero_fila\": contadorBase + index,\n            \"marca\": \"\",\n            \"cliente_nombre\": \"\",\n            \"cliente_apellidos\": \"\",\n            \"cliente_email\": \"\",\n            \"id_pedido\": \"\",\n            \"canal\": \"\",\n            \"metodo_pago\": \"\",\n            \"total_compra\": \"\",\n            \"nombre_producto\": prod.nombre,\n            \"cantidad\": prod.cantidad,\n            \"precio_unitario\": prod.precio_unitario,\n            \"productos_resumen\": \"\"\n        };\n    }\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -768,
+        672
+      ],
+      "id": "639143ee-f6eb-4832-af8e-48d41053a656",
+      "name": "sierranevadagranada"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Get row(s)2').item.json.ID_Documento }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Alquiler",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $json.numero_fila }}",
+            "MARCA": "={{ $json.marca }}",
+            "NOMBRE CLIENTE": "={{ $json.cliente_nombre }}",
+            "APELLIDOS CLIENTE": "={{ $json.cliente_apellidos }}",
+            "EMAIL": "={{ $json.cliente_email }}",
+            "ID PEDIDO": "={{ $json.id_pedido }}",
+            "CANAL": "={{ $json.canal }}",
+            "MÉTODO DE PAGO": "={{ $json.metodo_pago }}",
+            "TOTAL COMPRA (+IVA)": "={{ $json.total_compra }}",
+            "NOMBRE PRODUCTO": "={{ $json.nombre_producto }}",
+            "CANTIDAD": "={{ $json.cantidad }}",
+            "PRECIO UNITARIO": "={{ $json.precio_unitario }}",
+            "RESUMEN": "={{ $json.productos_resumen }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "MARCA",
+              "displayName": "MARCA",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "NOMBRE CLIENTE",
+              "displayName": "NOMBRE CLIENTE",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "APELLIDOS CLIENTE",
+              "displayName": "APELLIDOS CLIENTE",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "EMAIL",
+              "displayName": "EMAIL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "ID PEDIDO",
+              "displayName": "ID PEDIDO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "CANAL",
+              "displayName": "CANAL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "MÉTODO DE PAGO",
+              "displayName": "MÉTODO DE PAGO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "TOTAL COMPRA (+IVA)",
+              "displayName": "TOTAL COMPRA (+IVA)",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "NOMBRE PRODUCTO",
+              "displayName": "NOMBRE PRODUCTO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "CANTIDAD",
+              "displayName": "CANTIDAD",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "PRECIO UNITARIO",
+              "displayName": "PRECIO UNITARIO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "RESUMEN",
+              "displayName": "RESUMEN",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -576,
+        672
+      ],
+      "id": "bdcbbe12-2485-403b-bbd0-1b060ee75634",
+      "name": "Escribir sierranevadagranada",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "RCuKUCifcA4jENcY",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "dataTableId": {
+          "__rl": true,
+          "value": "IUsdbRMmbgTdrVQp",
+          "mode": "list",
+          "cachedResultName": "informeDiarioPruebas",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/IUsdbRMmbgTdrVQp"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "1"
+            }
+          ]
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "contador_alquiler": "={{ $json.row_number + 1}}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "id_documento",
+              "displayName": "id_documento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "contador",
+              "displayName": "contador",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "contador_alquiler",
+              "displayName": "contador_alquiler",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        -368,
+        672
+      ],
+      "id": "f91d9064-be06-467e-a244-f6f1999fc426",
+      "name": "actualizar contador sierranevadagranada"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "ghO8HECzTZgPqOqM",
+          "mode": "list",
+          "cachedResultName": "InformeDiario",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/ghO8HECzTZgPqOqM"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "1"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        -1120,
+        464
+      ],
+      "id": "162dccd0-13f7-427e-8032-e9547d607c67",
+      "name": "Get row(s)2"
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "simple": false,
+        "filters": {
+          "q": "reservas@rules-shop.es"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -1280,
+        464
+      ],
+      "id": "424c4c3d-50d2-4125-9517-d6184f95d5d8",
+      "name": "Correo",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "fha7KwAzrDSA7OXO",
+          "name": "ventas@sierranevadagranada.com"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "INFORME DIARIO DE ALQUILERES\n",
+        "height": 896,
+        "width": 1264,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1328,
+        64
+      ],
+      "id": "62875833-b388-4db3-8958-e726c4d976d9",
+      "name": "Sticky Note3"
+    }
+  ],
+  "pinData": {},
   "settings": {
     "executionOrder": "v1",
     "availableInMCP": false
@@ -2008,7 +4776,7 @@
   ],
   "staticData": null,
   "tags": [],
-  "triggerCount": 2,
-  "updatedAt": "2026-01-23T07:39:49.995Z",
-  "versionId": "12f56532-a454-4c60-8f37-ac22cc6f11b7"
+  "triggerCount": 3,
+  "updatedAt": "2026-01-26T13:49:55.328Z",
+  "versionId": "61780a58-8e7f-424b-9aa0-6a5c19052d01"
 }
