@@ -1561,17 +1561,7 @@
       "main": [
         [
           {
-            "node": "Calcular top Sucursales",
-            "type": "main",
-            "index": 0
-          },
-          {
             "node": "Tabla Marcas",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Calcular Top 10",
             "type": "main",
             "index": 0
           }
@@ -1585,21 +1575,10 @@
         ]
       ]
     },
-    "Espera 1s": {
-      "main": [
-        []
-      ]
-    },
     "Escribir detalle": {
       "main": [
         [],
-        [
-          {
-            "node": "Espera 1m1",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Leer Informe de ese Día": {
@@ -1618,11 +1597,6 @@
             "index": 0
           }
         ]
-      ]
-    },
-    "Configurar Fechas2": {
-      "main": [
-        []
       ]
     },
     "Configurar Fechas": {
@@ -1647,43 +1621,11 @@
         ]
       ]
     },
-    "Calcular Top 10": {
-      "main": [
-        [
-          {
-            "node": "Escribir detalle",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Calcular Ranking Empleados antiguo": {
-      "main": [
-        []
-      ]
-    },
-    "Obtener Nombres Empleados antiguo": {
-      "main": [
-        []
-      ]
-    },
     "Calcular Ranking Empleados": {
       "main": [
         [
           {
-            "node": "Escribir Empleados",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Calcular top marcas": {
-      "main": [
-        [
-          {
-            "node": "Escribir marcas",
+            "node": "Loop Over Items",
             "type": "main",
             "index": 0
           }
@@ -1704,42 +1646,14 @@
     "Escribir marcas": {
       "main": [
         [],
-        [
-          {
-            "node": "Espera 1m2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Espera 1m2": {
-      "main": [
-        [
-          {
-            "node": "Escribir marcas",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Espera 1m1": {
-      "main": [
-        [
-          {
-            "node": "Escribir detalle",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Tabla Marcas": {
       "main": [
         [
           {
-            "node": "Calcular top marcas",
+            "node": "Calculo_Maestro",
             "type": "main",
             "index": 0
           }
@@ -1748,18 +1662,25 @@
     },
     "Escribir Empleados": {
       "main": [
-        [],
         [
           {
-            "node": "Espera 1m3",
+            "node": "Wait",
             "type": "main",
             "index": 0
           }
-        ]
+        ],
+        []
       ]
     },
-    "Espera 1m3": {
+    "Escribir sucursales": {
       "main": [
+        [],
+        []
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
         [
           {
             "node": "Escribir Empleados",
@@ -1769,34 +1690,52 @@
         ]
       ]
     },
-    "Calcular top Sucursales": {
+    "Replace Me": {
+      "main": [
+        []
+      ]
+    },
+    "Wait": {
       "main": [
         [
           {
-            "node": "Escribir sucursales",
+            "node": "Loop Over Items",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Espera 1m4": {
+    "Calculo_Maestro": {
       "main": [
         [
           {
-            "node": "Escribir sucursales",
+            "node": "Elegir tipo de input",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Escribir sucursales": {
+    "Elegir tipo de input": {
       "main": [
-        [],
         [
           {
-            "node": "Espera 1m4",
+            "node": "Escribir detalle",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Escribir marcas",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Escribir sucursales",
             "type": "main",
             "index": 0
           }
@@ -1907,8 +1846,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -336,
-        288
+        -368,
+        272
       ],
       "id": "baac2c47-e3e0-4413-a657-02e685aeea0f",
       "name": "Prep Shopify"
@@ -1929,8 +1868,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        -160,
-        288
+        -192,
+        272
       ],
       "id": "02d692ea-c717-4ecf-ab9a-d95d81b2eb37",
       "name": "Shopify API",
@@ -1968,8 +1907,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        176,
-        288
+        144,
+        272
       ],
       "id": "3fed2932-cb89-43c4-86f1-8df62a10ec7c",
       "name": "Hay más páginas?"
@@ -1991,8 +1930,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        368,
-        272
+        336,
+        256
       ],
       "id": "74a1ce84-d763-4d42-96a6-b66b3a056bbe",
       "name": "Set Next Page"
@@ -2004,8 +1943,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        368,
-        480
+        336,
+        464
       ],
       "id": "76818f9e-1abd-4a3f-89be-6bcfe16956ff",
       "name": "Unir Todos los Pedidos"
@@ -2017,8 +1956,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        0,
-        288
+        -32,
+        272
       ],
       "id": "c388a069-3ddc-418e-a9d0-8903192a2fb1",
       "name": "Acumular en Memoria"
@@ -2033,23 +1972,23 @@
         },
         "sheetName": {
           "__rl": true,
-          "value": "Ranking Empleados",
+          "value": "Bonos Empleados",
           "mode": "name"
         },
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "Empleado": "={{ $json[\"Nombre Empleado\"] }}",
-            "Total Vendido": "={{ $json[\"Total Vendido\"] }}",
-            "row_number": "={{ $json.numero_fila }}"
+            "row_number": "={{ $json.numero_fila }}",
+            "BONOS INDIVIDUALES": "={{ $json[\"Nombre Empleado\"] }}",
+            "TOTAL VENDIDO": "={{ $json[\"Total Vendido\"] }}"
           },
           "matchingColumns": [
             "row_number"
           ],
           "schema": [
             {
-              "id": "Empleado",
-              "displayName": "Empleado",
+              "id": "BONOS INDIVIDUALES",
+              "displayName": "BONOS INDIVIDUALES",
               "required": false,
               "defaultMatch": false,
               "display": true,
@@ -2058,8 +1997,48 @@
               "removed": false
             },
             {
-              "id": "Total Vendido",
-              "displayName": "Total Vendido",
+              "id": "TOTAL VENDIDO",
+              "displayName": "TOTAL VENDIDO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "BONO 90€",
+              "displayName": "BONO 90€",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "BONO 120€",
+              "displayName": "BONO 120€",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "BONO 150€",
+              "displayName": "BONO 150€",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "BONO 200€",
+              "displayName": "BONO 200€",
               "required": false,
               "defaultMatch": false,
               "display": true,
@@ -2087,7 +2066,7 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        752,
+        912,
         480
       ],
       "id": "f894e18e-33b5-4bc9-9b5a-58b0663b6a26",
@@ -2126,8 +2105,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -336,
-        144
+        -368,
+        128
       ],
       "id": "2597c927-aa51-4003-a949-419b2158cda7",
       "name": "Sticky Note1"
@@ -2144,20 +2123,6 @@
       ],
       "id": "2d5428b2-70e7-4119-8684-7fbcf096a603",
       "name": "Bucle: Uno a Uno"
-    },
-    {
-      "parameters": {
-        "amount": 2
-      },
-      "type": "n8n-nodes-base.wait",
-      "typeVersion": 1.1,
-      "position": [
-        1344,
-        -208
-      ],
-      "id": "7e8d206e-0955-4264-a054-7f52e5aed125",
-      "name": "Espera 1s",
-      "webhookId": "57665f85-f34c-4a9b-81e3-71d620974b94"
     },
     {
       "parameters": {
@@ -2179,7 +2144,7 @@
             "NOMBRE PRODUCTO": "={{ $json.Producto }}",
             "VARIANTE": "={{ $json.Variante }}",
             "PRECIO": "={{ $json.Precio }}",
-            "UNIDADES VENDIDAS": "={{ $json[\"Unidades Vendidas\"] }}",
+            "UNIDADES VENDIDAS": "={{ $json.Unidades }}",
             "TOTAL": "={{ $json.Total }}",
             "TICKETS VENDIDOS": "={{ $json.Skatepark_Entradas_Vendidas }}",
             "PRECIO TOTAL": "={{ $json.Skatepark_Ingresos_Totales }}"
@@ -2278,8 +2243,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        432,
-        -752
+        896,
+        -512
       ],
       "id": "7f3e3a25-1af8-4209-af52-c9387dc6cbcb",
       "name": "Escribir detalle",
@@ -2310,7 +2275,7 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        272,
+        352,
         -192
       ],
       "id": "d2ef4873-7d36-41a0-ac61-3662612885c1",
@@ -2323,41 +2288,6 @@
         }
       },
       "onError": "continueErrorOutput"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "id_fecha",
-              "name": "NOMBRE_MES",
-              "value": "={{ $today.setLocale('es').format('MMMM').toUpperCase() }}",
-              "type": "string"
-            },
-            {
-              "id": "id_rango_inicio",
-              "name": "FECHA_INICIO",
-              "value": "={{ $today.startOf('month').format('yyyy-MM-dd') }}T00:00:00Z",
-              "type": "string"
-            },
-            {
-              "id": "id_rango_fin",
-              "name": "FECHA_FIN",
-              "value": "={{ $today.endOf('month').format('yyyy-MM-dd') }}T23:59:59Z",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        1360,
-        -32
-      ],
-      "id": "4ec80f18-8912-48eb-aac6-7855b84c109c",
-      "name": "Configurar Fechas2"
     },
     {
       "parameters": {
@@ -2396,25 +2326,12 @@
     },
     {
       "parameters": {
-        "jsCode": "// 1. Recuperamos datos\nconst staticData = $getWorkflowStaticData('global');\nlet allSales = staticData.allProducts;\n\nif (!allSales || allSales.length === 0) {\n  allSales = items.map(item => item.json);\n}\n\nconst productStats = {};\n// Variables Skatepark\nlet skateparkCount = 0;\nlet skateparkRevenue = 0;\nconst SKATEPARK_NAME = \"TICKET ENTRADA SKATEPARK\";\n\n// 2. Procesamos ventas\nfor (const sale of allSales) {\n  if (!sale['NOMBRE DE PRODUCTO']) continue;\n  const productName = sale['NOMBRE DE PRODUCTO'];\n  \n  // Limpieza números\n  let priceStr = (sale['PRECIO PAGADO'] || '0').toString();\n  let costStr = (sale['COSTE DE PRODUCTO'] || '0').toString();\n  let unitPriceStr = (sale['PRECIO DE PRODUCTO'] || '0').toString(); \n  \n  const paidPrice = parseFloat(priceStr.replace(',', '.')) || 0; \n  const cost = parseFloat(costStr.replace(',', '.')) || 0;\n  const listPrice = parseFloat(unitPriceStr.replace(',', '.')) || 0;\n\n  // Filtro Skatepark\n  if (productName.includes(SKATEPARK_NAME)) {\n      skateparkCount += 1;\n      skateparkRevenue += paidPrice;\n      continue; \n  }\n\n  const variant = sale['VARIANTE'] || '';\n  const key = `${productName} - ${variant}`;\n\n  if (!productStats[key]) {\n    productStats[key] = {\n      'Producto': productName,\n      'Variante': variant,\n      'Precio Etiqueta': listPrice, \n      'Ventas Totales': 0,        \n      'Unidades Vendidas': 0,\n      'Beneficio': 0\n    };\n  }\n  productStats[key]['Ventas Totales'] += paidPrice;\n  productStats[key]['Unidades Vendidas'] += 1;\n  productStats[key]['Beneficio'] += (paidPrice - cost);\n}\n\n// 3. Ordenar\nconst sortedProducts = Object.values(productStats).sort((a, b) => {\n  if (b['Unidades Vendidas'] !== a['Unidades Vendidas']) {\n    return b['Unidades Vendidas'] - a['Unidades Vendidas'];\n  }\n  return b['Ventas Totales'] - a['Ventas Totales'];\n});\n\n// 4. Cortar Top 10\nconst top10 = sortedProducts.slice(0, 10);\n\n// 5. Formato Salida CON FILA CALCULADA\nconst result = top10.map((p, index) => {\n  const jsonItem = {\n    'fila_excel': index + 2, // <--- AQUÍ ESTÁ EL TRUCO (Empieza en fila 2)\n    'Producto': p['Producto'],\n    'Variante': p['Variante'],\n    'Precio': parseFloat(p['Precio Etiqueta'].toFixed(2)),\n    'Unidades Vendidas': p['Unidades Vendidas'],\n    'Total': parseFloat(p['Ventas Totales'].toFixed(2)), \n    'Beneficio Estimado': parseFloat(p['Beneficio'].toFixed(2))\n  };\n\n  if (index === 0) {\n      jsonItem['Skatepark_Entradas_Vendidas'] = skateparkCount;\n      jsonItem['Skatepark_Ingresos_Totales'] = parseFloat(skateparkRevenue.toFixed(2));\n  }\n\n  return { json: jsonItem };\n});\n\nreturn result;"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        272,
-        -752
-      ],
-      "id": "6f3cf471-984c-488d-b08c-4f0f350039df",
-      "name": "Calcular Top 10"
-    },
-    {
-      "parameters": {
         "jsCode": "// Accedemos a la memoria global del flujo\nconst staticData = $getWorkflowStaticData('global');\n\n// Si es la primera vuelta, inicializamos la lista\nif (!staticData.allProducts) {\n  staticData.allProducts = [];\n}\n\n// Añadimos los productos leídos en esta vuelta del bucle\nconst newItems = items.map(item => item.json);\nstaticData.allProducts.push(...newItems);\n\n// Pasamos el testigo para que el flujo siga\nreturn { json: { status: 'guardado', filas: newItems.length } };"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        592,
+        672,
         -192
       ],
       "id": "a33a17b0-17aa-4d09-8bdb-a41b45ef16d7",
@@ -2422,70 +2339,16 @@
     },
     {
       "parameters": {
-        "jsCode": "// Agrupar por empleado\nconst inputs = items;\nconst groups = {};\nfor (const item of inputs) {\n  const data = item.json;\n  const userId = data.user_id;\n  const price = parseFloat(data.total_price) || 0;\n  if (!groups[userId]) {\n    groups[userId] = { user_id: userId, total_spent: 0, count: 0 };\n  }\n  groups[userId].total_spent += price;\n  groups[userId].count += 1;\n}\nconst sortedEmployees = Object.values(groups)\n  .map(g => ({\n    json: {\n      user_id: g.user_id,\n      total_sales: Number(g.total_spent.toFixed(2)),\n      orders_count: g.count\n    }\n  }))\n  .sort((a, b) => b.json.total_sales - a.json.total_sales);\nreturn sortedEmployees;"
+        "jsCode": "// 1. Recuperamos la lista de pedidos (Input)\nconst orders = items.map(item => item.json);\n\n// 2. Diccionario de Nombres\nconst employeeMap = {\n    \"126641570139\": \"Arturo Fernandez Caballero\",\n    \"126890148187\": \"Sandra Rogel Aguilera\",\n    \"126889361755\": \"Alejandro Pavon\",\n    \"127346573659\": \"Facundo Altamirano Pozzi\",\n    \"127144952155\": \"Jose Maria Restoy Varela\",\n    \"126790828379\": \"Florencia cielo Alarcon\",\n    \"115464700251\": \"Miguel Navarro\",\n    \"126641602907\": \"Eugenia La Piettra\",\n    \"126759141723\": \"Lorenzo Jimenez\",\n    \"127472533851\": \"Pablo roldan\",\n    \"127149113691\": \"Facundo Pereira\",\n    \"127346606427\": \"Nerea Fernández\",\n    \"125804478811\": \"Anabel Labella\",\n    \"127578997083\": \"Cesar Moreno\",\n    \"126889165147\": \"Julio Hermoso Fernández\",\n    \"126766121307\": \"Unai Rodríguez Alarcón\",\n    \"127048155483\": \"Gerardo Cairo\",\n    \"126888640859\": \"Facundo Altamirano Pozzi\",\n    \"123965866331\": \"Thomas Fontoura\",\n    \"126895620443\": \"Fabio Cortés Martín\",\n    \"126953292123\": \"Carlota Ramirez Palacios\",\n    \"126905516379\": \"André Ferreira\", \n    \"126888149339\": \"Alejandro Vasallo Bancalero\",\n    \"126905123163\": \"Ana Isabel Robles González\",\n    \"127310987611\": \"Paula Perez\",\n    \"114932875611\": \"Emiliano Martinez Verdecchia\",\n    \"125110976859\": \"Adrián Azorín\",\n    \"127346704731\": \"Rober Alonso\",\n    \"114884346203\": \"Lorena Verdecchia\",\n    \"126812389723\": \"Cuenta Multiusuario\",\n    \"115083706715\": \"Antonio Gabriel Lopez Moreno\"\n};\n\n// Objeto para acumular las ventas por ID\nconst salesSummary = {};\n\n// 3. Bucle para SUMAR ventas\nfor (const order of orders) {\n    const userId = order.user_id;\n    if (!userId) continue;\n\n    let price = parseFloat(order.total_price);\n    if (isNaN(price)) price = 0;\n\n    if (salesSummary[userId]) {\n        salesSummary[userId] += price;\n    } else {\n        salesSummary[userId] = price;\n    }\n}\n\n// 4. Transformar a lista temporal\nlet tempResults = [];\nfor (const [id, total] of Object.entries(salesSummary)) {\n    const nombre = employeeMap[id] || \"Desconocido (\" + id + \")\";\n    tempResults.push({\n        nombre: nombre,\n        total: parseFloat(total.toFixed(2))\n    });\n}\n\n// 5. Ordenar de mayor a menor venta\ntempResults.sort((a, b) => b.total - a.total);\n\n// 6. Generar JSON final con NUMERO DE FILA ACTUALIZADO\nconst finalResults = tempResults.map((item, index) => {\n    return {\n        json: {\n            \"numero_fila\": index + 31, // <--- Ahora empieza en 30\n            \"Nombre Empleado\": item.nombre,\n            \"Total Vendido\": item.total\n        }\n    };\n});\n\nreturn finalResults;"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1360,
-        128
-      ],
-      "id": "e2bc4c63-1319-4ac9-8ecd-a66c024022a1",
-      "name": "Calcular Ranking Empleados antiguo"
-    },
-    {
-      "parameters": {
-        "operation": "get",
-        "dataTableId": {
-          "__rl": true,
-          "value": "kpIuRe6aSFnpKUOB",
-          "mode": "list",
-          "cachedResultName": "Empleados_ids_Shopify",
-          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/kpIuRe6aSFnpKUOB"
-        },
-        "filters": {
-          "conditions": [
-            {
-              "keyName": "Identificador",
-              "keyValue": "={{ $json.user_id.toString() }}"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.dataTable",
-      "typeVersion": 1,
-      "position": [
-        1360,
-        288
-      ],
-      "id": "46231967-5f86-4143-9f9a-b4f5a426af10",
-      "name": "Obtener Nombres Empleados antiguo"
-    },
-    {
-      "parameters": {
-        "jsCode": "// 1. Recuperamos la lista de pedidos (Input)\nconst orders = items.map(item => item.json);\n\n// 2. Diccionario de Nombres\nconst employeeMap = {\n    \"126641570139\": \"Arturo Fernandez Caballero\",\n    \"126890148187\": \"Sandra Rogel Aguilera\",\n    \"126889361755\": \"Alejandro Pavon\",\n    \"127346573659\": \"Facundo Altamirano Pozzi\",\n    \"127144952155\": \"Jose Maria Restoy Varela\",\n    \"126790828379\": \"Florencia cielo Alarcon\",\n    \"115464700251\": \"Miguel Navarro\",\n    \"126641602907\": \"Eugenia La Piettra\",\n    \"126759141723\": \"Lorenzo Jimenez\",\n    \"127472533851\": \"Pablo roldan\",\n    \"127149113691\": \"Facundo Pereira\",\n    \"127346606427\": \"Nerea Fernández\",\n    \"125804478811\": \"Anabel Labella\",\n    \"127578997083\": \"Cesar Moreno\",\n    \"126889165147\": \"Julio Hermoso Fernández\",\n    \"126766121307\": \"Unai Rodríguez Alarcón\",\n    \"127048155483\": \"Gerardo Cairo\",\n    \"126888640859\": \"Facundo Altamirano Pozzi\",\n    \"123965866331\": \"Thomas Fontoura\",\n    \"126895620443\": \"Fabio Cortés Martín\",\n    \"126953292123\": \"Carlota Ramirez Palacios\",\n    \"126905516379\": \"André Ferreira\", \n    \"126888149339\": \"Alejandro Vasallo Bancalero\",\n    \"126905123163\": \"Ana Isabel Robles González\",\n    \"127310987611\": \"Paula Perez\",\n    \"114932875611\": \"Emiliano Martinez Verdecchia\",\n    \"125110976859\": \"Adrián Azorín\",\n    \"127346704731\": \"Rober Alonso\",\n    \"114884346203\": \"Lorena Verdecchia\",\n    \"126812389723\": \"Cuenta Multiusuario\",\n    \"115083706715\": \"Antonio Gabriel Lopez Moreno\"\n};\n\n// Objeto para acumular las ventas por ID\nconst salesSummary = {};\n\n// 3. Bucle para SUMAR ventas\nfor (const order of orders) {\n    const userId = order.user_id;\n    if (!userId) continue;\n\n    let price = parseFloat(order.total_price);\n    if (isNaN(price)) price = 0;\n\n    if (salesSummary[userId]) {\n        salesSummary[userId] += price;\n    } else {\n        salesSummary[userId] = price;\n    }\n}\n\n// 4. Transformar a lista temporal\nlet tempResults = [];\nfor (const [id, total] of Object.entries(salesSummary)) {\n    const nombre = employeeMap[id] || \"Desconocido (\" + id + \")\";\n    tempResults.push({\n        nombre: nombre,\n        total: parseFloat(total.toFixed(2))\n    });\n}\n\n// 5. Ordenar de mayor a menor venta\ntempResults.sort((a, b) => b.total - a.total);\n\n// 6. Generar JSON final con NUMERO DE FILA\nconst finalResults = tempResults.map((item, index) => {\n    return {\n        json: {\n            \"numero_fila\": index + 2, // Empieza en la fila 2 (debajo de cabeceras)\n            \"Nombre Empleado\": item.nombre,\n            \"Total Vendido\": item.total\n        }\n    };\n});\n\nreturn finalResults;"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        576,
-        480
+        544,
+        464
       ],
       "id": "78b07875-794e-4a6d-9100-1bc799bff8a6",
       "name": "Calcular Ranking Empleados"
-    },
-    {
-      "parameters": {
-        "jsCode": "// 1. RECUPERAR VENTAS (Exclusivamente de la memoria del bucle)\nconst staticData = $getWorkflowStaticData('global');\nconst allSales = staticData.allProducts || [];\n\n// 2. RECUPERAR MARCAS (Del input del nodo actual)\n// Como el nodo anterior es \"Tabla Marcas\", 'items' contiene tus 1150 marcas.\n// Asegúrate de que la columna se llama 'Nombre_del_Proveedor' (según tu captura de pantalla)\nconst LISTA_MARCAS = items.map(item => item.json['Nombre_del_Proveedor']); \n\n// TRUCO PRO: Ordenamos las marcas por longitud (de más larga a más corta).\n// Esto evita errores (ej: que detecte \"North\" antes que \"The North Face\").\nLISTA_MARCAS.sort((a, b) => {\n    const lenA = a ? a.length : 0;\n    const lenB = b ? b.length : 0;\n    return lenB - lenA;\n});\n\n// --- VERIFICACIÓN DE SEGURIDAD ---\n// Si no has ejecutado el bucle en esta sesión, allSales estará vacío.\nif (allSales.length === 0) {\n    return [\n        { \n            json: { \n                Mensaje: \"⚠️ MEMORIA VACÍA: Necesitas ejecutar el nodo 'Acumular en memoria' o el Bucle completo antes de probar este nodo.\",\n                fila_excel: 14 \n            } \n        }\n    ];\n}\n\nconst brandStats = {};\nconst SKATEPARK_NAME = \"TICKET ENTRADA SKATEPARK\";\n\n// 3. PROCESAR TODAS LAS VENTAS\nfor (const sale of allSales) {\n  const productName = sale['NOMBRE DE PRODUCTO'];\n  \n  // Ignoramos entradas de skatepark o productos sin nombre\n  if (!productName || productName.includes(SKATEPARK_NAME)) continue;\n  \n  // Limpieza de números\n  let priceStr = (sale['PRECIO PAGADO'] || '0').toString();\n  let costStr = (sale['COSTE DE PRODUCTO'] || '0').toString();\n  \n  const paidPrice = parseFloat(priceStr.replace(',', '.')) || 0; \n  const cost = parseFloat(costStr.replace(',', '.')) || 0;\n\n  // --- LÓGICA DE DETECCIÓN DINÁMICA ---\n  let detectedBrand = \"Otras\"; \n  \n  // Comparamos el título del producto contra tu lista de marcas importada\n  for (const marca of LISTA_MARCAS) {\n      // Verificamos que la marca no sea null/undefined y buscamos en el nombre del producto\n      if (marca && productName.toLowerCase().includes(marca.toLowerCase())) {\n          detectedBrand = marca; // ¡Marca encontrada!\n          break; \n      }\n  }\n\n  if (!brandStats[detectedBrand]) {\n    brandStats[detectedBrand] = {\n      'Marca': detectedBrand,\n      'Ventas Totales': 0,        \n      'Unidades Vendidas': 0,\n      'Beneficio': 0\n    };\n  }\n\n  brandStats[detectedBrand]['Ventas Totales'] += paidPrice;\n  brandStats[detectedBrand]['Unidades Vendidas'] += 1;\n  brandStats[detectedBrand]['Beneficio'] += (paidPrice - cost);\n}\n\n// 4. ORDENAR Y FILTRAR (Quitamos \"Otras\" para el top)\nconst brandsArray = Object.values(brandStats).filter(b => b.Marca !== \"Otras\");\n\nconst sortedBrands = brandsArray.sort((a, b) => {\n  if (b['Unidades Vendidas'] !== a['Unidades Vendidas']) {\n    return b['Unidades Vendidas'] - a['Unidades Vendidas'];\n  }\n  return b['Ventas Totales'] - a['Ventas Totales'];\n});\n\n// 5. CORTAR TOP 10\nconst top10 = sortedBrands.slice(0, 10);\n\n// 6. FORMATO SALIDA (EMPEZANDO EN FILA 14)\nconst result = top10.map((b, index) => ({\n  json: {\n    'fila_excel': index + 14, \n    'Marca': b['Marca'],\n    'Unidades Vendidas': b['Unidades Vendidas'],\n    'Total': parseFloat(b['Ventas Totales'].toFixed(2))\n  }\n}));\n\nreturn result;"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        432,
-        -576
-      ],
-      "id": "eca89f06-a992-4ed8-ab24-1a31a26cf4a2",
-      "name": "Calcular top marcas"
     },
     {
       "parameters": {
@@ -2507,7 +2370,7 @@
             "NOMBRE PRODUCTO": "=",
             "VARIANTE": "=",
             "PRECIO": "={{ $json.Marca }}",
-            "UNIDADES VENDIDAS": "={{ $json[\"Unidades Vendidas\"] }}",
+            "UNIDADES VENDIDAS": "={{ $json.Unidades }}",
             "TOTAL": "={{ $json.Total }}",
             "TICKETS VENDIDOS": "=",
             "PRECIO TOTAL": "="
@@ -2606,8 +2469,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        640,
-        -576
+        896,
+        -368
       ],
       "id": "29c8e054-4eea-484f-a4ff-d2de119feb59",
       "name": "Escribir marcas",
@@ -2629,41 +2492,11 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        432,
+        512,
         -176
       ],
       "id": "9c7d312d-251d-4683-ac7e-4c48146e1346",
       "name": "Espera 1m",
-      "webhookId": "57665f85-f34c-4a9b-81e3-71d620974b94"
-    },
-    {
-      "parameters": {
-        "amount": 1,
-        "unit": "minutes"
-      },
-      "type": "n8n-nodes-base.wait",
-      "typeVersion": 1.1,
-      "position": [
-        624,
-        -736
-      ],
-      "id": "4e9ed717-1698-431e-983e-8b64f4824cc0",
-      "name": "Espera 1m1",
-      "webhookId": "57665f85-f34c-4a9b-81e3-71d620974b94"
-    },
-    {
-      "parameters": {
-        "amount": 1,
-        "unit": "minutes"
-      },
-      "type": "n8n-nodes-base.wait",
-      "typeVersion": 1.1,
-      "position": [
-        816,
-        -560
-      ],
-      "id": "d284df91-2af2-4fef-ac3b-eb18b0f09912",
-      "name": "Espera 1m2",
       "webhookId": "57665f85-f34c-4a9b-81e3-71d620974b94"
     },
     {
@@ -2680,54 +2513,11 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
       "position": [
-        272,
-        -576
+        352,
+        -384
       ],
       "id": "4fe4230d-1851-46a4-9da2-77eac8f7bc95",
       "name": "Tabla Marcas"
-    },
-    {
-      "parameters": {
-        "amount": 1,
-        "unit": "minutes"
-      },
-      "type": "n8n-nodes-base.wait",
-      "typeVersion": 1.1,
-      "position": [
-        928,
-        496
-      ],
-      "id": "bf5c1029-08ea-42eb-bd43-a85e1287e686",
-      "name": "Espera 1m3",
-      "webhookId": "57665f85-f34c-4a9b-81e3-71d620974b94"
-    },
-    {
-      "parameters": {
-        "jsCode": "// 1. RECUPERAR VENTAS (De la memoria)\nconst staticData = $getWorkflowStaticData('global');\nconst allSales = staticData.allProducts || [];\n\n// Verificación de seguridad\nif (allSales.length === 0) {\n    return [{ json: { Mensaje: \"⚠️ Memoria vacía. Ejecuta el bucle primero.\" } }];\n}\n\nconst branchStats = {};\nconst SKATEPARK_NAME = \"TICKET ENTRADA SKATEPARK\";\n\n// --- CONFIGURACIÓN DE FILA ---\nconst FILA_INICIO = 26; // <--- AQUÍ ESTÁ EL 26 QUE NECESITAS\n// -----------------------------\n\n// 2. PROCESAR VENTAS\nfor (const sale of allSales) {\n  const branchName = sale['SUCURSAL DE VENTA'];\n  const productName = sale['NOMBRE DE PRODUCTO'];\n\n  // Filtros: Ignorar si no hay sucursal, si es N/A o si es el ticket del skatepark\n  if (!branchName || branchName === \"N/A\" || (productName && productName.includes(SKATEPARK_NAME))) {\n      continue;\n  }\n  \n  // Limpieza de números\n  let priceStr = (sale['PRECIO PAGADO'] || '0').toString();\n  const paidPrice = parseFloat(priceStr.replace(',', '.')) || 0; \n\n  if (!branchStats[branchName]) {\n    branchStats[branchName] = {\n      'Sucursal': branchName,\n      'Ingresos Totales': 0,\n      'Transacciones': 0\n    };\n  }\n\n  branchStats[branchName]['Ingresos Totales'] += paidPrice;\n  branchStats[branchName]['Transacciones'] += 1;\n}\n\n// 3. ORDENAR POR DINERO GENERADO (De más a menos)\nconst sortedBranches = Object.values(branchStats).sort((a, b) => {\n  return b['Ingresos Totales'] - a['Ingresos Totales'];\n});\n\n// 4. FORMATO SALIDA\nconst result = sortedBranches.map((b, index) => ({\n  json: {\n    'fila_excel': index + FILA_INICIO, // Esto calculará 26, 27, 28...\n    'Sucursal': b['Sucursal'],\n    'Ventas (Cant)': b['Transacciones'],\n    'Total Ingresado': parseFloat(b['Ingresos Totales'].toFixed(2))\n  }\n}));\n\n// 5. LIMPIEZA FINAL DE MEMORIA\n// ¡IMPORTANTE! Este debe ser el ÚNICO nodo que tenga esta línea activada\nstaticData.allProducts = [];\n\nreturn result;"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        272,
-        -384
-      ],
-      "id": "6f18f499-b18e-4684-9595-e0966ef6a32f",
-      "name": "Calcular top Sucursales"
-    },
-    {
-      "parameters": {
-        "amount": 1,
-        "unit": "minutes"
-      },
-      "type": "n8n-nodes-base.wait",
-      "typeVersion": 1.1,
-      "position": [
-        624,
-        -368
-      ],
-      "id": "13bc2543-8feb-4b16-bbc8-c14ac092b32e",
-      "name": "Espera 1m4",
-      "webhookId": "57665f85-f34c-4a9b-81e3-71d620974b94"
     },
     {
       "parameters": {
@@ -2749,8 +2539,8 @@
             "NOMBRE PRODUCTO": "=",
             "VARIANTE": "=",
             "PRECIO": "={{ $json.Sucursal }}",
-            "UNIDADES VENDIDAS": "={{ $json[\"Ventas (Cant)\"] }}",
-            "TOTAL": "={{ $json[\"Total Ingresado\"] }}",
+            "UNIDADES VENDIDAS": "={{ $json.Transacciones }}",
+            "TOTAL": "={{ $json.Total }}",
             "TICKETS VENDIDOS": "=",
             "PRECIO TOTAL": "="
           },
@@ -2848,8 +2638,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        464,
-        -384
+        896,
+        -224
       ],
       "id": "3bed7595-6d03-4345-9471-9458e4d05a69",
       "name": "Escribir sucursales",
@@ -2862,6 +2652,143 @@
         }
       },
       "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "batchSize": 10,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        736,
+        464
+      ],
+      "id": "d7771f33-ed1d-406c-8497-25446ab020a1",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "name": "Replace Me",
+      "typeVersion": 1,
+      "position": [
+        1168,
+        1008
+      ],
+      "id": "cb09523f-e127-4631-9102-2c7a9e8aa632"
+    },
+    {
+      "parameters": {
+        "amount": 1
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1088,
+        464
+      ],
+      "id": "0bbd5937-11f5-4468-bfc6-9bb942ff6945",
+      "name": "Wait",
+      "webhookId": "1be80c97-a21c-49f7-96f4-a9686e8a5bc0"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. CONFIGURACIÓN Y DATOS\nconst staticData = $getWorkflowStaticData('global');\nconst allSales = staticData.allProducts || [];\n\nif (allSales.length === 0) {\n    return [{ json: { mensaje: \"⚠️ Ejecuta el bucle primero.\" } }];\n}\n\n// Importar Marcas (Dinámico desde el nodo anterior)\n// Como conectamos Tabla Marcas -> Code, 'items' tiene las marcas.\nconst LISTA_MARCAS = items.map(item => item.json['Nombre_del_Proveedor']);\nLISTA_MARCAS.sort((a, b) => (b ? b.length : 0) - (a ? a.length : 0));\n\n// Contenedores\nconst productStats = {};\nconst brandStats = {};\nconst branchStats = {};\n\n// Configuración\nlet skateparkCount = 0;\nlet skateparkRevenue = 0;\nconst SKATEPARK_NAME = \"TICKET ENTRADA SKATEPARK\";\nconst FILA_SUCURSALES = 26; \n\n// 2. PROCESAMIENTO ÚNICO\nfor (const sale of allSales) {\n    const productName = sale['NOMBRE DE PRODUCTO'];\n    const branchName = sale['SUCURSAL DE VENTA'];\n    \n    // Limpieza números\n    let priceStr = (sale['PRECIO PAGADO'] || '0').toString();\n    let costStr = (sale['COSTE DE PRODUCTO'] || '0').toString();\n    let unitPriceStr = (sale['PRECIO DE PRODUCTO'] || '0').toString();\n    \n    const paidPrice = parseFloat(priceStr.replace(',', '.')) || 0;\n    const cost = parseFloat(costStr.replace(',', '.')) || 0;\n    const listPrice = parseFloat(unitPriceStr.replace(',', '.')) || 0;\n\n    // Lógica Skatepark\n    if (productName && productName.includes(SKATEPARK_NAME)) {\n        skateparkCount += 1;\n        skateparkRevenue += paidPrice;\n        continue; \n    }\n\n    if (productName) {\n        // A) PRODUCTOS\n        const variant = sale['VARIANTE'] || '';\n        const prodKey = `${productName} - ${variant}`;\n        \n        if (!productStats[prodKey]) {\n            productStats[prodKey] = {\n                Producto: productName, Variante: variant, Precio: listPrice,\n                Ventas: 0, Unidades: 0, Beneficio: 0\n            };\n        }\n        productStats[prodKey].Ventas += paidPrice;\n        productStats[prodKey].Unidades += 1;\n        productStats[prodKey].Beneficio += (paidPrice - cost);\n\n        // B) MARCAS\n        let detectedBrand = \"Otras\";\n        for (const marca of LISTA_MARCAS) {\n            if (marca && productName.toLowerCase().includes(marca.toLowerCase())) {\n                detectedBrand = marca;\n                break;\n            }\n        }\n        if (!brandStats[detectedBrand]) {\n            brandStats[detectedBrand] = { Marca: detectedBrand, Ventas: 0, Unidades: 0 };\n        }\n        brandStats[detectedBrand].Ventas += paidPrice;\n        brandStats[detectedBrand].Unidades += 1;\n    }\n\n    // C) SUCURSALES\n    if (branchName && branchName !== \"N/A\") {\n        if (!branchStats[branchName]) {\n            branchStats[branchName] = { Sucursal: branchName, Ventas: 0, Transacciones: 0 };\n        }\n        branchStats[branchName].Ventas += paidPrice;\n        branchStats[branchName].Transacciones += 1;\n    }\n}\n\n// 3. GENERAR RESULTADOS\nconst finalOutput = [];\n\n// --- PRODUCTOS (Top 10) ---\nconst sortedProds = Object.values(productStats).sort((a, b) => \n    b.Unidades !== a.Unidades ? b.Unidades - a.Unidades : b.Ventas - a.Ventas\n).slice(0, 10);\n\nsortedProds.forEach((p, i) => {\n    const item = {\n        tipo: \"producto\",\n        fila_excel: i + 2,\n        Producto: p.Producto,\n        Variante: p.Variante,\n        Precio: parseFloat(p.Precio.toFixed(2)),\n        Unidades: p.Unidades,\n        Total: parseFloat(p.Ventas.toFixed(2)),\n        Beneficio: parseFloat(p.Beneficio.toFixed(2))\n    };\n    if (i === 0) {\n        item.Skatepark_Entradas_Vendidas = skateparkCount;\n        item.Skatepark_Ingresos_Totales = parseFloat(skateparkRevenue.toFixed(2));\n    }\n    finalOutput.push({ json: item });\n});\n\n// --- MARCAS (Top 10) ---\nconst sortedBrands = Object.values(brandStats)\n    .filter(b => b.Marca !== \"Otras\")\n    .sort((a, b) => b.Unidades !== a.Unidades ? b.Unidades - a.Unidades : b.Ventas - a.Ventas)\n    .slice(0, 10);\n\nsortedBrands.forEach((b, i) => {\n    finalOutput.push({\n        json: {\n            tipo: \"marca\",\n            fila_excel: i + 14, \n            Marca: b.Marca,\n            Unidades: b.Unidades,\n            Total: parseFloat(b.Ventas.toFixed(2))\n        }\n    });\n});\n\n// --- SUCURSALES (Todas) ---\nconst sortedBranches = Object.values(branchStats).sort((a, b) => b.Ventas - a.Ventas);\n\nsortedBranches.forEach((b, i) => {\n    finalOutput.push({\n        json: {\n            tipo: \"sucursal\",\n            fila_excel: i + FILA_SUCURSALES, \n            Sucursal: b.Sucursal,\n            Transacciones: b.Transacciones,\n            Total: parseFloat(b.Ventas.toFixed(2))\n        }\n    });\n});\n\n// 4. LIMPIEZA FINAL (Apagar la luz)\nstaticData.allProducts = [];\n\nreturn finalOutput;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        512,
+        -384
+      ],
+      "id": "504c552c-d8b0-4d63-abb6-a9ec3f46e91b",
+      "name": "Calculo_Maestro"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.tipo }}",
+                    "rightValue": "producto",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "e3281762-2b3c-41e1-bcd5-6d1e82e10c0d"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "bd5f0dee-b77a-43e9-a0d6-b1df7ccd262c",
+                    "leftValue": "={{ $json.tipo }}",
+                    "rightValue": "marca",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "395d8bc3-96de-4d5b-be62-bec164fe3c72",
+                    "leftValue": "={{ $json.tipo }}",
+                    "rightValue": "sucursal",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        672,
+        -384
+      ],
+      "id": "654cadb9-d4c2-4198-b6da-69e0bd56aa55",
+      "name": "Elegir tipo de input"
     }
   ],
   "pinData": {},
@@ -2881,6 +2808,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-01-24T12:31:39.785Z",
-  "versionId": "36077098-7923-4cab-9428-f6e85074b85c"
+  "updatedAt": "2026-01-26T11:12:58.807Z",
+  "versionId": "794a1e96-658d-4565-8164-ca863bba082b"
 }
