@@ -1,45 +1,156 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2025-12-11T11:18:42.753Z",
-    "createdAt": "2025-12-11T11:18:42.753Z",
-    "versionId": "3604c531-4bd1-4a9d-9700-b964d182f701",
+    "updatedAt": "2026-01-26T12:01:43.000Z",
+    "createdAt": "2026-01-26T09:42:06.180Z",
+    "versionId": "cc26f21e-0aef-47b9-922f-147e174dec89",
     "workflowId": "YUPMjmLvnBwe9nE5",
     "nodes": [
       {
         "parameters": {
-          "inputSource": "passthrough"
+          "url": "https://rulesshop.myshopify.com/admin/api/2025-10/customers/search.json",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpHeaderAuth",
+          "sendQuery": true,
+          "queryParameters": {
+            "parameters": [
+              {
+                "name": "query",
+                "value": "tag:Empleado AND tag:BONO*"
+              }
+            ]
+          },
+          "options": {}
         },
-        "id": "c055762a-8fe7-4141-a639-df2372f30060",
-        "typeVersion": 1.1,
-        "name": "When Executed by Another Workflow",
-        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
         "position": [
-          272,
-          352
-        ]
+          208,
+          0
+        ],
+        "id": "378c0fd2-d9ee-4649-bdfa-ac77472a859f",
+        "name": "HTTP Request",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
       },
       {
         "parameters": {
-          "language": "python",
-          "pythonCode": "# Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor item in _input.all():\n  item.json.myNewField = 1\nreturn _input.all()"
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
+          "query": "query getStoreCredit($ids: [ID!]!) {\n  nodes(ids: $ids) {\n    ... on Customer {\n      id\n      firstName\n      lastName\n      email\n      tags\n      storeCreditAccounts(first: 1) {\n        edges {\n          node {\n            balance {\n              amount\n              currencyCode\n            }\n          }\n        }\n      }\n    }\n  }\n}",
+          "variables": "={\n  \"ids\": {{ JSON.stringify($json.customers.map(c => c.admin_graphql_api_id)) }}\n}"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          416,
+          0
+        ],
+        "id": "e1f89c65-748f-40d0-a6c5-1d4419a25aa4",
+        "name": "GraphQL",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
+          "query": "mutation removeBonoTags($id: ID!, $tags: [String!]!) {\n  tagsRemove(id: $id, tags: $tags) {\n    userErrors {\n      field\n      message\n    }\n    node {\n      id\n    }\n  }\n}",
+          "variables": "={\n  \"id\": \"{{ $json.id }}\",\n  \"tags\": {{ JSON.stringify($json.tags.filter(t => t.includes('BONO'))) }}\n}"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          816,
+          0
+        ],
+        "id": "0b3b485a-a0d1-4e8f-bcc0-725b45867dc1",
+        "name": "GraphQL1",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "// 1. Obtenemos el array de clientes (nodes) del resultado anterior\n// Nota: items[0] toma el primer item del input, que contiene el JSON grande de GraphQL\nconst customers = items[0].json.data.nodes;\n\n// 2. Filtramos para quedarnos solo con los de saldo 0\nconst filteredCustomers = customers.filter(customer => {\n  // Accedemos a los edges de forma segura usando '?.' por si algún cliente no tiene el campo\n  const edges = customer.storeCreditAccounts?.edges;\n\n  // CASO 1: El cliente tiene una cuenta de crédito registrada\n  if (edges && edges.length > 0) {\n    const amountStr = edges[0].node.balance.amount;\n    // Convertimos el string (\"0.0\") a número flotante y comparamos\n    return parseFloat(amountStr) === 0;\n  }\n\n  // CASO 2: El cliente NO tiene cuenta de crédito (edges está vacío)\n  // Si no tiene cuenta, su saldo es técnicamente 0.\n  // Devolvemos 'true' para incluirlos. Si quisieras excluirlos, pon 'false'.\n  return true;\n});\n\n// 3. Devolvemos el resultado en el formato que n8n entiende (array de objetos json)\nreturn filteredCustomers.map(customer => {\n  return { json: customer };\n});"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          480,
-          352
+          624,
+          0
         ],
-        "id": "c24fac9d-a9ac-4beb-8957-cda9847d1ecd",
-        "name": "Code in Python (Beta)"
+        "id": "1611fa61-36d6-45ea-9d04-82209eeef37a",
+        "name": "Code in JavaScript"
+      },
+      {
+        "parameters": {
+          "rule": {
+            "interval": [
+              {}
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "typeVersion": 1.3,
+        "position": [
+          0,
+          0
+        ],
+        "id": "8066a11f-cd98-4cac-baff-240026d2c351",
+        "name": "Schedule Trigger"
       }
     ],
     "connections": {
-      "When Executed by Another Workflow": {
+      "HTTP Request": {
         "main": [
           [
             {
-              "node": "Code in Python (Beta)",
+              "node": "GraphQL",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "GraphQL": {
+        "main": [
+          [
+            {
+              "node": "Code in JavaScript",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code in JavaScript": {
+        "main": [
+          [
+            {
+              "node": "GraphQL1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Schedule Trigger": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request",
               "type": "main",
               "index": 0
             }
@@ -48,11 +159,11 @@
       }
     },
     "authors": "Info Tailwind",
-    "name": null,
-    "description": null,
+    "name": "Version cc26f21e",
+    "description": "",
     "autosaved": false
   },
-  "activeVersionId": "3604c531-4bd1-4a9d-9700-b964d182f701",
+  "activeVersionId": "cc26f21e-0aef-47b9-922f-147e174dec89",
   "connections": {
     "HTTP Request": {
       "main": [
@@ -211,17 +322,6 @@
       ],
       "id": "8066a11f-cd98-4cac-baff-240026d2c351",
       "name": "Schedule Trigger"
-    },
-    {
-      "parameters": {},
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        -240,
-        -304
-      ],
-      "id": "bc972c06-63f5-4f23-84b6-1ed24297b75d",
-      "name": "Sticky Note"
     }
   ],
   "pinData": {},
@@ -237,9 +337,13 @@
       "projectId": "x5UZcmGQw2OWHuXb"
     }
   ],
-  "staticData": null,
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrenceRules": []
+    }
+  },
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2026-01-23T07:40:25.681Z",
-  "versionId": "7ff832c0-2bea-46b4-80ab-11c99d08aaa6"
+  "triggerCount": 1,
+  "updatedAt": "2026-01-26T09:42:06.172Z",
+  "versionId": "cc26f21e-0aef-47b9-922f-147e174dec89"
 }
