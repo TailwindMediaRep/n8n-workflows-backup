@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-01-22T11:28:43.000Z",
-    "createdAt": "2026-01-22T11:28:41.586Z",
-    "versionId": "9e31c851-2760-4e57-8d5e-93d2d8df80f0",
+    "updatedAt": "2026-01-26T13:04:38.000Z",
+    "createdAt": "2026-01-26T13:04:37.231Z",
+    "versionId": "0be4f264-5f42-4620-96d2-d0ca7b0481bc",
     "workflowId": "UmKsPhbqKY4r9YDi9-dc0",
     "nodes": [
       {
@@ -39,128 +39,6 @@
       },
       {
         "parameters": {
-          "url": "=https://snowink.bizneohr.com/api/v1/users?page_size=25",
-          "authentication": "genericCredentialType",
-          "genericAuthType": "httpHeaderAuth",
-          "sendQuery": true,
-          "queryParameters": {
-            "parameters": [
-              {
-                "name": "token",
-                "value": "SFMyNTY.g2gDdAAAAAJ3AmlkbQAAACRhMDZkZGIwNi03NjZjLTQ0ZDMtYTI1YS02MmZiMTUyNWMxZmZ3CmNvbXBhbnlfaWRiAO2ucG4GAF89AKebAWIAAVGA.w1Gue36eFFL5B9iPAWqon1Te_4w1rJr4zAVkhHcrfho"
-              }
-            ]
-          },
-          "options": {
-            "response": {
-              "response": {
-                "fullResponse": true
-              }
-            },
-            "pagination": {
-              "pagination": {
-                "parameters": {
-                  "parameters": [
-                    {
-                      "name": "page",
-                      "value": "={{ $pageCount + 1 }}"
-                    }
-                  ]
-                },
-                "paginationCompleteWhen": "other",
-                "completeExpression": "={{ $response.body.pagination.page_number >= $response.body.pagination.total_pages }}"
-              }
-            }
-          }
-        },
-        "type": "n8n-nodes-base.httpRequest",
-        "typeVersion": 4.3,
-        "position": [
-          -832,
-          80
-        ],
-        "id": "be8b1ce9-2fed-4cfb-a935-5fbefcbc062c",
-        "name": "Empleados Total - Bizneo",
-        "alwaysOutputData": false,
-        "credentials": {
-          "httpHeaderAuth": {
-            "id": "OPt2Cl0dnwcU4qRk",
-            "name": "ShopifyInformes"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "jsCode": "// Obtenemos la fecha actual y la ajustamos a las 00:00:00\nconst today = new Date();\ntoday.setHours(0, 0, 0, 0);\n\n// Usamos .map() para modificar cada ítem y añadir las propiedades nuevas\nreturn $input.all().map(item => {\n    const employee = item.json;\n    \n    // ---------------------------------------------------------\n    // 1. LÓGICA DE VIGENCIA (Tu código original)\n    // ---------------------------------------------------------\n    const contracts = employee.work_contracts || [];\n\n    const hasActiveContract = contracts.some(contract => {\n        const startDate = new Date(contract.start_at);\n        startDate.setHours(0, 0, 0, 0);\n\n        // El contrato ya empezó\n        const isStarted = startDate <= today;\n\n        // El contrato no ha terminado\n        let isNotEnded = true;\n        if (contract.end_at !== null) {\n            const endDate = new Date(contract.end_at);\n            endDate.setHours(0, 0, 0, 0);\n            if (endDate < today) {\n                isNotEnded = false;\n            }\n        }\n        return isStarted && isNotEnded;\n    });\n\n    // Añadimos la variable de vigencia\n    employee.isVigente = hasActiveContract;\n\n\n    // ---------------------------------------------------------\n    // 2. LÓGICA DE PROFESORES (Nueva)\n    // ---------------------------------------------------------\n    const rawTaxons = employee.main_taxons || \"\";\n    \n    // A) Convertimos a Array para búsquedas EXACTAS (\"a secas\")\n    // Esto separa \"Snow Division\" de \"Snow Division Rental\"\n    const tagsArray = String(rawTaxons).split(',').map(tag => tag.trim());\n    \n    // B) Convertimos a minúsculas para búsquedas PARCIALES (\"contiene\")\n    const taxonsLower = String(rawTaxons).toLowerCase();\n\n    let esProfesor = false;\n\n    // Condición 1: Coincidencia EXACTA (A secas)\n    // Busca si la etiqueta exacta existe en la lista\n    if (tagsArray.includes(\"Club Surfin\") || tagsArray.includes(\"Snow Division\")) {\n        esProfesor = true;\n    }\n\n    // Condición 2: Coincidencia PARCIAL (Contiene)\n    // Busca si el texto aparece dentro de cualquier parte\n    if (taxonsLower.includes(\"club nieve\") || taxonsLower.includes(\"ski school\")) {\n        esProfesor = true;\n    }\n\n    // Añadimos la variable de profesor\n    employee.es_profesor = esProfesor;\n\n    return item;\n});"
-        },
-        "type": "n8n-nodes-base.code",
-        "typeVersion": 2,
-        "position": [
-          -416,
-          80
-        ],
-        "id": "a2794c8e-cdcd-4757-90dd-d851641838d4",
-        "name": "Empleados Vigentes - Bizneo"
-      },
-      {
-        "parameters": {
-          "jsCode": "// 1. Obtenemos el resultado de la búsqueda en Shopify (Input de este nodo)\nconst shopifyResults = $input.all();\n\n// 2. Obtenemos los datos de Bizneo desde el nodo \"If\"\n// IMPORTANTE: Asegúrate de haber ejecutado el nodo \"If\" anterior para que esto tenga datos\nconst bizneoResults = $(\"If\").all();\n\nconst missingEmployees = [];\n\n// 3. Recorremos los resultados línea a línea\nshopifyResults.forEach((item, index) => {\n    // a) Revisamos si Shopify devolvió datos (edges vacío = no existe cuenta)\n    const edges = item.json.data?.customers?.edges;\n    \n    // b) Recuperamos los datos del empleado de Bizneo correspondiente (mismo índice)\n    const bizneoData = bizneoResults[index] ? bizneoResults[index].json : {};\n\n    // CONDICIÓN:\n    // Si 'edges' está vacío o es nulo, significa que el correo NO existe en Shopify.\n    if (!edges || edges.length === 0) {\n        \n        // --- LÓGICA DE DETECCIÓN DE PROFESOR ---\n        const rawTaxons = bizneoData.main_taxons || \"\";\n        \n        // 1. Convertimos a Array para búsquedas EXACTAS (\"a secas\")\n        // Separa \"Snow Division\" de \"Snow Division Rental\"\n        const tagsArray = String(rawTaxons).split(',').map(tag => tag.trim());\n        \n        // 2. Convertimos a minúsculas para búsquedas PARCIALES (\"contiene\")\n        const taxonsLower = String(rawTaxons).toLowerCase();\n\n        let esProfesor = false;\n\n        // A) Coincidencia Exacta\n        if (tagsArray.includes(\"Club Surfin\") || tagsArray.includes(\"Snow Division\")) {\n            esProfesor = true;\n        }\n\n        // B) Coincidencia Parcial\n        if (taxonsLower.includes(\"club nieve\") || taxonsLower.includes(\"ski school\")) {\n            esProfesor = true;\n        }\n        // ----------------------------------------\n        \n        // Agregamos a la lista final para crear\n        missingEmployees.push({\n            json: {\n                // Pasamos los datos limpios de Bizneo\n                first_name: bizneoData.first_name,\n                last_name: bizneoData.last_name,\n                email: bizneoData.email,\n                id_bizneo: bizneoData.id,\n                external_id: bizneoData.external_id,\n                \n                // Variable NUEVA para el siguiente IF\n                es_profesor: esProfesor, \n                main_taxons: rawTaxons, // (Opcional) Por si quieres revisar qué etiquetas tenía\n\n                // Debug info\n                check_status: \"Vigente en Bizneo, No existe en Shopify\"\n            }\n        });\n    }\n});\n\nreturn missingEmployees;"
-        },
-        "type": "n8n-nodes-base.code",
-        "typeVersion": 2,
-        "position": [
-          288,
-          -32
-        ],
-        "id": "9e9d34eb-5b24-404c-9437-9176ba482c1c",
-        "name": "No existe en Shopify"
-      },
-      {
-        "parameters": {
-          "authentication": "headerAuth",
-          "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
-          "query": "=query ($searchTerm: String!) {\n  customers(first: 10, query: $searchTerm) {\n    edges {\n      node {\n        id\n        email\n        tags\n        state\n      }\n    }\n  }\n}",
-          "variables": "={\n  \"searchTerm\": \"email:{{ $json.email }}\"\n}"
-        },
-        "type": "n8n-nodes-base.graphql",
-        "typeVersion": 1.1,
-        "position": [
-          -16,
-          -32
-        ],
-        "id": "4b597a8d-2500-4b02-82f7-92ba8b7ad67e",
-        "name": "Coincidencias con Shopify",
-        "credentials": {
-          "httpHeaderAuth": {
-            "id": "OPt2Cl0dnwcU4qRk",
-            "name": "ShopifyInformes"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "authentication": "headerAuth",
-          "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
-          "query": "mutation customerCreate($input: CustomerInput!) {\n  customerCreate(input: $input) {\n    customer {\n      id\n      email\n      firstName\n      lastName\n      tags\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
-          "variables": "={\n  \"input\": {\n    \"firstName\": \"{{ $json.first_name }}\",\n    \"lastName\": \"{{ $json.last_name }}\",\n    \"email\": \"{{ $json.email }}\",\n    \"tags\": [\"Empleado,DescuentoEmpleado,Profesor,DescuentoProfesor\"]\n  }\n}"
-        },
-        "type": "n8n-nodes-base.graphql",
-        "typeVersion": 1.1,
-        "position": [
-          704,
-          -128
-        ],
-        "id": "81d406ea-fa34-44fd-a0d6-ff373a05db8b",
-        "name": "Crear Clientes en Shopify",
-        "credentials": {
-          "httpHeaderAuth": {
-            "id": "OPt2Cl0dnwcU4qRk",
-            "name": "ShopifyInformes"
-          }
-        }
-      },
-      {
-        "parameters": {
           "conditions": {
             "options": {
               "caseSensitive": true,
@@ -192,63 +70,6 @@
         ],
         "id": "7aa7bd62-5c25-40f7-b3b3-1942b11580fe",
         "name": "If"
-      },
-      {
-        "parameters": {
-          "authentication": "headerAuth",
-          "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
-          "query": "=query ($searchTerm: String!) {\n  customers(first: 10, query: $searchTerm) {\n    edges {\n      node {\n        id\n        email\n        tags\n        state\n      }\n    }\n  }\n}",
-          "variables": "={\n  \"searchTerm\": \"email:{{ $json.email }}\"\n}"
-        },
-        "type": "n8n-nodes-base.graphql",
-        "typeVersion": 1.1,
-        "position": [
-          -16,
-          288
-        ],
-        "id": "f5ffdb7b-56d0-40a3-a54e-d93d02197937",
-        "name": "Coincidencias con Shopify1",
-        "credentials": {
-          "httpHeaderAuth": {
-            "id": "OPt2Cl0dnwcU4qRk",
-            "name": "ShopifyInformes"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "jsCode": "// 1. Obtenemos los resultados de la búsqueda de Shopify (Input de este nodo)\nconst shopifyResults = $input.all();\n\n// 2. Obtenemos los datos de Bizneo desde el nodo \"If\"\n// Esto nos trae los datos originales de la rama FALSE (No vigentes)\nconst bizneoResults = $(\"If\").all();\n\nconst foundEmployees = [];\n\n// 3. Recorremos los resultados\nshopifyResults.forEach((item, index) => {\n    // a) Datos devueltos por Shopify\n    const edges = item.json.data?.customers?.edges;\n    \n    // b) Datos originales de Bizneo (para tener nombres y referencia)\n    const bizneoData = bizneoResults[index] ? bizneoResults[index].json : {};\n\n    // CONDICIÓN 1: ¿Existe el cliente en Shopify?\n    if (edges && edges.length > 0) {\n        \n        const shopifyCustomer = edges[0].node;\n        const currentTags = shopifyCustomer.tags || [];\n\n        // CONDICIÓN 2: ¿Tiene las etiquetas peligrosas?\n        // Verificamos si incluye \"Empleado\" O \"DescuentoEmpleado\"\n        const isTaggedAsEmployee = currentTags.includes(\"Empleado\");\n        const isTaggedAsDiscount = currentTags.includes(\"DescuentoEmpleado\");\n\n        // Solo procesamos si cumple la condición de etiquetas\n        if (isTaggedAsEmployee || isTaggedAsDiscount) {\n            foundEmployees.push({\n                json: {\n                    // ID necesario para el siguiente nodo (quitar etiquetas)\n                    shopify_id: shopifyCustomer.id,\n                    shopify_email: shopifyCustomer.email,\n                    current_tags: currentTags,\n                    \n                    // Datos informativos de Bizneo\n                    first_name: bizneoData.first_name,\n                    last_name: bizneoData.last_name,\n                    email: bizneoData.email,\n                    id_bizneo: bizneoData.id,\n                    \n                    // Razón para el log\n                    reason: \"Ex-empleado con cuenta y etiquetas activas en Shopify\"\n                }\n            });\n        }\n    }\n});\n\nreturn foundEmployees;"
-        },
-        "type": "n8n-nodes-base.code",
-        "typeVersion": 2,
-        "position": [
-          288,
-          288
-        ],
-        "id": "2a1a8e87-752b-4cd3-8a5c-77c852d451e1",
-        "name": "Existe en Shopify"
-      },
-      {
-        "parameters": {
-          "authentication": "headerAuth",
-          "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
-          "query": "mutation removeEmployeeTag($id: ID!, $tags: [String!]!) {\n  tagsRemove(id: $id, tags: $tags) {\n    node {\n      id\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
-          "variables": "={\n  \"id\": \"{{ $json.shopify_id }}\",\n  \"tags\": [\"Profesor,DescuentoProfesor\"]\n}"
-        },
-        "type": "n8n-nodes-base.graphql",
-        "typeVersion": 1.1,
-        "position": [
-          640,
-          288
-        ],
-        "id": "f4ea09c5-285f-4b49-bd67-2ad2893c6692",
-        "name": "Quitar etiqueta del Cliente",
-        "credentials": {
-          "httpHeaderAuth": {
-            "id": "OPt2Cl0dnwcU4qRk",
-            "name": "ShopifyInformes"
-          }
-        }
       },
       {
         "parameters": {
@@ -337,6 +158,28 @@
           "authentication": "headerAuth",
           "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
           "query": "mutation customerCreate($input: CustomerInput!) {\n  customerCreate(input: $input) {\n    customer {\n      id\n      email\n      firstName\n      lastName\n      tags\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
+          "variables": "={\n  \"input\": {\n    \"firstName\": \"{{ $json.first_name }}\",\n    \"lastName\": \"{{ $json.last_name }}\",\n    \"email\": \"{{ $json.email }}\",\n    \"tags\": [\"Empleado,DescuentoEmpleado,Profesor,DescuentoProfesor\"]\n  }\n}"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          704,
+          -128
+        ],
+        "id": "81d406ea-fa34-44fd-a0d6-ff373a05db8b",
+        "name": "es_profesor",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
+          "query": "mutation customerCreate($input: CustomerInput!) {\n  customerCreate(input: $input) {\n    customer {\n      id\n      email\n      firstName\n      lastName\n      tags\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
           "variables": "={\n  \"input\": {\n    \"firstName\": \"{{ $json.first_name }}\",\n    \"lastName\": \"{{ $json.last_name }}\",\n    \"email\": \"{{ $json.email }}\",\n    \"tags\": [\"Empleado,DescuentoEmpleado\"]\n  }\n}"
         },
         "type": "n8n-nodes-base.graphql",
@@ -346,7 +189,164 @@
           16
         ],
         "id": "d7b71dec-7e1b-4728-b4b0-8567123d370f",
-        "name": "Crear Clientes en Shopify1",
+        "name": "solamente_empleado",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "url": "=https://snowink.bizneohr.com/api/v1/users?page_size=25",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpHeaderAuth",
+          "sendQuery": true,
+          "queryParameters": {
+            "parameters": [
+              {
+                "name": "token",
+                "value": "SFMyNTY.g2gDdAAAAAJ3AmlkbQAAACRhMDZkZGIwNi03NjZjLTQ0ZDMtYTI1YS02MmZiMTUyNWMxZmZ3CmNvbXBhbnlfaWRiAO2ucG4GAF89AKebAWIAAVGA.w1Gue36eFFL5B9iPAWqon1Te_4w1rJr4zAVkhHcrfho"
+              }
+            ]
+          },
+          "options": {
+            "response": {
+              "response": {
+                "fullResponse": true
+              }
+            },
+            "pagination": {
+              "pagination": {
+                "parameters": {
+                  "parameters": [
+                    {
+                      "name": "page",
+                      "value": "={{ $pageCount + 1 }}"
+                    }
+                  ]
+                },
+                "paginationCompleteWhen": "other",
+                "completeExpression": "={{ $response.body.pagination.page_number >= $response.body.pagination.total_pages }}"
+              }
+            }
+          }
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          -832,
+          80
+        ],
+        "id": "be8b1ce9-2fed-4cfb-a935-5fbefcbc062c",
+        "name": "Empleados_Total_Bizneo",
+        "alwaysOutputData": false,
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "// Obtenemos la fecha actual y la ajustamos a las 00:00:00\nconst today = new Date();\ntoday.setHours(0, 0, 0, 0);\n\n// Usamos .map() para modificar cada ítem y añadir las propiedades nuevas\nreturn $input.all().map(item => {\n    const employee = item.json;\n    \n    // ---------------------------------------------------------\n    // 1. LÓGICA DE VIGENCIA (Tu código original)\n    // ---------------------------------------------------------\n    const contracts = employee.work_contracts || [];\n\n    const hasActiveContract = contracts.some(contract => {\n        const startDate = new Date(contract.start_at);\n        startDate.setHours(0, 0, 0, 0);\n\n        // El contrato ya empezó\n        const isStarted = startDate <= today;\n\n        // El contrato no ha terminado\n        let isNotEnded = true;\n        if (contract.end_at !== null) {\n            const endDate = new Date(contract.end_at);\n            endDate.setHours(0, 0, 0, 0);\n            if (endDate < today) {\n                isNotEnded = false;\n            }\n        }\n        return isStarted && isNotEnded;\n    });\n\n    // Añadimos la variable de vigencia\n    employee.isVigente = hasActiveContract;\n\n\n    // ---------------------------------------------------------\n    // 2. LÓGICA DE PROFESORES (Nueva)\n    // ---------------------------------------------------------\n    const rawTaxons = employee.main_taxons || \"\";\n    \n    // A) Convertimos a Array para búsquedas EXACTAS (\"a secas\")\n    // Esto separa \"Snow Division\" de \"Snow Division Rental\"\n    const tagsArray = String(rawTaxons).split(',').map(tag => tag.trim());\n    \n    // B) Convertimos a minúsculas para búsquedas PARCIALES (\"contiene\")\n    const taxonsLower = String(rawTaxons).toLowerCase();\n\n    let esProfesor = false;\n\n    // Condición 1: Coincidencia EXACTA (A secas)\n    // Busca si la etiqueta exacta existe en la lista\n    if (tagsArray.includes(\"Club Surfin\") || tagsArray.includes(\"Snow Division\")) {\n        esProfesor = true;\n    }\n\n    // Condición 2: Coincidencia PARCIAL (Contiene)\n    // Busca si el texto aparece dentro de cualquier parte\n    if (taxonsLower.includes(\"club nieve\") || taxonsLower.includes(\"ski school\")) {\n        esProfesor = true;\n    }\n\n    // Añadimos la variable de profesor\n    employee.es_profesor = esProfesor;\n\n    return item;\n});"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          -416,
+          80
+        ],
+        "id": "a2794c8e-cdcd-4757-90dd-d851641838d4",
+        "name": "Empleados_Vigentes_Bizneo"
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
+          "query": "=query ($searchTerm: String!) {\n  customers(first: 10, query: $searchTerm) {\n    edges {\n      node {\n        id\n        email\n        tags\n        state\n      }\n    }\n  }\n}",
+          "variables": "={\n  \"searchTerm\": \"email:{{ $json.email }}\"\n}"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          -16,
+          -32
+        ],
+        "id": "4b597a8d-2500-4b02-82f7-92ba8b7ad67e",
+        "name": "Coincidencias_Shopify",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
+          "query": "=query ($searchTerm: String!) {\n  customers(first: 10, query: $searchTerm) {\n    edges {\n      node {\n        id\n        email\n        tags\n        state\n      }\n    }\n  }\n}",
+          "variables": "={\n  \"searchTerm\": \"email:{{ $json.email }}\"\n}"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          -16,
+          288
+        ],
+        "id": "f5ffdb7b-56d0-40a3-a54e-d93d02197937",
+        "name": "Coincidencias_Shopify1",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "// 1. Obtenemos los resultados de la búsqueda de Shopify (Input de este nodo)\nconst shopifyResults = $input.all();\n\n// 2. Obtenemos los datos de Bizneo desde el nodo \"If\"\n// Esto nos trae los datos originales de la rama FALSE (No vigentes)\nconst bizneoResults = $(\"If\").all();\n\nconst foundEmployees = [];\n\n// 3. Recorremos los resultados\nshopifyResults.forEach((item, index) => {\n    // a) Datos devueltos por Shopify\n    const edges = item.json.data?.customers?.edges;\n    \n    // b) Datos originales de Bizneo (para tener nombres y referencia)\n    const bizneoData = bizneoResults[index] ? bizneoResults[index].json : {};\n\n    // CONDICIÓN 1: ¿Existe el cliente en Shopify?\n    if (edges && edges.length > 0) {\n        \n        const shopifyCustomer = edges[0].node;\n        const currentTags = shopifyCustomer.tags || [];\n\n        // CONDICIÓN 2: ¿Tiene las etiquetas peligrosas?\n        // Verificamos si incluye \"Empleado\" O \"DescuentoEmpleado\"\n        const isTaggedAsEmployee = currentTags.includes(\"Empleado\");\n        const isTaggedAsDiscount = currentTags.includes(\"DescuentoEmpleado\");\n\n        // Solo procesamos si cumple la condición de etiquetas\n        if (isTaggedAsEmployee || isTaggedAsDiscount) {\n            foundEmployees.push({\n                json: {\n                    // ID necesario para el siguiente nodo (quitar etiquetas)\n                    shopify_id: shopifyCustomer.id,\n                    shopify_email: shopifyCustomer.email,\n                    current_tags: currentTags,\n                    \n                    // Datos informativos de Bizneo\n                    first_name: bizneoData.first_name,\n                    last_name: bizneoData.last_name,\n                    email: bizneoData.email,\n                    id_bizneo: bizneoData.id,\n                    \n                    // Razón para el log\n                    reason: \"Ex-empleado con cuenta y etiquetas activas en Shopify\"\n                }\n            });\n        }\n    }\n});\n\nreturn foundEmployees;"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          288,
+          288
+        ],
+        "id": "2a1a8e87-752b-4cd3-8a5c-77c852d451e1",
+        "name": "Existe_en_Shopify"
+      },
+      {
+        "parameters": {
+          "jsCode": "// 1. Obtenemos el resultado de la búsqueda en Shopify (Input de este nodo)\nconst shopifyResults = $input.all();\n\n// 2. Obtenemos los datos de Bizneo desde el nodo \"If\"\n// IMPORTANTE: Asegúrate de haber ejecutado el nodo \"If\" anterior para que esto tenga datos\nconst bizneoResults = $(\"If\").all();\n\nconst missingEmployees = [];\n\n// 3. Recorremos los resultados línea a línea\nshopifyResults.forEach((item, index) => {\n    // a) Revisamos si Shopify devolvió datos (edges vacío = no existe cuenta)\n    const edges = item.json.data?.customers?.edges;\n    \n    // b) Recuperamos los datos del empleado de Bizneo correspondiente (mismo índice)\n    const bizneoData = bizneoResults[index] ? bizneoResults[index].json : {};\n\n    // CONDICIÓN:\n    // Si 'edges' está vacío o es nulo, significa que el correo NO existe en Shopify.\n    if (!edges || edges.length === 0) {\n        \n        // --- LÓGICA DE DETECCIÓN DE PROFESOR ---\n        const rawTaxons = bizneoData.main_taxons || \"\";\n        \n        // 1. Convertimos a Array para búsquedas EXACTAS (\"a secas\")\n        // Separa \"Snow Division\" de \"Snow Division Rental\"\n        const tagsArray = String(rawTaxons).split(',').map(tag => tag.trim());\n        \n        // 2. Convertimos a minúsculas para búsquedas PARCIALES (\"contiene\")\n        const taxonsLower = String(rawTaxons).toLowerCase();\n\n        let esProfesor = false;\n\n        // A) Coincidencia Exacta\n        if (tagsArray.includes(\"Club Surfin\") || tagsArray.includes(\"Snow Division\")) {\n            esProfesor = true;\n        }\n\n        // B) Coincidencia Parcial\n        if (taxonsLower.includes(\"club nieve\") || taxonsLower.includes(\"ski school\")) {\n            esProfesor = true;\n        }\n        // ----------------------------------------\n        \n        // Agregamos a la lista final para crear\n        missingEmployees.push({\n            json: {\n                // Pasamos los datos limpios de Bizneo\n                first_name: bizneoData.first_name,\n                last_name: bizneoData.last_name,\n                email: bizneoData.email,\n                id_bizneo: bizneoData.id,\n                external_id: bizneoData.external_id,\n                \n                // Variable NUEVA para el siguiente IF\n                es_profesor: esProfesor, \n                main_taxons: rawTaxons, // (Opcional) Por si quieres revisar qué etiquetas tenía\n\n                // Debug info\n                check_status: \"Vigente en Bizneo, No existe en Shopify\"\n            }\n        });\n    }\n});\n\nreturn missingEmployees;"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          288,
+          -32
+        ],
+        "id": "9e9d34eb-5b24-404c-9437-9176ba482c1c",
+        "name": "No_existe_en_Shopify"
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
+          "query": "mutation removeEmployeeTag($id: ID!, $tags: [String!]!) {\n  tagsRemove(id: $id, tags: $tags) {\n    node {\n      id\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
+          "variables": "={\n  \"id\": \"{{ $json.shopify_id }}\",\n  \"tags\": [\"Empleado,DescuentoEmpleado\"]\n}"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          640,
+          288
+        ],
+        "id": "f4ea09c5-285f-4b49-bd67-2ad2893c6692",
+        "name": "quitar_etiqueta_empleado",
         "credentials": {
           "httpHeaderAuth": {
             "id": "OPt2Cl0dnwcU4qRk",
@@ -360,7 +360,7 @@
         "main": [
           [
             {
-              "node": "Empleados Vigentes - Bizneo",
+              "node": "Empleados_Vigentes_Bizneo",
               "type": "main",
               "index": 0
             }
@@ -371,51 +371,7 @@
         "main": [
           [
             {
-              "node": "Empleados Total - Bizneo",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Empleados Total - Bizneo": {
-        "main": [
-          [
-            {
-              "node": "Split Out",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Empleados Vigentes - Bizneo": {
-        "main": [
-          [
-            {
-              "node": "If",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "No existe en Shopify": {
-        "main": [
-          [
-            {
-              "node": "If1",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Coincidencias con Shopify": {
-        "main": [
-          [
-            {
-              "node": "No existe en Shopify",
+              "node": "Empleados_Total_Bizneo",
               "type": "main",
               "index": 0
             }
@@ -426,36 +382,14 @@
         "main": [
           [
             {
-              "node": "Coincidencias con Shopify",
+              "node": "Coincidencias_Shopify",
               "type": "main",
               "index": 0
             }
           ],
           [
             {
-              "node": "Coincidencias con Shopify1",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Coincidencias con Shopify1": {
-        "main": [
-          [
-            {
-              "node": "Existe en Shopify",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Existe en Shopify": {
-        "main": [
-          [
-            {
-              "node": "Quitar etiqueta del Cliente",
+              "node": "Coincidencias_Shopify1",
               "type": "main",
               "index": 0
             }
@@ -466,14 +400,80 @@
         "main": [
           [
             {
-              "node": "Crear Clientes en Shopify",
+              "node": "es_profesor",
               "type": "main",
               "index": 0
             }
           ],
           [
             {
-              "node": "Crear Clientes en Shopify1",
+              "node": "solamente_empleado",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Empleados_Total_Bizneo": {
+        "main": [
+          [
+            {
+              "node": "Split Out",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Empleados_Vigentes_Bizneo": {
+        "main": [
+          [
+            {
+              "node": "If",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Coincidencias_Shopify": {
+        "main": [
+          [
+            {
+              "node": "No_existe_en_Shopify",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Coincidencias_Shopify1": {
+        "main": [
+          [
+            {
+              "node": "Existe_en_Shopify",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Existe_en_Shopify": {
+        "main": [
+          [
+            {
+              "node": "quitar_etiqueta_empleado",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "No_existe_en_Shopify": {
+        "main": [
+          [
+            {
+              "node": "If1",
               "type": "main",
               "index": 0
             }
@@ -482,17 +482,17 @@
       }
     },
     "authors": "Info Tailwind",
-    "name": "Version 9e31c851",
+    "name": "Version 0be4f264",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "9e31c851-2760-4e57-8d5e-93d2d8df80f0",
+  "activeVersionId": "0be4f264-5f42-4620-96d2-d0ca7b0481bc",
   "connections": {
     "Split Out": {
       "main": [
         [
           {
-            "node": "Empleados Vigentes - Bizneo",
+            "node": "Empleados_Vigentes_Bizneo",
             "type": "main",
             "index": 0
           }
@@ -503,51 +503,7 @@
       "main": [
         [
           {
-            "node": "Empleados Total - Bizneo",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Empleados Total - Bizneo": {
-      "main": [
-        [
-          {
-            "node": "Split Out",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Empleados Vigentes - Bizneo": {
-      "main": [
-        [
-          {
-            "node": "If",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "No existe en Shopify": {
-      "main": [
-        [
-          {
-            "node": "If1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Coincidencias con Shopify": {
-      "main": [
-        [
-          {
-            "node": "No existe en Shopify",
+            "node": "Empleados_Total_Bizneo",
             "type": "main",
             "index": 0
           }
@@ -558,36 +514,14 @@
       "main": [
         [
           {
-            "node": "Coincidencias con Shopify",
+            "node": "Coincidencias_Shopify",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "Coincidencias con Shopify1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Coincidencias con Shopify1": {
-      "main": [
-        [
-          {
-            "node": "Existe en Shopify",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Existe en Shopify": {
-      "main": [
-        [
-          {
-            "node": "Quitar etiqueta del Cliente",
+            "node": "Coincidencias_Shopify1",
             "type": "main",
             "index": 0
           }
@@ -598,14 +532,80 @@
       "main": [
         [
           {
-            "node": "Crear Clientes en Shopify",
+            "node": "es_profesor",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "Crear Clientes en Shopify1",
+            "node": "solamente_empleado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Empleados_Total_Bizneo": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Empleados_Vigentes_Bizneo": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Coincidencias_Shopify": {
+      "main": [
+        [
+          {
+            "node": "No_existe_en_Shopify",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Coincidencias_Shopify1": {
+      "main": [
+        [
+          {
+            "node": "Existe_en_Shopify",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Existe_en_Shopify": {
+      "main": [
+        [
+          {
+            "node": "quitar_etiqueta_empleado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "No_existe_en_Shopify": {
+      "main": [
+        [
+          {
+            "node": "If1",
             "type": "main",
             "index": 0
           }
@@ -652,128 +652,6 @@
     },
     {
       "parameters": {
-        "url": "=https://snowink.bizneohr.com/api/v1/users?page_size=25",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpHeaderAuth",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
-            {
-              "name": "token",
-              "value": "SFMyNTY.g2gDdAAAAAJ3AmlkbQAAACRhMDZkZGIwNi03NjZjLTQ0ZDMtYTI1YS02MmZiMTUyNWMxZmZ3CmNvbXBhbnlfaWRiAO2ucG4GAF89AKebAWIAAVGA.w1Gue36eFFL5B9iPAWqon1Te_4w1rJr4zAVkhHcrfho"
-            }
-          ]
-        },
-        "options": {
-          "response": {
-            "response": {
-              "fullResponse": true
-            }
-          },
-          "pagination": {
-            "pagination": {
-              "parameters": {
-                "parameters": [
-                  {
-                    "name": "page",
-                    "value": "={{ $pageCount + 1 }}"
-                  }
-                ]
-              },
-              "paginationCompleteWhen": "other",
-              "completeExpression": "={{ $response.body.pagination.page_number >= $response.body.pagination.total_pages }}"
-            }
-          }
-        }
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.3,
-      "position": [
-        -832,
-        80
-      ],
-      "id": "be8b1ce9-2fed-4cfb-a935-5fbefcbc062c",
-      "name": "Empleados Total - Bizneo",
-      "alwaysOutputData": false,
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "OPt2Cl0dnwcU4qRk",
-          "name": "ShopifyInformes"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "jsCode": "// Obtenemos la fecha actual y la ajustamos a las 00:00:00\nconst today = new Date();\ntoday.setHours(0, 0, 0, 0);\n\n// Usamos .map() para modificar cada ítem y añadir las propiedades nuevas\nreturn $input.all().map(item => {\n    const employee = item.json;\n    \n    // ---------------------------------------------------------\n    // 1. LÓGICA DE VIGENCIA (Tu código original)\n    // ---------------------------------------------------------\n    const contracts = employee.work_contracts || [];\n\n    const hasActiveContract = contracts.some(contract => {\n        const startDate = new Date(contract.start_at);\n        startDate.setHours(0, 0, 0, 0);\n\n        // El contrato ya empezó\n        const isStarted = startDate <= today;\n\n        // El contrato no ha terminado\n        let isNotEnded = true;\n        if (contract.end_at !== null) {\n            const endDate = new Date(contract.end_at);\n            endDate.setHours(0, 0, 0, 0);\n            if (endDate < today) {\n                isNotEnded = false;\n            }\n        }\n        return isStarted && isNotEnded;\n    });\n\n    // Añadimos la variable de vigencia\n    employee.isVigente = hasActiveContract;\n\n\n    // ---------------------------------------------------------\n    // 2. LÓGICA DE PROFESORES (Nueva)\n    // ---------------------------------------------------------\n    const rawTaxons = employee.main_taxons || \"\";\n    \n    // A) Convertimos a Array para búsquedas EXACTAS (\"a secas\")\n    // Esto separa \"Snow Division\" de \"Snow Division Rental\"\n    const tagsArray = String(rawTaxons).split(',').map(tag => tag.trim());\n    \n    // B) Convertimos a minúsculas para búsquedas PARCIALES (\"contiene\")\n    const taxonsLower = String(rawTaxons).toLowerCase();\n\n    let esProfesor = false;\n\n    // Condición 1: Coincidencia EXACTA (A secas)\n    // Busca si la etiqueta exacta existe en la lista\n    if (tagsArray.includes(\"Club Surfin\") || tagsArray.includes(\"Snow Division\")) {\n        esProfesor = true;\n    }\n\n    // Condición 2: Coincidencia PARCIAL (Contiene)\n    // Busca si el texto aparece dentro de cualquier parte\n    if (taxonsLower.includes(\"club nieve\") || taxonsLower.includes(\"ski school\")) {\n        esProfesor = true;\n    }\n\n    // Añadimos la variable de profesor\n    employee.es_profesor = esProfesor;\n\n    return item;\n});"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        -416,
-        80
-      ],
-      "id": "a2794c8e-cdcd-4757-90dd-d851641838d4",
-      "name": "Empleados Vigentes - Bizneo"
-    },
-    {
-      "parameters": {
-        "jsCode": "// 1. Obtenemos el resultado de la búsqueda en Shopify (Input de este nodo)\nconst shopifyResults = $input.all();\n\n// 2. Obtenemos los datos de Bizneo desde el nodo \"If\"\n// IMPORTANTE: Asegúrate de haber ejecutado el nodo \"If\" anterior para que esto tenga datos\nconst bizneoResults = $(\"If\").all();\n\nconst missingEmployees = [];\n\n// 3. Recorremos los resultados línea a línea\nshopifyResults.forEach((item, index) => {\n    // a) Revisamos si Shopify devolvió datos (edges vacío = no existe cuenta)\n    const edges = item.json.data?.customers?.edges;\n    \n    // b) Recuperamos los datos del empleado de Bizneo correspondiente (mismo índice)\n    const bizneoData = bizneoResults[index] ? bizneoResults[index].json : {};\n\n    // CONDICIÓN:\n    // Si 'edges' está vacío o es nulo, significa que el correo NO existe en Shopify.\n    if (!edges || edges.length === 0) {\n        \n        // --- LÓGICA DE DETECCIÓN DE PROFESOR ---\n        const rawTaxons = bizneoData.main_taxons || \"\";\n        \n        // 1. Convertimos a Array para búsquedas EXACTAS (\"a secas\")\n        // Separa \"Snow Division\" de \"Snow Division Rental\"\n        const tagsArray = String(rawTaxons).split(',').map(tag => tag.trim());\n        \n        // 2. Convertimos a minúsculas para búsquedas PARCIALES (\"contiene\")\n        const taxonsLower = String(rawTaxons).toLowerCase();\n\n        let esProfesor = false;\n\n        // A) Coincidencia Exacta\n        if (tagsArray.includes(\"Club Surfin\") || tagsArray.includes(\"Snow Division\")) {\n            esProfesor = true;\n        }\n\n        // B) Coincidencia Parcial\n        if (taxonsLower.includes(\"club nieve\") || taxonsLower.includes(\"ski school\")) {\n            esProfesor = true;\n        }\n        // ----------------------------------------\n        \n        // Agregamos a la lista final para crear\n        missingEmployees.push({\n            json: {\n                // Pasamos los datos limpios de Bizneo\n                first_name: bizneoData.first_name,\n                last_name: bizneoData.last_name,\n                email: bizneoData.email,\n                id_bizneo: bizneoData.id,\n                external_id: bizneoData.external_id,\n                \n                // Variable NUEVA para el siguiente IF\n                es_profesor: esProfesor, \n                main_taxons: rawTaxons, // (Opcional) Por si quieres revisar qué etiquetas tenía\n\n                // Debug info\n                check_status: \"Vigente en Bizneo, No existe en Shopify\"\n            }\n        });\n    }\n});\n\nreturn missingEmployees;"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        288,
-        -32
-      ],
-      "id": "9e9d34eb-5b24-404c-9437-9176ba482c1c",
-      "name": "No existe en Shopify"
-    },
-    {
-      "parameters": {
-        "authentication": "headerAuth",
-        "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
-        "query": "=query ($searchTerm: String!) {\n  customers(first: 10, query: $searchTerm) {\n    edges {\n      node {\n        id\n        email\n        tags\n        state\n      }\n    }\n  }\n}",
-        "variables": "={\n  \"searchTerm\": \"email:{{ $json.email }}\"\n}"
-      },
-      "type": "n8n-nodes-base.graphql",
-      "typeVersion": 1.1,
-      "position": [
-        -16,
-        -32
-      ],
-      "id": "4b597a8d-2500-4b02-82f7-92ba8b7ad67e",
-      "name": "Coincidencias con Shopify",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "OPt2Cl0dnwcU4qRk",
-          "name": "ShopifyInformes"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "authentication": "headerAuth",
-        "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
-        "query": "mutation customerCreate($input: CustomerInput!) {\n  customerCreate(input: $input) {\n    customer {\n      id\n      email\n      firstName\n      lastName\n      tags\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
-        "variables": "={\n  \"input\": {\n    \"firstName\": \"{{ $json.first_name }}\",\n    \"lastName\": \"{{ $json.last_name }}\",\n    \"email\": \"{{ $json.email }}\",\n    \"tags\": [\"Empleado,DescuentoEmpleado,Profesor,DescuentoProfesor\"]\n  }\n}"
-      },
-      "type": "n8n-nodes-base.graphql",
-      "typeVersion": 1.1,
-      "position": [
-        704,
-        -128
-      ],
-      "id": "81d406ea-fa34-44fd-a0d6-ff373a05db8b",
-      "name": "Crear Clientes en Shopify",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "OPt2Cl0dnwcU4qRk",
-          "name": "ShopifyInformes"
-        }
-      }
-    },
-    {
-      "parameters": {
         "conditions": {
           "options": {
             "caseSensitive": true,
@@ -805,63 +683,6 @@
       ],
       "id": "7aa7bd62-5c25-40f7-b3b3-1942b11580fe",
       "name": "If"
-    },
-    {
-      "parameters": {
-        "authentication": "headerAuth",
-        "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
-        "query": "=query ($searchTerm: String!) {\n  customers(first: 10, query: $searchTerm) {\n    edges {\n      node {\n        id\n        email\n        tags\n        state\n      }\n    }\n  }\n}",
-        "variables": "={\n  \"searchTerm\": \"email:{{ $json.email }}\"\n}"
-      },
-      "type": "n8n-nodes-base.graphql",
-      "typeVersion": 1.1,
-      "position": [
-        -16,
-        288
-      ],
-      "id": "f5ffdb7b-56d0-40a3-a54e-d93d02197937",
-      "name": "Coincidencias con Shopify1",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "OPt2Cl0dnwcU4qRk",
-          "name": "ShopifyInformes"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "jsCode": "// 1. Obtenemos los resultados de la búsqueda de Shopify (Input de este nodo)\nconst shopifyResults = $input.all();\n\n// 2. Obtenemos los datos de Bizneo desde el nodo \"If\"\n// Esto nos trae los datos originales de la rama FALSE (No vigentes)\nconst bizneoResults = $(\"If\").all();\n\nconst foundEmployees = [];\n\n// 3. Recorremos los resultados\nshopifyResults.forEach((item, index) => {\n    // a) Datos devueltos por Shopify\n    const edges = item.json.data?.customers?.edges;\n    \n    // b) Datos originales de Bizneo (para tener nombres y referencia)\n    const bizneoData = bizneoResults[index] ? bizneoResults[index].json : {};\n\n    // CONDICIÓN 1: ¿Existe el cliente en Shopify?\n    if (edges && edges.length > 0) {\n        \n        const shopifyCustomer = edges[0].node;\n        const currentTags = shopifyCustomer.tags || [];\n\n        // CONDICIÓN 2: ¿Tiene las etiquetas peligrosas?\n        // Verificamos si incluye \"Empleado\" O \"DescuentoEmpleado\"\n        const isTaggedAsEmployee = currentTags.includes(\"Empleado\");\n        const isTaggedAsDiscount = currentTags.includes(\"DescuentoEmpleado\");\n\n        // Solo procesamos si cumple la condición de etiquetas\n        if (isTaggedAsEmployee || isTaggedAsDiscount) {\n            foundEmployees.push({\n                json: {\n                    // ID necesario para el siguiente nodo (quitar etiquetas)\n                    shopify_id: shopifyCustomer.id,\n                    shopify_email: shopifyCustomer.email,\n                    current_tags: currentTags,\n                    \n                    // Datos informativos de Bizneo\n                    first_name: bizneoData.first_name,\n                    last_name: bizneoData.last_name,\n                    email: bizneoData.email,\n                    id_bizneo: bizneoData.id,\n                    \n                    // Razón para el log\n                    reason: \"Ex-empleado con cuenta y etiquetas activas en Shopify\"\n                }\n            });\n        }\n    }\n});\n\nreturn foundEmployees;"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        288,
-        288
-      ],
-      "id": "2a1a8e87-752b-4cd3-8a5c-77c852d451e1",
-      "name": "Existe en Shopify"
-    },
-    {
-      "parameters": {
-        "authentication": "headerAuth",
-        "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
-        "query": "mutation removeEmployeeTag($id: ID!, $tags: [String!]!) {\n  tagsRemove(id: $id, tags: $tags) {\n    node {\n      id\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
-        "variables": "={\n  \"id\": \"{{ $json.shopify_id }}\",\n  \"tags\": [\"Profesor,DescuentoProfesor\"]\n}"
-      },
-      "type": "n8n-nodes-base.graphql",
-      "typeVersion": 1.1,
-      "position": [
-        640,
-        288
-      ],
-      "id": "f4ea09c5-285f-4b49-bd67-2ad2893c6692",
-      "name": "Quitar etiqueta del Cliente",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "OPt2Cl0dnwcU4qRk",
-          "name": "ShopifyInformes"
-        }
-      }
     },
     {
       "parameters": {
@@ -950,6 +771,28 @@
         "authentication": "headerAuth",
         "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
         "query": "mutation customerCreate($input: CustomerInput!) {\n  customerCreate(input: $input) {\n    customer {\n      id\n      email\n      firstName\n      lastName\n      tags\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
+        "variables": "={\n  \"input\": {\n    \"firstName\": \"{{ $json.first_name }}\",\n    \"lastName\": \"{{ $json.last_name }}\",\n    \"email\": \"{{ $json.email }}\",\n    \"tags\": [\"Empleado,DescuentoEmpleado,Profesor,DescuentoProfesor\"]\n  }\n}"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        704,
+        -128
+      ],
+      "id": "81d406ea-fa34-44fd-a0d6-ff373a05db8b",
+      "name": "es_profesor",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
+        "query": "mutation customerCreate($input: CustomerInput!) {\n  customerCreate(input: $input) {\n    customer {\n      id\n      email\n      firstName\n      lastName\n      tags\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
         "variables": "={\n  \"input\": {\n    \"firstName\": \"{{ $json.first_name }}\",\n    \"lastName\": \"{{ $json.last_name }}\",\n    \"email\": \"{{ $json.email }}\",\n    \"tags\": [\"Empleado,DescuentoEmpleado\"]\n  }\n}"
       },
       "type": "n8n-nodes-base.graphql",
@@ -959,7 +802,164 @@
         16
       ],
       "id": "d7b71dec-7e1b-4728-b4b0-8567123d370f",
-      "name": "Crear Clientes en Shopify1",
+      "name": "solamente_empleado",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://snowink.bizneohr.com/api/v1/users?page_size=25",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "token",
+              "value": "SFMyNTY.g2gDdAAAAAJ3AmlkbQAAACRhMDZkZGIwNi03NjZjLTQ0ZDMtYTI1YS02MmZiMTUyNWMxZmZ3CmNvbXBhbnlfaWRiAO2ucG4GAF89AKebAWIAAVGA.w1Gue36eFFL5B9iPAWqon1Te_4w1rJr4zAVkhHcrfho"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          },
+          "pagination": {
+            "pagination": {
+              "parameters": {
+                "parameters": [
+                  {
+                    "name": "page",
+                    "value": "={{ $pageCount + 1 }}"
+                  }
+                ]
+              },
+              "paginationCompleteWhen": "other",
+              "completeExpression": "={{ $response.body.pagination.page_number >= $response.body.pagination.total_pages }}"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -832,
+        80
+      ],
+      "id": "be8b1ce9-2fed-4cfb-a935-5fbefcbc062c",
+      "name": "Empleados_Total_Bizneo",
+      "alwaysOutputData": false,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Obtenemos la fecha actual y la ajustamos a las 00:00:00\nconst today = new Date();\ntoday.setHours(0, 0, 0, 0);\n\n// Usamos .map() para modificar cada ítem y añadir las propiedades nuevas\nreturn $input.all().map(item => {\n    const employee = item.json;\n    \n    // ---------------------------------------------------------\n    // 1. LÓGICA DE VIGENCIA (Tu código original)\n    // ---------------------------------------------------------\n    const contracts = employee.work_contracts || [];\n\n    const hasActiveContract = contracts.some(contract => {\n        const startDate = new Date(contract.start_at);\n        startDate.setHours(0, 0, 0, 0);\n\n        // El contrato ya empezó\n        const isStarted = startDate <= today;\n\n        // El contrato no ha terminado\n        let isNotEnded = true;\n        if (contract.end_at !== null) {\n            const endDate = new Date(contract.end_at);\n            endDate.setHours(0, 0, 0, 0);\n            if (endDate < today) {\n                isNotEnded = false;\n            }\n        }\n        return isStarted && isNotEnded;\n    });\n\n    // Añadimos la variable de vigencia\n    employee.isVigente = hasActiveContract;\n\n\n    // ---------------------------------------------------------\n    // 2. LÓGICA DE PROFESORES (Nueva)\n    // ---------------------------------------------------------\n    const rawTaxons = employee.main_taxons || \"\";\n    \n    // A) Convertimos a Array para búsquedas EXACTAS (\"a secas\")\n    // Esto separa \"Snow Division\" de \"Snow Division Rental\"\n    const tagsArray = String(rawTaxons).split(',').map(tag => tag.trim());\n    \n    // B) Convertimos a minúsculas para búsquedas PARCIALES (\"contiene\")\n    const taxonsLower = String(rawTaxons).toLowerCase();\n\n    let esProfesor = false;\n\n    // Condición 1: Coincidencia EXACTA (A secas)\n    // Busca si la etiqueta exacta existe en la lista\n    if (tagsArray.includes(\"Club Surfin\") || tagsArray.includes(\"Snow Division\")) {\n        esProfesor = true;\n    }\n\n    // Condición 2: Coincidencia PARCIAL (Contiene)\n    // Busca si el texto aparece dentro de cualquier parte\n    if (taxonsLower.includes(\"club nieve\") || taxonsLower.includes(\"ski school\")) {\n        esProfesor = true;\n    }\n\n    // Añadimos la variable de profesor\n    employee.es_profesor = esProfesor;\n\n    return item;\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -416,
+        80
+      ],
+      "id": "a2794c8e-cdcd-4757-90dd-d851641838d4",
+      "name": "Empleados_Vigentes_Bizneo"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
+        "query": "=query ($searchTerm: String!) {\n  customers(first: 10, query: $searchTerm) {\n    edges {\n      node {\n        id\n        email\n        tags\n        state\n      }\n    }\n  }\n}",
+        "variables": "={\n  \"searchTerm\": \"email:{{ $json.email }}\"\n}"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        -16,
+        -32
+      ],
+      "id": "4b597a8d-2500-4b02-82f7-92ba8b7ad67e",
+      "name": "Coincidencias_Shopify",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
+        "query": "=query ($searchTerm: String!) {\n  customers(first: 10, query: $searchTerm) {\n    edges {\n      node {\n        id\n        email\n        tags\n        state\n      }\n    }\n  }\n}",
+        "variables": "={\n  \"searchTerm\": \"email:{{ $json.email }}\"\n}"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        -16,
+        288
+      ],
+      "id": "f5ffdb7b-56d0-40a3-a54e-d93d02197937",
+      "name": "Coincidencias_Shopify1",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Obtenemos los resultados de la búsqueda de Shopify (Input de este nodo)\nconst shopifyResults = $input.all();\n\n// 2. Obtenemos los datos de Bizneo desde el nodo \"If\"\n// Esto nos trae los datos originales de la rama FALSE (No vigentes)\nconst bizneoResults = $(\"If\").all();\n\nconst foundEmployees = [];\n\n// 3. Recorremos los resultados\nshopifyResults.forEach((item, index) => {\n    // a) Datos devueltos por Shopify\n    const edges = item.json.data?.customers?.edges;\n    \n    // b) Datos originales de Bizneo (para tener nombres y referencia)\n    const bizneoData = bizneoResults[index] ? bizneoResults[index].json : {};\n\n    // CONDICIÓN 1: ¿Existe el cliente en Shopify?\n    if (edges && edges.length > 0) {\n        \n        const shopifyCustomer = edges[0].node;\n        const currentTags = shopifyCustomer.tags || [];\n\n        // CONDICIÓN 2: ¿Tiene las etiquetas peligrosas?\n        // Verificamos si incluye \"Empleado\" O \"DescuentoEmpleado\"\n        const isTaggedAsEmployee = currentTags.includes(\"Empleado\");\n        const isTaggedAsDiscount = currentTags.includes(\"DescuentoEmpleado\");\n\n        // Solo procesamos si cumple la condición de etiquetas\n        if (isTaggedAsEmployee || isTaggedAsDiscount) {\n            foundEmployees.push({\n                json: {\n                    // ID necesario para el siguiente nodo (quitar etiquetas)\n                    shopify_id: shopifyCustomer.id,\n                    shopify_email: shopifyCustomer.email,\n                    current_tags: currentTags,\n                    \n                    // Datos informativos de Bizneo\n                    first_name: bizneoData.first_name,\n                    last_name: bizneoData.last_name,\n                    email: bizneoData.email,\n                    id_bizneo: bizneoData.id,\n                    \n                    // Razón para el log\n                    reason: \"Ex-empleado con cuenta y etiquetas activas en Shopify\"\n                }\n            });\n        }\n    }\n});\n\nreturn foundEmployees;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        288,
+        288
+      ],
+      "id": "2a1a8e87-752b-4cd3-8a5c-77c852d451e1",
+      "name": "Existe_en_Shopify"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Obtenemos el resultado de la búsqueda en Shopify (Input de este nodo)\nconst shopifyResults = $input.all();\n\n// 2. Obtenemos los datos de Bizneo desde el nodo \"If\"\n// IMPORTANTE: Asegúrate de haber ejecutado el nodo \"If\" anterior para que esto tenga datos\nconst bizneoResults = $(\"If\").all();\n\nconst missingEmployees = [];\n\n// 3. Recorremos los resultados línea a línea\nshopifyResults.forEach((item, index) => {\n    // a) Revisamos si Shopify devolvió datos (edges vacío = no existe cuenta)\n    const edges = item.json.data?.customers?.edges;\n    \n    // b) Recuperamos los datos del empleado de Bizneo correspondiente (mismo índice)\n    const bizneoData = bizneoResults[index] ? bizneoResults[index].json : {};\n\n    // CONDICIÓN:\n    // Si 'edges' está vacío o es nulo, significa que el correo NO existe en Shopify.\n    if (!edges || edges.length === 0) {\n        \n        // --- LÓGICA DE DETECCIÓN DE PROFESOR ---\n        const rawTaxons = bizneoData.main_taxons || \"\";\n        \n        // 1. Convertimos a Array para búsquedas EXACTAS (\"a secas\")\n        // Separa \"Snow Division\" de \"Snow Division Rental\"\n        const tagsArray = String(rawTaxons).split(',').map(tag => tag.trim());\n        \n        // 2. Convertimos a minúsculas para búsquedas PARCIALES (\"contiene\")\n        const taxonsLower = String(rawTaxons).toLowerCase();\n\n        let esProfesor = false;\n\n        // A) Coincidencia Exacta\n        if (tagsArray.includes(\"Club Surfin\") || tagsArray.includes(\"Snow Division\")) {\n            esProfesor = true;\n        }\n\n        // B) Coincidencia Parcial\n        if (taxonsLower.includes(\"club nieve\") || taxonsLower.includes(\"ski school\")) {\n            esProfesor = true;\n        }\n        // ----------------------------------------\n        \n        // Agregamos a la lista final para crear\n        missingEmployees.push({\n            json: {\n                // Pasamos los datos limpios de Bizneo\n                first_name: bizneoData.first_name,\n                last_name: bizneoData.last_name,\n                email: bizneoData.email,\n                id_bizneo: bizneoData.id,\n                external_id: bizneoData.external_id,\n                \n                // Variable NUEVA para el siguiente IF\n                es_profesor: esProfesor, \n                main_taxons: rawTaxons, // (Opcional) Por si quieres revisar qué etiquetas tenía\n\n                // Debug info\n                check_status: \"Vigente en Bizneo, No existe en Shopify\"\n            }\n        });\n    }\n});\n\nreturn missingEmployees;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        288,
+        -32
+      ],
+      "id": "9e9d34eb-5b24-404c-9437-9176ba482c1c",
+      "name": "No_existe_en_Shopify"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2025-10/graphql.json",
+        "query": "mutation removeEmployeeTag($id: ID!, $tags: [String!]!) {\n  tagsRemove(id: $id, tags: $tags) {\n    node {\n      id\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
+        "variables": "={\n  \"id\": \"{{ $json.shopify_id }}\",\n  \"tags\": [\"Empleado,DescuentoEmpleado\"]\n}"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        640,
+        288
+      ],
+      "id": "f4ea09c5-285f-4b49-bd67-2ad2893c6692",
+      "name": "quitar_etiqueta_empleado",
       "credentials": {
         "httpHeaderAuth": {
           "id": "OPt2Cl0dnwcU4qRk",
@@ -985,6 +985,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-01-22T11:28:41.585Z",
-  "versionId": "9e31c851-2760-4e57-8d5e-93d2d8df80f0"
+  "updatedAt": "2026-01-26T13:04:37.228Z",
+  "versionId": "0be4f264-5f42-4620-96d2-d0ca7b0481bc"
 }
