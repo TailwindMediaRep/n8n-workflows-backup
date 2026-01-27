@@ -1,0 +1,728 @@
+{
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-01-26T11:51:04.000Z",
+    "createdAt": "2026-01-26T11:51:00.354Z",
+    "versionId": "19682179-e7cc-4f13-b717-ccdfa978bcf2",
+    "workflowId": "8zLv7DpNHO5BT9ay",
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "monto-descuentos",
+          "options": {}
+        },
+        "name": "Webhook2",
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 1,
+        "position": [
+          -2608,
+          1376
+        ],
+        "id": "37e24b67-a5c8-483d-9cbb-d6deb3bffc60",
+        "webhookId": "7ffd809b-cd97-4781-bbac-1cd59c4cf3d4"
+      },
+      {
+        "parameters": {
+          "rules": {
+            "values": [
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 1
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $json.headers[\"x-shopify-topic\"] }}",
+                      "rightValue": "refunds/create",
+                      "operator": {
+                        "type": "string",
+                        "operation": "contains"
+                      },
+                      "id": "05df5634-175d-4197-9602-04063623ac57"
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 1
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $json.headers[\"x-shopify-topic\"] }}",
+                      "rightValue": "orders/create",
+                      "operator": {
+                        "type": "string",
+                        "operation": "contains"
+                      },
+                      "id": "b7de8ecd-dbbe-4ba1-8cbf-a320b3f20ff8"
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              }
+            ]
+          },
+          "options": {}
+        },
+        "name": "Switch Topic1",
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3,
+        "position": [
+          -2384,
+          1376
+        ],
+        "id": "ad3ea731-07dc-45f4-ab7f-2fa1122403fb"
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+          "query": "query getOrderData($id: ID!) {\n  order(id: $id) {\n    customer {\n      id\n    }\n    discountCodes\n  }\n}"
+        },
+        "name": "Get Refund Customer1",
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1,
+        "position": [
+          -2160,
+          1312
+        ],
+        "id": "892eb6b9-c9ce-4dde-9072-34637ceda390",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "// 1. Obtener datos del Webhook\n// IMPORTANTE: Aquí debe ir el nombre EXACTO de tu nodo.\n// En tu captura se llama \"Webhook2\". Si lo cambias, actualiza esta línea.\nlet webhookNode;\ntry {\n    webhookNode = $('Webhook2').first().json; \n} catch (error) {\n    // Fallback: Si no se llama Webhook2, intentamos buscar el nodo anterior conectado\n    // Esto hace el código más resistente a cambios de nombre\n    webhookNode = $input.all()[0].json;\n}\n\nconst topic = webhookNode.headers[\"x-shopify-topic\"];\nconst body = webhookNode.body;\n\nlet customerId = \"\";\nlet amountToProcess = 0;\nlet discountCode = null;\n\nif (topic.includes('orders/create')) {\n    // === ES UN PEDIDO ===\n    if (body.customer && body.customer.admin_graphql_api_id) {\n        customerId = body.customer.admin_graphql_api_id;\n    }\n\n    // --- DETECCIÓN DE CÓDIGO/NOMBRE DE DESCUENTO ---\n    \n    // PRIORIDAD 1: Códigos de Descuento (Cupones estándar)\n    if (body.discount_codes && body.discount_codes.length > 0) {\n        discountCode = body.discount_codes[0].code;\n    }\n    // PRIORIDAD 2: Aplicaciones de Descuento (Manuales POS, Automáticos, Scripts)\n    else if (body.discount_applications && body.discount_applications.length > 0) {\n        discountCode = body.discount_applications[0].title;\n    }\n\n    // --- DETECCIÓN DE MONTO ---\n    const totalDiscounts = parseFloat(body.total_discounts || \"0\");\n    \n    // Solo acumulamos si hubo un descuento real\n    if (totalDiscounts > 0) {\n        amountToProcess = parseFloat(body.total_price);\n    } else {\n        amountToProcess = 0;\n    }\n\n} else if (topic.includes('refunds/create')) {\n    // === ES UNA DEVOLUCIÓN ===\n    // En las devoluciones, los datos vienen del nodo GraphQL anterior, no del webhook directo\n    // Usamos try/catch por si se ejecuta manualmente sin datos previos\n    let orderData = null;\n    try {\n        orderData = $input.item.json.data ? $input.item.json.data.order : null;\n    } catch(e) {}\n    \n    if (orderData && orderData.customer) {\n         customerId = orderData.customer.id;\n         \n         if (orderData.discountCodes && orderData.discountCodes.length > 0) {\n             const codeItem = orderData.discountCodes[0];\n             discountCode = (typeof codeItem === 'string') ? codeItem : codeItem.code;\n         } \n    } else {\n         customerId = body.order_id; \n    }\n\n    const transactions = body.transactions || [];\n    const totalRefunded = transactions.reduce((acc, curr) => acc + parseFloat(curr.amount), 0);\n    \n    amountToProcess = -Math.abs(totalRefunded);\n}\n\nreturn {\n    json: {\n        customerId: customerId,\n        amountToProcess: amountToProcess,\n        discountCode: discountCode\n    }\n};"
+        },
+        "name": "Code Unificador1",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          -1936,
+          1376
+        ],
+        "id": "c095aca7-cd13-45a4-92a7-86c98e6a5ea8"
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+          "requestFormat": "json",
+          "query": "query getCustomerMetafields($customerId: ID!) {\n  customer(id: $customerId) {\n    id\n    total: metafield(namespace: \"custom\", key: \"monto_total\") {\n      value\n    }\n    profesor: metafield(namespace: \"custom\", key: \"monto_profesor_40\") {\n      value\n    }\n    club: metafield(namespace: \"custom\", key: \"monto_club_30\") {\n      value\n    }\n    empleado: metafield(namespace: \"custom\", key: \"monto_empleado_25\") {\n      value\n    }\n  }\n}",
+          "variables": "={\n  \"customerId\": \"{{ $json.customerId }}\"\n}"
+        },
+        "name": "Get Current Balance1",
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1,
+        "position": [
+          -1712,
+          1376
+        ],
+        "id": "4961ca21-970f-492d-b305-b2610d3336a4",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "// === CONFIGURACIÓN ===\nconst codeMap = {\n    \"40%PROFESOR\": \"monto_profesor_40\",\n    \"30%CLUB\": \"monto_club_30\",\n    \"25%EMPLEADO\": \"monto_empleado_25\"\n};\n\nconst rules = [\n  { threshold: 600, tagToRemove: \"DescuentoEmpleado\" },\n  { threshold: 1000, tagToRemove: \"DescuentoClub\" },\n  { threshold: 1200, tagToRemove: \"DescuentoProfesor\" }\n];\n\n// === DATOS DE ENTRADA ===\nconst processData = $('Code Unificador1').first().json; \nconst amount = processData.amountToProcess;\nconst codeUsed = processData.discountCode;\n\nconst customerData = $input.item.json.data.customer;\nconst customerId = customerData.id;\n\nconst getVal = (metafieldObj) => {\n    if (!metafieldObj || !metafieldObj.value) return 0;\n    try {\n        const parsed = JSON.parse(metafieldObj.value);\n        return parseFloat(parsed.amount);\n    } catch (e) {\n        return 0;\n    }\n};\n\n// === 1. CALCULAR MONTO TOTAL ===\n// (Acumula cualquier pedido con descuento, sea código o personalizado)\nlet currentTotal = getVal(customerData.total);\nlet newTotal = currentTotal + amount;\nif (newTotal < 0) newTotal = 0;\n\nlet metafieldsToUpdate = [];\n\n// Actualizar TOTAL\nmetafieldsToUpdate.push({\n    ownerId: customerId,\n    namespace: \"custom\",\n    key: \"monto_total\",\n    type: \"money\",\n    value: JSON.stringify({ amount: newTotal.toFixed(2), currency_code: \"EUR\" })\n});\n\n// === 2. CALCULAR MONTO ESPECÍFICO ===\n// (Solo si coincide el código string exacto)\nif (codeUsed && codeMap[codeUsed]) {\n    const specificKey = codeMap[codeUsed];\n    let currentSpecific = 0;\n    \n    if (codeUsed === \"40%PROFESOR\") currentSpecific = getVal(customerData.profesor);\n    else if (codeUsed === \"30%CLUB\") currentSpecific = getVal(customerData.club);\n    else if (codeUsed === \"25%EMPLEADO\") currentSpecific = getVal(customerData.empleado);\n    \n    let newSpecific = currentSpecific + amount;\n    if (newSpecific < 0) newSpecific = 0;\n\n    metafieldsToUpdate.push({\n        ownerId: customerId,\n        namespace: \"custom\",\n        key: specificKey,\n        type: \"money\",\n        value: JSON.stringify({ amount: newSpecific.toFixed(2), currency_code: \"EUR\" })\n    });\n}\n\n// === 3. GESTIÓN DE ETIQUETAS ===\nlet tagsToRemove = [];\nfor (const rule of rules) {\n    if (newTotal >= rule.threshold) {\n        tagsToRemove.push(rule.tagToRemove);\n    }\n}\n\nreturn {\n    json: {\n        customerId: customerId,\n        metafieldsToUpdate: metafieldsToUpdate,\n        tagsToRemove: tagsToRemove,\n        shouldRemoveTags: tagsToRemove.length > 0\n    }\n};"
+        },
+        "name": "Code Calculator1",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          -1488,
+          1376
+        ],
+        "id": "1b8bd03a-39c9-4ec6-851e-306fc9eec61b"
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+          "requestFormat": "json",
+          "query": "mutation updateMetafields($metafields: [MetafieldsSetInput!]!) {\n  metafieldsSet(metafields: $metafields) {\n    metafields {\n      key\n      value\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
+          "variables": "={{ { \"metafields\": $json.metafieldsToUpdate } }}"
+        },
+        "name": "Update Balance1",
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1,
+        "position": [
+          -1264,
+          1376
+        ],
+        "id": "441cfb48-0d9d-4403-9797-b74cc0f280ec",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 1
+            },
+            "conditions": [
+              {
+                "leftValue": "={{ $('Code Calculator1').item.json.shouldRemoveTags }}",
+                "rightValue": true,
+                "operator": {
+                  "type": "boolean",
+                  "operation": "true",
+                  "singleValue": true
+                },
+                "id": "cd6e4c85-4d37-4c62-bd25-7ed5625c424e"
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "name": "Check Tags1",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2,
+        "position": [
+          -1040,
+          1376
+        ],
+        "id": "66f01a6d-e07d-4949-b148-53bf5452046f"
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+          "requestFormat": "json",
+          "query": "mutation removeCustomerTags($id: ID!, $tags: [String!]!) {\n  tagsRemove(id: $id, tags: $tags) {\n    userErrors {\n      field\n      message\n    }\n    node {\n      id\n    }\n  }\n}",
+          "variables": "={{\n  {\n    \"id\": $('Code Calculator1').item.json.customerId,\n    \"tags\": $('Code Calculator1').item.json.tagsToRemove\n  }\n}}"
+        },
+        "name": "Remove Tags1",
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1,
+        "position": [
+          -816,
+          1280
+        ],
+        "id": "d3a5382b-317e-41a7-8298-e660bb66d383",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          -816,
+          1472
+        ],
+        "id": "0d1a024e-1aaa-49a1-a085-55e9d67e95e8",
+        "name": "No Operation, do nothing"
+      }
+    ],
+    "connections": {
+      "Webhook2": {
+        "main": [
+          [
+            {
+              "node": "Switch Topic1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Switch Topic1": {
+        "main": [
+          [
+            {
+              "node": "Get Refund Customer1",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Code Unificador1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Get Refund Customer1": {
+        "main": [
+          [
+            {
+              "node": "Code Unificador1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code Unificador1": {
+        "main": [
+          [
+            {
+              "node": "Get Current Balance1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Get Current Balance1": {
+        "main": [
+          [
+            {
+              "node": "Code Calculator1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code Calculator1": {
+        "main": [
+          [
+            {
+              "node": "Update Balance1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Update Balance1": {
+        "main": [
+          [
+            {
+              "node": "Check Tags1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Check Tags1": {
+        "main": [
+          [
+            {
+              "node": "Remove Tags1",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "No Operation, do nothing",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Info Tailwind",
+    "name": "Version 19682179",
+    "description": "",
+    "autosaved": false
+  },
+  "activeVersionId": "19682179-e7cc-4f13-b717-ccdfa978bcf2",
+  "connections": {
+    "Webhook2": {
+      "main": [
+        [
+          {
+            "node": "Switch Topic1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch Topic1": {
+      "main": [
+        [
+          {
+            "node": "Get Refund Customer1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Code Unificador1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Refund Customer1": {
+      "main": [
+        [
+          {
+            "node": "Code Unificador1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code Unificador1": {
+      "main": [
+        [
+          {
+            "node": "Get Current Balance1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Current Balance1": {
+      "main": [
+        [
+          {
+            "node": "Code Calculator1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code Calculator1": {
+      "main": [
+        [
+          {
+            "node": "Update Balance1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Balance1": {
+      "main": [
+        [
+          {
+            "node": "Check Tags1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Tags1": {
+      "main": [
+        [
+          {
+            "node": "Remove Tags1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-01-26T09:47:12.180Z",
+  "id": "8zLv7DpNHO5BT9ay",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Monto_Hibrido_Descuentos",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "monto-descuentos",
+        "options": {}
+      },
+      "name": "Webhook2",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -2608,
+        1376
+      ],
+      "id": "37e24b67-a5c8-483d-9cbb-d6deb3bffc60",
+      "webhookId": "7ffd809b-cd97-4781-bbac-1cd59c4cf3d4"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.headers[\"x-shopify-topic\"] }}",
+                    "rightValue": "refunds/create",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    },
+                    "id": "05df5634-175d-4197-9602-04063623ac57"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 1
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.headers[\"x-shopify-topic\"] }}",
+                    "rightValue": "orders/create",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    },
+                    "id": "b7de8ecd-dbbe-4ba1-8cbf-a320b3f20ff8"
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Switch Topic1",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3,
+      "position": [
+        -2384,
+        1376
+      ],
+      "id": "ad3ea731-07dc-45f4-ab7f-2fa1122403fb"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+        "query": "query getOrderData($id: ID!) {\n  order(id: $id) {\n    customer {\n      id\n    }\n    discountCodes\n  }\n}"
+      },
+      "name": "Get Refund Customer1",
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1,
+      "position": [
+        -2160,
+        1312
+      ],
+      "id": "892eb6b9-c9ce-4dde-9072-34637ceda390",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Obtener datos del Webhook\n// IMPORTANTE: Aquí debe ir el nombre EXACTO de tu nodo.\n// En tu captura se llama \"Webhook2\". Si lo cambias, actualiza esta línea.\nlet webhookNode;\ntry {\n    webhookNode = $('Webhook2').first().json; \n} catch (error) {\n    // Fallback: Si no se llama Webhook2, intentamos buscar el nodo anterior conectado\n    // Esto hace el código más resistente a cambios de nombre\n    webhookNode = $input.all()[0].json;\n}\n\nconst topic = webhookNode.headers[\"x-shopify-topic\"];\nconst body = webhookNode.body;\n\nlet customerId = \"\";\nlet amountToProcess = 0;\nlet discountCode = null;\n\nif (topic.includes('orders/create')) {\n    // === ES UN PEDIDO ===\n    if (body.customer && body.customer.admin_graphql_api_id) {\n        customerId = body.customer.admin_graphql_api_id;\n    }\n\n    // --- DETECCIÓN DE CÓDIGO/NOMBRE DE DESCUENTO ---\n    \n    // PRIORIDAD 1: Códigos de Descuento (Cupones estándar)\n    if (body.discount_codes && body.discount_codes.length > 0) {\n        discountCode = body.discount_codes[0].code;\n    }\n    // PRIORIDAD 2: Aplicaciones de Descuento (Manuales POS, Automáticos, Scripts)\n    else if (body.discount_applications && body.discount_applications.length > 0) {\n        discountCode = body.discount_applications[0].title;\n    }\n\n    // --- DETECCIÓN DE MONTO ---\n    const totalDiscounts = parseFloat(body.total_discounts || \"0\");\n    \n    // Solo acumulamos si hubo un descuento real\n    if (totalDiscounts > 0) {\n        amountToProcess = parseFloat(body.total_price);\n    } else {\n        amountToProcess = 0;\n    }\n\n} else if (topic.includes('refunds/create')) {\n    // === ES UNA DEVOLUCIÓN ===\n    // En las devoluciones, los datos vienen del nodo GraphQL anterior, no del webhook directo\n    // Usamos try/catch por si se ejecuta manualmente sin datos previos\n    let orderData = null;\n    try {\n        orderData = $input.item.json.data ? $input.item.json.data.order : null;\n    } catch(e) {}\n    \n    if (orderData && orderData.customer) {\n         customerId = orderData.customer.id;\n         \n         if (orderData.discountCodes && orderData.discountCodes.length > 0) {\n             const codeItem = orderData.discountCodes[0];\n             discountCode = (typeof codeItem === 'string') ? codeItem : codeItem.code;\n         } \n    } else {\n         customerId = body.order_id; \n    }\n\n    const transactions = body.transactions || [];\n    const totalRefunded = transactions.reduce((acc, curr) => acc + parseFloat(curr.amount), 0);\n    \n    amountToProcess = -Math.abs(totalRefunded);\n}\n\nreturn {\n    json: {\n        customerId: customerId,\n        amountToProcess: amountToProcess,\n        discountCode: discountCode\n    }\n};"
+      },
+      "name": "Code Unificador1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1936,
+        1376
+      ],
+      "id": "c095aca7-cd13-45a4-92a7-86c98e6a5ea8"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+        "requestFormat": "json",
+        "query": "query getCustomerMetafields($customerId: ID!) {\n  customer(id: $customerId) {\n    id\n    total: metafield(namespace: \"custom\", key: \"monto_total\") {\n      value\n    }\n    profesor: metafield(namespace: \"custom\", key: \"monto_profesor_40\") {\n      value\n    }\n    club: metafield(namespace: \"custom\", key: \"monto_club_30\") {\n      value\n    }\n    empleado: metafield(namespace: \"custom\", key: \"monto_empleado_25\") {\n      value\n    }\n  }\n}",
+        "variables": "={\n  \"customerId\": \"{{ $json.customerId }}\"\n}"
+      },
+      "name": "Get Current Balance1",
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1,
+      "position": [
+        -1712,
+        1376
+      ],
+      "id": "4961ca21-970f-492d-b305-b2610d3336a4",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// === CONFIGURACIÓN ===\nconst codeMap = {\n    \"40%PROFESOR\": \"monto_profesor_40\",\n    \"30%CLUB\": \"monto_club_30\",\n    \"25%EMPLEADO\": \"monto_empleado_25\"\n};\n\nconst rules = [\n  { threshold: 600, tagToRemove: \"DescuentoEmpleado\" },\n  { threshold: 1000, tagToRemove: \"DescuentoClub\" },\n  { threshold: 1200, tagToRemove: \"DescuentoProfesor\" }\n];\n\n// === DATOS DE ENTRADA ===\nconst processData = $('Code Unificador1').first().json; \nconst amount = processData.amountToProcess;\nconst codeUsed = processData.discountCode;\n\nconst customerData = $input.item.json.data.customer;\nconst customerId = customerData.id;\n\nconst getVal = (metafieldObj) => {\n    if (!metafieldObj || !metafieldObj.value) return 0;\n    try {\n        const parsed = JSON.parse(metafieldObj.value);\n        return parseFloat(parsed.amount);\n    } catch (e) {\n        return 0;\n    }\n};\n\n// === 1. CALCULAR MONTO TOTAL ===\n// (Acumula cualquier pedido con descuento, sea código o personalizado)\nlet currentTotal = getVal(customerData.total);\nlet newTotal = currentTotal + amount;\nif (newTotal < 0) newTotal = 0;\n\nlet metafieldsToUpdate = [];\n\n// Actualizar TOTAL\nmetafieldsToUpdate.push({\n    ownerId: customerId,\n    namespace: \"custom\",\n    key: \"monto_total\",\n    type: \"money\",\n    value: JSON.stringify({ amount: newTotal.toFixed(2), currency_code: \"EUR\" })\n});\n\n// === 2. CALCULAR MONTO ESPECÍFICO ===\n// (Solo si coincide el código string exacto)\nif (codeUsed && codeMap[codeUsed]) {\n    const specificKey = codeMap[codeUsed];\n    let currentSpecific = 0;\n    \n    if (codeUsed === \"40%PROFESOR\") currentSpecific = getVal(customerData.profesor);\n    else if (codeUsed === \"30%CLUB\") currentSpecific = getVal(customerData.club);\n    else if (codeUsed === \"25%EMPLEADO\") currentSpecific = getVal(customerData.empleado);\n    \n    let newSpecific = currentSpecific + amount;\n    if (newSpecific < 0) newSpecific = 0;\n\n    metafieldsToUpdate.push({\n        ownerId: customerId,\n        namespace: \"custom\",\n        key: specificKey,\n        type: \"money\",\n        value: JSON.stringify({ amount: newSpecific.toFixed(2), currency_code: \"EUR\" })\n    });\n}\n\n// === 3. GESTIÓN DE ETIQUETAS ===\nlet tagsToRemove = [];\nfor (const rule of rules) {\n    if (newTotal >= rule.threshold) {\n        tagsToRemove.push(rule.tagToRemove);\n    }\n}\n\nreturn {\n    json: {\n        customerId: customerId,\n        metafieldsToUpdate: metafieldsToUpdate,\n        tagsToRemove: tagsToRemove,\n        shouldRemoveTags: tagsToRemove.length > 0\n    }\n};"
+      },
+      "name": "Code Calculator1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1488,
+        1376
+      ],
+      "id": "1b8bd03a-39c9-4ec6-851e-306fc9eec61b"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+        "requestFormat": "json",
+        "query": "mutation updateMetafields($metafields: [MetafieldsSetInput!]!) {\n  metafieldsSet(metafields: $metafields) {\n    metafields {\n      key\n      value\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
+        "variables": "={{ { \"metafields\": $json.metafieldsToUpdate } }}"
+      },
+      "name": "Update Balance1",
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1,
+      "position": [
+        -1264,
+        1376
+      ],
+      "id": "441cfb48-0d9d-4403-9797-b74cc0f280ec",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $('Code Calculator1').item.json.shouldRemoveTags }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              },
+              "id": "cd6e4c85-4d37-4c62-bd25-7ed5625c424e"
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "name": "Check Tags1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -1040,
+        1376
+      ],
+      "id": "66f01a6d-e07d-4949-b148-53bf5452046f"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+        "requestFormat": "json",
+        "query": "mutation removeCustomerTags($id: ID!, $tags: [String!]!) {\n  tagsRemove(id: $id, tags: $tags) {\n    userErrors {\n      field\n      message\n    }\n    node {\n      id\n    }\n  }\n}",
+        "variables": "={{\n  {\n    \"id\": $('Code Calculator1').item.json.customerId,\n    \"tags\": $('Code Calculator1').item.json.tagsToRemove\n  }\n}}"
+      },
+      "name": "Remove Tags1",
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1,
+      "position": [
+        -816,
+        1280
+      ],
+      "id": "d3a5382b-317e-41a7-8298-e660bb66d383",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        -816,
+        1472
+      ],
+      "id": "0d1a024e-1aaa-49a1-a085-55e9d67e95e8",
+      "name": "No Operation, do nothing"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-01-26T09:47:12.184Z",
+      "createdAt": "2026-01-26T09:47:12.184Z",
+      "role": "workflow:owner",
+      "workflowId": "8zLv7DpNHO5BT9ay",
+      "projectId": "x5UZcmGQw2OWHuXb"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2026-01-26T11:51:14.003Z",
+  "versionId": "19682179-e7cc-4f13-b717-ccdfa978bcf2"
+}
