@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-01-23T13:54:46.000Z",
-    "createdAt": "2026-01-23T13:54:36.975Z",
-    "versionId": "84b584a3-8d81-489c-927e-3a51a696d2c4",
+    "updatedAt": "2026-01-28T09:05:15.000Z",
+    "createdAt": "2026-01-28T09:05:11.583Z",
+    "versionId": "e58c95dd-077a-4f02-96b4-957797cc852f",
     "workflowId": "s453S4YZkDDjynYN",
     "nodes": [
       {
@@ -33,7 +33,7 @@
         "credentials": {
           "gmailOAuth2": {
             "id": "RHR23CJ1w4T4gR4J",
-            "name": "Gmail info@rules-shop.es"
+            "name": "info@rules-shop.es"
           }
         }
       },
@@ -194,7 +194,7 @@
         "credentials": {
           "gmailOAuth2": {
             "id": "RHR23CJ1w4T4gR4J",
-            "name": "Gmail info@rules-shop.es"
+            "name": "info@rules-shop.es"
           }
         }
       },
@@ -217,7 +217,7 @@
         "credentials": {
           "gmailOAuth2": {
             "id": "RHR23CJ1w4T4gR4J",
-            "name": "Gmail info@rules-shop.es"
+            "name": "info@rules-shop.es"
           }
         }
       },
@@ -372,7 +372,7 @@
         "credentials": {
           "gmailOAuth2": {
             "id": "RHR23CJ1w4T4gR4J",
-            "name": "Gmail info@rules-shop.es"
+            "name": "info@rules-shop.es"
           }
         }
       },
@@ -395,7 +395,7 @@
         "credentials": {
           "gmailOAuth2": {
             "id": "RHR23CJ1w4T4gR4J",
-            "name": "Gmail info@rules-shop.es"
+            "name": "info@rules-shop.es"
           }
         }
       },
@@ -663,11 +663,11 @@
       }
     },
     "authors": "Info Tailwind",
-    "name": "Version 84b584a3",
+    "name": "Version e58c95dd",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "84b584a3-8d81-489c-927e-3a51a696d2c4",
+  "activeVersionId": "e58c95dd-077a-4f02-96b4-957797cc852f",
   "connections": {
     "Gmail Trigger": {
       "main": [
@@ -874,7 +874,7 @@
       "credentials": {
         "gmailOAuth2": {
           "id": "RHR23CJ1w4T4gR4J",
-          "name": "Gmail info@rules-shop.es"
+          "name": "info@rules-shop.es"
         }
       }
     },
@@ -1035,7 +1035,7 @@
       "credentials": {
         "gmailOAuth2": {
           "id": "RHR23CJ1w4T4gR4J",
-          "name": "Gmail info@rules-shop.es"
+          "name": "info@rules-shop.es"
         }
       }
     },
@@ -1058,7 +1058,7 @@
       "credentials": {
         "gmailOAuth2": {
           "id": "RHR23CJ1w4T4gR4J",
-          "name": "Gmail info@rules-shop.es"
+          "name": "info@rules-shop.es"
         }
       }
     },
@@ -1213,7 +1213,7 @@
       "credentials": {
         "gmailOAuth2": {
           "id": "RHR23CJ1w4T4gR4J",
-          "name": "Gmail info@rules-shop.es"
+          "name": "info@rules-shop.es"
         }
       }
     },
@@ -1236,7 +1236,7 @@
       "credentials": {
         "gmailOAuth2": {
           "id": "RHR23CJ1w4T4gR4J",
-          "name": "Gmail info@rules-shop.es"
+          "name": "info@rules-shop.es"
         }
       }
     },
@@ -1362,6 +1362,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-01-23T13:54:54.012Z",
-  "versionId": "84b584a3-8d81-489c-927e-3a51a696d2c4"
+  "updatedAt": "2026-01-28T09:05:11.579Z",
+  "versionId": "e58c95dd-077a-4f02-96b4-957797cc852f"
 }
