@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-01-27T23:08:07.000Z",
-    "createdAt": "2026-01-27T23:08:04.498Z",
-    "versionId": "6b7637da-313b-4d97-90c4-89c9a41b5fdb",
+    "updatedAt": "2026-01-28T11:36:41.000Z",
+    "createdAt": "2026-01-28T11:36:35.256Z",
+    "versionId": "fa815c9c-a7a8-435a-8845-c2bb01e8155d",
     "workflowId": "cnuDKnZrHmDy4QDh",
     "nodes": [
       {
@@ -26,7 +26,7 @@
             "__rl": true,
             "value": 512939465,
             "mode": "list",
-            "cachedResultName": "Respuestas de formulario 2",
+            "cachedResultName": "Respuestas de formulario",
             "cachedResultUrl": "https://docs.google.com/spreadsheets/d/16auxC5pQ4ydDh1LxCKiPC5ClQ1WCN3R5ogY1Smmbm4c/edit#gid=512939465"
           },
           "event": "rowAdded",
@@ -54,7 +54,7 @@
               {
                 "id": "d56c1a5f-1dc2-4a0d-86fb-e47d652cbd19",
                 "name": "nombre_codificado",
-                "value": "={{ encodeURI($json[\"Nombre\"]) }}",
+                "value": "={{ ($json[\"Nombre\"]) }}",
                 "type": "string"
               },
               {
@@ -327,28 +327,6 @@
         "parameters": {
           "authentication": "headerAuth",
           "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
-          "query": "mutation customerUpdate($input: CustomerInput!) {\n  customerUpdate(input: $input) {\n    customer {\n      id\n      email\n      firstName\n      lastName\n      tags\n      phone\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
-          "variables": "={\n  \"input\": {\n    \"id\": \"{{ $('Buscar_ID_Cliente').item.json.data.customers.edges[0].node.id }}\",\n    \"firstName\": \"{{ $('Webhook').item.json.query.nombre }}\",\n    \"lastName\": \"{{ $('Webhook').item.json.query.apellido }}\",\n    \n    \"tags\": \"{{ ($('Buscar_ID_Cliente').item.json.data.customers.edges[0].node.tags || []).concat(['Profesorrrrrrr', 'DescuentoProfesor']) }}\",\n    \n    \"note\": \"Perfil actualizado y validado automáticamente vía WhatsApp el {{ $now.toFormat('dd/MM/yyyy') }}\",\n    \"phone\": \"{{ $('Webhook').item.json.query.telefono && $('Webhook').item.json.query.telefono.toString().replace(/\\D/g,'').length > 8 ? ($('Webhook').item.json.query.telefono.toString().includes('+') ? $('Webhook').item.json.query.telefono.toString().replace(/ /g,'') : '+34' + $('Webhook').item.json.query.telefono.toString().replace(/\\D/g,'')) : null }}\"\n  }\n}"
-        },
-        "type": "n8n-nodes-base.graphql",
-        "typeVersion": 1.1,
-        "position": [
-          512,
-          32
-        ],
-        "id": "20b324c0-a79a-434e-864f-8aeb88eb1a38",
-        "name": "GraphQL1",
-        "credentials": {
-          "httpHeaderAuth": {
-            "id": "OPt2Cl0dnwcU4qRk",
-            "name": "ShopifyInformes"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "authentication": "headerAuth",
-          "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
           "query": "query findCustomer($query: String!) {\n  customers(first: 1, query: $query) {\n    edges {\n      node {\n        id\n        tags\n      }\n    }\n  }\n}",
           "variables": "={\n  \"query\": \"email:{{ $('Webhook').item.json.query.email }}\"\n}"
         },
@@ -380,7 +358,7 @@
             "__rl": true,
             "value": 512939465,
             "mode": "list",
-            "cachedResultName": "Respuestas de formulario 2",
+            "cachedResultName": "Respuestas de formulario",
             "cachedResultUrl": "https://docs.google.com/spreadsheets/d/16auxC5pQ4ydDh1LxCKiPC5ClQ1WCN3R5ogY1Smmbm4c/edit#gid=512939465"
           },
           "filtersUI": {
@@ -504,7 +482,7 @@
             "__rl": true,
             "value": 512939465,
             "mode": "list",
-            "cachedResultName": "Respuestas de formulario 2",
+            "cachedResultName": "Respuestas de formulario",
             "cachedResultUrl": "https://docs.google.com/spreadsheets/d/16auxC5pQ4ydDh1LxCKiPC5ClQ1WCN3R5ogY1Smmbm4c/edit#gid=512939465"
           },
           "columns": {
@@ -653,7 +631,7 @@
             "__rl": true,
             "value": 512939465,
             "mode": "list",
-            "cachedResultName": "Respuestas de formulario 2",
+            "cachedResultName": "Respuestas de formulario",
             "cachedResultUrl": "https://docs.google.com/spreadsheets/d/16auxC5pQ4ydDh1LxCKiPC5ClQ1WCN3R5ogY1Smmbm4c/edit#gid=512939465"
           },
           "columns": {
@@ -787,6 +765,28 @@
             "name": "Google Sheets account"
           }
         }
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+          "query": "mutation customerUpdate($input: CustomerInput!) {\n  customerUpdate(input: $input) {\n    customer {\n      id\n      email\n      firstName\n      lastName\n      tags\n      phone\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
+          "variables": "={\n  \"input\": {\n    \"id\": \"{{ $('Buscar_ID_Cliente').item.json.data.customers.edges[0].node.id }}\",\n    \"firstName\": \"{{ $('Webhook').item.json.query.nombre }}\",\n    \"lastName\": \"{{ $('Webhook').item.json.query.apellido }}\",\n    \n    \"tags\": \"{{ ($('Buscar_ID_Cliente').item.json.data.customers.edges[0].node.tags || []).concat(['Profesor', 'DescuentoProfesor']) }}\",\n    \n    \"note\": \"Perfil actualizado y validado automáticamente vía WhatsApp el {{ $now.toFormat('dd/MM/yyyy') }}\",\n    \"phone\": \"{{ $('Webhook').item.json.query.telefono && $('Webhook').item.json.query.telefono.toString().replace(/\\D/g,'').length > 8 ? ($('Webhook').item.json.query.telefono.toString().includes('+') ? $('Webhook').item.json.query.telefono.toString().replace(/ /g,'') : '+34' + $('Webhook').item.json.query.telefono.toString().replace(/\\D/g,'')) : null }}\"\n  }\n}"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          512,
+          32
+        ],
+        "id": "20b324c0-a79a-434e-864f-8aeb88eb1a38",
+        "name": "Actualizar_Cliente",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
       }
     ],
     "connections": {
@@ -885,22 +885,11 @@
           ]
         ]
       },
-      "GraphQL1": {
-        "main": [
-          [
-            {
-              "node": "cuenta_existente",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
       "Buscar_ID_Cliente": {
         "main": [
           [
             {
-              "node": "GraphQL1",
+              "node": "Actualizar_Cliente",
               "type": "main",
               "index": 0
             }
@@ -975,14 +964,25 @@
             }
           ]
         ]
+      },
+      "Actualizar_Cliente": {
+        "main": [
+          [
+            {
+              "node": "cuenta_existente",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
     "authors": "Info Tailwind",
-    "name": "Version 6b7637da",
+    "name": "Version fa815c9c",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "6b7637da-313b-4d97-90c4-89c9a41b5fdb",
+  "activeVersionId": "fa815c9c-a7a8-435a-8845-c2bb01e8155d",
   "connections": {
     "Google Sheets Trigger": {
       "main": [
@@ -1079,22 +1079,11 @@
         ]
       ]
     },
-    "GraphQL1": {
-      "main": [
-        [
-          {
-            "node": "cuenta_existente",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Buscar_ID_Cliente": {
       "main": [
         [
           {
-            "node": "GraphQL1",
+            "node": "Actualizar_Cliente",
             "type": "main",
             "index": 0
           }
@@ -1169,6 +1158,17 @@
           }
         ]
       ]
+    },
+    "Actualizar_Cliente": {
+      "main": [
+        [
+          {
+            "node": "cuenta_existente",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-12-12T07:23:55.975Z",
@@ -1199,7 +1199,7 @@
           "__rl": true,
           "value": 512939465,
           "mode": "list",
-          "cachedResultName": "Respuestas de formulario 2",
+          "cachedResultName": "Respuestas de formulario",
           "cachedResultUrl": "https://docs.google.com/spreadsheets/d/16auxC5pQ4ydDh1LxCKiPC5ClQ1WCN3R5ogY1Smmbm4c/edit#gid=512939465"
         },
         "event": "rowAdded",
@@ -1227,7 +1227,7 @@
             {
               "id": "d56c1a5f-1dc2-4a0d-86fb-e47d652cbd19",
               "name": "nombre_codificado",
-              "value": "={{ encodeURI($json[\"Nombre\"]) }}",
+              "value": "={{ ($json[\"Nombre\"]) }}",
               "type": "string"
             },
             {
@@ -1500,28 +1500,6 @@
       "parameters": {
         "authentication": "headerAuth",
         "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
-        "query": "mutation customerUpdate($input: CustomerInput!) {\n  customerUpdate(input: $input) {\n    customer {\n      id\n      email\n      firstName\n      lastName\n      tags\n      phone\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
-        "variables": "={\n  \"input\": {\n    \"id\": \"{{ $('Buscar_ID_Cliente').item.json.data.customers.edges[0].node.id }}\",\n    \"firstName\": \"{{ $('Webhook').item.json.query.nombre }}\",\n    \"lastName\": \"{{ $('Webhook').item.json.query.apellido }}\",\n    \n    \"tags\": \"{{ ($('Buscar_ID_Cliente').item.json.data.customers.edges[0].node.tags || []).concat(['Profesorrrrrrr', 'DescuentoProfesor']) }}\",\n    \n    \"note\": \"Perfil actualizado y validado automáticamente vía WhatsApp el {{ $now.toFormat('dd/MM/yyyy') }}\",\n    \"phone\": \"{{ $('Webhook').item.json.query.telefono && $('Webhook').item.json.query.telefono.toString().replace(/\\D/g,'').length > 8 ? ($('Webhook').item.json.query.telefono.toString().includes('+') ? $('Webhook').item.json.query.telefono.toString().replace(/ /g,'') : '+34' + $('Webhook').item.json.query.telefono.toString().replace(/\\D/g,'')) : null }}\"\n  }\n}"
-      },
-      "type": "n8n-nodes-base.graphql",
-      "typeVersion": 1.1,
-      "position": [
-        512,
-        32
-      ],
-      "id": "20b324c0-a79a-434e-864f-8aeb88eb1a38",
-      "name": "GraphQL1",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "OPt2Cl0dnwcU4qRk",
-          "name": "ShopifyInformes"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "authentication": "headerAuth",
-        "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
         "query": "query findCustomer($query: String!) {\n  customers(first: 1, query: $query) {\n    edges {\n      node {\n        id\n        tags\n      }\n    }\n  }\n}",
         "variables": "={\n  \"query\": \"email:{{ $('Webhook').item.json.query.email }}\"\n}"
       },
@@ -1553,7 +1531,7 @@
           "__rl": true,
           "value": 512939465,
           "mode": "list",
-          "cachedResultName": "Respuestas de formulario 2",
+          "cachedResultName": "Respuestas de formulario",
           "cachedResultUrl": "https://docs.google.com/spreadsheets/d/16auxC5pQ4ydDh1LxCKiPC5ClQ1WCN3R5ogY1Smmbm4c/edit#gid=512939465"
         },
         "filtersUI": {
@@ -1677,7 +1655,7 @@
           "__rl": true,
           "value": 512939465,
           "mode": "list",
-          "cachedResultName": "Respuestas de formulario 2",
+          "cachedResultName": "Respuestas de formulario",
           "cachedResultUrl": "https://docs.google.com/spreadsheets/d/16auxC5pQ4ydDh1LxCKiPC5ClQ1WCN3R5ogY1Smmbm4c/edit#gid=512939465"
         },
         "columns": {
@@ -1826,7 +1804,7 @@
           "__rl": true,
           "value": 512939465,
           "mode": "list",
-          "cachedResultName": "Respuestas de formulario 2",
+          "cachedResultName": "Respuestas de formulario",
           "cachedResultUrl": "https://docs.google.com/spreadsheets/d/16auxC5pQ4ydDh1LxCKiPC5ClQ1WCN3R5ogY1Smmbm4c/edit#gid=512939465"
         },
         "columns": {
@@ -1960,6 +1938,28 @@
           "name": "Google Sheets account"
         }
       }
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+        "query": "mutation customerUpdate($input: CustomerInput!) {\n  customerUpdate(input: $input) {\n    customer {\n      id\n      email\n      firstName\n      lastName\n      tags\n      phone\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
+        "variables": "={\n  \"input\": {\n    \"id\": \"{{ $('Buscar_ID_Cliente').item.json.data.customers.edges[0].node.id }}\",\n    \"firstName\": \"{{ $('Webhook').item.json.query.nombre }}\",\n    \"lastName\": \"{{ $('Webhook').item.json.query.apellido }}\",\n    \n    \"tags\": \"{{ ($('Buscar_ID_Cliente').item.json.data.customers.edges[0].node.tags || []).concat(['Profesor', 'DescuentoProfesor']) }}\",\n    \n    \"note\": \"Perfil actualizado y validado automáticamente vía WhatsApp el {{ $now.toFormat('dd/MM/yyyy') }}\",\n    \"phone\": \"{{ $('Webhook').item.json.query.telefono && $('Webhook').item.json.query.telefono.toString().replace(/\\D/g,'').length > 8 ? ($('Webhook').item.json.query.telefono.toString().includes('+') ? $('Webhook').item.json.query.telefono.toString().replace(/ /g,'') : '+34' + $('Webhook').item.json.query.telefono.toString().replace(/\\D/g,'')) : null }}\"\n  }\n}"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        512,
+        32
+      ],
+      "id": "20b324c0-a79a-434e-864f-8aeb88eb1a38",
+      "name": "Actualizar_Cliente",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -1984,11 +1984,11 @@
     "node:Google Sheets Trigger": {
       "documentId": "16auxC5pQ4ydDh1LxCKiPC5ClQ1WCN3R5ogY1Smmbm4c",
       "sheetId": 512939465,
-      "lastIndexChecked": 0
+      "lastIndexChecked": 2
     }
   },
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2026-01-27T23:08:27.836Z",
-  "versionId": "6b7637da-313b-4d97-90c4-89c9a41b5fdb"
+  "updatedAt": "2026-01-28T11:36:35.254Z",
+  "versionId": "fa815c9c-a7a8-435a-8845-c2bb01e8155d"
 }
