@@ -25,17 +25,6 @@
         ]
       ]
     },
-    "HTTP Request2": {
-      "main": [
-        [
-          {
-            "node": "Edit Fields",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Edit Fields": {
       "main": [
         [
@@ -274,17 +263,6 @@
         ]
       ]
     },
-    "Schedule Trigger": {
-      "main": [
-        [
-          {
-            "node": "HTTP Request2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Code in JavaScript2": {
       "main": [
         [
@@ -355,6 +333,97 @@
       "main": [
         []
       ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Datos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Datos": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait3": {
+      "main": [
+        [
+          {
+            "node": "condicion_hora",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "condicion_hora",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "condicion_hora": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "condicion_cerrada",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "datos_prevision",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "condicion_cerrada": {
+      "main": [
+        [
+          {
+            "node": "ejecutar_prevision",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-11-29T11:04:16.100Z",
@@ -406,7 +475,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2144,
+        2048,
         -1760
       ],
       "id": "6222d526-1ca0-4ae2-b996-d6ae44f671c0",
@@ -417,20 +486,6 @@
           "name": "Canva"
         }
       }
-    },
-    {
-      "parameters": {
-        "url": "https://umb.sierranevada.es/umbraco/api/parte/previsiones?culture=es",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.3,
-      "position": [
-        -656,
-        -1776
-      ],
-      "id": "da8026f8-8ac5-4354-b419-8fa2725b22de",
-      "name": "HTTP Request2"
     },
     {
       "parameters": {
@@ -599,8 +654,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -496,
-        -1776
+        -592,
+        -1808
       ],
       "id": "5c19cfc0-2462-49d8-b3d5-a6889f5d8a3d",
       "name": "Edit Fields"
@@ -612,8 +667,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -352,
-        -1776
+        -448,
+        -1808
       ],
       "id": "eb515338-92e6-4e67-bad5-2216ef5ac98f",
       "name": "Code in JavaScript"
@@ -807,7 +862,7 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        3392,
+        3248,
         -1776
       ],
       "id": "7da66ccf-8fd7-48d5-8c6d-db816b75171b",
@@ -832,7 +887,7 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        4208,
+        3936,
         -1792
       ],
       "id": "3bb41e32-f010-4102-acc1-fd96e8892501",
@@ -864,7 +919,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        3600,
+        3456,
         -1776
       ],
       "id": "06240652-f050-41e7-a406-a611f53d1746",
@@ -903,7 +958,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        2976,
+        2880,
         -1760
       ],
       "id": "88a07af8-5d4d-4c7e-9a1f-4db66d843eef",
@@ -923,7 +978,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2336,
+        2240,
         -1760
       ],
       "id": "c1aa6ddb-952c-4894-a11b-d3f37a039c68",
@@ -945,7 +1000,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        3168,
+        3072,
         -1776
       ],
       "id": "7555d978-506b-45aa-bf1a-cdfafabbe297",
@@ -964,7 +1019,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        2768,
+        2672,
         -1760
       ],
       "id": "5531d7ae-3e1e-4e70-a013-b7a468dfde34",
@@ -981,7 +1036,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2560,
+        2464,
         -1760
       ],
       "id": "87ba9b82-c2a0-491d-a90b-251cc2de0db3",
@@ -998,7 +1053,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        3808,
+        3600,
         -1776
       ],
       "id": "475281c7-f520-4d18-8b3a-e8dc41dadfd9",
@@ -1032,7 +1087,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        3984,
+        3744,
         -1776
       ],
       "id": "c3ad2eff-8c1a-4047-ba71-69acd0745b05",
@@ -1042,13 +1097,13 @@
       "parameters": {
         "content": "CANVA EXPORT",
         "height": 256,
-        "width": 960,
+        "width": 784,
         "color": 5
       },
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1936,
+        2016,
         -1808
       ],
       "id": "4fcecff3-9ea7-4a71-9b49-c724b9345c25",
@@ -1064,31 +1119,11 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        2928,
+        2832,
         -1808
       ],
       "id": "a3e2cce6-de1f-4d87-89c9-2e53de712c07",
       "name": "Sticky Note3"
-    },
-    {
-      "parameters": {
-        "rule": {
-          "interval": [
-            {
-              "field": "cronExpression",
-              "expression": "10 2 * * *"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.scheduleTrigger",
-      "typeVersion": 1.3,
-      "position": [
-        -896,
-        -1776
-      ],
-      "id": "c860e63b-41b3-49b3-8ce3-5cf84eeee5c0",
-      "name": "Schedule Trigger"
     },
     {
       "parameters": {
@@ -1175,7 +1210,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        4416,
+        4096,
         -1792
       ],
       "id": "7eae2c4f-9d5b-4c4d-8417-1d9d218cbffe",
@@ -1195,7 +1230,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        4624,
+        4256,
         -1792
       ],
       "id": "b3eeaaf6-1eca-4fe1-bc18-add61e7dfa6d",
@@ -1210,6 +1245,248 @@
           "name": "Canva"
         }
       }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "10 8 * * *"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -1680,
+        -1792
+      ],
+      "id": "f998379f-7105-4fde-82cd-7d1872d81d09",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "url": "https://umb.sierranevada.es/umbraco/api/parte/previsiones?culture=es",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -1504,
+        -1792
+      ],
+      "id": "d8c7e3fc-5770-444d-8e69-65ed2a32441f",
+      "name": "Datos"
+    },
+    {
+      "parameters": {
+        "amount": 1,
+        "unit": "minutes"
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -848,
+        -1584
+      ],
+      "id": "3f2c168b-f1de-41d6-ae23-6ebeb696e1be",
+      "name": "Wait3",
+      "webhookId": "99959a94-0f40-481d-ab89-bd87eb376398"
+    },
+    {
+      "parameters": {
+        "content": "TIMING PARA SUBIR CUANDO SE ACTUALICE\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFVCK CETURSA",
+        "height": 480,
+        "width": 1072,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1760,
+        -1856
+      ],
+      "id": "7aa4f5b3-499b-44dd-b6d3-acdd549cce5b",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5d4fcf66-90cd-4605-839c-9787551daeee",
+              "name": "FECHA_JSON",
+              "value": "={{ $json.Partes[0].Parte.partenieve.general.fecha }}",
+              "type": "string"
+            },
+            {
+              "id": "113ba0a8-248c-40aa-9081-558595f76926",
+              "name": "=HOY",
+              "value": "={{ $today.format('dd/LL/yyyy') }}",
+              "type": "string"
+            },
+            {
+              "id": "19d744be-1032-41a4-9dce-a9e442862596",
+              "name": "HORA_JSON",
+              "value": "={{ DateTime.fromFormat($json.Partes[0].Parte.partenieve.general.hora, 'H:mm:ss').toMillis() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1344,
+        -1792
+      ],
+      "id": "0e9bc9a8-a131-4050-b49f-b32d6303100a",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "d94ef423-97b3-4b2a-96f1-4a870ffbf5fe",
+              "leftValue": "={{ $json.FECHA_JSON }}",
+              "rightValue": "={{ $json.HOY }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "8b0c64ec-3f03-4561-be5b-67d453383d80",
+              "leftValue": "={{ $json.HORA_JSON }}",
+              "rightValue": "={{ DateTime.fromFormat('7:40:00', 'H:mm:ss').toMillis() }}",
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -1184,
+        -1792
+      ],
+      "id": "c6405cd4-18b2-4050-86c3-166d5c8d9c55",
+      "name": "condicion_hora"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $workflow.id }}",
+          "cachedResultName": "={{ $workflow.id }}"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        -848,
+        -1744
+      ],
+      "id": "e6d8a8b8-2208-4a47-9675-8fdce884efd3",
+      "name": "ejecutar_prevision"
+    },
+    {
+      "parameters": {
+        "inputSource": "passthrough"
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -640,
+        -1024
+      ],
+      "id": "7e60928d-d9b5-4588-b10e-def8f6448e29",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "url": "https://umb.sierranevada.es/umbraco/api/parte/previsiones?culture=es",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -432,
+        -1024
+      ],
+      "id": "c8b2bdd2-7fb2-4de2-aefe-23de7c7af195",
+      "name": "datos_prevision"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "d94ef423-97b3-4b2a-96f1-4a870ffbf5fe",
+              "leftValue": "={{ $json.FECHA_JSON }}",
+              "rightValue": "={{ $json.HOY }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "8b0c64ec-3f03-4561-be5b-67d453383d80",
+              "leftValue": "={{ $json.HORA_JSON }}",
+              "rightValue": "={{ DateTime.fromFormat('11:30:00', 'H:mm:ss').toMillis() }}",
+              "operator": {
+                "type": "number",
+                "operation": "gte"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -1024,
+        -1728
+      ],
+      "id": "df01a653-5394-48de-88fc-dd32fde77288",
+      "name": "condicion_cerrada"
     }
   ],
   "pinData": {},
@@ -1236,6 +1513,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-01-22T10:03:46.450Z",
-  "versionId": "43388f60-44f8-45aa-945e-faaee7de2d21"
+  "updatedAt": "2026-01-28T12:17:28.947Z",
+  "versionId": "caf8b027-233a-43bd-97c0-5d6154cbab17"
 }
