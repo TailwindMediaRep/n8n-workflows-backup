@@ -1,7 +1,869 @@
 {
-  "active": false,
-  "activeVersion": null,
-  "activeVersionId": null,
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-01-28T11:44:38.000Z",
+    "createdAt": "2026-01-28T11:44:36.441Z",
+    "versionId": "ceed0eeb-692b-49aa-8cbc-c3d9a3ce8841",
+    "workflowId": "CBcjY0JF5P9ZjxEE",
+    "nodes": [
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          -1456,
+          160
+        ],
+        "id": "e592ab28-59d1-4e72-9947-35a971c8baa2",
+        "name": "When clicking ‘Execute workflow’"
+      },
+      {
+        "parameters": {
+          "httpRequestMethod": "POST",
+          "graphApiVersion": "v23.0",
+          "node": "17841470046184468",
+          "edge": "media_publish",
+          "options": {
+            "queryParametersJson": "={\n  \"creation_id\": \"{{$json.id}}\"\n}"
+          }
+        },
+        "type": "n8n-nodes-base.facebookGraphApi",
+        "typeVersion": 1,
+        "position": [
+          -64,
+          528
+        ],
+        "id": "70f5be56-bcbd-45e8-b707-d1fe8cd7941a",
+        "name": "Facebook Graph API1",
+        "credentials": {
+          "facebookGraphApi": {
+            "id": "F7VbX8jWKCXdAM47",
+            "name": "Facebook Graph account"
+          }
+        },
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "url": "=https://graph.facebook.com/v20.0/{{ $json.id }}?fields=status,status_code",
+          "authentication": "predefinedCredentialType",
+          "nodeCredentialType": "facebookGraphApi",
+          "sendQuery": true,
+          "queryParameters": {
+            "parameters": [
+              {
+                "name": "access_token",
+                "value": "EAF2z8nVLTA8BQVHL88vghg4RRZBH9svUgZCP93NSZAB9iSDKxTAMvz8DFby8KVqXp6DWFxfFDiSKOUXvXPVVrJcNxjFOmr0ZCXphOZBUUWRkP8sTZC9wwapmP8vlJQN4NHH2eW9zPRmg2SHrQ0AhjI3n2kx1vAa8nOtr6tbQMhcaP0X0eMtOComwFl3zR7zd7HowZDZD"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          -544,
+          544
+        ],
+        "id": "edf4ba47-a8ca-4343-8394-708f1e0f7712",
+        "name": "HTTP Request3",
+        "credentials": {
+          "facebookGraphApi": {
+            "id": "F7VbX8jWKCXdAM47",
+            "name": "Facebook Graph account"
+          }
+        }
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.wait",
+        "typeVersion": 1.1,
+        "position": [
+          -384,
+          544
+        ],
+        "id": "5579777d-f732-4b98-b233-233d14c7baeb",
+        "name": "Wait2",
+        "webhookId": "4e9e9bda-286b-4bd6-b112-9133762c2724"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "49c65dc4-2ebe-451b-9788-cd0999f268f1",
+                "leftValue": "={{ $json.status_code }}",
+                "rightValue": "FINISHED",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          -224,
+          544
+        ],
+        "id": "f2e57470-8cb6-4aff-a4f1-776c6d413c60",
+        "name": "If1"
+      },
+      {
+        "parameters": {
+          "httpRequestMethod": "POST",
+          "graphApiVersion": "v23.0",
+          "node": "17841470046184468",
+          "edge": "=media",
+          "options": {
+            "queryParametersJson": "={\n\"video_url\": \"{{ $json.id_Historia_Camaras }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
+          }
+        },
+        "type": "n8n-nodes-base.facebookGraphApi",
+        "typeVersion": 1,
+        "position": [
+          -880,
+          544
+        ],
+        "id": "0bbfbe8d-31e9-41c6-8d53-89988526abf1",
+        "name": "Facebook Graph API2",
+        "credentials": {
+          "facebookGraphApi": {
+            "id": "F7VbX8jWKCXdAM47",
+            "name": "Facebook Graph account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "4fa17a3a-35cc-4f82-988a-32b82b6223e9",
+                "name": "story_url",
+                "value": "=https://res.cloudinary.com/dglub1vnw/video/upload/vc_h264,ac_aac,c_pad,w_1080,h_1920,b_blurred:400,du_30/l_text:Courier_45_bold:ZONA%20BORREGUILES,co_black,e_outline:3/fl_layer_apply,g_north_west,x_10,y_670/l_text:Courier_45_bold:ZONA%20BORREGUILES,co_white/fl_layer_apply,g_north_west,x_13,y_673/{{ $json.public_id }}.mp4",
+                "type": "string"
+              },
+              {
+                "id": "281cd629-07ec-4b26-bcb4-085d1a77c5f8",
+                "name": "vista_previa",
+                "value": "=https://res.cloudinary.com/dglub1vnw/video/upload/c_pad,w_1080,h_1920,b_black/l_text:Courier_45_bold:ZONA%20BORREGUILES,co_black,e_outline:3/fl_layer_apply,g_north_west,x_10,y_670/l_text:Courier_45_bold:ZONA%20BORREGUILES,co_white/fl_layer_apply,g_north_west,x_13,y_673/{{ $json.public_id }}.jpg",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          16,
+          160
+        ],
+        "id": "8ec922b4-00bc-43fc-8fb3-48a2e73f92d2",
+        "name": "Edit Fields"
+      },
+      {
+        "parameters": {
+          "operation": "uploadFile",
+          "resource_type_file": "video",
+          "additionalFieldsFile": {}
+        },
+        "type": "n8n-nodes-cloudinary.cloudinary",
+        "typeVersion": 1,
+        "position": [
+          -144,
+          160
+        ],
+        "id": "4c85ba67-fb60-4a26-8c67-4a5bf0283b78",
+        "name": "Upload an asset from file data",
+        "credentials": {
+          "cloudinaryApi": {
+            "id": "YTnswF3cVMD8a6jX",
+            "name": "Cuenta Cloudinary"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "method": "HEAD",
+          "url": "={{ $json.story_url }}",
+          "options": {
+            "response": {
+              "response": {
+                "fullResponse": true,
+                "neverError": true,
+                "responseFormat": "json"
+              }
+            }
+          }
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          224,
+          160
+        ],
+        "id": "4fecbe0c-ed05-4db3-aa2c-8e9977ab31c2",
+        "name": "HTTP Request1"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "23ffd565-77db-41aa-846e-6e4f54f021a7",
+                "leftValue": "={{ $json.statusCode }}",
+                "rightValue": 200,
+                "operator": {
+                  "type": "number",
+                  "operation": "equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          384,
+          160
+        ],
+        "id": "4e3544c3-0642-49ef-82b2-ecd3367c560b",
+        "name": "If"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.wait",
+        "typeVersion": 1.1,
+        "position": [
+          528,
+          256
+        ],
+        "id": "cdd381ff-6ac2-45ba-9e2a-43a650f57753",
+        "name": "Wait",
+        "webhookId": "2ddadd9e-f14b-4c72-b341-f3ef721110ea"
+      },
+      {
+        "parameters": {
+          "url": "https://sierranevada.es/es/invierno/la-estacion/en-directo/webcams/",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          -1200,
+          160
+        ],
+        "id": "2aaa757a-e4c6-4d1a-afa7-70d04f751c29",
+        "name": "request_página_principal"
+      },
+      {
+        "parameters": {
+          "jsCode": "// 1. Obtenemos el HTML gigante\nconst html = items[0].json.data;\n\n// 2. Buscamos el script que tiene todos los datos de la página (Next.js data)\nconst regex = /<script id=\"__NEXT_DATA__\" type=\"application\\/json\">(.*?)<\\/script>/;\nconst match = html.match(regex);\n\nlet resultados = [];\n\nif (match && match[1]) {\n  // 3. Parseamos el texto a JSON real\n  const data = JSON.parse(match[1]);\n\n  // 4. Navegamos por la estructura compleja de Sierra Nevada para encontrar las webcams\n  // La ruta suele ser: props -> pageProps -> model -> MenuPrincipalCustom... o buscando bloques\n  // Para hacerlo fácil, vamos a buscar recursivamente cualquier objeto que parezca una webcam de Feratel\n  \n  // Convertimos todo el objeto a string para buscar patrones de feratel (truco rápido)\n  const jsonString = JSON.stringify(data);\n  \n  // Buscamos patrones de IDs de cámara (ej: cam=15111)\n  const camRegex = /cam=(\\d+)/g;\n  let camMatch;\n  const uniqueCams = new Set();\n\n  while ((camMatch = camRegex.exec(jsonString)) !== null) {\n    uniqueCams.add(camMatch[1]);\n  }\n\n  // Creamos el resultado\n  uniqueCams.forEach(id => {\n    resultados.push({\n      json: {\n        camera_id: id,\n        iframe_url: `https://webtv.feratel.com/webtv/?design=v5&cam=${id}`,\n        video_directo_mp4: `https://sts063.feratel.co.at/streams/stsstore055/1/${id}_vid.mp4` // URL estimada basada en tu ejemplo\n      }\n    });\n  });\n}\n\nreturn resultados;"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          -1024,
+          160
+        ],
+        "id": "182ae0c9-e916-4427-aec4-7a10a39e4a2c",
+        "name": "extraer_url"
+      },
+      {
+        "parameters": {
+          "url": "={{ $json.iframe_url }}",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "User-Agent",
+                "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+              },
+              {
+                "name": "Referer",
+                "value": "https://sierranevada.es/"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          -848,
+          160
+        ],
+        "id": "c8780df9-a109-4cee-b438-bbab9e0fdd02",
+        "name": "request_página_cámaras"
+      },
+      {
+        "parameters": {
+          "jsCode": "// Obtenemos la fecha actual\nconst now = new Date();\nlet masCercano = null;\nlet menorDiferencia = Infinity; \n\nfor (const item of items) {\n  // Asegúrate de que item.json existe por seguridad\n  if (!item.json) continue;\n\n  const url = item.json.video_url;\n  \n  // --- BLOQUE DE SEGURIDAD NUEVO ---\n  // Si no hay url, o no es un texto, saltamos al siguiente item del bucle\n  if (!url || typeof url !== 'string') {\n    continue; \n  }\n  // ---------------------------------\n\n  // Ahora es seguro usar .match()\n  const match = url.match(/_([0-9a-fA-F]{8})[-_a-zA-Z]/);\n\n  if (match && match[1]) {\n    const hexTimestamp = match[1];\n    const unixSeconds = parseInt(hexTimestamp, 16);\n    \n    const videoDate = new Date(unixSeconds * 1000);\n    const diff = now - videoDate;\n\n    if (diff >= 0 && diff < menorDiferencia) {\n      menorDiferencia = diff;\n      masCercano = item;\n      masCercano.json.fecha_decodificada = videoDate.toISOString();\n      masCercano.json.segundos_atras = diff / 1000;\n    }\n  }\n}\n\nreturn masCercano ? [masCercano] : [];"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          -528,
+          160
+        ],
+        "id": "f57b7f7e-dbe8-413c-a885-a19c5054e907",
+        "name": "filtrar_url_reciente"
+      },
+      {
+        "parameters": {
+          "url": "={{ $json.video_url }}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          -368,
+          160
+        ],
+        "id": "777d5a4a-20a7-412f-bc9f-683c3b198f68",
+        "name": "solicitud_url_reciente"
+      },
+      {
+        "parameters": {
+          "operation": "extractHtmlContent",
+          "extractionValues": {
+            "values": [
+              {
+                "key": "video_url",
+                "cssSelector": "div#videoframe video source",
+                "returnValue": "attribute",
+                "attribute": "src"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.html",
+        "typeVersion": 1.2,
+        "position": [
+          -688,
+          160
+        ],
+        "id": "341861a2-cb91-4338-a739-df0b98b10862",
+        "name": "extraer_url2"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "4fa17a3a-35cc-4f82-988a-32b82b6223e9",
+                "name": "story_url",
+                "value": "={{ $('Edit Fields').item.json.story_url }}",
+                "type": "string"
+              },
+              {
+                "id": "281cd629-07ec-4b26-bcb4-085d1a77c5f8",
+                "name": "",
+                "value": "",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          672,
+          256
+        ],
+        "id": "e575ea56-dfa1-45c0-859f-96bb45cd6518",
+        "name": "Edit Fields1"
+      },
+      {
+        "parameters": {
+          "content": "OBTENER VÍDEO DE LA CÁMARA",
+          "height": 288,
+          "width": 1056,
+          "color": 3
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -1264,
+          64
+        ],
+        "id": "6acdd7c5-d32a-4c6e-aca2-3acbb08403ea",
+        "name": "Sticky Note"
+      },
+      {
+        "parameters": {
+          "content": "SUBIR VÍDEO Y GENERAR URL",
+          "height": 288,
+          "width": 336,
+          "color": 5
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -192,
+          64
+        ],
+        "id": "c06ee7e0-d0ad-4922-9665-6e79c6076bc9",
+        "name": "Sticky Note1"
+      },
+      {
+        "parameters": {
+          "content": "COMPROBAR SI SE HA PROCESADO\n",
+          "height": 416,
+          "width": 672,
+          "color": 4
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          160,
+          32
+        ],
+        "id": "c401de65-2a78-442b-8f19-88f31b8bfc8f",
+        "name": "Sticky Note2"
+      },
+      {
+        "parameters": {
+          "content": "ENVIAR CORREO DE VERIFICACIÓN",
+          "height": 192,
+          "width": 336,
+          "color": 6
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          496,
+          16
+        ],
+        "id": "02064db4-3e3f-4cb6-b043-ba8e91701b76",
+        "name": "Sticky Note3"
+      },
+      {
+        "parameters": {
+          "content": "SUBIDA A META\n",
+          "height": 192,
+          "width": 1376
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -1248,
+          496
+        ],
+        "id": "ab8be564-4726-443a-aae2-3afebc817eaa",
+        "name": "Sticky Note4"
+      },
+      {
+        "parameters": {
+          "path": "historiaCamara",
+          "responseMode": "responseNode",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -1200,
+          544
+        ],
+        "id": "fd225dd5-64bd-4381-b7cc-b9cb982c5975",
+        "name": "Webhook",
+        "webhookId": "720cdebd-a73a-47ae-a8c8-66fe82638f89"
+      },
+      {
+        "parameters": {
+          "sendTo": "adrianazorinsanchez@gmail.com",
+          "subject": "HISTORIA CÁMARA",
+          "message": "=<!DOCTYPE html> <html> <head> <style>   body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }   .container { max-width: 600px; margin: 20px auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }   .header { background-color: #333333; color: #ffffff; padding: 20px; text-align: center; }   .content { padding: 30px; text-align: center; color: #333333; }   .preview-box { margin: 20px 0; border: 1px solid #eeeeee; padding: 10px; border-radius: 5px; background-color: #fafafa; }   img { max-width: 100%; height: auto; border-radius: 4px; display: block; margin: 0 auto; }      /* Estilos para el nuevo botón */   .btn-confirmar {     display: inline-block;     background-color: #2ecc71;     color: #ffffff !important;     padding: 14px 28px;     text-decoration: none;     border-radius: 5px;     font-weight: bold;     margin-top: 20px;     box-shadow: 0 2px 4px rgba(0,0,0,0.1);   } </style> </head> <body>  <div class=\"container\">   <div class=\"header\">     <h2 style=\"margin:0;\">Aprobación Requerida</h2>   </div>      <div class=\"content\">     <h3>Se requiere aprobación de una historia</h3>          <div class=\"preview-box\">       <p style=\"margin-top: 0; margin-bottom: 10px; font-weight: bold; color: #555;\">Vista previa:</p>              <img src=\"{{ $('Edit Fields').item.json.vista_previa }}\" alt=\"Vista previa de la historia\">     </div>      <a href=\"https://n8n.tailwind.es/webhook/historiaCamara\" class=\"btn-confirmar\">       Aprobar Historia     </a>    </div>      <div style=\"background-color: #eeeeee; padding: 10px; text-align: center; font-size: 12px; color: #777;\">     Enviado automáticamente desde n8n   </div> </div>  </body> </html>",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.gmail",
+        "typeVersion": 2.2,
+        "position": [
+          688,
+          64
+        ],
+        "id": "73308a25-8f99-40b8-9ef3-0317f097cfcb",
+        "name": "Send a message",
+        "webhookId": "31557ff2-993c-4c43-854d-8f372d063b1c",
+        "credentials": {
+          "gmailOAuth2": {
+            "id": "fha7KwAzrDSA7OXO",
+            "name": "ventas@sierranevadagranada.com"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "respondWith": "text",
+          "responseBody": "<style>\n  /* --- ESTILOS GENERALES --- */\n  body { \n    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; \n    display: flex; justify-content: center; align-items: center; \n    height: 100vh; margin: 0; background-color: #0f172a; \n    color: #e2e8f0; overflow: hidden; \n  }\n  .snow-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }\n  .flake { position: absolute; top: -10px; background-color: rgba(255, 255, 255, 0.4); border-radius: 50%; animation: fall linear infinite; }\n  @keyframes fall { to { transform: translateY(110vh); } }\n  \n  /* La tarjeta (z-index 10) */\n  .card { background-color: #1e293b; padding: 80px 40px 40px; border-radius: 16px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8); text-align: center; max-width: 380px; width: 90%; position: relative; z-index: 10; margin-top: 50px; overflow: visible; }\n  .snow-svg { position: absolute; top: -1px; left: 0; width: 100%; height: auto; z-index: 20; filter: drop-shadow(0 3px 2px rgba(0,0,0,0.15)); pointer-events: none; border-radius: 16px 16px 0 0; }\n  h1 { color: #f1f5f9; margin: 10px 0; font-size: 28px; font-weight: bold; }\n  p { color: #94a3b8; font-size: 16px; line-height: 1.6; margin-bottom: 20px; }\n  hr { border: 0; border-top: 1px solid #334155; margin: 25px 0; }\n  .check-icon { font-size: 50px; color: #22c55e; position: relative; z-index: 25; margin-top: 20px; filter: drop-shadow(0 0 15px rgba(34, 197, 94, 0.4)); }\n\n  /* ========================================= */\n  /* --- PINGÜINO REALISTA EN SNOWBOARD --- */\n  /* ========================================= */\n  .sliding-penguin-container {\n    position: fixed;\n    bottom: 35%; \n    left: -150px; \n    width: 110px; \n    height: auto;\n    z-index: 5; /* Detrás de la tarjeta */\n    transform: rotate(-3deg);\n    /* Duración total 5s: \n       - 4.25s para llegar al centro (lento)\n       - 0.75s para salir disparado (rápido) */\n    animation: slideAcross 5s linear infinite; \n  }\n  .penguin-ref-svg {\n    width: 100%; height: auto;\n    filter: drop-shadow(0 5px 4px rgba(0,0,0,0.5));\n  }\n\n  /* AQUÍ ESTÁ EL TRUCO DE LA VELOCIDAD */\n  @keyframes slideAcross {\n    0%   { left: -150px; } \n    /* Hasta el 85% del tiempo, avanza lento hasta pasar un poco el centro (55vw) */\n    85%  { left: 55vw; } \n    /* En el 15% de tiempo restante, acelera hasta el final (110vw) */\n    100% { left: 110vw;  }\n  }\n</style>\n\n<div class=\"snow-bg\">\n  <div class=\"flake\" style=\"left: 10%; animation-duration: 5s; width: 6px; height: 6px;\"></div>\n  <div class=\"flake\" style=\"left: 30%; animation-duration: 8s; width: 4px; height: 4px;\"></div>\n  <div class=\"flake\" style=\"left: 60%; animation-duration: 4s; width: 8px; height: 8px;\"></div>\n  <div class=\"flake\" style=\"left: 80%; animation-duration: 6s; width: 5px; height: 5px;\"></div>\n</div>\n\n<div class=\"sliding-penguin-container\">\n  <svg class=\"penguin-ref-svg\" viewBox=\"0 0 220 260\" xmlns=\"http://www.w3.org/2000/svg\">\n    <path fill=\"#f1f5f9\" opacity=\"0.9\" d=\"M 10,235 Q 30,220 50,230 Q 70,240 90,225 Q 110,210 130,225 Q 150,240 170,220 Q 190,200 210,230 L 220,250 Q 110,260 0,250 Z\" />\n    <circle fill=\"#f1f5f9\" cx=\"20\" cy=\"225\" r=\"5\" opacity=\"0.8\"/>\n    <circle fill=\"#f1f5f9\" cx=\"190\" cy=\"215\" r=\"6\" opacity=\"0.8\"/>\n    <g transform=\"translate(10, 210)\">\n        <path fill=\"#2dd4bf\" stroke=\"#0f766e\" stroke-width=\"2\" d=\"M 0,20 C 0,0 20,-10 40,-5 L 160,-5 C 180,-10 200,0 200,20 C 200,40 180,45 160,40 L 40,40 C 20,45 0,40 0,20 Z\" />\n        <path fill=\"#ef4444\" d=\"M 30,-2 Q 50,20 70,-2 L 100,-2 Q 80,25 60,35 L 30,35 Q 50,15 30,-2 Z\" />\n        <path fill=\"#ef4444\" d=\"M 130,-2 Q 150,20 170,-2 L 190,2 Q 170,30 150,38 L 120,38 Q 140,15 130,-2 Z\" />\n        <path fill=\"#1e3a8a\" d=\"M 65,0 Q 85,25 105,0 L 125,0 Q 105,30 85,38 L 55,38 Q 75,15 65,0 Z\" />\n        <path fill=\"#1e3a8a\" d=\"M 160,0 Q 175,15 190,0 L 195,5 Q 180,35 150,40 L 140,35 Z\" />\n        <path fill=\"#1e3a8a\" d=\"M 5,5 Q 20,25 5,35 L 15,38 Q 35,20 15,0 Z\" />\n    </g>\n    <g transform=\"translate(45, 15)\">\n        <path fill=\"#fb923c\" stroke=\"#c2410c\" stroke-width=\"2\" d=\"M 35,210 C 25,210 15,205 15,195 C 15,185 25,180 40,185 C 55,190 65,195 65,205 C 65,215 55,220 35,210 Z\" />\n        <path fill=\"#fb923c\" stroke=\"#c2410c\" stroke-width=\"2\" d=\"M 95,210 C 85,210 75,205 75,195 C 75,185 85,180 100,185 C 115,190 125,195 125,205 C 125,215 115,220 95,210 Z\" />\n        <path fill=\"#374151\" stroke=\"#1f2937\" stroke-width=\"2\" d=\"M 65,5 C 30,5 5,40 5,100 C 5,160 30,200 65,200 C 100,200 125,160 125,100 C 125,40 100,5 65,5 Z\" />\n        <ellipse fill=\"#f8fafc\" cx=\"65\" cy=\"130\" rx=\"45\" ry=\"55\" />\n        <path fill=\"#f8fafc\" d=\"M 65,35 C 50,35 40,45 40,65 C 40,85 50,95 65,95 C 80,95 90,85 90,65 C 90,45 80,35 65,35 Z\" />\n        <g>\n            <circle fill=\"#1f2937\" cx=\"52\" cy=\"65\" r=\"10\" /><circle fill=\"#1f2937\" cx=\"78\" cy=\"65\" r=\"10\" />\n            <circle fill=\"white\" cx=\"55\" cy=\"62\" r=\"4\" /><circle fill=\"white\" cx=\"75\" cy=\"62\" r=\"4\" />\n            <circle fill=\"white\" cx=\"50\" cy=\"68\" r=\"2\" /><circle fill=\"white\" cx=\"81\" cy=\"68\" r=\"2\" />\n        </g>\n        <path fill=\"#fb923c\" stroke=\"#c2410c\" stroke-width=\"1\" d=\"M 65,85 L 55,92 Q 65,105 75,92 Z\" />\n        <path fill=\"#374151\" stroke=\"#1f2937\" stroke-width=\"2\" d=\"M 8,100 Q -10,130 10,160 L 20,145 Q 10,125 8,100 Z\" />\n        <path fill=\"#374151\" stroke=\"#1f2937\" stroke-width=\"2\" d=\"M 122,100 Q 140,130 120,160 L 110,145 Q 120,125 122,100 Z\" />\n    </g>\n  </svg>\n</div>\n\n<div class=\"card\">\n  <svg class=\"snow-svg\" viewBox=\"0 0 400 80\" xmlns=\"http://www.w3.org/2000/svg\" preserveAspectRatio=\"none\">\n    <path fill=\"#f1f5f9\" d=\"M0,0 L400,0 V30 Q385,60 370,30 Q355,20 340,30 Q310,75 280,30 Q260,20 240,30 Q200,80 160,35 Q140,25 120,35 Q85,65 50,30 Q35,20 20,35 Q0,60 0,30 Z\" />\n  </svg>\n  <div class=\"check-icon\">✔</div>\n  <h1>¡Confirmado!</h1>\n  <p>La historia ha sido aprobada correctamente.</p>\n  <hr>\n  <p style=\"font-size: 13px; opacity: 0.7;\">Ya puedes cerrar esta pestaña.</p>\n</div>",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.5,
+        "position": [
+          -704,
+          544
+        ],
+        "id": "3d9447d2-f241-43a3-80ce-1688f72900e5",
+        "name": "Respond to Webhook"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "dataTableId": {
+            "__rl": true,
+            "value": "NMbDpuxCCVRyjA1E",
+            "mode": "list",
+            "cachedResultName": "Muchos_Datos",
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/NMbDpuxCCVRyjA1E"
+          },
+          "filters": {
+            "conditions": [
+              {
+                "keyValue": "1"
+              }
+            ]
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "id_Historia_Camaras": "={{ $('Edit Fields').item.json.story_url }}"
+            },
+            "matchingColumns": [
+              "id_Historia_Camaras"
+            ],
+            "schema": [
+              {
+                "id": "id_Historia_Camaras",
+                "displayName": "id_Historia_Camaras",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "readOnly": false,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.dataTable",
+        "typeVersion": 1.1,
+        "position": [
+          544,
+          64
+        ],
+        "id": "99aebce9-9cb1-45aa-9e92-61759452cb8e",
+        "name": "Update row(s)"
+      },
+      {
+        "parameters": {
+          "operation": "get",
+          "dataTableId": {
+            "__rl": true,
+            "value": "NMbDpuxCCVRyjA1E",
+            "mode": "list",
+            "cachedResultName": "Muchos_Datos",
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/NMbDpuxCCVRyjA1E"
+          }
+        },
+        "type": "n8n-nodes-base.dataTable",
+        "typeVersion": 1.1,
+        "position": [
+          -1040,
+          544
+        ],
+        "id": "10b4962c-59c5-4f9f-b9b8-72253af1bf23",
+        "name": "Get row(s)"
+      }
+    ],
+    "connections": {
+      "When clicking ‘Execute workflow’": {
+        "main": [
+          [
+            {
+              "node": "request_página_principal",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "HTTP Request3": {
+        "main": [
+          [
+            {
+              "node": "Wait2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Wait2": {
+        "main": [
+          [
+            {
+              "node": "If1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If1": {
+        "main": [
+          [
+            {
+              "node": "Facebook Graph API1",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "HTTP Request3",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Facebook Graph API2": {
+        "main": [
+          [
+            {
+              "node": "Respond to Webhook",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Upload an asset from file data": {
+        "main": [
+          [
+            {
+              "node": "Edit Fields",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Edit Fields": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "HTTP Request1": {
+        "main": [
+          [
+            {
+              "node": "If",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If": {
+        "main": [
+          [
+            {
+              "node": "Update row(s)",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Wait",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Wait": {
+        "main": [
+          [
+            {
+              "node": "Edit Fields1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "request_página_principal": {
+        "main": [
+          [
+            {
+              "node": "extraer_url",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "extraer_url": {
+        "main": [
+          [
+            {
+              "node": "request_página_cámaras",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "request_página_cámaras": {
+        "main": [
+          [
+            {
+              "node": "extraer_url2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "filtrar_url_reciente": {
+        "main": [
+          [
+            {
+              "node": "solicitud_url_reciente",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "solicitud_url_reciente": {
+        "main": [
+          [
+            {
+              "node": "Upload an asset from file data",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "extraer_url2": {
+        "main": [
+          [
+            {
+              "node": "filtrar_url_reciente",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Edit Fields1": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Send a message": {
+        "main": [
+          []
+        ]
+      },
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "Get row(s)",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Facebook Graph API1": {
+        "main": [
+          []
+        ]
+      },
+      "Update row(s)": {
+        "main": [
+          [
+            {
+              "node": "Send a message",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Get row(s)": {
+        "main": [
+          [
+            {
+              "node": "Facebook Graph API2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Respond to Webhook": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request3",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Info Tailwind",
+    "name": "Version ceed0eeb",
+    "description": "",
+    "autosaved": false
+  },
+  "activeVersionId": "ceed0eeb-692b-49aa-8cbc-c3d9a3ce8841",
   "connections": {
     "When clicking ‘Execute workflow’": {
       "main": [
@@ -58,7 +920,7 @@
       "main": [
         [
           {
-            "node": "HTTP Request3",
+            "node": "Respond to Webhook",
             "type": "main",
             "index": 0
           }
@@ -102,7 +964,7 @@
       "main": [
         [
           {
-            "node": "Send a message",
+            "node": "Update row(s)",
             "type": "main",
             "index": 0
           }
@@ -206,16 +1068,37 @@
     },
     "Send a message": {
       "main": [
+        []
+      ]
+    },
+    "Webhook": {
+      "main": [
         [
           {
-            "node": "If2",
+            "node": "Get row(s)",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "If2": {
+    "Facebook Graph API1": {
+      "main": [
+        []
+      ]
+    },
+    "Update row(s)": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s)": {
       "main": [
         [
           {
@@ -223,10 +1106,14 @@
             "type": "main",
             "index": 0
           }
-        ],
+        ]
+      ]
+    },
+    "Respond to Webhook": {
+      "main": [
         [
           {
-            "node": "No Operation, do nothing",
+            "node": "HTTP Request3",
             "type": "main",
             "index": 0
           }
@@ -266,8 +1153,8 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        1600,
-        -48
+        -64,
+        528
       ],
       "id": "70f5be56-bcbd-45e8-b707-d1fe8cd7941a",
       "name": "Facebook Graph API1",
@@ -298,8 +1185,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1088,
-        -32
+        -544,
+        544
       ],
       "id": "edf4ba47-a8ca-4343-8394-708f1e0f7712",
       "name": "HTTP Request3",
@@ -315,8 +1202,8 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        1248,
-        -32
+        -384,
+        544
       ],
       "id": "5579777d-f732-4b98-b233-233d14c7baeb",
       "name": "Wait2",
@@ -349,8 +1236,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        1408,
-        -32
+        -224,
+        544
       ],
       "id": "f2e57470-8cb6-4aff-a4f1-776c6d413c60",
       "name": "If1"
@@ -362,14 +1249,14 @@
         "node": "17841470046184468",
         "edge": "=media",
         "options": {
-          "queryParametersJson": "={\n\"video_url\": \"{{ $('Edit Fields').item.json.story_url }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
+          "queryParametersJson": "={\n\"video_url\": \"{{ $json.id_Historia_Camaras }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
         }
       },
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        896,
-        -32
+        -880,
+        544
       ],
       "id": "0bbfbe8d-31e9-41c6-8d53-89988526abf1",
       "name": "Facebook Graph API2",
@@ -634,82 +1521,6 @@
     },
     {
       "parameters": {
-        "operation": "sendAndWait",
-        "sendTo": "leonardomartinez44@icloud.com",
-        "subject": "APROBAR HISTORIA WEBCAM",
-        "message": "=<!DOCTYPE html>\n<html>\n<head>\n<style>\n  body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }\n  .container { max-width: 600px; margin: 20px auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }\n  .header { background-color: #333333; color: #ffffff; padding: 20px; text-align: center; }\n  .content { padding: 30px; text-align: center; color: #333333; }\n  .preview-box { margin: 20px 0; border: 1px solid #eeeeee; padding: 10px; border-radius: 5px; background-color: #fafafa; }\n  img { max-width: 100%; height: auto; border-radius: 4px; display: block; margin: 0 auto; }\n</style>\n</head>\n<body>\n\n<div class=\"container\">\n  <div class=\"header\">\n    <h2 style=\"margin:0;\">Aprobación Requerida</h2>\n  </div>\n  \n  <div class=\"content\">\n    <h3>Se requiere aprobación de una historia</h3>\n    \n    <div class=\"preview-box\">\n      <p style=\"margin-top: 0; margin-bottom: 10px; font-weight: bold; color: #555;\">Vista previa:</p>\n      \n      <img src=\"{{ $('Edit Fields').item.json.vista_previa }}\" alt=\"Vista previa de la historia\">\n      \n    </div>\n  </div>\n  \n  <div style=\"background-color: #eeeeee; padding: 10px; text-align: center; font-size: 12px; color: #777;\">\n    Enviado automáticamente desde n8n\n  </div>\n</div>\n\n</body>\n</html>",
-        "approvalOptions": {
-          "values": {
-            "approvalType": "double",
-            "approveLabel": "Aprobar"
-          }
-        },
-        "options": {
-          "appendAttribution": false
-        }
-      },
-      "type": "n8n-nodes-base.gmail",
-      "typeVersion": 2.2,
-      "position": [
-        560,
-        64
-      ],
-      "id": "9a9d6c8a-063e-45a0-a848-ba712b6f8fe8",
-      "name": "Send a message",
-      "webhookId": "e9c9c2ba-8c2d-4a9c-a0eb-f52f499cd543",
-      "credentials": {
-        "gmailOAuth2": {
-          "id": "wR7U82S8bmDH4odC",
-          "name": "info@tailwind.es"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 3
-          },
-          "conditions": [
-            {
-              "id": "2999bf30-121b-46b1-af7f-47fc0f314fb5",
-              "leftValue": "={{ $json.data.approved }}",
-              "rightValue": true,
-              "operator": {
-                "type": "boolean",
-                "operation": "equals"
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.3,
-      "position": [
-        704,
-        64
-      ],
-      "id": "fc975a37-c27d-4017-a950-fb2c7b0c4a15",
-      "name": "If2"
-    },
-    {
-      "parameters": {},
-      "type": "n8n-nodes-base.noOp",
-      "typeVersion": 1,
-      "position": [
-        896,
-        144
-      ],
-      "id": "1d0d3791-3a09-449b-a578-1f5a98dfdfdd",
-      "name": "No Operation, do nothing"
-    },
-    {
-      "parameters": {
         "content": "OBTENER VÍDEO DE LA CÁMARA",
         "height": 288,
         "width": 1056,
@@ -776,16 +1587,141 @@
       "parameters": {
         "content": "SUBIDA A META\n",
         "height": 192,
-        "width": 928
+        "width": 1376
       },
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        848,
-        -80
+        -1248,
+        496
       ],
       "id": "ab8be564-4726-443a-aae2-3afebc817eaa",
       "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "path": "historiaCamara",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1200,
+        544
+      ],
+      "id": "fd225dd5-64bd-4381-b7cc-b9cb982c5975",
+      "name": "Webhook",
+      "webhookId": "720cdebd-a73a-47ae-a8c8-66fe82638f89"
+    },
+    {
+      "parameters": {
+        "sendTo": "adrianazorinsanchez@gmail.com",
+        "subject": "HISTORIA CÁMARA",
+        "message": "=<!DOCTYPE html> <html> <head> <style>   body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }   .container { max-width: 600px; margin: 20px auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }   .header { background-color: #333333; color: #ffffff; padding: 20px; text-align: center; }   .content { padding: 30px; text-align: center; color: #333333; }   .preview-box { margin: 20px 0; border: 1px solid #eeeeee; padding: 10px; border-radius: 5px; background-color: #fafafa; }   img { max-width: 100%; height: auto; border-radius: 4px; display: block; margin: 0 auto; }      /* Estilos para el nuevo botón */   .btn-confirmar {     display: inline-block;     background-color: #2ecc71;     color: #ffffff !important;     padding: 14px 28px;     text-decoration: none;     border-radius: 5px;     font-weight: bold;     margin-top: 20px;     box-shadow: 0 2px 4px rgba(0,0,0,0.1);   } </style> </head> <body>  <div class=\"container\">   <div class=\"header\">     <h2 style=\"margin:0;\">Aprobación Requerida</h2>   </div>      <div class=\"content\">     <h3>Se requiere aprobación de una historia</h3>          <div class=\"preview-box\">       <p style=\"margin-top: 0; margin-bottom: 10px; font-weight: bold; color: #555;\">Vista previa:</p>              <img src=\"{{ $('Edit Fields').item.json.vista_previa }}\" alt=\"Vista previa de la historia\">     </div>      <a href=\"https://n8n.tailwind.es/webhook/historiaCamara\" class=\"btn-confirmar\">       Aprobar Historia     </a>    </div>      <div style=\"background-color: #eeeeee; padding: 10px; text-align: center; font-size: 12px; color: #777;\">     Enviado automáticamente desde n8n   </div> </div>  </body> </html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        688,
+        64
+      ],
+      "id": "73308a25-8f99-40b8-9ef3-0317f097cfcb",
+      "name": "Send a message",
+      "webhookId": "31557ff2-993c-4c43-854d-8f372d063b1c",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "fha7KwAzrDSA7OXO",
+          "name": "ventas@sierranevadagranada.com"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "<style>\n  /* --- ESTILOS GENERALES --- */\n  body { \n    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; \n    display: flex; justify-content: center; align-items: center; \n    height: 100vh; margin: 0; background-color: #0f172a; \n    color: #e2e8f0; overflow: hidden; \n  }\n  .snow-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }\n  .flake { position: absolute; top: -10px; background-color: rgba(255, 255, 255, 0.4); border-radius: 50%; animation: fall linear infinite; }\n  @keyframes fall { to { transform: translateY(110vh); } }\n  \n  /* La tarjeta (z-index 10) */\n  .card { background-color: #1e293b; padding: 80px 40px 40px; border-radius: 16px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8); text-align: center; max-width: 380px; width: 90%; position: relative; z-index: 10; margin-top: 50px; overflow: visible; }\n  .snow-svg { position: absolute; top: -1px; left: 0; width: 100%; height: auto; z-index: 20; filter: drop-shadow(0 3px 2px rgba(0,0,0,0.15)); pointer-events: none; border-radius: 16px 16px 0 0; }\n  h1 { color: #f1f5f9; margin: 10px 0; font-size: 28px; font-weight: bold; }\n  p { color: #94a3b8; font-size: 16px; line-height: 1.6; margin-bottom: 20px; }\n  hr { border: 0; border-top: 1px solid #334155; margin: 25px 0; }\n  .check-icon { font-size: 50px; color: #22c55e; position: relative; z-index: 25; margin-top: 20px; filter: drop-shadow(0 0 15px rgba(34, 197, 94, 0.4)); }\n\n  /* ========================================= */\n  /* --- PINGÜINO REALISTA EN SNOWBOARD --- */\n  /* ========================================= */\n  .sliding-penguin-container {\n    position: fixed;\n    bottom: 35%; \n    left: -150px; \n    width: 110px; \n    height: auto;\n    z-index: 5; /* Detrás de la tarjeta */\n    transform: rotate(-3deg);\n    /* Duración total 5s: \n       - 4.25s para llegar al centro (lento)\n       - 0.75s para salir disparado (rápido) */\n    animation: slideAcross 5s linear infinite; \n  }\n  .penguin-ref-svg {\n    width: 100%; height: auto;\n    filter: drop-shadow(0 5px 4px rgba(0,0,0,0.5));\n  }\n\n  /* AQUÍ ESTÁ EL TRUCO DE LA VELOCIDAD */\n  @keyframes slideAcross {\n    0%   { left: -150px; } \n    /* Hasta el 85% del tiempo, avanza lento hasta pasar un poco el centro (55vw) */\n    85%  { left: 55vw; } \n    /* En el 15% de tiempo restante, acelera hasta el final (110vw) */\n    100% { left: 110vw;  }\n  }\n</style>\n\n<div class=\"snow-bg\">\n  <div class=\"flake\" style=\"left: 10%; animation-duration: 5s; width: 6px; height: 6px;\"></div>\n  <div class=\"flake\" style=\"left: 30%; animation-duration: 8s; width: 4px; height: 4px;\"></div>\n  <div class=\"flake\" style=\"left: 60%; animation-duration: 4s; width: 8px; height: 8px;\"></div>\n  <div class=\"flake\" style=\"left: 80%; animation-duration: 6s; width: 5px; height: 5px;\"></div>\n</div>\n\n<div class=\"sliding-penguin-container\">\n  <svg class=\"penguin-ref-svg\" viewBox=\"0 0 220 260\" xmlns=\"http://www.w3.org/2000/svg\">\n    <path fill=\"#f1f5f9\" opacity=\"0.9\" d=\"M 10,235 Q 30,220 50,230 Q 70,240 90,225 Q 110,210 130,225 Q 150,240 170,220 Q 190,200 210,230 L 220,250 Q 110,260 0,250 Z\" />\n    <circle fill=\"#f1f5f9\" cx=\"20\" cy=\"225\" r=\"5\" opacity=\"0.8\"/>\n    <circle fill=\"#f1f5f9\" cx=\"190\" cy=\"215\" r=\"6\" opacity=\"0.8\"/>\n    <g transform=\"translate(10, 210)\">\n        <path fill=\"#2dd4bf\" stroke=\"#0f766e\" stroke-width=\"2\" d=\"M 0,20 C 0,0 20,-10 40,-5 L 160,-5 C 180,-10 200,0 200,20 C 200,40 180,45 160,40 L 40,40 C 20,45 0,40 0,20 Z\" />\n        <path fill=\"#ef4444\" d=\"M 30,-2 Q 50,20 70,-2 L 100,-2 Q 80,25 60,35 L 30,35 Q 50,15 30,-2 Z\" />\n        <path fill=\"#ef4444\" d=\"M 130,-2 Q 150,20 170,-2 L 190,2 Q 170,30 150,38 L 120,38 Q 140,15 130,-2 Z\" />\n        <path fill=\"#1e3a8a\" d=\"M 65,0 Q 85,25 105,0 L 125,0 Q 105,30 85,38 L 55,38 Q 75,15 65,0 Z\" />\n        <path fill=\"#1e3a8a\" d=\"M 160,0 Q 175,15 190,0 L 195,5 Q 180,35 150,40 L 140,35 Z\" />\n        <path fill=\"#1e3a8a\" d=\"M 5,5 Q 20,25 5,35 L 15,38 Q 35,20 15,0 Z\" />\n    </g>\n    <g transform=\"translate(45, 15)\">\n        <path fill=\"#fb923c\" stroke=\"#c2410c\" stroke-width=\"2\" d=\"M 35,210 C 25,210 15,205 15,195 C 15,185 25,180 40,185 C 55,190 65,195 65,205 C 65,215 55,220 35,210 Z\" />\n        <path fill=\"#fb923c\" stroke=\"#c2410c\" stroke-width=\"2\" d=\"M 95,210 C 85,210 75,205 75,195 C 75,185 85,180 100,185 C 115,190 125,195 125,205 C 125,215 115,220 95,210 Z\" />\n        <path fill=\"#374151\" stroke=\"#1f2937\" stroke-width=\"2\" d=\"M 65,5 C 30,5 5,40 5,100 C 5,160 30,200 65,200 C 100,200 125,160 125,100 C 125,40 100,5 65,5 Z\" />\n        <ellipse fill=\"#f8fafc\" cx=\"65\" cy=\"130\" rx=\"45\" ry=\"55\" />\n        <path fill=\"#f8fafc\" d=\"M 65,35 C 50,35 40,45 40,65 C 40,85 50,95 65,95 C 80,95 90,85 90,65 C 90,45 80,35 65,35 Z\" />\n        <g>\n            <circle fill=\"#1f2937\" cx=\"52\" cy=\"65\" r=\"10\" /><circle fill=\"#1f2937\" cx=\"78\" cy=\"65\" r=\"10\" />\n            <circle fill=\"white\" cx=\"55\" cy=\"62\" r=\"4\" /><circle fill=\"white\" cx=\"75\" cy=\"62\" r=\"4\" />\n            <circle fill=\"white\" cx=\"50\" cy=\"68\" r=\"2\" /><circle fill=\"white\" cx=\"81\" cy=\"68\" r=\"2\" />\n        </g>\n        <path fill=\"#fb923c\" stroke=\"#c2410c\" stroke-width=\"1\" d=\"M 65,85 L 55,92 Q 65,105 75,92 Z\" />\n        <path fill=\"#374151\" stroke=\"#1f2937\" stroke-width=\"2\" d=\"M 8,100 Q -10,130 10,160 L 20,145 Q 10,125 8,100 Z\" />\n        <path fill=\"#374151\" stroke=\"#1f2937\" stroke-width=\"2\" d=\"M 122,100 Q 140,130 120,160 L 110,145 Q 120,125 122,100 Z\" />\n    </g>\n  </svg>\n</div>\n\n<div class=\"card\">\n  <svg class=\"snow-svg\" viewBox=\"0 0 400 80\" xmlns=\"http://www.w3.org/2000/svg\" preserveAspectRatio=\"none\">\n    <path fill=\"#f1f5f9\" d=\"M0,0 L400,0 V30 Q385,60 370,30 Q355,20 340,30 Q310,75 280,30 Q260,20 240,30 Q200,80 160,35 Q140,25 120,35 Q85,65 50,30 Q35,20 20,35 Q0,60 0,30 Z\" />\n  </svg>\n  <div class=\"check-icon\">✔</div>\n  <h1>¡Confirmado!</h1>\n  <p>La historia ha sido aprobada correctamente.</p>\n  <hr>\n  <p style=\"font-size: 13px; opacity: 0.7;\">Ya puedes cerrar esta pestaña.</p>\n</div>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        -704,
+        544
+      ],
+      "id": "3d9447d2-f241-43a3-80ce-1688f72900e5",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "dataTableId": {
+          "__rl": true,
+          "value": "NMbDpuxCCVRyjA1E",
+          "mode": "list",
+          "cachedResultName": "Muchos_Datos",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/NMbDpuxCCVRyjA1E"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "1"
+            }
+          ]
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id_Historia_Camaras": "={{ $('Edit Fields').item.json.story_url }}"
+          },
+          "matchingColumns": [
+            "id_Historia_Camaras"
+          ],
+          "schema": [
+            {
+              "id": "id_Historia_Camaras",
+              "displayName": "id_Historia_Camaras",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        544,
+        64
+      ],
+      "id": "99aebce9-9cb1-45aa-9e92-61759452cb8e",
+      "name": "Update row(s)"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "NMbDpuxCCVRyjA1E",
+          "mode": "list",
+          "cachedResultName": "Muchos_Datos",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/NMbDpuxCCVRyjA1E"
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        -1040,
+        544
+      ],
+      "id": "10b4962c-59c5-4f9f-b9b8-72253af1bf23",
+      "name": "Get row(s)"
     }
   ],
   "pinData": {},
@@ -803,7 +1739,7 @@
   ],
   "staticData": null,
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2026-01-24T08:37:55.120Z",
-  "versionId": "99e77d87-a8f6-481c-9757-d15c3b18906c"
+  "triggerCount": 1,
+  "updatedAt": "2026-01-28T11:44:36.439Z",
+  "versionId": "ceed0eeb-692b-49aa-8cbc-c3d9a3ce8841"
 }
