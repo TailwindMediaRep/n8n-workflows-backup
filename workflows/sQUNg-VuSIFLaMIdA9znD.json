@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-01-26T13:46:30.000Z",
-    "createdAt": "2026-01-26T13:46:28.882Z",
-    "versionId": "814575c9-a4c1-4b84-93e7-652a5885507e",
+    "updatedAt": "2026-01-27T14:14:06.000Z",
+    "createdAt": "2026-01-27T14:14:01.361Z",
+    "versionId": "cc3bc5de-6ee1-4392-b6c1-5262ff6c238c",
     "workflowId": "sQUNg-VuSIFLaMIdA9znD",
     "nodes": [
       {
@@ -15,7 +15,7 @@
         "type": "n8n-nodes-base.webhook",
         "typeVersion": 2.1,
         "position": [
-          32,
+          256,
           480
         ],
         "id": "3a169d65-fc08-45f0-a1c1-197ef4d4aa08",
@@ -40,7 +40,7 @@
         "type": "n8n-nodes-base.graphql",
         "typeVersion": 1.1,
         "position": [
-          464,
+          640,
           480
         ],
         "id": "7255d822-ea0d-446d-83c9-1aee124ad0e8",
@@ -56,13 +56,13 @@
         "parameters": {
           "content": "ENVIAR CORREO",
           "height": 208,
-          "width": 736,
+          "width": 384,
           "color": 4
         },
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          0,
+          208,
           768
         ],
         "id": "070b8235-6802-470b-bd7a-884c6711458e",
@@ -82,7 +82,7 @@
         "type": "n8n-nodes-base.googleDrive",
         "typeVersion": 3,
         "position": [
-          464,
+          672,
           128
         ],
         "id": "67d0cf56-a4b3-432d-9ab3-2b819b9f63a8",
@@ -104,7 +104,7 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          0,
+          208,
           80
         ],
         "id": "2b6bbfe7-3af9-4eb7-a19d-ec2a3322de91",
@@ -121,7 +121,7 @@
         "type": "n8n-nodes-base.scheduleTrigger",
         "typeVersion": 1.3,
         "position": [
-          32,
+          240,
           128
         ],
         "id": "62e5fa32-0ae7-493b-875f-e37addba632a",
@@ -175,7 +175,7 @@
         "type": "n8n-nodes-base.dataTable",
         "typeVersion": 1,
         "position": [
-          752,
+          960,
           128
         ],
         "id": "e5db14bd-7dca-40a9-bee1-b422e5e5f4a0",
@@ -188,7 +188,7 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          464,
+          640,
           624
         ],
         "id": "f74317cd-37d0-4262-a761-d94cdf479b6a",
@@ -201,7 +201,7 @@
         "type": "n8n-nodes-base.merge",
         "typeVersion": 3.2,
         "position": [
-          752,
+          880,
           464
         ],
         "id": "5007c6bb-31eb-4b15-be8a-fb06c3e7962e",
@@ -278,7 +278,7 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          1072,
+          1152,
           480
         ],
         "id": "b52e6336-e7f7-40dd-ad46-c520b057c406",
@@ -291,7 +291,7 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          912,
+          1008,
           480
         ],
         "id": "38bbf384-1b40-4d4d-b5cc-97d8454a7303",
@@ -351,7 +351,7 @@
         "type": "n8n-nodes-base.dataTable",
         "typeVersion": 1,
         "position": [
-          608,
+          816,
           128
         ],
         "id": "954c39f5-d1ab-48b0-a72f-d98b54032d3b",
@@ -378,7 +378,7 @@
         "type": "n8n-nodes-base.dataTable",
         "typeVersion": 1,
         "position": [
-          208,
+          432,
           480
         ],
         "id": "4f754bc8-b2f2-4dd8-a946-e584b5dab050",
@@ -566,7 +566,7 @@
         "type": "n8n-nodes-base.googleSheets",
         "typeVersion": 4.7,
         "position": [
-          1248,
+          1296,
           480
         ],
         "id": "3456907e-1889-4e9d-87b5-40ea7f7453de",
@@ -633,7 +633,7 @@
         "type": "n8n-nodes-base.dataTable",
         "typeVersion": 1,
         "position": [
-          1408,
+          1456,
           480
         ],
         "id": "faf01950-eda5-4601-8b6c-75240e769c87",
@@ -657,7 +657,7 @@
         "type": "n8n-nodes-base.graphql",
         "typeVersion": 1.1,
         "position": [
-          528,
+          704,
           336
         ],
         "id": "0547d26f-e2d4-4a83-ad9a-3b3f4097a3c2",
@@ -686,7 +686,7 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          400,
+          592,
           336
         ],
         "id": "296715bd-4cb8-4930-a0d7-966761cc3f3b",
@@ -711,7 +711,7 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          176,
+          384,
           128
         ],
         "id": "fccdf808-f4e0-4782-a70b-a6b6e00c2e42",
@@ -724,7 +724,7 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          320,
+          528,
           128
         ],
         "id": "a2ae42c0-c272-4555-ae7f-445636e14ba8",
@@ -734,13 +734,13 @@
         "parameters": {
           "content": "ACTUALIZAR DOCUMENTO CON CADA PEDIDO",
           "height": 448,
-          "width": 1632,
+          "width": 1456,
           "color": 3
         },
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          0,
+          208,
           304
         ],
         "id": "851e0c70-842c-46c7-a56a-b490e4cc792d",
@@ -756,7 +756,7 @@
         "type": "n8n-nodes-base.gmail",
         "typeVersion": 2.2,
         "position": [
-          192,
+          400,
           816
         ],
         "id": "e0a1443f-7789-45c3-88a0-4471df57e63a",
@@ -790,7 +790,7 @@
         "type": "n8n-nodes-base.dataTable",
         "typeVersion": 1.1,
         "position": [
-          32,
+          240,
           816
         ],
         "id": "6762e93d-c33c-4008-9d9c-7fd70d47fbf5",
@@ -897,8 +897,8 @@
         "type": "n8n-nodes-base.switch",
         "typeVersion": 3.4,
         "position": [
-          -1040,
-          432
+          -768,
+          448
         ],
         "id": "fa3ccb4f-aef5-4d7b-a691-90267f5171fe",
         "name": "Switch"
@@ -910,8 +910,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          -848,
-          240
+          -576,
+          256
         ],
         "id": "132c4e3b-b445-4f4b-bdff-7374f9e5ff18",
         "name": "rules-shop"
@@ -923,8 +923,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          -848,
-          384
+          -576,
+          400
         ],
         "id": "d58a6580-401b-4d55-bc2f-a2bcb34c3ee5",
         "name": "surfin"
@@ -936,8 +936,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          -848,
-          528
+          -576,
+          544
         ],
         "id": "9031743d-79e1-4b7d-a852-e3aa8b68164a",
         "name": "snowdivision"
@@ -1113,8 +1113,8 @@
         "type": "n8n-nodes-base.googleSheets",
         "typeVersion": 4.7,
         "position": [
-          -656,
-          528
+          -240,
+          544
         ],
         "id": "7367a66d-8df9-476b-8c0b-5479607fb339",
         "name": "Escribir SnowDivision",
@@ -1299,8 +1299,8 @@
         "type": "n8n-nodes-base.googleSheets",
         "typeVersion": 4.7,
         "position": [
-          -656,
-          384
+          -240,
+          400
         ],
         "id": "e4cb0885-b4e6-46e5-abc8-ced7e117233d",
         "name": "Escribir Surfin",
@@ -1485,8 +1485,8 @@
         "type": "n8n-nodes-base.googleSheets",
         "typeVersion": 4.7,
         "position": [
-          -656,
-          240
+          -240,
+          256
         ],
         "id": "9262d50b-9185-4607-81c6-ad91edd89465",
         "name": "Escribir Rules",
@@ -1502,10 +1502,10 @@
           "operation": "update",
           "dataTableId": {
             "__rl": true,
-            "value": "IUsdbRMmbgTdrVQp",
+            "value": "ghO8HECzTZgPqOqM",
             "mode": "list",
-            "cachedResultName": "informeDiarioPruebas",
-            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/IUsdbRMmbgTdrVQp"
+            "cachedResultName": "InformeDiario",
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/ghO8HECzTZgPqOqM"
           },
           "filters": {
             "conditions": [
@@ -1517,13 +1517,14 @@
           "columns": {
             "mappingMode": "defineBelow",
             "value": {
-              "contador_alquiler": "={{ $json.row_number + 1}}"
+              "Contador_Alquiler": "={{ $json.row_number + 1}}",
+              "Contador": "={{ $('Get row(s)2').item.json.Contador }}"
             },
             "matchingColumns": [],
             "schema": [
               {
-                "id": "id_documento",
-                "displayName": "id_documento",
+                "id": "ID_Documento",
+                "displayName": "ID_Documento",
                 "required": false,
                 "defaultMatch": false,
                 "display": true,
@@ -1532,22 +1533,22 @@
                 "removed": false
               },
               {
-                "id": "contador",
-                "displayName": "contador",
+                "id": "Contador",
+                "displayName": "Contador",
                 "required": false,
                 "defaultMatch": false,
                 "display": true,
-                "type": "string",
+                "type": "number",
                 "readOnly": false,
                 "removed": false
               },
               {
-                "id": "contador_alquiler",
-                "displayName": "contador_alquiler",
+                "id": "Contador_Alquiler",
+                "displayName": "Contador_Alquiler",
                 "required": false,
                 "defaultMatch": false,
                 "display": true,
-                "type": "string",
+                "type": "number",
                 "readOnly": false,
                 "removed": false
               }
@@ -1560,8 +1561,8 @@
         "type": "n8n-nodes-base.dataTable",
         "typeVersion": 1.1,
         "position": [
-          -464,
-          240
+          -80,
+          256
         ],
         "id": "520dc12b-583c-40bd-80d8-b54401ade2f1",
         "name": "actualizar contador rules"
@@ -1571,10 +1572,10 @@
           "operation": "update",
           "dataTableId": {
             "__rl": true,
-            "value": "IUsdbRMmbgTdrVQp",
+            "value": "ghO8HECzTZgPqOqM",
             "mode": "list",
-            "cachedResultName": "informeDiarioPruebas",
-            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/IUsdbRMmbgTdrVQp"
+            "cachedResultName": "InformeDiario",
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/ghO8HECzTZgPqOqM"
           },
           "filters": {
             "conditions": [
@@ -1586,13 +1587,14 @@
           "columns": {
             "mappingMode": "defineBelow",
             "value": {
-              "contador_alquiler": "={{ $json.row_number + 1}}"
+              "Contador_Alquiler": "={{ $json.row_number + 1}}",
+              "Contador": "={{ $('Get row(s)2').item.json.Contador }}"
             },
             "matchingColumns": [],
             "schema": [
               {
-                "id": "id_documento",
-                "displayName": "id_documento",
+                "id": "ID_Documento",
+                "displayName": "ID_Documento",
                 "required": false,
                 "defaultMatch": false,
                 "display": true,
@@ -1601,22 +1603,22 @@
                 "removed": false
               },
               {
-                "id": "contador",
-                "displayName": "contador",
+                "id": "Contador",
+                "displayName": "Contador",
                 "required": false,
                 "defaultMatch": false,
                 "display": true,
-                "type": "string",
+                "type": "number",
                 "readOnly": false,
                 "removed": false
               },
               {
-                "id": "contador_alquiler",
-                "displayName": "contador_alquiler",
+                "id": "Contador_Alquiler",
+                "displayName": "Contador_Alquiler",
                 "required": false,
                 "defaultMatch": false,
                 "display": true,
-                "type": "string",
+                "type": "number",
                 "readOnly": false,
                 "removed": false
               }
@@ -1629,8 +1631,8 @@
         "type": "n8n-nodes-base.dataTable",
         "typeVersion": 1.1,
         "position": [
-          -448,
-          384
+          -80,
+          400
         ],
         "id": "6b0db584-2a39-46bb-902d-9131fa4ce1e0",
         "name": "actualizar contador surfin"
@@ -1640,10 +1642,10 @@
           "operation": "update",
           "dataTableId": {
             "__rl": true,
-            "value": "IUsdbRMmbgTdrVQp",
+            "value": "ghO8HECzTZgPqOqM",
             "mode": "list",
-            "cachedResultName": "informeDiarioPruebas",
-            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/IUsdbRMmbgTdrVQp"
+            "cachedResultName": "InformeDiario",
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/ghO8HECzTZgPqOqM"
           },
           "filters": {
             "conditions": [
@@ -1655,13 +1657,14 @@
           "columns": {
             "mappingMode": "defineBelow",
             "value": {
-              "contador_alquiler": "={{ $json.row_number + 1}}"
+              "Contador_Alquiler": "={{ $json.row_number + 1}}",
+              "Contador": "={{ $('Get row(s)2').item.json.Contador }}"
             },
             "matchingColumns": [],
             "schema": [
               {
-                "id": "id_documento",
-                "displayName": "id_documento",
+                "id": "ID_Documento",
+                "displayName": "ID_Documento",
                 "required": false,
                 "defaultMatch": false,
                 "display": true,
@@ -1670,22 +1673,22 @@
                 "removed": false
               },
               {
-                "id": "contador",
-                "displayName": "contador",
+                "id": "Contador",
+                "displayName": "Contador",
                 "required": false,
                 "defaultMatch": false,
                 "display": true,
-                "type": "string",
+                "type": "number",
                 "readOnly": false,
                 "removed": false
               },
               {
-                "id": "contador_alquiler",
-                "displayName": "contador_alquiler",
+                "id": "Contador_Alquiler",
+                "displayName": "Contador_Alquiler",
                 "required": false,
                 "defaultMatch": false,
                 "display": true,
-                "type": "string",
+                "type": "number",
                 "readOnly": false,
                 "removed": false
               }
@@ -1698,8 +1701,8 @@
         "type": "n8n-nodes-base.dataTable",
         "typeVersion": 1.1,
         "position": [
-          -448,
-          528
+          -80,
+          544
         ],
         "id": "56f1f664-3f3e-480a-84a8-f9067fb0d648",
         "name": "actualizar contador snowdivision"
@@ -1711,8 +1714,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          -848,
-          672
+          -576,
+          688
         ],
         "id": "639143ee-f6eb-4832-af8e-48d41053a656",
         "name": "sierranevadagranada"
@@ -1891,8 +1894,8 @@
         "type": "n8n-nodes-base.googleSheets",
         "typeVersion": 4.7,
         "position": [
-          -656,
-          672
+          -240,
+          688
         ],
         "id": "bdcbbe12-2485-403b-bbd0-1b060ee75634",
         "name": "Escribir sierranevadagranada",
@@ -1908,10 +1911,10 @@
           "operation": "update",
           "dataTableId": {
             "__rl": true,
-            "value": "IUsdbRMmbgTdrVQp",
+            "value": "ghO8HECzTZgPqOqM",
             "mode": "list",
-            "cachedResultName": "informeDiarioPruebas",
-            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/IUsdbRMmbgTdrVQp"
+            "cachedResultName": "InformeDiario",
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/ghO8HECzTZgPqOqM"
           },
           "filters": {
             "conditions": [
@@ -1923,13 +1926,14 @@
           "columns": {
             "mappingMode": "defineBelow",
             "value": {
-              "contador_alquiler": "={{ $json.row_number + 1}}"
+              "Contador_Alquiler": "={{ $json.row_number + 1}}",
+              "Contador": "={{ $('Get row(s)2').item.json.Contador }}"
             },
             "matchingColumns": [],
             "schema": [
               {
-                "id": "id_documento",
-                "displayName": "id_documento",
+                "id": "ID_Documento",
+                "displayName": "ID_Documento",
                 "required": false,
                 "defaultMatch": false,
                 "display": true,
@@ -1938,22 +1942,22 @@
                 "removed": false
               },
               {
-                "id": "contador",
-                "displayName": "contador",
+                "id": "Contador",
+                "displayName": "Contador",
                 "required": false,
                 "defaultMatch": false,
                 "display": true,
-                "type": "string",
+                "type": "number",
                 "readOnly": false,
                 "removed": false
               },
               {
-                "id": "contador_alquiler",
-                "displayName": "contador_alquiler",
+                "id": "Contador_Alquiler",
+                "displayName": "Contador_Alquiler",
                 "required": false,
                 "defaultMatch": false,
                 "display": true,
-                "type": "string",
+                "type": "number",
                 "readOnly": false,
                 "removed": false
               }
@@ -1966,8 +1970,8 @@
         "type": "n8n-nodes-base.dataTable",
         "typeVersion": 1.1,
         "position": [
-          -448,
-          672
+          -80,
+          688
         ],
         "id": "f91d9064-be06-467e-a244-f6f1999fc426",
         "name": "actualizar contador sierranevadagranada"
@@ -1993,8 +1997,8 @@
         "type": "n8n-nodes-base.dataTable",
         "typeVersion": 1.1,
         "position": [
-          -1200,
-          464
+          -928,
+          480
         ],
         "id": "162dccd0-13f7-427e-8032-e9547d607c67",
         "name": "Get row(s)2"
@@ -2010,15 +2014,15 @@
           },
           "simple": false,
           "filters": {
-            "q": "reservas@rules-shop.es"
+            "q": "from: (reservas@rules-shop.es OR reservas@surfin.es OR reservas@snowdivision.es OR info@sierranevadagranada.com)"
           },
           "options": {}
         },
         "type": "n8n-nodes-base.gmailTrigger",
         "typeVersion": 1.3,
         "position": [
-          -1360,
-          464
+          -1088,
+          480
         ],
         "id": "424c4c3d-50d2-4125-9517-d6184f95d5d8",
         "name": "Correo",
@@ -2033,17 +2037,397 @@
         "parameters": {
           "content": "INFORME DIARIO DE ALQUILERES\n",
           "height": 896,
-          "width": 1264,
+          "width": 1248,
           "color": 5
         },
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          -1408,
-          64
+          -1120,
+          80
         ],
         "id": "62875833-b388-4db3-8958-e726c4d976d9",
         "name": "Sticky Note3"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "fc09a58b-a345-4c84-a629-f073a9032b69",
+                "name": "numero_fila",
+                "value": "={{ $('Get row(s)2').item.json.Contador_Alquiler }}",
+                "type": "number"
+              },
+              {
+                "id": "471bcf47-2504-4152-bff1-949246e15243",
+                "name": "marca",
+                "value": "={{ $json.marca }}",
+                "type": "string"
+              },
+              {
+                "id": "612d9f45-eefc-4cc8-b0c0-e917ea3b829e",
+                "name": "cliente_nombre",
+                "value": "={{ $json.cliente_nombre }}",
+                "type": "string"
+              },
+              {
+                "id": "52bde6b3-5ed8-41d6-975c-718ff6176d76",
+                "name": "cliente_apellidos",
+                "value": "={{ $json.cliente_apellidos }}",
+                "type": "string"
+              },
+              {
+                "id": "833adb41-1c87-4d7d-97b1-9d048552a445",
+                "name": "cliente_email",
+                "value": "={{ $json.cliente_email }}",
+                "type": "string"
+              },
+              {
+                "id": "7aa9e812-00e5-4cb6-8c21-606013668656",
+                "name": "id_pedido",
+                "value": "={{ $json.id_pedido }}",
+                "type": "string"
+              },
+              {
+                "id": "c75b70ad-300c-41d5-a700-033e8d780ac8",
+                "name": "canal",
+                "value": "={{ $json.canal }}",
+                "type": "string"
+              },
+              {
+                "id": "c32538d7-0595-4444-a65e-f69168afe43d",
+                "name": "metodo_pago",
+                "value": "={{ $json.metodo_pago }}",
+                "type": "string"
+              },
+              {
+                "id": "252b796e-4622-4f94-860c-d277fd79adf1",
+                "name": "total_compra",
+                "value": "={{ $json.total_compra }}",
+                "type": "string"
+              },
+              {
+                "id": "a1453dfb-7552-49ef-8c64-990179ffcf3e",
+                "name": "nombre_producto",
+                "value": "={{ $json.nombre_producto }}",
+                "type": "string"
+              },
+              {
+                "id": "90ae3ed5-acd3-4e40-b955-f00626bf6e98",
+                "name": "cantidad",
+                "value": "={{ $json.cantidad }}",
+                "type": "number"
+              },
+              {
+                "id": "70cce953-858e-42aa-9d93-9d8c110bb7a0",
+                "name": "precio_unitario",
+                "value": "={{ $json.precio_unitario }}",
+                "type": "string"
+              },
+              {
+                "id": "a6901f1f-321f-4d6f-8611-5ecb35c60c61",
+                "name": "productos_resumen",
+                "value": "={{ $json.productos_resumen }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -400,
+          256
+        ],
+        "id": "5a47b98c-ba59-40b5-99da-5e8c899fdc7b",
+        "name": "numero fila rules"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "fc09a58b-a345-4c84-a629-f073a9032b69",
+                "name": "numero_fila",
+                "value": "={{ $('Get row(s)2').item.json.Contador_Alquiler }}",
+                "type": "number"
+              },
+              {
+                "id": "471bcf47-2504-4152-bff1-949246e15243",
+                "name": "marca",
+                "value": "={{ $json.marca }}",
+                "type": "string"
+              },
+              {
+                "id": "612d9f45-eefc-4cc8-b0c0-e917ea3b829e",
+                "name": "cliente_nombre",
+                "value": "={{ $json.cliente_nombre }}",
+                "type": "string"
+              },
+              {
+                "id": "52bde6b3-5ed8-41d6-975c-718ff6176d76",
+                "name": "cliente_apellidos",
+                "value": "={{ $json.cliente_apellidos }}",
+                "type": "string"
+              },
+              {
+                "id": "833adb41-1c87-4d7d-97b1-9d048552a445",
+                "name": "cliente_email",
+                "value": "={{ $json.cliente_email }}",
+                "type": "string"
+              },
+              {
+                "id": "7aa9e812-00e5-4cb6-8c21-606013668656",
+                "name": "id_pedido",
+                "value": "={{ $json.id_pedido }}",
+                "type": "string"
+              },
+              {
+                "id": "c75b70ad-300c-41d5-a700-033e8d780ac8",
+                "name": "canal",
+                "value": "={{ $json.canal }}",
+                "type": "string"
+              },
+              {
+                "id": "c32538d7-0595-4444-a65e-f69168afe43d",
+                "name": "metodo_pago",
+                "value": "={{ $json.metodo_pago }}",
+                "type": "string"
+              },
+              {
+                "id": "252b796e-4622-4f94-860c-d277fd79adf1",
+                "name": "total_compra",
+                "value": "={{ $json.total_compra }}",
+                "type": "string"
+              },
+              {
+                "id": "a1453dfb-7552-49ef-8c64-990179ffcf3e",
+                "name": "nombre_producto",
+                "value": "={{ $json.nombre_producto }}",
+                "type": "string"
+              },
+              {
+                "id": "90ae3ed5-acd3-4e40-b955-f00626bf6e98",
+                "name": "cantidad",
+                "value": "={{ $json.cantidad }}",
+                "type": "number"
+              },
+              {
+                "id": "70cce953-858e-42aa-9d93-9d8c110bb7a0",
+                "name": "precio_unitario",
+                "value": "={{ $json.precio_unitario }}",
+                "type": "string"
+              },
+              {
+                "id": "a6901f1f-321f-4d6f-8611-5ecb35c60c61",
+                "name": "productos_resumen",
+                "value": "={{ $json.productos_resumen }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -400,
+          400
+        ],
+        "id": "0a1fd86f-ceff-4036-9dd6-8d57d1341c2a",
+        "name": "numero fila surfin"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "fc09a58b-a345-4c84-a629-f073a9032b69",
+                "name": "numero_fila",
+                "value": "={{ $('Get row(s)2').item.json.Contador_Alquiler }}",
+                "type": "number"
+              },
+              {
+                "id": "471bcf47-2504-4152-bff1-949246e15243",
+                "name": "marca",
+                "value": "={{ $json.marca }}",
+                "type": "string"
+              },
+              {
+                "id": "612d9f45-eefc-4cc8-b0c0-e917ea3b829e",
+                "name": "cliente_nombre",
+                "value": "={{ $json.cliente_nombre }}",
+                "type": "string"
+              },
+              {
+                "id": "52bde6b3-5ed8-41d6-975c-718ff6176d76",
+                "name": "cliente_apellidos",
+                "value": "={{ $json.cliente_apellidos }}",
+                "type": "string"
+              },
+              {
+                "id": "833adb41-1c87-4d7d-97b1-9d048552a445",
+                "name": "cliente_email",
+                "value": "={{ $json.cliente_email }}",
+                "type": "string"
+              },
+              {
+                "id": "7aa9e812-00e5-4cb6-8c21-606013668656",
+                "name": "id_pedido",
+                "value": "={{ $json.id_pedido }}",
+                "type": "string"
+              },
+              {
+                "id": "c75b70ad-300c-41d5-a700-033e8d780ac8",
+                "name": "canal",
+                "value": "={{ $json.canal }}",
+                "type": "string"
+              },
+              {
+                "id": "c32538d7-0595-4444-a65e-f69168afe43d",
+                "name": "metodo_pago",
+                "value": "={{ $json.metodo_pago }}",
+                "type": "string"
+              },
+              {
+                "id": "252b796e-4622-4f94-860c-d277fd79adf1",
+                "name": "total_compra",
+                "value": "={{ $json.total_compra }}",
+                "type": "string"
+              },
+              {
+                "id": "a1453dfb-7552-49ef-8c64-990179ffcf3e",
+                "name": "nombre_producto",
+                "value": "={{ $json.nombre_producto }}",
+                "type": "string"
+              },
+              {
+                "id": "90ae3ed5-acd3-4e40-b955-f00626bf6e98",
+                "name": "cantidad",
+                "value": "={{ $json.cantidad }}",
+                "type": "number"
+              },
+              {
+                "id": "70cce953-858e-42aa-9d93-9d8c110bb7a0",
+                "name": "precio_unitario",
+                "value": "={{ $json.precio_unitario }}",
+                "type": "string"
+              },
+              {
+                "id": "a6901f1f-321f-4d6f-8611-5ecb35c60c61",
+                "name": "productos_resumen",
+                "value": "={{ $json.productos_resumen }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -400,
+          544
+        ],
+        "id": "23897e2d-387f-4e44-b5cd-56986d8b0259",
+        "name": "numero fila snowdivision"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "fc09a58b-a345-4c84-a629-f073a9032b69",
+                "name": "numero_fila",
+                "value": "={{ $('Get row(s)2').item.json.Contador_Alquiler }}",
+                "type": "number"
+              },
+              {
+                "id": "471bcf47-2504-4152-bff1-949246e15243",
+                "name": "marca",
+                "value": "={{ $json.marca }}",
+                "type": "string"
+              },
+              {
+                "id": "612d9f45-eefc-4cc8-b0c0-e917ea3b829e",
+                "name": "cliente_nombre",
+                "value": "={{ $json.cliente_nombre }}",
+                "type": "string"
+              },
+              {
+                "id": "52bde6b3-5ed8-41d6-975c-718ff6176d76",
+                "name": "cliente_apellidos",
+                "value": "={{ $json.cliente_apellidos }}",
+                "type": "string"
+              },
+              {
+                "id": "833adb41-1c87-4d7d-97b1-9d048552a445",
+                "name": "cliente_email",
+                "value": "={{ $json.cliente_email }}",
+                "type": "string"
+              },
+              {
+                "id": "7aa9e812-00e5-4cb6-8c21-606013668656",
+                "name": "id_pedido",
+                "value": "={{ $json.id_pedido }}",
+                "type": "string"
+              },
+              {
+                "id": "c75b70ad-300c-41d5-a700-033e8d780ac8",
+                "name": "canal",
+                "value": "={{ $json.canal }}",
+                "type": "string"
+              },
+              {
+                "id": "c32538d7-0595-4444-a65e-f69168afe43d",
+                "name": "metodo_pago",
+                "value": "={{ $json.metodo_pago }}",
+                "type": "string"
+              },
+              {
+                "id": "252b796e-4622-4f94-860c-d277fd79adf1",
+                "name": "total_compra",
+                "value": "={{ $json.total_compra }}",
+                "type": "string"
+              },
+              {
+                "id": "a1453dfb-7552-49ef-8c64-990179ffcf3e",
+                "name": "nombre_producto",
+                "value": "={{ $json.nombre_producto }}",
+                "type": "string"
+              },
+              {
+                "id": "90ae3ed5-acd3-4e40-b955-f00626bf6e98",
+                "name": "cantidad",
+                "value": "={{ $json.cantidad }}",
+                "type": "number"
+              },
+              {
+                "id": "70cce953-858e-42aa-9d93-9d8c110bb7a0",
+                "name": "precio_unitario",
+                "value": "={{ $json.precio_unitario }}",
+                "type": "string"
+              },
+              {
+                "id": "a6901f1f-321f-4d6f-8611-5ecb35c60c61",
+                "name": "productos_resumen",
+                "value": "={{ $json.productos_resumen }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -400,
+          688
+        ],
+        "id": "fe0df144-fb59-435e-a19e-61f4093fc4e2",
+        "name": "numero fila sierranevadagranada"
       }
     ],
     "connections": {
@@ -2269,7 +2653,7 @@
         "main": [
           [
             {
-              "node": "Escribir Rules",
+              "node": "numero fila rules",
               "type": "main",
               "index": 0
             }
@@ -2280,7 +2664,7 @@
         "main": [
           [
             {
-              "node": "Escribir Surfin",
+              "node": "numero fila surfin",
               "type": "main",
               "index": 0
             }
@@ -2291,7 +2675,7 @@
         "main": [
           [
             {
-              "node": "Escribir SnowDivision",
+              "node": "numero fila snowdivision",
               "type": "main",
               "index": 0
             }
@@ -2335,7 +2719,7 @@
         "main": [
           [
             {
-              "node": "Escribir sierranevadagranada",
+              "node": "numero fila sierranevadagranada",
               "type": "main",
               "index": 0
             }
@@ -2374,14 +2758,58 @@
             }
           ]
         ]
+      },
+      "numero fila rules": {
+        "main": [
+          [
+            {
+              "node": "Escribir Rules",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "numero fila surfin": {
+        "main": [
+          [
+            {
+              "node": "Escribir Surfin",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "numero fila snowdivision": {
+        "main": [
+          [
+            {
+              "node": "Escribir SnowDivision",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "numero fila sierranevadagranada": {
+        "main": [
+          [
+            {
+              "node": "Escribir sierranevadagranada",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
     "authors": "Info Tailwind",
-    "name": "Version 814575c9",
+    "name": "Version cc3bc5de",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "814575c9-a4c1-4b84-93e7-652a5885507e",
+  "activeVersionId": "cc3bc5de-6ee1-4392-b6c1-5262ff6c238c",
   "connections": {
     "Webhook": {
       "main": [
@@ -2605,7 +3033,7 @@
       "main": [
         [
           {
-            "node": "Escribir Rules",
+            "node": "numero fila rules",
             "type": "main",
             "index": 0
           }
@@ -2616,7 +3044,7 @@
       "main": [
         [
           {
-            "node": "Escribir Surfin",
+            "node": "numero fila surfin",
             "type": "main",
             "index": 0
           }
@@ -2627,7 +3055,7 @@
       "main": [
         [
           {
-            "node": "Escribir SnowDivision",
+            "node": "numero fila snowdivision",
             "type": "main",
             "index": 0
           }
@@ -2671,7 +3099,7 @@
       "main": [
         [
           {
-            "node": "Escribir sierranevadagranada",
+            "node": "numero fila sierranevadagranada",
             "type": "main",
             "index": 0
           }
@@ -2710,6 +3138,50 @@
           }
         ]
       ]
+    },
+    "numero fila rules": {
+      "main": [
+        [
+          {
+            "node": "Escribir Rules",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "numero fila surfin": {
+      "main": [
+        [
+          {
+            "node": "Escribir Surfin",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "numero fila snowdivision": {
+      "main": [
+        [
+          {
+            "node": "Escribir SnowDivision",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "numero fila sierranevadagranada": {
+      "main": [
+        [
+          {
+            "node": "Escribir sierranevadagranada",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2026-01-15T07:50:18.774Z",
@@ -2729,7 +3201,7 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        32,
+        256,
         480
       ],
       "id": "3a169d65-fc08-45f0-a1c1-197ef4d4aa08",
@@ -2754,7 +3226,7 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        464,
+        640,
         480
       ],
       "id": "7255d822-ea0d-446d-83c9-1aee124ad0e8",
@@ -2770,13 +3242,13 @@
       "parameters": {
         "content": "ENVIAR CORREO",
         "height": 208,
-        "width": 736,
+        "width": 384,
         "color": 4
       },
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        0,
+        208,
         768
       ],
       "id": "070b8235-6802-470b-bd7a-884c6711458e",
@@ -2796,7 +3268,7 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        464,
+        672,
         128
       ],
       "id": "67d0cf56-a4b3-432d-9ab3-2b819b9f63a8",
@@ -2818,7 +3290,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        0,
+        208,
         80
       ],
       "id": "2b6bbfe7-3af9-4eb7-a19d-ec2a3322de91",
@@ -2835,7 +3307,7 @@
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.3,
       "position": [
-        32,
+        240,
         128
       ],
       "id": "62e5fa32-0ae7-493b-875f-e37addba632a",
@@ -2889,7 +3361,7 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1,
       "position": [
-        752,
+        960,
         128
       ],
       "id": "e5db14bd-7dca-40a9-bee1-b422e5e5f4a0",
@@ -2902,7 +3374,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        464,
+        640,
         624
       ],
       "id": "f74317cd-37d0-4262-a761-d94cdf479b6a",
@@ -2915,7 +3387,7 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        752,
+        880,
         464
       ],
       "id": "5007c6bb-31eb-4b15-be8a-fb06c3e7962e",
@@ -2992,7 +3464,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1072,
+        1152,
         480
       ],
       "id": "b52e6336-e7f7-40dd-ad46-c520b057c406",
@@ -3005,7 +3477,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        912,
+        1008,
         480
       ],
       "id": "38bbf384-1b40-4d4d-b5cc-97d8454a7303",
@@ -3065,7 +3537,7 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1,
       "position": [
-        608,
+        816,
         128
       ],
       "id": "954c39f5-d1ab-48b0-a72f-d98b54032d3b",
@@ -3092,7 +3564,7 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1,
       "position": [
-        208,
+        432,
         480
       ],
       "id": "4f754bc8-b2f2-4dd8-a946-e584b5dab050",
@@ -3280,7 +3752,7 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        1248,
+        1296,
         480
       ],
       "id": "3456907e-1889-4e9d-87b5-40ea7f7453de",
@@ -3347,7 +3819,7 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1,
       "position": [
-        1408,
+        1456,
         480
       ],
       "id": "faf01950-eda5-4601-8b6c-75240e769c87",
@@ -3371,7 +3843,7 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        528,
+        704,
         336
       ],
       "id": "0547d26f-e2d4-4a83-ad9a-3b3f4097a3c2",
@@ -3400,7 +3872,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        400,
+        592,
         336
       ],
       "id": "296715bd-4cb8-4930-a0d7-966761cc3f3b",
@@ -3425,7 +3897,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        176,
+        384,
         128
       ],
       "id": "fccdf808-f4e0-4782-a70b-a6b6e00c2e42",
@@ -3438,7 +3910,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        320,
+        528,
         128
       ],
       "id": "a2ae42c0-c272-4555-ae7f-445636e14ba8",
@@ -3448,13 +3920,13 @@
       "parameters": {
         "content": "ACTUALIZAR DOCUMENTO CON CADA PEDIDO",
         "height": 448,
-        "width": 1632,
+        "width": 1456,
         "color": 3
       },
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        0,
+        208,
         304
       ],
       "id": "851e0c70-842c-46c7-a56a-b490e4cc792d",
@@ -3470,7 +3942,7 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        192,
+        400,
         816
       ],
       "id": "e0a1443f-7789-45c3-88a0-4471df57e63a",
@@ -3504,7 +3976,7 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
       "position": [
-        32,
+        240,
         816
       ],
       "id": "6762e93d-c33c-4008-9d9c-7fd70d47fbf5",
@@ -3611,8 +4083,8 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        -960,
-        432
+        -768,
+        448
       ],
       "id": "fa3ccb4f-aef5-4d7b-a691-90267f5171fe",
       "name": "Switch"
@@ -3624,8 +4096,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -768,
-        240
+        -576,
+        256
       ],
       "id": "132c4e3b-b445-4f4b-bdff-7374f9e5ff18",
       "name": "rules-shop"
@@ -3637,8 +4109,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -768,
-        384
+        -576,
+        400
       ],
       "id": "d58a6580-401b-4d55-bc2f-a2bcb34c3ee5",
       "name": "surfin"
@@ -3650,8 +4122,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -768,
-        528
+        -576,
+        544
       ],
       "id": "9031743d-79e1-4b7d-a852-e3aa8b68164a",
       "name": "snowdivision"
@@ -3827,8 +4299,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -576,
-        528
+        -240,
+        544
       ],
       "id": "7367a66d-8df9-476b-8c0b-5479607fb339",
       "name": "Escribir SnowDivision",
@@ -4013,8 +4485,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -576,
-        384
+        -240,
+        400
       ],
       "id": "e4cb0885-b4e6-46e5-abc8-ced7e117233d",
       "name": "Escribir Surfin",
@@ -4199,8 +4671,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -576,
-        240
+        -240,
+        256
       ],
       "id": "9262d50b-9185-4607-81c6-ad91edd89465",
       "name": "Escribir Rules",
@@ -4216,10 +4688,10 @@
         "operation": "update",
         "dataTableId": {
           "__rl": true,
-          "value": "IUsdbRMmbgTdrVQp",
+          "value": "ghO8HECzTZgPqOqM",
           "mode": "list",
-          "cachedResultName": "informeDiarioPruebas",
-          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/IUsdbRMmbgTdrVQp"
+          "cachedResultName": "InformeDiario",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/ghO8HECzTZgPqOqM"
         },
         "filters": {
           "conditions": [
@@ -4231,13 +4703,14 @@
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "contador_alquiler": "={{ $json.row_number + 1}}"
+            "Contador_Alquiler": "={{ $json.row_number + 1}}",
+            "Contador": "={{ $('Get row(s)2').item.json.Contador }}"
           },
           "matchingColumns": [],
           "schema": [
             {
-              "id": "id_documento",
-              "displayName": "id_documento",
+              "id": "ID_Documento",
+              "displayName": "ID_Documento",
               "required": false,
               "defaultMatch": false,
               "display": true,
@@ -4246,22 +4719,22 @@
               "removed": false
             },
             {
-              "id": "contador",
-              "displayName": "contador",
+              "id": "Contador",
+              "displayName": "Contador",
               "required": false,
               "defaultMatch": false,
               "display": true,
-              "type": "string",
+              "type": "number",
               "readOnly": false,
               "removed": false
             },
             {
-              "id": "contador_alquiler",
-              "displayName": "contador_alquiler",
+              "id": "Contador_Alquiler",
+              "displayName": "Contador_Alquiler",
               "required": false,
               "defaultMatch": false,
               "display": true,
-              "type": "string",
+              "type": "number",
               "readOnly": false,
               "removed": false
             }
@@ -4274,8 +4747,8 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
       "position": [
-        -384,
-        240
+        -80,
+        256
       ],
       "id": "520dc12b-583c-40bd-80d8-b54401ade2f1",
       "name": "actualizar contador rules"
@@ -4285,10 +4758,10 @@
         "operation": "update",
         "dataTableId": {
           "__rl": true,
-          "value": "IUsdbRMmbgTdrVQp",
+          "value": "ghO8HECzTZgPqOqM",
           "mode": "list",
-          "cachedResultName": "informeDiarioPruebas",
-          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/IUsdbRMmbgTdrVQp"
+          "cachedResultName": "InformeDiario",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/ghO8HECzTZgPqOqM"
         },
         "filters": {
           "conditions": [
@@ -4300,13 +4773,14 @@
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "contador_alquiler": "={{ $json.row_number + 1}}"
+            "Contador_Alquiler": "={{ $json.row_number + 1}}",
+            "Contador": "={{ $('Get row(s)2').item.json.Contador }}"
           },
           "matchingColumns": [],
           "schema": [
             {
-              "id": "id_documento",
-              "displayName": "id_documento",
+              "id": "ID_Documento",
+              "displayName": "ID_Documento",
               "required": false,
               "defaultMatch": false,
               "display": true,
@@ -4315,22 +4789,22 @@
               "removed": false
             },
             {
-              "id": "contador",
-              "displayName": "contador",
+              "id": "Contador",
+              "displayName": "Contador",
               "required": false,
               "defaultMatch": false,
               "display": true,
-              "type": "string",
+              "type": "number",
               "readOnly": false,
               "removed": false
             },
             {
-              "id": "contador_alquiler",
-              "displayName": "contador_alquiler",
+              "id": "Contador_Alquiler",
+              "displayName": "Contador_Alquiler",
               "required": false,
               "defaultMatch": false,
               "display": true,
-              "type": "string",
+              "type": "number",
               "readOnly": false,
               "removed": false
             }
@@ -4343,8 +4817,8 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
       "position": [
-        -368,
-        384
+        -80,
+        400
       ],
       "id": "6b0db584-2a39-46bb-902d-9131fa4ce1e0",
       "name": "actualizar contador surfin"
@@ -4354,10 +4828,10 @@
         "operation": "update",
         "dataTableId": {
           "__rl": true,
-          "value": "IUsdbRMmbgTdrVQp",
+          "value": "ghO8HECzTZgPqOqM",
           "mode": "list",
-          "cachedResultName": "informeDiarioPruebas",
-          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/IUsdbRMmbgTdrVQp"
+          "cachedResultName": "InformeDiario",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/ghO8HECzTZgPqOqM"
         },
         "filters": {
           "conditions": [
@@ -4369,13 +4843,14 @@
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "contador_alquiler": "={{ $json.row_number + 1}}"
+            "Contador_Alquiler": "={{ $json.row_number + 1}}",
+            "Contador": "={{ $('Get row(s)2').item.json.Contador }}"
           },
           "matchingColumns": [],
           "schema": [
             {
-              "id": "id_documento",
-              "displayName": "id_documento",
+              "id": "ID_Documento",
+              "displayName": "ID_Documento",
               "required": false,
               "defaultMatch": false,
               "display": true,
@@ -4384,22 +4859,22 @@
               "removed": false
             },
             {
-              "id": "contador",
-              "displayName": "contador",
+              "id": "Contador",
+              "displayName": "Contador",
               "required": false,
               "defaultMatch": false,
               "display": true,
-              "type": "string",
+              "type": "number",
               "readOnly": false,
               "removed": false
             },
             {
-              "id": "contador_alquiler",
-              "displayName": "contador_alquiler",
+              "id": "Contador_Alquiler",
+              "displayName": "Contador_Alquiler",
               "required": false,
               "defaultMatch": false,
               "display": true,
-              "type": "string",
+              "type": "number",
               "readOnly": false,
               "removed": false
             }
@@ -4412,8 +4887,8 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
       "position": [
-        -368,
-        528
+        -80,
+        544
       ],
       "id": "56f1f664-3f3e-480a-84a8-f9067fb0d648",
       "name": "actualizar contador snowdivision"
@@ -4425,8 +4900,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -768,
-        672
+        -576,
+        688
       ],
       "id": "639143ee-f6eb-4832-af8e-48d41053a656",
       "name": "sierranevadagranada"
@@ -4605,8 +5080,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -576,
-        672
+        -240,
+        688
       ],
       "id": "bdcbbe12-2485-403b-bbd0-1b060ee75634",
       "name": "Escribir sierranevadagranada",
@@ -4622,10 +5097,10 @@
         "operation": "update",
         "dataTableId": {
           "__rl": true,
-          "value": "IUsdbRMmbgTdrVQp",
+          "value": "ghO8HECzTZgPqOqM",
           "mode": "list",
-          "cachedResultName": "informeDiarioPruebas",
-          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/IUsdbRMmbgTdrVQp"
+          "cachedResultName": "InformeDiario",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/ghO8HECzTZgPqOqM"
         },
         "filters": {
           "conditions": [
@@ -4637,13 +5112,14 @@
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "contador_alquiler": "={{ $json.row_number + 1}}"
+            "Contador_Alquiler": "={{ $json.row_number + 1}}",
+            "Contador": "={{ $('Get row(s)2').item.json.Contador }}"
           },
           "matchingColumns": [],
           "schema": [
             {
-              "id": "id_documento",
-              "displayName": "id_documento",
+              "id": "ID_Documento",
+              "displayName": "ID_Documento",
               "required": false,
               "defaultMatch": false,
               "display": true,
@@ -4652,22 +5128,22 @@
               "removed": false
             },
             {
-              "id": "contador",
-              "displayName": "contador",
+              "id": "Contador",
+              "displayName": "Contador",
               "required": false,
               "defaultMatch": false,
               "display": true,
-              "type": "string",
+              "type": "number",
               "readOnly": false,
               "removed": false
             },
             {
-              "id": "contador_alquiler",
-              "displayName": "contador_alquiler",
+              "id": "Contador_Alquiler",
+              "displayName": "Contador_Alquiler",
               "required": false,
               "defaultMatch": false,
               "display": true,
-              "type": "string",
+              "type": "number",
               "readOnly": false,
               "removed": false
             }
@@ -4680,8 +5156,8 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
       "position": [
-        -368,
-        672
+        -80,
+        688
       ],
       "id": "f91d9064-be06-467e-a244-f6f1999fc426",
       "name": "actualizar contador sierranevadagranada"
@@ -4707,8 +5183,8 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
       "position": [
-        -1120,
-        464
+        -928,
+        480
       ],
       "id": "162dccd0-13f7-427e-8032-e9547d607c67",
       "name": "Get row(s)2"
@@ -4724,15 +5200,15 @@
         },
         "simple": false,
         "filters": {
-          "q": "reservas@rules-shop.es"
+          "q": "from: (reservas@rules-shop.es OR reservas@surfin.es OR reservas@snowdivision.es OR info@sierranevadagranada.com)"
         },
         "options": {}
       },
       "type": "n8n-nodes-base.gmailTrigger",
       "typeVersion": 1.3,
       "position": [
-        -1280,
-        464
+        -1088,
+        480
       ],
       "id": "424c4c3d-50d2-4125-9517-d6184f95d5d8",
       "name": "Correo",
@@ -4747,20 +5223,469 @@
       "parameters": {
         "content": "INFORME DIARIO DE ALQUILERES\n",
         "height": 896,
-        "width": 1264,
+        "width": 1248,
         "color": 5
       },
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -1328,
-        64
+        -1120,
+        80
       ],
       "id": "62875833-b388-4db3-8958-e726c4d976d9",
       "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fc09a58b-a345-4c84-a629-f073a9032b69",
+              "name": "numero_fila",
+              "value": "={{ $('Get row(s)2').item.json.Contador_Alquiler }}",
+              "type": "number"
+            },
+            {
+              "id": "471bcf47-2504-4152-bff1-949246e15243",
+              "name": "marca",
+              "value": "={{ $json.marca }}",
+              "type": "string"
+            },
+            {
+              "id": "612d9f45-eefc-4cc8-b0c0-e917ea3b829e",
+              "name": "cliente_nombre",
+              "value": "={{ $json.cliente_nombre }}",
+              "type": "string"
+            },
+            {
+              "id": "52bde6b3-5ed8-41d6-975c-718ff6176d76",
+              "name": "cliente_apellidos",
+              "value": "={{ $json.cliente_apellidos }}",
+              "type": "string"
+            },
+            {
+              "id": "833adb41-1c87-4d7d-97b1-9d048552a445",
+              "name": "cliente_email",
+              "value": "={{ $json.cliente_email }}",
+              "type": "string"
+            },
+            {
+              "id": "7aa9e812-00e5-4cb6-8c21-606013668656",
+              "name": "id_pedido",
+              "value": "={{ $json.id_pedido }}",
+              "type": "string"
+            },
+            {
+              "id": "c75b70ad-300c-41d5-a700-033e8d780ac8",
+              "name": "canal",
+              "value": "={{ $json.canal }}",
+              "type": "string"
+            },
+            {
+              "id": "c32538d7-0595-4444-a65e-f69168afe43d",
+              "name": "metodo_pago",
+              "value": "={{ $json.metodo_pago }}",
+              "type": "string"
+            },
+            {
+              "id": "252b796e-4622-4f94-860c-d277fd79adf1",
+              "name": "total_compra",
+              "value": "={{ $json.total_compra }}",
+              "type": "string"
+            },
+            {
+              "id": "a1453dfb-7552-49ef-8c64-990179ffcf3e",
+              "name": "nombre_producto",
+              "value": "={{ $json.nombre_producto }}",
+              "type": "string"
+            },
+            {
+              "id": "90ae3ed5-acd3-4e40-b955-f00626bf6e98",
+              "name": "cantidad",
+              "value": "={{ $json.cantidad }}",
+              "type": "number"
+            },
+            {
+              "id": "70cce953-858e-42aa-9d93-9d8c110bb7a0",
+              "name": "precio_unitario",
+              "value": "={{ $json.precio_unitario }}",
+              "type": "string"
+            },
+            {
+              "id": "a6901f1f-321f-4d6f-8611-5ecb35c60c61",
+              "name": "productos_resumen",
+              "value": "={{ $json.productos_resumen }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -400,
+        256
+      ],
+      "id": "5a47b98c-ba59-40b5-99da-5e8c899fdc7b",
+      "name": "numero fila rules"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fc09a58b-a345-4c84-a629-f073a9032b69",
+              "name": "numero_fila",
+              "value": "={{ $('Get row(s)2').item.json.Contador_Alquiler }}",
+              "type": "number"
+            },
+            {
+              "id": "471bcf47-2504-4152-bff1-949246e15243",
+              "name": "marca",
+              "value": "={{ $json.marca }}",
+              "type": "string"
+            },
+            {
+              "id": "612d9f45-eefc-4cc8-b0c0-e917ea3b829e",
+              "name": "cliente_nombre",
+              "value": "={{ $json.cliente_nombre }}",
+              "type": "string"
+            },
+            {
+              "id": "52bde6b3-5ed8-41d6-975c-718ff6176d76",
+              "name": "cliente_apellidos",
+              "value": "={{ $json.cliente_apellidos }}",
+              "type": "string"
+            },
+            {
+              "id": "833adb41-1c87-4d7d-97b1-9d048552a445",
+              "name": "cliente_email",
+              "value": "={{ $json.cliente_email }}",
+              "type": "string"
+            },
+            {
+              "id": "7aa9e812-00e5-4cb6-8c21-606013668656",
+              "name": "id_pedido",
+              "value": "={{ $json.id_pedido }}",
+              "type": "string"
+            },
+            {
+              "id": "c75b70ad-300c-41d5-a700-033e8d780ac8",
+              "name": "canal",
+              "value": "={{ $json.canal }}",
+              "type": "string"
+            },
+            {
+              "id": "c32538d7-0595-4444-a65e-f69168afe43d",
+              "name": "metodo_pago",
+              "value": "={{ $json.metodo_pago }}",
+              "type": "string"
+            },
+            {
+              "id": "252b796e-4622-4f94-860c-d277fd79adf1",
+              "name": "total_compra",
+              "value": "={{ $json.total_compra }}",
+              "type": "string"
+            },
+            {
+              "id": "a1453dfb-7552-49ef-8c64-990179ffcf3e",
+              "name": "nombre_producto",
+              "value": "={{ $json.nombre_producto }}",
+              "type": "string"
+            },
+            {
+              "id": "90ae3ed5-acd3-4e40-b955-f00626bf6e98",
+              "name": "cantidad",
+              "value": "={{ $json.cantidad }}",
+              "type": "number"
+            },
+            {
+              "id": "70cce953-858e-42aa-9d93-9d8c110bb7a0",
+              "name": "precio_unitario",
+              "value": "={{ $json.precio_unitario }}",
+              "type": "string"
+            },
+            {
+              "id": "a6901f1f-321f-4d6f-8611-5ecb35c60c61",
+              "name": "productos_resumen",
+              "value": "={{ $json.productos_resumen }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -400,
+        400
+      ],
+      "id": "0a1fd86f-ceff-4036-9dd6-8d57d1341c2a",
+      "name": "numero fila surfin"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fc09a58b-a345-4c84-a629-f073a9032b69",
+              "name": "numero_fila",
+              "value": "={{ $('Get row(s)2').item.json.Contador_Alquiler }}",
+              "type": "number"
+            },
+            {
+              "id": "471bcf47-2504-4152-bff1-949246e15243",
+              "name": "marca",
+              "value": "={{ $json.marca }}",
+              "type": "string"
+            },
+            {
+              "id": "612d9f45-eefc-4cc8-b0c0-e917ea3b829e",
+              "name": "cliente_nombre",
+              "value": "={{ $json.cliente_nombre }}",
+              "type": "string"
+            },
+            {
+              "id": "52bde6b3-5ed8-41d6-975c-718ff6176d76",
+              "name": "cliente_apellidos",
+              "value": "={{ $json.cliente_apellidos }}",
+              "type": "string"
+            },
+            {
+              "id": "833adb41-1c87-4d7d-97b1-9d048552a445",
+              "name": "cliente_email",
+              "value": "={{ $json.cliente_email }}",
+              "type": "string"
+            },
+            {
+              "id": "7aa9e812-00e5-4cb6-8c21-606013668656",
+              "name": "id_pedido",
+              "value": "={{ $json.id_pedido }}",
+              "type": "string"
+            },
+            {
+              "id": "c75b70ad-300c-41d5-a700-033e8d780ac8",
+              "name": "canal",
+              "value": "={{ $json.canal }}",
+              "type": "string"
+            },
+            {
+              "id": "c32538d7-0595-4444-a65e-f69168afe43d",
+              "name": "metodo_pago",
+              "value": "={{ $json.metodo_pago }}",
+              "type": "string"
+            },
+            {
+              "id": "252b796e-4622-4f94-860c-d277fd79adf1",
+              "name": "total_compra",
+              "value": "={{ $json.total_compra }}",
+              "type": "string"
+            },
+            {
+              "id": "a1453dfb-7552-49ef-8c64-990179ffcf3e",
+              "name": "nombre_producto",
+              "value": "={{ $json.nombre_producto }}",
+              "type": "string"
+            },
+            {
+              "id": "90ae3ed5-acd3-4e40-b955-f00626bf6e98",
+              "name": "cantidad",
+              "value": "={{ $json.cantidad }}",
+              "type": "number"
+            },
+            {
+              "id": "70cce953-858e-42aa-9d93-9d8c110bb7a0",
+              "name": "precio_unitario",
+              "value": "={{ $json.precio_unitario }}",
+              "type": "string"
+            },
+            {
+              "id": "a6901f1f-321f-4d6f-8611-5ecb35c60c61",
+              "name": "productos_resumen",
+              "value": "={{ $json.productos_resumen }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -400,
+        544
+      ],
+      "id": "23897e2d-387f-4e44-b5cd-56986d8b0259",
+      "name": "numero fila snowdivision"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fc09a58b-a345-4c84-a629-f073a9032b69",
+              "name": "numero_fila",
+              "value": "={{ $('Get row(s)2').item.json.Contador_Alquiler }}",
+              "type": "number"
+            },
+            {
+              "id": "471bcf47-2504-4152-bff1-949246e15243",
+              "name": "marca",
+              "value": "={{ $json.marca }}",
+              "type": "string"
+            },
+            {
+              "id": "612d9f45-eefc-4cc8-b0c0-e917ea3b829e",
+              "name": "cliente_nombre",
+              "value": "={{ $json.cliente_nombre }}",
+              "type": "string"
+            },
+            {
+              "id": "52bde6b3-5ed8-41d6-975c-718ff6176d76",
+              "name": "cliente_apellidos",
+              "value": "={{ $json.cliente_apellidos }}",
+              "type": "string"
+            },
+            {
+              "id": "833adb41-1c87-4d7d-97b1-9d048552a445",
+              "name": "cliente_email",
+              "value": "={{ $json.cliente_email }}",
+              "type": "string"
+            },
+            {
+              "id": "7aa9e812-00e5-4cb6-8c21-606013668656",
+              "name": "id_pedido",
+              "value": "={{ $json.id_pedido }}",
+              "type": "string"
+            },
+            {
+              "id": "c75b70ad-300c-41d5-a700-033e8d780ac8",
+              "name": "canal",
+              "value": "={{ $json.canal }}",
+              "type": "string"
+            },
+            {
+              "id": "c32538d7-0595-4444-a65e-f69168afe43d",
+              "name": "metodo_pago",
+              "value": "={{ $json.metodo_pago }}",
+              "type": "string"
+            },
+            {
+              "id": "252b796e-4622-4f94-860c-d277fd79adf1",
+              "name": "total_compra",
+              "value": "={{ $json.total_compra }}",
+              "type": "string"
+            },
+            {
+              "id": "a1453dfb-7552-49ef-8c64-990179ffcf3e",
+              "name": "nombre_producto",
+              "value": "={{ $json.nombre_producto }}",
+              "type": "string"
+            },
+            {
+              "id": "90ae3ed5-acd3-4e40-b955-f00626bf6e98",
+              "name": "cantidad",
+              "value": "={{ $json.cantidad }}",
+              "type": "number"
+            },
+            {
+              "id": "70cce953-858e-42aa-9d93-9d8c110bb7a0",
+              "name": "precio_unitario",
+              "value": "={{ $json.precio_unitario }}",
+              "type": "string"
+            },
+            {
+              "id": "a6901f1f-321f-4d6f-8611-5ecb35c60c61",
+              "name": "productos_resumen",
+              "value": "={{ $json.productos_resumen }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -400,
+        688
+      ],
+      "id": "fe0df144-fb59-435e-a19e-61f4093fc4e2",
+      "name": "numero fila sierranevadagranada"
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Correo": [
+      {
+        "json": {
+          "id": "19bffb7022f5db57",
+          "threadId": "19bffb7022f5db57",
+          "labelIds": [
+            "UNREAD",
+            "CATEGORY_PERSONAL",
+            "INBOX"
+          ],
+          "sizeEstimate": 31169,
+          "headers": {
+            "delivered-to": "Delivered-To: ventas@sierranevadagranada.com",
+            "received": "Received: from wn0sdwk0000RF ([20.23.138.213])\r\n        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6584b9718adsm6048192a12.35.2026.01.27.05.49.01\r\n        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);\r\n        Tue, 27 Jan 2026 05:49:01 -0800 (PST)",
+            "x-forwarded-encrypted": "X-Forwarded-Encrypted: i=1; AJvYcCXCE6+Y5TY9iiWIJDSQbgJ+4QJkMEUX0yRJ3idP/csxNG26L9ZbVAGXCSkp6LSpwjpdXOYQNlM=@sierranevadagranada.com",
+            "x-received": "X-Received: by 2002:a05:6402:2711:b0:658:1223:32f3 with SMTP id 4fb4d7f45d1cf-658a6086e52mr1141957a12.21.1769521742091;\r\n        Tue, 27 Jan 2026 05:49:02 -0800 (PST)",
+            "arc-seal": "ARC-Seal: i=1; a=rsa-sha256; t=1769521742; cv=none;\r\n        d=google.com; s=arc-20240605;\r\n        b=HvDuPXAXAxhUYSVr+eEPFe9XMukPpaIbWOv3glan0C3Df90xY/s0voNpgXIQkPaIp8\r\n         TInM2CpUsx8YlV0U4ApGl+JX0rOzz7lRcsCQsLf3jb/lkESMS3xphOrfm83X0L3DTi43\r\n         VfRvNpvctuVq+EKGnJD1t+x1nI9HoWQIgQNo3OvRchNDH4Urm6hz+vdpTlesQpf37Uua\r\n         Imm7V1gV73G8NWVrhFcKvNblcNGKsttXcYsr7Kxa4A7y+OnwyQGlIOVFmE5ZePH+cnF8\r\n         JOtzO1VQnxEvRzCp4oaVtxMtVbOrSfC5XWoxDJ4bVgoaLWKANXHhqmfU1OmJoggdyd64\r\n         3MkQ==",
+            "arc-message-signature": "ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;\r\n        h=content-transfer-encoding:subject:to:from:mime-version:date\r\n         :message-id:dkim-signature;\r\n        bh=rua8BihwFDSgUu/OJHlZA/5Zasd2DX5+PH95nRtn3KU=;\r\n        fh=44JEB5KWoyqswyv18Y0UPAO7kqriNZPt8zhNZx1xlnk=;\r\n        b=RPQyBrhAbC51/MzbMqFTYcvP30cg0JBY2gQaXa3xlhMulGcKF61e5tfSKSuTWweWT0\r\n         rPf1B2k7sgkw+zXW78OahpEZuxwD6r61FXAzVLhTvCXKU883hzBdJdffQsQRgap4lkC7\r\n         u1AeSL5s2KTye88HXi+2YxF1On8cYJpWafgRS4ZbrcfA4aN4Wg8yQSjbUV1j4w/py5YW\r\n         oKPOj4wBrah1ZAIXyyzcBptRXEczDj0JWpPDR6XcDJ1EVb9AzAhq9FX4c+/VaUIdujW4\r\n         pWo5VU4Gkqte8d90hipa7qjJ1Mv4AIfRZRnzZWYexPkSOBe3fNNuZ0ZmWWi4cevptzKu\r\n         c8nA==;\r\n        dara=google.com",
+            "arc-authentication-results": "ARC-Authentication-Results: i=1; mx.google.com;\r\n       dkim=pass header.i=@rules-shop-es.20230601.gappssmtp.com header.s=20230601 header.b=28kdYk6C;\r\n       spf=pass (google.com: domain of reservas@rules-shop.es designates 209.85.220.65 as permitted sender) smtp.mailfrom=reservas@rules-shop.es;\r\n       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=rules-shop.es;\r\n       dara=neutral header.i=@sierranevadagranada.com",
+            "return-path": "Return-Path: <reservas@rules-shop.es>",
+            "received-spf": "Received-SPF: pass (google.com: domain of reservas@rules-shop.es designates 209.85.220.65 as permitted sender) client-ip=209.85.220.65;",
+            "authentication-results": "Authentication-Results: mx.google.com;\r\n       dkim=pass header.i=@rules-shop-es.20230601.gappssmtp.com header.s=20230601 header.b=28kdYk6C;\r\n       spf=pass (google.com: domain of reservas@rules-shop.es designates 209.85.220.65 as permitted sender) smtp.mailfrom=reservas@rules-shop.es;\r\n       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=rules-shop.es;\r\n       dara=neutral header.i=@sierranevadagranada.com",
+            "dkim-signature": "DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;\r\n        d=rules-shop-es.20230601.gappssmtp.com; s=20230601; t=1769521742; x=1770126542; darn=sierranevadagranada.com;\r\n        h=content-transfer-encoding:subject:to:from:mime-version:date\r\n         :message-id:from:to:cc:subject:date:message-id:reply-to;\r\n        bh=rua8BihwFDSgUu/OJHlZA/5Zasd2DX5+PH95nRtn3KU=;\r\n        b=28kdYk6CCSgHyeQvKNfwKnAlJC40spFDps/GTcsMp86AzE4kvB5EIOqRYy2qyOkfAN\r\n         5w658vXT/21/TcU/9SQbAqATAXU6axPgdLuOtFfv0gljLIwOKdgubwmlIKQAhRExB404\r\n         LqfmsrekD7WQumGT2Ppvx3yolS7qPfrAraP8iyI3PcLJFBy+cgbe167oVsxDbNnQBDl9\r\n         n2zti9tQdA/0yp6d7SxWHP43RmRqNzMRuuIduIKB9c1ox9Nfmqg1UCrmNptZYL/aSJ/0\r\n         fci4eCq/XTJ1wStNj2O0AvfCEIDj5rqOf+QNjHEBc8BvjB9PacuxVcyGnmQf790HNC73\r\n         sv2A==",
+            "x-google-dkim-signature": "X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;\r\n        d=1e100.net; s=20230601; t=1769521742; x=1770126542;\r\n        h=content-transfer-encoding:subject:to:from:mime-version:date\r\n         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date\r\n         :message-id:reply-to;\r\n        bh=rua8BihwFDSgUu/OJHlZA/5Zasd2DX5+PH95nRtn3KU=;\r\n        b=Rz7jLRYEVqA/f2fNnB1BtgTJlyFwbsmRY5KL/3Eol8x4uwvy63ARmC4RQc87xru/+c\r\n         D1qGt3wYzVNznoi6YrhQW0BKPTV5q/NgIZ2PUzF3gCFnyfp48Xc1IFRbiIM2tJ8Aaw8z\r\n         0RxxQojRjfTgOcofbHLCEl0zLVK424oEBTXsNesQCv2s9CmL+mEgx8Eq34BmD6GW8tMh\r\n         1x2avhzg9tJWoTjRbmCDObtkoiRro+CS8ymd6to3jwT0d8UxpK7ZJbkHSIyJ3CUQ/YQV\r\n         YDk+Js+3Jtj8ZciLbOJRBwMLo19nbt/Z7Xxx2DTay1khlDnUn/dqFmufPC7Eh7f+a3AO\r\n         2kLg==",
+            "x-gm-message-state": "X-Gm-Message-State: AOJu0YzIkHI/Puxxyfg9C782qWpsK8q7RoR5ygtKyEd+Go4Vv1y7k6Cj\r\n\toXcgAdjq4wMGZMfEyMDeVpMjtBQvWj0e2Eaf/tRyCS31J9Ag5GdEJBkLzdbC1htwx+CdkgYGVdf\r\n\tVhyBzbCCmhw==",
+            "x-gm-gg": "X-Gm-Gg: AZuq6aJ4HNkgafGB+6lAEPU4Ck7XaBABGglXGMToJwY3NozUm00pTz2idkhapEJnHft\r\n\ta4WMcNB7JW9f39+SrXAdm4Sin0WTwswl+gEVM/QJbUywz4Gb3CTZapZWHY5crL6M+HaKw9NcbWv\r\n\t2WT7C0lALrjsArUvhRLPMcHk3U/DMfGumqiI8ydqvH44HsCAzdFWVDy4GSV69unw31eXulCt5Xh\r\n\tuwuvixD8uwIyk88tL4l64DdU2BZlJy38ZqAZqMpo1jylxPEPaEkogiG5NXqvmWd6yLBOHEXcDVo\r\n\tkvsiCfNOPRSI1Nmcn+CPm7YNj+B03b4iOuZACl3n74cS9dNXr0nimKiN4JoQYC5Y0YZrBaMEGbN\r\n\tiuIUsstRu7t6/Dha4LyQ9aMZEme/NhN6+VP8tFo9UUb0wQf+AWmgYkMSqFXR9P1op0i7aupiesT\r\n\t6eZ1hy9jxgH1fgmkQOJz+X2zIUujMw1og630oSEJg=",
+            "message-id": "Message-ID: <6978c24d.050a0220.2a9e0.dc58@mx.google.com>",
+            "date": "Date: Tue, 27 Jan 2026 05:49:01 -0800 (PST)",
+            "x-google-original-date": "X-Google-Original-Date: 27 Jan 2026 14:49:01 +0100",
+            "mime-version": "MIME-Version: 1.0",
+            "from": "From: \"reservas@rules-shop.es\" <reservas@rules-shop.es>",
+            "to": "To: \"Raquel Barredo Rodriguez\" <raquelbarredo98@gmail.com>",
+            "subject": "Subject: Rules - Compra efectuada - Raquel Barredo Rodriguez - canal Reservas",
+            "content-type": "Content-Type: text/html; charset=utf-8",
+            "content-transfer-encoding": "Content-Transfer-Encoding: base64"
+          },
+          "html": "<html><body style=\"font: normal 11pt Calibri, sans-serif, Arial, Verdana, 'Trebuchet MS';color: #333;background-color: #fff;margin: 20px;\"\"><style>p { display: block; margin-before: 1em; margin-after: 1em; margin-start: 0px; margin-end: 0px;}</style><!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Email - Rules Shop</title>\n</head>\n<body style=\"margin: 0; padding: 0; font-family: 'Trebuchet MS', 'Lucida Grande', 'Verdana', sans-serif; background-color: #f9f9f9; color: #111;\">\n    <!-- Cabecera -->\n    <table width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" style=\"background-color: #111; padding: 20px 0; font-family: 'Trebuchet MS', 'Lucida Grande', 'Verdana', sans-serif;\">\n        <tr>\n            <td align=\"center\">\n                <img src=\"https://rules-shop.es/File/logoRules.png?id=3888145A-1121-483D-9E19-4F94927C2496\" alt=\"Rules Shop\" style=\"max-height: 60px;\">\n            </td>\n        </tr>\n    </table>\n\n    <!-- Contenido -->\n    <table width=\"100%\" cellspacing=\"0\" cellpadding=\"20\" style=\"background-color: #f9f9f9; font-family: 'Trebuchet MS', 'Lucida Grande', 'Verdana', sans-serif;\">\n        <tr>\n            <td align=\"center\">\n                <div style=\"max-width: 600px; width: 100%; margin: 0 auto; background-color: #fff; padding: 20px; color: #111; text-align: left; font-size: 16px; line-height: 1.6; border-radius: 5px;\">\n                    <style type=\"text/css\">\n\n/*printing and email cols*/\n.pr-container {\n    padding-left: 15px;\n    padding-right: 15px;  \n}\n.pr-row {\n    margin-left: -15px;\n    margin-right: -15px;\n}  \n.pr-row::after {\n  content: \"\";\n  clear: both;\n  display: block;\n}\n[class*=\"pr-col-\"] {\n  float: left;\n  padding-left: 15px;\n  padding-right: 15px;\n  box-sizing: border-box;\n}\n/* For mobile phones: */\n[class*=\"pr-col-\"] {\n   width: 100%;\n}\n  \n@media print, (min-width: 768px) {\n    /* For desktop: */\n    .pr-col-1 {width: 8.33%;}\n    .pr-col-2 {width: 16.66%;}\n    .pr-col-3 {width: 25%;}\n    .pr-col-4 {width: 33.33%;}\n    .pr-col-5 {width: 41.66%;}\n    .pr-col-6 {width: 50%;}\n    .pr-col-7 {width: 58.33%;}\n    .pr-col-8 {width: 66.66%;}\n    .pr-col-9 {width: 75%;}\n    .pr-col-10 {width: 83.33%;}\n    .pr-col-11 {width: 91.66%;}\n    .pr-col-12 {width: 100%;}\n}\n/*end printing and email cols*/\n\n  .cart-extract-d-none {\n     display: none;\n  }\n  @media print, (min-width: 768px) {\n   .cart-extract-d-none {\n     display: block;\n     width: 100%;\n   } \n   body {\n     /*font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\";\n     font-size: 16px;\n     font-weight: 400;*/\n  }\n}\n  \nh1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {\n    margin-top: 0;\n    margin-bottom: 0.5rem;\n    font-weight: 500;\n    line-height: 1.2;\n}\nh1 {\n    font-size: 2rem;\n    margin-bottom: 1rem;\n}\nh5 {\n  font-size: 1.25rem;\n}\n  \n.cart-extract-section {\n  margin-bottom: 1em;\n  border: solid 1px #dbdbdb;\n}\n.cart-extract-section-head {\n  background-color: #e9ebed;\n  overflow: hidden;\n  padding: 0.25em 0.5em;\n  font-weight: bold;\n}\n.cart-extract-section-body {\n  padding: 0.5em;\n}\n  \n.cart-extract-payment {\n  border: 1px solid #dbdbdb;\n  padding: 10px;\n  background-color: #e9ebed;\n  margin-bottom: 1em;\n}\n  .cart-extract-warning {\n  \tcolor: #856404;\n    margin-bottom: 1em;\n    padding: 10px;\n    background-color: #fff3cd;\n    border: 1px solid #ffeeba;\n  }\n  \n.cart-line {\n    margin-bottom: 1em;\n    border: solid 1px #dbdbdb;\n}\n.cart-line-header {\n    background-color: #e9ebed;\n    overflow: hidden;\n    line-height: 33px;\n}\n.cart-line-header h4 {\n    padding-bottom: 0;\n    margin: 10px 0;\n    font-weight: bold;\n    font-size: 17px;\n    line-height: 20px;\n}\n.cart-line-actions {\n    padding: 0 10px;\n}\n.cart-line-actions > div {\n    margin: 0 10px;\n    float: left;\n}\n.cart-line-price-panel {\n    float: right !important;\n    padding: 4px 0;\n    font-size: 18px;\n    font-weight: bold;\n    color: #2c3e50;\n}\n.cart-line-quantity-panel input {\n    height: 30px;\n    width: 30px;\n    margin: 4px 0;\n    text-align: center;\n    display: inline;\n}\n  .cart-line-product-img img {\n    width: 100%;\n  }\n  @media print {\n     .cart-line-header h4 {\n        font-size: 14px;\n       \tvertical-align: middle;\n    }\n  }\n.cart-line-product-img {\n    padding: 0;\n}\n.cart-line-details-panel {\n    padding-top: 0.5em;\n    padding-bottom: 0.5em;\n}\n  .cart-extract-totals {\n     width: 6em;\n     display: inline-block;\n  }\n  .cart-line-old-price {\n    font-weight: normal;\n    text-decoration: line-through;\n}\n</style>\n       \n<p>Hola Raquel,</p>\n<p>Tu reserva ha sido autorizada.</p>\n<h5>Detalles de la reserva:</h5>\n\n<table cellspacing=\"0\" width=\"100%\" cellpadding=\"5\">\n\t<tr>\n\t\t<td width=\"25%\" style=\"vertical-align:top;border:0\">    \n\t\t\t<table cellspacing=\"5\" class=\"cart-extract-section\" style=\"border:solid 1px #dbdbdb\">\n\t\t\t\t<tr>\n\t\t\t\t\t<td class=\"cart-extract-section-head\" style=\"border:0;background-color:#e9ebed;\">\n\t\t\t\t\t\tDetalles del Pedido\n\t\t\t\t\t</td>\n\t\t\t\t</tr>\n\t\t\t\t<tr>\n\t\t\t\t\t<td class=\"cart-extract-section-body\" style=\"border:0\">\n\t\t\t\t\t\tIdentificador:<br /><b>SO00043771</b><br />\n                        <!---->\n\t\t\t\t\t\tCanal:<br /><b>Reservas</b><br />\n                            <!---->\n\t\t\t\t\t\tFecha de efecto:<br /><b>27/1/2026 14:06</b><br />\n\t\t\t\t\t</td>\n\t\t\t\t</tr>\n\t\t\t</table>\n\t\t</td>\n\t\t<td width=\"25%\" style=\"vertical-align:top;border:0\">    \n\t\t\t\n\t\t\t\t<div class=\"cart-extract-d-none\">&nbsp;</div>\n\t\t\t\n\t\t</td>\n\t\t<td width=\"25%\" style=\"vertical-align:top;border:0\">    \n\t\t\t\n\t\t\t\t\n\t\t\t\t\t<table cellspacing=\"5\" class=\"cart-extract-section\" style=\"border:solid 1px #dbdbdb\">\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<td class=\"cart-extract-section-head\" style=\"border:0;background-color:#e9ebed;\">\n\t\t\t\t\t\t\t\tDirecci&oacute;n de facturaci&oacute;n\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<td class=\"cart-extract-section-body\" style=\"border:0\">\n\t\t\t\t\t\t\t\tRaquel Barredo Rodriguez<br />53778446F<br />Avenida Roces 935<br />Gijon<br />33209 (Asturias)<br />ESPAÑA\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t</table>\n\t\t\t\t\n\t\t\t\n\t\t</td>\n\t\t<td width=\"25%\" style=\"vertical-align:top;border:0\">    \n\t\t\t<table cellspacing=\"5\" class=\"cart-extract-section\" style=\"border:solid 1px #dbdbdb\">\n\t\t\t\t<tr>\n\t\t\t\t\t<td class=\"cart-extract-section-head\" style=\"border:0;background-color:#e9ebed;\">\n\t\t\t\t\t\tEntidad emisora\n\t\t\t\t\t</td>\n\t\t\t\t</tr>\n\t\t\t\t<tr>\n\t\t\t\t\t<td class=\"cart-extract-section-body\" style=\"border:0\">\n\t\t\t\t\t\tSNOWDIVISION S.L<br />\n\t\t\t\t\t\tCif: B19696988<br />\n\t\t\t\t\t\tPlaza Pradollano 7  <br />\n\t\t\t\t\t\t18196 - Sierra Nevada<br />\n\t\t\t\t\t\t(GRANADA)<br />\n\t\t\t\t\t</td>\n\t\t\t\t</tr>\n\t\t\t</table>\n\t\t</td>\n\t</tr>\n</table>\n\n\n<h5>Pagos asociados al pedido:</h5>\n<table cellspacing=\"0\" width=\"100%\" cellpadding=\"5\">\n\t<tr>\n\t\t<td style=\"background-color:#e9ebed;width:20%\">Importe</td>\n\t\t<td style=\"background-color:#e9ebed;width:20%\">Fecha l&iacute;mite</td>\n\t\t<td style=\"background-color:#e9ebed;width:20%\">Método de pago</td>\n\t\t<td style=\"background-color:#e9ebed;width:20%\">Estado</td>\n\t\t<td style=\"background-color:#e9ebed;width:20%\">Acción requerida</td>\n\t</tr>\n\t\t<tr>\n\t\t  <td style=\"background-color:#fff\"><b>51,98&euro;</b></td>\n\t\t  <td style=\"background-color:#fff\"><b>27/01/2026</b></td>\n\t\t  <td style=\"background-color:#fff\"><b>GROUPON</b></td>\n\t\t  <td style=\"background-color:#fff\"><b>Efectuado</b></td>\n\t\t  <td style=\"background-color:#fff\"><b>Ninguna</b></td>\n\t\t</tr>\n\t    \n</table>\n\n\n<br />    \n<h5>Detalles del pedido:</h5>\n<div class=\"cart-orderlines-table cart-orderlines-table-readonly document-web-extract\">\n  <div class=\"cart-content\">\n\t    \t\n    \t\n\t\t\n\t\t\t<table width=\"100%\" cellSpacing=\"0\" style=\"margin-bottom:10px;border:solid 1px #dbdbdb\">\n\t\t\t\t<tr class=\"cart-line-header\">\n\t\t\t\t  <td width=\"66%\" style=\"border:0;padding-left:5px;background-color:#e9ebed;margin:8px;\">\n\t\t\t\t\t<h4 style=\"font-size:14px\">Alquiler de equipo de esqu&#237;</h4>\n\t\t\t\t  </td>\n\t\t\t\t  <td width=\"17%\" style=\"border:0;font-size:14px;text-align:center;background-color:#e9ebed;margin:8px;\" class=\"cart-line-actions\">\n\t\t\t\t\t  <span style=\"width: 3em;text-align:center;color:#000;padding:0;border:0;\">1</span>\n\t\t\t\t  </td>\n\t\t\t\t  <td width=\"17%\" style=\"border:0;font-size:14px;text-align:right;font-weight:bold;background-color:#e9ebed;margin:8px;\" class=\"cart-line-actions\">\n\t\t\t\t\t\t\t\t  \n\t\t\t\t\t\t\t<!---->\n\t\t\t\t\t\t21,48&euro;\n\t\t\t\t\t\n\t\t\t\t  </td>\n\t\t\t\t</tr>\n\t\t\t\t<tr class=\"cart-line-data\">\n\t\t\t\t\t<td width=\"100%\" colspan=\"3\">\n\t\t\t\t\t\t<table width=\"100%\" border=\"0\" cellSpacing=\"0\">\n\t\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t\t<td width=\"25%\" style=\"border:0;vertical-align:top\" class=\"cart-line-product-img\">\n\t\t\t\t\t\t\t\t\t<div>\n\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t<img src=\"https://rules-shop.es/images/alquiler-equipo-esqui-rules-128250.jpg\" alt=\"Alquiler de equipo de esqu&#237;\" />\n\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t\t<td width=\"75%\" style=\"border:0;vertical-align:top;padding:10px;font-size:0.9em;\" class=\"cart-line-details-panel\">\n\t\t\t\t\tLocalizador: <b>6a72701d</b><br />\n\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t<!---->                                  \n\t\t\t\t\t Fecha: <b>30/01/2026</b><br />\n\t\t\t\t\t\t N&uacute;mero de d&iacute;as: <b>2</b><br />\n\t\t\t\t\t\t\t<!----> \n\t\t\t\t\t\t \n\t\t\t\t\t\n\t\t\t\t\t<!---->\n\t\t\t\t\t<!----> \n\t\t\t\t\t\n\t\t\t\t\t\t<!----> \n\t\t\t\t\t\t<!----> \n                    <!---->\n\t\t\t\t\tGama: Media\nTipo de beneficiario: Adulto\n<br />\n\t\t\t\t\t\n\t\t\t\t\t<!---->\n\t\t\t\t\t    \n\t\t\t\t\t\t<div>&nbsp;</div>\n\t\t\t\t\t\t\n\t\t\t\t\t\t\t\n                    \t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\t\t\n                               <div style=\"padding-left:10px\">\n                               \t  <b>1 x Alquiler de botas de esqu&#237;</b>\n                               </div>\n\t\t\t\t\t\t\n\t\t\t\t\t\t\t\n                               <div style=\"padding-left:10px\">\n                               \t  <b>1 x Alquiler de esqu&#237;s y bastones</b>\n                               </div>\n\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t  </td>\n\t\t\t\t\t\t\t</tr>\n\t\t\t\t\t\t</table>\n\t\t\t\t\t</td>\n\t\t\t\t</tr>\n\t\t\t</table>\n\t\t \n\t    \t\n    \t\n\t\t \n\t    \t\n    \t\n\t\t \n\t    \t\n    \t\n\t\t \n\t    \t\n    \t\n\t\t\n\t\t\t<table width=\"100%\" cellSpacing=\"0\" style=\"margin-bottom:10px;border:solid 1px #dbdbdb\">\n\t\t\t\t<tr class=\"cart-line-header\">\n\t\t\t\t  <td width=\"66%\" style=\"border:0;padding-left:5px;background-color:#e9ebed;margin:8px;\">\n\t\t\t\t\t<h4 style=\"font-size:14px\">Alquiler de equipo de esqu&#237;</h4>\n\t\t\t\t  </td>\n\t\t\t\t  <td width=\"17%\" style=\"border:0;font-size:14px;text-align:center;background-color:#e9ebed;margin:8px;\" class=\"cart-line-actions\">\n\t\t\t\t\t  <span style=\"width: 3em;text-align:center;color:#000;padding:0;border:0;\">1</span>\n\t\t\t\t  </td>\n\t\t\t\t  <td width=\"17%\" style=\"border:0;font-size:14px;text-align:right;font-weight:bold;background-color:#e9ebed;margin:8px;\" class=\"cart-line-actions\">\n\t\t\t\t\t\t\t\t  \n\t\t\t\t\t\t\t<!---->\n\t\t\t\t\t\t21,48&euro;\n\t\t\t\t\t\n\t\t\t\t  </td>\n\t\t\t\t</tr>\n\t\t\t\t<tr class=\"cart-line-data\">\n\t\t\t\t\t<td width=\"100%\" colspan=\"3\">\n\t\t\t\t\t\t<table width=\"100%\" border=\"0\" cellSpacing=\"0\">\n\t\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t\t<td width=\"25%\" style=\"border:0;vertical-align:top\" class=\"cart-line-product-img\">\n\t\t\t\t\t\t\t\t\t<div>\n\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t<img src=\"https://rules-shop.es/images/alquiler-equipo-esqui-rules-128250.jpg\" alt=\"Alquiler de equipo de esqu&#237;\" />\n\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t</div>\n\t\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t\t<td width=\"75%\" style=\"border:0;vertical-align:top;padding:10px;font-size:0.9em;\" class=\"cart-line-details-panel\">\n\t\t\t\t\tLocalizador: <b>b7e177a5</b><br />\n\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t<!---->                                  \n\t\t\t\t\t Fecha: <b>30/01/2026</b><br />\n\t\t\t\t\t\t N&uacute;mero de d&iacute;as: <b>2</b><br />\n\t\t\t\t\t\t\t<!----> \n\t\t\t\t\t\t \n\t\t\t\t\t\n\t\t\t\t\t<!---->\n\t\t\t\t\t<!----> \n\t\t\t\t\t\n\t\t\t\t\t\t<!----> \n\t\t\t\t\t\t<!----> \n                    <!---->\n\t\t\t\t\tGama: Media\nTipo de beneficiario: Adulto\n<br />\n\t\t\t\t\t\n\t\t\t\t\t<!---->\n\t\t\t\t\t    \n\t\t\t\t\t\t<div>&nbsp;</div>\n\t\t\t\t\t\t\n\t\t\t\t\t\t\t\n                               <div style=\"padding-left:10px\">\n                               \t  <b>1 x Alquiler de botas de esqu&#237;</b>\n                               </div>\n\t\t\t\t\t\t\n\t\t\t\t\t\t\t\n                    \t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\t\t\n                               <div style=\"padding-left:10px\">\n                               \t  <b>1 x Alquiler de esqu&#237;s y bastones</b>\n                               </div>\n\t\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t  </td>\n\t\t\t\t\t\t\t</tr>\n\t\t\t\t\t\t</table>\n\t\t\t\t\t</td>\n\t\t\t\t</tr>\n\t\t\t</table>\n\t\t \n\t    \t\n    \t\n\t\t \n\t    \t\n    \t\n\t\t \n\t    \t\n    \t\n\t\t \n\t\n  </div>\n</div>\n\n<div style=\"text-align:right;margin-right:5px\">\n</div>\n<div style=\"text-align:right;margin-right:5px;margin-top:3px\"><b>TOTAL: <span class=\"cart-extract-totals\">51,98</span></b></div>\n\n\n   <div style=\"text-align:right\"><p>Precios con IVA incluido.</p></div>\n\n\n\n<p>Puedes imprimir el justificante de compra haciendo click en este <a href=\"https://rules-shop.es/documentWebExtract?orderGuid=2088e744-845d-44bb-bda9-df3021ab2560\">enlace</a>.</p>\n\n<p>Si no puedes usar el enlace puedes pegar la siguiente dirección en tu navegador:<br />\nhttps://rules-shop.es/documentWebExtract?orderGuid=2088e744-845d-44bb-bda9-df3021ab2560</p>\n\n<p><b>INFORMACIÓN DE INTERÉS</b></p>\n<p><b>Lea atentamente las condiciones generales de reserva adjuntas</b></p>\n\n<p><span style=\"color:red; text-decoration:underline;\">Recuerde llegar con al menos 2 horas de antelación, de la hora de su clase, a recoger el material para equiparse, evitar colas y llegar a tiempo, para que tenga una experiencia inmejorable.</p>\n\n<p style=\"text-decoration:underline\"><b>MATERIAL</b></p>\n<p>\nEsta es la dirección para retirar el material:<br />\n<div class=\"ink-recogida row pr-row\">\n    <div class=\"col-md-3 col-lg-2 pr-col-3 logo\">\n        <img src=\"https://sierranevadagranada.com/File/logo-rules-small.png?id=B7EBE528-B54D-4AB9-8CEF-AE5F6B213748\" style=\"max-width:100%\" />\n    </div>\n    <div class=\"col-md-6 col-lg-7 pr-col-6 info\">\n        <h5>RULES SIERRA NEVADA</h5>\n        <p>Plaza de Andalucía, Edificio Monachil, locales 1 y 2.</p>\n        <p>Frente al parking de autobuses.</p>\n    </div>\n    <div class=\"col-md-3 col-lg-3 pr-col-3 ubicacion\">\n        <i class=\"fas fa-map-marked-alt\"></i>\n        <a href=\"https://goo.gl/maps/eUAjCiksJHQUwMPb7\" target=\"_blank\">Ver en mapa</a>\n    </div>\n</div>\n</p>\n<p>Presenta este código QR en la tienda de alquiler para recoger el material más rápidamente:</p>\n<br />\n<img src=\"https://rules-shop.es/res/qrImage/SO00043771.gif\" style=\"width: 150px;\"/>\n<p><br /></p>\n<p>Puedes venir el día de antes a recoger el material desde 18:30h hasta cierre de tienda, así evitas colas o retrasos.</p>\n\n<p>HORARIO TIENDA<br />\nTodos los días de 8:00h a 20:00h<br />\n* Los horarios o servicios pueden modificarse\n</p>\n\n<br/>\n<p style=\"text-decoration:underline\"><b>INFORMACIÓN EXCLUSIVA PARA CLIENTES CON CLASES CONTRATADAS</b></p>\n<p>El punto de encuentro para las CLASES se encuentra en nuestra oficina ubicada en Borreguiles en la salida del telecabina Al-Andalus a la derecha. SURFIN SIERRA NEVADA.</p>\n<p>Ante cualquier problema con la hora de llegada o localización del punto de encuentro de pistas (Borreguiles) llame con tiempo al <b>638 877 288</b> (teléfono de la Escuela).</p>\n\n<p style=\"text-decoration:underline\"><b>MUY IMPORTANTE – PARA CLIENTES CON RESERVAS DE CURSILLOS COLECTIVOS </b></p>\n<p>El curso se realizará en grupos de 4 a 10 personas según el nivel.</p>\n<p>Si no se llega a completar un mínimo de 4 personas, el curso se verá reducido de 2 horas a 1 hora y de 4 horas a 2 horas, respectivamente. En caso de no llegar a un mínimo de 2 personas, el curso podría verse anulado o modificado, dando la empresa otras opciones.</p>\n<p>Las clases comenzarán a la hora establecida en el bono de confirmación de reserva, independientemente del número de alumnos presentes. Si llegase tarde al punto de encuentro en Borreguiles por causas ajenas a nuestra empresa, <b>el tiempo no será recuperable y si este tiempo excede de 20 minutos de la hora de inicio, no será posible incorporarse al cursillo por motivos del progreso de aprendizaje</b>.</p>\n<p><b>FORFAIT</b> para acceder a pistas imprescindible <b>no incluido en los cursillos</b>.</p>\n\n<p style=\"text-decoration:underline\"><b>MUY IMPORTANTE – PARA CLIENTES CON RESERVAS DE CLASES PARTICULARES </b></p>\n<p>Las clases comenzarán a la hora establecida en el bono de confirmación de reserva, independientemente del número de alumnos presentes. Si llegase tarde al punto de encuentro en Borreguiles por causas ajenas a nuestra empresa, <b>el tiempo no será recuperable y si este tiempo excede de 20 minutos de la hora de inicio, se pierde el derecho a dar la clase</b>.</p>\n<p><b>FORFAIT</b> para acceder a pistas imprescindible <b>no incluido en los cursillos</b>.</p>\n<br/>\n<p><b>Por favor, si hay algún error póngase en contacto nuevamente para solucionarlo. No nos hacemos responsables de errores no notificados.</b></p>\n                </div>\n            </td>\n        </tr>\n    </table>\n\n    <!-- Pie -->\n    <table width=\"100%\" cellspacing=\"0\" cellpadding=\"20\" style=\"background-color: #111; font-family: 'Trebuchet MS', 'Lucida Grande', 'Verdana', sans-serif;\">\n        <tr>\n            <td align=\"center\" style=\"font-size: 14px;\">\n                <div style=\"max-width: 600px; width: 100%; margin: 0 auto; text-align: center;\">\n                    <p style=\"margin: 0; color: #fff;\">Plaza Andalucia, Edificio Monachil Local 1 y 2<br>Monachil, España</p>\n                    <p style=\"margin: 10px 0;\">\n                        <a href=\"#\" style=\"color: #1bb5dc; text-decoration: none; margin: 0 10px;\">Aviso legal</a>\n                        <span style=\"color: #666; margin: 0 10px;\">|</span>\n                        <a href=\"#\" style=\"color: #1bb5dc; text-decoration: none; margin: 0 10px;\">Política de privacidad</a>\n                        <span style=\"color: #666; margin: 0 10px;\">|</span>\n                        <a href=\"#\" style=\"color: #1bb5dc; text-decoration: none; margin: 0 10px;\">Condiciones de compra</a>\n                    </p>\n                </div>\n            </td>\n        </tr>\n    </table>\n</body>\n</html>\n<br/><span style='color:white'>(Mensaje:502eff55-638d-4d46-a03d-41318f6ccaf1)</span><br/></body></html>",
+          "text": "Email - Rules Shop\n\nRules Shop\n[https://rules-shop.es/File/logoRules.png?id=3888145A-1121-483D-9E19-4F94927C2496]\n\nHola Raquel,\n\nTu reserva ha sido autorizada.\n\nDETALLES DE LA RESERVA:\n\nDetalles del Pedido Identificador:\nSO00043771\nCanal:\nReservas\nFecha de efecto:\n27/1/2026 14:06\n\n\n \n\nDirección de facturación Raquel Barredo Rodriguez\n53778446F\nAvenida Roces 935\nGijon\n33209 (Asturias)\nESPAÑA\n\nEntidad emisora SNOWDIVISION S.L\nCif: B19696988\nPlaza Pradollano 7\n18196 - Sierra Nevada\n(GRANADA)\n\n\nPAGOS ASOCIADOS AL PEDIDO:\n\nImporte Fecha límite Método de pago Estado Acción requerida 51,98€ 27/01/2026\nGROUPON Efectuado Ninguna\n\n\nDETALLES DEL PEDIDO:\n\nALQUILER DE EQUIPO DE ESQUÍ\n\n1 21,48€\nAlquiler de equipo de esquí\n[https://rules-shop.es/images/alquiler-equipo-esqui-rules-128250.jpg]\nLocalizador: 6a72701d\nFecha: 30/01/2026\nNúmero de días: 2\nGama: Media Tipo de beneficiario: Adulto\n\n \n1 x Alquiler de botas de esquí\n1 x Alquiler de esquís y bastones\n\nALQUILER DE EQUIPO DE ESQUÍ\n\n1 21,48€\nAlquiler de equipo de esquí\n[https://rules-shop.es/images/alquiler-equipo-esqui-rules-128250.jpg]\nLocalizador: b7e177a5\nFecha: 30/01/2026\nNúmero de días: 2\nGama: Media Tipo de beneficiario: Adulto\n\n \n1 x Alquiler de botas de esquí\n1 x Alquiler de esquís y bastones\n\n\nTOTAL: 51,98\n\nPrecios con IVA incluido.\n\nPuedes imprimir el justificante de compra haciendo click en este enlace\n[https://rules-shop.es/documentWebExtract?orderGuid=2088e744-845d-44bb-bda9-df3021ab2560].\n\nSi no puedes usar el enlace puedes pegar la siguiente dirección en tu navegador:\nhttps://rules-shop.es/documentWebExtract?orderGuid=2088e744-845d-44bb-bda9-df3021ab2560\n\nINFORMACIÓN DE INTERÉS\n\nLea atentamente las condiciones generales de reserva adjuntas\n\nRecuerde llegar con al menos 2 horas de antelación, de la hora de su clase, a\nrecoger el material para equiparse, evitar colas y llegar a tiempo, para que\ntenga una experiencia inmejorable.\n\nMATERIAL\n\nEsta es la dirección para retirar el material:\n\n\n[https://sierranevadagranada.com/File/logo-rules-small.png?id=B7EBE528-B54D-4AB9-8CEF-AE5F6B213748]\n\nRULES SIERRA NEVADA\n\nPlaza de Andalucía, Edificio Monachil, locales 1 y 2.\n\nFrente al parking de autobuses.\n\nVer en mapa [https://goo.gl/maps/eUAjCiksJHQUwMPb7]\n\n\n\nPresenta este código QR en la tienda de alquiler para recoger el material más\nrápidamente:\n\n\n[https://rules-shop.es/res/qrImage/SO00043771.gif]\n\n\n\n\nPuedes venir el día de antes a recoger el material desde 18:30h hasta cierre de\ntienda, así evitas colas o retrasos.\n\nHORARIO TIENDA\nTodos los días de 8:00h a 20:00h\n* Los horarios o servicios pueden modificarse\n\n\nINFORMACIÓN EXCLUSIVA PARA CLIENTES CON CLASES CONTRATADAS\n\nEl punto de encuentro para las CLASES se encuentra en nuestra oficina ubicada en\nBorreguiles en la salida del telecabina Al-Andalus a la derecha. SURFIN SIERRA\nNEVADA.\n\nAnte cualquier problema con la hora de llegada o localización del punto de\nencuentro de pistas (Borreguiles) llame con tiempo al 638 877 288 (teléfono de\nla Escuela).\n\nMUY IMPORTANTE – PARA CLIENTES CON RESERVAS DE CURSILLOS COLECTIVOS\n\nEl curso se realizará en grupos de 4 a 10 personas según el nivel.\n\nSi no se llega a completar un mínimo de 4 personas, el curso se verá reducido de\n2 horas a 1 hora y de 4 horas a 2 horas, respectivamente. En caso de no llegar a\nun mínimo de 2 personas, el curso podría verse anulado o modificado, dando la\nempresa otras opciones.\n\nLas clases comenzarán a la hora establecida en el bono de confirmación de\nreserva, independientemente del número de alumnos presentes. Si llegase tarde al\npunto de encuentro en Borreguiles por causas ajenas a nuestra empresa, el tiempo\nno será recuperable y si este tiempo excede de 20 minutos de la hora de inicio,\nno será posible incorporarse al cursillo por motivos del progreso de\naprendizaje.\n\nFORFAIT para acceder a pistas imprescindible no incluido en los cursillos.\n\nMUY IMPORTANTE – PARA CLIENTES CON RESERVAS DE CLASES PARTICULARES\n\nLas clases comenzarán a la hora establecida en el bono de confirmación de\nreserva, independientemente del número de alumnos presentes. Si llegase tarde al\npunto de encuentro en Borreguiles por causas ajenas a nuestra empresa, el tiempo\nno será recuperable y si este tiempo excede de 20 minutos de la hora de inicio,\nse pierde el derecho a dar la clase.\n\nFORFAIT para acceder a pistas imprescindible no incluido en los cursillos.\n\n\nPor favor, si hay algún error póngase en contacto nuevamente para solucionarlo.\nNo nos hacemos responsables de errores no notificados.\n\nPlaza Andalucia, Edificio Monachil Local 1 y 2\nMonachil, España\n\nAviso legal | Política de privacidad | Condiciones de compra\n\n\n(Mensaje:502eff55-638d-4d46-a03d-41318f6ccaf1)\n",
+          "textAsHtml": "<p>Email - Rules Shop</p><p>Rules Shop<br/>[<a href=\"https://rules-shop.es/File/logoRules.png?id=3888145A-1121-483D-9E19-4F94927C2496\">https://rules-shop.es/File/logoRules.png?id=3888145A-1121-483D-9E19-4F94927C2496</a>]</p><p>Hola Raquel,</p><p>Tu reserva ha sido autorizada.</p><p>DETALLES DE LA RESERVA:</p><p>Detalles del Pedido Identificador:<br/>SO00043771<br/>Canal:<br/>Reservas<br/>Fecha de efecto:<br/>27/1/2026 14:06</p><p>&nbsp;</p><p>Direcci&oacute;n de facturaci&oacute;n Raquel Barredo Rodriguez<br/>53778446F<br/>Avenida Roces 935<br/>Gijon<br/>33209 (Asturias)<br/>ESPA&Ntilde;A</p><p>Entidad emisora SNOWDIVISION S.L<br/>Cif: B19696988<br/>Plaza Pradollano 7<br/>18196 - Sierra Nevada<br/>(GRANADA)</p><p>PAGOS ASOCIADOS AL PEDIDO:</p><p>Importe Fecha l&iacute;mite M&eacute;todo de pago Estado Acci&oacute;n requerida 51,98&euro; 27/01/2026<br/>GROUPON Efectuado Ninguna</p><p>DETALLES DEL PEDIDO:</p><p>ALQUILER DE EQUIPO DE ESQU&Iacute;</p><p>1 21,48&euro;<br/>Alquiler de equipo de esqu&iacute;<br/>[<a href=\"https://rules-shop.es/images/alquiler-equipo-esqui-rules-128250.jpg\">https://rules-shop.es/images/alquiler-equipo-esqui-rules-128250.jpg</a>]<br/>Localizador: 6a72701d<br/>Fecha: 30/01/2026<br/>N&uacute;mero de d&iacute;as: 2<br/>Gama: Media Tipo de beneficiario: Adulto</p><p>&nbsp;<br/>1 x Alquiler de botas de esqu&iacute;<br/>1 x Alquiler de esqu&iacute;s y bastones</p><p>ALQUILER DE EQUIPO DE ESQU&Iacute;</p><p>1 21,48&euro;<br/>Alquiler de equipo de esqu&iacute;<br/>[<a href=\"https://rules-shop.es/images/alquiler-equipo-esqui-rules-128250.jpg\">https://rules-shop.es/images/alquiler-equipo-esqui-rules-128250.jpg</a>]<br/>Localizador: b7e177a5<br/>Fecha: 30/01/2026<br/>N&uacute;mero de d&iacute;as: 2<br/>Gama: Media Tipo de beneficiario: Adulto</p><p>&nbsp;<br/>1 x Alquiler de botas de esqu&iacute;<br/>1 x Alquiler de esqu&iacute;s y bastones</p><p>TOTAL: 51,98</p><p>Precios con IVA incluido.</p><p>Puedes imprimir el justificante de compra haciendo click en este enlace<br/>[<a href=\"https://rules-shop.es/documentWebExtract?orderGuid=2088e744-845d-44bb-bda9-df3021ab2560\">https://rules-shop.es/documentWebExtract?orderGuid=2088e744-845d-44bb-bda9-df3021ab2560</a>].</p><p>Si no puedes usar el enlace puedes pegar la siguiente direcci&oacute;n en tu navegador:<br/><a href=\"https://rules-shop.es/documentWebExtract?orderGuid=2088e744-845d-44bb-bda9-df3021ab2560\">https://rules-shop.es/documentWebExtract?orderGuid=2088e744-845d-44bb-bda9-df3021ab2560</a></p><p>INFORMACI&Oacute;N DE INTER&Eacute;S</p><p>Lea atentamente las condiciones generales de reserva adjuntas</p><p>Recuerde llegar con al menos 2 horas de antelaci&oacute;n, de la hora de su clase, a<br/>recoger el material para equiparse, evitar colas y llegar a tiempo, para que<br/>tenga una experiencia inmejorable.</p><p>MATERIAL</p><p>Esta es la direcci&oacute;n para retirar el material:</p><p>[<a href=\"https://sierranevadagranada.com/File/logo-rules-small.png?id=B7EBE528-B54D-4AB9-8CEF-AE5F6B213748\">https://sierranevadagranada.com/File/logo-rules-small.png?id=B7EBE528-B54D-4AB9-8CEF-AE5F6B213748</a>]</p><p>RULES SIERRA NEVADA</p><p>Plaza de Andaluc&iacute;a, Edificio Monachil, locales 1 y 2.</p><p>Frente al parking de autobuses.</p><p>Ver en mapa [<a href=\"https://goo.gl/maps/eUAjCiksJHQUwMPb7\">https://goo.gl/maps/eUAjCiksJHQUwMPb7</a>]</p><p>Presenta este c&oacute;digo QR en la tienda de alquiler para recoger el material m&aacute;s<br/>r&aacute;pidamente:</p><p>[<a href=\"https://rules-shop.es/res/qrImage/SO00043771.gif\">https://rules-shop.es/res/qrImage/SO00043771.gif</a>]</p><p>Puedes venir el d&iacute;a de antes a recoger el material desde 18:30h hasta cierre de<br/>tienda, as&iacute; evitas colas o retrasos.</p><p>HORARIO TIENDA<br/>Todos los d&iacute;as de 8:00h a 20:00h<br/>* Los horarios o servicios pueden modificarse</p><p>INFORMACI&Oacute;N EXCLUSIVA PARA CLIENTES CON CLASES CONTRATADAS</p><p>El punto de encuentro para las CLASES se encuentra en nuestra oficina ubicada en<br/>Borreguiles en la salida del telecabina Al-Andalus a la derecha. SURFIN SIERRA<br/>NEVADA.</p><p>Ante cualquier problema con la hora de llegada o localizaci&oacute;n del punto de<br/>encuentro de pistas (Borreguiles) llame con tiempo al 638 877 288 (tel&eacute;fono de<br/>la Escuela).</p><p>MUY IMPORTANTE &ndash; PARA CLIENTES CON RESERVAS DE CURSILLOS COLECTIVOS</p><p>El curso se realizar&aacute; en grupos de 4 a 10 personas seg&uacute;n el nivel.</p><p>Si no se llega a completar un m&iacute;nimo de 4 personas, el curso se ver&aacute; reducido de<br/>2 horas a 1 hora y de 4 horas a 2 horas, respectivamente. En caso de no llegar a<br/>un m&iacute;nimo de 2 personas, el curso podr&iacute;a verse anulado o modificado, dando la<br/>empresa otras opciones.</p><p>Las clases comenzar&aacute;n a la hora establecida en el bono de confirmaci&oacute;n de<br/>reserva, independientemente del n&uacute;mero de alumnos presentes. Si llegase tarde al<br/>punto de encuentro en Borreguiles por causas ajenas a nuestra empresa, el tiempo<br/>no ser&aacute; recuperable y si este tiempo excede de 20 minutos de la hora de inicio,<br/>no ser&aacute; posible incorporarse al cursillo por motivos del progreso de<br/>aprendizaje.</p><p>FORFAIT para acceder a pistas imprescindible no incluido en los cursillos.</p><p>MUY IMPORTANTE &ndash; PARA CLIENTES CON RESERVAS DE CLASES PARTICULARES</p><p>Las clases comenzar&aacute;n a la hora establecida en el bono de confirmaci&oacute;n de<br/>reserva, independientemente del n&uacute;mero de alumnos presentes. Si llegase tarde al<br/>punto de encuentro en Borreguiles por causas ajenas a nuestra empresa, el tiempo<br/>no ser&aacute; recuperable y si este tiempo excede de 20 minutos de la hora de inicio,<br/>se pierde el derecho a dar la clase.</p><p>FORFAIT para acceder a pistas imprescindible no incluido en los cursillos.</p><p>Por favor, si hay alg&uacute;n error p&oacute;ngase en contacto nuevamente para solucionarlo.<br/>No nos hacemos responsables de errores no notificados.</p><p>Plaza Andalucia, Edificio Monachil Local 1 y 2<br/>Monachil, Espa&ntilde;a</p><p>Aviso legal | Pol&iacute;tica de privacidad | Condiciones de compra</p><p>(Mensaje:502eff55-638d-4d46-a03d-41318f6ccaf1)</p>",
+          "subject": "Rules - Compra efectuada - Raquel Barredo Rodriguez - canal Reservas",
+          "date": "2026-01-27T13:49:01.000Z",
+          "to": {
+            "value": [
+              {
+                "address": "raquelbarredo98@gmail.com",
+                "name": "Raquel Barredo Rodriguez"
+              }
+            ],
+            "html": "<span class=\"mp_address_group\"><span class=\"mp_address_name\">Raquel Barredo Rodriguez</span> &lt;<a href=\"mailto:raquelbarredo98@gmail.com\" class=\"mp_address_email\">raquelbarredo98@gmail.com</a>&gt;</span>",
+            "text": "\"Raquel Barredo Rodriguez\" <raquelbarredo98@gmail.com>"
+          },
+          "from": {
+            "value": [
+              {
+                "address": "reservas@rules-shop.es",
+                "name": ""
+              }
+            ],
+            "html": "<span class=\"mp_address_group\"><a href=\"mailto:reservas@rules-shop.es\" class=\"mp_address_email\">reservas@rules-shop.es</a></span>",
+            "text": "reservas@rules-shop.es"
+          },
+          "messageId": "<6978c24d.050a0220.2a9e0.dc58@mx.google.com>"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1",
     "availableInMCP": false
@@ -4777,6 +5702,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 3,
-  "updatedAt": "2026-01-26T13:49:55.328Z",
-  "versionId": "61780a58-8e7f-424b-9aa0-6a5c19052d01"
+  "updatedAt": "2026-01-27T14:14:01.359Z",
+  "versionId": "cc3bc5de-6ee1-4392-b6c1-5262ff6c238c"
 }
