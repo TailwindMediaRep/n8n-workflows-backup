@@ -680,7 +680,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -16,
+        -32,
         -2144
       ],
       "id": "0e36311c-5edf-4f2c-ab91-6b6a8bae6a3b",
@@ -693,8 +693,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -96,
-        -1936
+        -80,
+        -1984
       ],
       "id": "155d582c-754f-49ce-b06b-d57274c0749d",
       "name": "zonas abiertas"
@@ -719,7 +719,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        0,
+        -16,
         -1696
       ],
       "id": "44c3ca04-f48f-4386-a2fa-2db76f0b20f2",
@@ -772,7 +772,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        0,
+        -16,
         -1456
       ],
       "id": "1f268b96-cbc6-452c-9009-b7b8dcf0738d",
@@ -785,7 +785,7 @@
       "type": "n8n-nodes-base.merge",
       "typeVersion": 3.2,
       "position": [
-        432,
+        480,
         -1792
       ],
       "id": "28ca7694-4e79-4474-a916-6729a987d344",
@@ -798,7 +798,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        656,
+        640,
         -1760
       ],
       "id": "6dde6bba-db88-46c4-a311-bec39dea1f1e",
@@ -1132,8 +1132,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        96,
-        -1936
+        64,
+        -1984
       ],
       "id": "8db1f2c7-070d-4dd9-b7f1-711abfa9e919",
       "name": "Code in JavaScript2"
@@ -1513,6 +1513,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-01-28T12:17:28.947Z",
-  "versionId": "caf8b027-233a-43bd-97c0-5d6154cbab17"
+  "updatedAt": "2026-01-28T13:17:03.849Z",
+  "versionId": "e4df7fd7-5a42-453b-8b4a-5ed27d65821c"
 }
