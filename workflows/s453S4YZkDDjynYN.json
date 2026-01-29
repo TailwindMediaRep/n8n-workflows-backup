@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-01-28T09:05:15.000Z",
-    "createdAt": "2026-01-28T09:05:11.583Z",
-    "versionId": "e58c95dd-077a-4f02-96b4-957797cc852f",
+    "updatedAt": "2026-01-28T14:06:37.000Z",
+    "createdAt": "2026-01-28T14:06:32.408Z",
+    "versionId": "f036a59f-3a8f-4377-956e-d67ae0b8478f",
     "workflowId": "s453S4YZkDDjynYN",
     "nodes": [
       {
@@ -17,7 +17,7 @@
           },
           "simple": false,
           "filters": {
-            "q": "(from:no-reply@vinted.es subject:\"Has vendido un artículo en Vinted\") OR (from:info@wallapop.com (subject:\"Sale confirmed! Follow the instructions to send your package\" OR subject:\"¡Venta confirmada! Sigue las instrucciones para enviar tu paquete\"))"
+            "q": "(from:noreply@vinted.es subject:\"Has vendido un artículo en Vinted\")"
           },
           "options": {}
         },
@@ -39,7 +39,7 @@
       },
       {
         "parameters": {
-          "jsCode": "// 1. Obtenemos el texto de donde esté disponible (text, html o snippet)\n// TU INPUT TIENE EL CONTENIDO EN 'snippet', así que lo añadimos aquí.\nconst emailText = $input.item.json.text || $input.item.json.html || $input.item.json.snippet || \"\";\n\n// 2. Limpieza Previa (CRÍTICO PARA TU INPUT)\n// Reemplazamos &quot; por comillas normales \" para que el Regex funcione\nlet cleanText = emailText.replace(/&quot;/g, '\"').replace(/&#39;/g, \"'\");\n\n// Limpiamos saltos de línea y espacios extra\ncleanText = cleanText.replace(/\\r\\n/g, '\\n').replace(/\\s+/g, ' ');\n\n// --- PATRONES ---\n\n// A. Patrón PRODUCTO\n// Busca: texto entre comillas justo después de \"ha comprado\"\nconst productPattern = /ha comprado\\s+[*]*[\"“'](.+?)[\"”']([*]|[\\.]|$)/i;\n\n// B. Patrón USUARIO\n// Busca: la palabra que está justo antes de \"ha comprado\" (ej: ripride_or_die)\nconst usernamePattern = /([^\\s:,]+)\\s+ha comprado/i;\n\n// C. Patrones Adicionales (Email/Nombre real por si vinieran en el cuerpo completo)\nconst emailPattern = /E-mail:\\s*([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.[a-zA-Z0-9._-]+)/i;\nconst realNamePattern = /Dirección:\\s*([^,]+),/i;\n\n\n// --- EJECUCIÓN ---\nconst matchProduct = cleanText.match(productPattern);\nconst matchUsername = cleanText.match(usernamePattern);\nconst matchEmail = cleanText.match(emailPattern);\nconst matchRealName = cleanText.match(realNamePattern);\n\n// --- PROCESAMIENTO ---\n\n// 1. Producto\nlet productName = \"Producto Vinted\"; \nif (matchProduct && matchProduct[1]) {\n  productName = matchProduct[1].replace(/[*]/g, '').trim();\n}\n\n// 2. Usuario / Nombre\nlet username = \"UsuarioVinted\";\nif (matchUsername && matchUsername[1]) {\n    // Limpiamos asteriscos si los hubiera\n    username = matchUsername[1].replace(/\\*/g, '').trim();\n}\n\nlet firstName = username;\nlet lastName = \"(Vinted)\";\nlet finalEmail = \"\";\n\n// Intentamos sacar nombre real si existe (raro en snippet)\nif (matchRealName && matchRealName[1]) {\n  const fullName = matchRealName[1].trim();\n  const nameParts = fullName.split(\" \");\n  if (nameParts.length > 1) {\n    lastName = nameParts.pop(); \n    firstName = nameParts.join(\" \"); \n  } else {\n    firstName = fullName;\n  }\n}\n\n// 3. Generar Email (Vinted no da el email real, generamos uno ficticio para Shopify)\nif (matchEmail && matchEmail[1]) {\n  finalEmail = matchEmail[1].trim(); \n} else {\n  // Creamos email tipo: riprideordie@vinted.tailwind.es\n  const safeUser = username.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();\n  finalEmail = `${safeUser}@vinted.tailwind.es`;\n}\n\n// --- SALIDA ---\n\nif (matchProduct || username !== \"UsuarioVinted\") {\n  return {\n    json: {\n      status: \"success\",\n      customer: {\n        first_name: firstName,\n        last_name: lastName,\n        email: finalEmail,\n        tags: [\"Cliente Vinted\"],\n        note: `Comprado en Vinted: ${productName}. Usuario: ${username}`\n      },\n      product: {\n        name: productName\n      }\n    }\n  };\n} else {\n  return {\n    json: {\n      error: \"No se pudieron extraer los datos\",\n      debug: cleanText.substring(0, 500)\n    }\n  };\n}"
+          "jsCode": "// --- FUNCIÓN AUXILIAR PARA LIMPIAR HTML ---\nconst stripHtml = (html) => html.replace(/<[^>]*>?/gm, '');\n\n// 1. Obtenemos el texto de donde esté disponible\nconst emailText = $input.item.json.text || $input.item.json.html || $input.item.json.snippet || \"\";\n\n// 2. Limpieza Previa\nlet cleanText = emailText.replace(/&quot;/g, '\"').replace(/&#39;/g, \"'\");\ncleanText = cleanText.replace(/\\r\\n/g, '\\n').replace(/\\s+/g, ' ');\n\n// --- PATRONES ---\n// A. Patrón PRODUCTO\nconst productPattern = /ha comprado\\s+[*]*[\"“'](.+?)[\"”']([*]|[\\.]|$)/i;\n\n// B. Patrón USUARIO \n// (Se mantiene igual, pero luego limpiaremos el resultado del HTML)\nconst usernamePattern = /([^\\s:,]+)\\s+ha comprado/i;\n\n// C. Patrones Adicionales\nconst emailPattern = /E-mail:\\s*([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.[a-zA-Z0-9._-]+)/i;\nconst realNamePattern = /Dirección:\\s*([^,]+),/i;\n\n// --- EJECUCIÓN ---\nconst matchProduct = cleanText.match(productPattern);\nconst matchUsername = cleanText.match(usernamePattern);\nconst matchEmail = cleanText.match(emailPattern);\nconst matchRealName = cleanText.match(realNamePattern);\n\n// --- PROCESAMIENTO ---\n\n// 1. Producto (Limpiamos HTML por si acaso)\nlet productName = \"Producto Vinted\"; \nif (matchProduct && matchProduct[1]) {\n  productName = stripHtml(matchProduct[1]).replace(/[*]/g, '').trim();\n}\n\n// 2. Usuario / Nombre\nlet username = \"UsuarioVinted\";\nif (matchUsername && matchUsername[1]) {\n    // IMPORTANTE: Limpiamos etiquetas HTML y asteriscos\n    username = stripHtml(matchUsername[1]).replace(/\\*/g, '').trim();\n}\n\nlet firstName = username;\nlet lastName = \"(Vinted)\";\nlet finalEmail = \"\";\n\n// Intentamos sacar nombre real si existe\nif (matchRealName && matchRealName[1]) {\n  const fullName = stripHtml(matchRealName[1]).trim();\n  const nameParts = fullName.split(\" \");\n  if (nameParts.length > 1) {\n    lastName = nameParts.pop(); \n    firstName = nameParts.join(\" \"); \n  } else {\n    firstName = fullName;\n  }\n}\n\n// 3. Generar Email\nif (matchEmail && matchEmail[1]) {\n  finalEmail = stripHtml(matchEmail[1]).trim(); \n} else {\n  // Limpiamos el username de cualquier residuo antes de generar el email\n  const safeUser = username.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();\n  finalEmail = `${safeUser}@vinted.tailwind.es`;\n}\n\n// --- SALIDA ---\nif (matchProduct || username !== \"UsuarioVinted\") {\n  return {\n    json: {\n      status: \"success\",\n      customer: {\n        first_name: firstName,\n        last_name: lastName,\n        email: finalEmail,\n        tags: [\"Cliente Vinted\"],\n        note: `Comprado en Vinted: ${productName}. Usuario: ${username}`\n      },\n      product: {\n        name: productName\n      }\n    }\n  };\n} else {\n  return {\n    json: {\n      error: \"No se pudieron extraer los datos\",\n      debug: stripHtml(cleanText).substring(0, 500)\n    }\n  };\n}"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -636,7 +636,13 @@
               "index": 0
             }
           ],
-          []
+          [
+            {
+              "node": "Code in JavaScript",
+              "type": "main",
+              "index": 0
+            }
+          ]
         ]
       },
       "Code in JavaScript2": {
@@ -663,11 +669,11 @@
       }
     },
     "authors": "Info Tailwind",
-    "name": "Version e58c95dd",
+    "name": "Version f036a59f",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "e58c95dd-077a-4f02-96b4-957797cc852f",
+  "activeVersionId": "f036a59f-3a8f-4377-956e-d67ae0b8478f",
   "connections": {
     "Gmail Trigger": {
       "main": [
@@ -813,7 +819,13 @@
             "index": 0
           }
         ],
-        []
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Code in JavaScript2": {
@@ -858,7 +870,7 @@
         },
         "simple": false,
         "filters": {
-          "q": "(from:no-reply@vinted.es subject:\"Has vendido un artículo en Vinted\") OR (from:info@wallapop.com (subject:\"Sale confirmed! Follow the instructions to send your package\" OR subject:\"¡Venta confirmada! Sigue las instrucciones para enviar tu paquete\"))"
+          "q": "(from:noreply@vinted.es subject:\"Has vendido un artículo en Vinted\")"
         },
         "options": {}
       },
@@ -880,7 +892,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// 1. Obtenemos el texto de donde esté disponible (text, html o snippet)\n// TU INPUT TIENE EL CONTENIDO EN 'snippet', así que lo añadimos aquí.\nconst emailText = $input.item.json.text || $input.item.json.html || $input.item.json.snippet || \"\";\n\n// 2. Limpieza Previa (CRÍTICO PARA TU INPUT)\n// Reemplazamos &quot; por comillas normales \" para que el Regex funcione\nlet cleanText = emailText.replace(/&quot;/g, '\"').replace(/&#39;/g, \"'\");\n\n// Limpiamos saltos de línea y espacios extra\ncleanText = cleanText.replace(/\\r\\n/g, '\\n').replace(/\\s+/g, ' ');\n\n// --- PATRONES ---\n\n// A. Patrón PRODUCTO\n// Busca: texto entre comillas justo después de \"ha comprado\"\nconst productPattern = /ha comprado\\s+[*]*[\"“'](.+?)[\"”']([*]|[\\.]|$)/i;\n\n// B. Patrón USUARIO\n// Busca: la palabra que está justo antes de \"ha comprado\" (ej: ripride_or_die)\nconst usernamePattern = /([^\\s:,]+)\\s+ha comprado/i;\n\n// C. Patrones Adicionales (Email/Nombre real por si vinieran en el cuerpo completo)\nconst emailPattern = /E-mail:\\s*([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.[a-zA-Z0-9._-]+)/i;\nconst realNamePattern = /Dirección:\\s*([^,]+),/i;\n\n\n// --- EJECUCIÓN ---\nconst matchProduct = cleanText.match(productPattern);\nconst matchUsername = cleanText.match(usernamePattern);\nconst matchEmail = cleanText.match(emailPattern);\nconst matchRealName = cleanText.match(realNamePattern);\n\n// --- PROCESAMIENTO ---\n\n// 1. Producto\nlet productName = \"Producto Vinted\"; \nif (matchProduct && matchProduct[1]) {\n  productName = matchProduct[1].replace(/[*]/g, '').trim();\n}\n\n// 2. Usuario / Nombre\nlet username = \"UsuarioVinted\";\nif (matchUsername && matchUsername[1]) {\n    // Limpiamos asteriscos si los hubiera\n    username = matchUsername[1].replace(/\\*/g, '').trim();\n}\n\nlet firstName = username;\nlet lastName = \"(Vinted)\";\nlet finalEmail = \"\";\n\n// Intentamos sacar nombre real si existe (raro en snippet)\nif (matchRealName && matchRealName[1]) {\n  const fullName = matchRealName[1].trim();\n  const nameParts = fullName.split(\" \");\n  if (nameParts.length > 1) {\n    lastName = nameParts.pop(); \n    firstName = nameParts.join(\" \"); \n  } else {\n    firstName = fullName;\n  }\n}\n\n// 3. Generar Email (Vinted no da el email real, generamos uno ficticio para Shopify)\nif (matchEmail && matchEmail[1]) {\n  finalEmail = matchEmail[1].trim(); \n} else {\n  // Creamos email tipo: riprideordie@vinted.tailwind.es\n  const safeUser = username.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();\n  finalEmail = `${safeUser}@vinted.tailwind.es`;\n}\n\n// --- SALIDA ---\n\nif (matchProduct || username !== \"UsuarioVinted\") {\n  return {\n    json: {\n      status: \"success\",\n      customer: {\n        first_name: firstName,\n        last_name: lastName,\n        email: finalEmail,\n        tags: [\"Cliente Vinted\"],\n        note: `Comprado en Vinted: ${productName}. Usuario: ${username}`\n      },\n      product: {\n        name: productName\n      }\n    }\n  };\n} else {\n  return {\n    json: {\n      error: \"No se pudieron extraer los datos\",\n      debug: cleanText.substring(0, 500)\n    }\n  };\n}"
+        "jsCode": "// --- FUNCIÓN AUXILIAR PARA LIMPIAR HTML ---\nconst stripHtml = (html) => html.replace(/<[^>]*>?/gm, '');\n\n// 1. Obtenemos el texto de donde esté disponible\nconst emailText = $input.item.json.text || $input.item.json.html || $input.item.json.snippet || \"\";\n\n// 2. Limpieza Previa\nlet cleanText = emailText.replace(/&quot;/g, '\"').replace(/&#39;/g, \"'\");\ncleanText = cleanText.replace(/\\r\\n/g, '\\n').replace(/\\s+/g, ' ');\n\n// --- PATRONES ---\n// A. Patrón PRODUCTO\nconst productPattern = /ha comprado\\s+[*]*[\"“'](.+?)[\"”']([*]|[\\.]|$)/i;\n\n// B. Patrón USUARIO \n// (Se mantiene igual, pero luego limpiaremos el resultado del HTML)\nconst usernamePattern = /([^\\s:,]+)\\s+ha comprado/i;\n\n// C. Patrones Adicionales\nconst emailPattern = /E-mail:\\s*([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.[a-zA-Z0-9._-]+)/i;\nconst realNamePattern = /Dirección:\\s*([^,]+),/i;\n\n// --- EJECUCIÓN ---\nconst matchProduct = cleanText.match(productPattern);\nconst matchUsername = cleanText.match(usernamePattern);\nconst matchEmail = cleanText.match(emailPattern);\nconst matchRealName = cleanText.match(realNamePattern);\n\n// --- PROCESAMIENTO ---\n\n// 1. Producto (Limpiamos HTML por si acaso)\nlet productName = \"Producto Vinted\"; \nif (matchProduct && matchProduct[1]) {\n  productName = stripHtml(matchProduct[1]).replace(/[*]/g, '').trim();\n}\n\n// 2. Usuario / Nombre\nlet username = \"UsuarioVinted\";\nif (matchUsername && matchUsername[1]) {\n    // IMPORTANTE: Limpiamos etiquetas HTML y asteriscos\n    username = stripHtml(matchUsername[1]).replace(/\\*/g, '').trim();\n}\n\nlet firstName = username;\nlet lastName = \"(Vinted)\";\nlet finalEmail = \"\";\n\n// Intentamos sacar nombre real si existe\nif (matchRealName && matchRealName[1]) {\n  const fullName = stripHtml(matchRealName[1]).trim();\n  const nameParts = fullName.split(\" \");\n  if (nameParts.length > 1) {\n    lastName = nameParts.pop(); \n    firstName = nameParts.join(\" \"); \n  } else {\n    firstName = fullName;\n  }\n}\n\n// 3. Generar Email\nif (matchEmail && matchEmail[1]) {\n  finalEmail = stripHtml(matchEmail[1]).trim(); \n} else {\n  // Limpiamos el username de cualquier residuo antes de generar el email\n  const safeUser = username.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();\n  finalEmail = `${safeUser}@vinted.tailwind.es`;\n}\n\n// --- SALIDA ---\nif (matchProduct || username !== \"UsuarioVinted\") {\n  return {\n    json: {\n      status: \"success\",\n      customer: {\n        first_name: firstName,\n        last_name: lastName,\n        email: finalEmail,\n        tags: [\"Cliente Vinted\"],\n        note: `Comprado en Vinted: ${productName}. Usuario: ${username}`\n      },\n      product: {\n        name: productName\n      }\n    }\n  };\n} else {\n  return {\n    json: {\n      error: \"No se pudieron extraer los datos\",\n      debug: stripHtml(cleanText).substring(0, 500)\n    }\n  };\n}"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -1353,15 +1365,16 @@
     },
     "node:Gmail Trigger": {
       "Gmail Trigger": {
-        "lastTimeChecked": 1769075758,
+        "lastTimeChecked": 1769450959,
         "possibleDuplicates": [
-          "19be521d8af115d0"
+          "19bfb7ef7602fe56",
+          "19bf151b18f056e6"
         ]
       }
     }
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-01-28T09:05:11.579Z",
-  "versionId": "e58c95dd-077a-4f02-96b4-957797cc852f"
+  "updatedAt": "2026-01-28T14:06:32.405Z",
+  "versionId": "f036a59f-3a8f-4377-956e-d67ae0b8478f"
 }
