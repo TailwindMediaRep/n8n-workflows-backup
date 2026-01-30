@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-01-20T09:12:03.000Z",
-    "createdAt": "2026-01-20T09:12:01.578Z",
-    "versionId": "2564df6b-f886-4203-ba94-ec68574d92b0",
+    "updatedAt": "2026-01-29T10:11:51.000Z",
+    "createdAt": "2026-01-29T10:11:49.998Z",
+    "versionId": "a584d48f-24e9-401a-b6ad-ee63fa2eee98",
     "workflowId": "hXSd72PLpx6CIiA7",
     "nodes": [
       {
@@ -179,7 +179,7 @@
         "typeVersion": 1,
         "position": [
           288,
-          -32
+          -48
         ],
         "id": "c233f02e-1986-4cd3-ac9b-29c944d5cf24",
         "name": "No Operation, do nothing"
@@ -462,7 +462,15 @@
           },
           "columns": {
             "mappingMode": "defineBelow",
-            "value": {},
+            "value": {
+              "PRODUCTO": "={{ $json.NOMBRE_PRODUCTO }}",
+              "ID": "={{ $json[\"ID PRODUCTO\"] }}",
+              "CATEGORÍA": "={{ $json[\"TIPO DE PRODUCTO\"] }}",
+              "COLOR": "={{ $json.COLOR }}",
+              "TALLA": "={{ $json.TALLA }}",
+              "AÑO": "={{ $json[\"AÑO\"] }}",
+              "CANTIDAD_ACTUAL": "={{ $json.CANTIDAD_PRODUCTO }}"
+            },
             "matchingColumns": [],
             "schema": [
               {
@@ -557,6 +565,147 @@
             "name": "Google Sheets account"
           }
         }
+      },
+      {
+        "parameters": {
+          "path": "fe652125-7b6c-4bcb-bf7c-d9a86be10360",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -192,
+          720
+        ],
+        "id": "06414434-a2f4-45fe-93ea-8c9bc7007290",
+        "name": "Webhook1",
+        "webhookId": "fe652125-7b6c-4bcb-bf7c-d9a86be10360"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpHeaderAuth",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"query\": \"query { productVariant(id: \\\"gid://shopify/ProductVariant/{{ $json.VARIANT_ID_NUMERICO }}\\\") { product { id title totalInventory } } }\"\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          288,
+          -464
+        ],
+        "id": "b66d8c24-ff2e-4dfc-b415-870b1fd579c5",
+        "name": "HTTP Request",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "9ad4f8aa-ec36-4295-9191-63292b1e3751",
+                "leftValue": "={{ $json.data.productVariant.product.totalInventory }}",
+                "rightValue": 0,
+                "operator": {
+                  "type": "number",
+                  "operation": "lte"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          496,
+          -464
+        ],
+        "id": "a1edac9d-0099-4f62-b72b-d24b21d71f26",
+        "name": "If1"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpHeaderAuth",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"query\": \"mutation publishableUnpublish($id: ID!, $input: [PublicationInput!]!) { publishableUnpublish(id: $id, input: $input) { userErrors { field message } } }\",\n  \"variables\": {\n    \"id\": \"{{ $json.data.productVariant.product.id }}\",\n    \"input\": [\n      {\n        \"publicationId\": \"gid://shopify/Publication/258962489691\"\n      }\n    ]\n  }\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          704,
+          -608
+        ],
+        "id": "854831a8-1044-408c-8cd7-4570d881ef51",
+        "name": "HTTP Request1",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          704,
+          -448
+        ],
+        "id": "df04fcb6-c3e5-4a0c-8718-077f0f1e2b38",
+        "name": "No Operation, do nothing1"
+      },
+      {
+        "parameters": {
+          "content": "QUITA PRODUCTO DE TIENDA ONLINE",
+          "height": 352,
+          "width": 848
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          112,
+          -640
+        ],
+        "id": "dc676ec8-3947-4004-ba64-a0ab38508e1b",
+        "name": "Sticky Note4"
+      },
+      {
+        "parameters": {
+          "content": "Este flow elimina del canal de venta Tienda online en Shopify los productos que tienen stock igual o menos que 0",
+          "height": 80,
+          "width": 304
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          112,
+          -736
+        ],
+        "id": "58de7bf0-26cc-46d5-bd68-1266c26fca5f",
+        "name": "Sticky Note5"
       }
     ],
     "connections": {
@@ -598,6 +747,11 @@
           [
             {
               "node": "GraphQL",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "HTTP Request",
               "type": "main",
               "index": 0
             }
@@ -720,14 +874,48 @@
             }
           ]
         ]
+      },
+      "HTTP Request": {
+        "main": [
+          [
+            {
+              "node": "If1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If1": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request1",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "No Operation, do nothing1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "HTTP Request1": {
+        "main": [
+          []
+        ]
       }
     },
-    "authors": "Info Tailwind",
-    "name": "Version 2564df6b",
+    "authors": "Tailwind Media",
+    "name": "Version a584d48f",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "2564df6b-f886-4203-ba94-ec68574d92b0",
+  "activeVersionId": "a584d48f-24e9-401a-b6ad-ee63fa2eee98",
   "connections": {
     "Webhook": {
       "main": [
@@ -767,6 +955,11 @@
         [
           {
             "node": "GraphQL",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "HTTP Request",
             "type": "main",
             "index": 0
           }
@@ -888,6 +1081,40 @@
             "index": 0
           }
         ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        []
       ]
     }
   },
@@ -1072,7 +1299,7 @@
       "typeVersion": 1,
       "position": [
         288,
-        -32
+        -48
       ],
       "id": "c233f02e-1986-4cd3-ac9b-29c944d5cf24",
       "name": "No Operation, do nothing"
@@ -1355,7 +1582,15 @@
         },
         "columns": {
           "mappingMode": "defineBelow",
-          "value": {},
+          "value": {
+            "PRODUCTO": "={{ $json.NOMBRE_PRODUCTO }}",
+            "ID": "={{ $json[\"ID PRODUCTO\"] }}",
+            "CATEGORÍA": "={{ $json[\"TIPO DE PRODUCTO\"] }}",
+            "COLOR": "={{ $json.COLOR }}",
+            "TALLA": "={{ $json.TALLA }}",
+            "AÑO": "={{ $json[\"AÑO\"] }}",
+            "CANTIDAD_ACTUAL": "={{ $json.CANTIDAD_PRODUCTO }}"
+          },
           "matchingColumns": [],
           "schema": [
             {
@@ -1450,6 +1685,147 @@
           "name": "Google Sheets account"
         }
       }
+    },
+    {
+      "parameters": {
+        "path": "fe652125-7b6c-4bcb-bf7c-d9a86be10360",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -192,
+        720
+      ],
+      "id": "06414434-a2f4-45fe-93ea-8c9bc7007290",
+      "name": "Webhook1",
+      "webhookId": "fe652125-7b6c-4bcb-bf7c-d9a86be10360"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"query\": \"query { productVariant(id: \\\"gid://shopify/ProductVariant/{{ $json.VARIANT_ID_NUMERICO }}\\\") { product { id title totalInventory } } }\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        288,
+        -464
+      ],
+      "id": "b66d8c24-ff2e-4dfc-b415-870b1fd579c5",
+      "name": "HTTP Request",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "9ad4f8aa-ec36-4295-9191-63292b1e3751",
+              "leftValue": "={{ $json.data.productVariant.product.totalInventory }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "lte"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        496,
+        -464
+      ],
+      "id": "a1edac9d-0099-4f62-b72b-d24b21d71f26",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"query\": \"mutation publishableUnpublish($id: ID!, $input: [PublicationInput!]!) { publishableUnpublish(id: $id, input: $input) { userErrors { field message } } }\",\n  \"variables\": {\n    \"id\": \"{{ $json.data.productVariant.product.id }}\",\n    \"input\": [\n      {\n        \"publicationId\": \"gid://shopify/Publication/258962489691\"\n      }\n    ]\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        704,
+        -608
+      ],
+      "id": "854831a8-1044-408c-8cd7-4570d881ef51",
+      "name": "HTTP Request1",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        704,
+        -448
+      ],
+      "id": "df04fcb6-c3e5-4a0c-8718-077f0f1e2b38",
+      "name": "No Operation, do nothing1"
+    },
+    {
+      "parameters": {
+        "content": "QUITA PRODUCTO DE TIENDA ONLINE",
+        "height": 352,
+        "width": 848
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        112,
+        -640
+      ],
+      "id": "dc676ec8-3947-4004-ba64-a0ab38508e1b",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "content": "Este flow elimina del canal de venta Tienda online en Shopify los productos que tienen stock igual o menos que 0",
+        "height": 80,
+        "width": 304
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        112,
+        -736
+      ],
+      "id": "58de7bf0-26cc-46d5-bd68-1266c26fca5f",
+      "name": "Sticky Note5"
     }
   ],
   "pinData": {},
@@ -1468,12 +1844,12 @@
   "staticData": {
     "node:Schedule Trigger": {
       "recurrenceRules": [
-        22
+        0
       ]
     }
   },
   "tags": [],
-  "triggerCount": 2,
-  "updatedAt": "2026-01-20T09:12:01.576Z",
-  "versionId": "2564df6b-f886-4203-ba94-ec68574d92b0"
+  "triggerCount": 3,
+  "updatedAt": "2026-01-29T10:13:16.006Z",
+  "versionId": "a584d48f-24e9-401a-b6ad-ee63fa2eee98"
 }
