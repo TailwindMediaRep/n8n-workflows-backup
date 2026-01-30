@@ -1,16 +1,527 @@
 {
-  "active": false,
-  "activeVersion": null,
-  "activeVersionId": null,
-  "connections": {},
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-01-29T13:19:31.000Z",
+    "createdAt": "2026-01-29T13:19:29.362Z",
+    "versionId": "850d839d-dcb9-489c-9041-2d08a907e38a",
+    "workflowId": "e80tfOpD4TdBh8EF",
+    "nodes": [
+      {
+        "parameters": {
+          "path": "nothingBox",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -176,
+          -96
+        ],
+        "id": "eea1c911-9644-4f75-89c4-0d9d46f2bbb9",
+        "name": "Webhook",
+        "webhookId": "ead5a850-6cef-40c0-88db-d770260a62e8"
+      },
+      {
+        "parameters": {
+          "operation": "get",
+          "dataTableId": {
+            "__rl": true,
+            "value": "FnOKQ90bd0CxI2H5",
+            "mode": "list",
+            "cachedResultName": "nothingbox",
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/FnOKQ90bd0CxI2H5"
+          },
+          "filters": {
+            "conditions": [
+              {
+                "keyValue": "1"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.dataTable",
+        "typeVersion": 1.1,
+        "position": [
+          0,
+          -96
+        ],
+        "id": "f1ae6cff-1ec4-455e-971d-d53fd2f1cc4a",
+        "name": "obtener contador"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "dataTableId": {
+            "__rl": true,
+            "value": "FnOKQ90bd0CxI2H5",
+            "mode": "list",
+            "cachedResultName": "nothingbox",
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/FnOKQ90bd0CxI2H5"
+          },
+          "filters": {
+            "conditions": [
+              {
+                "keyValue": "1"
+              }
+            ]
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "contador": "={{ $json.row_number + 1}}"
+            },
+            "matchingColumns": [
+              "contador"
+            ],
+            "schema": [
+              {
+                "id": "contador",
+                "displayName": "contador",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "readOnly": false,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.dataTable",
+        "typeVersion": 1.1,
+        "position": [
+          496,
+          -96
+        ],
+        "id": "9e0c9b06-1b14-4e39-8c94-1adff6b7bfbe",
+        "name": "sumar contador"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "1fc1ee34-829a-45a3-a4af-fa95470d9512",
+                "name": "ORIGEN",
+                "value": "={{ $('Webhook').item.json.query.origen }}",
+                "type": "string"
+              },
+              {
+                "id": "348d16fa-a017-44c5-9879-665a4936a387",
+                "name": "CONTENIDO",
+                "value": "={{ $('Webhook').item.json.query.contenido }}",
+                "type": "string"
+              },
+              {
+                "id": "1e3fccd6-21e4-48d2-af81-a5372f6807eb",
+                "name": "CONTADOR",
+                "value": "={{ $json.contador }}",
+                "type": "number"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          160,
+          -96
+        ],
+        "id": "86f0e295-1a98-4660-aaec-a0118208b3da",
+        "name": "datos"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "documentId": {
+            "__rl": true,
+            "value": "1kE01W7ucOTrCpfrN_bC8b4WMvE9tTgQf9lBvjLPwj50",
+            "mode": "id"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "gid=0",
+            "mode": "list",
+            "cachedResultName": "Hoja 1",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1kE01W7ucOTrCpfrN_bC8b4WMvE9tTgQf9lBvjLPwj50/edit#gid=0"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "ORIGEN": "={{ $json.ORIGEN }}",
+              "CONTENIDO": "={{ $json.CONTENIDO }}",
+              "row_number": "={{ $json.CONTADOR }}"
+            },
+            "matchingColumns": [
+              "row_number"
+            ],
+            "schema": [
+              {
+                "id": "ORIGEN",
+                "displayName": "ORIGEN",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "CONTENIDO",
+                "displayName": "CONTENIDO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "row_number",
+                "displayName": "row_number",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "readOnly": true,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          320,
+          -96
+        ],
+        "id": "19035f47-2af1-4703-8349-9ee717cb5f2f",
+        "name": "escribir datos",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "RCuKUCifcA4jENcY",
+            "name": "Google Sheets account"
+          }
+        }
+      }
+    ],
+    "connections": {
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "obtener contador",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "obtener contador": {
+        "main": [
+          [
+            {
+              "node": "datos",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "datos": {
+        "main": [
+          [
+            {
+              "node": "escribir datos",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "escribir datos": {
+        "main": [
+          [
+            {
+              "node": "sumar contador",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Tailwind Media",
+    "name": "Version 850d839d",
+    "description": "",
+    "autosaved": false
+  },
+  "activeVersionId": "850d839d-dcb9-489c-9041-2d08a907e38a",
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "obtener contador",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "obtener contador": {
+      "main": [
+        [
+          {
+            "node": "datos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "datos": {
+      "main": [
+        [
+          {
+            "node": "escribir datos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "escribir datos": {
+      "main": [
+        [
+          {
+            "node": "sumar contador",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
   "createdAt": "2025-12-03T09:13:23.128Z",
   "id": "e80tfOpD4TdBh8EF",
   "isArchived": false,
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "vacio",
-  "nodes": [],
+  "name": "NOTHING BOX",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "nothingBox",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -176,
+        -96
+      ],
+      "id": "eea1c911-9644-4f75-89c4-0d9d46f2bbb9",
+      "name": "Webhook",
+      "webhookId": "ead5a850-6cef-40c0-88db-d770260a62e8"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "FnOKQ90bd0CxI2H5",
+          "mode": "list",
+          "cachedResultName": "nothingbox",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/FnOKQ90bd0CxI2H5"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "1"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        -96
+      ],
+      "id": "f1ae6cff-1ec4-455e-971d-d53fd2f1cc4a",
+      "name": "obtener contador"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "dataTableId": {
+          "__rl": true,
+          "value": "FnOKQ90bd0CxI2H5",
+          "mode": "list",
+          "cachedResultName": "nothingbox",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/FnOKQ90bd0CxI2H5"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "1"
+            }
+          ]
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "contador": "={{ $json.row_number + 1}}"
+          },
+          "matchingColumns": [
+            "contador"
+          ],
+          "schema": [
+            {
+              "id": "contador",
+              "displayName": "contador",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        496,
+        -96
+      ],
+      "id": "9e0c9b06-1b14-4e39-8c94-1adff6b7bfbe",
+      "name": "sumar contador"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1fc1ee34-829a-45a3-a4af-fa95470d9512",
+              "name": "ORIGEN",
+              "value": "={{ $('Webhook').item.json.query.origen }}",
+              "type": "string"
+            },
+            {
+              "id": "348d16fa-a017-44c5-9879-665a4936a387",
+              "name": "CONTENIDO",
+              "value": "={{ $('Webhook').item.json.query.contenido }}",
+              "type": "string"
+            },
+            {
+              "id": "1e3fccd6-21e4-48d2-af81-a5372f6807eb",
+              "name": "CONTADOR",
+              "value": "={{ $json.contador }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        160,
+        -96
+      ],
+      "id": "86f0e295-1a98-4660-aaec-a0118208b3da",
+      "name": "datos"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1kE01W7ucOTrCpfrN_bC8b4WMvE9tTgQf9lBvjLPwj50",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1kE01W7ucOTrCpfrN_bC8b4WMvE9tTgQf9lBvjLPwj50/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "ORIGEN": "={{ $json.ORIGEN }}",
+            "CONTENIDO": "={{ $json.CONTENIDO }}",
+            "row_number": "={{ $json.CONTADOR }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "ORIGEN",
+              "displayName": "ORIGEN",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "CONTENIDO",
+              "displayName": "CONTENIDO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        320,
+        -96
+      ],
+      "id": "19035f47-2af1-4703-8349-9ee717cb5f2f",
+      "name": "escribir datos",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "RCuKUCifcA4jENcY",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
   "pinData": {},
   "settings": {
     "executionOrder": "v1"
@@ -30,7 +541,7 @@
     }
   },
   "tags": [],
-  "triggerCount": 2,
-  "updatedAt": "2026-01-23T07:49:50.921Z",
-  "versionId": "5e0deb13-59ae-4f0f-ab4e-d5e8f1dcc105"
+  "triggerCount": 1,
+  "updatedAt": "2026-01-29T13:19:29.361Z",
+  "versionId": "850d839d-dcb9-489c-9041-2d08a907e38a"
 }
