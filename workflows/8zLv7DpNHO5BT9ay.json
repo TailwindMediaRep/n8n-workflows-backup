@@ -539,7 +539,7 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3,
       "position": [
-        -2384,
+        -2416,
         1376
       ],
       "id": "ad3ea731-07dc-45f4-ab7f-2fa1122403fb"
@@ -554,8 +554,8 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1,
       "position": [
-        -2160,
-        1312
+        -2208,
+        1328
       ],
       "id": "892eb6b9-c9ce-4dde-9072-34637ceda390",
       "credentials": {
@@ -573,8 +573,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -1936,
-        1376
+        -1952,
+        1392
       ],
       "id": "c095aca7-cd13-45a4-92a7-86c98e6a5ea8"
     },
@@ -591,7 +591,7 @@
       "typeVersion": 1,
       "position": [
         -1712,
-        1376
+        1392
       ],
       "id": "4961ca21-970f-492d-b305-b2610d3336a4",
       "credentials": {
@@ -610,7 +610,7 @@
       "typeVersion": 2,
       "position": [
         -1488,
-        1376
+        1392
       ],
       "id": "1b8bd03a-39c9-4ec6-851e-306fc9eec61b"
     },
@@ -627,7 +627,7 @@
       "typeVersion": 1,
       "position": [
         -1264,
-        1376
+        1392
       ],
       "id": "441cfb48-0d9d-4403-9797-b74cc0f280ec",
       "credentials": {
@@ -667,7 +667,7 @@
       "typeVersion": 2,
       "position": [
         -1040,
-        1376
+        1392
       ],
       "id": "66f01a6d-e07d-4949-b148-53bf5452046f"
     },
@@ -684,7 +684,7 @@
       "typeVersion": 1,
       "position": [
         -816,
-        1280
+        1296
       ],
       "id": "d3a5382b-317e-41a7-8298-e660bb66d383",
       "credentials": {
@@ -700,7 +700,7 @@
       "typeVersion": 1,
       "position": [
         -816,
-        1472
+        1488
       ],
       "id": "0d1a024e-1aaa-49a1-a085-55e9d67e95e8",
       "name": "No Operation, do nothing"
@@ -723,6 +723,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-01-26T11:51:14.003Z",
-  "versionId": "19682179-e7cc-4f13-b717-ccdfa978bcf2"
+  "updatedAt": "2026-01-29T10:26:38.815Z",
+  "versionId": "4858b4a1-e640-41e8-b1c5-db692b1b8fe8"
 }
