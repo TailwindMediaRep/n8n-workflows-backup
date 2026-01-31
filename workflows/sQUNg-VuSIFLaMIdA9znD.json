@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-01-29T14:10:08.000Z",
-    "createdAt": "2026-01-29T14:10:06.169Z",
-    "versionId": "6d3103ad-15df-42e6-9db1-8264edf45482",
+    "updatedAt": "2026-01-30T12:31:48.000Z",
+    "createdAt": "2026-01-30T12:31:47.127Z",
+    "versionId": "e5a88567-6fc7-4877-a510-48b97f8b7316",
     "workflowId": "sQUNg-VuSIFLaMIdA9znD",
     "nodes": [
       {
@@ -2042,7 +2042,7 @@
       {
         "parameters": {
           "content": "INFORME DIARIO DE ALQUILERES\n",
-          "height": 896,
+          "height": 624,
           "width": 1120,
           "color": 5
         },
@@ -2050,7 +2050,7 @@
         "typeVersion": 1,
         "position": [
           -784,
-          80
+          240
         ],
         "id": "62875833-b388-4db3-8958-e726c4d976d9",
         "name": "Sticky Note3"
@@ -2387,11 +2387,11 @@
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version 6d3103ad",
+    "name": "Version e5a88567",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "6d3103ad-15df-42e6-9db1-8264edf45482",
+  "activeVersionId": "e5a88567-6fc7-4877-a510-48b97f8b7316",
   "connections": {
     "Webhook": {
       "main": [
@@ -4766,7 +4766,7 @@
     {
       "parameters": {
         "content": "INFORME DIARIO DE ALQUILERES\n",
-        "height": 896,
+        "height": 624,
         "width": 1120,
         "color": 5
       },
@@ -4774,7 +4774,7 @@
       "typeVersion": 1,
       "position": [
         -784,
-        80
+        240
       ],
       "id": "62875833-b388-4db3-8958-e726c4d976d9",
       "name": "Sticky Note3"
@@ -4797,6 +4797,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 3,
-  "updatedAt": "2026-01-29T14:10:06.166Z",
-  "versionId": "6d3103ad-15df-42e6-9db1-8264edf45482"
+  "updatedAt": "2026-01-30T12:31:47.125Z",
+  "versionId": "e5a88567-6fc7-4877-a510-48b97f8b7316"
 }
