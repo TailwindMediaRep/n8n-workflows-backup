@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-01-29T13:17:15.000Z",
-    "createdAt": "2026-01-29T13:17:13.347Z",
-    "versionId": "c3414228-0b34-4593-8f98-7c901a51225c",
+    "updatedAt": "2026-01-31T09:33:26.000Z",
+    "createdAt": "2026-01-31T09:33:24.947Z",
+    "versionId": "9f383328-d6b5-48a5-a555-665046f84a5b",
     "workflowId": "CBcjY0JF5P9ZjxEE",
     "nodes": [
       {
@@ -126,7 +126,7 @@
           "node": "17841470046184468",
           "edge": "=media",
           "options": {
-            "queryParametersJson": "={\n\"video_url\": \"{{ $json.id_Historia_Camaras }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
+            "queryParametersJson": "={\n\"video_url\": \"{{ $json.query.idHistoria }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
           }
         },
         "type": "n8n-nodes-base.facebookGraphApi",
@@ -495,7 +495,7 @@
         "parameters": {
           "sendTo": "adrianazorinsanchez@gmail.com",
           "subject": "HISTORIA CÁMARA",
-          "message": "=<!DOCTYPE html>\n<html>\n<head>\n  <style>\n    /* Estilos Generales */\n    body {\n      font-family: Arial, sans-serif;\n      background-color: #f4f4f4;\n      margin: 0;\n      padding: 0;\n    }\n\n    /* Contenedor Principal */\n    .container {\n      max-width: 600px;\n      margin: 20px auto;\n      background-color: #ffffff;\n      border-radius: 8px;\n      overflow: hidden;\n      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);\n    }\n\n    /* Cabecera */\n    .header {\n      background-color: #333333;\n      color: #ffffff;\n      padding: 20px;\n      text-align: center;\n    }\n\n    /* Contenido */\n    .content {\n      padding: 30px;\n      text-align: center;\n      color: #333333;\n    }\n\n    /* Caja de Previsualización */\n    .preview-box {\n      margin: 20px 0;\n      border: 1px solid #eeeeee;\n      padding: 10px;\n      border-radius: 5px;\n      background-color: #fafafa;\n    }\n\n    /* Imágenes */\n    img {\n      max-width: 100%;\n      height: auto;\n      border-radius: 4px;\n      display: block;\n      margin: 0 auto;\n    }\n\n    /* Botón de Confirmación */\n    .btn-confirmar {\n      display: inline-block;\n      background-color: #2ecc71;\n      color: #ffffff !important;\n      padding: 14px 28px;\n      text-decoration: none;\n      border-radius: 5px;\n      font-weight: bold;\n      margin-top: 20px;\n      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n    }\n  </style>\n</head>\n<body>\n\n  <div class=\"container\">\n    \n    <div class=\"header\">\n      <h2 style=\"margin:0;\">Aprobación Requerida</h2>\n    </div>\n\n    <div class=\"content\">\n      <h3>Se requiere aprobación de una historia</h3>\n\n      <div class=\"preview-box\">\n        <p style=\"margin-top: 0; margin-bottom: 10px; font-weight: bold; color: #555;\">\n          Vista previa:\n        </p>\n        \n        <img src=\"{{ $('Edit Fields').item.json.vista_previa }}\" alt=\"Vista Previa\">\n      </div>\n\n      <a href=\"https://n8n.tailwind.es/webhook-test/historiaCamara?idHistoria={{ $('Edit Fields').item.json.story_url }}\" class=\"btn-confirmar\">\n        Aprobar Historia\n      </a>\n      <a href=\"https://n8n.tailwind.es/webhook-test/historiaPospuesta\" class=\"btn-confirmar\">\n        Posponer 30 minutos\n      </a>\n      <a href=\"https://n8n.tailwind.es/webhook-test/nothingBox?origen=historiaWebcam&contenido=HistoriaRechazada\" class=\"btn-confirmar\">\n        Rechazar\n      </a>\n    </div>\n\n    <div style=\"background-color: #eeeeee; padding: 10px; text-align: center; font-size: 12px; color: #777;\">\n      Enviado automáticamente desde n8n\n    </div>\n\n  </div>\n\n</body>\n</html>",
+          "message": "=<!DOCTYPE html>\n<html>\n<head>\n  <style>\n    /* Estilos Generales */\n    body {\n      font-family: Arial, sans-serif;\n      background-color: #f4f4f4;\n      margin: 0;\n      padding: 0;\n    }\n\n    /* Contenedor Principal */\n    .container {\n      max-width: 600px;\n      margin: 20px auto;\n      background-color: #ffffff;\n      border-radius: 8px;\n      overflow: hidden;\n      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);\n    }\n\n    /* Cabecera */\n    .header {\n      background-color: #333333;\n      color: #ffffff;\n      padding: 20px;\n      text-align: center;\n    }\n\n    /* Contenido */\n    .content {\n      padding: 30px;\n      text-align: center;\n      color: #333333;\n    }\n\n    /* Caja de Previsualización */\n    .preview-box {\n      margin: 20px 0;\n      border: 1px solid #eeeeee;\n      padding: 10px;\n      border-radius: 5px;\n      background-color: #fafafa;\n    }\n\n    /* Imágenes */\n    img {\n      max-width: 100%;\n      height: auto;\n      border-radius: 4px;\n      display: block;\n      margin: 0 auto;\n    }\n\n    /* Botón de Confirmación */\n    .btn-confirmar {\n      display: inline-block;\n      background-color: #2ecc71;\n      color: #ffffff !important;\n      padding: 14px 28px;\n      text-decoration: none;\n      border-radius: 5px;\n      font-weight: bold;\n      margin-top: 20px;\n      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n    }\n  </style>\n</head>\n<body>\n\n  <div class=\"container\">\n    \n    <div class=\"header\">\n      <h2 style=\"margin:0;\">Aprobación Requerida</h2>\n    </div>\n\n    <div class=\"content\">\n      <h3>Se requiere aprobación de una historia</h3>\n\n      <div class=\"preview-box\">\n        <p style=\"margin-top: 0; margin-bottom: 10px; font-weight: bold; color: #555;\">\n          Vista previa:\n        </p>\n        \n        <img src=\"{{ $('Edit Fields').item.json.vista_previa }}\" alt=\"Vista Previa\">\n      </div>\n\n      <a href=\"https://n8n.tailwind.es/webhook/historiaCamara?idHistoria={{ $('Edit Fields').item.json.story_url }}\" class=\"btn-confirmar\">\n        Aprobar Historia\n      </a>\n      <a href=\"https://n8n.tailwind.es/webhook/historiaPospuesta\" class=\"btn-confirmar\">\n        Posponer 30 minutos\n      </a>\n      <a href=\"https://n8n.tailwind.es/webhook-test/rechazarHistoria?origen=historiaWebcam&contenido=HistoriaRechazada&idHistoria={{ $('Edit Fields').item.json.story_url }}\" class=\"btn-confirmar\">\n        Rechazar\n      </a>\n    </div>\n\n    <div style=\"background-color: #eeeeee; padding: 10px; text-align: center; font-size: 12px; color: #777;\">\n      Enviado automáticamente desde n8n\n    </div>\n\n  </div>\n\n</body>\n</html>",
           "options": {}
         },
         "type": "n8n-nodes-base.gmail",
@@ -573,6 +573,598 @@
         "id": "35d19881-992b-4494-a591-18f39361266c",
         "name": "esperar 30 minutos",
         "webhookId": "746e61ef-777c-4de5-8dab-a2cfde26d891"
+      },
+      {
+        "parameters": {
+          "path": "rechazarHistoria",
+          "responseMode": "responseNode",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -1232,
+          -352
+        ],
+        "id": "7facb56f-f11a-4b0c-8a73-2a1872b6bcc7",
+        "name": "rechazarHistoria",
+        "webhookId": "b7eb3ca4-9700-4a4b-b1ae-cfbd33789ee9"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "1fc1ee34-829a-45a3-a4af-fa95470d9512",
+                "name": "ORIGEN",
+                "value": "={{ $('Webhook').item.json.query.origen }}",
+                "type": "string"
+              },
+              {
+                "id": "348d16fa-a017-44c5-9879-665a4936a387",
+                "name": "CONTENIDO",
+                "value": "={{ $('Webhook').item.json.query.contenido }}",
+                "type": "string"
+              },
+              {
+                "id": "93855f27-f03b-443c-82bf-153d717f2a4d",
+                "name": "ID_FLOW",
+                "value": "={{ $json.query.idFlow }}",
+                "type": "string"
+              },
+              {
+                "id": "43b297bb-9d8d-4af2-97b0-0ddb4711edd1",
+                "name": "MAS",
+                "value": "={{ $json.query.idHistoria }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -1072,
+          -352
+        ],
+        "id": "a151d550-695a-4b66-8dc1-8b96ac126da1",
+        "name": "datosRechazar"
+      },
+      {
+        "parameters": {
+          "respondWith": "text",
+          "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Confirmación</title>\n  <style>\n    body {\n      font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif;\n      background-color: #f3f4f6;\n      display: flex;\n      justify-content: center;\n      align-items: center;\n      height: 100vh;\n      margin: 0;\n    }\n    .card {\n      background: white;\n      padding: 40px;\n      border-radius: 12px;\n      box-shadow: 0 10px 25px rgba(0,0,0,0.1);\n      text-align: center;\n      max-width: 400px;\n      border-top: 6px solid #ef4444;\n    }\n    h2 { color: #1f2937; margin-top: 0; font-size: 24px; }\n    p { color: #4b5563; margin: 10px 0; font-size: 16px; }\n    .warning { color: #ef4444; font-weight: bold; margin-bottom: 25px; display: block; }\n    .btn-container { display: flex; gap: 15px; justify-content: center; margin-top: 20px; }\n    \n    /* Estilos de los botones (Enlaces) */\n    .btn {\n      text-decoration: none;\n      padding: 12px 30px;\n      border-radius: 6px;\n      font-weight: bold;\n      font-size: 16px;\n      transition: opacity 0.2s;\n      display: inline-block;\n    }\n    .btn:hover { opacity: 0.8; }\n    \n    /* Botón SI (Acción de Webhook) */\n    .btn-si { background-color: #ef4444; color: white; }\n    \n    /* Botón NO (Cancelar) */\n    .btn-no { background-color: #e5e7eb; color: #374151; }\n  </style>\n</head>\n<body>\n\n  <div class=\"card\">\n    <h2>⚠️ Atención</h2>\n    <p>Estás a punto de rechazar.</p>\n    <p>Esta acción no se puede deshacer.</p>\n    <span class=\"warning\">¿Estás seguro?</span>\n\n    <div class=\"btn-container\">\n      <a href=\"https://n8n.tailwind.es/webhook-test/nothingBoxSi?origen={{ $json.ORIGEN }}&contenido={{ $json.CONTENIDO }}&estado=rechazado&idFlow={{ $json.ID_FLOW }}&mas={{ $json.MAS }}\" class=\"btn btn-si\">SÍ</a>\n\n      <a href=\"https://n8n.tailwind.es/webhook-test/nothingBoxSi?origen={{ $json.ORIGEN }}&contenido={{ $json.CONTENIDO }}&estado=noRechazado&idFlow={{ $json.ID_FLOW }}&mas={{ $json.MAS }}\" class=\"btn btn-no\">NO</a>\n    </div>\n  </div>\n\n</body>\n</html>",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.5,
+        "position": [
+          -912,
+          -352
+        ],
+        "id": "54afc9b8-4f0c-49bf-96af-f83d961af8a8",
+        "name": "Respond to Webhook Rechazar"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "dataTableId": {
+            "__rl": true,
+            "value": "FnOKQ90bd0CxI2H5",
+            "mode": "list",
+            "cachedResultName": "nothingbox",
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/FnOKQ90bd0CxI2H5"
+          },
+          "filters": {
+            "conditions": [
+              {
+                "keyValue": "1"
+              }
+            ]
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "contador": "={{ $json.row_number + 1}}",
+              "contador_no_rechazados": "={{ $('obtener contador').item.json.contador_no_rechazados }}"
+            },
+            "matchingColumns": [
+              "contador"
+            ],
+            "schema": [
+              {
+                "id": "contador",
+                "displayName": "contador",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "readOnly": false,
+                "removed": false
+              },
+              {
+                "id": "contador_no_rechazados",
+                "displayName": "contador_no_rechazados",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "readOnly": false,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.dataTable",
+        "typeVersion": 1.1,
+        "position": [
+          656,
+          -512
+        ],
+        "id": "9b26fb52-e2b7-4b2a-9cdc-4e0e1f334c22",
+        "name": "sumar contador"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "1fc1ee34-829a-45a3-a4af-fa95470d9512",
+                "name": "ORIGEN",
+                "value": "={{ $('si').item.json.query.origen }}",
+                "type": "string"
+              },
+              {
+                "id": "348d16fa-a017-44c5-9879-665a4936a387",
+                "name": "CONTENIDO",
+                "value": "={{ $('si').item.json.query.contenido }}",
+                "type": "string"
+              },
+              {
+                "id": "1e3fccd6-21e4-48d2-af81-a5372f6807eb",
+                "name": "CONTADOR",
+                "value": "={{ $json.contador }}",
+                "type": "number"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          320,
+          -512
+        ],
+        "id": "5a228376-6e29-480e-b480-f2efb1ca87ca",
+        "name": "datos"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "documentId": {
+            "__rl": true,
+            "value": "1kE01W7ucOTrCpfrN_bC8b4WMvE9tTgQf9lBvjLPwj50",
+            "mode": "id"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "Rechazados",
+            "mode": "name"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "row_number": "={{ $json.CONTADOR }}",
+              "ORIGEN": "={{ $json.ORIGEN }}",
+              "CONTENIDO": "={{ $json.CONTENIDO }}"
+            },
+            "matchingColumns": [
+              "row_number"
+            ],
+            "schema": [
+              {
+                "id": "ORIGEN",
+                "displayName": "ORIGEN",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "CONTENIDO",
+                "displayName": "CONTENIDO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "row_number",
+                "displayName": "row_number",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "readOnly": true,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          480,
+          -512
+        ],
+        "id": "5a709dcd-83fe-4fa9-a663-a33d0c1dae45",
+        "name": "escribir datos",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "RCuKUCifcA4jENcY",
+            "name": "Google Sheets account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "path": "rechazarSi",
+          "responseMode": "responseNode",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -544,
+          -352
+        ],
+        "id": "34425f3d-064a-4a05-a5ee-152a7d25b887",
+        "name": "si",
+        "webhookId": "8d74fb79-3a60-4b85-8eae-63028c20ecb5"
+      },
+      {
+        "parameters": {
+          "operation": "get",
+          "dataTableId": {
+            "__rl": true,
+            "value": "FnOKQ90bd0CxI2H5",
+            "mode": "list",
+            "cachedResultName": "nothingbox",
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/FnOKQ90bd0CxI2H5"
+          },
+          "filters": {
+            "conditions": [
+              {
+                "keyValue": "1"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.dataTable",
+        "typeVersion": 1.1,
+        "position": [
+          160,
+          -512
+        ],
+        "id": "b626e203-21c2-4c8a-9cff-385723289213",
+        "name": "obtener contador"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "dataTableId": {
+            "__rl": true,
+            "value": "FnOKQ90bd0CxI2H5",
+            "mode": "list",
+            "cachedResultName": "nothingbox",
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/FnOKQ90bd0CxI2H5"
+          },
+          "filters": {
+            "conditions": [
+              {
+                "keyValue": "1"
+              }
+            ]
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "contador": "={{ $('obtener contador1').item.json.contador }}",
+              "contador_no_rechazados": "={{ $json.row_number + 1}}"
+            },
+            "matchingColumns": [
+              "contador"
+            ],
+            "schema": [
+              {
+                "id": "contador",
+                "displayName": "contador",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "readOnly": false,
+                "removed": false
+              },
+              {
+                "id": "contador_no_rechazados",
+                "displayName": "contador_no_rechazados",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "readOnly": false,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.dataTable",
+        "typeVersion": 1.1,
+        "position": [
+          672,
+          -224
+        ],
+        "id": "a6e39b97-25d6-4978-b2f6-c7b390801524",
+        "name": "sumar contador1"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "1fc1ee34-829a-45a3-a4af-fa95470d9512",
+                "name": "ORIGEN",
+                "value": "={{ $('si').item.json.query.origen }}",
+                "type": "string"
+              },
+              {
+                "id": "348d16fa-a017-44c5-9879-665a4936a387",
+                "name": "CONTENIDO",
+                "value": "={{ $('si').item.json.query.contenido }}",
+                "type": "string"
+              },
+              {
+                "id": "1e3fccd6-21e4-48d2-af81-a5372f6807eb",
+                "name": "CONTADOR",
+                "value": "={{ $json.contador_no_rechazados }}",
+                "type": "number"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          336,
+          -224
+        ],
+        "id": "0ccd4143-6dc7-4a5e-a34e-bc8be3cd37b6",
+        "name": "datos2"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "documentId": {
+            "__rl": true,
+            "value": "1kE01W7ucOTrCpfrN_bC8b4WMvE9tTgQf9lBvjLPwj50",
+            "mode": "id"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": "No Rechazados",
+            "mode": "name"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "row_number": "={{ $json.CONTADOR }}",
+              "ORIGEN": "={{ $json.ORIGEN }}",
+              "CONTENIDO": "={{ $json.CONTENIDO }}"
+            },
+            "matchingColumns": [
+              "row_number"
+            ],
+            "schema": [
+              {
+                "id": "ORIGEN",
+                "displayName": "ORIGEN",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "CONTENIDO",
+                "displayName": "CONTENIDO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "row_number",
+                "displayName": "row_number",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "readOnly": true,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          496,
+          -224
+        ],
+        "id": "427cb2ff-b459-4736-95ab-2e372b34dfa5",
+        "name": "escribir datos1",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "RCuKUCifcA4jENcY",
+            "name": "Google Sheets account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "get",
+          "dataTableId": {
+            "__rl": true,
+            "value": "FnOKQ90bd0CxI2H5",
+            "mode": "list",
+            "cachedResultName": "nothingbox",
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/FnOKQ90bd0CxI2H5"
+          },
+          "filters": {
+            "conditions": [
+              {
+                "keyValue": "1"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.dataTable",
+        "typeVersion": 1.1,
+        "position": [
+          176,
+          -224
+        ],
+        "id": "f901e8c3-08ec-4bdf-9470-803fbbf9847e",
+        "name": "obtener contador1"
+      },
+      {
+        "parameters": {
+          "respondWith": "text",
+          "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Selección de Acción</title>\n    <style>\n        body {\n            font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif;\n            background-color: #f3f4f6;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            height: 100vh;\n            margin: 0;\n        }\n        .card {\n            background: white;\n            padding: 40px;\n            border-radius: 12px;\n            box-shadow: 0 10px 25px rgba(0,0,0,0.1);\n            text-align: center;\n            max-width: 450px; /* Un poco más ancho para que quepan los textos */\n            width: 90%;\n            border-top: 6px solid #3b82f6; /* Azul Informativo */\n        }\n        .icon {\n            font-size: 50px;\n            margin-bottom: 15px;\n            display: block;\n        }\n        h2 { \n            color: #1f2937; \n            margin-top: 0; \n            font-size: 24px; \n        }\n        p { \n            color: #4b5563; \n            margin: 10px 0 30px 0; \n            font-size: 18px; \n        }\n        .btn-container { \n            display: flex; \n            flex-direction: column; /* Botones uno encima de otro para mejor lectura en móvil */\n            gap: 15px; \n            justify-content: center; \n        }\n        \n        /* Estilos Base de Botones */\n        .btn {\n            text-decoration: none;\n            padding: 15px 20px;\n            border-radius: 8px;\n            font-weight: bold;\n            font-size: 16px;\n            transition: transform 0.1s, opacity 0.2s;\n            display: block;\n            text-align: center;\n            box-shadow: 0 2px 4px rgba(0,0,0,0.1);\n        }\n        .btn:hover { opacity: 0.9; transform: translateY(-1px); }\n        .btn:active { transform: translateY(1px); }\n        \n        /* Botón Posponer (Naranja - Tiempo) */\n        .btn-posponer { \n            background-color: #f59e0b; \n            color: white; \n        }\n        \n        /* Botón Aceptar (Azul - Acción Principal) */\n        .btn-aceptar { \n            background-color: #3b82f6; \n            color: white; \n        }\n\n    </style>\n</head>\n<body>\n\n    <div class=\"card\">\n        <span class=\"icon\">🤔</span>\n        \n        <h2>No se ha rechazado</h2>\n        <p>¿Qué quieres hacer?</p>\n\n        <div class=\"btn-container\">\n            <a href=\"REEMPLAZAR_URL_POSPONER\" class=\"btn btn-posponer\">\n                ⏱️ POSPONER 30 MINUTOS\n            </a>\n\n            <a href=\"REEMPLAZAR_URL_ACEPTAR\" class=\"btn btn-aceptar\">\n                ✅ ACEPTAR\n            </a>\n        </div>\n    </div>\n\n</body>\n</html>",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.5,
+        "position": [
+          0,
+          -224
+        ],
+        "id": "271a6a4d-599d-455c-b699-86c5d10eed12",
+        "name": "Respond to Webhook2"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "284b2492-0b5d-46f4-89df-663f252068cf",
+                "name": "",
+                "value": "",
+                "type": "string"
+              },
+              {
+                "id": "da67b1b5-9751-40e0-a4b8-31d51d15c6c9",
+                "name": "",
+                "value": "",
+                "type": "string"
+              },
+              {
+                "id": "23a32b17-5967-4fd9-b9e1-d7891c740482",
+                "name": "",
+                "value": "",
+                "type": "string"
+              },
+              {
+                "id": "7a5c6c5f-9d94-496b-8e36-192286d69c5e",
+                "name": "",
+                "value": "",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -384,
+          -352
+        ],
+        "id": "4cb7dd56-6534-4a59-8595-8a6832725ae0",
+        "name": "datos_si_no"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "eb37d92a-214b-46d4-9bab-842c86e8e860",
+                "leftValue": "={{ $json.query.estado }}",
+                "rightValue": "rechazado",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          -192,
+          -352
+        ],
+        "id": "b0625766-366e-4d16-8e08-d72254e31bca",
+        "name": "If2"
+      },
+      {
+        "parameters": {
+          "respondWith": "text",
+          "responseBody": "<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Acción Completada</title>\n    <style>\n        body {\n            font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif;\n            background-color: #f3f4f6;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            height: 100vh;\n            margin: 0;\n        }\n        .card {\n            background: white;\n            padding: 40px;\n            border-radius: 12px;\n            box-shadow: 0 10px 25px rgba(0,0,0,0.1);\n            text-align: center;\n            max-width: 400px;\n            border-top: 6px solid #10b981; /* Verde Éxito */\n        }\n        .icon {\n            font-size: 50px;\n            margin-bottom: 20px;\n            display: block;\n        }\n        h2 { \n            color: #1f2937; \n            margin-top: 0; \n            margin-bottom: 15px;\n            font-size: 24px; \n        }\n        p { \n            color: #4b5563; \n            margin: 10px 0; \n            line-height: 1.5;\n            font-size: 16px; \n        }\n        .doc-name {\n            background-color: #f3f4f6;\n            padding: 2px 6px;\n            border-radius: 4px;\n            font-family: monospace;\n            color: #374151;\n            font-weight: bold;\n        }\n        button {\n            background-color: #10b981;\n            color: white;\n            border: none;\n            padding: 12px 40px;\n            border-radius: 6px;\n            font-weight: bold;\n            font-size: 16px;\n            cursor: pointer;\n            margin-top: 25px;\n            transition: background 0.2s;\n        }\n        button:hover {\n            background-color: #059669;\n        }\n    </style>\n</head>\n<body>\n\n    <div class=\"card\">\n        <span class=\"icon\">✅</span>\n        \n        <h2>Rechazado con éxito</h2>\n        \n        <p>\n            El fallo quedará apuntado en el documento <span class=\"doc-name\">nothingbox</span> de Drive.\n        </p>\n        \n        <button onclick=\"cerrarPestana()\">ACEPTAR</button>\n    </div>\n\n    <script>\n        function cerrarPestana() {\n            // Intenta cerrar la ventana\n            window.close();\n            \n            // Truco adicional para navegadores que bloquean window.close()\n            // si la pestaña no fue abierta por script\n            window.open('','_parent','');\n            window.close();\n\n            // Si el navegador bloquea el cierre (medida de seguridad común),\n            // mostramos un mensaje final.\n            setTimeout(function() {\n                document.body.innerHTML = \"<div style='text-align:center; padding:50px; font-family:sans-serif; color:#4b5563;'><h3>Puedes cerrar esta pestaña manualmente.</h3></div>\";\n            }, 100);\n        }\n    </script>\n\n</body>\n</html>",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.5,
+        "position": [
+          0,
+          -512
+        ],
+        "id": "4568449c-95d0-4ca1-9824-cee5dae22b44",
+        "name": "Respond to Webhook3"
       }
     ],
     "connections": {
@@ -841,14 +1433,164 @@
             }
           ]
         ]
+      },
+      "rechazarHistoria": {
+        "main": [
+          [
+            {
+              "node": "datosRechazar",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "datosRechazar": {
+        "main": [
+          [
+            {
+              "node": "Respond to Webhook Rechazar",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "datos": {
+        "main": [
+          [
+            {
+              "node": "escribir datos",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "escribir datos": {
+        "main": [
+          [
+            {
+              "node": "sumar contador",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "si": {
+        "main": [
+          [
+            {
+              "node": "datos_si_no",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "obtener contador": {
+        "main": [
+          [
+            {
+              "node": "datos",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "datos2": {
+        "main": [
+          [
+            {
+              "node": "escribir datos1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "escribir datos1": {
+        "main": [
+          [
+            {
+              "node": "sumar contador1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "obtener contador1": {
+        "main": [
+          [
+            {
+              "node": "datos2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Respond to Webhook2": {
+        "main": [
+          [
+            {
+              "node": "obtener contador1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "datos_si_no": {
+        "main": [
+          [
+            {
+              "node": "If2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If2": {
+        "main": [
+          [
+            {
+              "node": "Respond to Webhook3",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Respond to Webhook2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Respond to Webhook3": {
+        "main": [
+          [
+            {
+              "node": "obtener contador",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version c3414228",
+    "name": "Version 9f383328",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "c3414228-0b34-4593-8f98-7c901a51225c",
+  "activeVersionId": "9f383328-d6b5-48a5-a555-665046f84a5b",
   "connections": {
     "When clicking ‘Execute workflow’": {
       "main": [
@@ -1110,6 +1852,156 @@
         [
           {
             "node": "request_página_principal",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "rechazarHistoria": {
+      "main": [
+        [
+          {
+            "node": "datosRechazar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "datosRechazar": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook Rechazar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "datos": {
+      "main": [
+        [
+          {
+            "node": "escribir datos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "escribir datos": {
+      "main": [
+        [
+          {
+            "node": "sumar contador",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "si": {
+      "main": [
+        [
+          {
+            "node": "datos_si_no",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "obtener contador": {
+      "main": [
+        [
+          {
+            "node": "datos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "datos2": {
+      "main": [
+        [
+          {
+            "node": "escribir datos1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "escribir datos1": {
+      "main": [
+        [
+          {
+            "node": "sumar contador1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "obtener contador1": {
+      "main": [
+        [
+          {
+            "node": "datos2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond to Webhook2": {
+      "main": [
+        [
+          {
+            "node": "obtener contador1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "datos_si_no": {
+      "main": [
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond to Webhook2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond to Webhook3": {
+      "main": [
+        [
+          {
+            "node": "obtener contador",
             "type": "main",
             "index": 0
           }
@@ -1614,7 +2506,7 @@
       "parameters": {
         "sendTo": "adrianazorinsanchez@gmail.com",
         "subject": "HISTORIA CÁMARA",
-        "message": "=<!DOCTYPE html>\n<html>\n<head>\n  <style>\n    /* Estilos Generales */\n    body {\n      font-family: Arial, sans-serif;\n      background-color: #f4f4f4;\n      margin: 0;\n      padding: 0;\n    }\n\n    /* Contenedor Principal */\n    .container {\n      max-width: 600px;\n      margin: 20px auto;\n      background-color: #ffffff;\n      border-radius: 8px;\n      overflow: hidden;\n      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);\n    }\n\n    /* Cabecera */\n    .header {\n      background-color: #333333;\n      color: #ffffff;\n      padding: 20px;\n      text-align: center;\n    }\n\n    /* Contenido */\n    .content {\n      padding: 30px;\n      text-align: center;\n      color: #333333;\n    }\n\n    /* Caja de Previsualización */\n    .preview-box {\n      margin: 20px 0;\n      border: 1px solid #eeeeee;\n      padding: 10px;\n      border-radius: 5px;\n      background-color: #fafafa;\n    }\n\n    /* Imágenes */\n    img {\n      max-width: 100%;\n      height: auto;\n      border-radius: 4px;\n      display: block;\n      margin: 0 auto;\n    }\n\n    /* Botón de Confirmación */\n    .btn-confirmar {\n      display: inline-block;\n      background-color: #2ecc71;\n      color: #ffffff !important;\n      padding: 14px 28px;\n      text-decoration: none;\n      border-radius: 5px;\n      font-weight: bold;\n      margin-top: 20px;\n      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n    }\n  </style>\n</head>\n<body>\n\n  <div class=\"container\">\n    \n    <div class=\"header\">\n      <h2 style=\"margin:0;\">Aprobación Requerida</h2>\n    </div>\n\n    <div class=\"content\">\n      <h3>Se requiere aprobación de una historia</h3>\n\n      <div class=\"preview-box\">\n        <p style=\"margin-top: 0; margin-bottom: 10px; font-weight: bold; color: #555;\">\n          Vista previa:\n        </p>\n        \n        <img src=\"{{ $('Edit Fields').item.json.vista_previa }}\" alt=\"Vista Previa\">\n      </div>\n\n      <a href=\"https://n8n.tailwind.es/webhook/historiaCamara?idHistoria={{ $('Edit Fields').item.json.story_url }}\" class=\"btn-confirmar\">\n        Aprobar Historia\n      </a>\n      <a href=\"https://n8n.tailwind.es/webhook/historiaPospuesta\" class=\"btn-confirmar\">\n        Posponer 30 minutos\n      </a>\n      <a href=\"https://n8n.tailwind.es/webhook-test/nothingBox?origen=historiaWebcam&contenido=HistoriaRechazada\" class=\"btn-confirmar\">\n        Rechazar\n      </a>\n    </div>\n\n    <div style=\"background-color: #eeeeee; padding: 10px; text-align: center; font-size: 12px; color: #777;\">\n      Enviado automáticamente desde n8n\n    </div>\n\n  </div>\n\n</body>\n</html>",
+        "message": "=<!DOCTYPE html>\n<html>\n<head>\n  <style>\n    /* Estilos Generales */\n    body {\n      font-family: Arial, sans-serif;\n      background-color: #f4f4f4;\n      margin: 0;\n      padding: 0;\n    }\n\n    /* Contenedor Principal */\n    .container {\n      max-width: 600px;\n      margin: 20px auto;\n      background-color: #ffffff;\n      border-radius: 8px;\n      overflow: hidden;\n      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);\n    }\n\n    /* Cabecera */\n    .header {\n      background-color: #333333;\n      color: #ffffff;\n      padding: 20px;\n      text-align: center;\n    }\n\n    /* Contenido */\n    .content {\n      padding: 30px;\n      text-align: center;\n      color: #333333;\n    }\n\n    /* Caja de Previsualización */\n    .preview-box {\n      margin: 20px 0;\n      border: 1px solid #eeeeee;\n      padding: 10px;\n      border-radius: 5px;\n      background-color: #fafafa;\n    }\n\n    /* Imágenes */\n    img {\n      max-width: 100%;\n      height: auto;\n      border-radius: 4px;\n      display: block;\n      margin: 0 auto;\n    }\n\n    /* Botón de Confirmación */\n    .btn-confirmar {\n      display: inline-block;\n      background-color: #2ecc71;\n      color: #ffffff !important;\n      padding: 14px 28px;\n      text-decoration: none;\n      border-radius: 5px;\n      font-weight: bold;\n      margin-top: 20px;\n      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n    }\n  </style>\n</head>\n<body>\n\n  <div class=\"container\">\n    \n    <div class=\"header\">\n      <h2 style=\"margin:0;\">Aprobación Requerida</h2>\n    </div>\n\n    <div class=\"content\">\n      <h3>Se requiere aprobación de una historia</h3>\n\n      <div class=\"preview-box\">\n        <p style=\"margin-top: 0; margin-bottom: 10px; font-weight: bold; color: #555;\">\n          Vista previa:\n        </p>\n        \n        <img src=\"{{ $('Edit Fields').item.json.vista_previa }}\" alt=\"Vista Previa\">\n      </div>\n\n      <a href=\"https://n8n.tailwind.es/webhook/historiaCamara?idHistoria={{ $('Edit Fields').item.json.story_url }}\" class=\"btn-confirmar\">\n        Aprobar Historia\n      </a>\n      <a href=\"https://n8n.tailwind.es/webhook/historiaPospuesta\" class=\"btn-confirmar\">\n        Posponer 30 minutos\n      </a>\n      <a href=\"https://n8n.tailwind.es/webhook-test/rechazarHistoria?origen=historiaWebcam&contenido=HistoriaRechazada&idHistoria={{ $('Edit Fields').item.json.story_url }}\" class=\"btn-confirmar\">\n        Rechazar\n      </a>\n    </div>\n\n    <div style=\"background-color: #eeeeee; padding: 10px; text-align: center; font-size: 12px; color: #777;\">\n      Enviado automáticamente desde n8n\n    </div>\n\n  </div>\n\n</body>\n</html>",
         "options": {}
       },
       "type": "n8n-nodes-base.gmail",
@@ -1692,6 +2584,598 @@
       "id": "35d19881-992b-4494-a591-18f39361266c",
       "name": "esperar 30 minutos",
       "webhookId": "746e61ef-777c-4de5-8dab-a2cfde26d891"
+    },
+    {
+      "parameters": {
+        "path": "rechazarHistoria",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1232,
+        -352
+      ],
+      "id": "7facb56f-f11a-4b0c-8a73-2a1872b6bcc7",
+      "name": "rechazarHistoria",
+      "webhookId": "b7eb3ca4-9700-4a4b-b1ae-cfbd33789ee9"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1fc1ee34-829a-45a3-a4af-fa95470d9512",
+              "name": "ORIGEN",
+              "value": "={{ $('Webhook').item.json.query.origen }}",
+              "type": "string"
+            },
+            {
+              "id": "348d16fa-a017-44c5-9879-665a4936a387",
+              "name": "CONTENIDO",
+              "value": "={{ $('Webhook').item.json.query.contenido }}",
+              "type": "string"
+            },
+            {
+              "id": "93855f27-f03b-443c-82bf-153d717f2a4d",
+              "name": "ID_FLOW",
+              "value": "={{ $json.query.idFlow }}",
+              "type": "string"
+            },
+            {
+              "id": "43b297bb-9d8d-4af2-97b0-0ddb4711edd1",
+              "name": "MAS",
+              "value": "={{ $json.query.idHistoria }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1072,
+        -352
+      ],
+      "id": "a151d550-695a-4b66-8dc1-8b96ac126da1",
+      "name": "datosRechazar"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Confirmación</title>\n  <style>\n    body {\n      font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif;\n      background-color: #f3f4f6;\n      display: flex;\n      justify-content: center;\n      align-items: center;\n      height: 100vh;\n      margin: 0;\n    }\n    .card {\n      background: white;\n      padding: 40px;\n      border-radius: 12px;\n      box-shadow: 0 10px 25px rgba(0,0,0,0.1);\n      text-align: center;\n      max-width: 400px;\n      border-top: 6px solid #ef4444;\n    }\n    h2 { color: #1f2937; margin-top: 0; font-size: 24px; }\n    p { color: #4b5563; margin: 10px 0; font-size: 16px; }\n    .warning { color: #ef4444; font-weight: bold; margin-bottom: 25px; display: block; }\n    .btn-container { display: flex; gap: 15px; justify-content: center; margin-top: 20px; }\n    \n    /* Estilos de los botones (Enlaces) */\n    .btn {\n      text-decoration: none;\n      padding: 12px 30px;\n      border-radius: 6px;\n      font-weight: bold;\n      font-size: 16px;\n      transition: opacity 0.2s;\n      display: inline-block;\n    }\n    .btn:hover { opacity: 0.8; }\n    \n    /* Botón SI (Acción de Webhook) */\n    .btn-si { background-color: #ef4444; color: white; }\n    \n    /* Botón NO (Cancelar) */\n    .btn-no { background-color: #e5e7eb; color: #374151; }\n  </style>\n</head>\n<body>\n\n  <div class=\"card\">\n    <h2>⚠️ Atención</h2>\n    <p>Estás a punto de rechazar.</p>\n    <p>Esta acción no se puede deshacer.</p>\n    <span class=\"warning\">¿Estás seguro?</span>\n\n    <div class=\"btn-container\">\n      <a href=\"https://n8n.tailwind.es/webhook-test/nothingBoxSi?origen={{ $json.ORIGEN }}&contenido={{ $json.CONTENIDO }}&estado=rechazado&idFlow={{ $json.ID_FLOW }}&mas={{ $json.MAS }}\" class=\"btn btn-si\">SÍ</a>\n\n      <a href=\"https://n8n.tailwind.es/webhook-test/nothingBoxSi?origen={{ $json.ORIGEN }}&contenido={{ $json.CONTENIDO }}&estado=noRechazado&idFlow={{ $json.ID_FLOW }}&mas={{ $json.MAS }}\" class=\"btn btn-no\">NO</a>\n    </div>\n  </div>\n\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        -912,
+        -352
+      ],
+      "id": "54afc9b8-4f0c-49bf-96af-f83d961af8a8",
+      "name": "Respond to Webhook Rechazar"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "dataTableId": {
+          "__rl": true,
+          "value": "FnOKQ90bd0CxI2H5",
+          "mode": "list",
+          "cachedResultName": "nothingbox",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/FnOKQ90bd0CxI2H5"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "1"
+            }
+          ]
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "contador": "={{ $json.row_number + 1}}",
+            "contador_no_rechazados": "={{ $('obtener contador').item.json.contador_no_rechazados }}"
+          },
+          "matchingColumns": [
+            "contador"
+          ],
+          "schema": [
+            {
+              "id": "contador",
+              "displayName": "contador",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "contador_no_rechazados",
+              "displayName": "contador_no_rechazados",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        656,
+        -512
+      ],
+      "id": "9b26fb52-e2b7-4b2a-9cdc-4e0e1f334c22",
+      "name": "sumar contador"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1fc1ee34-829a-45a3-a4af-fa95470d9512",
+              "name": "ORIGEN",
+              "value": "={{ $('si').item.json.query.origen }}",
+              "type": "string"
+            },
+            {
+              "id": "348d16fa-a017-44c5-9879-665a4936a387",
+              "name": "CONTENIDO",
+              "value": "={{ $('si').item.json.query.contenido }}",
+              "type": "string"
+            },
+            {
+              "id": "1e3fccd6-21e4-48d2-af81-a5372f6807eb",
+              "name": "CONTADOR",
+              "value": "={{ $json.contador }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        320,
+        -512
+      ],
+      "id": "5a228376-6e29-480e-b480-f2efb1ca87ca",
+      "name": "datos"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1kE01W7ucOTrCpfrN_bC8b4WMvE9tTgQf9lBvjLPwj50",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Rechazados",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $json.CONTADOR }}",
+            "ORIGEN": "={{ $json.ORIGEN }}",
+            "CONTENIDO": "={{ $json.CONTENIDO }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "ORIGEN",
+              "displayName": "ORIGEN",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "CONTENIDO",
+              "displayName": "CONTENIDO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        480,
+        -512
+      ],
+      "id": "5a709dcd-83fe-4fa9-a663-a33d0c1dae45",
+      "name": "escribir datos",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "RCuKUCifcA4jENcY",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "path": "rechazarSi",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -544,
+        -352
+      ],
+      "id": "34425f3d-064a-4a05-a5ee-152a7d25b887",
+      "name": "si",
+      "webhookId": "8d74fb79-3a60-4b85-8eae-63028c20ecb5"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "FnOKQ90bd0CxI2H5",
+          "mode": "list",
+          "cachedResultName": "nothingbox",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/FnOKQ90bd0CxI2H5"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "1"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        160,
+        -512
+      ],
+      "id": "b626e203-21c2-4c8a-9cff-385723289213",
+      "name": "obtener contador"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "dataTableId": {
+          "__rl": true,
+          "value": "FnOKQ90bd0CxI2H5",
+          "mode": "list",
+          "cachedResultName": "nothingbox",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/FnOKQ90bd0CxI2H5"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "1"
+            }
+          ]
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "contador": "={{ $('obtener contador1').item.json.contador }}",
+            "contador_no_rechazados": "={{ $json.row_number + 1}}"
+          },
+          "matchingColumns": [
+            "contador"
+          ],
+          "schema": [
+            {
+              "id": "contador",
+              "displayName": "contador",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "contador_no_rechazados",
+              "displayName": "contador_no_rechazados",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        672,
+        -224
+      ],
+      "id": "a6e39b97-25d6-4978-b2f6-c7b390801524",
+      "name": "sumar contador1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1fc1ee34-829a-45a3-a4af-fa95470d9512",
+              "name": "ORIGEN",
+              "value": "={{ $('si').item.json.query.origen }}",
+              "type": "string"
+            },
+            {
+              "id": "348d16fa-a017-44c5-9879-665a4936a387",
+              "name": "CONTENIDO",
+              "value": "={{ $('si').item.json.query.contenido }}",
+              "type": "string"
+            },
+            {
+              "id": "1e3fccd6-21e4-48d2-af81-a5372f6807eb",
+              "name": "CONTADOR",
+              "value": "={{ $json.contador_no_rechazados }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        336,
+        -224
+      ],
+      "id": "0ccd4143-6dc7-4a5e-a34e-bc8be3cd37b6",
+      "name": "datos2"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1kE01W7ucOTrCpfrN_bC8b4WMvE9tTgQf9lBvjLPwj50",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "No Rechazados",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $json.CONTADOR }}",
+            "ORIGEN": "={{ $json.ORIGEN }}",
+            "CONTENIDO": "={{ $json.CONTENIDO }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "ORIGEN",
+              "displayName": "ORIGEN",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "CONTENIDO",
+              "displayName": "CONTENIDO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        496,
+        -224
+      ],
+      "id": "427cb2ff-b459-4736-95ab-2e372b34dfa5",
+      "name": "escribir datos1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "RCuKUCifcA4jENcY",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "FnOKQ90bd0CxI2H5",
+          "mode": "list",
+          "cachedResultName": "nothingbox",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/FnOKQ90bd0CxI2H5"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "1"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        176,
+        -224
+      ],
+      "id": "f901e8c3-08ec-4bdf-9470-803fbbf9847e",
+      "name": "obtener contador1"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Selección de Acción</title>\n    <style>\n        body {\n            font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif;\n            background-color: #f3f4f6;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            height: 100vh;\n            margin: 0;\n        }\n        .card {\n            background: white;\n            padding: 40px;\n            border-radius: 12px;\n            box-shadow: 0 10px 25px rgba(0,0,0,0.1);\n            text-align: center;\n            max-width: 450px; /* Un poco más ancho para que quepan los textos */\n            width: 90%;\n            border-top: 6px solid #3b82f6; /* Azul Informativo */\n        }\n        .icon {\n            font-size: 50px;\n            margin-bottom: 15px;\n            display: block;\n        }\n        h2 { \n            color: #1f2937; \n            margin-top: 0; \n            font-size: 24px; \n        }\n        p { \n            color: #4b5563; \n            margin: 10px 0 30px 0; \n            font-size: 18px; \n        }\n        .btn-container { \n            display: flex; \n            flex-direction: column; /* Botones uno encima de otro para mejor lectura en móvil */\n            gap: 15px; \n            justify-content: center; \n        }\n        \n        /* Estilos Base de Botones */\n        .btn {\n            text-decoration: none;\n            padding: 15px 20px;\n            border-radius: 8px;\n            font-weight: bold;\n            font-size: 16px;\n            transition: transform 0.1s, opacity 0.2s;\n            display: block;\n            text-align: center;\n            box-shadow: 0 2px 4px rgba(0,0,0,0.1);\n        }\n        .btn:hover { opacity: 0.9; transform: translateY(-1px); }\n        .btn:active { transform: translateY(1px); }\n        \n        /* Botón Posponer (Naranja - Tiempo) */\n        .btn-posponer { \n            background-color: #f59e0b; \n            color: white; \n        }\n        \n        /* Botón Aceptar (Azul - Acción Principal) */\n        .btn-aceptar { \n            background-color: #3b82f6; \n            color: white; \n        }\n\n    </style>\n</head>\n<body>\n\n    <div class=\"card\">\n        <span class=\"icon\">🤔</span>\n        \n        <h2>No se ha rechazado</h2>\n        <p>¿Qué quieres hacer?</p>\n\n        <div class=\"btn-container\">\n            <a href=\"REEMPLAZAR_URL_POSPONER\" class=\"btn btn-posponer\">\n                ⏱️ POSPONER 30 MINUTOS\n            </a>\n\n            <a href=\"REEMPLAZAR_URL_ACEPTAR\" class=\"btn btn-aceptar\">\n                ✅ ACEPTAR\n            </a>\n        </div>\n    </div>\n\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        0,
+        -224
+      ],
+      "id": "271a6a4d-599d-455c-b699-86c5d10eed12",
+      "name": "Respond to Webhook2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "284b2492-0b5d-46f4-89df-663f252068cf",
+              "name": "",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "da67b1b5-9751-40e0-a4b8-31d51d15c6c9",
+              "name": "",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "23a32b17-5967-4fd9-b9e1-d7891c740482",
+              "name": "",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "7a5c6c5f-9d94-496b-8e36-192286d69c5e",
+              "name": "",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -384,
+        -352
+      ],
+      "id": "4cb7dd56-6534-4a59-8595-8a6832725ae0",
+      "name": "datos_si_no"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "eb37d92a-214b-46d4-9bab-842c86e8e860",
+              "leftValue": "={{ $json.query.estado }}",
+              "rightValue": "rechazado",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -192,
+        -352
+      ],
+      "id": "b0625766-366e-4d16-8e08-d72254e31bca",
+      "name": "If2"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Acción Completada</title>\n    <style>\n        body {\n            font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif;\n            background-color: #f3f4f6;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            height: 100vh;\n            margin: 0;\n        }\n        .card {\n            background: white;\n            padding: 40px;\n            border-radius: 12px;\n            box-shadow: 0 10px 25px rgba(0,0,0,0.1);\n            text-align: center;\n            max-width: 400px;\n            border-top: 6px solid #10b981; /* Verde Éxito */\n        }\n        .icon {\n            font-size: 50px;\n            margin-bottom: 20px;\n            display: block;\n        }\n        h2 { \n            color: #1f2937; \n            margin-top: 0; \n            margin-bottom: 15px;\n            font-size: 24px; \n        }\n        p { \n            color: #4b5563; \n            margin: 10px 0; \n            line-height: 1.5;\n            font-size: 16px; \n        }\n        .doc-name {\n            background-color: #f3f4f6;\n            padding: 2px 6px;\n            border-radius: 4px;\n            font-family: monospace;\n            color: #374151;\n            font-weight: bold;\n        }\n        button {\n            background-color: #10b981;\n            color: white;\n            border: none;\n            padding: 12px 40px;\n            border-radius: 6px;\n            font-weight: bold;\n            font-size: 16px;\n            cursor: pointer;\n            margin-top: 25px;\n            transition: background 0.2s;\n        }\n        button:hover {\n            background-color: #059669;\n        }\n    </style>\n</head>\n<body>\n\n    <div class=\"card\">\n        <span class=\"icon\">✅</span>\n        \n        <h2>Rechazado con éxito</h2>\n        \n        <p>\n            El fallo quedará apuntado en el documento <span class=\"doc-name\">nothingbox</span> de Drive.\n        </p>\n        \n        <button onclick=\"cerrarPestana()\">ACEPTAR</button>\n    </div>\n\n    <script>\n        function cerrarPestana() {\n            // Intenta cerrar la ventana\n            window.close();\n            \n            // Truco adicional para navegadores que bloquean window.close()\n            // si la pestaña no fue abierta por script\n            window.open('','_parent','');\n            window.close();\n\n            // Si el navegador bloquea el cierre (medida de seguridad común),\n            // mostramos un mensaje final.\n            setTimeout(function() {\n                document.body.innerHTML = \"<div style='text-align:center; padding:50px; font-family:sans-serif; color:#4b5563;'><h3>Puedes cerrar esta pestaña manualmente.</h3></div>\";\n            }, 100);\n        }\n    </script>\n\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        0,
+        -512
+      ],
+      "id": "4568449c-95d0-4ca1-9824-cee5dae22b44",
+      "name": "Respond to Webhook3"
     }
   ],
   "pinData": {},
@@ -1709,7 +3193,7 @@
   ],
   "staticData": null,
   "tags": [],
-  "triggerCount": 2,
-  "updatedAt": "2026-01-29T13:18:49.101Z",
-  "versionId": "42db8ce6-9671-42fa-970d-022916a43ca4"
+  "triggerCount": 4,
+  "updatedAt": "2026-01-31T09:33:24.945Z",
+  "versionId": "9f383328-d6b5-48a5-a555-665046f84a5b"
 }
