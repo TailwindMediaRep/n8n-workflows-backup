@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-01-29T12:39:18.000Z",
-    "createdAt": "2026-01-29T12:39:15.736Z",
-    "versionId": "7bc547a9-32e2-43b6-a02a-5007d4171bba",
+    "updatedAt": "2026-01-31T08:21:22.000Z",
+    "createdAt": "2026-01-31T08:21:20.761Z",
+    "versionId": "7c4b9e33-3478-4d5c-b521-dd34946756b3",
     "workflowId": "584ehV8qDkwoHzoLSDP1n",
     "nodes": [
       {
@@ -1044,8 +1044,8 @@
         "type": "n8n-nodes-base.graphql",
         "typeVersion": 1.1,
         "position": [
-          992,
-          800
+          832,
+          736
         ],
         "id": "143b2690-f56b-4f55-9a4c-c9e59e4a8d15",
         "name": "GraphQL",
@@ -1063,8 +1063,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          416,
-          800
+          256,
+          736
         ],
         "id": "30885162-dd4f-4a72-a927-16f991a44fdd",
         "name": "Calcular Ranking Empleados1"
@@ -1076,8 +1076,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          784,
-          800
+          624,
+          736
         ],
         "id": "f1e8abd2-0441-4ba7-8f11-558506473f74",
         "name": "Code in JavaScript"
@@ -1104,8 +1104,8 @@
         "type": "n8n-nodes-base.dataTable",
         "typeVersion": 1.1,
         "position": [
-          608,
-          800
+          448,
+          736
         ],
         "id": "23a0b84f-a080-49b8-beb3-cf051b28b93a",
         "name": "Get row(s)"
@@ -1117,8 +1117,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          1200,
-          800
+          1040,
+          736
         ],
         "id": "311e9e07-8adc-40b5-8354-b12975b32cfc",
         "name": "Code in JavaScript1"
@@ -1133,8 +1133,8 @@
         "type": "n8n-nodes-base.graphql",
         "typeVersion": 1.1,
         "position": [
-          1392,
-          800
+          1232,
+          736
         ],
         "id": "2c8ee8bf-99fc-4bef-8ea0-06a5bec51363",
         "name": "GraphQL1",
@@ -1500,11 +1500,11 @@
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version 7bc547a9",
+    "name": "Version 7c4b9e33",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "7bc547a9-32e2-43b6-a02a-5007d4171bba",
+  "activeVersionId": "7c4b9e33-3478-4d5c-b521-dd34946756b3",
   "connections": {
     "Inicio de Mes (Día 1)": {
       "main": [
@@ -2904,8 +2904,8 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        992,
-        800
+        832,
+        736
       ],
       "id": "143b2690-f56b-4f55-9a4c-c9e59e4a8d15",
       "name": "GraphQL",
@@ -2923,8 +2923,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        416,
-        800
+        256,
+        736
       ],
       "id": "30885162-dd4f-4a72-a927-16f991a44fdd",
       "name": "Calcular Ranking Empleados1"
@@ -2936,8 +2936,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        784,
-        800
+        624,
+        736
       ],
       "id": "f1e8abd2-0441-4ba7-8f11-558506473f74",
       "name": "Code in JavaScript"
@@ -2964,8 +2964,8 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
       "position": [
-        608,
-        800
+        448,
+        736
       ],
       "id": "23a0b84f-a080-49b8-beb3-cf051b28b93a",
       "name": "Get row(s)"
@@ -2977,8 +2977,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1200,
-        800
+        1040,
+        736
       ],
       "id": "311e9e07-8adc-40b5-8354-b12975b32cfc",
       "name": "Code in JavaScript1"
@@ -2993,8 +2993,8 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        1392,
-        800
+        1232,
+        736
       ],
       "id": "2c8ee8bf-99fc-4bef-8ea0-06a5bec51363",
       "name": "GraphQL1",
@@ -3004,6 +3004,32 @@
           "name": "Token Informes Shopify"
         }
       }
+    },
+    {
+      "parameters": {
+        "operation": "deleteRows",
+        "dataTableId": {
+          "__rl": true,
+          "value": "8GDVj673ag0hCrVt",
+          "mode": "list",
+          "cachedResultName": "Informe Mensual",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/8GDVj673ag0hCrVt"
+        },
+        "filters": {
+          "conditions": [
+            {}
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        912,
+        160
+      ],
+      "id": "2eb99103-3cf1-4f13-865a-d7584dcc05a7",
+      "name": "Delete row(s)"
     }
   ],
   "pinData": {
@@ -3261,6 +3287,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-01-29T12:39:15.734Z",
-  "versionId": "7bc547a9-32e2-43b6-a02a-5007d4171bba"
+  "updatedAt": "2026-01-31T08:22:57.355Z",
+  "versionId": "b0e9a0a1-ae03-40a3-89a6-2684ba39a3e4"
 }
