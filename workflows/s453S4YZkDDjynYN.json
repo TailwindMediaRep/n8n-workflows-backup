@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-01-28T14:06:37.000Z",
-    "createdAt": "2026-01-28T14:06:32.408Z",
-    "versionId": "f036a59f-3a8f-4377-956e-d67ae0b8478f",
+    "updatedAt": "2026-01-31T18:44:50.000Z",
+    "createdAt": "2026-01-31T18:44:49.195Z",
+    "versionId": "2a6c8161-96da-46f7-904a-c2ce31004fcd",
     "workflowId": "s453S4YZkDDjynYN",
     "nodes": [
       {
@@ -39,7 +39,7 @@
       },
       {
         "parameters": {
-          "jsCode": "// --- FUNCIÓN AUXILIAR PARA LIMPIAR HTML ---\nconst stripHtml = (html) => html.replace(/<[^>]*>?/gm, '');\n\n// 1. Obtenemos el texto de donde esté disponible\nconst emailText = $input.item.json.text || $input.item.json.html || $input.item.json.snippet || \"\";\n\n// 2. Limpieza Previa\nlet cleanText = emailText.replace(/&quot;/g, '\"').replace(/&#39;/g, \"'\");\ncleanText = cleanText.replace(/\\r\\n/g, '\\n').replace(/\\s+/g, ' ');\n\n// --- PATRONES ---\n// A. Patrón PRODUCTO\nconst productPattern = /ha comprado\\s+[*]*[\"“'](.+?)[\"”']([*]|[\\.]|$)/i;\n\n// B. Patrón USUARIO \n// (Se mantiene igual, pero luego limpiaremos el resultado del HTML)\nconst usernamePattern = /([^\\s:,]+)\\s+ha comprado/i;\n\n// C. Patrones Adicionales\nconst emailPattern = /E-mail:\\s*([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.[a-zA-Z0-9._-]+)/i;\nconst realNamePattern = /Dirección:\\s*([^,]+),/i;\n\n// --- EJECUCIÓN ---\nconst matchProduct = cleanText.match(productPattern);\nconst matchUsername = cleanText.match(usernamePattern);\nconst matchEmail = cleanText.match(emailPattern);\nconst matchRealName = cleanText.match(realNamePattern);\n\n// --- PROCESAMIENTO ---\n\n// 1. Producto (Limpiamos HTML por si acaso)\nlet productName = \"Producto Vinted\"; \nif (matchProduct && matchProduct[1]) {\n  productName = stripHtml(matchProduct[1]).replace(/[*]/g, '').trim();\n}\n\n// 2. Usuario / Nombre\nlet username = \"UsuarioVinted\";\nif (matchUsername && matchUsername[1]) {\n    // IMPORTANTE: Limpiamos etiquetas HTML y asteriscos\n    username = stripHtml(matchUsername[1]).replace(/\\*/g, '').trim();\n}\n\nlet firstName = username;\nlet lastName = \"(Vinted)\";\nlet finalEmail = \"\";\n\n// Intentamos sacar nombre real si existe\nif (matchRealName && matchRealName[1]) {\n  const fullName = stripHtml(matchRealName[1]).trim();\n  const nameParts = fullName.split(\" \");\n  if (nameParts.length > 1) {\n    lastName = nameParts.pop(); \n    firstName = nameParts.join(\" \"); \n  } else {\n    firstName = fullName;\n  }\n}\n\n// 3. Generar Email\nif (matchEmail && matchEmail[1]) {\n  finalEmail = stripHtml(matchEmail[1]).trim(); \n} else {\n  // Limpiamos el username de cualquier residuo antes de generar el email\n  const safeUser = username.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();\n  finalEmail = `${safeUser}@vinted.tailwind.es`;\n}\n\n// --- SALIDA ---\nif (matchProduct || username !== \"UsuarioVinted\") {\n  return {\n    json: {\n      status: \"success\",\n      customer: {\n        first_name: firstName,\n        last_name: lastName,\n        email: finalEmail,\n        tags: [\"Cliente Vinted\"],\n        note: `Comprado en Vinted: ${productName}. Usuario: ${username}`\n      },\n      product: {\n        name: productName\n      }\n    }\n  };\n} else {\n  return {\n    json: {\n      error: \"No se pudieron extraer los datos\",\n      debug: stripHtml(cleanText).substring(0, 500)\n    }\n  };\n}"
+          "jsCode": "// --- FUNCIÓN AUXILIAR PARA LIMPIAR HTML ---\n// Usamos ' ' (espacio) para evitar que palabras se peguen\nconst stripHtml = (html) => html.replace(/<[^>]*>?/gm, ' ');\n\n// 1. OBTENCIÓN Y LIMPIEZA PROFUNDA\nconst rawHtml = $input.item.json.html || $input.item.json.text || \"\";\n\n// PASO CRÍTICO: Reemplazar entidades HTML ANTES de borrar etiquetas\nlet cleanText = rawHtml\n    .replace(/&#34;/g, '\"')   // Decodifica la comilla Vinted\n    .replace(/&quot;/g, '\"')\n    .replace(/&#39;/g, \"'\")\n    .replace(/&amp;/g, '&')\n    .replace(/&nbsp;/g, ' ');\n\n// Borramos etiquetas HTML y normalizamos espacios\ncleanText = stripHtml(cleanText).replace(/\\s+/g, ' ').trim();\n\n// --- PATRONES ---\n\n// A. Patrón PRODUCTO (CORREGIDO)\n// Ya no obliga a que haya un punto justo después. Solo busca el contenido entre comillas.\nconst productPattern = /ha comprado\\s*[\"“'](.+?)[\"”']/i;\n\n// B. Patrón USUARIO\nconst usernamePattern = /([^\\s]+)\\s+ha comprado/i;\n\n// --- EJECUCIÓN ---\nconst matchProduct = cleanText.match(productPattern);\nconst matchUsername = cleanText.match(usernamePattern);\n\n// --- PROCESAMIENTO ---\n\n// 1. Producto\nlet productName = \"Producto Vinted\";\nif (matchProduct && matchProduct[1]) {\n    productName = matchProduct[1].trim();\n}\n\n// 2. Usuario\nlet username = \"UsuarioVinted\";\nif (matchUsername && matchUsername[1]) {\n    username = matchUsername[1].trim();\n}\n\n// 3. Email Falso (Estructura solicitada)\n// Limpiamos el username para que sea válido en un email\nconst safeUser = username.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();\nconst finalEmail = `${safeUser}@vinted.tailwind.es`;\n\n// --- SALIDA ---\n\nif (productName !== \"Producto Vinted\") {\n    return {\n        json: {\n            status: \"success\",\n            customer: {\n                first_name: username,\n                last_name: \"(Vinted)\",\n                email: finalEmail,\n                tags: [\n                    \"Cliente Vinted\"\n                ],\n                note: `Comprado en Vinted: ${productName}. Usuario: ${username}`\n            },\n            product: {\n                name: productName\n            }\n        }\n    };\n} else {\n    return {\n        json: {\n            status: \"error\",\n            error: \"No se pudo extraer el producto\",\n            debug: cleanText.substring(0, 500)\n        }\n    };\n}"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -135,7 +135,7 @@
                 "rightValue": "",
                 "operator": {
                   "type": "array",
-                  "operation": "empty",
+                  "operation": "notEmpty",
                   "singleValue": true
                 }
               }
@@ -163,7 +163,7 @@
         "type": "n8n-nodes-base.graphql",
         "typeVersion": 1.1,
         "position": [
-          688,
+          704,
           464
         ],
         "id": "68144495-7bc0-466e-b603-a1fafbd441df",
@@ -179,13 +179,13 @@
         "parameters": {
           "sendTo": "info@rules-shop.es",
           "subject": "Producto Vendido en Vinted",
-          "message": "=<div style=\"font-family: Arial, sans-serif; max-width: 600px; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px; background-color: #ffffff;\">\n  \n  <h2 style=\"color: #D32F2F; margin-top: 0;\">⚠️ Acción Requerida: Stock Vinted</h2>\n  \n  <p style=\"color: #555555; font-size: 16px; line-height: 1.5;\">\n    Hola equipo, se ha vendido un producto en Vinted pero <strong>el nombre no coincide exactamente</strong> con el de Shopify.\n  </p>\n  \n  <p style=\"color: #555555; font-size: 16px; line-height: 1.5;\">\n    Por seguridad, la automatización no ha descontado el stock. <strong>Por favor, cambie el stock manualmente.</strong>\n  </p>\n\n  <hr style=\"border: 0; border-top: 1px solid #eeeeee; margin: 20px 0;\">\n\n  <div style=\"background-color: #f9f9f9; padding: 15px; border-left: 5px solid #D32F2F; border-radius: 4px;\">\n    <p style=\"margin: 0; font-size: 14px; color: #888;\">Producto vendido en Vinted:</p>\n    <p style=\"margin: 5px 0 0 0; font-size: 18px; font-weight: bold; color: #333;\">\n      {{ $('Edit Fields').item.json.PRODUCTO }}\n    </p>\n  </div>\n\n  <p style=\"margin-top: 20px; font-size: 14px; color: #666;\">\n    <strong>Cliente:</strong> {{ $('Edit Fields').item.json.NOMBRE }} {{ $('Edit Fields').item.json.APELLIDO }}\n  </p>\n\n  <p style=\"font-size: 12px; color: #aaaaaa; margin-top: 30px; text-align: center;\">\n    Notificación automática enviada por n8n 🤖\n  </p>\n\n</div>",
+          "message": "=<div style=\"font-family: Arial, sans-serif; max-width: 600px; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px; background-color: #ffffff;\">\n  \n  <h2 style=\"color: #D32F2F; margin-top: 0;\">⚠️ Acción Requerida: Crear Pedido Vinted</h2>\n  \n  <p style=\"color: #555555; font-size: 16px; line-height: 1.5;\">\n    Hola equipo, se ha realizado una venta en Wallapop.\n  </p>\n  \n  <p style=\"color: #555555; font-size: 16px; line-height: 1.5;\">\n    <strong>Por favor, crea el pedido para este cliente manualmente en Shopify</strong> (el nombre del producto puede variar ligeramente).\n  </p>\n\n  <hr style=\"border: 0; border-top: 1px solid #eeeeee; margin: 20px 0;\">\n\n  <div style=\"background-color: #f9f9f9; padding: 15px; border-left: 5px solid #D32F2F; border-radius: 4px; margin-bottom: 20px;\">\n    <p style=\"margin: 0; font-size: 14px; color: #888;\">Producto vendido en Vinted:</p>\n    <p style=\"margin: 5px 0 0 0; font-size: 18px; font-weight: bold; color: #333;\">\n      {{ $('Edit Fields').item.json.PRODUCTO }}\n    </p>\n  </div>\n\n  <div style=\"background-color: #e8f5e9; padding: 15px; border-left: 5px solid #2e7d32; border-radius: 4px; margin-bottom: 25px;\">\n    <p style=\"margin: 0; font-size: 14px; color: #2e7d32; font-weight: bold;\">✅ Cliente ya registrado en Shopify:</p>\n    <p style=\"margin: 5px 0 0 0; font-size: 14px; color: #333;\">\n      Datos para asignar el pedido:\n    </p>\n    <ul style=\"margin: 10px 0 0 0; padding-left: 20px; color: #555; font-size: 14px;\">\n       <li><strong>Nombre:</strong> {{ $('Edit Fields').item.json.NOMBRE }} {{ $('Edit Fields').item.json.APELLIDO }}</li>\n    </ul>\n  </div>\n  <div style=\"text-align: center;\">\n    <a href=\"{{ $json.shopify_admin_url }}\" style=\"background-color: #008060; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 16px; display: inline-block;\">\n      Ver Cliente en Shopify ↗\n    </a>\n  </div>\n\n  <p style=\"font-size: 12px; color: #aaaaaa; margin-top: 30px; text-align: center;\">\n    Notificación automática enviada por n8n 🤖\n  </p>\n\n</div>",
           "options": {}
         },
         "type": "n8n-nodes-base.gmail",
         "typeVersion": 2.2,
         "position": [
-          864,
+          1072,
           464
         ],
         "id": "09ed8cc6-5578-408e-8ff3-1ecbb8888a74",
@@ -202,14 +202,14 @@
         "parameters": {
           "sendTo": "info@rules-shop.es",
           "subject": "Producto Vendido en Vinted",
-          "message": "=<div style=\"font-family: Arial, sans-serif; max-width: 600px; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px; background-color: #ffffff;\">\n  \n  <h2 style=\"color: #D32F2F; margin-top: 0;\">⚠️ Acción Requerida: Stock Vinted</h2>\n  \n  <p style=\"color: #555555; font-size: 16px; line-height: 1.5;\">\n    Hola equipo, se ha vendido un producto en Vinted pero <strong>el nombre no coincide exactamente</strong> con el de Shopify.\n  </p>\n  \n  <p style=\"color: #555555; font-size: 16px; line-height: 1.5;\">\n    Por seguridad, la automatización no ha descontado el stock. <strong>Por favor, cambie el stock manualmente.</strong>\n  </p>\n\n  <hr style=\"border: 0; border-top: 1px solid #eeeeee; margin: 20px 0;\">\n\n  <div style=\"background-color: #f9f9f9; padding: 15px; border-left: 5px solid #D32F2F; border-radius: 4px;\">\n    <p style=\"margin: 0; font-size: 14px; color: #888;\">Producto vendido en Vinted:</p>\n    <p style=\"margin: 5px 0 0 0; font-size: 18px; font-weight: bold; color: #333;\">\n      {{ $('Edit Fields').item.json.PRODUCTO }}\n    </p>\n  </div>\n\n  <p style=\"margin-top: 20px; font-size: 14px; color: #666;\">\n    <strong>Cliente:</strong> {{ $('Edit Fields').item.json.NOMBRE }} {{ $('Edit Fields').item.json.APELLIDO }}\n  </p>\n\n  <p style=\"font-size: 12px; color: #aaaaaa; margin-top: 30px; text-align: center;\">\n    Notificación automática enviada por n8n 🤖\n  </p>\n\n</div>",
+          "message": "=<div style=\"font-family: Arial, sans-serif; max-width: 600px; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px; background-color: #ffffff;\">\n  \n  <h2 style=\"color: #D32F2F; margin-top: 0;\">⚠️ Acción Requerida: Crear Pedido Vinted</h2>\n  \n  <p style=\"color: #555555; font-size: 16px; line-height: 1.5;\">\n    Hola equipo, se ha realizado una venta en Wallapop.\n  </p>\n  \n  <p style=\"color: #555555; font-size: 16px; line-height: 1.5;\">\n    <strong>Por favor, crea el pedido para este cliente manualmente en Shopify</strong> (el nombre del producto puede variar ligeramente).\n  </p>\n\n  <hr style=\"border: 0; border-top: 1px solid #eeeeee; margin: 20px 0;\">\n\n  <div style=\"background-color: #f9f9f9; padding: 15px; border-left: 5px solid #D32F2F; border-radius: 4px; margin-bottom: 20px;\">\n    <p style=\"margin: 0; font-size: 14px; color: #888;\">Producto vendido en Vinted:</p>\n    <p style=\"margin: 5px 0 0 0; font-size: 18px; font-weight: bold; color: #333;\">\n      {{ $('Edit Fields').item.json.PRODUCTO }}\n    </p>\n  </div>\n\n  <div style=\"background-color: #e8f5e9; padding: 15px; border-left: 5px solid #2e7d32; border-radius: 4px; margin-bottom: 25px;\">\n    <p style=\"margin: 0; font-size: 14px; color: #2e7d32; font-weight: bold;\">✅ Cliente ya registrado en Shopify:</p>\n    <p style=\"margin: 5px 0 0 0; font-size: 14px; color: #333;\">\n      Datos para asignar el pedido:\n    </p>\n    <ul style=\"margin: 10px 0 0 0; padding-left: 20px; color: #555; font-size: 14px;\">\n       <li><strong>Nombre:</strong> {{ $('Edit Fields').item.json.NOMBRE }} {{ $('Edit Fields').item.json.APELLIDO }}</li>\n    </ul>\n  </div>\n  <div style=\"text-align: center;\">\n    <a href=\"{{ $json.shopify_admin_url }}\" style=\"background-color: #008060; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 16px; display: inline-block;\">\n      Ver Cliente en Shopify ↗\n    </a>\n  </div>\n\n  <p style=\"font-size: 12px; color: #aaaaaa; margin-top: 30px; text-align: center;\">\n    Notificación automática enviada por n8n 🤖\n  </p>\n\n</div>",
           "options": {}
         },
         "type": "n8n-nodes-base.gmail",
         "typeVersion": 2.2,
         "position": [
-          688,
-          656
+          880,
+          704
         ],
         "id": "a9b80301-c949-4fbb-85a4-eeeeaa265f30",
         "name": "Send a message1",
@@ -452,7 +452,7 @@
         "parameters": {
           "content": "## De Vinted",
           "height": 816,
-          "width": 1760,
+          "width": 1968,
           "color": 3
         },
         "type": "n8n-nodes-base.stickyNote",
@@ -489,6 +489,32 @@
         ],
         "id": "47f30864-04fe-48ae-ac30-c788d656cd55",
         "name": "Code in JavaScript3"
+      },
+      {
+        "parameters": {
+          "jsCode": "// CONFIGURACIÓN: El 'handle' de tu tienda tal como aparece en la URL de tu admin\n// Ejemplo: si tu admin es admin.shopify.com/store/mi-tienda-pro, pon aquí \"mi-tienda-pro\"\nconst storeName = \"rulesshop\"; \n\nreturn $input.all().map(item => {\n  \n  // 1. Navegación segura para sacar los datos del cliente\n  // Verificamos si existe 'edges' y si tiene al menos un elemento\n  const edges = item.json.data?.customers?.edges;\n  const customerNode = (edges && edges.length > 0) ? edges[0].node : {};\n  \n  // 2. Inicializamos variables\n  let cleanId = null;\n  let customerUrl = null;\n  let found = false;\n\n  // 3. Procesamos si encontramos un ID\n  if (customerNode.id) {\n    found = true;\n    \n    // El ID viene formato Global: \"gid://shopify/Customer/10122677059931\"\n    // Hacemos split por '/' y nos quedamos con el último fragmento (el número)\n    cleanId = customerNode.id.toString().split('/').pop();\n    \n    // Construimos la URL del Admin de Shopify\n    customerUrl = `https://admin.shopify.com/store/${storeName}/customers/${cleanId}`;\n  }\n\n  // 4. Retornamos la estructura plana\n  return {\n    json: {\n      // Esparcimos los datos originales (firstName, lastName, email, tags)\n      ...customerNode,\n      \n      // Agregamos nuestros campos calculados\n      shopify_id_numeric: cleanId,\n      shopify_admin_url: customerUrl,\n      \n      // Bandera útil para usar en un nodo \"If\" posterior (true si el cliente existe)\n      customer_found: found\n    }\n  };\n});"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          704,
+          704
+        ],
+        "id": "ecf3bf9e-e5a9-4366-8c75-f18ef23ac432",
+        "name": "Code in JavaScript4"
+      },
+      {
+        "parameters": {
+          "jsCode": "// CONFIGURACIÓN: Nombre de tu tienda en la URL del admin\nconst storeName = \"rulesshop\"; \n\n// IMPORTANTE: Aquí le decimos a n8n que ignore el input anterior \n// y coja específicamente los datos del nodo llamado \"If\"\nconst items = $('If').all();\n\nreturn items.map(item => {\n  \n  // 1. Obtener datos navegando la estructura del JSON del nodo 'If'\n  const edges = item.json.data?.customers?.edges;\n  \n  // Verificamos si existe el array y tiene datos\n  const customerNode = (edges && edges.length > 0) ? edges[0].node : {};\n  \n  // 2. Inicializar variables\n  let cleanId = null;\n  let customerUrl = null;\n  let found = false;\n\n  // 3. Procesar ID y URL si encontramos un cliente\n  if (customerNode.id) {\n    found = true;\n    \n    // El ID viene como \"gid://shopify/Customer/10122677059931\"\n    // .split('/').pop() coge lo que hay después de la última barra\n    cleanId = customerNode.id.toString().split('/').pop();\n    \n    // Construimos la URL\n    customerUrl = `https://admin.shopify.com/store/${storeName}/customers/${cleanId}`;\n  }\n\n  // 4. Devolver resultado limpio\n  return {\n    json: {\n      // Mantenemos los datos originales del cliente (firstName, email, etc.)\n      ...customerNode,\n      \n      // Añadimos los campos calculados\n      shopify_id_numeric: cleanId,\n      shopify_admin_url: customerUrl,\n      \n      // Booleano de control\n      customer_found: found\n    }\n  };\n});"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          896,
+          464
+        ],
+        "id": "f388e16d-93c4-41b3-be68-5d0404ce6351",
+        "name": "Code in JavaScript5"
       }
     ],
     "connections": {
@@ -547,7 +573,7 @@
           ],
           [
             {
-              "node": "Send a message1",
+              "node": "Code in JavaScript4",
               "type": "main",
               "index": 0
             }
@@ -558,7 +584,7 @@
         "main": [
           [
             {
-              "node": "Send a message",
+              "node": "Code in JavaScript5",
               "type": "main",
               "index": 0
             }
@@ -666,14 +692,36 @@
             }
           ]
         ]
+      },
+      "Code in JavaScript4": {
+        "main": [
+          [
+            {
+              "node": "Send a message1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code in JavaScript5": {
+        "main": [
+          [
+            {
+              "node": "Send a message",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
-    "authors": "Info Tailwind",
-    "name": "Version f036a59f",
+    "authors": "Tailwind Media",
+    "name": "Version 2a6c8161",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "f036a59f-3a8f-4377-956e-d67ae0b8478f",
+  "activeVersionId": "2a6c8161-96da-46f7-904a-c2ce31004fcd",
   "connections": {
     "Gmail Trigger": {
       "main": [
@@ -730,7 +778,7 @@
         ],
         [
           {
-            "node": "Send a message1",
+            "node": "Code in JavaScript4",
             "type": "main",
             "index": 0
           }
@@ -741,7 +789,7 @@
       "main": [
         [
           {
-            "node": "Send a message",
+            "node": "Code in JavaScript5",
             "type": "main",
             "index": 0
           }
@@ -849,6 +897,28 @@
           }
         ]
       ]
+    },
+    "Code in JavaScript4": {
+      "main": [
+        [
+          {
+            "node": "Send a message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript5": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-12-03T10:25:57.653Z",
@@ -892,7 +962,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// --- FUNCIÓN AUXILIAR PARA LIMPIAR HTML ---\nconst stripHtml = (html) => html.replace(/<[^>]*>?/gm, '');\n\n// 1. Obtenemos el texto de donde esté disponible\nconst emailText = $input.item.json.text || $input.item.json.html || $input.item.json.snippet || \"\";\n\n// 2. Limpieza Previa\nlet cleanText = emailText.replace(/&quot;/g, '\"').replace(/&#39;/g, \"'\");\ncleanText = cleanText.replace(/\\r\\n/g, '\\n').replace(/\\s+/g, ' ');\n\n// --- PATRONES ---\n// A. Patrón PRODUCTO\nconst productPattern = /ha comprado\\s+[*]*[\"“'](.+?)[\"”']([*]|[\\.]|$)/i;\n\n// B. Patrón USUARIO \n// (Se mantiene igual, pero luego limpiaremos el resultado del HTML)\nconst usernamePattern = /([^\\s:,]+)\\s+ha comprado/i;\n\n// C. Patrones Adicionales\nconst emailPattern = /E-mail:\\s*([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.[a-zA-Z0-9._-]+)/i;\nconst realNamePattern = /Dirección:\\s*([^,]+),/i;\n\n// --- EJECUCIÓN ---\nconst matchProduct = cleanText.match(productPattern);\nconst matchUsername = cleanText.match(usernamePattern);\nconst matchEmail = cleanText.match(emailPattern);\nconst matchRealName = cleanText.match(realNamePattern);\n\n// --- PROCESAMIENTO ---\n\n// 1. Producto (Limpiamos HTML por si acaso)\nlet productName = \"Producto Vinted\"; \nif (matchProduct && matchProduct[1]) {\n  productName = stripHtml(matchProduct[1]).replace(/[*]/g, '').trim();\n}\n\n// 2. Usuario / Nombre\nlet username = \"UsuarioVinted\";\nif (matchUsername && matchUsername[1]) {\n    // IMPORTANTE: Limpiamos etiquetas HTML y asteriscos\n    username = stripHtml(matchUsername[1]).replace(/\\*/g, '').trim();\n}\n\nlet firstName = username;\nlet lastName = \"(Vinted)\";\nlet finalEmail = \"\";\n\n// Intentamos sacar nombre real si existe\nif (matchRealName && matchRealName[1]) {\n  const fullName = stripHtml(matchRealName[1]).trim();\n  const nameParts = fullName.split(\" \");\n  if (nameParts.length > 1) {\n    lastName = nameParts.pop(); \n    firstName = nameParts.join(\" \"); \n  } else {\n    firstName = fullName;\n  }\n}\n\n// 3. Generar Email\nif (matchEmail && matchEmail[1]) {\n  finalEmail = stripHtml(matchEmail[1]).trim(); \n} else {\n  // Limpiamos el username de cualquier residuo antes de generar el email\n  const safeUser = username.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();\n  finalEmail = `${safeUser}@vinted.tailwind.es`;\n}\n\n// --- SALIDA ---\nif (matchProduct || username !== \"UsuarioVinted\") {\n  return {\n    json: {\n      status: \"success\",\n      customer: {\n        first_name: firstName,\n        last_name: lastName,\n        email: finalEmail,\n        tags: [\"Cliente Vinted\"],\n        note: `Comprado en Vinted: ${productName}. Usuario: ${username}`\n      },\n      product: {\n        name: productName\n      }\n    }\n  };\n} else {\n  return {\n    json: {\n      error: \"No se pudieron extraer los datos\",\n      debug: stripHtml(cleanText).substring(0, 500)\n    }\n  };\n}"
+        "jsCode": "// --- FUNCIÓN AUXILIAR PARA LIMPIAR HTML ---\n// Usamos ' ' (espacio) para evitar que palabras se peguen\nconst stripHtml = (html) => html.replace(/<[^>]*>?/gm, ' ');\n\n// 1. OBTENCIÓN Y LIMPIEZA PROFUNDA\nconst rawHtml = $input.item.json.html || $input.item.json.text || \"\";\n\n// PASO CRÍTICO: Reemplazar entidades HTML ANTES de borrar etiquetas\nlet cleanText = rawHtml\n    .replace(/&#34;/g, '\"')   // Decodifica la comilla Vinted\n    .replace(/&quot;/g, '\"')\n    .replace(/&#39;/g, \"'\")\n    .replace(/&amp;/g, '&')\n    .replace(/&nbsp;/g, ' ');\n\n// Borramos etiquetas HTML y normalizamos espacios\ncleanText = stripHtml(cleanText).replace(/\\s+/g, ' ').trim();\n\n// --- PATRONES ---\n\n// A. Patrón PRODUCTO (CORREGIDO)\n// Ya no obliga a que haya un punto justo después. Solo busca el contenido entre comillas.\nconst productPattern = /ha comprado\\s*[\"“'](.+?)[\"”']/i;\n\n// B. Patrón USUARIO\nconst usernamePattern = /([^\\s]+)\\s+ha comprado/i;\n\n// --- EJECUCIÓN ---\nconst matchProduct = cleanText.match(productPattern);\nconst matchUsername = cleanText.match(usernamePattern);\n\n// --- PROCESAMIENTO ---\n\n// 1. Producto\nlet productName = \"Producto Vinted\";\nif (matchProduct && matchProduct[1]) {\n    productName = matchProduct[1].trim();\n}\n\n// 2. Usuario\nlet username = \"UsuarioVinted\";\nif (matchUsername && matchUsername[1]) {\n    username = matchUsername[1].trim();\n}\n\n// 3. Email Falso (Estructura solicitada)\n// Limpiamos el username para que sea válido en un email\nconst safeUser = username.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();\nconst finalEmail = `${safeUser}@vinted.tailwind.es`;\n\n// --- SALIDA ---\n\nif (productName !== \"Producto Vinted\") {\n    return {\n        json: {\n            status: \"success\",\n            customer: {\n                first_name: username,\n                last_name: \"(Vinted)\",\n                email: finalEmail,\n                tags: [\n                    \"Cliente Vinted\"\n                ],\n                note: `Comprado en Vinted: ${productName}. Usuario: ${username}`\n            },\n            product: {\n                name: productName\n            }\n        }\n    };\n} else {\n    return {\n        json: {\n            status: \"error\",\n            error: \"No se pudo extraer el producto\",\n            debug: cleanText.substring(0, 500)\n        }\n    };\n}"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -988,7 +1058,7 @@
               "rightValue": "",
               "operator": {
                 "type": "array",
-                "operation": "empty",
+                "operation": "notEmpty",
                 "singleValue": true
               }
             }
@@ -1016,7 +1086,7 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        688,
+        704,
         464
       ],
       "id": "68144495-7bc0-466e-b603-a1fafbd441df",
@@ -1032,13 +1102,13 @@
       "parameters": {
         "sendTo": "info@rules-shop.es",
         "subject": "Producto Vendido en Vinted",
-        "message": "=<div style=\"font-family: Arial, sans-serif; max-width: 600px; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px; background-color: #ffffff;\">\n  \n  <h2 style=\"color: #D32F2F; margin-top: 0;\">⚠️ Acción Requerida: Stock Vinted</h2>\n  \n  <p style=\"color: #555555; font-size: 16px; line-height: 1.5;\">\n    Hola equipo, se ha vendido un producto en Vinted pero <strong>el nombre no coincide exactamente</strong> con el de Shopify.\n  </p>\n  \n  <p style=\"color: #555555; font-size: 16px; line-height: 1.5;\">\n    Por seguridad, la automatización no ha descontado el stock. <strong>Por favor, cambie el stock manualmente.</strong>\n  </p>\n\n  <hr style=\"border: 0; border-top: 1px solid #eeeeee; margin: 20px 0;\">\n\n  <div style=\"background-color: #f9f9f9; padding: 15px; border-left: 5px solid #D32F2F; border-radius: 4px;\">\n    <p style=\"margin: 0; font-size: 14px; color: #888;\">Producto vendido en Vinted:</p>\n    <p style=\"margin: 5px 0 0 0; font-size: 18px; font-weight: bold; color: #333;\">\n      {{ $('Edit Fields').item.json.PRODUCTO }}\n    </p>\n  </div>\n\n  <p style=\"margin-top: 20px; font-size: 14px; color: #666;\">\n    <strong>Cliente:</strong> {{ $('Edit Fields').item.json.NOMBRE }} {{ $('Edit Fields').item.json.APELLIDO }}\n  </p>\n\n  <p style=\"font-size: 12px; color: #aaaaaa; margin-top: 30px; text-align: center;\">\n    Notificación automática enviada por n8n 🤖\n  </p>\n\n</div>",
+        "message": "=<div style=\"font-family: Arial, sans-serif; max-width: 600px; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px; background-color: #ffffff;\">\n  \n  <h2 style=\"color: #D32F2F; margin-top: 0;\">⚠️ Acción Requerida: Crear Pedido Vinted</h2>\n  \n  <p style=\"color: #555555; font-size: 16px; line-height: 1.5;\">\n    Hola equipo, se ha realizado una venta en Wallapop.\n  </p>\n  \n  <p style=\"color: #555555; font-size: 16px; line-height: 1.5;\">\n    <strong>Por favor, crea el pedido para este cliente manualmente en Shopify</strong> (el nombre del producto puede variar ligeramente).\n  </p>\n\n  <hr style=\"border: 0; border-top: 1px solid #eeeeee; margin: 20px 0;\">\n\n  <div style=\"background-color: #f9f9f9; padding: 15px; border-left: 5px solid #D32F2F; border-radius: 4px; margin-bottom: 20px;\">\n    <p style=\"margin: 0; font-size: 14px; color: #888;\">Producto vendido en Vinted:</p>\n    <p style=\"margin: 5px 0 0 0; font-size: 18px; font-weight: bold; color: #333;\">\n      {{ $('Edit Fields').item.json.PRODUCTO }}\n    </p>\n  </div>\n\n  <div style=\"background-color: #e8f5e9; padding: 15px; border-left: 5px solid #2e7d32; border-radius: 4px; margin-bottom: 25px;\">\n    <p style=\"margin: 0; font-size: 14px; color: #2e7d32; font-weight: bold;\">✅ Cliente ya registrado en Shopify:</p>\n    <p style=\"margin: 5px 0 0 0; font-size: 14px; color: #333;\">\n      Datos para asignar el pedido:\n    </p>\n    <ul style=\"margin: 10px 0 0 0; padding-left: 20px; color: #555; font-size: 14px;\">\n       <li><strong>Nombre:</strong> {{ $('Edit Fields').item.json.NOMBRE }} {{ $('Edit Fields').item.json.APELLIDO }}</li>\n    </ul>\n  </div>\n  <div style=\"text-align: center;\">\n    <a href=\"{{ $json.shopify_admin_url }}\" style=\"background-color: #008060; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 16px; display: inline-block;\">\n      Ver Cliente en Shopify ↗\n    </a>\n  </div>\n\n  <p style=\"font-size: 12px; color: #aaaaaa; margin-top: 30px; text-align: center;\">\n    Notificación automática enviada por n8n 🤖\n  </p>\n\n</div>",
         "options": {}
       },
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        864,
+        1072,
         464
       ],
       "id": "09ed8cc6-5578-408e-8ff3-1ecbb8888a74",
@@ -1055,14 +1125,14 @@
       "parameters": {
         "sendTo": "info@rules-shop.es",
         "subject": "Producto Vendido en Vinted",
-        "message": "=<div style=\"font-family: Arial, sans-serif; max-width: 600px; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px; background-color: #ffffff;\">\n  \n  <h2 style=\"color: #D32F2F; margin-top: 0;\">⚠️ Acción Requerida: Stock Vinted</h2>\n  \n  <p style=\"color: #555555; font-size: 16px; line-height: 1.5;\">\n    Hola equipo, se ha vendido un producto en Vinted pero <strong>el nombre no coincide exactamente</strong> con el de Shopify.\n  </p>\n  \n  <p style=\"color: #555555; font-size: 16px; line-height: 1.5;\">\n    Por seguridad, la automatización no ha descontado el stock. <strong>Por favor, cambie el stock manualmente.</strong>\n  </p>\n\n  <hr style=\"border: 0; border-top: 1px solid #eeeeee; margin: 20px 0;\">\n\n  <div style=\"background-color: #f9f9f9; padding: 15px; border-left: 5px solid #D32F2F; border-radius: 4px;\">\n    <p style=\"margin: 0; font-size: 14px; color: #888;\">Producto vendido en Vinted:</p>\n    <p style=\"margin: 5px 0 0 0; font-size: 18px; font-weight: bold; color: #333;\">\n      {{ $('Edit Fields').item.json.PRODUCTO }}\n    </p>\n  </div>\n\n  <p style=\"margin-top: 20px; font-size: 14px; color: #666;\">\n    <strong>Cliente:</strong> {{ $('Edit Fields').item.json.NOMBRE }} {{ $('Edit Fields').item.json.APELLIDO }}\n  </p>\n\n  <p style=\"font-size: 12px; color: #aaaaaa; margin-top: 30px; text-align: center;\">\n    Notificación automática enviada por n8n 🤖\n  </p>\n\n</div>",
+        "message": "=<div style=\"font-family: Arial, sans-serif; max-width: 600px; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px; background-color: #ffffff;\">\n  \n  <h2 style=\"color: #D32F2F; margin-top: 0;\">⚠️ Acción Requerida: Crear Pedido Vinted</h2>\n  \n  <p style=\"color: #555555; font-size: 16px; line-height: 1.5;\">\n    Hola equipo, se ha realizado una venta en Wallapop.\n  </p>\n  \n  <p style=\"color: #555555; font-size: 16px; line-height: 1.5;\">\n    <strong>Por favor, crea el pedido para este cliente manualmente en Shopify</strong> (el nombre del producto puede variar ligeramente).\n  </p>\n\n  <hr style=\"border: 0; border-top: 1px solid #eeeeee; margin: 20px 0;\">\n\n  <div style=\"background-color: #f9f9f9; padding: 15px; border-left: 5px solid #D32F2F; border-radius: 4px; margin-bottom: 20px;\">\n    <p style=\"margin: 0; font-size: 14px; color: #888;\">Producto vendido en Vinted:</p>\n    <p style=\"margin: 5px 0 0 0; font-size: 18px; font-weight: bold; color: #333;\">\n      {{ $('Edit Fields').item.json.PRODUCTO }}\n    </p>\n  </div>\n\n  <div style=\"background-color: #e8f5e9; padding: 15px; border-left: 5px solid #2e7d32; border-radius: 4px; margin-bottom: 25px;\">\n    <p style=\"margin: 0; font-size: 14px; color: #2e7d32; font-weight: bold;\">✅ Cliente ya registrado en Shopify:</p>\n    <p style=\"margin: 5px 0 0 0; font-size: 14px; color: #333;\">\n      Datos para asignar el pedido:\n    </p>\n    <ul style=\"margin: 10px 0 0 0; padding-left: 20px; color: #555; font-size: 14px;\">\n       <li><strong>Nombre:</strong> {{ $('Edit Fields').item.json.NOMBRE }} {{ $('Edit Fields').item.json.APELLIDO }}</li>\n    </ul>\n  </div>\n  <div style=\"text-align: center;\">\n    <a href=\"{{ $json.shopify_admin_url }}\" style=\"background-color: #008060; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 16px; display: inline-block;\">\n      Ver Cliente en Shopify ↗\n    </a>\n  </div>\n\n  <p style=\"font-size: 12px; color: #aaaaaa; margin-top: 30px; text-align: center;\">\n    Notificación automática enviada por n8n 🤖\n  </p>\n\n</div>",
         "options": {}
       },
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        688,
-        656
+        880,
+        704
       ],
       "id": "a9b80301-c949-4fbb-85a4-eeeeaa265f30",
       "name": "Send a message1",
@@ -1305,7 +1375,7 @@
       "parameters": {
         "content": "## De Vinted",
         "height": 816,
-        "width": 1760,
+        "width": 1968,
         "color": 3
       },
       "type": "n8n-nodes-base.stickyNote",
@@ -1342,9 +1412,107 @@
       ],
       "id": "47f30864-04fe-48ae-ac30-c788d656cd55",
       "name": "Code in JavaScript3"
+    },
+    {
+      "parameters": {
+        "jsCode": "// CONFIGURACIÓN: El 'handle' de tu tienda tal como aparece en la URL de tu admin\n// Ejemplo: si tu admin es admin.shopify.com/store/mi-tienda-pro, pon aquí \"mi-tienda-pro\"\nconst storeName = \"rulesshop\"; \n\nreturn $input.all().map(item => {\n  \n  // 1. Navegación segura para sacar los datos del cliente\n  // Verificamos si existe 'edges' y si tiene al menos un elemento\n  const edges = item.json.data?.customers?.edges;\n  const customerNode = (edges && edges.length > 0) ? edges[0].node : {};\n  \n  // 2. Inicializamos variables\n  let cleanId = null;\n  let customerUrl = null;\n  let found = false;\n\n  // 3. Procesamos si encontramos un ID\n  if (customerNode.id) {\n    found = true;\n    \n    // El ID viene formato Global: \"gid://shopify/Customer/10122677059931\"\n    // Hacemos split por '/' y nos quedamos con el último fragmento (el número)\n    cleanId = customerNode.id.toString().split('/').pop();\n    \n    // Construimos la URL del Admin de Shopify\n    customerUrl = `https://admin.shopify.com/store/${storeName}/customers/${cleanId}`;\n  }\n\n  // 4. Retornamos la estructura plana\n  return {\n    json: {\n      // Esparcimos los datos originales (firstName, lastName, email, tags)\n      ...customerNode,\n      \n      // Agregamos nuestros campos calculados\n      shopify_id_numeric: cleanId,\n      shopify_admin_url: customerUrl,\n      \n      // Bandera útil para usar en un nodo \"If\" posterior (true si el cliente existe)\n      customer_found: found\n    }\n  };\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        704,
+        704
+      ],
+      "id": "ecf3bf9e-e5a9-4366-8c75-f18ef23ac432",
+      "name": "Code in JavaScript4"
+    },
+    {
+      "parameters": {
+        "jsCode": "// CONFIGURACIÓN: Nombre de tu tienda en la URL del admin\nconst storeName = \"rulesshop\"; \n\n// IMPORTANTE: Aquí le decimos a n8n que ignore el input anterior \n// y coja específicamente los datos del nodo llamado \"If\"\nconst items = $('If').all();\n\nreturn items.map(item => {\n  \n  // 1. Obtener datos navegando la estructura del JSON del nodo 'If'\n  const edges = item.json.data?.customers?.edges;\n  \n  // Verificamos si existe el array y tiene datos\n  const customerNode = (edges && edges.length > 0) ? edges[0].node : {};\n  \n  // 2. Inicializar variables\n  let cleanId = null;\n  let customerUrl = null;\n  let found = false;\n\n  // 3. Procesar ID y URL si encontramos un cliente\n  if (customerNode.id) {\n    found = true;\n    \n    // El ID viene como \"gid://shopify/Customer/10122677059931\"\n    // .split('/').pop() coge lo que hay después de la última barra\n    cleanId = customerNode.id.toString().split('/').pop();\n    \n    // Construimos la URL\n    customerUrl = `https://admin.shopify.com/store/${storeName}/customers/${cleanId}`;\n  }\n\n  // 4. Devolver resultado limpio\n  return {\n    json: {\n      // Mantenemos los datos originales del cliente (firstName, email, etc.)\n      ...customerNode,\n      \n      // Añadimos los campos calculados\n      shopify_id_numeric: cleanId,\n      shopify_admin_url: customerUrl,\n      \n      // Booleano de control\n      customer_found: found\n    }\n  };\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        896,
+        464
+      ],
+      "id": "f388e16d-93c4-41b3-be68-5d0404ce6351",
+      "name": "Code in JavaScript5"
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Gmail Trigger": [
+      {
+        "json": {
+          "id": "19c09c19accb09de",
+          "threadId": "19c09c19accb09de",
+          "labelIds": [
+            "UNREAD",
+            "IMPORTANT",
+            "CATEGORY_UPDATES",
+            "INBOX"
+          ],
+          "sizeEstimate": 72114,
+          "headers": {
+            "delivered-to": "Delivered-To: info@rules-shop.es",
+            "received": "Received: from b229-198.smtp-out.eu-west-1.amazonses.com (b229-198.smtp-out.eu-west-1.amazonses.com. [69.169.229.198])\r\n        by mx.google.com with ESMTPS id ffacd0b85a97d-435e1389e1bsi8969824f8f.214.2026.01.29.04.36.48\r\n        for <info@rules-shop.es>\r\n        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);\r\n        Thu, 29 Jan 2026 04:36:48 -0800 (PST)",
+            "x-received": "X-Received: by 2002:a05:6000:2082:b0:430:fd0f:28fe with SMTP id ffacd0b85a97d-435dd1c12d6mr12361343f8f.31.1769690208899;\r\n        Thu, 29 Jan 2026 04:36:48 -0800 (PST)",
+            "arc-seal": "ARC-Seal: i=1; a=rsa-sha256; t=1769690208; cv=none;\r\n        d=google.com; s=arc-20240605;\r\n        b=Dm8J8mp2luDarnhvW21qMXYSdU7iD2tc35QUoyti6Rhevmc3xY3HKNrZPIFFycIFn/\r\n         eSJj4yrHSljqAcbMiNQmSnFPBRdEA5nwN+diml9n8t740HjhYpiZMYiQa311CPS3ig0o\r\n         VjSrPk8z+zW6kRXScPrPxnXo0FkALF5e01375aNbngyGs6+d+4SICdlKJde/Z3jTdAn9\r\n         RNZU4k6tr8NI3Sp9yMqfZl2GMz9M27Sutyt8QRgRrwbjaaVnmKW4NmU12/Fkk6loawHS\r\n         hnh4nQTu7gd1/SoIEbYLBb1xaRhSL0iW02Hc0bXu2jmifEn4X6T0HHsFsE5IHW2gWfTW\r\n         9RyA==",
+            "arc-message-signature": "ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20240605;\r\n        h=reply-to:to:from:subject:message-id:mime-version:feedback-id:date\r\n         :dkim-signature:dkim-signature;\r\n        bh=g7wZGkON/UcbMtbOd3e9T4bzkoBULvlM+8J3Z1oCUcI=;\r\n        fh=oQb2jPy2mSmJm0xhjO5x7xsJ1M0jIo8PRrNhfwhP4KQ=;\r\n        b=MbTuO4LKuxSO6tcAWHwLXyWojHsNDxVislN/du6YObMtsbGRANiroZ/Poa33/Bm41M\r\n         rDsFIJYUOsmTQ/Z33lL+BYBmNuNRqXL5EO1YeZNypfUOxC2SKcxHiVxidSF9c7oHoRCv\r\n         A24WkW2AT1jnKqQfUElV8RS6QB8CYszTil5t6MKifUNCzNzIVS1/366yrz7H/YrRcvuu\r\n         FCS/iV6IVo4OJmS3R2Tp2gEAr8IW/qpRLgtA9cU3jyNGbvGr0pXR3j9tNwJLUOlgIpEE\r\n         79LczB/m6LSCfCSb3dx1qHtBbHIiqDXULyL5wCs6vras72Vi1xJ/2C0x8qaqUMf+QgLI\r\n         P1GA==;\r\n        dara=google.com",
+            "arc-authentication-results": "ARC-Authentication-Results: i=1; mx.google.com;\r\n       dkim=pass header.i=@vinted.es header.s=slqt5wh4msgvvc3vfn5qoflwzymk64to header.b=n+8AwQPP;\r\n       dkim=pass header.i=@amazonses.com header.s=ihchhvubuqgjsxyuhssfvqohv7z3u4hn header.b=gskgCFg5;\r\n       spf=pass (google.com: domain of 0102019c09c1979a-71aae973-d678-4ddf-9c9e-27fd01355335-000000@aws-bounce.vinted.es designates 69.169.229.198 as permitted sender) smtp.mailfrom=0102019c09c1979a-71aae973-d678-4ddf-9c9e-27fd01355335-000000@aws-bounce.vinted.es;\r\n       dmarc=pass (p=QUARANTINE sp=QUARANTINE dis=NONE) header.from=vinted.es",
+            "return-path": "Return-Path: <0102019c09c1979a-71aae973-d678-4ddf-9c9e-27fd01355335-000000@aws-bounce.vinted.es>",
+            "received-spf": "Received-SPF: pass (google.com: domain of 0102019c09c1979a-71aae973-d678-4ddf-9c9e-27fd01355335-000000@aws-bounce.vinted.es designates 69.169.229.198 as permitted sender) client-ip=69.169.229.198;",
+            "authentication-results": "Authentication-Results: mx.google.com;\r\n       dkim=pass header.i=@vinted.es header.s=slqt5wh4msgvvc3vfn5qoflwzymk64to header.b=n+8AwQPP;\r\n       dkim=pass header.i=@amazonses.com header.s=ihchhvubuqgjsxyuhssfvqohv7z3u4hn header.b=gskgCFg5;\r\n       spf=pass (google.com: domain of 0102019c09c1979a-71aae973-d678-4ddf-9c9e-27fd01355335-000000@aws-bounce.vinted.es designates 69.169.229.198 as permitted sender) smtp.mailfrom=0102019c09c1979a-71aae973-d678-4ddf-9c9e-27fd01355335-000000@aws-bounce.vinted.es;\r\n       dmarc=pass (p=QUARANTINE sp=QUARANTINE dis=NONE) header.from=vinted.es",
+            "dkim-signature": "DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;\r\n\ts=ihchhvubuqgjsxyuhssfvqohv7z3u4hn; d=amazonses.com; t=1769690208;\r\n\th=Date:Feedback-ID:MIME-Version:Message-ID:Subject:From:To:Reply-To:Content-Type;\r\n\tbh=iQDGfg6Vd/IvzfimBGtRl9YnvfgHr1T0u87yQNtPhaY=;\r\n\tb=gskgCFg5+UWCkb900znqeeUg94pRm2VhkmOgZn5wyej/GcBZOUkoPW3JZSZN84co\r\n\toCh7OradHvCwvL6nKN5Ct62VJpWeFxCiP7jTyd/PhJK+YdYuV1Gw7AOsWjWf/YFrB6N\r\n\tLXpN0UBSceo68DV62uFQnkF7urhl8NY4lWzVU/0g=",
+            "date": "Date: Thu, 29 Jan 2026 12:36:48 +0000",
+            "feedback-id": "Feedback-ID: ::1.eu-west-1.QOzjNwxJtlDcPj1T2b+NJY3x2BmLrUAayYYkSNgKC8I=:AmazonSES",
+            "mime-version": "MIME-Version: 1.0",
+            "message-id": "Message-ID: <0102019c09c1979a-71aae973-d678-4ddf-9c9e-27fd01355335-000000@eu-west-1.amazonses.com>",
+            "subject": "Subject: =?UTF-8?q?Has_vendido_un_art=C3=ADculo_en_Vinted?=",
+            "from": "From: Tu equipo de Vinted <noreply@vinted.es>",
+            "to": "To: info@rules-shop.es",
+            "reply-to": "Reply-To: Tu equipo de Vinted <noreply@vinted.es>",
+            "content-type": "Content-Type: multipart/mixed;\r\n boundary=8f0dbe3787372e65862b4937a5c32e23cd0a8f51e0a1d1a9043c14973bb8",
+            "x-ses-outgoing": "X-SES-Outgoing: 2026.01.29-69.169.229.198"
+          },
+          "html": "<html><head></head><body><div style=\"font-size: 1rem;\" role=\"article\" aria-roledescription=\"email\"><!-- [if mso]>\n    <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"padding:0px;margin:0px;width:680px; min-width: 680px;\">\n    <tr>\n    <td style=\"padding:0px;margin:0px;\"> </td>\n    <td style=\"padding:0px;margin:0px;\" width=\"680\">\n    <![endif]-->\n<div style=\"color: #333333; font-family: Helvetica, sans-serif; font-size: 18px; font-weight: normal; line-height: 150%; margin: 0px auto; width: 100%; max-width: 680px;\">\n<table role=\"presentation\" border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\">\n<tbody>\n<tr>\n<td style=\"padding: 0% 9%;\" align=\"left\" valign=\"middle\" height=\"110\"><a href=\"https://links.vinted.com/t/aHR0cHM6Ly92aW50ZWQuZXN8MGZmNWE4OTAtMDU0ZS00MWExLWI4NDEtOGE1Yzg2MjUzMTEyfGJXVlRObFVrbER3UjJqWjFHVnJZTnlaWTlKcERURktGSUVuWE5jUnVKR2s9\"><img style=\"height: 30px; display: block;\" src=\"https://static-assets.vinted.com/images/email/_shared/logo/default.png\" border=\"0\"/></a></td>\n</tr>\n</tbody>\n</table>\n<img src=\"https://www.vinted.es/crm/email_track?correlation_id=0ff5a890-054e-41a1-b841-8a5c86253112&amp;crm_email_id=505&amp;hash=269524185%3A2e9902e8150ec85bf9bafa4886fb1161759caa26af2342b4fd92f883a0b195bd\" width=\"1\" height=\"1\" alt=\"\"/><p><strong>Hola, skategr:</strong></p>\n<p></p>\n<p></p>\n<p><strong>kat_komplexe</strong> ha comprado <strong>&#34;Vans Skate Sk8-Hi Pro Zapatillas Black/Gum 38&#34;</strong>.</p>\n<p></p>\n<p></p>\n<p></p>\n<p></p>\n<p></p>\n<p style=\"margin: 16px 0 28px;\"> <a class=\"btn\" style=\"display: inline-block; background-color: #007782; color: #ffffff; text-decoration: none; padding: 8px 20px; border-radius: 6px; font-size: 16px; line-height: 1.5; box-shadow: 0 1px 2px rgba(0, 0, 0, .05); margin: 8px 0; border: 1px solid #007782;\" href=\"https://links.vinted.com/t/aHR0cHM6Ly93d3cudmludGVkLmVzL2luYm94LzIwNDQwMDY1MDU3P2NsaWNrX3RhcmdldD1nZXRfc2hpcHBpbmdfbGFiZWwmbD1lbWFpbC5ib2R5LmdldF9zaGlwcGluZ19sYWJlbCZsb2dpbj10cnVlfDBmZjVhODkwLTA1NGUtNDFhMS1iODQxLThhNWM4NjI1MzExMnxocTcwNGZDQ1M0OVZ3OHdmVE9ZSjlVbTdhMll5d3ZDVjJWNUJhbUE4UXJvPQ==\"> Descargar etiqueta </a> </p>\n<p></p>\n<p></p>\n<p><span style=\"font-weight: 400;\">Transferiremos el pago del comprador a tu saldo Vinted cuando haya finalizado la transacción.</span></p>\n<p></p>\n<p>Envía el pedido en los próximos 5 días.</p>\n<p></p>\n<p>Instrucciones: </p>\n<ol>\n<li>Ve a la conversación con el comprador para generar la etiqueta de envío.</li>\n<li><span style=\"font-weight: 400;\">Sigue los primeros pasos en Vinted y, después, sigue los pasos que te lleguen por e-mail una vez generada la etiqueta. </span></li>\n<li>Si tienes que imprimir y pegar la etiqueta, <span style=\"font-weight: 400;\">asegúrate de no tapar el código de barras con la cinta adhesiva (aunque sea transparente, puede impedir su escaneo). </span>Puedes usar el embalaje que quieras o comprar un sobre o una caja.</li>\n</ol>\n<p></p>\n<p></p>\n<p><span style=\"font-weight: 400;\">Como miembro Vinted Pro, debes mandar al comprador 2 documentos adicionales:</span></p>\n<p>• <strong>Un formulario de devolución.</strong><span style=\"font-weight: 400;\"> Imprime el formulario (adjunto en este e-mail) e inclúyelo dentro del paquete. El comprador tiene </span><a style=\"color: #007782;\" href=\"https://links.vinted.com/t/aHR0cHM6Ly93d3cudmludGVkLmZyL2hlbHAvODg2fDBmZjVhODkwLTA1NGUtNDFhMS1iODQxLThhNWM4NjI1MzExMnxibndiMXdMRDNZMG9GTUdla0xobEM4cEFuRmpjd0ZqaFlfYzQwcV9QVW9jPQ==\"><span style=\"font-weight: 400;\">derecho a devolver</span></a><span style=\"font-weight: 400;\"> este artículo en un plazo de 14 días.</span></p>\n<p>• <strong>Una factura. </strong><span style=\"font-weight: 400;\">Asegúrate de que incluyes la factura dentro del paquete junto con el artículo. También puedes enviarla a la dirección de e-mail del comprador utilizando los datos que verás a  continuación.</span></p>\n<p><strong>Información de contacto del comprador</strong></p>\n<table style=\"border-collapse: collapse; width: 100%; height: 44px;\" border=\"0\">\n<tbody>\n<tr style=\"height: 22px;\">\n<td style=\"width: 6.7200000000000015%; height: 22px;\"><span style=\"font-weight: 400;\">Dirección</span>:</td>\n<td style=\"width: 40.995000000000005%; height: 22px;\">Katia Kamotesov, 3 rue des paludiers, La Rochelle, 17000, FR, France</td>\n</tr>\n<tr style=\"height: 22px;\">\n<td style=\"width: 6.7200000000000015%; height: 22px;\"><span style=\"font-weight: 400;\">E-mail</span>:</td>\n<td style=\"width: 40.995000000000005%; height: 22px;\">katiakamo@gmail.com</td>\n</tr>\n</tbody>\n</table>\n<p></p>\n<p>También es buena idea ponerte en contacto con kat_komplexe para decirle que ya has enviado el artículo.</p>\n<p> </p>\n<p>Tu equipo de Vinted</p>\n<table role=\"presentation\" border=\"0\" width=\"100%\" cellspacing=\"0\" cellpadding=\"0\" bgcolor=\"#F5F6F7\">\n<tbody>\n<tr>\n<td align=\"right\" bgcolor=\"#ffffff\"><img style=\"display: block; max-width: 680px; width: 100%;\" src=\"https://static-assets.vinted.com/admin/editor_assets/en/subtract-footer.png\" width=\"680\" border=\"0\"/></td>\n</tr>\n<tr>\n<td height=\"30\"> </td>\n</tr>\n<tr>\n<td style=\"font-family: Helvetica, sans-serif; font-size: 12px; line-height: 16px; margin: 0; color: #999999; padding: 0% 9%; text-align: left;\" align=\"left\">\n<p style=\"font-size: 12px; line-height: 16px; margin: 0px; color: #999999;\"><span style=\"font-weight: 400;\">Tenemos la obligación de enviarte este e-mail para cumplir nuestros <a style=\"text-decoration: underline; color: #333333;\" href=\"https://links.vinted.com/t/aHR0cHM6Ly93d3cudmludGVkLmVzL3Rlcm1zX2FuZF9jb25kaXRpb25zfDBmZjVhODkwLTA1NGUtNDFhMS1iODQxLThhNWM4NjI1MzExMnwtcmpyQllSVzUtUVJvLWtUdXhLQVFkekhZNkJNcUp6RDM4ME5JbEcxbTdnPQ==\">Términos y Condiciones</a>, o por otros motivos legales. No es posible darse de baja de estos e-mails. Para conocer tus derechos y obtener información más detallada sobre el uso que hacemos de tus datos personales, consulta nuestra </span><a style=\"text-decoration: underline; color: #333333;\" href=\"https://links.vinted.com/t/aHR0cHM6Ly93d3cudmludGVkLmVzL3ByaXZhY3ktcG9saWN5fDBmZjVhODkwLTA1NGUtNDFhMS1iODQxLThhNWM4NjI1MzExMnw5bnlITmdJYzQtT1p6UG1fTGZvMzZGcUlJdEZ4ZTFNcmxrRDRITDRkYTg0PQ==\"><span style=\"font-weight: 400;\">política de privacidad</span></a><span style=\"font-weight: 400;\">.</span></p>\n</td>\n</tr>\n<tr>\n<td height=\"64\"> </td>\n</tr>\n</tbody>\n</table>\n</div>\n<!-- [if mso]>\n    </td>\n    <td style=\"padding:0px;margin:0px;\"> </td>\n    </tr>\n    </table>\n    <![endif]--></div></body></html>",
+          "subject": "Has vendido un artículo en Vinted",
+          "date": "2026-01-29T12:36:48.000Z",
+          "to": {
+            "value": [
+              {
+                "address": "info@rules-shop.es",
+                "name": ""
+              }
+            ],
+            "html": "<span class=\"mp_address_group\"><a href=\"mailto:info@rules-shop.es\" class=\"mp_address_email\">info@rules-shop.es</a></span>",
+            "text": "info@rules-shop.es"
+          },
+          "from": {
+            "value": [
+              {
+                "address": "noreply@vinted.es",
+                "name": "Tu equipo de Vinted"
+              }
+            ],
+            "html": "<span class=\"mp_address_group\"><span class=\"mp_address_name\">Tu equipo de Vinted</span> &lt;<a href=\"mailto:noreply@vinted.es\" class=\"mp_address_email\">noreply@vinted.es</a>&gt;</span>",
+            "text": "\"Tu equipo de Vinted\" <noreply@vinted.es>"
+          },
+          "messageId": "<0102019c09c1979a-71aae973-d678-4ddf-9c9e-27fd01355335-000000@eu-west-1.amazonses.com>",
+          "replyTo": {
+            "value": [
+              {
+                "address": "noreply@vinted.es",
+                "name": "Tu equipo de Vinted"
+              }
+            ],
+            "html": "<span class=\"mp_address_group\"><span class=\"mp_address_name\">Tu equipo de Vinted</span> &lt;<a href=\"mailto:noreply@vinted.es\" class=\"mp_address_email\">noreply@vinted.es</a>&gt;</span>",
+            "text": "\"Tu equipo de Vinted\" <noreply@vinted.es>"
+          }
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1"
   },
@@ -1367,14 +1535,13 @@
       "Gmail Trigger": {
         "lastTimeChecked": 1769690208,
         "possibleDuplicates": [
-          "19c09c19accb09de",
-          "19bfb7ef7602fe56"
+          "19c09c19accb09de"
         ]
       }
     }
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-01-28T14:06:32.405Z",
-  "versionId": "f036a59f-3a8f-4377-956e-d67ae0b8478f"
+  "updatedAt": "2026-01-31T18:44:49.193Z",
+  "versionId": "2a6c8161-96da-46f7-904a-c2ce31004fcd"
 }
