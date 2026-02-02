@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-01-31T08:21:22.000Z",
-    "createdAt": "2026-01-31T08:21:20.761Z",
-    "versionId": "7c4b9e33-3478-4d5c-b521-dd34946756b3",
+    "updatedAt": "2026-02-01T09:56:34.000Z",
+    "createdAt": "2026-02-01T09:56:20.452Z",
+    "versionId": "2c366ddd-8394-4b0f-a99d-ef96248fb0d6",
     "workflowId": "584ehV8qDkwoHzoLSDP1n",
     "nodes": [
       {
@@ -1044,7 +1044,7 @@
         "type": "n8n-nodes-base.graphql",
         "typeVersion": 1.1,
         "position": [
-          832,
+          864,
           736
         ],
         "id": "143b2690-f56b-4f55-9a4c-c9e59e4a8d15",
@@ -1058,25 +1058,12 @@
       },
       {
         "parameters": {
-          "jsCode": "// 1. Recuperamos la lista de pedidos (Input)\nconst orders = items.map(item => item.json);\n\n// 2. Diccionario de Nombres\nconst employeeMap = {\n    \"126641570139\": \"Arturo Fernandez Caballero\",\n    \"126890148187\": \"Sandra Rogel Aguilera\",\n    \"126889361755\": \"Alejandro Pavon\",\n    \"127346573659\": \"Facundo Altamirano Pozzi\",\n    \"127144952155\": \"Jose Maria Restoy Varela\",\n    \"126790828379\": \"Florencia cielo Alarcon\",\n    \"115464700251\": \"Miguel Navarro\",\n    \"126641602907\": \"Eugenia La Piettra\",\n    \"126759141723\": \"Lorenzo Jimenez\",\n    \"127472533851\": \"Pablo roldan\",\n    \"127149113691\": \"Facundo Pereira\",\n    \"127346606427\": \"Nerea Fernández\",\n    \"125804478811\": \"Anabel Labella\",\n    \"127578997083\": \"Cesar Moreno\",\n    \"126889165147\": \"Julio Hermoso Fernández\",\n    \"126766121307\": \"Unai Rodríguez Alarcón\",\n    \"127048155483\": \"Gerardo Cairo\",\n    \"126888640859\": \"Facundo Altamirano Pozzi\",\n    \"123965866331\": \"Thomas Fontoura\",\n    \"126895620443\": \"Fabio Cortés Martín\",\n    \"126953292123\": \"Carlota Ramirez Palacios\",\n    \"126905516379\": \"André Ferreira\", \n    \"126888149339\": \"Alejandro Vasallo Bancalero\",\n    \"126905123163\": \"Ana Isabel Robles González\",\n    \"127310987611\": \"Paula Perez\",\n    \"114932875611\": \"Emiliano Martinez Verdecchia\",\n    \"125110976859\": \"Adrián Azorín\",\n    \"127346704731\": \"Rober Alonso\",\n    \"114884346203\": \"Lorena Verdecchia\",\n    \"126812389723\": \"Cuenta Multiusuario\",\n    \"115083706715\": \"Antonio Gabriel Lopez Moreno\"\n};\n\n// Objeto para acumular las ventas por ID\nconst salesSummary = {};\n\n// 3. Bucle para SUMAR ventas\nfor (const order of orders) {\n    const userId = order.user_id;\n    if (!userId) continue;\n\n    let price = parseFloat(order.total_price);\n    if (isNaN(price)) price = 0;\n\n    if (salesSummary[userId]) {\n        salesSummary[userId] += price;\n    } else {\n        salesSummary[userId] = price;\n    }\n}\n\n// 4. Transformar a lista temporal\nlet tempResults = [];\nfor (const [id, total] of Object.entries(salesSummary)) {\n    const nombre = employeeMap[id] || \"Desconocido (\" + id + \")\";\n    tempResults.push({\n        nombre: nombre,\n        total: parseFloat(total.toFixed(2))\n    });\n}\n\n// 5. Ordenar de mayor a menor venta\ntempResults.sort((a, b) => b.total - a.total);\n\n// 6. Generar JSON final con NUMERO DE FILA ACTUALIZADO\nconst finalResults = tempResults.map((item, index) => {\n    return {\n        json: {\n            \"numero_fila\": index + 31, // <--- Ahora empieza en 30\n            \"Nombre Empleado\": item.nombre,\n            \"Total Vendido\": item.total\n        }\n    };\n});\n\nreturn finalResults;"
-        },
-        "type": "n8n-nodes-base.code",
-        "typeVersion": 2,
-        "position": [
-          256,
-          736
-        ],
-        "id": "30885162-dd4f-4a72-a927-16f991a44fdd",
-        "name": "Calcular Ranking Empleados1"
-      },
-      {
-        "parameters": {
           "jsCode": "// 1. INPUT ACTUAL (items): Son los datos que vienen de \"Get row(s)\" (Correos)\nconst datosCorreos = items;\n\n// 2. INPUT ANTERIOR: Recuperamos los datos del nodo \"Calcular Ranking Empleados1\" (Ventas)\n// NOTA: Asegúrate de que el nombre dentro de $('...') sea EXACTO al de tu nodo morado\nlet datosVentas = [];\ntry {\n  datosVentas = $('Calcular Ranking Empleados1').all();\n} catch (e) {\n  return [{ json: { error: \"No encuentro el nodo 'Calcular Ranking Empleados1'. Revisa el nombre.\" } }];\n}\n\n// 3. Creamos el mapa para buscar correos (Nombre -> Correo)\nconst mapaCorreos = {};\n\ndatosCorreos.forEach(fila => {\n  const datos = fila.json;\n  \n  // En tu captura de \"Get row(s)\", la columna del nombre se llama \"Nombre\" (no \"Nombre Empleado\")\n  // Usamos .trim() porque en tu captura se ven saltos de línea (\"\\n\")\n  const nombreKey = (datos[\"Nombre\"] || \"\").toString().trim();\n  const email = (datos[\"Correo\"] || \"\").toString().trim(); // Limpiamos el \\n del correo\n  \n  if (nombreKey && email) {\n    mapaCorreos[nombreKey] = email;\n  }\n});\n\n// 4. Procesamos las VENTAS (iteramos sobre datosVentas, NO sobre items)\nconst resultados = [];\n\nfor (const item of datosVentas) {\n  const empleado = item.json;\n  \n  // Aquí sí existen estas columnas porque estamos leyendo del nodo de Ranking\n  const ventas = parseFloat(empleado[\"Total Vendido\"]);\n  const nombreVentas = (empleado[\"Nombre Empleado\"] || \"\").toString().trim();\n  \n  let bonoValor = 0;\n\n  // --- LÓGICA DEL BONO ---\n  if (ventas >= 30000) {\n    bonoValor = 200;\n  } else if (ventas >= 26000) {\n    bonoValor = 150;\n  } else if (ventas >= 22000) {\n    bonoValor = 120;\n  } else if (ventas >= 18000) {\n    bonoValor = 90;\n  }\n\n  // --- GENERACIÓN DEL OUTPUT ---\n  if (bonoValor > 0) {\n    \n    // Buscamos el correo usando el nombre limpio\n    const correoEncontrado = mapaCorreos[nombreVentas];\n\n    resultados.push({\n      json: {\n        \"Nombre Empleado\": nombreVentas,\n        \"Total Vendido\": ventas,\n        \"BONO\": `BONO ${bonoValor}€`,\n        \"MontoBono\": bonoValor,\n        // Si no encuentra el correo, pondrá null.\n        \"Correo\": correoEncontrado || \"No encontrado\"\n      }\n    });\n  }\n}\n\nreturn resultados;"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          624,
+          688,
           736
         ],
         "id": "f1e8abd2-0441-4ba7-8f11-558506473f74",
@@ -1104,7 +1091,7 @@
         "type": "n8n-nodes-base.dataTable",
         "typeVersion": 1.1,
         "position": [
-          448,
+          512,
           736
         ],
         "id": "23a0b84f-a080-49b8-beb3-cf051b28b93a",
@@ -1133,7 +1120,7 @@
         "type": "n8n-nodes-base.graphql",
         "typeVersion": 1.1,
         "position": [
-          1232,
+          1216,
           736
         ],
         "id": "2c8ee8bf-99fc-4bef-8ea0-06a5bec51363",
@@ -1144,6 +1131,32 @@
             "name": "Token Informes Shopify"
           }
         }
+      },
+      {
+        "parameters": {
+          "operation": "deleteRows",
+          "dataTableId": {
+            "__rl": true,
+            "value": "8GDVj673ag0hCrVt",
+            "mode": "list",
+            "cachedResultName": "Informe Mensual",
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/8GDVj673ag0hCrVt"
+          },
+          "filters": {
+            "conditions": [
+              {}
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.dataTable",
+        "typeVersion": 1.1,
+        "position": [
+          912,
+          160
+        ],
+        "id": "2eb99103-3cf1-4f13-865a-d7584dcc05a7",
+        "name": "Delete row(s)"
       }
     ],
     "connections": {
@@ -1313,7 +1326,13 @@
       },
       "Configurar Fechas": {
         "main": [
-          []
+          [
+            {
+              "node": "Crear Informe Maestro",
+              "type": "main",
+              "index": 0
+            }
+          ]
         ]
       },
       "Acumular en memoria": {
@@ -1332,6 +1351,11 @@
           [
             {
               "node": "Loop Over Items",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Get row(s)",
               "type": "main",
               "index": 0
             }
@@ -1443,17 +1467,6 @@
           ]
         ]
       },
-      "Calcular Ranking Empleados1": {
-        "main": [
-          [
-            {
-              "node": "Get row(s)",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
       "Code in JavaScript": {
         "main": [
           [
@@ -1500,11 +1513,11 @@
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version 7c4b9e33",
+    "name": "Version 2c366ddd",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "7c4b9e33-3478-4d5c-b521-dd34946756b3",
+  "activeVersionId": "2c366ddd-8394-4b0f-a99d-ef96248fb0d6",
   "connections": {
     "Inicio de Mes (Día 1)": {
       "main": [
@@ -1672,7 +1685,13 @@
     },
     "Configurar Fechas": {
       "main": [
-        []
+        [
+          {
+            "node": "Crear Informe Maestro",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Acumular en memoria": {
@@ -1691,6 +1710,11 @@
         [
           {
             "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get row(s)",
             "type": "main",
             "index": 0
           }
@@ -1796,17 +1820,6 @@
         [
           {
             "node": "Escribir sucursales",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Calcular Ranking Empleados1": {
-      "main": [
-        [
-          {
-            "node": "Get row(s)",
             "type": "main",
             "index": 0
           }
@@ -2904,7 +2917,7 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        832,
+        864,
         736
       ],
       "id": "143b2690-f56b-4f55-9a4c-c9e59e4a8d15",
@@ -2918,25 +2931,12 @@
     },
     {
       "parameters": {
-        "jsCode": "// 1. Recuperamos la lista de pedidos (Input)\nconst orders = items.map(item => item.json);\n\n// 2. Diccionario de Nombres\nconst employeeMap = {\n    \"126641570139\": \"Arturo Fernandez Caballero\",\n    \"126890148187\": \"Sandra Rogel Aguilera\",\n    \"126889361755\": \"Alejandro Pavon\",\n    \"127346573659\": \"Facundo Altamirano Pozzi\",\n    \"127144952155\": \"Jose Maria Restoy Varela\",\n    \"126790828379\": \"Florencia cielo Alarcon\",\n    \"115464700251\": \"Miguel Navarro\",\n    \"126641602907\": \"Eugenia La Piettra\",\n    \"126759141723\": \"Lorenzo Jimenez\",\n    \"127472533851\": \"Pablo roldan\",\n    \"127149113691\": \"Facundo Pereira\",\n    \"127346606427\": \"Nerea Fernández\",\n    \"125804478811\": \"Anabel Labella\",\n    \"127578997083\": \"Cesar Moreno\",\n    \"126889165147\": \"Julio Hermoso Fernández\",\n    \"126766121307\": \"Unai Rodríguez Alarcón\",\n    \"127048155483\": \"Gerardo Cairo\",\n    \"126888640859\": \"Facundo Altamirano Pozzi\",\n    \"123965866331\": \"Thomas Fontoura\",\n    \"126895620443\": \"Fabio Cortés Martín\",\n    \"126953292123\": \"Carlota Ramirez Palacios\",\n    \"126905516379\": \"André Ferreira\", \n    \"126888149339\": \"Alejandro Vasallo Bancalero\",\n    \"126905123163\": \"Ana Isabel Robles González\",\n    \"127310987611\": \"Paula Perez\",\n    \"114932875611\": \"Emiliano Martinez Verdecchia\",\n    \"125110976859\": \"Adrián Azorín\",\n    \"127346704731\": \"Rober Alonso\",\n    \"114884346203\": \"Lorena Verdecchia\",\n    \"126812389723\": \"Cuenta Multiusuario\",\n    \"115083706715\": \"Antonio Gabriel Lopez Moreno\"\n};\n\n// Objeto para acumular las ventas por ID\nconst salesSummary = {};\n\n// 3. Bucle para SUMAR ventas\nfor (const order of orders) {\n    const userId = order.user_id;\n    if (!userId) continue;\n\n    let price = parseFloat(order.total_price);\n    if (isNaN(price)) price = 0;\n\n    if (salesSummary[userId]) {\n        salesSummary[userId] += price;\n    } else {\n        salesSummary[userId] = price;\n    }\n}\n\n// 4. Transformar a lista temporal\nlet tempResults = [];\nfor (const [id, total] of Object.entries(salesSummary)) {\n    const nombre = employeeMap[id] || \"Desconocido (\" + id + \")\";\n    tempResults.push({\n        nombre: nombre,\n        total: parseFloat(total.toFixed(2))\n    });\n}\n\n// 5. Ordenar de mayor a menor venta\ntempResults.sort((a, b) => b.total - a.total);\n\n// 6. Generar JSON final con NUMERO DE FILA ACTUALIZADO\nconst finalResults = tempResults.map((item, index) => {\n    return {\n        json: {\n            \"numero_fila\": index + 31, // <--- Ahora empieza en 30\n            \"Nombre Empleado\": item.nombre,\n            \"Total Vendido\": item.total\n        }\n    };\n});\n\nreturn finalResults;"
+        "jsCode": "// 1. INPUT ACTUAL (items): Son los datos que vienen de \"Get row(s)\" (Correos)\nconst datosCorreos = items;\n\n// 2. INPUT ANTERIOR: Recuperamos los datos del nodo \"Calcular Ranking Empleados1\" (Ventas)\n// NOTA: Asegúrate de que el nombre dentro de $('...') sea EXACTO al de tu nodo morado\nlet datosVentas = [];\ntry {\n  datosVentas = $('Calcular Ranking Empleados').all();\n} catch (e) {\n  return [{ json: { error: \"No encuentro el nodo 'Calcular Ranking Empleados1'. Revisa el nombre.\" } }];\n}\n\n// 3. Creamos el mapa para buscar correos (Nombre -> Correo)\nconst mapaCorreos = {};\n\ndatosCorreos.forEach(fila => {\n  const datos = fila.json;\n  \n  // En tu captura de \"Get row(s)\", la columna del nombre se llama \"Nombre\" (no \"Nombre Empleado\")\n  // Usamos .trim() porque en tu captura se ven saltos de línea (\"\\n\")\n  const nombreKey = (datos[\"Nombre\"] || \"\").toString().trim();\n  const email = (datos[\"Correo\"] || \"\").toString().trim(); // Limpiamos el \\n del correo\n  \n  if (nombreKey && email) {\n    mapaCorreos[nombreKey] = email;\n  }\n});\n\n// 4. Procesamos las VENTAS (iteramos sobre datosVentas, NO sobre items)\nconst resultados = [];\n\nfor (const item of datosVentas) {\n  const empleado = item.json;\n  \n  // Aquí sí existen estas columnas porque estamos leyendo del nodo de Ranking\n  const ventas = parseFloat(empleado[\"Total Vendido\"]);\n  const nombreVentas = (empleado[\"Nombre Empleado\"] || \"\").toString().trim();\n  \n  let bonoValor = 0;\n\n  // --- LÓGICA DEL BONO ---\n  if (ventas >= 30000) {\n    bonoValor = 200;\n  } else if (ventas >= 26000) {\n    bonoValor = 150;\n  } else if (ventas >= 22000) {\n    bonoValor = 120;\n  } else if (ventas >= 18000) {\n    bonoValor = 90;\n  }\n\n  // --- GENERACIÓN DEL OUTPUT ---\n  if (bonoValor > 0) {\n    \n    // Buscamos el correo usando el nombre limpio\n    const correoEncontrado = mapaCorreos[nombreVentas];\n\n    resultados.push({\n      json: {\n        \"Nombre Empleado\": nombreVentas,\n        \"Total Vendido\": ventas,\n        \"BONO\": `BONO ${bonoValor}€`,\n        \"MontoBono\": bonoValor,\n        // Si no encuentra el correo, pondrá null.\n        \"Correo\": correoEncontrado || \"No encontrado\"\n      }\n    });\n  }\n}\n\nreturn resultados;"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        256,
-        736
-      ],
-      "id": "30885162-dd4f-4a72-a927-16f991a44fdd",
-      "name": "Calcular Ranking Empleados1"
-    },
-    {
-      "parameters": {
-        "jsCode": "// 1. INPUT ACTUAL (items): Son los datos que vienen de \"Get row(s)\" (Correos)\nconst datosCorreos = items;\n\n// 2. INPUT ANTERIOR: Recuperamos los datos del nodo \"Calcular Ranking Empleados1\" (Ventas)\n// NOTA: Asegúrate de que el nombre dentro de $('...') sea EXACTO al de tu nodo morado\nlet datosVentas = [];\ntry {\n  datosVentas = $('Calcular Ranking Empleados1').all();\n} catch (e) {\n  return [{ json: { error: \"No encuentro el nodo 'Calcular Ranking Empleados1'. Revisa el nombre.\" } }];\n}\n\n// 3. Creamos el mapa para buscar correos (Nombre -> Correo)\nconst mapaCorreos = {};\n\ndatosCorreos.forEach(fila => {\n  const datos = fila.json;\n  \n  // En tu captura de \"Get row(s)\", la columna del nombre se llama \"Nombre\" (no \"Nombre Empleado\")\n  // Usamos .trim() porque en tu captura se ven saltos de línea (\"\\n\")\n  const nombreKey = (datos[\"Nombre\"] || \"\").toString().trim();\n  const email = (datos[\"Correo\"] || \"\").toString().trim(); // Limpiamos el \\n del correo\n  \n  if (nombreKey && email) {\n    mapaCorreos[nombreKey] = email;\n  }\n});\n\n// 4. Procesamos las VENTAS (iteramos sobre datosVentas, NO sobre items)\nconst resultados = [];\n\nfor (const item of datosVentas) {\n  const empleado = item.json;\n  \n  // Aquí sí existen estas columnas porque estamos leyendo del nodo de Ranking\n  const ventas = parseFloat(empleado[\"Total Vendido\"]);\n  const nombreVentas = (empleado[\"Nombre Empleado\"] || \"\").toString().trim();\n  \n  let bonoValor = 0;\n\n  // --- LÓGICA DEL BONO ---\n  if (ventas >= 30000) {\n    bonoValor = 200;\n  } else if (ventas >= 26000) {\n    bonoValor = 150;\n  } else if (ventas >= 22000) {\n    bonoValor = 120;\n  } else if (ventas >= 18000) {\n    bonoValor = 90;\n  }\n\n  // --- GENERACIÓN DEL OUTPUT ---\n  if (bonoValor > 0) {\n    \n    // Buscamos el correo usando el nombre limpio\n    const correoEncontrado = mapaCorreos[nombreVentas];\n\n    resultados.push({\n      json: {\n        \"Nombre Empleado\": nombreVentas,\n        \"Total Vendido\": ventas,\n        \"BONO\": `BONO ${bonoValor}€`,\n        \"MontoBono\": bonoValor,\n        // Si no encuentra el correo, pondrá null.\n        \"Correo\": correoEncontrado || \"No encontrado\"\n      }\n    });\n  }\n}\n\nreturn resultados;"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        624,
+        688,
         736
       ],
       "id": "f1e8abd2-0441-4ba7-8f11-558506473f74",
@@ -2964,7 +2964,7 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
       "position": [
-        448,
+        512,
         736
       ],
       "id": "23a0b84f-a080-49b8-beb3-cf051b28b93a",
@@ -2993,7 +2993,7 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        1232,
+        1216,
         736
       ],
       "id": "2c8ee8bf-99fc-4bef-8ea0-06a5bec51363",
@@ -3032,245 +3032,7 @@
       "name": "Delete row(s)"
     }
   ],
-  "pinData": {
-    "Calcular Ranking Empleados1": [
-      {
-        "json": {
-          "numero_fila": 31,
-          "Nombre Empleado": "Arturo Fernandez Caballero",
-          "Total Vendido": 32900.82
-        }
-      },
-      {
-        "json": {
-          "numero_fila": 32,
-          "Nombre Empleado": "Lorenzo Jimenez",
-          "Total Vendido": 32694.78
-        }
-      },
-      {
-        "json": {
-          "numero_fila": 33,
-          "Nombre Empleado": "Desconocido (126889034075)",
-          "Total Vendido": 27216.54
-        }
-      },
-      {
-        "json": {
-          "numero_fila": 34,
-          "Nombre Empleado": "Jose Maria Restoy Varela",
-          "Total Vendido": 26815.71
-        }
-      },
-      {
-        "json": {
-          "numero_fila": 35,
-          "Nombre Empleado": "Miguel Navarro",
-          "Total Vendido": 26301.86
-        }
-      },
-      {
-        "json": {
-          "numero_fila": 36,
-          "Nombre Empleado": "Eugenia La Piettra",
-          "Total Vendido": 25247
-        }
-      },
-      {
-        "json": {
-          "numero_fila": 37,
-          "Nombre Empleado": "Florencia cielo Alarcon",
-          "Total Vendido": 21662.1
-        }
-      },
-      {
-        "json": {
-          "numero_fila": 38,
-          "Nombre Empleado": "Alejandro Pavon",
-          "Total Vendido": 20300.67
-        }
-      },
-      {
-        "json": {
-          "numero_fila": 39,
-          "Nombre Empleado": "Julio Hermoso Fernández",
-          "Total Vendido": 16655.98
-        }
-      },
-      {
-        "json": {
-          "numero_fila": 40,
-          "Nombre Empleado": "Sandra Rogel Aguilera",
-          "Total Vendido": 12752.8
-        }
-      },
-      {
-        "json": {
-          "numero_fila": 41,
-          "Nombre Empleado": "Facundo Altamirano Pozzi",
-          "Total Vendido": 11946.38
-        }
-      },
-      {
-        "json": {
-          "numero_fila": 42,
-          "Nombre Empleado": "Unai Rodríguez Alarcón",
-          "Total Vendido": 11465.03
-        }
-      },
-      {
-        "json": {
-          "numero_fila": 43,
-          "Nombre Empleado": "Facundo Altamirano Pozzi",
-          "Total Vendido": 10087.29
-        }
-      },
-      {
-        "json": {
-          "numero_fila": 44,
-          "Nombre Empleado": "Anabel Labella",
-          "Total Vendido": 9602.23
-        }
-      },
-      {
-        "json": {
-          "numero_fila": 45,
-          "Nombre Empleado": "Thomas Fontoura",
-          "Total Vendido": 8757.25
-        }
-      },
-      {
-        "json": {
-          "numero_fila": 46,
-          "Nombre Empleado": "Antonio Gabriel Lopez Moreno",
-          "Total Vendido": 7704.16
-        }
-      },
-      {
-        "json": {
-          "numero_fila": 47,
-          "Nombre Empleado": "Paula Perez",
-          "Total Vendido": 6100.75
-        }
-      },
-      {
-        "json": {
-          "numero_fila": 48,
-          "Nombre Empleado": "Pablo roldan",
-          "Total Vendido": 4438.13
-        }
-      },
-      {
-        "json": {
-          "numero_fila": 49,
-          "Nombre Empleado": "André Ferreira",
-          "Total Vendido": 3980.01
-        }
-      },
-      {
-        "json": {
-          "numero_fila": 50,
-          "Nombre Empleado": "Emiliano Martinez Verdecchia",
-          "Total Vendido": 1990.54
-        }
-      },
-      {
-        "json": {
-          "numero_fila": 51,
-          "Nombre Empleado": "Fabio Cortés Martín",
-          "Total Vendido": 1977.26
-        }
-      },
-      {
-        "json": {
-          "numero_fila": 52,
-          "Nombre Empleado": "Facundo Pereira",
-          "Total Vendido": 1830.24
-        }
-      },
-      {
-        "json": {
-          "numero_fila": 53,
-          "Nombre Empleado": "Nerea Fernández",
-          "Total Vendido": 1526.99
-        }
-      },
-      {
-        "json": {
-          "numero_fila": 54,
-          "Nombre Empleado": "Lorena Verdecchia",
-          "Total Vendido": 1193.93
-        }
-      },
-      {
-        "json": {
-          "numero_fila": 55,
-          "Nombre Empleado": "Ana Isabel Robles González",
-          "Total Vendido": 1086.73
-        }
-      },
-      {
-        "json": {
-          "numero_fila": 56,
-          "Nombre Empleado": "Cesar Moreno",
-          "Total Vendido": 970
-        }
-      },
-      {
-        "json": {
-          "numero_fila": 57,
-          "Nombre Empleado": "Alejandro Vasallo Bancalero",
-          "Total Vendido": 960.4
-        }
-      },
-      {
-        "json": {
-          "numero_fila": 58,
-          "Nombre Empleado": "Gerardo Cairo",
-          "Total Vendido": 757.88
-        }
-      },
-      {
-        "json": {
-          "numero_fila": 59,
-          "Nombre Empleado": "Adrián Azorín",
-          "Total Vendido": 491.4
-        }
-      },
-      {
-        "json": {
-          "numero_fila": 60,
-          "Nombre Empleado": "Cuenta Multiusuario",
-          "Total Vendido": 343.66
-        }
-      },
-      {
-        "json": {
-          "numero_fila": 61,
-          "Nombre Empleado": "Carlota Ramirez Palacios",
-          "Total Vendido": 316.59
-        }
-      },
-      {
-        "json": {
-          "numero_fila": 62,
-          "Nombre Empleado": "Rober Alonso",
-          "Total Vendido": 130.99
-        }
-      }
-    ],
-    "Code in JavaScript": [
-      {
-        "json": {
-          "Nombre Empleado": "Emiliano Martinez",
-          "Total Vendido": 20300.67,
-          "BONO": "BONO 90€",
-          "MontoBono": 90,
-          "Correo": "emilianomartinezvrd@gmail.com"
-        }
-      }
-    ]
-  },
+  "pinData": {},
   "settings": {
     "executionOrder": "v1",
     "availableInMCP": false
@@ -3287,6 +3049,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-01-31T08:22:57.355Z",
-  "versionId": "b0e9a0a1-ae03-40a3-89a6-2684ba39a3e4"
+  "updatedAt": "2026-02-01T10:03:57.096Z",
+  "versionId": "08896129-35e5-47a1-b68b-9f00a32513c8"
 }
