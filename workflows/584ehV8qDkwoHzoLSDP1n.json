@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-02-01T09:56:34.000Z",
-    "createdAt": "2026-02-01T09:56:20.452Z",
-    "versionId": "2c366ddd-8394-4b0f-a99d-ef96248fb0d6",
+    "updatedAt": "2026-02-02T13:30:43.000Z",
+    "createdAt": "2026-02-02T13:30:33.340Z",
+    "versionId": "f645359b-9c7b-4661-9350-ce65e55fddd1",
     "workflowId": "584ehV8qDkwoHzoLSDP1n",
     "nodes": [
       {
@@ -198,7 +198,7 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          240,
+          224,
           464
         ],
         "id": "76818f9e-1abd-4a3f-89be-6bcfe16956ff",
@@ -1058,7 +1058,7 @@
       },
       {
         "parameters": {
-          "jsCode": "// 1. INPUT ACTUAL (items): Son los datos que vienen de \"Get row(s)\" (Correos)\nconst datosCorreos = items;\n\n// 2. INPUT ANTERIOR: Recuperamos los datos del nodo \"Calcular Ranking Empleados1\" (Ventas)\n// NOTA: Asegúrate de que el nombre dentro de $('...') sea EXACTO al de tu nodo morado\nlet datosVentas = [];\ntry {\n  datosVentas = $('Calcular Ranking Empleados1').all();\n} catch (e) {\n  return [{ json: { error: \"No encuentro el nodo 'Calcular Ranking Empleados1'. Revisa el nombre.\" } }];\n}\n\n// 3. Creamos el mapa para buscar correos (Nombre -> Correo)\nconst mapaCorreos = {};\n\ndatosCorreos.forEach(fila => {\n  const datos = fila.json;\n  \n  // En tu captura de \"Get row(s)\", la columna del nombre se llama \"Nombre\" (no \"Nombre Empleado\")\n  // Usamos .trim() porque en tu captura se ven saltos de línea (\"\\n\")\n  const nombreKey = (datos[\"Nombre\"] || \"\").toString().trim();\n  const email = (datos[\"Correo\"] || \"\").toString().trim(); // Limpiamos el \\n del correo\n  \n  if (nombreKey && email) {\n    mapaCorreos[nombreKey] = email;\n  }\n});\n\n// 4. Procesamos las VENTAS (iteramos sobre datosVentas, NO sobre items)\nconst resultados = [];\n\nfor (const item of datosVentas) {\n  const empleado = item.json;\n  \n  // Aquí sí existen estas columnas porque estamos leyendo del nodo de Ranking\n  const ventas = parseFloat(empleado[\"Total Vendido\"]);\n  const nombreVentas = (empleado[\"Nombre Empleado\"] || \"\").toString().trim();\n  \n  let bonoValor = 0;\n\n  // --- LÓGICA DEL BONO ---\n  if (ventas >= 30000) {\n    bonoValor = 200;\n  } else if (ventas >= 26000) {\n    bonoValor = 150;\n  } else if (ventas >= 22000) {\n    bonoValor = 120;\n  } else if (ventas >= 18000) {\n    bonoValor = 90;\n  }\n\n  // --- GENERACIÓN DEL OUTPUT ---\n  if (bonoValor > 0) {\n    \n    // Buscamos el correo usando el nombre limpio\n    const correoEncontrado = mapaCorreos[nombreVentas];\n\n    resultados.push({\n      json: {\n        \"Nombre Empleado\": nombreVentas,\n        \"Total Vendido\": ventas,\n        \"BONO\": `BONO ${bonoValor}€`,\n        \"MontoBono\": bonoValor,\n        // Si no encuentra el correo, pondrá null.\n        \"Correo\": correoEncontrado || \"No encontrado\"\n      }\n    });\n  }\n}\n\nreturn resultados;"
+          "jsCode": "// 1. INPUT ACTUAL (items): Son los datos que vienen de \"Get row(s)\" (Correos)\nconst datosCorreos = items;\n\n// 2. INPUT ANTERIOR: Recuperamos los datos del nodo \"Calcular Ranking Empleados1\" (Ventas)\n// NOTA: Asegúrate de que el nombre dentro de $('...') sea EXACTO al de tu nodo morado\nlet datosVentas = [];\ntry {\n  datosVentas = $('Calcular Ranking Empleados').all();\n} catch (e) {\n  return [{ json: { error: \"No encuentro el nodo 'Calcular Ranking Empleados1'. Revisa el nombre.\" } }];\n}\n\n// 3. Creamos el mapa para buscar correos (Nombre -> Correo)\nconst mapaCorreos = {};\n\ndatosCorreos.forEach(fila => {\n  const datos = fila.json;\n  \n  // En tu captura de \"Get row(s)\", la columna del nombre se llama \"Nombre\" (no \"Nombre Empleado\")\n  // Usamos .trim() porque en tu captura se ven saltos de línea (\"\\n\")\n  const nombreKey = (datos[\"Nombre\"] || \"\").toString().trim();\n  const email = (datos[\"Correo\"] || \"\").toString().trim(); // Limpiamos el \\n del correo\n  \n  if (nombreKey && email) {\n    mapaCorreos[nombreKey] = email;\n  }\n});\n\n// 4. Procesamos las VENTAS (iteramos sobre datosVentas, NO sobre items)\nconst resultados = [];\n\nfor (const item of datosVentas) {\n  const empleado = item.json;\n  \n  // Aquí sí existen estas columnas porque estamos leyendo del nodo de Ranking\n  const ventas = parseFloat(empleado[\"Total Vendido\"]);\n  const nombreVentas = (empleado[\"Nombre Empleado\"] || \"\").toString().trim();\n  \n  let bonoValor = 0;\n\n  // --- LÓGICA DEL BONO ---\n  if (ventas >= 30000) {\n    bonoValor = 200;\n  } else if (ventas >= 26000) {\n    bonoValor = 150;\n  } else if (ventas >= 22000) {\n    bonoValor = 120;\n  } else if (ventas >= 18000) {\n    bonoValor = 90;\n  }\n\n  // --- GENERACIÓN DEL OUTPUT ---\n  if (bonoValor > 0) {\n    \n    // Buscamos el correo usando el nombre limpio\n    const correoEncontrado = mapaCorreos[nombreVentas];\n\n    resultados.push({\n      json: {\n        \"Nombre Empleado\": nombreVentas,\n        \"Total Vendido\": ventas,\n        \"BONO\": `BONO ${bonoValor}€`,\n        \"MontoBono\": bonoValor,\n        // Si no encuentra el correo, pondrá null.\n        \"Correo\": correoEncontrado || \"No encontrado\"\n      }\n    });\n  }\n}\n\nreturn resultados;"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -1114,13 +1114,13 @@
         "parameters": {
           "authentication": "headerAuth",
           "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
-          "query": "mutation AddTagAndCredit($customerId: ID!, $tags: [String!]!, $creditId: ID!, $amount: MoneyInput!) {\n  # 1. Agregamos la etiqueta sin borrar las anteriores\n  tagsAdd(id: $customerId, tags: $tags) {\n    node {\n      id\n      tags\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n  \n  # 2. Sumamos el saldo al Crédito de Tienda nativo (lo que ves en la captura)\n  storeCreditAccountCredit(id: $creditId, amount: $amount) {\n    storeCreditAccountTransaction {\n      amount {\n        amount\n      }\n      account {\n        balance {\n          amount\n        }\n      }\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
-          "variables": "={\n  \"customerId\": \"{{ $json.CustomerID }}\",\n  \"tags\": [\"{{ $json.EtiquetaBono }}\"],\n  \"creditId\": \"{{ $json.CreditAccountID }}\",\n  \"amount\": {\n    \"amount\": \"{{ $json.MontoBono }}\",\n    \"currencyCode\": \"EUR\"\n  }\n}"
+          "query": "mutation storeCreditAccountCredit($id: ID!, $creditInput: StoreCreditAccountCreditInput!) {\n  storeCreditAccountCredit(id: $id, creditInput: $creditInput) {\n    storeCreditAccountTransaction {\n      id\n      amount {\n        amount\n        currencyCode\n      }\n      balanceAfterTransaction {\n        amount\n        currencyCode\n      }\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}\n",
+          "variables": "={\n  \"id\": \"{{ $json.CreditAccountID }}\",\n  \"creditInput\": {\n    \"creditAmount\": {\n      \"amount\": \"{{ $json.MontoBono }}\",\n      \"currencyCode\": \"EUR\"\n    }\n  }\n}\n"
         },
         "type": "n8n-nodes-base.graphql",
         "typeVersion": 1.1,
         "position": [
-          1216,
+          1456,
           736
         ],
         "id": "2c8ee8bf-99fc-4bef-8ea0-06a5bec51363",
@@ -1134,29 +1134,48 @@
       },
       {
         "parameters": {
-          "operation": "deleteRows",
-          "dataTableId": {
-            "__rl": true,
-            "value": "8GDVj673ag0hCrVt",
-            "mode": "list",
-            "cachedResultName": "Informe Mensual",
-            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/8GDVj673ag0hCrVt"
-          },
-          "filters": {
-            "conditions": [
-              {}
-            ]
-          },
-          "options": {}
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+          "query": "mutation AddCustomerTag($id: ID!, $tags: [String!]!) {\n  tagsAdd(id: $id, tags: $tags) {\n    node {\n      id\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
+          "variables": "={\n  \"id\": \"{{ $json.CustomerID }}\",\n  \"tags\": [\"{{ $json.EtiquetaBono }}\"]\n}"
         },
-        "type": "n8n-nodes-base.dataTable",
+        "type": "n8n-nodes-base.graphql",
         "typeVersion": 1.1,
         "position": [
-          912,
-          160
+          1264,
+          736
         ],
-        "id": "2eb99103-3cf1-4f13-865a-d7584dcc05a7",
-        "name": "Delete row(s)"
+        "id": "59ef37c4-27e6-4de1-9613-f17fd0b0371f",
+        "name": "GraphQL2",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "THkhgrtze1uBo6Ft",
+            "name": "Token Informes Shopify"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "sendTo": "={{ $json.Email }}",
+          "subject": "=¡Tienes {{ $json.MontoBono }}€ de saldo disponible en tienda! 🎁",
+          "message": "=<!DOCTYPE html>\n<html>\n<head>\n<style>\n  body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }\n  .email-container { max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 40px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }\n  .header { text-align: center; padding-bottom: 20px; border-bottom: 1px solid #eeeeee; }\n  .header h1 { color: #333333; margin: 0; font-size: 24px; }\n  .content { padding: 30px 0; color: #555555; line-height: 1.6; }\n  .credit-box { background-color: #e6fffa; border: 1px solid #38b2ac; color: #234e52; padding: 15px; text-align: center; border-radius: 6px; margin: 20px 0; font-size: 18px; font-weight: bold; }\n  .info-text { font-size: 14px; color: #666; text-align: center; margin-top: -10px; margin-bottom: 20px; font-style: italic; }\n  .warning-box { background-color: #fffaf0; border-left: 4px solid #ed8936; padding: 15px; margin: 20px 0; font-size: 14px; color: #744210; }\n  .footer { text-align: center; font-size: 12px; color: #999999; margin-top: 30px; border-top: 1px solid #eeeeee; padding-top: 20px; }\n</style>\n</head>\n<body>\n\n<div class=\"email-container\">\n  <div class=\"header\">\n    <h1>¡Saldo añadido correctamente!</h1>\n  </div>\n\n  <div class=\"content\">\n    <p>Hola,</p>\n    \n    <p>Queremos informarte que hemos actualizado tu cuenta de cliente. Tienes un nuevo bono de crédito listo para usar.</p>\n\n    <div class=\"credit-box\">\n      Has recibido: {{ $json.MontoBono }}€\n    </div>\n\n    <div class=\"info-text\">\n      *Si ya disponías de saldo anterior en tu cuenta, este importe <strong>se ha sumado</strong> a tu total actual.\n    </div>\n\n    <p>Puedes utilizar este crédito para adquirir cualquier producto en <strong>todas nuestras tiendas</strong>.</p>\n\n    <div class=\"warning-box\">\n      <strong>⚠️ Recordatorio importante:</strong><br>\n      Si decides pagar utilizando tu crédito de tienda, el sistema <u>no permitirá aplicar otros códigos de descuento</u> o cupones promocionales en ese mismo pedido.\n    </div>\n  </div>\n\n  <div class=\"footer\">\n    <p>Saludos,<br><strong>El Equipo de Tailwind</strong></p>\n    <p>Si tienes alguna duda sobre tu saldo total, no dudes en responder a este correo.</p>\n  </div>\n</div>\n\n</body>\n</html>",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.gmail",
+        "typeVersion": 2.2,
+        "position": [
+          1264,
+          912
+        ],
+        "id": "de05e630-42ee-4d9a-868f-d0d567a0ed53",
+        "name": "Send a message",
+        "webhookId": "69b6f5d3-a26d-46a8-8432-61d9aa5edd87",
+        "credentials": {
+          "gmailOAuth2": {
+            "id": "wR7U82S8bmDH4odC",
+            "name": "info@tailwind.es"
+          }
+        }
       }
     ],
     "connections": {
@@ -1273,13 +1292,7 @@
       },
       "Unir Todos los Pedidos": {
         "main": [
-          [
-            {
-              "node": "Calcular Ranking Empleados",
-              "type": "main",
-              "index": 0
-            }
-          ]
+          []
         ]
       },
       "Bucle: Uno a Uno": {
@@ -1350,12 +1363,12 @@
         "main": [
           [
             {
-              "node": "Loop Over Items",
+              "node": "Get row(s)",
               "type": "main",
               "index": 0
             },
             {
-              "node": "Get row(s)",
+              "node": "Loop Over Items",
               "type": "main",
               "index": 0
             }
@@ -1504,20 +1517,41 @@
         "main": [
           [
             {
+              "node": "Send a message",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "GraphQL2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "GraphQL2": {
+        "main": [
+          [
+            {
               "node": "GraphQL1",
               "type": "main",
               "index": 0
             }
           ]
         ]
+      },
+      "Send a message": {
+        "main": [
+          []
+        ]
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version 2c366ddd",
+    "name": "Version f645359b",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "2c366ddd-8394-4b0f-a99d-ef96248fb0d6",
+  "activeVersionId": "f645359b-9c7b-4661-9350-ce65e55fddd1",
   "connections": {
     "Inicio de Mes (Día 1)": {
       "main": [
@@ -1632,13 +1666,7 @@
     },
     "Unir Todos los Pedidos": {
       "main": [
-        [
-          {
-            "node": "Calcular Ranking Empleados",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Bucle: Uno a Uno": {
@@ -1709,12 +1737,12 @@
       "main": [
         [
           {
-            "node": "Loop Over Items",
+            "node": "Get row(s)",
             "type": "main",
             "index": 0
           },
           {
-            "node": "Get row(s)",
+            "node": "Loop Over Items",
             "type": "main",
             "index": 0
           }
@@ -1863,11 +1891,32 @@
       "main": [
         [
           {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "GraphQL2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GraphQL2": {
+      "main": [
+        [
+          {
             "node": "GraphQL1",
             "type": "main",
             "index": 0
           }
         ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        []
       ]
     }
   },
@@ -2071,7 +2120,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        240,
+        224,
         464
       ],
       "id": "76818f9e-1abd-4a3f-89be-6bcfe16956ff",
@@ -2987,13 +3036,13 @@
       "parameters": {
         "authentication": "headerAuth",
         "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
-        "query": "mutation AddTagAndCredit($customerId: ID!, $tags: [String!]!, $creditId: ID!, $amount: MoneyInput!) {\n  # 1. Agregamos la etiqueta sin borrar las anteriores\n  tagsAdd(id: $customerId, tags: $tags) {\n    node {\n      id\n      tags\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n  \n  # 2. Sumamos el saldo al Crédito de Tienda nativo (lo que ves en la captura)\n  storeCreditAccountCredit(id: $creditId, amount: $amount) {\n    storeCreditAccountTransaction {\n      amount {\n        amount\n      }\n      account {\n        balance {\n          amount\n        }\n      }\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
-        "variables": "={\n  \"customerId\": \"{{ $json.CustomerID }}\",\n  \"tags\": [\"{{ $json.EtiquetaBono }}\"],\n  \"creditId\": \"{{ $json.CreditAccountID }}\",\n  \"amount\": {\n    \"amount\": \"{{ $json.MontoBono }}\",\n    \"currencyCode\": \"EUR\"\n  }\n}"
+        "query": "mutation storeCreditAccountCredit($id: ID!, $creditInput: StoreCreditAccountCreditInput!) {\n  storeCreditAccountCredit(id: $id, creditInput: $creditInput) {\n    storeCreditAccountTransaction {\n      id\n      amount {\n        amount\n        currencyCode\n      }\n      balanceAfterTransaction {\n        amount\n        currencyCode\n      }\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}\n",
+        "variables": "={\n  \"id\": \"{{ $json.CreditAccountID }}\",\n  \"creditInput\": {\n    \"creditAmount\": {\n      \"amount\": \"{{ $json.MontoBono }}\",\n      \"currencyCode\": \"EUR\"\n    }\n  }\n}\n"
       },
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        1216,
+        1456,
         736
       ],
       "id": "2c8ee8bf-99fc-4bef-8ea0-06a5bec51363",
@@ -3007,29 +3056,48 @@
     },
     {
       "parameters": {
-        "operation": "deleteRows",
-        "dataTableId": {
-          "__rl": true,
-          "value": "8GDVj673ag0hCrVt",
-          "mode": "list",
-          "cachedResultName": "Informe Mensual",
-          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/8GDVj673ag0hCrVt"
-        },
-        "filters": {
-          "conditions": [
-            {}
-          ]
-        },
-        "options": {}
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+        "query": "mutation AddCustomerTag($id: ID!, $tags: [String!]!) {\n  tagsAdd(id: $id, tags: $tags) {\n    node {\n      id\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
+        "variables": "={\n  \"id\": \"{{ $json.CustomerID }}\",\n  \"tags\": [\"{{ $json.EtiquetaBono }}\"]\n}"
       },
-      "type": "n8n-nodes-base.dataTable",
+      "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        912,
-        160
+        1264,
+        736
       ],
-      "id": "2eb99103-3cf1-4f13-865a-d7584dcc05a7",
-      "name": "Delete row(s)"
+      "id": "59ef37c4-27e6-4de1-9613-f17fd0b0371f",
+      "name": "GraphQL2",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THkhgrtze1uBo6Ft",
+          "name": "Token Informes Shopify"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.Email }}",
+        "subject": "=¡Tienes {{ $json.MontoBono }}€ de saldo disponible en tienda! 🎁",
+        "message": "=<!DOCTYPE html>\n<html>\n<head>\n<style>\n  body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }\n  .email-container { max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 40px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }\n  .header { text-align: center; padding-bottom: 20px; border-bottom: 1px solid #eeeeee; }\n  .header h1 { color: #333333; margin: 0; font-size: 24px; }\n  .content { padding: 30px 0; color: #555555; line-height: 1.6; }\n  .credit-box { background-color: #e6fffa; border: 1px solid #38b2ac; color: #234e52; padding: 15px; text-align: center; border-radius: 6px; margin: 20px 0; font-size: 18px; font-weight: bold; }\n  .info-text { font-size: 14px; color: #666; text-align: center; margin-top: -10px; margin-bottom: 20px; font-style: italic; }\n  .warning-box { background-color: #fffaf0; border-left: 4px solid #ed8936; padding: 15px; margin: 20px 0; font-size: 14px; color: #744210; }\n  .footer { text-align: center; font-size: 12px; color: #999999; margin-top: 30px; border-top: 1px solid #eeeeee; padding-top: 20px; }\n</style>\n</head>\n<body>\n\n<div class=\"email-container\">\n  <div class=\"header\">\n    <h1>¡Saldo añadido correctamente!</h1>\n  </div>\n\n  <div class=\"content\">\n    <p>Hola,</p>\n    \n    <p>Queremos informarte que hemos actualizado tu cuenta de cliente. Tienes un nuevo bono de crédito listo para usar.</p>\n\n    <div class=\"credit-box\">\n      Has recibido: {{ $json.MontoBono }}€\n    </div>\n\n    <div class=\"info-text\">\n      *Si ya disponías de saldo anterior en tu cuenta, este importe <strong>se ha sumado</strong> a tu total actual.\n    </div>\n\n    <p>Puedes utilizar este crédito para adquirir cualquier producto en <strong>todas nuestras tiendas</strong>.</p>\n\n    <div class=\"warning-box\">\n      <strong>⚠️ Recordatorio importante:</strong><br>\n      Si decides pagar utilizando tu crédito de tienda, el sistema <u>no permitirá aplicar otros códigos de descuento</u> o cupones promocionales en ese mismo pedido.\n    </div>\n  </div>\n\n  <div class=\"footer\">\n    <p>Saludos,<br><strong>El Equipo de Tailwind</strong></p>\n    <p>Si tienes alguna duda sobre tu saldo total, no dudes en responder a este correo.</p>\n  </div>\n</div>\n\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1264,
+        912
+      ],
+      "id": "de05e630-42ee-4d9a-868f-d0d567a0ed53",
+      "name": "Send a message",
+      "webhookId": "69b6f5d3-a26d-46a8-8432-61d9aa5edd87",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "wR7U82S8bmDH4odC",
+          "name": "info@tailwind.es"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -3049,6 +3117,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-02-01T10:03:57.096Z",
-  "versionId": "08896129-35e5-47a1-b68b-9f00a32513c8"
+  "updatedAt": "2026-02-02T13:30:33.338Z",
+  "versionId": "f645359b-9c7b-4661-9350-ce65e55fddd1"
 }
