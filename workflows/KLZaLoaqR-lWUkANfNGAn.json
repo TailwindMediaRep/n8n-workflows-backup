@@ -376,7 +376,7 @@
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "Canva Sierra Nevada Granada",
+  "name": "Canva_SNG",
   "nodes": [
     {
       "parameters": {
@@ -1301,6 +1301,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-01-22T10:02:19.062Z",
+  "updatedAt": "2026-02-02T13:35:14.934Z",
   "versionId": "16d39b4c-9e36-4859-988e-59b56b4e9811"
 }
