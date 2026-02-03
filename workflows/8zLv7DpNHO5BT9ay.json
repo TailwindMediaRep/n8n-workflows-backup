@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-02-01T15:26:04.000Z",
-    "createdAt": "2026-02-01T15:26:03.700Z",
-    "versionId": "5cadcf4c-dfb9-459a-937a-4b7da3461a6e",
+    "updatedAt": "2026-02-02T08:51:59.000Z",
+    "createdAt": "2026-02-02T08:51:58.358Z",
+    "versionId": "0e922213-c75d-4ef8-afb5-5dc2d98d3d86",
     "workflowId": "8zLv7DpNHO5BT9ay",
     "nodes": [
       {
@@ -87,14 +87,16 @@
         "parameters": {
           "authentication": "headerAuth",
           "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
-          "query": "query getOrderData($id: ID!) {\n  order(id: $id) {\n    customer {\n      id\n    }\n    discountCodes\n  }\n}"
+          "requestFormat": "json",
+          "query": "query getOrderData($id: ID!) {\n  order(id: $id) {\n    customer {\n      id\n    }\n    discountCodes\n  }\n}",
+          "variables": "={\n  \"id\": \"gid://shopify/Order/{{ $json.body.order_id }}\"\n}"
         },
         "name": "Get Refund Customer1",
         "type": "n8n-nodes-base.graphql",
         "typeVersion": 1,
         "position": [
-          -2208,
-          1328
+          -2192,
+          1280
         ],
         "id": "892eb6b9-c9ce-4dde-9072-34637ceda390",
         "credentials": {
@@ -413,11 +415,11 @@
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version 5cadcf4c",
+    "name": "Version 0e922213",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "5cadcf4c-dfb9-459a-937a-4b7da3461a6e",
+  "activeVersionId": "0e922213-c75d-4ef8-afb5-5dc2d98d3d86",
   "connections": {
     "Webhook2": {
       "main": [
@@ -629,14 +631,16 @@
       "parameters": {
         "authentication": "headerAuth",
         "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
-        "query": "query getOrderData($id: ID!) {\n  order(id: $id) {\n    customer {\n      id\n    }\n    discountCodes\n  }\n}"
+        "requestFormat": "json",
+        "query": "query getOrderData($id: ID!) {\n  order(id: $id) {\n    customer {\n      id\n    }\n    discountCodes\n  }\n}",
+        "variables": "={\n  \"id\": \"gid://shopify/Order/{{ $json.body.order_id }}\"\n}"
       },
       "name": "Get Refund Customer1",
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1,
       "position": [
-        -2208,
-        1328
+        -2192,
+        1280
       ],
       "id": "892eb6b9-c9ce-4dde-9072-34637ceda390",
       "credentials": {
@@ -832,7 +836,155 @@
       "name": "No Operation, do nothing1"
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Webhook2": [
+      {
+        "json": {
+          "headers": {
+            "connection": "upgrade",
+            "host": "n8n.tailwind.es",
+            "x-forwarded-for": "34.78.69.87",
+            "x-forwarded-proto": "https",
+            "content-length": "2134",
+            "user-agent": "Shopify-Captain-Hook",
+            "accept": "*/*",
+            "accept-encoding": "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
+            "content-type": "application/json",
+            "x-shopify-api-version": "2026-01",
+            "x-shopify-event-id": "d8cbf066-77d0-4bd8-b6ba-f2fa1686977c",
+            "x-shopify-hmac-sha256": "YjTb2mnzVIn5TIZXxE4qvqG6NIQKaPmSkOLMjZ/wQQI=",
+            "x-shopify-shop-domain": "surfin-store-spain.myshopify.com",
+            "x-shopify-topic": "refunds/create",
+            "x-shopify-triggered-at": "2026-02-01T19:18:30.531684869Z",
+            "x-shopify-webhook-id": "0c8d8b28-5217-594d-8970-ad61061ee166"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "id": 1100647825755,
+            "order_id": 7513466077531,
+            "created_at": "2026-02-01T20:18:30+01:00",
+            "note": null,
+            "user_id": 127777374555,
+            "processed_at": "2026-02-01T20:18:30+01:00",
+            "duties": [],
+            "total_duties_set": {
+              "shop_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              }
+            },
+            "return": {
+              "id": 44230705499,
+              "admin_graphql_api_id": "gid://shopify/Return/44230705499"
+            },
+            "restock": true,
+            "refund_shipping_lines": [],
+            "admin_graphql_api_id": "gid://shopify/Refund/1100647825755",
+            "order_adjustments": [],
+            "refund_line_items": [
+              {
+                "id": 822013690203,
+                "line_item_id": 18400234799451,
+                "quantity": 1,
+                "restock_type": "return",
+                "location_id": 108915917147,
+                "subtotal": 65,
+                "total_tax": 0,
+                "line_item": {
+                  "id": 18400234799451,
+                  "variant_id": 51904460816731,
+                  "title": "The North Face Wms Montana Ski Guantes",
+                  "quantity": 1,
+                  "sku": "51904460816731",
+                  "variant_title": "White Dune / XS",
+                  "vendor": "The North Face",
+                  "fulfillment_service": "manual",
+                  "product_id": 10254688092507,
+                  "requires_shipping": true,
+                  "taxable": true,
+                  "gift_card": false,
+                  "name": "The North Face Wms Montana Ski Guantes - White Dune / XS",
+                  "variant_inventory_management": "shopify",
+                  "properties": [],
+                  "product_exists": true,
+                  "fulfillable_quantity": 0,
+                  "grams": 0,
+                  "price": "65.00",
+                  "total_discount": "0.00",
+                  "fulfillment_status": "fulfilled",
+                  "price_set": {
+                    "shop_money": {
+                      "amount": "65.00",
+                      "currency_code": "EUR"
+                    },
+                    "presentment_money": {
+                      "amount": "65.00",
+                      "currency_code": "EUR"
+                    }
+                  },
+                  "total_discount_set": {
+                    "shop_money": {
+                      "amount": "0.00",
+                      "currency_code": "EUR"
+                    },
+                    "presentment_money": {
+                      "amount": "0.00",
+                      "currency_code": "EUR"
+                    }
+                  },
+                  "discount_allocations": [],
+                  "origin_location": {
+                    "id": 4053736948059,
+                    "country_code": "ES",
+                    "province_code": "GR",
+                    "name": "Rules The North Face",
+                    "address1": "Grupo Explanada 2",
+                    "address2": "",
+                    "city": "Sierra Nevada",
+                    "zip": "18196"
+                  },
+                  "admin_graphql_api_id": "gid://shopify/LineItem/18400234799451",
+                  "duties": [],
+                  "tax_lines": []
+                },
+                "subtotal_set": {
+                  "shop_money": {
+                    "amount": "65.00",
+                    "currency_code": "EUR"
+                  },
+                  "presentment_money": {
+                    "amount": "65.00",
+                    "currency_code": "EUR"
+                  }
+                },
+                "total_tax_set": {
+                  "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "EUR"
+                  },
+                  "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "EUR"
+                  }
+                }
+              }
+            ],
+            "transactions": []
+          },
+          "webhookUrl": "https://n8n.tailwind.es/webhook/monto-descuentos",
+          "executionMode": "production"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1",
     "availableInMCP": false
@@ -849,6 +1001,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-02-01T15:26:17.530Z",
-  "versionId": "5cadcf4c-dfb9-459a-937a-4b7da3461a6e"
+  "updatedAt": "2026-02-02T08:51:58.356Z",
+  "versionId": "0e922213-c75d-4ef8-afb5-5dc2d98d3d86"
 }
