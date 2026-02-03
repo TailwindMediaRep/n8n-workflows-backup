@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-02-02T13:30:43.000Z",
-    "createdAt": "2026-02-02T13:30:33.340Z",
-    "versionId": "f645359b-9c7b-4661-9350-ce65e55fddd1",
+    "updatedAt": "2026-02-03T13:37:12.000Z",
+    "createdAt": "2026-02-03T13:37:11.443Z",
+    "versionId": "204d611a-24d9-4692-a652-28439c78bb44",
     "workflowId": "584ehV8qDkwoHzoLSDP1n",
     "nodes": [
       {
@@ -34,13 +34,13 @@
             "value": "1tsvxi9_RbsJ9PZzj89QC4KmPOSeOUlI2FnsqcM4vmoY",
             "mode": "id"
           },
-          "name": "=INFORME MENSUAL COMPLETO - {{ $json.NOMBRE_MES }}",
+          "name": "=PRUEBAPRUEBAPRUEBAPRUEBA COMPLETO - {{ $json.NOMBRE_MES }}",
           "options": {}
         },
         "type": "n8n-nodes-base.googleDrive",
         "typeVersion": 3,
         "position": [
-          -656,
+          -768,
           32
         ],
         "id": "0b17272d-1aa2-4c3f-8811-2d74745ef031",
@@ -101,7 +101,7 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          -448,
+          -416,
           272
         ],
         "id": "baac2c47-e3e0-4413-a657-02e685aeea0f",
@@ -123,7 +123,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          -272,
+          -240,
           272
         ],
         "id": "02d692ea-c717-4ecf-ab9a-d95d81b2eb37",
@@ -162,7 +162,7 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          48,
+          80,
           272
         ],
         "id": "3fed2932-cb89-43c4-86f1-8df62a10ec7c",
@@ -185,7 +185,7 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          208,
+          240,
           256
         ],
         "id": "74a1ce84-d763-4d42-96a6-b66b3a056bbe",
@@ -198,7 +198,7 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          224,
+          272,
           464
         ],
         "id": "76818f9e-1abd-4a3f-89be-6bcfe16956ff",
@@ -211,7 +211,7 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          -112,
+          -80,
           272
         ],
         "id": "c388a069-3ddc-418e-a9d0-8903192a2fb1",
@@ -321,7 +321,7 @@
         "type": "n8n-nodes-base.googleSheets",
         "typeVersion": 4.7,
         "position": [
-          736,
+          768,
           480
         ],
         "id": "f894e18e-33b5-4bc9-9b5a-58b0663b6a26",
@@ -361,7 +361,7 @@
         "typeVersion": 1,
         "position": [
           -448,
-          128
+          64
         ],
         "id": "2597c927-aa51-4003-a949-419b2158cda7",
         "name": "Sticky Note1"
@@ -530,8 +530,8 @@
         "type": "n8n-nodes-base.googleSheets",
         "typeVersion": 4.7,
         "position": [
-          192,
-          -192
+          160,
+          -96
         ],
         "id": "d2ef4873-7d36-41a0-ac61-3662612885c1",
         "name": "Leer Informe de ese Día",
@@ -573,24 +573,11 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          -880,
+          -944,
           32
         ],
         "id": "4e18e961-e82a-44bc-a08f-203fb6bdb947",
         "name": "Configurar Fechas"
-      },
-      {
-        "parameters": {
-          "jsCode": "// Accedemos a la memoria global del flujo\nconst staticData = $getWorkflowStaticData('global');\n\n// Si es la primera vuelta, inicializamos la lista\nif (!staticData.allProducts) {\n  staticData.allProducts = [];\n}\n\n// Añadimos los productos leídos en esta vuelta del bucle\nconst newItems = items.map(item => item.json);\nstaticData.allProducts.push(...newItems);\n\n// Pasamos el testigo para que el flujo siga\nreturn { json: { status: 'guardado', filas: newItems.length } };"
-        },
-        "type": "n8n-nodes-base.code",
-        "typeVersion": 2,
-        "position": [
-          512,
-          -208
-        ],
-        "id": "a33a17b0-17aa-4d09-8bdb-a41b45ef16d7",
-        "name": "Acumular en memoria"
       },
       {
         "parameters": {
@@ -599,7 +586,7 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          400,
+          432,
           464
         ],
         "id": "78b07875-794e-4a6d-9100-1bc799bff8a6",
@@ -747,8 +734,8 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          352,
-          -176
+          336,
+          -80
         ],
         "id": "9c7d312d-251d-4683-ac7e-4c48146e1346",
         "name": "Espera 1m",
@@ -916,7 +903,7 @@
         "type": "n8n-nodes-base.splitInBatches",
         "typeVersion": 3,
         "position": [
-          576,
+          608,
           464
         ],
         "id": "d7771f33-ed1d-406c-8497-25446ab020a1",
@@ -924,21 +911,7 @@
       },
       {
         "parameters": {
-          "amount": 1
-        },
-        "type": "n8n-nodes-base.wait",
-        "typeVersion": 1.1,
-        "position": [
-          896,
-          464
-        ],
-        "id": "0bbd5937-11f5-4468-bfc6-9bb942ff6945",
-        "name": "Wait",
-        "webhookId": "1be80c97-a21c-49f7-96f4-a9686e8a5bc0"
-      },
-      {
-        "parameters": {
-          "jsCode": "// 1. CONFIGURACIÓN Y DATOS\nconst staticData = $getWorkflowStaticData('global');\nconst allSales = staticData.allProducts || [];\n\nif (allSales.length === 0) {\n    return [{ json: { mensaje: \"⚠️ Ejecuta el bucle primero.\" } }];\n}\n\n// Importar Marcas (Dinámico desde el nodo anterior)\n// Como conectamos Tabla Marcas -> Code, 'items' tiene las marcas.\nconst LISTA_MARCAS = items.map(item => item.json['Nombre_del_Proveedor']);\nLISTA_MARCAS.sort((a, b) => (b ? b.length : 0) - (a ? a.length : 0));\n\n// Contenedores\nconst productStats = {};\nconst brandStats = {};\nconst branchStats = {};\n\n// Configuración\nlet skateparkCount = 0;\nlet skateparkRevenue = 0;\nconst SKATEPARK_NAME = \"TICKET ENTRADA SKATEPARK\";\nconst FILA_SUCURSALES = 26; \n\n// 2. PROCESAMIENTO ÚNICO\nfor (const sale of allSales) {\n    const productName = sale['NOMBRE DE PRODUCTO'];\n    const branchName = sale['SUCURSAL DE VENTA'];\n    \n    // Limpieza números\n    let priceStr = (sale['PRECIO PAGADO'] || '0').toString();\n    let costStr = (sale['COSTE DE PRODUCTO'] || '0').toString();\n    let unitPriceStr = (sale['PRECIO DE PRODUCTO'] || '0').toString();\n    \n    const paidPrice = parseFloat(priceStr.replace(',', '.')) || 0;\n    const cost = parseFloat(costStr.replace(',', '.')) || 0;\n    const listPrice = parseFloat(unitPriceStr.replace(',', '.')) || 0;\n\n    // Lógica Skatepark\n    if (productName && productName.includes(SKATEPARK_NAME)) {\n        skateparkCount += 1;\n        skateparkRevenue += paidPrice;\n        continue; \n    }\n\n    if (productName) {\n        // A) PRODUCTOS\n        const variant = sale['VARIANTE'] || '';\n        const prodKey = `${productName} - ${variant}`;\n        \n        if (!productStats[prodKey]) {\n            productStats[prodKey] = {\n                Producto: productName, Variante: variant, Precio: listPrice,\n                Ventas: 0, Unidades: 0, Beneficio: 0\n            };\n        }\n        productStats[prodKey].Ventas += paidPrice;\n        productStats[prodKey].Unidades += 1;\n        productStats[prodKey].Beneficio += (paidPrice - cost);\n\n        // B) MARCAS\n        let detectedBrand = \"Otras\";\n        for (const marca of LISTA_MARCAS) {\n            if (marca && productName.toLowerCase().includes(marca.toLowerCase())) {\n                detectedBrand = marca;\n                break;\n            }\n        }\n        if (!brandStats[detectedBrand]) {\n            brandStats[detectedBrand] = { Marca: detectedBrand, Ventas: 0, Unidades: 0 };\n        }\n        brandStats[detectedBrand].Ventas += paidPrice;\n        brandStats[detectedBrand].Unidades += 1;\n    }\n\n    // C) SUCURSALES\n    if (branchName && branchName !== \"N/A\") {\n        if (!branchStats[branchName]) {\n            branchStats[branchName] = { Sucursal: branchName, Ventas: 0, Transacciones: 0 };\n        }\n        branchStats[branchName].Ventas += paidPrice;\n        branchStats[branchName].Transacciones += 1;\n    }\n}\n\n// 3. GENERAR RESULTADOS\nconst finalOutput = [];\n\n// --- PRODUCTOS (Top 10) ---\nconst sortedProds = Object.values(productStats).sort((a, b) => \n    b.Unidades !== a.Unidades ? b.Unidades - a.Unidades : b.Ventas - a.Ventas\n).slice(0, 10);\n\nsortedProds.forEach((p, i) => {\n    const item = {\n        tipo: \"producto\",\n        fila_excel: i + 2,\n        Producto: p.Producto,\n        Variante: p.Variante,\n        Precio: parseFloat(p.Precio.toFixed(2)),\n        Unidades: p.Unidades,\n        Total: parseFloat(p.Ventas.toFixed(2)),\n        Beneficio: parseFloat(p.Beneficio.toFixed(2))\n    };\n    if (i === 0) {\n        item.Skatepark_Entradas_Vendidas = skateparkCount;\n        item.Skatepark_Ingresos_Totales = parseFloat(skateparkRevenue.toFixed(2));\n    }\n    finalOutput.push({ json: item });\n});\n\n// --- MARCAS (Top 10) ---\nconst sortedBrands = Object.values(brandStats)\n    .filter(b => b.Marca !== \"Otras\")\n    .sort((a, b) => b.Unidades !== a.Unidades ? b.Unidades - a.Unidades : b.Ventas - a.Ventas)\n    .slice(0, 10);\n\nsortedBrands.forEach((b, i) => {\n    finalOutput.push({\n        json: {\n            tipo: \"marca\",\n            fila_excel: i + 14, \n            Marca: b.Marca,\n            Unidades: b.Unidades,\n            Total: parseFloat(b.Ventas.toFixed(2))\n        }\n    });\n});\n\n// --- SUCURSALES (Todas) ---\nconst sortedBranches = Object.values(branchStats).sort((a, b) => b.Ventas - a.Ventas);\n\nsortedBranches.forEach((b, i) => {\n    finalOutput.push({\n        json: {\n            tipo: \"sucursal\",\n            fila_excel: i + FILA_SUCURSALES, \n            Sucursal: b.Sucursal,\n            Transacciones: b.Transacciones,\n            Total: parseFloat(b.Ventas.toFixed(2))\n        }\n    });\n});\n\n// 4. LIMPIEZA FINAL (Apagar la luz)\nstaticData.allProducts = [];\n\nreturn finalOutput;"
+          "jsCode": "// 1. CONFIGURACIÓN Y DATOS\nconst staticData = $getWorkflowStaticData('global');\nconst allSales = staticData.allProducts || [];\n\nif (allSales.length === 0) {\n    return [{ json: { mensaje: \"⚠️ Ejecuta el bucle primero.\" } }];\n}\n\n// NORMALIZACIÓN DE MARCAS: Limpiamos espacios y pasamos a MAYÚSCULAS\nconst LISTA_MARCAS = items\n    .map(item => (item.json['Nombre_del_Proveedor'] || '').toString().trim().toUpperCase())\n    .filter(marca => marca.length > 1);\n\n// Ordenamos por longitud de mayor a menor para evitar que \"NIKE\" se coma a \"NIKE SB\"\nLISTA_MARCAS.sort((a, b) => b.length - a.length);\n\n// Contenedores\nconst productStats = {};\nconst brandStats = {};\nconst branchStats = {};\n\n// Configuración Skatepark\nlet skateparkCount = 0;\nlet skateparkRevenue = 0;\nconst SKATEPARK_NAME = \"TICKET ENTRADA SKATEPARK\";\nconst FILA_SUCURSALES = 26; \n\n// 2. PROCESAMIENTO ÚNICO (Con Normalización)\nfor (const sale of allSales) {\n    // --- LA REGLA DE ORO: NORMALIZACIÓN ---\n    // Convertimos a texto, quitamos espacios fantasma y pasamos a MAYÚSCULAS\n    const productName = (sale['NOMBRE DE PRODUCTO'] || \"SIN NOMBRE\").toString().trim().toUpperCase();\n    const branchName = (sale['SUCURSAL DE VENTA'] || \"N/A\").toString().trim().toUpperCase();\n    const variantOriginal = (sale['VARIANTE'] || '').toString().trim(); \n    const variantKey = variantOriginal.toUpperCase(); \n\n    // Limpieza números (mantienes tu lógica original que estaba perfecta)\n    let priceStr = (sale['PRECIO PAGADO'] || '0').toString();\n    let costStr = (sale['COSTE DE PRODUCTO'] || '0').toString();\n    let unitPriceStr = (sale['PRECIO DE PRODUCTO'] || '0').toString();\n    \n    const paidPrice = parseFloat(priceStr.replace(',', '.')) || 0;\n    const cost = parseFloat(costStr.replace(',', '.')) || 0;\n    const listPrice = parseFloat(unitPriceStr.replace(',', '.')) || 0;\n\n    // Lógica Skatepark (buscamos en el nombre ya en mayúsculas)\n    if (productName.includes(SKATEPARK_NAME)) {\n        skateparkCount += 1;\n        skateparkRevenue += paidPrice;\n        continue; \n    }\n\n    if (productName !== \"SIN NOMBRE\") {\n        // A) PRODUCTOS\n        const prodKey = `${productName} - ${variantKey}`;\n        \n        if (!productStats[prodKey]) {\n            productStats[prodKey] = {\n                Producto: productName, \n                Variante: variantOriginal, // Guardamos la original para que quede bonita en el Excel\n                Precio: listPrice,\n                Ventas: 0, Unidades: 0, Beneficio: 0\n            };\n        }\n        productStats[prodKey].Ventas += paidPrice;\n        productStats[prodKey].Unidades += 1;\n        productStats[prodKey].Beneficio += (paidPrice - cost);\n\n        // B) MARCAS\n        let detectedBrand = \"OTRAS\"; // Usamos mayúsculas por consistencia\n        \n        for (const marca of LISTA_MARCAS) {\n            // Si la marca es un número (ej. \"686\"), usamos Regex de coincidencia exacta\n            if (!isNaN(marca)) {\n                const regex = new RegExp(`\\\\b${marca}\\\\b`);\n                if (regex.test(productName)) {\n                    detectedBrand = marca;\n                    break;\n                }\n            } else {\n                // Si es texto normal\n                if (productName.includes(marca)) {\n                    detectedBrand = marca;\n                    break;\n                }\n            }\n        }\n\n        // Parche manual para The North Face (buscando en mayúsculas)\n        if (detectedBrand === \"OTRAS\" && (productName.includes(\"NORTH FACE\") || productName.includes(\" TNF \"))) {\n            detectedBrand = \"THE NORTH FACE\";\n        }\n\n        if (!brandStats[detectedBrand]) {\n            brandStats[detectedBrand] = { Marca: detectedBrand, Ventas: 0, Unidades: 0 };\n        }\n        brandStats[detectedBrand].Ventas += paidPrice;\n        brandStats[detectedBrand].Unidades += 1;\n    }\n\n    // C) SUCURSALES\n    if (branchName !== \"N/A\" && branchName !== \"\") {\n        if (!branchStats[branchName]) {\n            branchStats[branchName] = { Sucursal: branchName, Ventas: 0, Transacciones: 0 };\n        }\n        branchStats[branchName].Ventas += paidPrice;\n        branchStats[branchName].Transacciones += 1;\n    }\n}\n\n// 3. GENERAR RESULTADOS (TOP 10 y demás lógica original)\nconst finalOutput = [];\n\n// --- PRODUCTOS ---\nconst sortedProds = Object.values(productStats).sort((a, b) => \n    b.Unidades !== a.Unidades ? b.Unidades - a.Unidades : b.Ventas - a.Ventas\n).slice(0, 10);\n\nsortedProds.forEach((p, i) => {\n    const item = {\n        tipo: \"producto\",\n        fila_excel: i + 2,\n        Producto: p.Producto,\n        Variante: p.Variante,\n        Precio: parseFloat(p.Precio.toFixed(2)),\n        Unidades: p.Unidades,\n        Total: parseFloat(p.Ventas.toFixed(2)),\n        Beneficio: parseFloat(p.Beneficio.toFixed(2))\n    };\n    if (i === 0) {\n        item.Skatepark_Entradas_Vendidas = skateparkCount;\n        item.Skatepark_Ingresos_Totales = parseFloat(skateparkRevenue.toFixed(2));\n    }\n    finalOutput.push({ json: item });\n});\n\n// --- MARCAS ---\nconst sortedBrands = Object.values(brandStats)\n    .filter(b => b.Marca !== \"OTRAS\")\n    .sort((a, b) => b.Unidades !== a.Unidades ? b.Unidades - a.Unidades : b.Ventas - a.Ventas)\n    .slice(0, 10);\n\nsortedBrands.forEach((b, i) => {\n    finalOutput.push({\n        json: {\n            tipo: \"marca\",\n            fila_excel: i + 14, \n            Marca: b.Marca,\n            Unidades: b.Unidades,\n            Total: parseFloat(b.Ventas.toFixed(2))\n        }\n    });\n});\n\n// --- SUCURSALES ---\nconst sortedBranches = Object.values(branchStats).sort((a, b) => b.Ventas - a.Ventas);\n\nsortedBranches.forEach((b, i) => {\n    finalOutput.push({\n        json: {\n            tipo: \"sucursal\",\n            fila_excel: i + FILA_SUCURSALES, \n            Sucursal: b.Sucursal,\n            Transacciones: b.Transacciones,\n            Total: parseFloat(b.Ventas.toFixed(2))\n        }\n    });\n});\n\n// 4. LIMPIEZA FINAL\nstaticData.allProducts = [];\n\nreturn finalOutput;"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -1044,7 +1017,7 @@
         "type": "n8n-nodes-base.graphql",
         "typeVersion": 1.1,
         "position": [
-          864,
+          960,
           736
         ],
         "id": "143b2690-f56b-4f55-9a4c-c9e59e4a8d15",
@@ -1063,7 +1036,7 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          688,
+          784,
           736
         ],
         "id": "f1e8abd2-0441-4ba7-8f11-558506473f74",
@@ -1091,7 +1064,7 @@
         "type": "n8n-nodes-base.dataTable",
         "typeVersion": 1.1,
         "position": [
-          512,
+          608,
           736
         ],
         "id": "23a0b84f-a080-49b8-beb3-cf051b28b93a",
@@ -1104,7 +1077,7 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          1040,
+          1136,
           736
         ],
         "id": "311e9e07-8adc-40b5-8354-b12975b32cfc",
@@ -1120,7 +1093,7 @@
         "type": "n8n-nodes-base.graphql",
         "typeVersion": 1.1,
         "position": [
-          1456,
+          1552,
           736
         ],
         "id": "2c8ee8bf-99fc-4bef-8ea0-06a5bec51363",
@@ -1142,7 +1115,7 @@
         "type": "n8n-nodes-base.graphql",
         "typeVersion": 1.1,
         "position": [
-          1264,
+          1360,
           736
         ],
         "id": "59ef37c4-27e6-4de1-9613-f17fd0b0371f",
@@ -1164,7 +1137,7 @@
         "type": "n8n-nodes-base.gmail",
         "typeVersion": 2.2,
         "position": [
-          1264,
+          1360,
           912
         ],
         "id": "de05e630-42ee-4d9a-868f-d0d567a0ed53",
@@ -1176,6 +1149,131 @@
             "name": "info@tailwind.es"
           }
         }
+      },
+      {
+        "parameters": {
+          "content": "COPIA DE LA PLANTILLA\n",
+          "height": 192,
+          "width": 528,
+          "color": 6
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -1152,
+          0
+        ],
+        "id": "9ab3499d-1278-4571-b488-d3cd92b0b552",
+        "name": "Sticky Note2"
+      },
+      {
+        "parameters": {
+          "content": "ESCRIBIR EN EL ARCHIVO\n",
+          "height": 512,
+          "width": 160,
+          "color": 5
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          704,
+          -608
+        ],
+        "id": "f34655cd-9b98-4355-91c9-9d2905e5eb2d",
+        "name": "Sticky Note3"
+      },
+      {
+        "parameters": {
+          "content": "HACER LOS CÁLCULOS CON LA INFORMACIÓN DE LOS INFORMES DIARIOS\n",
+          "height": 224,
+          "width": 528,
+          "color": 4
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          160,
+          -448
+        ],
+        "id": "ca0245e6-327a-49d2-9492-83334ed8ba5e",
+        "name": "Sticky Note4"
+      },
+      {
+        "parameters": {
+          "jsCode": "// Accedemos a la memoria global del flujo\nconst staticData = $getWorkflowStaticData('global');\n\n// Si es la primera vuelta, inicializamos la lista\nif (!staticData.allProducts) {\n  staticData.allProducts = [];\n}\n\n// Añadimos los productos leídos en esta vuelta del bucle\nconst newItems = items.map(item => item.json);\nstaticData.allProducts.push(...newItems);\n\n// Pasamos el testigo para que el flujo siga\nreturn { json: { status: 'guardado', filas: newItems.length } };"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          496,
+          -112
+        ],
+        "id": "a33a17b0-17aa-4d09-8bdb-a41b45ef16d7",
+        "name": "Acumular en memoria"
+      },
+      {
+        "parameters": {
+          "content": "LEER LOS INFORMES DIARIOS DE TODO EL MES\n",
+          "height": 288,
+          "width": 576,
+          "color": 4
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          112,
+          -192
+        ],
+        "id": "705c6f1d-cb5b-4ea4-a52d-0e84ffb4017d",
+        "name": "Sticky Note5"
+      },
+      {
+        "parameters": {
+          "content": "ESCRIBIR EN EL ARCHIVO\n",
+          "height": 192,
+          "width": 336,
+          "color": 5
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          560,
+          432
+        ],
+        "id": "235f4b24-b7ea-4f04-9558-07fcb29c5086",
+        "name": "Sticky Note6"
+      },
+      {
+        "parameters": {
+          "content": "LEER INFORMACIÓN DE LOS EMPLEADOS EN SHOPIFY\n",
+          "height": 400,
+          "width": 992,
+          "color": 3
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -448,
+          208
+        ],
+        "id": "c0d28e3a-dc03-4bb2-a809-690f7ab3472c",
+        "name": "Sticky Note7"
+      },
+      {
+        "parameters": {
+          "content": "░░░░░░░░░░░░░░░░░░░▒▓▓█████████████▓▓▒░░░░░░░░░░░░░░░░░░░░░░\n░░░░░░░░░░░░░░▒████▓▓▒▒░▒▒▒░▒▒▒▒▒▒▓▓████▓▒░░░░░░░░░░░░░░░░░░\n░░░░░░░░░░░▒███▓░░░░░░░░░░░░░░░░░░░░░░▒███████▓▓▒░░░░░░░░░░░\n░░░░░░░░░▒██▓░░░░▒▒███▓▓▒░░░░░░░░░░░░░▓▓▒▒▒▒▒▓██████▓░░░░░░░\n░░░░░░░▒██▓░░░▓███▓▒░░░░░░░░▒▒▒▒▒▒▒▒▒▒░░░░░░▒▓▓███▓████▒▒░░░\n░░░░░░██▓░░▒▓██▓░░▒▓██████▓░░░░░░░▒░░░░░░▒██▓▒░░░▓███▒▓▒░░░░\n░░░░░██░░▓███▒░░▒██▒░░░░▒▒██▓░░░░░░░░░░░██▒░░░░▒████▒█░░░░░░\n░░░░██░▒▓▒▓▓░░░██░░░░░░░░░░░█▓░░░░░░░░░██░░░░░░▒███░░█▒░░░░░\n░░░▓█░░░░░░░░░██░░░░░░░░░░░░▓█░░░░░░░░██░░░░░░░░░░░░░█▒░░░░░\n░░░█▓░░░░░░░░░█▒░░████░░░░░░░█▒░░░░░░░██░░░░░░░░░░░░███░░░░░\n░░▒█░░░░░░░▒▓▒█▓░▓████▓░░░░░▒█░░░░░░░░▒█▒░░░░░░░░░░██░█▒░░░░\n░░██░░░░░▒▓▒▓▒██▒▒▓▓▓░░░░░░░██░░░░░░░░░▒████▓███████▓░█▒░░░░\n░░█▓░░░░░▒░░░▒░▒██▓▒░░░░░▒██▓░░░░░░░░░░░░░░██▓░░░░░░▒██▓░░░░\n░░█░░░░░░░░░▓▒░░░░▒▓██████▓░░░░░░░░░░░░░░▒██░░░▓█▓▓▒░░░██░░░\n░▒█░░░░░░░░░░░░░░░░░░░░░░░░░░▓▒▓▒▒▒▒▒▓▓▓▓██░░▓█▓░▒▒██▒░░██░░\n░▓█░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▓▓▒░░██░░██▓░▒░▒░██░░▒█░░\n░██░░░░░░░░░░░░░░░░░░░░░░░▒▓▒▒▒▒▒▒▒▒░░░██░░▓█░█▓░█▒█▓█▓░░█░░\n░██░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒░▒▒░░▓█▓░░██░█▒▒█▒█▒▓█░░█░░\n░██░░░░░░░░░░░░░░░░░░░░░░░░▒░░░░░░░░░░▓█░░░█▒░░░░▒▒░░▒█░▓█░░\n░▒█░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒░░█▒░░█▒░░░░░░░░▓█░█▓░░\n░░█▓░▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▓█░░█▒░░░░░░░░█░▒█░░░\n░░▓█░░▒░░▒▒░░▒░░░░░░░░░░░░░░░░░░░░░░░░░░█░░█▒░░░░░░░█▓░█▓░░░\n░░░█▒░░▒░░▒░░▒▒░░░░░░░░░░░░░░░░░░░░░░░░░█░░█▒░░░░░░▓█░░█░░░░\n░░░██░░░▒░▒░░░▒▒░░░░░░░░░░░░░░░░░░░░░░░░█░░█▒░░░░░░██░░█░░░░\n░░░░█▓░░░▒░▒░░░░▒▒░░░░░▒▒▒▒▒▒░░░░░░░░░░▒█░▒█░░░░░░░█▒░░█▓░░░\n░░░░▓█░░░░▒▒░░░░░▒▒░░░░░░▒▒▒▓▓▓▒░░░░░░░██░██░░░░░░░██░░▓█░░░\n░░░░░██░░░▒░▒░░░░░▒░░░░░░░░▒░▒▒▓█▒░░░░▒█░░█▓▒▓▓▓▒░░▓█░░░█▒░░\n░░░░░▒█▒░░░▒▒▒░░░░▒░░░░░░░░░░▒▒▒░▒▓░░░██░▒█░░░░▒▓▓░░██░░█▒░░\n░░░░░░▒█▒░░░▒░▒░░░▒░░░░░░▒▒▒░░░░▒▒░░░▒█░░██░░░░░░░█░▒█░░█▒░░\n░░░░░░░▓█░░░▒░▒░░░░▒▒░░░░▓▒▒▓▓▓▒░░▓▒░██░░██▒▒▒▒▓▒▓▓███░░█▒░░\n░░░░░░░░██░░░▒░▒░░░░░▒▒░░░░░░░░▓█▓░░░█▓░░██░▓█░█░█░░█▒░░█▒░░\n░░░░░░░░░██░░░░▒▒░░░░░░▒▒░░░░░░░░▒█▓░█▓░░▓█▒▒█▒█░█▒██░░▒█░░░\n░░░░░░░░░░██▒░░░░▒░░░▒░░░▒▒░░░░░░░░▒▓██░░░██░░░░▒▒██░░░██░░░\n░░░░░░░░░░░▓██░░░░░░░░▒▒░░░▒░░░░░░░░░▓█░░░░▓███▓▓██░░░██░░░░\n░░░░░░░░░░░░░▓██▒░░░░░░▒▒▒▒▒░░░░░░░░░░██░░░░░░▒▒▒░░░░██░░░░░\n░░░░░░░░░░░░░░░▓███▒░░░░░░░▒▒▒▒▒▒▒▒░░░░▓██▒░░░░░░░▒███░░░░░░\n░░░░░░░░░░░░░░░░░▒▓███▓▒░░░░░░░▒░░▒▒▒▒░░░▒██▓██████▓░░░░░░░░\n░░░░░░░░░░░░░░░░░░░░░▒████▓▒▒░░░░░░░░░░░░░░░▓██▒░░░░░░░░░░░░\n░░░░░░░░░░░░░░░░░░░░░░░░░▒▓████▓░░░░░░░▓█████▒░░░░░░░░░░░░░░\n░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒█████████▒░░░░░░░░░░░░░░░░░░░\n░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒░░░░░░░░░░░░░░░░░░░░░░░\n",
+          "height": 784,
+          "width": 624,
+          "color": 3
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          976,
+          -144
+        ],
+        "id": "0a689d39-3746-4b8b-b67c-5405bd28b17b",
+        "name": "Sticky Note14"
       }
     ],
     "connections": {
@@ -1292,7 +1390,13 @@
       },
       "Unir Todos los Pedidos": {
         "main": [
-          []
+          [
+            {
+              "node": "Calcular Ranking Empleados",
+              "type": "main",
+              "index": 0
+            }
+          ]
         ]
       },
       "Bucle: Uno a Uno": {
@@ -1348,17 +1452,6 @@
           ]
         ]
       },
-      "Acumular en memoria": {
-        "main": [
-          [
-            {
-              "node": "Bucle: Uno a Uno",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
       "Calcular Ranking Empleados": {
         "main": [
           [
@@ -1407,7 +1500,7 @@
         "main": [
           [
             {
-              "node": "Wait",
+              "node": "Loop Over Items",
               "type": "main",
               "index": 0
             }
@@ -1427,17 +1520,6 @@
           [
             {
               "node": "Escribir Empleados",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Wait": {
-        "main": [
-          [
-            {
-              "node": "Loop Over Items",
               "type": "main",
               "index": 0
             }
@@ -1544,14 +1626,25 @@
         "main": [
           []
         ]
+      },
+      "Acumular en memoria": {
+        "main": [
+          [
+            {
+              "node": "Bucle: Uno a Uno",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version f645359b",
+    "name": "Version 204d611a",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "f645359b-9c7b-4661-9350-ce65e55fddd1",
+  "activeVersionId": "204d611a-24d9-4692-a652-28439c78bb44",
   "connections": {
     "Inicio de Mes (Día 1)": {
       "main": [
@@ -1666,7 +1759,13 @@
     },
     "Unir Todos los Pedidos": {
       "main": [
-        []
+        [
+          {
+            "node": "Calcular Ranking Empleados",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Bucle: Uno a Uno": {
@@ -1722,17 +1821,6 @@
         ]
       ]
     },
-    "Acumular en memoria": {
-      "main": [
-        [
-          {
-            "node": "Bucle: Uno a Uno",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Calcular Ranking Empleados": {
       "main": [
         [
@@ -1781,7 +1869,7 @@
       "main": [
         [
           {
-            "node": "Wait",
+            "node": "Loop Over Items",
             "type": "main",
             "index": 0
           }
@@ -1801,17 +1889,6 @@
         [
           {
             "node": "Escribir Empleados",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Wait": {
-      "main": [
-        [
-          {
-            "node": "Loop Over Items",
             "type": "main",
             "index": 0
           }
@@ -1918,6 +1995,17 @@
       "main": [
         []
       ]
+    },
+    "Acumular en memoria": {
+      "main": [
+        [
+          {
+            "node": "Bucle: Uno a Uno",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2026-01-14T08:04:08.245Z",
@@ -1956,13 +2044,13 @@
           "value": "1tsvxi9_RbsJ9PZzj89QC4KmPOSeOUlI2FnsqcM4vmoY",
           "mode": "id"
         },
-        "name": "=INFORME MENSUAL COMPLETO - {{ $json.NOMBRE_MES }}",
+        "name": "=PRUEBAPRUEBAPRUEBAPRUEBA COMPLETO - {{ $json.NOMBRE_MES }}",
         "options": {}
       },
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        -656,
+        -768,
         32
       ],
       "id": "0b17272d-1aa2-4c3f-8811-2d74745ef031",
@@ -2023,7 +2111,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -448,
+        -416,
         272
       ],
       "id": "baac2c47-e3e0-4413-a657-02e685aeea0f",
@@ -2045,7 +2133,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        -272,
+        -240,
         272
       ],
       "id": "02d692ea-c717-4ecf-ab9a-d95d81b2eb37",
@@ -2084,7 +2172,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        48,
+        80,
         272
       ],
       "id": "3fed2932-cb89-43c4-86f1-8df62a10ec7c",
@@ -2107,7 +2195,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        208,
+        240,
         256
       ],
       "id": "74a1ce84-d763-4d42-96a6-b66b3a056bbe",
@@ -2120,7 +2208,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        224,
+        272,
         464
       ],
       "id": "76818f9e-1abd-4a3f-89be-6bcfe16956ff",
@@ -2133,7 +2221,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -112,
+        -80,
         272
       ],
       "id": "c388a069-3ddc-418e-a9d0-8903192a2fb1",
@@ -2243,7 +2331,7 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        736,
+        768,
         480
       ],
       "id": "f894e18e-33b5-4bc9-9b5a-58b0663b6a26",
@@ -2283,7 +2371,7 @@
       "typeVersion": 1,
       "position": [
         -448,
-        128
+        64
       ],
       "id": "2597c927-aa51-4003-a949-419b2158cda7",
       "name": "Sticky Note1"
@@ -2452,8 +2540,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        192,
-        -192
+        160,
+        -96
       ],
       "id": "d2ef4873-7d36-41a0-ac61-3662612885c1",
       "name": "Leer Informe de ese Día",
@@ -2495,24 +2583,11 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -880,
+        -944,
         32
       ],
       "id": "4e18e961-e82a-44bc-a08f-203fb6bdb947",
       "name": "Configurar Fechas"
-    },
-    {
-      "parameters": {
-        "jsCode": "// Accedemos a la memoria global del flujo\nconst staticData = $getWorkflowStaticData('global');\n\n// Si es la primera vuelta, inicializamos la lista\nif (!staticData.allProducts) {\n  staticData.allProducts = [];\n}\n\n// Añadimos los productos leídos en esta vuelta del bucle\nconst newItems = items.map(item => item.json);\nstaticData.allProducts.push(...newItems);\n\n// Pasamos el testigo para que el flujo siga\nreturn { json: { status: 'guardado', filas: newItems.length } };"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        512,
-        -208
-      ],
-      "id": "a33a17b0-17aa-4d09-8bdb-a41b45ef16d7",
-      "name": "Acumular en memoria"
     },
     {
       "parameters": {
@@ -2521,7 +2596,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        400,
+        432,
         464
       ],
       "id": "78b07875-794e-4a6d-9100-1bc799bff8a6",
@@ -2669,8 +2744,8 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        352,
-        -176
+        336,
+        -80
       ],
       "id": "9c7d312d-251d-4683-ac7e-4c48146e1346",
       "name": "Espera 1m",
@@ -2838,7 +2913,7 @@
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 3,
       "position": [
-        576,
+        608,
         464
       ],
       "id": "d7771f33-ed1d-406c-8497-25446ab020a1",
@@ -2846,21 +2921,7 @@
     },
     {
       "parameters": {
-        "amount": 1
-      },
-      "type": "n8n-nodes-base.wait",
-      "typeVersion": 1.1,
-      "position": [
-        896,
-        464
-      ],
-      "id": "0bbd5937-11f5-4468-bfc6-9bb942ff6945",
-      "name": "Wait",
-      "webhookId": "1be80c97-a21c-49f7-96f4-a9686e8a5bc0"
-    },
-    {
-      "parameters": {
-        "jsCode": "// 1. CONFIGURACIÓN Y DATOS\nconst staticData = $getWorkflowStaticData('global');\nconst allSales = staticData.allProducts || [];\n\nif (allSales.length === 0) {\n    return [{ json: { mensaje: \"⚠️ Ejecuta el bucle primero.\" } }];\n}\n\n// Importar Marcas (Dinámico desde el nodo anterior)\n// Como conectamos Tabla Marcas -> Code, 'items' tiene las marcas.\nconst LISTA_MARCAS = items.map(item => item.json['Nombre_del_Proveedor']);\nLISTA_MARCAS.sort((a, b) => (b ? b.length : 0) - (a ? a.length : 0));\n\n// Contenedores\nconst productStats = {};\nconst brandStats = {};\nconst branchStats = {};\n\n// Configuración\nlet skateparkCount = 0;\nlet skateparkRevenue = 0;\nconst SKATEPARK_NAME = \"TICKET ENTRADA SKATEPARK\";\nconst FILA_SUCURSALES = 26; \n\n// 2. PROCESAMIENTO ÚNICO\nfor (const sale of allSales) {\n    const productName = sale['NOMBRE DE PRODUCTO'];\n    const branchName = sale['SUCURSAL DE VENTA'];\n    \n    // Limpieza números\n    let priceStr = (sale['PRECIO PAGADO'] || '0').toString();\n    let costStr = (sale['COSTE DE PRODUCTO'] || '0').toString();\n    let unitPriceStr = (sale['PRECIO DE PRODUCTO'] || '0').toString();\n    \n    const paidPrice = parseFloat(priceStr.replace(',', '.')) || 0;\n    const cost = parseFloat(costStr.replace(',', '.')) || 0;\n    const listPrice = parseFloat(unitPriceStr.replace(',', '.')) || 0;\n\n    // Lógica Skatepark\n    if (productName && productName.includes(SKATEPARK_NAME)) {\n        skateparkCount += 1;\n        skateparkRevenue += paidPrice;\n        continue; \n    }\n\n    if (productName) {\n        // A) PRODUCTOS\n        const variant = sale['VARIANTE'] || '';\n        const prodKey = `${productName} - ${variant}`;\n        \n        if (!productStats[prodKey]) {\n            productStats[prodKey] = {\n                Producto: productName, Variante: variant, Precio: listPrice,\n                Ventas: 0, Unidades: 0, Beneficio: 0\n            };\n        }\n        productStats[prodKey].Ventas += paidPrice;\n        productStats[prodKey].Unidades += 1;\n        productStats[prodKey].Beneficio += (paidPrice - cost);\n\n        // B) MARCAS\n        let detectedBrand = \"Otras\";\n        for (const marca of LISTA_MARCAS) {\n            if (marca && productName.toLowerCase().includes(marca.toLowerCase())) {\n                detectedBrand = marca;\n                break;\n            }\n        }\n        if (!brandStats[detectedBrand]) {\n            brandStats[detectedBrand] = { Marca: detectedBrand, Ventas: 0, Unidades: 0 };\n        }\n        brandStats[detectedBrand].Ventas += paidPrice;\n        brandStats[detectedBrand].Unidades += 1;\n    }\n\n    // C) SUCURSALES\n    if (branchName && branchName !== \"N/A\") {\n        if (!branchStats[branchName]) {\n            branchStats[branchName] = { Sucursal: branchName, Ventas: 0, Transacciones: 0 };\n        }\n        branchStats[branchName].Ventas += paidPrice;\n        branchStats[branchName].Transacciones += 1;\n    }\n}\n\n// 3. GENERAR RESULTADOS\nconst finalOutput = [];\n\n// --- PRODUCTOS (Top 10) ---\nconst sortedProds = Object.values(productStats).sort((a, b) => \n    b.Unidades !== a.Unidades ? b.Unidades - a.Unidades : b.Ventas - a.Ventas\n).slice(0, 10);\n\nsortedProds.forEach((p, i) => {\n    const item = {\n        tipo: \"producto\",\n        fila_excel: i + 2,\n        Producto: p.Producto,\n        Variante: p.Variante,\n        Precio: parseFloat(p.Precio.toFixed(2)),\n        Unidades: p.Unidades,\n        Total: parseFloat(p.Ventas.toFixed(2)),\n        Beneficio: parseFloat(p.Beneficio.toFixed(2))\n    };\n    if (i === 0) {\n        item.Skatepark_Entradas_Vendidas = skateparkCount;\n        item.Skatepark_Ingresos_Totales = parseFloat(skateparkRevenue.toFixed(2));\n    }\n    finalOutput.push({ json: item });\n});\n\n// --- MARCAS (Top 10) ---\nconst sortedBrands = Object.values(brandStats)\n    .filter(b => b.Marca !== \"Otras\")\n    .sort((a, b) => b.Unidades !== a.Unidades ? b.Unidades - a.Unidades : b.Ventas - a.Ventas)\n    .slice(0, 10);\n\nsortedBrands.forEach((b, i) => {\n    finalOutput.push({\n        json: {\n            tipo: \"marca\",\n            fila_excel: i + 14, \n            Marca: b.Marca,\n            Unidades: b.Unidades,\n            Total: parseFloat(b.Ventas.toFixed(2))\n        }\n    });\n});\n\n// --- SUCURSALES (Todas) ---\nconst sortedBranches = Object.values(branchStats).sort((a, b) => b.Ventas - a.Ventas);\n\nsortedBranches.forEach((b, i) => {\n    finalOutput.push({\n        json: {\n            tipo: \"sucursal\",\n            fila_excel: i + FILA_SUCURSALES, \n            Sucursal: b.Sucursal,\n            Transacciones: b.Transacciones,\n            Total: parseFloat(b.Ventas.toFixed(2))\n        }\n    });\n});\n\n// 4. LIMPIEZA FINAL (Apagar la luz)\nstaticData.allProducts = [];\n\nreturn finalOutput;"
+        "jsCode": "// 1. CONFIGURACIÓN Y DATOS\nconst staticData = $getWorkflowStaticData('global');\nconst allSales = staticData.allProducts || [];\n\nif (allSales.length === 0) {\n    return [{ json: { mensaje: \"⚠️ Ejecuta el bucle primero.\" } }];\n}\n\n// NORMALIZACIÓN DE MARCAS: Limpiamos espacios y pasamos a MAYÚSCULAS\nconst LISTA_MARCAS = items\n    .map(item => (item.json['Nombre_del_Proveedor'] || '').toString().trim().toUpperCase())\n    .filter(marca => marca.length > 1);\n\n// Ordenamos por longitud de mayor a menor para evitar que \"NIKE\" se coma a \"NIKE SB\"\nLISTA_MARCAS.sort((a, b) => b.length - a.length);\n\n// Contenedores\nconst productStats = {};\nconst brandStats = {};\nconst branchStats = {};\n\n// Configuración Skatepark\nlet skateparkCount = 0;\nlet skateparkRevenue = 0;\nconst SKATEPARK_NAME = \"TICKET ENTRADA SKATEPARK\";\nconst FILA_SUCURSALES = 26; \n\n// 2. PROCESAMIENTO ÚNICO (Con Normalización)\nfor (const sale of allSales) {\n    // --- LA REGLA DE ORO: NORMALIZACIÓN ---\n    // Convertimos a texto, quitamos espacios fantasma y pasamos a MAYÚSCULAS\n    const productName = (sale['NOMBRE DE PRODUCTO'] || \"SIN NOMBRE\").toString().trim().toUpperCase();\n    const branchName = (sale['SUCURSAL DE VENTA'] || \"N/A\").toString().trim().toUpperCase();\n    const variantOriginal = (sale['VARIANTE'] || '').toString().trim(); \n    const variantKey = variantOriginal.toUpperCase(); \n\n    // Limpieza números (mantienes tu lógica original que estaba perfecta)\n    let priceStr = (sale['PRECIO PAGADO'] || '0').toString();\n    let costStr = (sale['COSTE DE PRODUCTO'] || '0').toString();\n    let unitPriceStr = (sale['PRECIO DE PRODUCTO'] || '0').toString();\n    \n    const paidPrice = parseFloat(priceStr.replace(',', '.')) || 0;\n    const cost = parseFloat(costStr.replace(',', '.')) || 0;\n    const listPrice = parseFloat(unitPriceStr.replace(',', '.')) || 0;\n\n    // Lógica Skatepark (buscamos en el nombre ya en mayúsculas)\n    if (productName.includes(SKATEPARK_NAME)) {\n        skateparkCount += 1;\n        skateparkRevenue += paidPrice;\n        continue; \n    }\n\n    if (productName !== \"SIN NOMBRE\") {\n        // A) PRODUCTOS\n        const prodKey = `${productName} - ${variantKey}`;\n        \n        if (!productStats[prodKey]) {\n            productStats[prodKey] = {\n                Producto: productName, \n                Variante: variantOriginal, // Guardamos la original para que quede bonita en el Excel\n                Precio: listPrice,\n                Ventas: 0, Unidades: 0, Beneficio: 0\n            };\n        }\n        productStats[prodKey].Ventas += paidPrice;\n        productStats[prodKey].Unidades += 1;\n        productStats[prodKey].Beneficio += (paidPrice - cost);\n\n        // B) MARCAS\n        let detectedBrand = \"OTRAS\"; // Usamos mayúsculas por consistencia\n        \n        for (const marca of LISTA_MARCAS) {\n            // Si la marca es un número (ej. \"686\"), usamos Regex de coincidencia exacta\n            if (!isNaN(marca)) {\n                const regex = new RegExp(`\\\\b${marca}\\\\b`);\n                if (regex.test(productName)) {\n                    detectedBrand = marca;\n                    break;\n                }\n            } else {\n                // Si es texto normal\n                if (productName.includes(marca)) {\n                    detectedBrand = marca;\n                    break;\n                }\n            }\n        }\n\n        // Parche manual para The North Face (buscando en mayúsculas)\n        if (detectedBrand === \"OTRAS\" && (productName.includes(\"NORTH FACE\") || productName.includes(\" TNF \"))) {\n            detectedBrand = \"THE NORTH FACE\";\n        }\n\n        if (!brandStats[detectedBrand]) {\n            brandStats[detectedBrand] = { Marca: detectedBrand, Ventas: 0, Unidades: 0 };\n        }\n        brandStats[detectedBrand].Ventas += paidPrice;\n        brandStats[detectedBrand].Unidades += 1;\n    }\n\n    // C) SUCURSALES\n    if (branchName !== \"N/A\" && branchName !== \"\") {\n        if (!branchStats[branchName]) {\n            branchStats[branchName] = { Sucursal: branchName, Ventas: 0, Transacciones: 0 };\n        }\n        branchStats[branchName].Ventas += paidPrice;\n        branchStats[branchName].Transacciones += 1;\n    }\n}\n\n// 3. GENERAR RESULTADOS (TOP 10 y demás lógica original)\nconst finalOutput = [];\n\n// --- PRODUCTOS ---\nconst sortedProds = Object.values(productStats).sort((a, b) => \n    b.Unidades !== a.Unidades ? b.Unidades - a.Unidades : b.Ventas - a.Ventas\n).slice(0, 10);\n\nsortedProds.forEach((p, i) => {\n    const item = {\n        tipo: \"producto\",\n        fila_excel: i + 2,\n        Producto: p.Producto,\n        Variante: p.Variante,\n        Precio: parseFloat(p.Precio.toFixed(2)),\n        Unidades: p.Unidades,\n        Total: parseFloat(p.Ventas.toFixed(2)),\n        Beneficio: parseFloat(p.Beneficio.toFixed(2))\n    };\n    if (i === 0) {\n        item.Skatepark_Entradas_Vendidas = skateparkCount;\n        item.Skatepark_Ingresos_Totales = parseFloat(skateparkRevenue.toFixed(2));\n    }\n    finalOutput.push({ json: item });\n});\n\n// --- MARCAS ---\nconst sortedBrands = Object.values(brandStats)\n    .filter(b => b.Marca !== \"OTRAS\")\n    .sort((a, b) => b.Unidades !== a.Unidades ? b.Unidades - a.Unidades : b.Ventas - a.Ventas)\n    .slice(0, 10);\n\nsortedBrands.forEach((b, i) => {\n    finalOutput.push({\n        json: {\n            tipo: \"marca\",\n            fila_excel: i + 14, \n            Marca: b.Marca,\n            Unidades: b.Unidades,\n            Total: parseFloat(b.Ventas.toFixed(2))\n        }\n    });\n});\n\n// --- SUCURSALES ---\nconst sortedBranches = Object.values(branchStats).sort((a, b) => b.Ventas - a.Ventas);\n\nsortedBranches.forEach((b, i) => {\n    finalOutput.push({\n        json: {\n            tipo: \"sucursal\",\n            fila_excel: i + FILA_SUCURSALES, \n            Sucursal: b.Sucursal,\n            Transacciones: b.Transacciones,\n            Total: parseFloat(b.Ventas.toFixed(2))\n        }\n    });\n});\n\n// 4. LIMPIEZA FINAL\nstaticData.allProducts = [];\n\nreturn finalOutput;"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -2966,7 +3027,7 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        864,
+        960,
         736
       ],
       "id": "143b2690-f56b-4f55-9a4c-c9e59e4a8d15",
@@ -2985,7 +3046,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        688,
+        784,
         736
       ],
       "id": "f1e8abd2-0441-4ba7-8f11-558506473f74",
@@ -3013,7 +3074,7 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
       "position": [
-        512,
+        608,
         736
       ],
       "id": "23a0b84f-a080-49b8-beb3-cf051b28b93a",
@@ -3026,7 +3087,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1040,
+        1136,
         736
       ],
       "id": "311e9e07-8adc-40b5-8354-b12975b32cfc",
@@ -3042,7 +3103,7 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        1456,
+        1552,
         736
       ],
       "id": "2c8ee8bf-99fc-4bef-8ea0-06a5bec51363",
@@ -3064,7 +3125,7 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        1264,
+        1360,
         736
       ],
       "id": "59ef37c4-27e6-4de1-9613-f17fd0b0371f",
@@ -3086,7 +3147,7 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        1264,
+        1360,
         912
       ],
       "id": "de05e630-42ee-4d9a-868f-d0d567a0ed53",
@@ -3098,6 +3159,131 @@
           "name": "info@tailwind.es"
         }
       }
+    },
+    {
+      "parameters": {
+        "content": "COPIA DE LA PLANTILLA\n",
+        "height": 192,
+        "width": 528,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1152,
+        0
+      ],
+      "id": "9ab3499d-1278-4571-b488-d3cd92b0b552",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "ESCRIBIR EN EL ARCHIVO\n",
+        "height": 512,
+        "width": 160,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        704,
+        -608
+      ],
+      "id": "f34655cd-9b98-4355-91c9-9d2905e5eb2d",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "HACER LOS CÁLCULOS CON LA INFORMACIÓN DE LOS INFORMES DIARIOS\n",
+        "height": 224,
+        "width": 528,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        160,
+        -448
+      ],
+      "id": "ca0245e6-327a-49d2-9492-83334ed8ba5e",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Accedemos a la memoria global del flujo\nconst staticData = $getWorkflowStaticData('global');\n\n// Si es la primera vuelta, inicializamos la lista\nif (!staticData.allProducts) {\n  staticData.allProducts = [];\n}\n\n// Añadimos los productos leídos en esta vuelta del bucle\nconst newItems = items.map(item => item.json);\nstaticData.allProducts.push(...newItems);\n\n// Pasamos el testigo para que el flujo siga\nreturn { json: { status: 'guardado', filas: newItems.length } };"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        496,
+        -112
+      ],
+      "id": "a33a17b0-17aa-4d09-8bdb-a41b45ef16d7",
+      "name": "Acumular en memoria"
+    },
+    {
+      "parameters": {
+        "content": "LEER LOS INFORMES DIARIOS DE TODO EL MES\n",
+        "height": 288,
+        "width": 576,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        112,
+        -192
+      ],
+      "id": "705c6f1d-cb5b-4ea4-a52d-0e84ffb4017d",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "content": "ESCRIBIR EN EL ARCHIVO\n",
+        "height": 192,
+        "width": 336,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        560,
+        432
+      ],
+      "id": "235f4b24-b7ea-4f04-9558-07fcb29c5086",
+      "name": "Sticky Note6"
+    },
+    {
+      "parameters": {
+        "content": "LEER INFORMACIÓN DE LOS EMPLEADOS EN SHOPIFY\n",
+        "height": 400,
+        "width": 992,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -448,
+        208
+      ],
+      "id": "c0d28e3a-dc03-4bb2-a809-690f7ab3472c",
+      "name": "Sticky Note7"
+    },
+    {
+      "parameters": {
+        "content": "░░░░░░░░░░░░░░░░░░░▒▓▓█████████████▓▓▒░░░░░░░░░░░░░░░░░░░░░░\n░░░░░░░░░░░░░░▒████▓▓▒▒░▒▒▒░▒▒▒▒▒▒▓▓████▓▒░░░░░░░░░░░░░░░░░░\n░░░░░░░░░░░▒███▓░░░░░░░░░░░░░░░░░░░░░░▒███████▓▓▒░░░░░░░░░░░\n░░░░░░░░░▒██▓░░░░▒▒███▓▓▒░░░░░░░░░░░░░▓▓▒▒▒▒▒▓██████▓░░░░░░░\n░░░░░░░▒██▓░░░▓███▓▒░░░░░░░░▒▒▒▒▒▒▒▒▒▒░░░░░░▒▓▓███▓████▒▒░░░\n░░░░░░██▓░░▒▓██▓░░▒▓██████▓░░░░░░░▒░░░░░░▒██▓▒░░░▓███▒▓▒░░░░\n░░░░░██░░▓███▒░░▒██▒░░░░▒▒██▓░░░░░░░░░░░██▒░░░░▒████▒█░░░░░░\n░░░░██░▒▓▒▓▓░░░██░░░░░░░░░░░█▓░░░░░░░░░██░░░░░░▒███░░█▒░░░░░\n░░░▓█░░░░░░░░░██░░░░░░░░░░░░▓█░░░░░░░░██░░░░░░░░░░░░░█▒░░░░░\n░░░█▓░░░░░░░░░█▒░░████░░░░░░░█▒░░░░░░░██░░░░░░░░░░░░███░░░░░\n░░▒█░░░░░░░▒▓▒█▓░▓████▓░░░░░▒█░░░░░░░░▒█▒░░░░░░░░░░██░█▒░░░░\n░░██░░░░░▒▓▒▓▒██▒▒▓▓▓░░░░░░░██░░░░░░░░░▒████▓███████▓░█▒░░░░\n░░█▓░░░░░▒░░░▒░▒██▓▒░░░░░▒██▓░░░░░░░░░░░░░░██▓░░░░░░▒██▓░░░░\n░░█░░░░░░░░░▓▒░░░░▒▓██████▓░░░░░░░░░░░░░░▒██░░░▓█▓▓▒░░░██░░░\n░▒█░░░░░░░░░░░░░░░░░░░░░░░░░░▓▒▓▒▒▒▒▒▓▓▓▓██░░▓█▓░▒▒██▒░░██░░\n░▓█░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▓▓▒░░██░░██▓░▒░▒░██░░▒█░░\n░██░░░░░░░░░░░░░░░░░░░░░░░▒▓▒▒▒▒▒▒▒▒░░░██░░▓█░█▓░█▒█▓█▓░░█░░\n░██░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒░▒▒░░▓█▓░░██░█▒▒█▒█▒▓█░░█░░\n░██░░░░░░░░░░░░░░░░░░░░░░░░▒░░░░░░░░░░▓█░░░█▒░░░░▒▒░░▒█░▓█░░\n░▒█░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒░░█▒░░█▒░░░░░░░░▓█░█▓░░\n░░█▓░▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▓█░░█▒░░░░░░░░█░▒█░░░\n░░▓█░░▒░░▒▒░░▒░░░░░░░░░░░░░░░░░░░░░░░░░░█░░█▒░░░░░░░█▓░█▓░░░\n░░░█▒░░▒░░▒░░▒▒░░░░░░░░░░░░░░░░░░░░░░░░░█░░█▒░░░░░░▓█░░█░░░░\n░░░██░░░▒░▒░░░▒▒░░░░░░░░░░░░░░░░░░░░░░░░█░░█▒░░░░░░██░░█░░░░\n░░░░█▓░░░▒░▒░░░░▒▒░░░░░▒▒▒▒▒▒░░░░░░░░░░▒█░▒█░░░░░░░█▒░░█▓░░░\n░░░░▓█░░░░▒▒░░░░░▒▒░░░░░░▒▒▒▓▓▓▒░░░░░░░██░██░░░░░░░██░░▓█░░░\n░░░░░██░░░▒░▒░░░░░▒░░░░░░░░▒░▒▒▓█▒░░░░▒█░░█▓▒▓▓▓▒░░▓█░░░█▒░░\n░░░░░▒█▒░░░▒▒▒░░░░▒░░░░░░░░░░▒▒▒░▒▓░░░██░▒█░░░░▒▓▓░░██░░█▒░░\n░░░░░░▒█▒░░░▒░▒░░░▒░░░░░░▒▒▒░░░░▒▒░░░▒█░░██░░░░░░░█░▒█░░█▒░░\n░░░░░░░▓█░░░▒░▒░░░░▒▒░░░░▓▒▒▓▓▓▒░░▓▒░██░░██▒▒▒▒▓▒▓▓███░░█▒░░\n░░░░░░░░██░░░▒░▒░░░░░▒▒░░░░░░░░▓█▓░░░█▓░░██░▓█░█░█░░█▒░░█▒░░\n░░░░░░░░░██░░░░▒▒░░░░░░▒▒░░░░░░░░▒█▓░█▓░░▓█▒▒█▒█░█▒██░░▒█░░░\n░░░░░░░░░░██▒░░░░▒░░░▒░░░▒▒░░░░░░░░▒▓██░░░██░░░░▒▒██░░░██░░░\n░░░░░░░░░░░▓██░░░░░░░░▒▒░░░▒░░░░░░░░░▓█░░░░▓███▓▓██░░░██░░░░\n░░░░░░░░░░░░░▓██▒░░░░░░▒▒▒▒▒░░░░░░░░░░██░░░░░░▒▒▒░░░░██░░░░░\n░░░░░░░░░░░░░░░▓███▒░░░░░░░▒▒▒▒▒▒▒▒░░░░▓██▒░░░░░░░▒███░░░░░░\n░░░░░░░░░░░░░░░░░▒▓███▓▒░░░░░░░▒░░▒▒▒▒░░░▒██▓██████▓░░░░░░░░\n░░░░░░░░░░░░░░░░░░░░░▒████▓▒▒░░░░░░░░░░░░░░░▓██▒░░░░░░░░░░░░\n░░░░░░░░░░░░░░░░░░░░░░░░░▒▓████▓░░░░░░░▓█████▒░░░░░░░░░░░░░░\n░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒█████████▒░░░░░░░░░░░░░░░░░░░\n░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒░░░░░░░░░░░░░░░░░░░░░░░\n",
+        "height": 784,
+        "width": 624,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        976,
+        -144
+      ],
+      "id": "0a689d39-3746-4b8b-b67c-5405bd28b17b",
+      "name": "Sticky Note14"
     }
   ],
   "pinData": {},
@@ -3117,6 +3303,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-02-02T13:30:33.338Z",
-  "versionId": "f645359b-9c7b-4661-9350-ce65e55fddd1"
+  "updatedAt": "2026-02-03T13:37:11.442Z",
+  "versionId": "204d611a-24d9-4692-a652-28439c78bb44"
 }
