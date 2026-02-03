@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-02-02T15:35:21.000Z",
-    "createdAt": "2026-02-02T15:35:20.019Z",
-    "versionId": "6f1c0048-9d31-4449-96e9-38b1eaaccc0b",
+    "updatedAt": "2026-02-03T12:15:48.000Z",
+    "createdAt": "2026-02-03T12:15:47.071Z",
+    "versionId": "0ac5f770-78b1-4811-9427-1534c8f915bc",
     "workflowId": "CBcjY0JF5P9ZjxEE",
     "nodes": [
       {
@@ -19,8 +19,8 @@
         "type": "n8n-nodes-base.facebookGraphApi",
         "typeVersion": 1,
         "position": [
-          208,
-          400
+          368,
+          464
         ],
         "id": "70f5be56-bcbd-45e8-b707-d1fe8cd7941a",
         "name": "Facebook Graph API1",
@@ -51,8 +51,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          -272,
-          416
+          -112,
+          480
         ],
         "id": "edf4ba47-a8ca-4343-8394-708f1e0f7712",
         "name": "HTTP Request3",
@@ -68,8 +68,8 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          -112,
-          416
+          48,
+          480
         ],
         "id": "5579777d-f732-4b98-b233-233d14c7baeb",
         "name": "Wait2",
@@ -102,8 +102,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          48,
-          416
+          208,
+          480
         ],
         "id": "f2e57470-8cb6-4aff-a4f1-776c6d413c60",
         "name": "If1"
@@ -115,14 +115,14 @@
           "node": "17841470046184468",
           "edge": "=media",
           "options": {
-            "queryParametersJson": "={\n\"video_url\": \"{{ $json.query.idHistoria }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
+            "queryParametersJson": "={\n\"video_url\": \"{{ $('Webhook').item.json.query.idHistoria }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
           }
         },
         "type": "n8n-nodes-base.facebookGraphApi",
         "typeVersion": 1,
         "position": [
-          -608,
-          416
+          -448,
+          480
         ],
         "id": "0bbfbe8d-31e9-41c6-8d53-89988526abf1",
         "name": "Facebook Graph API2",
@@ -206,7 +206,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          640,
+          432,
           160
         ],
         "id": "4fecbe0c-ed05-4db3-aa2c-8e9977ab31c2",
@@ -239,7 +239,7 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          800,
+          592,
           160
         ],
         "id": "4e3544c3-0642-49ef-82b2-ecd3367c560b",
@@ -250,8 +250,8 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          976,
-          240
+          752,
+          256
         ],
         "id": "cdd381ff-6ac2-45ba-9e2a-43a650f57753",
         "name": "Wait",
@@ -385,8 +385,8 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          1120,
-          240
+          880,
+          256
         ],
         "id": "e575ea56-dfa1-45c0-859f-96bb45cd6518",
         "name": "Edit Fields1"
@@ -426,8 +426,8 @@
       {
         "parameters": {
           "content": "COMPROBAR SI SE HA PROCESADO\n",
-          "height": 416,
-          "width": 912,
+          "height": 400,
+          "width": 704,
           "color": 4
         },
         "type": "n8n-nodes-base.stickyNote",
@@ -443,7 +443,7 @@
         "parameters": {
           "content": "ENVIAR CORREO DE VERIFICACIÓN",
           "height": 192,
-          "width": 544,
+          "width": 336,
           "color": 6
         },
         "type": "n8n-nodes-base.stickyNote",
@@ -458,14 +458,14 @@
       {
         "parameters": {
           "content": "SUBIDA A META\n",
-          "height": 320,
-          "width": 1408
+          "height": 240,
+          "width": 1600
         },
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
           -1056,
-          384
+          448
         ],
         "id": "ab8be564-4726-443a-aae2-3afebc817eaa",
         "name": "Sticky Note4"
@@ -479,8 +479,8 @@
         "type": "n8n-nodes-base.webhook",
         "typeVersion": 2.1,
         "position": [
-          -1168,
-          432
+          -1008,
+          496
         ],
         "id": "fd225dd5-64bd-4381-b7cc-b9cb982c5975",
         "name": "Webhook",
@@ -496,8 +496,8 @@
         "type": "n8n-nodes-base.gmail",
         "typeVersion": 2.2,
         "position": [
-          1136,
-          80
+          896,
+          64
         ],
         "id": "73308a25-8f99-40b8-9ef3-0317f097cfcb",
         "name": "Send a message",
@@ -518,8 +518,8 @@
         "type": "n8n-nodes-base.respondToWebhook",
         "typeVersion": 1.5,
         "position": [
-          -432,
-          416
+          -272,
+          480
         ],
         "id": "3d9447d2-f241-43a3-80ce-1688f72900e5",
         "name": "Respond to Webhook"
@@ -533,11 +533,12 @@
         "type": "n8n-nodes-base.respondToWebhook",
         "typeVersion": 1.5,
         "position": [
-          -1568,
-          368
+          -1392,
+          512
         ],
         "id": "3a961a4f-a452-4c7d-adca-015e96491d83",
-        "name": "Respond to Webhook1"
+        "name": "Respond to Webhook1",
+        "disabled": true
       },
       {
         "parameters": {
@@ -548,8 +549,8 @@
         "type": "n8n-nodes-base.webhook",
         "typeVersion": 2.1,
         "position": [
-          -2192,
-          384
+          -2016,
+          528
         ],
         "id": "9a115c23-aedd-4865-bd46-2f851d98028c",
         "name": "posponer",
@@ -562,8 +563,8 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          -1392,
-          368
+          -1216,
+          512
         ],
         "id": "35d19881-992b-4494-a591-18f39361266c",
         "name": "esperar 30 minutos",
@@ -578,8 +579,8 @@
         "type": "n8n-nodes-base.webhook",
         "typeVersion": 2.1,
         "position": [
-          -800,
-          960
+          -960,
+          912
         ],
         "id": "7facb56f-f11a-4b0c-8a73-2a1872b6bcc7",
         "name": "rechazarHistoria",
@@ -609,7 +610,7 @@
               },
               {
                 "id": "787399fb-18dd-4255-93a1-09ff792ba1de",
-                "name": "requestId",
+                "name": "requestId2",
                 "value": "={{ $now.toFormat('yyyyMMddHHmmss') + Math.floor(Math.random()*1000) + 1 }}",
                 "type": "string"
               }
@@ -620,8 +621,8 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          -176,
-          944
+          -448,
+          896
         ],
         "id": "a151d550-695a-4b66-8dc1-8b96ac126da1",
         "name": "datosRechazar"
@@ -629,14 +630,14 @@
       {
         "parameters": {
           "respondWith": "text",
-          "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Confirmación</title>\n  <style>\n    body {\n      font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif;\n      background-color: #f3f4f6;\n      display: flex;\n      justify-content: center;\n      align-items: center;\n      height: 100vh;\n      margin: 0;\n    }\n    .card {\n      background: white;\n      padding: 40px;\n      border-radius: 12px;\n      box-shadow: 0 10px 25px rgba(0,0,0,0.1);\n      text-align: center;\n      max-width: 400px;\n      border-top: 6px solid #ef4444;\n    }\n    h2 { color: #1f2937; margin-top: 0; font-size: 24px; }\n    p { color: #4b5563; margin: 10px 0; font-size: 16px; }\n    .warning { color: #ef4444; font-weight: bold; margin-bottom: 25px; display: block; }\n    .btn-container { display: flex; gap: 15px; justify-content: center; margin-top: 20px; }\n    \n    /* Estilos de los botones (Enlaces) */\n    .btn {\n      text-decoration: none;\n      padding: 12px 30px;\n      border-radius: 6px;\n      font-weight: bold;\n      font-size: 16px;\n      transition: opacity 0.2s;\n      display: inline-block;\n    }\n    .btn:hover { opacity: 0.8; }\n    \n    /* Botón SI (Acción de Webhook) */\n    .btn-si { background-color: #ef4444; color: white; }\n    \n    /* Botón NO (Cancelar) */\n    .btn-no { background-color: #e5e7eb; color: #374151; }\n  </style>\n</head>\n<body>\n\n  <div class=\"card\">\n    <h2>⚠️ Atención</h2>\n    <p>Estás a punto de rechazar.</p>\n    <p>Esta acción no se puede deshacer.</p>\n    <span class=\"warning\">¿Estás seguro?</span>\n\n    <div class=\"btn-container\">\n      <a href=\"https://n8n.tailwind.es/webhook-test/rechazarSi?origen={{ $('datosRechazar').item.json.ORIGEN }}&contenido={{ $('datosRechazar').item.json.CONTENIDO }}&estado=rechazado&requestId={{ $json.requestId }}\" class=\"btn btn-si\">SÍ</a>\n\n      <a href=\"https://n8n.tailwind.es/webhook-test/rechazarSi?origen={{ $('datosRechazar').item.json.ORIGEN }}&contenido={{ $('datosRechazar').item.json.CONTENIDO }}&estado=noRechazado&requestId={{ $json.requestId }}\" class=\"btn btn-no\">NO</a>\n    </div>\n  </div>\n\n</body>\n</html>",
+          "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Confirmación</title>\n  <style>\n    body {\n      font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif;\n      background-color: #f3f4f6;\n      display: flex;\n      justify-content: center;\n      align-items: center;\n      height: 100vh;\n      margin: 0;\n    }\n    .card {\n      background: white;\n      padding: 40px;\n      border-radius: 12px;\n      box-shadow: 0 10px 25px rgba(0,0,0,0.1);\n      text-align: center;\n      max-width: 400px;\n      border-top: 6px solid #ef4444;\n    }\n    h2 { color: #1f2937; margin-top: 0; font-size: 24px; }\n    p { color: #4b5563; margin: 10px 0; font-size: 16px; }\n    .warning { color: #ef4444; font-weight: bold; margin-bottom: 25px; display: block; }\n    .btn-container { display: flex; gap: 15px; justify-content: center; margin-top: 20px; }\n    \n    /* Estilos de los botones (Enlaces) */\n    .btn {\n      text-decoration: none;\n      padding: 12px 30px;\n      border-radius: 6px;\n      font-weight: bold;\n      font-size: 16px;\n      transition: opacity 0.2s;\n      display: inline-block;\n    }\n    .btn:hover { opacity: 0.8; }\n    \n    /* Botón SI (Acción de Webhook) */\n    .btn-si { background-color: #ef4444; color: white; }\n    \n    /* Botón NO (Cancelar) */\n    .btn-no { background-color: #e5e7eb; color: #374151; }\n  </style>\n</head>\n<body>\n\n  <div class=\"card\">\n    <h2>⚠️ Atención</h2>\n    <p>Estás a punto de rechazar.</p>\n    <p>Esta acción no se puede deshacer.</p>\n    <span class=\"warning\">¿Estás seguro?</span>\n\n    <div class=\"btn-container\">\n      <a href=\"https://n8n.tailwind.es/webhook/rechazarSi?origen={{ $('datosRechazar').item.json.ORIGEN }}&contenido={{ $('datosRechazar').item.json.CONTENIDO }}&estado=rechazado&requestId2={{ $json.requestId }}\" class=\"btn btn-si\">SÍ</a>\n\n      <a href=\"https://n8n.tailwind.es/webhook/rechazarSi?origen={{ $('datosRechazar').item.json.ORIGEN }}&contenido={{ $('datosRechazar').item.json.CONTENIDO }}&idHistoria={{ $('datosRechazar').item.json.MAS }}&estado=noRechazado&requestId2={{ $json.requestId }}\" class=\"btn btn-no\">NO</a>\n    </div>\n  </div>\n\n</body>\n</html>",
           "options": {}
         },
         "type": "n8n-nodes-base.respondToWebhook",
         "typeVersion": 1.5,
         "position": [
-          144,
-          944
+          -112,
+          896
         ],
         "id": "54afc9b8-4f0c-49bf-96af-f83d961af8a8",
         "name": "Respond to Webhook Rechazar"
@@ -717,8 +718,8 @@
         "type": "n8n-nodes-base.dataTable",
         "typeVersion": 1.1,
         "position": [
-          912,
-          1344
+          960,
+          1296
         ],
         "id": "9b26fb52-e2b7-4b2a-9cdc-4e0e1f334c22",
         "name": "sumar contador"
@@ -758,8 +759,8 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          560,
-          1344
+          608,
+          1296
         ],
         "id": "5a228376-6e29-480e-b480-f2efb1ca87ca",
         "name": "datos"
@@ -828,8 +829,8 @@
         "type": "n8n-nodes-base.googleSheets",
         "typeVersion": 4.7,
         "position": [
-          752,
-          1344
+          800,
+          1296
         ],
         "id": "5a709dcd-83fe-4fa9-a663-a33d0c1dae45",
         "name": "escribir datos",
@@ -849,8 +850,8 @@
         "type": "n8n-nodes-base.webhook",
         "typeVersion": 2.1,
         "position": [
-          -800,
-          1520
+          -960,
+          1472
         ],
         "id": "34425f3d-064a-4a05-a5ee-152a7d25b887",
         "name": "si",
@@ -877,8 +878,8 @@
         "type": "n8n-nodes-base.dataTable",
         "typeVersion": 1.1,
         "position": [
-          192,
-          1344
+          240,
+          1296
         ],
         "id": "b626e203-21c2-4c8a-9cff-385723289213",
         "name": "obtener contador"
@@ -939,8 +940,8 @@
         "type": "n8n-nodes-base.dataTable",
         "typeVersion": 1.1,
         "position": [
-          912,
-          1632
+          736,
+          1584
         ],
         "id": "a6e39b97-25d6-4978-b2f6-c7b390801524",
         "name": "sumar contador1"
@@ -974,8 +975,8 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          576,
-          1632
+          400,
+          1584
         ],
         "id": "0ccd4143-6dc7-4a5e-a34e-bc8be3cd37b6",
         "name": "datos2"
@@ -1044,8 +1045,8 @@
         "type": "n8n-nodes-base.googleSheets",
         "typeVersion": 4.7,
         "position": [
-          736,
-          1632
+          560,
+          1584
         ],
         "id": "427cb2ff-b459-4736-95ab-2e372b34dfa5",
         "name": "escribir datos1",
@@ -1077,8 +1078,8 @@
         "type": "n8n-nodes-base.dataTable",
         "typeVersion": 1.1,
         "position": [
-          176,
-          1632
+          224,
+          1584
         ],
         "id": "f901e8c3-08ec-4bdf-9470-803fbbf9847e",
         "name": "obtener contador1"
@@ -1086,14 +1087,14 @@
       {
         "parameters": {
           "respondWith": "text",
-          "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Selección de Acción</title>\n    <style>\n        body {\n            font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif;\n            background-color: #f3f4f6;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            height: 100vh;\n            margin: 0;\n        }\n        .card {\n            background: white;\n            padding: 40px;\n            border-radius: 12px;\n            box-shadow: 0 10px 25px rgba(0,0,0,0.1);\n            text-align: center;\n            max-width: 450px; /* Un poco más ancho para que quepan los textos */\n            width: 90%;\n            border-top: 6px solid #3b82f6; /* Azul Informativo */\n        }\n        .icon {\n            font-size: 50px;\n            margin-bottom: 15px;\n            display: block;\n        }\n        h2 { \n            color: #1f2937; \n            margin-top: 0; \n            font-size: 24px; \n        }\n        p { \n            color: #4b5563; \n            margin: 10px 0 30px 0; \n            font-size: 18px; \n        }\n        .btn-container { \n            display: flex; \n            flex-direction: column; /* Botones uno encima de otro para mejor lectura en móvil */\n            gap: 15px; \n            justify-content: center; \n        }\n        \n        /* Estilos Base de Botones */\n        .btn {\n            text-decoration: none;\n            padding: 15px 20px;\n            border-radius: 8px;\n            font-weight: bold;\n            font-size: 16px;\n            transition: transform 0.1s, opacity 0.2s;\n            display: block;\n            text-align: center;\n            box-shadow: 0 2px 4px rgba(0,0,0,0.1);\n        }\n        .btn:hover { opacity: 0.9; transform: translateY(-1px); }\n        .btn:active { transform: translateY(1px); }\n        \n        /* Botón Posponer (Naranja - Tiempo) */\n        .btn-posponer { \n            background-color: #f59e0b; \n            color: white; \n        }\n        \n        /* Botón Aceptar (Azul - Acción Principal) */\n        .btn-aceptar { \n            background-color: #3b82f6; \n            color: white; \n        }\n\n    </style>\n</head>\n<body>\n\n    <div class=\"card\">\n        <span class=\"icon\">🤔</span>\n        \n        <h2>No se ha rechazado</h2>\n        <p>¿Qué quieres hacer?</p>\n\n        <div class=\"btn-container\">\n            <a href=\"https://n8n.tailwind.es/webhook/historiaPospuesta?requestId=\" class=\"btn btn-posponer\">\n                ⏱️ POSPONER 30 MINUTOS\n            </a>\n\n            <a href=\"https://n8n.tailwind.es/webhook/historiaCamara\" class=\"btn btn-aceptar\">\n                ✅ ACEPTAR HISTORIA\n            </a>\n        </div>\n    </div>\n\n</body>\n</html>",
+          "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Selección de Acción</title>\n    <style>\n        body {\n            font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif;\n            background-color: #f3f4f6;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            height: 100vh;\n            margin: 0;\n        }\n        .card {\n            background: white;\n            padding: 40px;\n            border-radius: 12px;\n            box-shadow: 0 10px 25px rgba(0,0,0,0.1);\n            text-align: center;\n            max-width: 450px; /* Un poco más ancho para que quepan los textos */\n            width: 90%;\n            border-top: 6px solid #3b82f6; /* Azul Informativo */\n        }\n        .icon {\n            font-size: 50px;\n            margin-bottom: 15px;\n            display: block;\n        }\n        h2 { \n            color: #1f2937; \n            margin-top: 0; \n            font-size: 24px; \n        }\n        p { \n            color: #4b5563; \n            margin: 10px 0 30px 0; \n            font-size: 18px; \n        }\n        .btn-container { \n            display: flex; \n            flex-direction: column; /* Botones uno encima de otro para mejor lectura en móvil */\n            gap: 15px; \n            justify-content: center; \n        }\n        \n        /* Estilos Base de Botones */\n        .btn {\n            text-decoration: none;\n            padding: 15px 20px;\n            border-radius: 8px;\n            font-weight: bold;\n            font-size: 16px;\n            transition: transform 0.1s, opacity 0.2s;\n            display: block;\n            text-align: center;\n            box-shadow: 0 2px 4px rgba(0,0,0,0.1);\n        }\n        .btn:hover { opacity: 0.9; transform: translateY(-1px); }\n        .btn:active { transform: translateY(1px); }\n        \n        /* Botón Posponer (Naranja - Tiempo) */\n        .btn-posponer { \n            background-color: #f59e0b; \n            color: white; \n        }\n        \n        /* Botón Aceptar (Azul - Acción Principal) */\n        .btn-aceptar { \n            background-color: #3b82f6; \n            color: white; \n        }\n\n    </style>\n</head>\n<body>\n\n    <div class=\"card\">\n        <span class=\"icon\">🤔</span>\n        \n        <h2>No se ha rechazado</h2>\n        <p>¿Qué quieres hacer?</p>\n\n        <div class=\"btn-container\">\n            <a href=\"https://n8n.tailwind.es/webhook/historiaPospuesta?requestId={{ $json.requestId }}&idHistoria={{ $('si').item.json.query.idHistoria }}\" class=\"btn btn-posponer\">\n                ⏱️ POSPONER 30 MINUTOS\n            </a>\n\n            <a href=\"https://n8n.tailwind.es/webhook/historiaCamara?requestId={{ $json.requestId }}&idHistoria={{ $('si').item.json.query.idHistoria }}\" class=\"btn btn-aceptar\">\n                ✅ ACEPTAR HISTORIA\n            </a>\n        </div>\n    </div>\n\n</body>\n</html>",
           "options": {}
         },
         "type": "n8n-nodes-base.respondToWebhook",
         "typeVersion": 1.5,
         "position": [
-          0,
-          1632
+          48,
+          1584
         ],
         "id": "271a6a4d-599d-455c-b699-86c5d10eed12",
         "name": "Respond to Webhook2"
@@ -1125,8 +1126,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          -176,
-          1504
+          -128,
+          1456
         ],
         "id": "b0625766-366e-4d16-8e08-d72254e31bca",
         "name": "If2"
@@ -1140,8 +1141,8 @@
         "type": "n8n-nodes-base.respondToWebhook",
         "typeVersion": 1.5,
         "position": [
-          0,
-          1344
+          48,
+          1296
         ],
         "id": "4568449c-95d0-4ca1-9824-cee5dae22b44",
         "name": "Respond to Webhook3"
@@ -1149,15 +1150,15 @@
       {
         "parameters": {
           "content": "Rechazar la historia",
-          "height": 352,
-          "width": 1136,
+          "height": 368,
+          "width": 1120,
           "color": 3
         },
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          -848,
-          896
+          -1008,
+          832
         ],
         "id": "b393dd20-107f-48c5-ac15-36dc31f38403",
         "name": "Sticky Note6"
@@ -1172,8 +1173,8 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          -48,
-          1600
+          0,
+          1552
         ],
         "id": "f9957b2d-da8a-4e68-a24a-bb35a129a80b",
         "name": "Sticky Note7"
@@ -1188,8 +1189,8 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          -48,
-          1312
+          0,
+          1264
         ],
         "id": "16b3166a-3479-405e-aa50-c151195bf1e4",
         "name": "Sticky Note8"
@@ -1207,8 +1208,8 @@
         "type": "n8n-nodes-base.scheduleTrigger",
         "typeVersion": 1.3,
         "position": [
-          -1648,
-          -64
+          -1424,
+          32
         ],
         "id": "49fa25e5-f301-4918-84b1-47aa1e2acd37",
         "name": "Ejecución diaria"
@@ -1222,8 +1223,8 @@
         "type": "n8n-nodes-base.respondToWebhook",
         "typeVersion": 1.5,
         "position": [
-          -1648,
-          160
+          -1568,
+          304
         ],
         "id": "7ceb85e6-bb7d-47fd-b8d6-af1d92d4cfb0",
         "name": "Respond to Webhook4"
@@ -1237,8 +1238,8 @@
         "type": "n8n-nodes-base.webhook",
         "typeVersion": 2.1,
         "position": [
-          -1840,
-          160
+          -1760,
+          304
         ],
         "id": "df127ed2-3c87-4160-830d-2ab6edc39580",
         "name": "Activación manual remota",
@@ -1251,8 +1252,8 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          -1488,
-          160
+          -1408,
+          304
         ],
         "id": "5454579a-3c68-4fb2-8967-515db88c6f90",
         "name": "Wait1",
@@ -1262,14 +1263,14 @@
         "parameters": {
           "content": "CONDICIÓN RECHAZAR\nEs lo que sale en la página de \"Estás seguro de que quieres rechazar la historia?\"",
           "height": 592,
-          "width": 1952,
+          "width": 2160,
           "color": 6
         },
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          -848,
-          1264
+          -1008,
+          1216
         ],
         "id": "934684ff-df35-424b-a3a4-87186ad5bf38",
         "name": "Sticky Note9"
@@ -1277,15 +1278,15 @@
       {
         "parameters": {
           "content": "Esta es la página de cuando le das a rechazar historia en la página principal, está enlazada directamente al flow de justo abajo, donde se decide si realmente estás seguro de rechazarla",
-          "height": 224,
-          "width": 256,
+          "height": 368,
+          "width": 304,
           "color": 3
         },
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          304,
-          896
+          144,
+          832
         ],
         "id": "e1a41ebd-fd17-46fd-a8fc-435f4908ac65",
         "name": "Sticky Note10"
@@ -1293,15 +1294,15 @@
       {
         "parameters": {
           "content": "Esta parte gestiona si el usuario está seguro de rechazar la historia.\nLa opción de rechazar apunta la acción en el informe y no hace nada más.\nLa opción de no rechazar redirige a otra página en la que se elige que se quiere hacer con la historia, si posponerla o subirla, cada uno de esos botones está enlazado por medio de webhooks con las opciones correspondientes para cada uno",
-          "height": 224,
-          "width": 464,
+          "height": 368,
+          "width": 480,
           "color": 6
         },
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          576,
-          896
+          464,
+          832
         ],
         "id": "146710dc-5953-449c-9284-7287154ae1fb",
         "name": "Sticky Note11"
@@ -1360,83 +1361,23 @@
         "type": "n8n-nodes-base.dataTable",
         "typeVersion": 1.1,
         "position": [
-          992,
-          80
+          752,
+          64
         ],
         "id": "437682ee-5a25-49aa-a87c-95bceec4456f",
         "name": "escribir pendiente requestId"
       },
       {
         "parameters": {
-          "operation": "update",
-          "dataTableId": {
-            "__rl": true,
-            "value": "7t1UIjvma8hSpdjP",
-            "mode": "list",
-            "cachedResultName": "historia_camaras",
-            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
-          },
-          "filters": {
-            "conditions": [
-              {
-                "keyValue": "1"
-              }
-            ]
-          },
-          "columns": {
-            "mappingMode": "defineBelow",
-            "value": {
-              "Estado": "Procesado",
-              "requestId": "={{ $json.query.requestId }}"
-            },
-            "matchingColumns": [],
-            "schema": [
-              {
-                "id": "requestId",
-                "displayName": "requestId",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "readOnly": false,
-                "removed": false
-              },
-              {
-                "id": "Estado",
-                "displayName": "Estado",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "readOnly": false,
-                "removed": false
-              }
-            ],
-            "attemptToConvertTypes": false,
-            "convertFieldsToString": false
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.dataTable",
-        "typeVersion": 1.1,
-        "position": [
-          -1744,
-          368
-        ],
-        "id": "a722f57b-1ff2-404b-8135-97b8d6f398bc",
-        "name": "Update row(s)"
-      },
-      {
-        "parameters": {
           "respondWith": "text",
-          "responseBody": "ERROR PAYASO",
+          "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Enlace no válido</title>\n    <style>\n        body {\n            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n            background-color: #f3f4f6;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            height: 100vh;\n            margin: 0;\n            color: #1f2937;\n        }\n        .container {\n            background-color: #ffffff;\n            padding: 40px;\n            border-radius: 12px;\n            box-shadow: 0 10px 25px rgba(0,0,0,0.05);\n            text-align: center;\n            max-width: 450px;\n            width: 90%;\n            border-top: 5px solid #ef4444; /* Borde rojo superior */\n        }\n        .icon {\n            font-size: 60px;\n            margin-bottom: 15px;\n        }\n        h1 {\n            font-size: 24px;\n            margin-bottom: 10px;\n            color: #111827;\n        }\n        p {\n            font-size: 16px;\n            color: #4b5563;\n            line-height: 1.6;\n            margin-bottom: 25px;\n        }\n        .button {\n            display: inline-block;\n            background-color: #3b82f6;\n            color: #ffffff;\n            padding: 12px 24px;\n            text-decoration: none;\n            border-radius: 8px;\n            font-weight: 600;\n            transition: background-color 0.3s;\n        }\n        .button:hover {\n            background-color: #2563eb;\n        }\n    </style>\n</head>\n<body>\n\n    <div class=\"container\">\n        <div class=\"icon\">🔗🚫</div>\n        \n        <h1>Este link ya ha sido utilizado</h1>\n        \n        <p>Por motivos de seguridad, este enlace es de un solo uso y la acción ya se ha completado anteriormente. No es posible volver a utilizarlo.</p>\n\n    </div>\n\n</body>\n</html>",
           "options": {}
         },
         "type": "n8n-nodes-base.respondToWebhook",
         "typeVersion": 1.5,
         "position": [
-          -1744,
-          528
+          -1520,
+          1056
         ],
         "id": "22844fce-9827-448c-98c2-3fc53ba79dfb",
         "name": "link usado"
@@ -1469,159 +1410,11 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          -480,
-          960
+          -640,
+          912
         ],
         "id": "a8f2261d-1f85-466a-82c9-bea578ef845b",
         "name": "If4"
-      },
-      {
-        "parameters": {
-          "operation": "update",
-          "dataTableId": {
-            "__rl": true,
-            "value": "7t1UIjvma8hSpdjP",
-            "mode": "list",
-            "cachedResultName": "historia_camaras",
-            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
-          },
-          "filters": {
-            "conditions": [
-              {
-                "keyValue": "1"
-              }
-            ]
-          },
-          "columns": {
-            "mappingMode": "defineBelow",
-            "value": {
-              "Estado": "Procesado",
-              "requestId": "={{ $json.requestId }}"
-            },
-            "matchingColumns": [],
-            "schema": [
-              {
-                "id": "requestId",
-                "displayName": "requestId",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "readOnly": false,
-                "removed": false
-              },
-              {
-                "id": "Estado",
-                "displayName": "Estado",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "readOnly": false,
-                "removed": false
-              }
-            ],
-            "attemptToConvertTypes": false,
-            "convertFieldsToString": false
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.dataTable",
-        "typeVersion": 1.1,
-        "position": [
-          -320,
-          944
-        ],
-        "id": "4315edff-d643-4513-bd18-b5cdf6465230",
-        "name": "Update row(s)1"
-      },
-      {
-        "parameters": {
-          "respondWith": "text",
-          "options": {}
-        },
-        "type": "n8n-nodes-base.respondToWebhook",
-        "typeVersion": 1.5,
-        "position": [
-          -288,
-          1104
-        ],
-        "id": "f04e6d08-bf1c-46c8-a736-68be1f0df447",
-        "name": "link usado1"
-      },
-      {
-        "parameters": {
-          "operation": "update",
-          "dataTableId": {
-            "__rl": true,
-            "value": "7t1UIjvma8hSpdjP",
-            "mode": "list",
-            "cachedResultName": "historia_camaras",
-            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
-          },
-          "filters": {
-            "conditions": [
-              {
-                "keyValue": "1"
-              }
-            ]
-          },
-          "columns": {
-            "mappingMode": "defineBelow",
-            "value": {
-              "Estado": "Procesado",
-              "requestId": "={{ $json.query.requestId }}"
-            },
-            "matchingColumns": [],
-            "schema": [
-              {
-                "id": "requestId",
-                "displayName": "requestId",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "readOnly": false,
-                "removed": false
-              },
-              {
-                "id": "Estado",
-                "displayName": "Estado",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "readOnly": false,
-                "removed": false
-              }
-            ],
-            "attemptToConvertTypes": false,
-            "convertFieldsToString": false
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.dataTable",
-        "typeVersion": 1.1,
-        "position": [
-          -752,
-          416
-        ],
-        "id": "1bf076e3-c508-4c08-a928-cf2a6474b24b",
-        "name": "Update row(s)2"
-      },
-      {
-        "parameters": {
-          "respondWith": "text",
-          "options": {}
-        },
-        "type": "n8n-nodes-base.respondToWebhook",
-        "typeVersion": 1.5,
-        "position": [
-          -736,
-          576
-        ],
-        "id": "2fa3e887-f926-4fc3-9890-d18667c6e5d3",
-        "name": "link usado2"
       },
       {
         "parameters": {
@@ -1645,8 +1438,8 @@
         "type": "n8n-nodes-base.dataTable",
         "typeVersion": 1.1,
         "position": [
-          -624,
-          960
+          -784,
+          912
         ],
         "id": "6ed9fc83-3de6-4eb1-90c0-b3ece5c31121",
         "name": "Get row(s)"
@@ -1679,42 +1472,14 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          -896,
-          432
+          -736,
+          496
         ],
         "id": "bc9646ee-9aa2-49e9-98c3-d2129c4d40ed",
         "name": "If6"
       },
       {
         "parameters": {
-          "operation": "get",
-          "dataTableId": {
-            "__rl": true,
-            "value": "7t1UIjvma8hSpdjP",
-            "mode": "list",
-            "cachedResultName": "historia_camaras",
-            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
-          },
-          "filters": {
-            "conditions": [
-              {
-                "keyName": "requestId",
-                "keyValue": "={{ $json.query.requestId }}"
-              }
-            ]
-          }
-        },
-        "type": "n8n-nodes-base.dataTable",
-        "typeVersion": 1.1,
-        "position": [
-          -1024,
-          432
-        ],
-        "id": "1fe830b2-137f-49c4-a4b4-0b2d4c88b6ed",
-        "name": "Get row(s)1"
-      },
-      {
-        "parameters": {
           "conditions": {
             "options": {
               "caseSensitive": true,
@@ -1741,42 +1506,14 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          -1904,
-          384
+          -1728,
+          528
         ],
         "id": "82bf3a57-5a60-4aa3-855b-22c03e5fac1b",
         "name": "If5"
       },
       {
         "parameters": {
-          "operation": "get",
-          "dataTableId": {
-            "__rl": true,
-            "value": "7t1UIjvma8hSpdjP",
-            "mode": "list",
-            "cachedResultName": "historia_camaras",
-            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
-          },
-          "filters": {
-            "conditions": [
-              {
-                "keyName": "requestId",
-                "keyValue": "="
-              }
-            ]
-          }
-        },
-        "type": "n8n-nodes-base.dataTable",
-        "typeVersion": 1.1,
-        "position": [
-          -2048,
-          384
-        ],
-        "id": "aefe1f33-7e4b-412a-acb8-f38b9d5a7615",
-        "name": "Get row(s)2"
-      },
-      {
-        "parameters": {
           "conditions": {
             "options": {
               "caseSensitive": true,
@@ -1803,8 +1540,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          -528,
-          1520
+          -672,
+          1472
         ],
         "id": "a29ad6e0-9684-41a9-a35d-b330be843b65",
         "name": "If7"
@@ -1822,14 +1559,14 @@
           "filters": {
             "conditions": [
               {
-                "keyValue": "1"
+                "keyValue": "2"
               }
             ]
           },
           "columns": {
             "mappingMode": "defineBelow",
             "value": {
-              "requestId": "={{ $json.requestId }}",
+              "requestId": "={{ $json.requestId2 }}",
               "Estado": "Pendiente"
             },
             "matchingColumns": [],
@@ -1853,6 +1590,26 @@
                 "type": "string",
                 "readOnly": false,
                 "removed": false
+              },
+              {
+                "id": "contador",
+                "displayName": "contador",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "readOnly": false,
+                "removed": true
+              },
+              {
+                "id": "contador_no_rechazado",
+                "displayName": "contador_no_rechazado",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "readOnly": false,
+                "removed": true
               }
             ],
             "attemptToConvertTypes": false,
@@ -1863,26 +1620,11 @@
         "type": "n8n-nodes-base.dataTable",
         "typeVersion": 1.1,
         "position": [
-          -336,
-          1504
+          -288,
+          896
         ],
-        "id": "d8e2fa43-6737-4dc6-b59d-743744cf89b5",
-        "name": "Update row(s)3"
-      },
-      {
-        "parameters": {
-          "respondWith": "text",
-          "responseBody": "ERROR PAYASO",
-          "options": {}
-        },
-        "type": "n8n-nodes-base.respondToWebhook",
-        "typeVersion": 1.5,
-        "position": [
-          -320,
-          1664
-        ],
-        "id": "1693023a-5189-416e-9eb1-b33b8edff778",
-        "name": "link usado3"
+        "id": "a80b5b0e-b7a7-447d-89b4-27c34e21d766",
+        "name": "generar segunda clave"
       },
       {
         "parameters": {
@@ -1898,7 +1640,7 @@
             "conditions": [
               {
                 "keyName": "requestId",
-                "keyValue": "={{ $json.query.requestId }}"
+                "keyValue": "={{ $json.query.requestId2 }}"
               }
             ]
           }
@@ -1906,11 +1648,11 @@
         "type": "n8n-nodes-base.dataTable",
         "typeVersion": 1.1,
         "position": [
-          -656,
-          1520
+          -800,
+          1472
         ],
         "id": "abf5bd4f-80a9-4601-9f5e-b06433f6d1ec",
-        "name": "Get row(s)3"
+        "name": "comprobar segunda clave"
       },
       {
         "parameters": {
@@ -1933,7 +1675,7 @@
             "mappingMode": "defineBelow",
             "value": {
               "requestId": "={{ $json.requestId }}",
-              "Estado": "Pendiente"
+              "Estado": "Procesado"
             },
             "matchingColumns": [],
             "schema": [
@@ -1956,6 +1698,26 @@
                 "type": "string",
                 "readOnly": false,
                 "removed": false
+              },
+              {
+                "id": "contador",
+                "displayName": "contador",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "readOnly": false,
+                "removed": true
+              },
+              {
+                "id": "contador_no_rechazado",
+                "displayName": "contador_no_rechazado",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "readOnly": false,
+                "removed": true
               }
             ],
             "attemptToConvertTypes": false,
@@ -1966,11 +1728,11 @@
         "type": "n8n-nodes-base.dataTable",
         "typeVersion": 1.1,
         "position": [
-          -16,
-          944
+          -496,
+          1456
         ],
-        "id": "a80b5b0e-b7a7-447d-89b4-27c34e21d766",
-        "name": "Update row(s)4"
+        "id": "d8e2fa43-6737-4dc6-b59d-743744cf89b5",
+        "name": "bloquear segunda clave"
       },
       {
         "parameters": {
@@ -2048,11 +1810,39 @@
         "type": "n8n-nodes-base.dataTable",
         "typeVersion": 1.1,
         "position": [
-          384,
-          1344
+          432,
+          1296
         ],
         "id": "2108798b-f3e0-49a9-8b66-d1717b5b0ac0",
-        "name": "Update row(s)5"
+        "name": "bloquear primera clave"
+      },
+      {
+        "parameters": {
+          "operation": "get",
+          "dataTableId": {
+            "__rl": true,
+            "value": "7t1UIjvma8hSpdjP",
+            "mode": "list",
+            "cachedResultName": "historia_camaras",
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
+          },
+          "filters": {
+            "conditions": [
+              {
+                "keyName": "requestId",
+                "keyValue": "={{ $json.query.requestId }}"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.dataTable",
+        "typeVersion": 1.1,
+        "position": [
+          -1872,
+          528
+        ],
+        "id": "aefe1f33-7e4b-412a-acb8-f38b9d5a7615",
+        "name": "obtener primera clave"
       },
       {
         "parameters": {
@@ -2074,10 +1864,8 @@
           "columns": {
             "mappingMode": "defineBelow",
             "value": {
-              "contador": "={{ $json.contador }}",
-              "contador_no_rechazado": "={{ $json.contador_no_rechazado }}",
-              "requestId": "={{ $json.requestId }}",
-              "Estado": "Pendiente"
+              "Estado": "Procesado",
+              "requestId": "={{ $json.requestId }}"
             },
             "matchingColumns": [],
             "schema": [
@@ -2109,7 +1897,7 @@
                 "display": true,
                 "type": "number",
                 "readOnly": false,
-                "removed": false
+                "removed": true
               },
               {
                 "id": "contador_no_rechazado",
@@ -2119,7 +1907,7 @@
                 "display": true,
                 "type": "number",
                 "readOnly": false,
-                "removed": false
+                "removed": true
               }
             ],
             "attemptToConvertTypes": false,
@@ -2130,11 +1918,210 @@
         "type": "n8n-nodes-base.dataTable",
         "typeVersion": 1.1,
         "position": [
-          352,
-          1632
+          -1568,
+          512
         ],
-        "id": "8275308d-3e17-46d2-bd02-4264fafb95ac",
-        "name": "Update row(s)6"
+        "id": "a722f57b-1ff2-404b-8135-97b8d6f398bc",
+        "name": "bloquear primera clave1"
+      },
+      {
+        "parameters": {
+          "operation": "get",
+          "dataTableId": {
+            "__rl": true,
+            "value": "7t1UIjvma8hSpdjP",
+            "mode": "list",
+            "cachedResultName": "historia_camaras",
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
+          },
+          "filters": {
+            "conditions": [
+              {
+                "keyName": "requestId",
+                "keyValue": "={{ $json.query.requestId }}"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.dataTable",
+        "typeVersion": 1.1,
+        "position": [
+          -864,
+          496
+        ],
+        "id": "1fe830b2-137f-49c4-a4b4-0b2d4c88b6ed",
+        "name": "obtener primera clave1"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "dataTableId": {
+            "__rl": true,
+            "value": "7t1UIjvma8hSpdjP",
+            "mode": "list",
+            "cachedResultName": "historia_camaras",
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
+          },
+          "filters": {
+            "conditions": [
+              {
+                "keyValue": "1"
+              }
+            ]
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "Estado": "Procesado",
+              "requestId": "={{ $json.requestId }}"
+            },
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "requestId",
+                "displayName": "requestId",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "readOnly": false,
+                "removed": false
+              },
+              {
+                "id": "Estado",
+                "displayName": "Estado",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "readOnly": false,
+                "removed": false
+              },
+              {
+                "id": "contador",
+                "displayName": "contador",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "readOnly": false,
+                "removed": true
+              },
+              {
+                "id": "contador_no_rechazado",
+                "displayName": "contador_no_rechazado",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "readOnly": false,
+                "removed": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.dataTable",
+        "typeVersion": 1.1,
+        "position": [
+          -592,
+          480
+        ],
+        "id": "1bf076e3-c508-4c08-a928-cf2a6474b24b",
+        "name": "bloquear primera clave2"
+      },
+      {
+        "parameters": {
+          "operation": "get",
+          "dataTableId": {
+            "__rl": true,
+            "value": "7t1UIjvma8hSpdjP",
+            "mode": "list",
+            "cachedResultName": "historia_camaras",
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
+          },
+          "filters": {
+            "conditions": [
+              {
+                "keyValue": "1"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.dataTable",
+        "typeVersion": 1.1,
+        "position": [
+          -304,
+          1456
+        ],
+        "id": "5042cd7e-02a3-4049-bb41-97b12a5dc9aa",
+        "name": "obtener primera clave2"
+      },
+      {
+        "parameters": {
+          "content": "TRIGGERS",
+          "height": 496,
+          "width": 848,
+          "color": 2
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -1920,
+          -48
+        ],
+        "id": "4f4375d0-41c4-41ed-a3b6-c741343a0498",
+        "name": "Sticky Note5"
+      },
+      {
+        "parameters": {
+          "content": "POSPONER",
+          "height": 224,
+          "width": 992,
+          "color": 5
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -2064,
+          464
+        ],
+        "id": "006a245b-7fa0-4621-8d25-93e86638b47d",
+        "name": "Sticky Note12"
+      },
+      {
+        "parameters": {
+          "content": "LINK USADO\n\nEste Repond To Webhook es el que se ejecuta cuando el link se clica más de una vez",
+          "height": 288,
+          "width": 320,
+          "color": 4
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -1568,
+          912
+        ],
+        "id": "8e61f5c8-2e86-4d6d-9de9-7b6b787d5cdc",
+        "name": "Sticky Note13"
+      },
+      {
+        "parameters": {
+          "content": "░░░░░░░░░░░░░░░░░░░▒▓▓█████████████▓▓▒░░░░░░░░░░░░░░░░░░░░░░\n░░░░░░░░░░░░░░▒████▓▓▒▒░▒▒▒░▒▒▒▒▒▒▓▓████▓▒░░░░░░░░░░░░░░░░░░\n░░░░░░░░░░░▒███▓░░░░░░░░░░░░░░░░░░░░░░▒███████▓▓▒░░░░░░░░░░░\n░░░░░░░░░▒██▓░░░░▒▒███▓▓▒░░░░░░░░░░░░░▓▓▒▒▒▒▒▓██████▓░░░░░░░\n░░░░░░░▒██▓░░░▓███▓▒░░░░░░░░▒▒▒▒▒▒▒▒▒▒░░░░░░▒▓▓███▓████▒▒░░░\n░░░░░░██▓░░▒▓██▓░░▒▓██████▓░░░░░░░▒░░░░░░▒██▓▒░░░▓███▒▓▒░░░░\n░░░░░██░░▓███▒░░▒██▒░░░░▒▒██▓░░░░░░░░░░░██▒░░░░▒████▒█░░░░░░\n░░░░██░▒▓▒▓▓░░░██░░░░░░░░░░░█▓░░░░░░░░░██░░░░░░▒███░░█▒░░░░░\n░░░▓█░░░░░░░░░██░░░░░░░░░░░░▓█░░░░░░░░██░░░░░░░░░░░░░█▒░░░░░\n░░░█▓░░░░░░░░░█▒░░████░░░░░░░█▒░░░░░░░██░░░░░░░░░░░░███░░░░░\n░░▒█░░░░░░░▒▓▒█▓░▓████▓░░░░░▒█░░░░░░░░▒█▒░░░░░░░░░░██░█▒░░░░\n░░██░░░░░▒▓▒▓▒██▒▒▓▓▓░░░░░░░██░░░░░░░░░▒████▓███████▓░█▒░░░░\n░░█▓░░░░░▒░░░▒░▒██▓▒░░░░░▒██▓░░░░░░░░░░░░░░██▓░░░░░░▒██▓░░░░\n░░█░░░░░░░░░▓▒░░░░▒▓██████▓░░░░░░░░░░░░░░▒██░░░▓█▓▓▒░░░██░░░\n░▒█░░░░░░░░░░░░░░░░░░░░░░░░░░▓▒▓▒▒▒▒▒▓▓▓▓██░░▓█▓░▒▒██▒░░██░░\n░▓█░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▓▓▒░░██░░██▓░▒░▒░██░░▒█░░\n░██░░░░░░░░░░░░░░░░░░░░░░░▒▓▒▒▒▒▒▒▒▒░░░██░░▓█░█▓░█▒█▓█▓░░█░░\n░██░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒░▒▒░░▓█▓░░██░█▒▒█▒█▒▓█░░█░░\n░██░░░░░░░░░░░░░░░░░░░░░░░░▒░░░░░░░░░░▓█░░░█▒░░░░▒▒░░▒█░▓█░░\n░▒█░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒░░█▒░░█▒░░░░░░░░▓█░█▓░░\n░░█▓░▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▓█░░█▒░░░░░░░░█░▒█░░░\n░░▓█░░▒░░▒▒░░▒░░░░░░░░░░░░░░░░░░░░░░░░░░█░░█▒░░░░░░░█▓░█▓░░░\n░░░█▒░░▒░░▒░░▒▒░░░░░░░░░░░░░░░░░░░░░░░░░█░░█▒░░░░░░▓█░░█░░░░\n░░░██░░░▒░▒░░░▒▒░░░░░░░░░░░░░░░░░░░░░░░░█░░█▒░░░░░░██░░█░░░░\n░░░░█▓░░░▒░▒░░░░▒▒░░░░░▒▒▒▒▒▒░░░░░░░░░░▒█░▒█░░░░░░░█▒░░█▓░░░\n░░░░▓█░░░░▒▒░░░░░▒▒░░░░░░▒▒▒▓▓▓▒░░░░░░░██░██░░░░░░░██░░▓█░░░\n░░░░░██░░░▒░▒░░░░░▒░░░░░░░░▒░▒▒▓█▒░░░░▒█░░█▓▒▓▓▓▒░░▓█░░░█▒░░\n░░░░░▒█▒░░░▒▒▒░░░░▒░░░░░░░░░░▒▒▒░▒▓░░░██░▒█░░░░▒▓▓░░██░░█▒░░\n░░░░░░▒█▒░░░▒░▒░░░▒░░░░░░▒▒▒░░░░▒▒░░░▒█░░██░░░░░░░█░▒█░░█▒░░\n░░░░░░░▓█░░░▒░▒░░░░▒▒░░░░▓▒▒▓▓▓▒░░▓▒░██░░██▒▒▒▒▓▒▓▓███░░█▒░░\n░░░░░░░░██░░░▒░▒░░░░░▒▒░░░░░░░░▓█▓░░░█▓░░██░▓█░█░█░░█▒░░█▒░░\n░░░░░░░░░██░░░░▒▒░░░░░░▒▒░░░░░░░░▒█▓░█▓░░▓█▒▒█▒█░█▒██░░▒█░░░\n░░░░░░░░░░██▒░░░░▒░░░▒░░░▒▒░░░░░░░░▒▓██░░░██░░░░▒▒██░░░██░░░\n░░░░░░░░░░░▓██░░░░░░░░▒▒░░░▒░░░░░░░░░▓█░░░░▓███▓▓██░░░██░░░░\n░░░░░░░░░░░░░▓██▒░░░░░░▒▒▒▒▒░░░░░░░░░░██░░░░░░▒▒▒░░░░██░░░░░\n░░░░░░░░░░░░░░░▓███▒░░░░░░░▒▒▒▒▒▒▒▒░░░░▓██▒░░░░░░░▒███░░░░░░\n░░░░░░░░░░░░░░░░░▒▓███▓▒░░░░░░░▒░░▒▒▒▒░░░▒██▓██████▓░░░░░░░░\n░░░░░░░░░░░░░░░░░░░░░▒████▓▒▒░░░░░░░░░░░░░░░▓██▒░░░░░░░░░░░░\n░░░░░░░░░░░░░░░░░░░░░░░░░▒▓████▓░░░░░░░▓█████▒░░░░░░░░░░░░░░\n░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒█████████▒░░░░░░░░░░░░░░░░░░░\n░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒░░░░░░░░░░░░░░░░░░░░░░░\n",
+          "height": 784,
+          "width": 624,
+          "color": 6
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -2256,
+          816
+        ],
+        "id": "a4b1565b-ed05-444f-b416-395c6c8a5828",
+        "name": "Sticky Note14"
       }
     ],
     "connections": {
@@ -2337,7 +2324,7 @@
         "main": [
           [
             {
-              "node": "Get row(s)1",
+              "node": "obtener primera clave1",
               "type": "main",
               "index": 0
             }
@@ -2375,7 +2362,7 @@
         "main": [
           [
             {
-              "node": "Get row(s)2",
+              "node": "obtener primera clave",
               "type": "main",
               "index": 0
             }
@@ -2408,7 +2395,7 @@
         "main": [
           [
             {
-              "node": "Update row(s)4",
+              "node": "generar segunda clave",
               "type": "main",
               "index": 0
             }
@@ -2441,7 +2428,7 @@
         "main": [
           [
             {
-              "node": "Get row(s)3",
+              "node": "comprobar segunda clave",
               "type": "main",
               "index": 0
             }
@@ -2452,7 +2439,7 @@
         "main": [
           [
             {
-              "node": "Update row(s)5",
+              "node": "bloquear primera clave",
               "type": "main",
               "index": 0
             }
@@ -2461,13 +2448,7 @@
       },
       "datos2": {
         "main": [
-          [
-            {
-              "node": "escribir datos1",
-              "type": "main",
-              "index": 0
-            }
-          ]
+          []
         ]
       },
       "escribir datos1": {
@@ -2485,7 +2466,7 @@
         "main": [
           [
             {
-              "node": "Update row(s)6",
+              "node": "datos2",
               "type": "main",
               "index": 0
             }
@@ -2587,36 +2568,7 @@
           ]
         ]
       },
-      "Update row(s)": {
-        "main": [
-          [
-            {
-              "node": "Respond to Webhook1",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
       "If4": {
-        "main": [
-          [
-            {
-              "node": "Update row(s)1",
-              "type": "main",
-              "index": 0
-            }
-          ],
-          [
-            {
-              "node": "link usado1",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Update row(s)1": {
         "main": [
           [
             {
@@ -2624,14 +2576,10 @@
               "type": "main",
               "index": 0
             }
-          ]
-        ]
-      },
-      "Update row(s)2": {
-        "main": [
+          ],
           [
             {
-              "node": "Facebook Graph API2",
+              "node": "link usado",
               "type": "main",
               "index": 0
             }
@@ -2649,40 +2597,18 @@
           ]
         ]
       },
-      "Get row(s)1": {
-        "main": [
-          [
-            {
-              "node": "If6",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
       "If6": {
         "main": [
           [
             {
-              "node": "Update row(s)2",
+              "node": "bloquear primera clave2",
               "type": "main",
               "index": 0
             }
           ],
           [
             {
-              "node": "link usado2",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Get row(s)2": {
-        "main": [
-          [
-            {
-              "node": "If5",
+              "node": "link usado",
               "type": "main",
               "index": 0
             }
@@ -2693,7 +2619,7 @@
         "main": [
           [
             {
-              "node": "Update row(s)",
+              "node": "bloquear primera clave1",
               "type": "main",
               "index": 0
             }
@@ -2711,43 +2637,21 @@
         "main": [
           [
             {
-              "node": "Update row(s)3",
+              "node": "bloquear segunda clave",
               "type": "main",
               "index": 0
             }
           ],
           [
             {
-              "node": "link usado3",
+              "node": "link usado",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "Get row(s)3": {
-        "main": [
-          [
-            {
-              "node": "If7",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Update row(s)3": {
-        "main": [
-          [
-            {
-              "node": "If2",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Update row(s)4": {
+      "generar segunda clave": {
         "main": [
           [
             {
@@ -2758,7 +2662,29 @@
           ]
         ]
       },
-      "Update row(s)5": {
+      "comprobar segunda clave": {
+        "main": [
+          [
+            {
+              "node": "If7",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "bloquear segunda clave": {
+        "main": [
+          [
+            {
+              "node": "obtener primera clave2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "bloquear primera clave": {
         "main": [
           [
             {
@@ -2769,11 +2695,55 @@
           ]
         ]
       },
-      "Update row(s)6": {
+      "obtener primera clave": {
         "main": [
           [
             {
-              "node": "datos2",
+              "node": "If5",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "bloquear primera clave1": {
+        "main": [
+          [
+            {
+              "node": "Respond to Webhook1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "obtener primera clave1": {
+        "main": [
+          [
+            {
+              "node": "If6",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "bloquear primera clave2": {
+        "main": [
+          [
+            {
+              "node": "Facebook Graph API2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "obtener primera clave2": {
+        "main": [
+          [
+            {
+              "node": "If2",
               "type": "main",
               "index": 0
             }
@@ -2782,11 +2752,11 @@
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version 6f1c0048",
+    "name": "Version 0ac5f770",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "6f1c0048-9d31-4449-96e9-38b1eaaccc0b",
+  "activeVersionId": "0ac5f770-78b1-4811-9427-1534c8f915bc",
   "connections": {
     "HTTP Request3": {
       "main": [
@@ -2987,7 +2957,7 @@
       "main": [
         [
           {
-            "node": "Get row(s)1",
+            "node": "obtener primera clave1",
             "type": "main",
             "index": 0
           }
@@ -3025,7 +2995,7 @@
       "main": [
         [
           {
-            "node": "Get row(s)2",
+            "node": "obtener primera clave",
             "type": "main",
             "index": 0
           }
@@ -3058,7 +3028,7 @@
       "main": [
         [
           {
-            "node": "Update row(s)4",
+            "node": "generar segunda clave",
             "type": "main",
             "index": 0
           }
@@ -3091,7 +3061,7 @@
       "main": [
         [
           {
-            "node": "Get row(s)3",
+            "node": "comprobar segunda clave",
             "type": "main",
             "index": 0
           }
@@ -3102,7 +3072,7 @@
       "main": [
         [
           {
-            "node": "Update row(s)5",
+            "node": "bloquear primera clave",
             "type": "main",
             "index": 0
           }
@@ -3111,13 +3081,7 @@
     },
     "datos2": {
       "main": [
-        [
-          {
-            "node": "escribir datos1",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "escribir datos1": {
@@ -3135,7 +3099,7 @@
       "main": [
         [
           {
-            "node": "Update row(s)6",
+            "node": "datos2",
             "type": "main",
             "index": 0
           }
@@ -3237,36 +3201,7 @@
         ]
       ]
     },
-    "Update row(s)": {
-      "main": [
-        [
-          {
-            "node": "Respond to Webhook1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "If4": {
-      "main": [
-        [
-          {
-            "node": "Update row(s)1",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "link usado1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Update row(s)1": {
       "main": [
         [
           {
@@ -3274,14 +3209,10 @@
             "type": "main",
             "index": 0
           }
-        ]
-      ]
-    },
-    "Update row(s)2": {
-      "main": [
+        ],
         [
           {
-            "node": "Facebook Graph API2",
+            "node": "link usado",
             "type": "main",
             "index": 0
           }
@@ -3299,40 +3230,18 @@
         ]
       ]
     },
-    "Get row(s)1": {
-      "main": [
-        [
-          {
-            "node": "If6",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "If6": {
       "main": [
         [
           {
-            "node": "Update row(s)2",
+            "node": "bloquear primera clave2",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "link usado2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Get row(s)2": {
-      "main": [
-        [
-          {
-            "node": "If5",
+            "node": "link usado",
             "type": "main",
             "index": 0
           }
@@ -3343,7 +3252,7 @@
       "main": [
         [
           {
-            "node": "Update row(s)",
+            "node": "bloquear primera clave1",
             "type": "main",
             "index": 0
           }
@@ -3361,43 +3270,21 @@
       "main": [
         [
           {
-            "node": "Update row(s)3",
+            "node": "bloquear segunda clave",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "link usado3",
+            "node": "link usado",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Get row(s)3": {
-      "main": [
-        [
-          {
-            "node": "If7",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Update row(s)3": {
-      "main": [
-        [
-          {
-            "node": "If2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Update row(s)4": {
+    "generar segunda clave": {
       "main": [
         [
           {
@@ -3408,7 +3295,29 @@
         ]
       ]
     },
-    "Update row(s)5": {
+    "comprobar segunda clave": {
+      "main": [
+        [
+          {
+            "node": "If7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "bloquear segunda clave": {
+      "main": [
+        [
+          {
+            "node": "obtener primera clave2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "bloquear primera clave": {
       "main": [
         [
           {
@@ -3419,11 +3328,55 @@
         ]
       ]
     },
-    "Update row(s)6": {
+    "obtener primera clave": {
       "main": [
         [
           {
-            "node": "datos2",
+            "node": "If5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "bloquear primera clave1": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "obtener primera clave1": {
+      "main": [
+        [
+          {
+            "node": "If6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "bloquear primera clave2": {
+      "main": [
+        [
+          {
+            "node": "Facebook Graph API2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "obtener primera clave2": {
+      "main": [
+        [
+          {
+            "node": "If2",
             "type": "main",
             "index": 0
           }
@@ -3452,8 +3405,8 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        208,
-        400
+        368,
+        464
       ],
       "id": "70f5be56-bcbd-45e8-b707-d1fe8cd7941a",
       "name": "Facebook Graph API1",
@@ -3484,8 +3437,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        -272,
-        416
+        -112,
+        480
       ],
       "id": "edf4ba47-a8ca-4343-8394-708f1e0f7712",
       "name": "HTTP Request3",
@@ -3501,8 +3454,8 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        -112,
-        416
+        48,
+        480
       ],
       "id": "5579777d-f732-4b98-b233-233d14c7baeb",
       "name": "Wait2",
@@ -3535,8 +3488,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        48,
-        416
+        208,
+        480
       ],
       "id": "f2e57470-8cb6-4aff-a4f1-776c6d413c60",
       "name": "If1"
@@ -3548,14 +3501,14 @@
         "node": "17841470046184468",
         "edge": "=media",
         "options": {
-          "queryParametersJson": "={\n\"video_url\": \"{{ $json.query.idHistoria }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
+          "queryParametersJson": "={\n\"video_url\": \"{{ $('Webhook').item.json.query.idHistoria }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
         }
       },
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        -608,
-        416
+        -448,
+        480
       ],
       "id": "0bbfbe8d-31e9-41c6-8d53-89988526abf1",
       "name": "Facebook Graph API2",
@@ -3639,7 +3592,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        640,
+        432,
         160
       ],
       "id": "4fecbe0c-ed05-4db3-aa2c-8e9977ab31c2",
@@ -3672,7 +3625,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        800,
+        592,
         160
       ],
       "id": "4e3544c3-0642-49ef-82b2-ecd3367c560b",
@@ -3683,8 +3636,8 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        976,
-        240
+        752,
+        256
       ],
       "id": "cdd381ff-6ac2-45ba-9e2a-43a650f57753",
       "name": "Wait",
@@ -3818,8 +3771,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1120,
-        240
+        880,
+        256
       ],
       "id": "e575ea56-dfa1-45c0-859f-96bb45cd6518",
       "name": "Edit Fields1"
@@ -3859,8 +3812,8 @@
     {
       "parameters": {
         "content": "COMPROBAR SI SE HA PROCESADO\n",
-        "height": 416,
-        "width": 912,
+        "height": 400,
+        "width": 704,
         "color": 4
       },
       "type": "n8n-nodes-base.stickyNote",
@@ -3876,7 +3829,7 @@
       "parameters": {
         "content": "ENVIAR CORREO DE VERIFICACIÓN",
         "height": 192,
-        "width": 544,
+        "width": 336,
         "color": 6
       },
       "type": "n8n-nodes-base.stickyNote",
@@ -3891,14 +3844,14 @@
     {
       "parameters": {
         "content": "SUBIDA A META\n",
-        "height": 320,
-        "width": 1408
+        "height": 240,
+        "width": 1600
       },
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
         -1056,
-        384
+        448
       ],
       "id": "ab8be564-4726-443a-aae2-3afebc817eaa",
       "name": "Sticky Note4"
@@ -3912,8 +3865,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -1168,
-        432
+        -1008,
+        496
       ],
       "id": "fd225dd5-64bd-4381-b7cc-b9cb982c5975",
       "name": "Webhook",
@@ -3929,8 +3882,8 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        1136,
-        80
+        896,
+        64
       ],
       "id": "73308a25-8f99-40b8-9ef3-0317f097cfcb",
       "name": "Send a message",
@@ -3951,8 +3904,8 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        -432,
-        416
+        -272,
+        480
       ],
       "id": "3d9447d2-f241-43a3-80ce-1688f72900e5",
       "name": "Respond to Webhook"
@@ -3966,11 +3919,12 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        -1568,
-        368
+        -1392,
+        512
       ],
       "id": "3a961a4f-a452-4c7d-adca-015e96491d83",
-      "name": "Respond to Webhook1"
+      "name": "Respond to Webhook1",
+      "disabled": true
     },
     {
       "parameters": {
@@ -3981,8 +3935,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -2192,
-        384
+        -2016,
+        528
       ],
       "id": "9a115c23-aedd-4865-bd46-2f851d98028c",
       "name": "posponer",
@@ -3995,8 +3949,8 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        -1392,
-        368
+        -1216,
+        512
       ],
       "id": "35d19881-992b-4494-a591-18f39361266c",
       "name": "esperar 30 minutos",
@@ -4011,8 +3965,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -800,
-        960
+        -960,
+        912
       ],
       "id": "7facb56f-f11a-4b0c-8a73-2a1872b6bcc7",
       "name": "rechazarHistoria",
@@ -4042,7 +3996,7 @@
             },
             {
               "id": "787399fb-18dd-4255-93a1-09ff792ba1de",
-              "name": "requestId",
+              "name": "requestId2",
               "value": "={{ $now.toFormat('yyyyMMddHHmmss') + Math.floor(Math.random()*1000) + 1 }}",
               "type": "string"
             }
@@ -4053,8 +4007,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -176,
-        944
+        -448,
+        896
       ],
       "id": "a151d550-695a-4b66-8dc1-8b96ac126da1",
       "name": "datosRechazar"
@@ -4062,14 +4016,14 @@
     {
       "parameters": {
         "respondWith": "text",
-        "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Confirmación</title>\n  <style>\n    body {\n      font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif;\n      background-color: #f3f4f6;\n      display: flex;\n      justify-content: center;\n      align-items: center;\n      height: 100vh;\n      margin: 0;\n    }\n    .card {\n      background: white;\n      padding: 40px;\n      border-radius: 12px;\n      box-shadow: 0 10px 25px rgba(0,0,0,0.1);\n      text-align: center;\n      max-width: 400px;\n      border-top: 6px solid #ef4444;\n    }\n    h2 { color: #1f2937; margin-top: 0; font-size: 24px; }\n    p { color: #4b5563; margin: 10px 0; font-size: 16px; }\n    .warning { color: #ef4444; font-weight: bold; margin-bottom: 25px; display: block; }\n    .btn-container { display: flex; gap: 15px; justify-content: center; margin-top: 20px; }\n    \n    /* Estilos de los botones (Enlaces) */\n    .btn {\n      text-decoration: none;\n      padding: 12px 30px;\n      border-radius: 6px;\n      font-weight: bold;\n      font-size: 16px;\n      transition: opacity 0.2s;\n      display: inline-block;\n    }\n    .btn:hover { opacity: 0.8; }\n    \n    /* Botón SI (Acción de Webhook) */\n    .btn-si { background-color: #ef4444; color: white; }\n    \n    /* Botón NO (Cancelar) */\n    .btn-no { background-color: #e5e7eb; color: #374151; }\n  </style>\n</head>\n<body>\n\n  <div class=\"card\">\n    <h2>⚠️ Atención</h2>\n    <p>Estás a punto de rechazar.</p>\n    <p>Esta acción no se puede deshacer.</p>\n    <span class=\"warning\">¿Estás seguro?</span>\n\n    <div class=\"btn-container\">\n      <a href=\"https://n8n.tailwind.es/webhook-test/rechazarSi?origen={{ $('datosRechazar').item.json.ORIGEN }}&contenido={{ $('datosRechazar').item.json.CONTENIDO }}&estado=rechazado&requestId={{ $json.requestId }}\" class=\"btn btn-si\">SÍ</a>\n\n      <a href=\"https://n8n.tailwind.es/webhook-test/rechazarSi?origen={{ $('datosRechazar').item.json.ORIGEN }}&contenido={{ $('datosRechazar').item.json.CONTENIDO }}&estado=noRechazado&requestId={{ $json.requestId }}\" class=\"btn btn-no\">NO</a>\n    </div>\n  </div>\n\n</body>\n</html>",
+        "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Confirmación</title>\n  <style>\n    body {\n      font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif;\n      background-color: #f3f4f6;\n      display: flex;\n      justify-content: center;\n      align-items: center;\n      height: 100vh;\n      margin: 0;\n    }\n    .card {\n      background: white;\n      padding: 40px;\n      border-radius: 12px;\n      box-shadow: 0 10px 25px rgba(0,0,0,0.1);\n      text-align: center;\n      max-width: 400px;\n      border-top: 6px solid #ef4444;\n    }\n    h2 { color: #1f2937; margin-top: 0; font-size: 24px; }\n    p { color: #4b5563; margin: 10px 0; font-size: 16px; }\n    .warning { color: #ef4444; font-weight: bold; margin-bottom: 25px; display: block; }\n    .btn-container { display: flex; gap: 15px; justify-content: center; margin-top: 20px; }\n    \n    /* Estilos de los botones (Enlaces) */\n    .btn {\n      text-decoration: none;\n      padding: 12px 30px;\n      border-radius: 6px;\n      font-weight: bold;\n      font-size: 16px;\n      transition: opacity 0.2s;\n      display: inline-block;\n    }\n    .btn:hover { opacity: 0.8; }\n    \n    /* Botón SI (Acción de Webhook) */\n    .btn-si { background-color: #ef4444; color: white; }\n    \n    /* Botón NO (Cancelar) */\n    .btn-no { background-color: #e5e7eb; color: #374151; }\n  </style>\n</head>\n<body>\n\n  <div class=\"card\">\n    <h2>⚠️ Atención</h2>\n    <p>Estás a punto de rechazar.</p>\n    <p>Esta acción no se puede deshacer.</p>\n    <span class=\"warning\">¿Estás seguro?</span>\n\n    <div class=\"btn-container\">\n      <a href=\"https://n8n.tailwind.es/webhook/rechazarSi?origen={{ $('datosRechazar').item.json.ORIGEN }}&contenido={{ $('datosRechazar').item.json.CONTENIDO }}&estado=rechazado&requestId2={{ $json.requestId }}\" class=\"btn btn-si\">SÍ</a>\n\n      <a href=\"https://n8n.tailwind.es/webhook/rechazarSi?origen={{ $('datosRechazar').item.json.ORIGEN }}&contenido={{ $('datosRechazar').item.json.CONTENIDO }}&idHistoria={{ $('datosRechazar').item.json.MAS }}&estado=noRechazado&requestId2={{ $json.requestId }}\" class=\"btn btn-no\">NO</a>\n    </div>\n  </div>\n\n</body>\n</html>",
         "options": {}
       },
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        144,
-        944
+        -112,
+        896
       ],
       "id": "54afc9b8-4f0c-49bf-96af-f83d961af8a8",
       "name": "Respond to Webhook Rechazar"
@@ -4150,8 +4104,8 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
       "position": [
-        912,
-        1344
+        960,
+        1296
       ],
       "id": "9b26fb52-e2b7-4b2a-9cdc-4e0e1f334c22",
       "name": "sumar contador"
@@ -4191,8 +4145,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        560,
-        1344
+        608,
+        1296
       ],
       "id": "5a228376-6e29-480e-b480-f2efb1ca87ca",
       "name": "datos"
@@ -4261,8 +4215,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        752,
-        1344
+        800,
+        1296
       ],
       "id": "5a709dcd-83fe-4fa9-a663-a33d0c1dae45",
       "name": "escribir datos",
@@ -4282,8 +4236,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -800,
-        1520
+        -960,
+        1472
       ],
       "id": "34425f3d-064a-4a05-a5ee-152a7d25b887",
       "name": "si",
@@ -4310,8 +4264,8 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
       "position": [
-        192,
-        1344
+        240,
+        1296
       ],
       "id": "b626e203-21c2-4c8a-9cff-385723289213",
       "name": "obtener contador"
@@ -4372,8 +4326,8 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
       "position": [
-        912,
-        1632
+        736,
+        1584
       ],
       "id": "a6e39b97-25d6-4978-b2f6-c7b390801524",
       "name": "sumar contador1"
@@ -4407,8 +4361,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        576,
-        1632
+        400,
+        1584
       ],
       "id": "0ccd4143-6dc7-4a5e-a34e-bc8be3cd37b6",
       "name": "datos2"
@@ -4477,8 +4431,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        736,
-        1632
+        560,
+        1584
       ],
       "id": "427cb2ff-b459-4736-95ab-2e372b34dfa5",
       "name": "escribir datos1",
@@ -4510,8 +4464,8 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
       "position": [
-        176,
-        1632
+        224,
+        1584
       ],
       "id": "f901e8c3-08ec-4bdf-9470-803fbbf9847e",
       "name": "obtener contador1"
@@ -4519,14 +4473,14 @@
     {
       "parameters": {
         "respondWith": "text",
-        "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Selección de Acción</title>\n    <style>\n        body {\n            font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif;\n            background-color: #f3f4f6;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            height: 100vh;\n            margin: 0;\n        }\n        .card {\n            background: white;\n            padding: 40px;\n            border-radius: 12px;\n            box-shadow: 0 10px 25px rgba(0,0,0,0.1);\n            text-align: center;\n            max-width: 450px; /* Un poco más ancho para que quepan los textos */\n            width: 90%;\n            border-top: 6px solid #3b82f6; /* Azul Informativo */\n        }\n        .icon {\n            font-size: 50px;\n            margin-bottom: 15px;\n            display: block;\n        }\n        h2 { \n            color: #1f2937; \n            margin-top: 0; \n            font-size: 24px; \n        }\n        p { \n            color: #4b5563; \n            margin: 10px 0 30px 0; \n            font-size: 18px; \n        }\n        .btn-container { \n            display: flex; \n            flex-direction: column; /* Botones uno encima de otro para mejor lectura en móvil */\n            gap: 15px; \n            justify-content: center; \n        }\n        \n        /* Estilos Base de Botones */\n        .btn {\n            text-decoration: none;\n            padding: 15px 20px;\n            border-radius: 8px;\n            font-weight: bold;\n            font-size: 16px;\n            transition: transform 0.1s, opacity 0.2s;\n            display: block;\n            text-align: center;\n            box-shadow: 0 2px 4px rgba(0,0,0,0.1);\n        }\n        .btn:hover { opacity: 0.9; transform: translateY(-1px); }\n        .btn:active { transform: translateY(1px); }\n        \n        /* Botón Posponer (Naranja - Tiempo) */\n        .btn-posponer { \n            background-color: #f59e0b; \n            color: white; \n        }\n        \n        /* Botón Aceptar (Azul - Acción Principal) */\n        .btn-aceptar { \n            background-color: #3b82f6; \n            color: white; \n        }\n\n    </style>\n</head>\n<body>\n\n    <div class=\"card\">\n        <span class=\"icon\">🤔</span>\n        \n        <h2>No se ha rechazado</h2>\n        <p>¿Qué quieres hacer?</p>\n\n        <div class=\"btn-container\">\n            <a href=\"https://n8n.tailwind.es/webhook/historiaPospuesta?requestId=\" class=\"btn btn-posponer\">\n                ⏱️ POSPONER 30 MINUTOS\n            </a>\n\n            <a href=\"https://n8n.tailwind.es/webhook/historiaCamara\" class=\"btn btn-aceptar\">\n                ✅ ACEPTAR HISTORIA\n            </a>\n        </div>\n    </div>\n\n</body>\n</html>",
+        "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Selección de Acción</title>\n    <style>\n        body {\n            font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif;\n            background-color: #f3f4f6;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            height: 100vh;\n            margin: 0;\n        }\n        .card {\n            background: white;\n            padding: 40px;\n            border-radius: 12px;\n            box-shadow: 0 10px 25px rgba(0,0,0,0.1);\n            text-align: center;\n            max-width: 450px; /* Un poco más ancho para que quepan los textos */\n            width: 90%;\n            border-top: 6px solid #3b82f6; /* Azul Informativo */\n        }\n        .icon {\n            font-size: 50px;\n            margin-bottom: 15px;\n            display: block;\n        }\n        h2 { \n            color: #1f2937; \n            margin-top: 0; \n            font-size: 24px; \n        }\n        p { \n            color: #4b5563; \n            margin: 10px 0 30px 0; \n            font-size: 18px; \n        }\n        .btn-container { \n            display: flex; \n            flex-direction: column; /* Botones uno encima de otro para mejor lectura en móvil */\n            gap: 15px; \n            justify-content: center; \n        }\n        \n        /* Estilos Base de Botones */\n        .btn {\n            text-decoration: none;\n            padding: 15px 20px;\n            border-radius: 8px;\n            font-weight: bold;\n            font-size: 16px;\n            transition: transform 0.1s, opacity 0.2s;\n            display: block;\n            text-align: center;\n            box-shadow: 0 2px 4px rgba(0,0,0,0.1);\n        }\n        .btn:hover { opacity: 0.9; transform: translateY(-1px); }\n        .btn:active { transform: translateY(1px); }\n        \n        /* Botón Posponer (Naranja - Tiempo) */\n        .btn-posponer { \n            background-color: #f59e0b; \n            color: white; \n        }\n        \n        /* Botón Aceptar (Azul - Acción Principal) */\n        .btn-aceptar { \n            background-color: #3b82f6; \n            color: white; \n        }\n\n    </style>\n</head>\n<body>\n\n    <div class=\"card\">\n        <span class=\"icon\">🤔</span>\n        \n        <h2>No se ha rechazado</h2>\n        <p>¿Qué quieres hacer?</p>\n\n        <div class=\"btn-container\">\n            <a href=\"https://n8n.tailwind.es/webhook/historiaPospuesta?requestId={{ $json.requestId }}&idHistoria={{ $('si').item.json.query.idHistoria }}\" class=\"btn btn-posponer\">\n                ⏱️ POSPONER 30 MINUTOS\n            </a>\n\n            <a href=\"https://n8n.tailwind.es/webhook/historiaCamara?requestId={{ $json.requestId }}&idHistoria={{ $('si').item.json.query.idHistoria }}\" class=\"btn btn-aceptar\">\n                ✅ ACEPTAR HISTORIA\n            </a>\n        </div>\n    </div>\n\n</body>\n</html>",
         "options": {}
       },
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        0,
-        1632
+        48,
+        1584
       ],
       "id": "271a6a4d-599d-455c-b699-86c5d10eed12",
       "name": "Respond to Webhook2"
@@ -4558,8 +4512,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -176,
-        1504
+        -128,
+        1456
       ],
       "id": "b0625766-366e-4d16-8e08-d72254e31bca",
       "name": "If2"
@@ -4573,8 +4527,8 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        0,
-        1344
+        48,
+        1296
       ],
       "id": "4568449c-95d0-4ca1-9824-cee5dae22b44",
       "name": "Respond to Webhook3"
@@ -4582,15 +4536,15 @@
     {
       "parameters": {
         "content": "Rechazar la historia",
-        "height": 352,
-        "width": 1136,
+        "height": 368,
+        "width": 1120,
         "color": 3
       },
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -848,
-        896
+        -1008,
+        832
       ],
       "id": "b393dd20-107f-48c5-ac15-36dc31f38403",
       "name": "Sticky Note6"
@@ -4605,8 +4559,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -48,
-        1600
+        0,
+        1552
       ],
       "id": "f9957b2d-da8a-4e68-a24a-bb35a129a80b",
       "name": "Sticky Note7"
@@ -4621,8 +4575,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -48,
-        1312
+        0,
+        1264
       ],
       "id": "16b3166a-3479-405e-aa50-c151195bf1e4",
       "name": "Sticky Note8"
@@ -4640,8 +4594,8 @@
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.3,
       "position": [
-        -1648,
-        -64
+        -1424,
+        32
       ],
       "id": "49fa25e5-f301-4918-84b1-47aa1e2acd37",
       "name": "Ejecución diaria"
@@ -4655,8 +4609,8 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        -1648,
-        160
+        -1568,
+        304
       ],
       "id": "7ceb85e6-bb7d-47fd-b8d6-af1d92d4cfb0",
       "name": "Respond to Webhook4"
@@ -4670,8 +4624,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -1840,
-        160
+        -1760,
+        304
       ],
       "id": "df127ed2-3c87-4160-830d-2ab6edc39580",
       "name": "Activación manual remota",
@@ -4684,8 +4638,8 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        -1488,
-        160
+        -1408,
+        304
       ],
       "id": "5454579a-3c68-4fb2-8967-515db88c6f90",
       "name": "Wait1",
@@ -4695,14 +4649,14 @@
       "parameters": {
         "content": "CONDICIÓN RECHAZAR\nEs lo que sale en la página de \"Estás seguro de que quieres rechazar la historia?\"",
         "height": 592,
-        "width": 1952,
+        "width": 2160,
         "color": 6
       },
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -848,
-        1264
+        -1008,
+        1216
       ],
       "id": "934684ff-df35-424b-a3a4-87186ad5bf38",
       "name": "Sticky Note9"
@@ -4710,15 +4664,15 @@
     {
       "parameters": {
         "content": "Esta es la página de cuando le das a rechazar historia en la página principal, está enlazada directamente al flow de justo abajo, donde se decide si realmente estás seguro de rechazarla",
-        "height": 224,
-        "width": 256,
+        "height": 368,
+        "width": 304,
         "color": 3
       },
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        304,
-        896
+        144,
+        832
       ],
       "id": "e1a41ebd-fd17-46fd-a8fc-435f4908ac65",
       "name": "Sticky Note10"
@@ -4726,15 +4680,15 @@
     {
       "parameters": {
         "content": "Esta parte gestiona si el usuario está seguro de rechazar la historia.\nLa opción de rechazar apunta la acción en el informe y no hace nada más.\nLa opción de no rechazar redirige a otra página en la que se elige que se quiere hacer con la historia, si posponerla o subirla, cada uno de esos botones está enlazado por medio de webhooks con las opciones correspondientes para cada uno",
-        "height": 224,
-        "width": 464,
+        "height": 368,
+        "width": 480,
         "color": 6
       },
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        576,
-        896
+        464,
+        832
       ],
       "id": "146710dc-5953-449c-9284-7287154ae1fb",
       "name": "Sticky Note11"
@@ -4793,83 +4747,23 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
       "position": [
-        992,
-        80
+        752,
+        64
       ],
       "id": "437682ee-5a25-49aa-a87c-95bceec4456f",
       "name": "escribir pendiente requestId"
     },
     {
       "parameters": {
-        "operation": "update",
-        "dataTableId": {
-          "__rl": true,
-          "value": "7t1UIjvma8hSpdjP",
-          "mode": "list",
-          "cachedResultName": "historia_camaras",
-          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
-        },
-        "filters": {
-          "conditions": [
-            {
-              "keyValue": "1"
-            }
-          ]
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "Estado": "Procesado",
-            "requestId": "={{ $json.query.requestId }}"
-          },
-          "matchingColumns": [],
-          "schema": [
-            {
-              "id": "requestId",
-              "displayName": "requestId",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "readOnly": false,
-              "removed": false
-            },
-            {
-              "id": "Estado",
-              "displayName": "Estado",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "readOnly": false,
-              "removed": false
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.dataTable",
-      "typeVersion": 1.1,
-      "position": [
-        -1744,
-        368
-      ],
-      "id": "a722f57b-1ff2-404b-8135-97b8d6f398bc",
-      "name": "Update row(s)"
-    },
-    {
-      "parameters": {
         "respondWith": "text",
-        "responseBody": "ERROR PAYASO",
+        "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Enlace no válido</title>\n    <style>\n        body {\n            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n            background-color: #f3f4f6;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            height: 100vh;\n            margin: 0;\n            color: #1f2937;\n        }\n        .container {\n            background-color: #ffffff;\n            padding: 40px;\n            border-radius: 12px;\n            box-shadow: 0 10px 25px rgba(0,0,0,0.05);\n            text-align: center;\n            max-width: 450px;\n            width: 90%;\n            border-top: 5px solid #ef4444; /* Borde rojo superior */\n        }\n        .icon {\n            font-size: 60px;\n            margin-bottom: 15px;\n        }\n        h1 {\n            font-size: 24px;\n            margin-bottom: 10px;\n            color: #111827;\n        }\n        p {\n            font-size: 16px;\n            color: #4b5563;\n            line-height: 1.6;\n            margin-bottom: 25px;\n        }\n        .button {\n            display: inline-block;\n            background-color: #3b82f6;\n            color: #ffffff;\n            padding: 12px 24px;\n            text-decoration: none;\n            border-radius: 8px;\n            font-weight: 600;\n            transition: background-color 0.3s;\n        }\n        .button:hover {\n            background-color: #2563eb;\n        }\n    </style>\n</head>\n<body>\n\n    <div class=\"container\">\n        <div class=\"icon\">🔗🚫</div>\n        \n        <h1>Este link ya ha sido utilizado</h1>\n        \n        <p>Por motivos de seguridad, este enlace es de un solo uso y la acción ya se ha completado anteriormente. No es posible volver a utilizarlo.</p>\n\n    </div>\n\n</body>\n</html>",
         "options": {}
       },
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        -1744,
-        528
+        -1520,
+        1056
       ],
       "id": "22844fce-9827-448c-98c2-3fc53ba79dfb",
       "name": "link usado"
@@ -4902,159 +4796,11 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -480,
-        960
+        -640,
+        912
       ],
       "id": "a8f2261d-1f85-466a-82c9-bea578ef845b",
       "name": "If4"
-    },
-    {
-      "parameters": {
-        "operation": "update",
-        "dataTableId": {
-          "__rl": true,
-          "value": "7t1UIjvma8hSpdjP",
-          "mode": "list",
-          "cachedResultName": "historia_camaras",
-          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
-        },
-        "filters": {
-          "conditions": [
-            {
-              "keyValue": "1"
-            }
-          ]
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "Estado": "Procesado",
-            "requestId": "={{ $json.requestId }}"
-          },
-          "matchingColumns": [],
-          "schema": [
-            {
-              "id": "requestId",
-              "displayName": "requestId",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "readOnly": false,
-              "removed": false
-            },
-            {
-              "id": "Estado",
-              "displayName": "Estado",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "readOnly": false,
-              "removed": false
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.dataTable",
-      "typeVersion": 1.1,
-      "position": [
-        -320,
-        944
-      ],
-      "id": "4315edff-d643-4513-bd18-b5cdf6465230",
-      "name": "Update row(s)1"
-    },
-    {
-      "parameters": {
-        "respondWith": "text",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.respondToWebhook",
-      "typeVersion": 1.5,
-      "position": [
-        -288,
-        1104
-      ],
-      "id": "f04e6d08-bf1c-46c8-a736-68be1f0df447",
-      "name": "link usado1"
-    },
-    {
-      "parameters": {
-        "operation": "update",
-        "dataTableId": {
-          "__rl": true,
-          "value": "7t1UIjvma8hSpdjP",
-          "mode": "list",
-          "cachedResultName": "historia_camaras",
-          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
-        },
-        "filters": {
-          "conditions": [
-            {
-              "keyValue": "1"
-            }
-          ]
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "Estado": "Procesado",
-            "requestId": "={{ $json.query.requestId }}"
-          },
-          "matchingColumns": [],
-          "schema": [
-            {
-              "id": "requestId",
-              "displayName": "requestId",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "readOnly": false,
-              "removed": false
-            },
-            {
-              "id": "Estado",
-              "displayName": "Estado",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "readOnly": false,
-              "removed": false
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.dataTable",
-      "typeVersion": 1.1,
-      "position": [
-        -752,
-        416
-      ],
-      "id": "1bf076e3-c508-4c08-a928-cf2a6474b24b",
-      "name": "Update row(s)2"
-    },
-    {
-      "parameters": {
-        "respondWith": "text",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.respondToWebhook",
-      "typeVersion": 1.5,
-      "position": [
-        -736,
-        576
-      ],
-      "id": "2fa3e887-f926-4fc3-9890-d18667c6e5d3",
-      "name": "link usado2"
     },
     {
       "parameters": {
@@ -5078,8 +4824,8 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
       "position": [
-        -624,
-        960
+        -784,
+        912
       ],
       "id": "6ed9fc83-3de6-4eb1-90c0-b3ece5c31121",
       "name": "Get row(s)"
@@ -5112,42 +4858,14 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -896,
-        432
+        -736,
+        496
       ],
       "id": "bc9646ee-9aa2-49e9-98c3-d2129c4d40ed",
       "name": "If6"
     },
     {
       "parameters": {
-        "operation": "get",
-        "dataTableId": {
-          "__rl": true,
-          "value": "7t1UIjvma8hSpdjP",
-          "mode": "list",
-          "cachedResultName": "historia_camaras",
-          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
-        },
-        "filters": {
-          "conditions": [
-            {
-              "keyName": "requestId",
-              "keyValue": "={{ $json.query.requestId }}"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.dataTable",
-      "typeVersion": 1.1,
-      "position": [
-        -1024,
-        432
-      ],
-      "id": "1fe830b2-137f-49c4-a4b4-0b2d4c88b6ed",
-      "name": "Get row(s)1"
-    },
-    {
-      "parameters": {
         "conditions": {
           "options": {
             "caseSensitive": true,
@@ -5174,42 +4892,14 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -1904,
-        384
+        -1728,
+        528
       ],
       "id": "82bf3a57-5a60-4aa3-855b-22c03e5fac1b",
       "name": "If5"
     },
     {
       "parameters": {
-        "operation": "get",
-        "dataTableId": {
-          "__rl": true,
-          "value": "7t1UIjvma8hSpdjP",
-          "mode": "list",
-          "cachedResultName": "historia_camaras",
-          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
-        },
-        "filters": {
-          "conditions": [
-            {
-              "keyName": "requestId",
-              "keyValue": "="
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.dataTable",
-      "typeVersion": 1.1,
-      "position": [
-        -2048,
-        384
-      ],
-      "id": "aefe1f33-7e4b-412a-acb8-f38b9d5a7615",
-      "name": "Get row(s)2"
-    },
-    {
-      "parameters": {
         "conditions": {
           "options": {
             "caseSensitive": true,
@@ -5236,8 +4926,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -528,
-        1520
+        -672,
+        1472
       ],
       "id": "a29ad6e0-9684-41a9-a35d-b330be843b65",
       "name": "If7"
@@ -5255,14 +4945,14 @@
         "filters": {
           "conditions": [
             {
-              "keyValue": "1"
+              "keyValue": "2"
             }
           ]
         },
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "requestId": "={{ $json.requestId }}",
+            "requestId": "={{ $json.requestId2 }}",
             "Estado": "Pendiente"
           },
           "matchingColumns": [],
@@ -5286,6 +4976,26 @@
               "type": "string",
               "readOnly": false,
               "removed": false
+            },
+            {
+              "id": "contador",
+              "displayName": "contador",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "contador_no_rechazado",
+              "displayName": "contador_no_rechazado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
             }
           ],
           "attemptToConvertTypes": false,
@@ -5296,26 +5006,11 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
       "position": [
-        -336,
-        1504
+        -288,
+        896
       ],
-      "id": "d8e2fa43-6737-4dc6-b59d-743744cf89b5",
-      "name": "Update row(s)3"
-    },
-    {
-      "parameters": {
-        "respondWith": "text",
-        "responseBody": "ERROR PAYASO",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.respondToWebhook",
-      "typeVersion": 1.5,
-      "position": [
-        -320,
-        1664
-      ],
-      "id": "1693023a-5189-416e-9eb1-b33b8edff778",
-      "name": "link usado3"
+      "id": "a80b5b0e-b7a7-447d-89b4-27c34e21d766",
+      "name": "generar segunda clave"
     },
     {
       "parameters": {
@@ -5331,7 +5026,7 @@
           "conditions": [
             {
               "keyName": "requestId",
-              "keyValue": "={{ $json.query.requestId }}"
+              "keyValue": "={{ $json.query.requestId2 }}"
             }
           ]
         }
@@ -5339,11 +5034,11 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
       "position": [
-        -656,
-        1520
+        -800,
+        1472
       ],
       "id": "abf5bd4f-80a9-4601-9f5e-b06433f6d1ec",
-      "name": "Get row(s)3"
+      "name": "comprobar segunda clave"
     },
     {
       "parameters": {
@@ -5366,7 +5061,7 @@
           "mappingMode": "defineBelow",
           "value": {
             "requestId": "={{ $json.requestId }}",
-            "Estado": "Pendiente"
+            "Estado": "Procesado"
           },
           "matchingColumns": [],
           "schema": [
@@ -5389,6 +5084,26 @@
               "type": "string",
               "readOnly": false,
               "removed": false
+            },
+            {
+              "id": "contador",
+              "displayName": "contador",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "contador_no_rechazado",
+              "displayName": "contador_no_rechazado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
             }
           ],
           "attemptToConvertTypes": false,
@@ -5399,11 +5114,11 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
       "position": [
-        -16,
-        944
+        -496,
+        1456
       ],
-      "id": "a80b5b0e-b7a7-447d-89b4-27c34e21d766",
-      "name": "Update row(s)4"
+      "id": "d8e2fa43-6737-4dc6-b59d-743744cf89b5",
+      "name": "bloquear segunda clave"
     },
     {
       "parameters": {
@@ -5481,11 +5196,39 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
       "position": [
-        384,
-        1344
+        432,
+        1296
       ],
       "id": "2108798b-f3e0-49a9-8b66-d1717b5b0ac0",
-      "name": "Update row(s)5"
+      "name": "bloquear primera clave"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "7t1UIjvma8hSpdjP",
+          "mode": "list",
+          "cachedResultName": "historia_camaras",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "requestId",
+              "keyValue": "={{ $json.query.requestId }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        -1872,
+        528
+      ],
+      "id": "aefe1f33-7e4b-412a-acb8-f38b9d5a7615",
+      "name": "obtener primera clave"
     },
     {
       "parameters": {
@@ -5507,10 +5250,8 @@
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "contador": "={{ $json.contador }}",
-            "contador_no_rechazado": "={{ $json.contador_no_rechazado }}",
-            "requestId": "={{ $json.requestId }}",
-            "Estado": "Pendiente"
+            "Estado": "Procesado",
+            "requestId": "={{ $json.requestId }}"
           },
           "matchingColumns": [],
           "schema": [
@@ -5542,7 +5283,7 @@
               "display": true,
               "type": "number",
               "readOnly": false,
-              "removed": false
+              "removed": true
             },
             {
               "id": "contador_no_rechazado",
@@ -5552,7 +5293,7 @@
               "display": true,
               "type": "number",
               "readOnly": false,
-              "removed": false
+              "removed": true
             }
           ],
           "attemptToConvertTypes": false,
@@ -5563,15 +5304,214 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
       "position": [
-        352,
-        1632
+        -1568,
+        512
       ],
-      "id": "8275308d-3e17-46d2-bd02-4264fafb95ac",
-      "name": "Update row(s)6"
+      "id": "a722f57b-1ff2-404b-8135-97b8d6f398bc",
+      "name": "bloquear primera clave1"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "7t1UIjvma8hSpdjP",
+          "mode": "list",
+          "cachedResultName": "historia_camaras",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "requestId",
+              "keyValue": "={{ $json.query.requestId }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        -864,
+        496
+      ],
+      "id": "1fe830b2-137f-49c4-a4b4-0b2d4c88b6ed",
+      "name": "obtener primera clave1"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "dataTableId": {
+          "__rl": true,
+          "value": "7t1UIjvma8hSpdjP",
+          "mode": "list",
+          "cachedResultName": "historia_camaras",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "1"
+            }
+          ]
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Estado": "Procesado",
+            "requestId": "={{ $json.requestId }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "requestId",
+              "displayName": "requestId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "contador",
+              "displayName": "contador",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "contador_no_rechazado",
+              "displayName": "contador_no_rechazado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        -592,
+        480
+      ],
+      "id": "1bf076e3-c508-4c08-a928-cf2a6474b24b",
+      "name": "bloquear primera clave2"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "7t1UIjvma8hSpdjP",
+          "mode": "list",
+          "cachedResultName": "historia_camaras",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "1"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        -304,
+        1456
+      ],
+      "id": "5042cd7e-02a3-4049-bb41-97b12a5dc9aa",
+      "name": "obtener primera clave2"
+    },
+    {
+      "parameters": {
+        "content": "TRIGGERS",
+        "height": 496,
+        "width": 848,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1920,
+        -48
+      ],
+      "id": "4f4375d0-41c4-41ed-a3b6-c741343a0498",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "content": "POSPONER",
+        "height": 224,
+        "width": 992,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -2064,
+        464
+      ],
+      "id": "006a245b-7fa0-4621-8d25-93e86638b47d",
+      "name": "Sticky Note12"
+    },
+    {
+      "parameters": {
+        "content": "LINK USADO\n\nEste Repond To Webhook es el que se ejecuta cuando el link se clica más de una vez",
+        "height": 288,
+        "width": 320,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1568,
+        912
+      ],
+      "id": "8e61f5c8-2e86-4d6d-9de9-7b6b787d5cdc",
+      "name": "Sticky Note13"
+    },
+    {
+      "parameters": {
+        "content": "░░░░░░░░░░░░░░░░░░░▒▓▓█████████████▓▓▒░░░░░░░░░░░░░░░░░░░░░░\n░░░░░░░░░░░░░░▒████▓▓▒▒░▒▒▒░▒▒▒▒▒▒▓▓████▓▒░░░░░░░░░░░░░░░░░░\n░░░░░░░░░░░▒███▓░░░░░░░░░░░░░░░░░░░░░░▒███████▓▓▒░░░░░░░░░░░\n░░░░░░░░░▒██▓░░░░▒▒███▓▓▒░░░░░░░░░░░░░▓▓▒▒▒▒▒▓██████▓░░░░░░░\n░░░░░░░▒██▓░░░▓███▓▒░░░░░░░░▒▒▒▒▒▒▒▒▒▒░░░░░░▒▓▓███▓████▒▒░░░\n░░░░░░██▓░░▒▓██▓░░▒▓██████▓░░░░░░░▒░░░░░░▒██▓▒░░░▓███▒▓▒░░░░\n░░░░░██░░▓███▒░░▒██▒░░░░▒▒██▓░░░░░░░░░░░██▒░░░░▒████▒█░░░░░░\n░░░░██░▒▓▒▓▓░░░██░░░░░░░░░░░█▓░░░░░░░░░██░░░░░░▒███░░█▒░░░░░\n░░░▓█░░░░░░░░░██░░░░░░░░░░░░▓█░░░░░░░░██░░░░░░░░░░░░░█▒░░░░░\n░░░█▓░░░░░░░░░█▒░░████░░░░░░░█▒░░░░░░░██░░░░░░░░░░░░███░░░░░\n░░▒█░░░░░░░▒▓▒█▓░▓████▓░░░░░▒█░░░░░░░░▒█▒░░░░░░░░░░██░█▒░░░░\n░░██░░░░░▒▓▒▓▒██▒▒▓▓▓░░░░░░░██░░░░░░░░░▒████▓███████▓░█▒░░░░\n░░█▓░░░░░▒░░░▒░▒██▓▒░░░░░▒██▓░░░░░░░░░░░░░░██▓░░░░░░▒██▓░░░░\n░░█░░░░░░░░░▓▒░░░░▒▓██████▓░░░░░░░░░░░░░░▒██░░░▓█▓▓▒░░░██░░░\n░▒█░░░░░░░░░░░░░░░░░░░░░░░░░░▓▒▓▒▒▒▒▒▓▓▓▓██░░▓█▓░▒▒██▒░░██░░\n░▓█░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▓▓▒░░██░░██▓░▒░▒░██░░▒█░░\n░██░░░░░░░░░░░░░░░░░░░░░░░▒▓▒▒▒▒▒▒▒▒░░░██░░▓█░█▓░█▒█▓█▓░░█░░\n░██░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒░▒▒░░▓█▓░░██░█▒▒█▒█▒▓█░░█░░\n░██░░░░░░░░░░░░░░░░░░░░░░░░▒░░░░░░░░░░▓█░░░█▒░░░░▒▒░░▒█░▓█░░\n░▒█░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒▒▒▒▒▒▒▒░░█▒░░█▒░░░░░░░░▓█░█▓░░\n░░█▓░▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▓█░░█▒░░░░░░░░█░▒█░░░\n░░▓█░░▒░░▒▒░░▒░░░░░░░░░░░░░░░░░░░░░░░░░░█░░█▒░░░░░░░█▓░█▓░░░\n░░░█▒░░▒░░▒░░▒▒░░░░░░░░░░░░░░░░░░░░░░░░░█░░█▒░░░░░░▓█░░█░░░░\n░░░██░░░▒░▒░░░▒▒░░░░░░░░░░░░░░░░░░░░░░░░█░░█▒░░░░░░██░░█░░░░\n░░░░█▓░░░▒░▒░░░░▒▒░░░░░▒▒▒▒▒▒░░░░░░░░░░▒█░▒█░░░░░░░█▒░░█▓░░░\n░░░░▓█░░░░▒▒░░░░░▒▒░░░░░░▒▒▒▓▓▓▒░░░░░░░██░██░░░░░░░██░░▓█░░░\n░░░░░██░░░▒░▒░░░░░▒░░░░░░░░▒░▒▒▓█▒░░░░▒█░░█▓▒▓▓▓▒░░▓█░░░█▒░░\n░░░░░▒█▒░░░▒▒▒░░░░▒░░░░░░░░░░▒▒▒░▒▓░░░██░▒█░░░░▒▓▓░░██░░█▒░░\n░░░░░░▒█▒░░░▒░▒░░░▒░░░░░░▒▒▒░░░░▒▒░░░▒█░░██░░░░░░░█░▒█░░█▒░░\n░░░░░░░▓█░░░▒░▒░░░░▒▒░░░░▓▒▒▓▓▓▒░░▓▒░██░░██▒▒▒▒▓▒▓▓███░░█▒░░\n░░░░░░░░██░░░▒░▒░░░░░▒▒░░░░░░░░▓█▓░░░█▓░░██░▓█░█░█░░█▒░░█▒░░\n░░░░░░░░░██░░░░▒▒░░░░░░▒▒░░░░░░░░▒█▓░█▓░░▓█▒▒█▒█░█▒██░░▒█░░░\n░░░░░░░░░░██▒░░░░▒░░░▒░░░▒▒░░░░░░░░▒▓██░░░██░░░░▒▒██░░░██░░░\n░░░░░░░░░░░▓██░░░░░░░░▒▒░░░▒░░░░░░░░░▓█░░░░▓███▓▓██░░░██░░░░\n░░░░░░░░░░░░░▓██▒░░░░░░▒▒▒▒▒░░░░░░░░░░██░░░░░░▒▒▒░░░░██░░░░░\n░░░░░░░░░░░░░░░▓███▒░░░░░░░▒▒▒▒▒▒▒▒░░░░▓██▒░░░░░░░▒███░░░░░░\n░░░░░░░░░░░░░░░░░▒▓███▓▒░░░░░░░▒░░▒▒▒▒░░░▒██▓██████▓░░░░░░░░\n░░░░░░░░░░░░░░░░░░░░░▒████▓▒▒░░░░░░░░░░░░░░░▓██▒░░░░░░░░░░░░\n░░░░░░░░░░░░░░░░░░░░░░░░░▒▓████▓░░░░░░░▓█████▒░░░░░░░░░░░░░░\n░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒█████████▒░░░░░░░░░░░░░░░░░░░\n░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░▒▒▒░░░░░░░░░░░░░░░░░░░░░░░\n",
+        "height": 784,
+        "width": 624,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -2256,
+        816
+      ],
+      "id": "a4b1565b-ed05-444f-b416-395c6c8a5828",
+      "name": "Sticky Note14"
     }
   ],
   "pinData": {
-    "posponer": [
+    "si": [
       {
         "json": {
           "headers": {
@@ -5592,12 +5532,18 @@
             "sec-fetch-user": "?1",
             "sec-fetch-dest": "document",
             "accept-encoding": "gzip, deflate, br, zstd",
-            "cookie": "rl_page_init_referrer=RudderEncrypt%3AU2FsdGVkX19G9hj2oHUljiLMDFDD4NPAhx36zLECAVM%3D; rl_page_init_referring_domain=RudderEncrypt%3AU2FsdGVkX19DZj0rYYRDnJqpinHJ5WdeJvAQiTnyTb4%3D; ph_phc_4URIAm1uYfJO7j8kWSe0J8lc8IqnstRLS7Jx8NcakHo_posthog=%7B%22%24device_id%22%3A%22019b59c2-251b-7f9d-94c9-0e7af88287b0%22%2C%22distinct_id%22%3A%220f6825be298b3a005d52154ed2c929ac7758de54b6ab4a8d7eb7a8e83f623918%2308853e58-b9e7-4eaa-a226-f2a3e30187ec%22%2C%22%24sesid%22%3A%5B1768377126820%2C%22019bbb68-e0bb-712c-934e-b5fd44a85811%22%2C1768375771320%5D%2C%22%24epp%22%3Atrue%2C%22%24initial_person_info%22%3A%7B%22r%22%3A%22%24direct%22%2C%22u%22%3A%22https%3A%2F%2Fn8n.tailwind.es%2Fsignin%3Fredirect%3D%25252F%22%7D%7D; rl_anonymous_id=RudderEncrypt%3AU2FsdGVkX1%2FOjEmaaKCqnrRrIjpp9KdUHOowegLssn5fSuBSTM19VrEsakQr2tsQg2swj0HSiJ8KLlfczwNz4A%3D%3D; rl_user_id=RudderEncrypt%3AU2FsdGVkX19BBB%2BSwGVaeP%2Bd8lTptBgRShAr9M8pfQ%2F8oOIGP4FNUuwH1gUHLbf1ZQ365lDuaTWkVfSfrsUZHyp8ulvMlg2MB0DGqHCDS2a7dXEEk3TxzHS3hNj0fbIr8yDdoygglLKR3PTPYSBS3IWx4ueIX6pvDoyaoNEPwXs%3D; rl_trait=RudderEncrypt%3AU2FsdGVkX19QDaYXUSm8%2BA%2Bz2iyS8qd49cfGIs7LdcbzfgPGRYaEs0QS72MTObss2awSVlv7axY1a%2F5o12uNAfm%2BNQIrIwvgIemTxBMmsIJE6%2FOGeX4bs5xE33q4XzGZcJkxXXMPnEYfzQ%2BotqsB4ZZ6Z0OVnwnCYgrs3RodN3A%3D; rl_session=RudderEncrypt%3AU2FsdGVkX19BvwuWn9Trr7CAZvRsCIbJW14wnuFVzT61cumsuuRhuC%2FSaxFeq3ReYinUMzJSZpi2aBUR4X%2FV21a%2FCIWnAwAxD7vZYlAspJcK3KmzmCDNKMnrckUv2BO1%2F6RiGdEc1vtzy5%2B5jAYIng%3D%3D"
+            "cookie": "rl_page_init_referrer=RudderEncrypt%3AU2FsdGVkX19G9hj2oHUljiLMDFDD4NPAhx36zLECAVM%3D; rl_page_init_referring_domain=RudderEncrypt%3AU2FsdGVkX19DZj0rYYRDnJqpinHJ5WdeJvAQiTnyTb4%3D; ph_phc_4URIAm1uYfJO7j8kWSe0J8lc8IqnstRLS7Jx8NcakHo_posthog=%7B%22%24device_id%22%3A%22019b59c2-251b-7f9d-94c9-0e7af88287b0%22%2C%22distinct_id%22%3A%220f6825be298b3a005d52154ed2c929ac7758de54b6ab4a8d7eb7a8e83f623918%2308853e58-b9e7-4eaa-a226-f2a3e30187ec%22%2C%22%24sesid%22%3A%5B1768377126820%2C%22019bbb68-e0bb-712c-934e-b5fd44a85811%22%2C1768375771320%5D%2C%22%24epp%22%3Atrue%2C%22%24initial_person_info%22%3A%7B%22r%22%3A%22%24direct%22%2C%22u%22%3A%22https%3A%2F%2Fn8n.tailwind.es%2Fsignin%3Fredirect%3D%25252F%22%7D%7D; rl_anonymous_id=RudderEncrypt%3AU2FsdGVkX1%2B2XkCoj75cgZm9OxVywFa4DDsUIfmfNSRo06nN%2B3HqIl%2FoJ8jzekklJ7X4rnNLtdPHYAEEL5Ic8A%3D%3D; rl_user_id=RudderEncrypt%3AU2FsdGVkX19WWhBBX2s7uD0JrIHBIahGmAouPQxLoDhELsiKGN60aby9F1Xkl%2BokZ43TqxhOry33l%2BIWr1dui6acPPN3YWAjTr5hZVlxngcjzsLKcGhwEegYq%2FeVX8pWk5sD2Ac1feSMEiCStL7DYpTDnbO2UqvoTYv1cFBfrFM%3D; rl_trait=RudderEncrypt%3AU2FsdGVkX19J4H8jPTQ9kVE1aa8bs476oQ8rjLQ9JqKKz12x628SOMKvykFWpOsbH68QDUrJJ4AtQgDsbaHJMi%2BM%2BgBQfJAXECXbiu52uBBG%2BBR%2FiYDQDiyuihOpWgLF1wk1zuvHM2zPmJpxPb%2Fyx8mUu94DLmMWF%2BQAYFP%2FP1o%3D; rl_session=RudderEncrypt%3AU2FsdGVkX1%2FVHYPulftiB6yrpulwZ2ywc2qjr%2FYElplbI1Ma1iDwSBN%2BF7BSAS3ubah15PdLWEYxzrWDJaOCgXlDScFYBrNYvrF5%2FndX%2BuN0GS5DCg0%2F0exhSaockJGD8e1tTO4pWlrBYG8ViRI2vg%3D%3D"
           },
           "params": {},
-          "query": {},
+          "query": {
+            "origen": "historiaWebcam",
+            "contenido": "HistoriaRechazada",
+            "idHistoria": "https://res.cloudinary.com/dglub1vnw/video/upload/vc_h264,ac_aac,c_pad,w_1080,h_1920,b_blurred:400,du_30/l_text:Courier_45_bold:ZONA BORREGUILES,co_black,e_outline:3/fl_layer_apply,g_north_west,x_10,y_670/l_text:Courier_45_bold:ZONA BORREGUILES,co_white/fl_layer_apply,g_north_west,x_13,y_673/rh4cddsdrekdf71s6ixn.mp4",
+            "estado": "noRechazado",
+            "requestId2": "202602030348411971"
+          },
           "body": {},
-          "webhookUrl": "https://n8n.tailwind.es/webhook/historiaPospuesta",
+          "webhookUrl": "https://n8n.tailwind.es/webhook/rechazarSi",
           "executionMode": "production"
         },
         "pairedItem": {
@@ -5628,6 +5574,6 @@
   },
   "tags": [],
   "triggerCount": 6,
-  "updatedAt": "2026-02-02T15:35:20.017Z",
-  "versionId": "6f1c0048-9d31-4449-96e9-38b1eaaccc0b"
+  "updatedAt": "2026-02-03T12:15:47.068Z",
+  "versionId": "0ac5f770-78b1-4811-9427-1534c8f915bc"
 }
