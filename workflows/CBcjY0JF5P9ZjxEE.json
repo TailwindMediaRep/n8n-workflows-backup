@@ -1,22 +1,11 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-01-31T09:33:26.000Z",
-    "createdAt": "2026-01-31T09:33:24.947Z",
-    "versionId": "9f383328-d6b5-48a5-a555-665046f84a5b",
+    "updatedAt": "2026-02-02T15:35:21.000Z",
+    "createdAt": "2026-02-02T15:35:20.019Z",
+    "versionId": "6f1c0048-9d31-4449-96e9-38b1eaaccc0b",
     "workflowId": "CBcjY0JF5P9ZjxEE",
     "nodes": [
-      {
-        "parameters": {},
-        "type": "n8n-nodes-base.manualTrigger",
-        "typeVersion": 1,
-        "position": [
-          -1456,
-          160
-        ],
-        "id": "e592ab28-59d1-4e72-9947-35a971c8baa2",
-        "name": "When clicking ‘Execute workflow’"
-      },
       {
         "parameters": {
           "httpRequestMethod": "POST",
@@ -30,8 +19,8 @@
         "type": "n8n-nodes-base.facebookGraphApi",
         "typeVersion": 1,
         "position": [
-          -240,
-          832
+          208,
+          400
         ],
         "id": "70f5be56-bcbd-45e8-b707-d1fe8cd7941a",
         "name": "Facebook Graph API1",
@@ -62,8 +51,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          -720,
-          848
+          -272,
+          416
         ],
         "id": "edf4ba47-a8ca-4343-8394-708f1e0f7712",
         "name": "HTTP Request3",
@@ -79,8 +68,8 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          -560,
-          848
+          -112,
+          416
         ],
         "id": "5579777d-f732-4b98-b233-233d14c7baeb",
         "name": "Wait2",
@@ -113,8 +102,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          -400,
-          848
+          48,
+          416
         ],
         "id": "f2e57470-8cb6-4aff-a4f1-776c6d413c60",
         "name": "If1"
@@ -132,8 +121,8 @@
         "type": "n8n-nodes-base.facebookGraphApi",
         "typeVersion": 1,
         "position": [
-          -1056,
-          848
+          -608,
+          416
         ],
         "id": "0bbfbe8d-31e9-41c6-8d53-89988526abf1",
         "name": "Facebook Graph API2",
@@ -159,6 +148,12 @@
                 "name": "vista_previa",
                 "value": "=https://res.cloudinary.com/dglub1vnw/video/upload/c_pad,w_1080,h_1920,b_black/l_text:Courier_45_bold:ZONA%20BORREGUILES,co_black,e_outline:3/fl_layer_apply,g_north_west,x_10,y_670/l_text:Courier_45_bold:ZONA%20BORREGUILES,co_white/fl_layer_apply,g_north_west,x_13,y_673/{{ $json.public_id }}.jpg",
                 "type": "string"
+              },
+              {
+                "id": "4dc0a51e-ecfb-43bb-9ea2-33faf1ebebda",
+                "name": "=token único",
+                "value": "={{ $now.toFormat('yyyyMMddHHmmss') + Math.floor(Math.random()*1000) }}",
+                "type": "string"
               }
             ]
           },
@@ -167,7 +162,7 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          16,
+          224,
           160
         ],
         "id": "8ec922b4-00bc-43fc-8fb3-48a2e73f92d2",
@@ -182,7 +177,7 @@
         "type": "n8n-nodes-cloudinary.cloudinary",
         "typeVersion": 1,
         "position": [
-          -144,
+          64,
           160
         ],
         "id": "4c85ba67-fb60-4a26-8c67-4a5bf0283b78",
@@ -211,7 +206,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          224,
+          640,
           160
         ],
         "id": "4fecbe0c-ed05-4db3-aa2c-8e9977ab31c2",
@@ -244,7 +239,7 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          384,
+          800,
           160
         ],
         "id": "4e3544c3-0642-49ef-82b2-ecd3367c560b",
@@ -255,7 +250,7 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          560,
+          976,
           240
         ],
         "id": "cdd381ff-6ac2-45ba-9e2a-43a650f57753",
@@ -270,7 +265,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          -1200,
+          -992,
           160
         ],
         "id": "2aaa757a-e4c6-4d1a-afa7-70d04f751c29",
@@ -283,7 +278,7 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          -1024,
+          -816,
           160
         ],
         "id": "182ae0c9-e916-4427-aec4-7a10a39e4a2c",
@@ -310,7 +305,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          -848,
+          -640,
           160
         ],
         "id": "c8780df9-a109-4cee-b438-bbab9e0fdd02",
@@ -323,7 +318,7 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          -528,
+          -320,
           160
         ],
         "id": "f57b7f7e-dbe8-413c-a885-a19c5054e907",
@@ -337,7 +332,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          -368,
+          -160,
           160
         ],
         "id": "777d5a4a-20a7-412f-bc9f-683c3b198f68",
@@ -361,7 +356,7 @@
         "type": "n8n-nodes-base.html",
         "typeVersion": 1.2,
         "position": [
-          -688,
+          -480,
           160
         ],
         "id": "341861a2-cb91-4338-a739-df0b98b10862",
@@ -390,7 +385,7 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          704,
+          1120,
           240
         ],
         "id": "e575ea56-dfa1-45c0-859f-96bb45cd6518",
@@ -406,7 +401,7 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          -1264,
+          -1056,
           64
         ],
         "id": "6acdd7c5-d32a-4c6e-aca2-3acbb08403ea",
@@ -422,7 +417,7 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          -192,
+          16,
           64
         ],
         "id": "c06ee7e0-d0ad-4922-9665-6e79c6076bc9",
@@ -432,13 +427,13 @@
         "parameters": {
           "content": "COMPROBAR SI SE HA PROCESADO\n",
           "height": 416,
-          "width": 704,
+          "width": 912,
           "color": 4
         },
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          160,
+          368,
           32
         ],
         "id": "c401de65-2a78-442b-8f19-88f31b8bfc8f",
@@ -448,13 +443,13 @@
         "parameters": {
           "content": "ENVIAR CORREO DE VERIFICACIÓN",
           "height": 192,
-          "width": 336,
+          "width": 544,
           "color": 6
         },
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          528,
+          736,
           32
         ],
         "id": "02064db4-3e3f-4cb6-b043-ba8e91701b76",
@@ -463,14 +458,14 @@
       {
         "parameters": {
           "content": "SUBIDA A META\n",
-          "height": 192,
-          "width": 1376
+          "height": 320,
+          "width": 1408
         },
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          -1280,
-          800
+          -1056,
+          384
         ],
         "id": "ab8be564-4726-443a-aae2-3afebc817eaa",
         "name": "Sticky Note4"
@@ -484,8 +479,8 @@
         "type": "n8n-nodes-base.webhook",
         "typeVersion": 2.1,
         "position": [
-          -1232,
-          848
+          -1168,
+          432
         ],
         "id": "fd225dd5-64bd-4381-b7cc-b9cb982c5975",
         "name": "Webhook",
@@ -495,13 +490,13 @@
         "parameters": {
           "sendTo": "adrianazorinsanchez@gmail.com",
           "subject": "HISTORIA CÁMARA",
-          "message": "=<!DOCTYPE html>\n<html>\n<head>\n  <style>\n    /* Estilos Generales */\n    body {\n      font-family: Arial, sans-serif;\n      background-color: #f4f4f4;\n      margin: 0;\n      padding: 0;\n    }\n\n    /* Contenedor Principal */\n    .container {\n      max-width: 600px;\n      margin: 20px auto;\n      background-color: #ffffff;\n      border-radius: 8px;\n      overflow: hidden;\n      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);\n    }\n\n    /* Cabecera */\n    .header {\n      background-color: #333333;\n      color: #ffffff;\n      padding: 20px;\n      text-align: center;\n    }\n\n    /* Contenido */\n    .content {\n      padding: 30px;\n      text-align: center;\n      color: #333333;\n    }\n\n    /* Caja de Previsualización */\n    .preview-box {\n      margin: 20px 0;\n      border: 1px solid #eeeeee;\n      padding: 10px;\n      border-radius: 5px;\n      background-color: #fafafa;\n    }\n\n    /* Imágenes */\n    img {\n      max-width: 100%;\n      height: auto;\n      border-radius: 4px;\n      display: block;\n      margin: 0 auto;\n    }\n\n    /* Botón de Confirmación */\n    .btn-confirmar {\n      display: inline-block;\n      background-color: #2ecc71;\n      color: #ffffff !important;\n      padding: 14px 28px;\n      text-decoration: none;\n      border-radius: 5px;\n      font-weight: bold;\n      margin-top: 20px;\n      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n    }\n  </style>\n</head>\n<body>\n\n  <div class=\"container\">\n    \n    <div class=\"header\">\n      <h2 style=\"margin:0;\">Aprobación Requerida</h2>\n    </div>\n\n    <div class=\"content\">\n      <h3>Se requiere aprobación de una historia</h3>\n\n      <div class=\"preview-box\">\n        <p style=\"margin-top: 0; margin-bottom: 10px; font-weight: bold; color: #555;\">\n          Vista previa:\n        </p>\n        \n        <img src=\"{{ $('Edit Fields').item.json.vista_previa }}\" alt=\"Vista Previa\">\n      </div>\n\n      <a href=\"https://n8n.tailwind.es/webhook/historiaCamara?idHistoria={{ $('Edit Fields').item.json.story_url }}\" class=\"btn-confirmar\">\n        Aprobar Historia\n      </a>\n      <a href=\"https://n8n.tailwind.es/webhook/historiaPospuesta\" class=\"btn-confirmar\">\n        Posponer 30 minutos\n      </a>\n      <a href=\"https://n8n.tailwind.es/webhook-test/rechazarHistoria?origen=historiaWebcam&contenido=HistoriaRechazada&idHistoria={{ $('Edit Fields').item.json.story_url }}\" class=\"btn-confirmar\">\n        Rechazar\n      </a>\n    </div>\n\n    <div style=\"background-color: #eeeeee; padding: 10px; text-align: center; font-size: 12px; color: #777;\">\n      Enviado automáticamente desde n8n\n    </div>\n\n  </div>\n\n</body>\n</html>",
+          "message": "=<!DOCTYPE html>\n<html>\n<head>\n  <style>\n    /* Estilos Generales */\n    body {\n      font-family: Arial, sans-serif;\n      background-color: #f4f4f4;\n      margin: 0;\n      padding: 0;\n    }\n\n    /* Contenedor Principal */\n    .container {\n      max-width: 600px;\n      margin: 20px auto;\n      background-color: #ffffff;\n      border-radius: 8px;\n      overflow: hidden;\n      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);\n    }\n\n    /* Cabecera */\n    .header {\n      background-color: #333333;\n      color: #ffffff;\n      padding: 20px;\n      text-align: center;\n    }\n\n    /* Contenido */\n    .content {\n      padding: 30px;\n      text-align: center;\n      color: #333333;\n    }\n\n    /* Caja de Previsualización */\n    .preview-box {\n      margin: 20px 0;\n      border: 1px solid #eeeeee;\n      padding: 10px;\n      border-radius: 5px;\n      background-color: #fafafa;\n    }\n\n    /* Imágenes */\n    img {\n      max-width: 100%;\n      height: auto;\n      border-radius: 4px;\n      display: block;\n      margin: 0 auto;\n    }\n\n    /* Botón de Confirmación */\n    .btn-confirmar {\n      display: inline-block;\n      background-color: #2ecc71;\n      color: #ffffff !important;\n      padding: 14px 28px;\n      text-decoration: none;\n      border-radius: 5px;\n      font-weight: bold;\n      margin-top: 20px;\n      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n    }\n  </style>\n</head>\n<body>\n\n  <div class=\"container\">\n    \n    <div class=\"header\">\n      <h2 style=\"margin:0;\">Aprobación Requerida</h2>\n    </div>\n\n    <div class=\"content\">\n      <h3>Se requiere aprobación de una historia</h3>\n\n      <div class=\"preview-box\">\n        <p style=\"margin-top: 0; margin-bottom: 10px; font-weight: bold; color: #555;\">\n          Vista previa:\n        </p>\n        \n        <img src=\"{{ $('Edit Fields').item.json.vista_previa }}\" alt=\"Vista Previa\">\n      </div>\n\n      <a href=\"https://n8n.tailwind.es/webhook/historiaCamara?idHistoria={{ $('Edit Fields').item.json.story_url }}&requestId={{ $('Edit Fields').item.json['token único'] }}\" class=\"btn-confirmar\">\n        Aprobar Historia\n      </a>\n      <a href=\"https://n8n.tailwind.es/webhook/historiaPospuesta?requestId={{ $('Edit Fields').item.json['token único'] }}\" class=\"btn-confirmar\">\n        Posponer 30 minutos\n      </a>\n      <a href=\"https://n8n.tailwind.es/webhook/rechazarHistoria?origen=historiaWebcam&contenido=HistoriaRechazada&idHistoria={{ $('Edit Fields').item.json.story_url }}&requestId={{ $('Edit Fields').item.json['token único'] }}\" class=\"btn-confirmar\">\n        Rechazar\n      </a>\n    </div>\n\n    <div style=\"background-color: #eeeeee; padding: 10px; text-align: center; font-size: 12px; color: #777;\">\n      Enviado automáticamente desde n8n\n    </div>\n\n  </div>\n\n</body>\n</html>",
           "options": {}
         },
         "type": "n8n-nodes-base.gmail",
         "typeVersion": 2.2,
         "position": [
-          560,
+          1136,
           80
         ],
         "id": "73308a25-8f99-40b8-9ef3-0317f097cfcb",
@@ -523,8 +518,8 @@
         "type": "n8n-nodes-base.respondToWebhook",
         "typeVersion": 1.5,
         "position": [
-          -880,
-          848
+          -432,
+          416
         ],
         "id": "3d9447d2-f241-43a3-80ce-1688f72900e5",
         "name": "Respond to Webhook"
@@ -538,8 +533,8 @@
         "type": "n8n-nodes-base.respondToWebhook",
         "typeVersion": 1.5,
         "position": [
-          -1520,
-          384
+          -1568,
+          368
         ],
         "id": "3a961a4f-a452-4c7d-adca-015e96491d83",
         "name": "Respond to Webhook1"
@@ -553,7 +548,7 @@
         "type": "n8n-nodes-base.webhook",
         "typeVersion": 2.1,
         "position": [
-          -1680,
+          -2192,
           384
         ],
         "id": "9a115c23-aedd-4865-bd46-2f851d98028c",
@@ -567,8 +562,8 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          -1360,
-          384
+          -1392,
+          368
         ],
         "id": "35d19881-992b-4494-a591-18f39361266c",
         "name": "esperar 30 minutos",
@@ -583,8 +578,8 @@
         "type": "n8n-nodes-base.webhook",
         "typeVersion": 2.1,
         "position": [
-          -1232,
-          -352
+          -800,
+          960
         ],
         "id": "7facb56f-f11a-4b0c-8a73-2a1872b6bcc7",
         "name": "rechazarHistoria",
@@ -597,25 +592,25 @@
               {
                 "id": "1fc1ee34-829a-45a3-a4af-fa95470d9512",
                 "name": "ORIGEN",
-                "value": "={{ $('Webhook').item.json.query.origen }}",
+                "value": "={{ $('rechazarHistoria').item.json.query.origen }}",
                 "type": "string"
               },
               {
                 "id": "348d16fa-a017-44c5-9879-665a4936a387",
                 "name": "CONTENIDO",
-                "value": "={{ $('Webhook').item.json.query.contenido }}",
-                "type": "string"
-              },
-              {
-                "id": "93855f27-f03b-443c-82bf-153d717f2a4d",
-                "name": "ID_FLOW",
-                "value": "={{ $json.query.idFlow }}",
+                "value": "={{ $('rechazarHistoria').item.json.query.contenido }}",
                 "type": "string"
               },
               {
                 "id": "43b297bb-9d8d-4af2-97b0-0ddb4711edd1",
                 "name": "MAS",
-                "value": "={{ $json.query.idHistoria }}",
+                "value": "={{ $('rechazarHistoria').item.json.query.idHistoria }}",
+                "type": "string"
+              },
+              {
+                "id": "787399fb-18dd-4255-93a1-09ff792ba1de",
+                "name": "requestId",
+                "value": "={{ $now.toFormat('yyyyMMddHHmmss') + Math.floor(Math.random()*1000) + 1 }}",
                 "type": "string"
               }
             ]
@@ -625,8 +620,8 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          -1072,
-          -352
+          -176,
+          944
         ],
         "id": "a151d550-695a-4b66-8dc1-8b96ac126da1",
         "name": "datosRechazar"
@@ -634,14 +629,14 @@
       {
         "parameters": {
           "respondWith": "text",
-          "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Confirmación</title>\n  <style>\n    body {\n      font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif;\n      background-color: #f3f4f6;\n      display: flex;\n      justify-content: center;\n      align-items: center;\n      height: 100vh;\n      margin: 0;\n    }\n    .card {\n      background: white;\n      padding: 40px;\n      border-radius: 12px;\n      box-shadow: 0 10px 25px rgba(0,0,0,0.1);\n      text-align: center;\n      max-width: 400px;\n      border-top: 6px solid #ef4444;\n    }\n    h2 { color: #1f2937; margin-top: 0; font-size: 24px; }\n    p { color: #4b5563; margin: 10px 0; font-size: 16px; }\n    .warning { color: #ef4444; font-weight: bold; margin-bottom: 25px; display: block; }\n    .btn-container { display: flex; gap: 15px; justify-content: center; margin-top: 20px; }\n    \n    /* Estilos de los botones (Enlaces) */\n    .btn {\n      text-decoration: none;\n      padding: 12px 30px;\n      border-radius: 6px;\n      font-weight: bold;\n      font-size: 16px;\n      transition: opacity 0.2s;\n      display: inline-block;\n    }\n    .btn:hover { opacity: 0.8; }\n    \n    /* Botón SI (Acción de Webhook) */\n    .btn-si { background-color: #ef4444; color: white; }\n    \n    /* Botón NO (Cancelar) */\n    .btn-no { background-color: #e5e7eb; color: #374151; }\n  </style>\n</head>\n<body>\n\n  <div class=\"card\">\n    <h2>⚠️ Atención</h2>\n    <p>Estás a punto de rechazar.</p>\n    <p>Esta acción no se puede deshacer.</p>\n    <span class=\"warning\">¿Estás seguro?</span>\n\n    <div class=\"btn-container\">\n      <a href=\"https://n8n.tailwind.es/webhook-test/nothingBoxSi?origen={{ $json.ORIGEN }}&contenido={{ $json.CONTENIDO }}&estado=rechazado&idFlow={{ $json.ID_FLOW }}&mas={{ $json.MAS }}\" class=\"btn btn-si\">SÍ</a>\n\n      <a href=\"https://n8n.tailwind.es/webhook-test/nothingBoxSi?origen={{ $json.ORIGEN }}&contenido={{ $json.CONTENIDO }}&estado=noRechazado&idFlow={{ $json.ID_FLOW }}&mas={{ $json.MAS }}\" class=\"btn btn-no\">NO</a>\n    </div>\n  </div>\n\n</body>\n</html>",
+          "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Confirmación</title>\n  <style>\n    body {\n      font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif;\n      background-color: #f3f4f6;\n      display: flex;\n      justify-content: center;\n      align-items: center;\n      height: 100vh;\n      margin: 0;\n    }\n    .card {\n      background: white;\n      padding: 40px;\n      border-radius: 12px;\n      box-shadow: 0 10px 25px rgba(0,0,0,0.1);\n      text-align: center;\n      max-width: 400px;\n      border-top: 6px solid #ef4444;\n    }\n    h2 { color: #1f2937; margin-top: 0; font-size: 24px; }\n    p { color: #4b5563; margin: 10px 0; font-size: 16px; }\n    .warning { color: #ef4444; font-weight: bold; margin-bottom: 25px; display: block; }\n    .btn-container { display: flex; gap: 15px; justify-content: center; margin-top: 20px; }\n    \n    /* Estilos de los botones (Enlaces) */\n    .btn {\n      text-decoration: none;\n      padding: 12px 30px;\n      border-radius: 6px;\n      font-weight: bold;\n      font-size: 16px;\n      transition: opacity 0.2s;\n      display: inline-block;\n    }\n    .btn:hover { opacity: 0.8; }\n    \n    /* Botón SI (Acción de Webhook) */\n    .btn-si { background-color: #ef4444; color: white; }\n    \n    /* Botón NO (Cancelar) */\n    .btn-no { background-color: #e5e7eb; color: #374151; }\n  </style>\n</head>\n<body>\n\n  <div class=\"card\">\n    <h2>⚠️ Atención</h2>\n    <p>Estás a punto de rechazar.</p>\n    <p>Esta acción no se puede deshacer.</p>\n    <span class=\"warning\">¿Estás seguro?</span>\n\n    <div class=\"btn-container\">\n      <a href=\"https://n8n.tailwind.es/webhook-test/rechazarSi?origen={{ $('datosRechazar').item.json.ORIGEN }}&contenido={{ $('datosRechazar').item.json.CONTENIDO }}&estado=rechazado&requestId={{ $json.requestId }}\" class=\"btn btn-si\">SÍ</a>\n\n      <a href=\"https://n8n.tailwind.es/webhook-test/rechazarSi?origen={{ $('datosRechazar').item.json.ORIGEN }}&contenido={{ $('datosRechazar').item.json.CONTENIDO }}&estado=noRechazado&requestId={{ $json.requestId }}\" class=\"btn btn-no\">NO</a>\n    </div>\n  </div>\n\n</body>\n</html>",
           "options": {}
         },
         "type": "n8n-nodes-base.respondToWebhook",
         "typeVersion": 1.5,
         "position": [
-          -912,
-          -352
+          144,
+          944
         ],
         "id": "54afc9b8-4f0c-49bf-96af-f83d961af8a8",
         "name": "Respond to Webhook Rechazar"
@@ -651,10 +646,10 @@
           "operation": "update",
           "dataTableId": {
             "__rl": true,
-            "value": "FnOKQ90bd0CxI2H5",
+            "value": "7t1UIjvma8hSpdjP",
             "mode": "list",
-            "cachedResultName": "nothingbox",
-            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/FnOKQ90bd0CxI2H5"
+            "cachedResultName": "historia_camaras",
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
           },
           "filters": {
             "conditions": [
@@ -667,12 +662,32 @@
             "mappingMode": "defineBelow",
             "value": {
               "contador": "={{ $json.row_number + 1}}",
-              "contador_no_rechazados": "={{ $('obtener contador').item.json.contador_no_rechazados }}"
+              "contador_no_rechazado": 0
             },
             "matchingColumns": [
               "contador"
             ],
             "schema": [
+              {
+                "id": "requestId",
+                "displayName": "requestId",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "readOnly": false,
+                "removed": false
+              },
+              {
+                "id": "Estado",
+                "displayName": "Estado",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "readOnly": false,
+                "removed": false
+              },
               {
                 "id": "contador",
                 "displayName": "contador",
@@ -684,8 +699,8 @@
                 "removed": false
               },
               {
-                "id": "contador_no_rechazados",
-                "displayName": "contador_no_rechazados",
+                "id": "contador_no_rechazado",
+                "displayName": "contador_no_rechazado",
                 "required": false,
                 "defaultMatch": false,
                 "display": true,
@@ -702,8 +717,8 @@
         "type": "n8n-nodes-base.dataTable",
         "typeVersion": 1.1,
         "position": [
-          656,
-          -512
+          912,
+          1344
         ],
         "id": "9b26fb52-e2b7-4b2a-9cdc-4e0e1f334c22",
         "name": "sumar contador"
@@ -729,6 +744,12 @@
                 "name": "CONTADOR",
                 "value": "={{ $json.contador }}",
                 "type": "number"
+              },
+              {
+                "id": "5bbb4b39-9485-415b-a1ea-7fac0e20f99f",
+                "name": "token_unico",
+                "value": "",
+                "type": "string"
               }
             ]
           },
@@ -737,8 +758,8 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          320,
-          -512
+          560,
+          1344
         ],
         "id": "5a228376-6e29-480e-b480-f2efb1ca87ca",
         "name": "datos"
@@ -807,8 +828,8 @@
         "type": "n8n-nodes-base.googleSheets",
         "typeVersion": 4.7,
         "position": [
-          480,
-          -512
+          752,
+          1344
         ],
         "id": "5a709dcd-83fe-4fa9-a663-a33d0c1dae45",
         "name": "escribir datos",
@@ -828,8 +849,8 @@
         "type": "n8n-nodes-base.webhook",
         "typeVersion": 2.1,
         "position": [
-          -544,
-          -352
+          -800,
+          1520
         ],
         "id": "34425f3d-064a-4a05-a5ee-152a7d25b887",
         "name": "si",
@@ -840,10 +861,10 @@
           "operation": "get",
           "dataTableId": {
             "__rl": true,
-            "value": "FnOKQ90bd0CxI2H5",
+            "value": "7t1UIjvma8hSpdjP",
             "mode": "list",
-            "cachedResultName": "nothingbox",
-            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/FnOKQ90bd0CxI2H5"
+            "cachedResultName": "historia_camaras",
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
           },
           "filters": {
             "conditions": [
@@ -856,8 +877,8 @@
         "type": "n8n-nodes-base.dataTable",
         "typeVersion": 1.1,
         "position": [
-          160,
-          -512
+          192,
+          1344
         ],
         "id": "b626e203-21c2-4c8a-9cff-385723289213",
         "name": "obtener contador"
@@ -918,8 +939,8 @@
         "type": "n8n-nodes-base.dataTable",
         "typeVersion": 1.1,
         "position": [
-          672,
-          -224
+          912,
+          1632
         ],
         "id": "a6e39b97-25d6-4978-b2f6-c7b390801524",
         "name": "sumar contador1"
@@ -953,8 +974,8 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          336,
-          -224
+          576,
+          1632
         ],
         "id": "0ccd4143-6dc7-4a5e-a34e-bc8be3cd37b6",
         "name": "datos2"
@@ -1023,8 +1044,8 @@
         "type": "n8n-nodes-base.googleSheets",
         "typeVersion": 4.7,
         "position": [
-          496,
-          -224
+          736,
+          1632
         ],
         "id": "427cb2ff-b459-4736-95ab-2e372b34dfa5",
         "name": "escribir datos1",
@@ -1040,10 +1061,10 @@
           "operation": "get",
           "dataTableId": {
             "__rl": true,
-            "value": "FnOKQ90bd0CxI2H5",
+            "value": "7t1UIjvma8hSpdjP",
             "mode": "list",
-            "cachedResultName": "nothingbox",
-            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/FnOKQ90bd0CxI2H5"
+            "cachedResultName": "historia_camaras",
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
           },
           "filters": {
             "conditions": [
@@ -1057,7 +1078,7 @@
         "typeVersion": 1.1,
         "position": [
           176,
-          -224
+          1632
         ],
         "id": "f901e8c3-08ec-4bdf-9470-803fbbf9847e",
         "name": "obtener contador1"
@@ -1065,58 +1086,17 @@
       {
         "parameters": {
           "respondWith": "text",
-          "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Selección de Acción</title>\n    <style>\n        body {\n            font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif;\n            background-color: #f3f4f6;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            height: 100vh;\n            margin: 0;\n        }\n        .card {\n            background: white;\n            padding: 40px;\n            border-radius: 12px;\n            box-shadow: 0 10px 25px rgba(0,0,0,0.1);\n            text-align: center;\n            max-width: 450px; /* Un poco más ancho para que quepan los textos */\n            width: 90%;\n            border-top: 6px solid #3b82f6; /* Azul Informativo */\n        }\n        .icon {\n            font-size: 50px;\n            margin-bottom: 15px;\n            display: block;\n        }\n        h2 { \n            color: #1f2937; \n            margin-top: 0; \n            font-size: 24px; \n        }\n        p { \n            color: #4b5563; \n            margin: 10px 0 30px 0; \n            font-size: 18px; \n        }\n        .btn-container { \n            display: flex; \n            flex-direction: column; /* Botones uno encima de otro para mejor lectura en móvil */\n            gap: 15px; \n            justify-content: center; \n        }\n        \n        /* Estilos Base de Botones */\n        .btn {\n            text-decoration: none;\n            padding: 15px 20px;\n            border-radius: 8px;\n            font-weight: bold;\n            font-size: 16px;\n            transition: transform 0.1s, opacity 0.2s;\n            display: block;\n            text-align: center;\n            box-shadow: 0 2px 4px rgba(0,0,0,0.1);\n        }\n        .btn:hover { opacity: 0.9; transform: translateY(-1px); }\n        .btn:active { transform: translateY(1px); }\n        \n        /* Botón Posponer (Naranja - Tiempo) */\n        .btn-posponer { \n            background-color: #f59e0b; \n            color: white; \n        }\n        \n        /* Botón Aceptar (Azul - Acción Principal) */\n        .btn-aceptar { \n            background-color: #3b82f6; \n            color: white; \n        }\n\n    </style>\n</head>\n<body>\n\n    <div class=\"card\">\n        <span class=\"icon\">🤔</span>\n        \n        <h2>No se ha rechazado</h2>\n        <p>¿Qué quieres hacer?</p>\n\n        <div class=\"btn-container\">\n            <a href=\"REEMPLAZAR_URL_POSPONER\" class=\"btn btn-posponer\">\n                ⏱️ POSPONER 30 MINUTOS\n            </a>\n\n            <a href=\"REEMPLAZAR_URL_ACEPTAR\" class=\"btn btn-aceptar\">\n                ✅ ACEPTAR\n            </a>\n        </div>\n    </div>\n\n</body>\n</html>",
+          "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Selección de Acción</title>\n    <style>\n        body {\n            font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif;\n            background-color: #f3f4f6;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            height: 100vh;\n            margin: 0;\n        }\n        .card {\n            background: white;\n            padding: 40px;\n            border-radius: 12px;\n            box-shadow: 0 10px 25px rgba(0,0,0,0.1);\n            text-align: center;\n            max-width: 450px; /* Un poco más ancho para que quepan los textos */\n            width: 90%;\n            border-top: 6px solid #3b82f6; /* Azul Informativo */\n        }\n        .icon {\n            font-size: 50px;\n            margin-bottom: 15px;\n            display: block;\n        }\n        h2 { \n            color: #1f2937; \n            margin-top: 0; \n            font-size: 24px; \n        }\n        p { \n            color: #4b5563; \n            margin: 10px 0 30px 0; \n            font-size: 18px; \n        }\n        .btn-container { \n            display: flex; \n            flex-direction: column; /* Botones uno encima de otro para mejor lectura en móvil */\n            gap: 15px; \n            justify-content: center; \n        }\n        \n        /* Estilos Base de Botones */\n        .btn {\n            text-decoration: none;\n            padding: 15px 20px;\n            border-radius: 8px;\n            font-weight: bold;\n            font-size: 16px;\n            transition: transform 0.1s, opacity 0.2s;\n            display: block;\n            text-align: center;\n            box-shadow: 0 2px 4px rgba(0,0,0,0.1);\n        }\n        .btn:hover { opacity: 0.9; transform: translateY(-1px); }\n        .btn:active { transform: translateY(1px); }\n        \n        /* Botón Posponer (Naranja - Tiempo) */\n        .btn-posponer { \n            background-color: #f59e0b; \n            color: white; \n        }\n        \n        /* Botón Aceptar (Azul - Acción Principal) */\n        .btn-aceptar { \n            background-color: #3b82f6; \n            color: white; \n        }\n\n    </style>\n</head>\n<body>\n\n    <div class=\"card\">\n        <span class=\"icon\">🤔</span>\n        \n        <h2>No se ha rechazado</h2>\n        <p>¿Qué quieres hacer?</p>\n\n        <div class=\"btn-container\">\n            <a href=\"https://n8n.tailwind.es/webhook/historiaPospuesta?requestId=\" class=\"btn btn-posponer\">\n                ⏱️ POSPONER 30 MINUTOS\n            </a>\n\n            <a href=\"https://n8n.tailwind.es/webhook/historiaCamara\" class=\"btn btn-aceptar\">\n                ✅ ACEPTAR HISTORIA\n            </a>\n        </div>\n    </div>\n\n</body>\n</html>",
           "options": {}
         },
         "type": "n8n-nodes-base.respondToWebhook",
         "typeVersion": 1.5,
         "position": [
           0,
-          -224
+          1632
         ],
         "id": "271a6a4d-599d-455c-b699-86c5d10eed12",
         "name": "Respond to Webhook2"
-      },
-      {
-        "parameters": {
-          "assignments": {
-            "assignments": [
-              {
-                "id": "284b2492-0b5d-46f4-89df-663f252068cf",
-                "name": "",
-                "value": "",
-                "type": "string"
-              },
-              {
-                "id": "da67b1b5-9751-40e0-a4b8-31d51d15c6c9",
-                "name": "",
-                "value": "",
-                "type": "string"
-              },
-              {
-                "id": "23a32b17-5967-4fd9-b9e1-d7891c740482",
-                "name": "",
-                "value": "",
-                "type": "string"
-              },
-              {
-                "id": "7a5c6c5f-9d94-496b-8e36-192286d69c5e",
-                "name": "",
-                "value": "",
-                "type": "string"
-              }
-            ]
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.set",
-        "typeVersion": 3.4,
-        "position": [
-          -384,
-          -352
-        ],
-        "id": "4cb7dd56-6534-4a59-8595-8a6832725ae0",
-        "name": "datos_si_no"
       },
       {
         "parameters": {
@@ -1130,7 +1110,7 @@
             "conditions": [
               {
                 "id": "eb37d92a-214b-46d4-9bab-842c86e8e860",
-                "leftValue": "={{ $json.query.estado }}",
+                "leftValue": "={{ $('si').item.json.query.estado }}",
                 "rightValue": "rechazado",
                 "operator": {
                   "type": "string",
@@ -1145,8 +1125,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          -192,
-          -352
+          -176,
+          1504
         ],
         "id": "b0625766-366e-4d16-8e08-d72254e31bca",
         "name": "If2"
@@ -1161,24 +1141,1003 @@
         "typeVersion": 1.5,
         "position": [
           0,
-          -512
+          1344
         ],
         "id": "4568449c-95d0-4ca1-9824-cee5dae22b44",
         "name": "Respond to Webhook3"
+      },
+      {
+        "parameters": {
+          "content": "Rechazar la historia",
+          "height": 352,
+          "width": 1136,
+          "color": 3
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -848,
+          896
+        ],
+        "id": "b393dd20-107f-48c5-ac15-36dc31f38403",
+        "name": "Sticky Note6"
+      },
+      {
+        "parameters": {
+          "content": "No rechazar",
+          "height": 192,
+          "width": 1136,
+          "color": 5
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -48,
+          1600
+        ],
+        "id": "f9957b2d-da8a-4e68-a24a-bb35a129a80b",
+        "name": "Sticky Note7"
+      },
+      {
+        "parameters": {
+          "content": "Rechazar\n",
+          "height": 192,
+          "width": 1136,
+          "color": 4
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -48,
+          1312
+        ],
+        "id": "16b3166a-3479-405e-aa50-c151195bf1e4",
+        "name": "Sticky Note8"
+      },
+      {
+        "parameters": {
+          "rule": {
+            "interval": [
+              {
+                "triggerAtHour": 21
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "typeVersion": 1.3,
+        "position": [
+          -1648,
+          -64
+        ],
+        "id": "49fa25e5-f301-4918-84b1-47aa1e2acd37",
+        "name": "Ejecución diaria"
+      },
+      {
+        "parameters": {
+          "respondWith": "text",
+          "responseBody": "<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Workflow Activado</title>\n    <style>\n        body {\n            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n            background-color: #f4f7f9;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            height: 100vh;\n            margin: 0;\n        }\n        .card {\n            background: white;\n            padding: 2rem;\n            border-radius: 12px;\n            box-shadow: 0 4px 15px rgba(0,0,0,0.1);\n            text-align: center;\n            max-width: 400px;\n        }\n        .icon {\n            font-size: 50px;\n            color: #4CAF50;\n            margin-bottom: 1rem;\n        }\n        h1 {\n            color: #333;\n            font-size: 24px;\n            margin-bottom: 10px;\n        }\n        p {\n            color: #666;\n            line-height: 1.6;\n            margin-bottom: 20px;\n        }\n        .footer-text {\n            font-size: 0.9rem;\n            color: #999;\n            border-top: 1px solid #eee;\n            padding-top: 15px;\n        }\n    </style>\n</head>\n<body>\n    <div class=\"card\">\n        <div class=\"icon\">✅</div>\n        <h1>Se ha activado el workflow</h1>\n        <p>Se te enviará un correo con la información necesaria.</p>\n        <div class=\"footer-text\">\n            Ya puedes cerrar esta página de forma segura.\n        </div>\n    </div>\n</body>\n</html>",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.5,
+        "position": [
+          -1648,
+          160
+        ],
+        "id": "7ceb85e6-bb7d-47fd-b8d6-af1d92d4cfb0",
+        "name": "Respond to Webhook4"
+      },
+      {
+        "parameters": {
+          "path": "activarHistoriaCamara",
+          "responseMode": "responseNode",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -1840,
+          160
+        ],
+        "id": "df127ed2-3c87-4160-830d-2ab6edc39580",
+        "name": "Activación manual remota",
+        "webhookId": "2cc4c66e-9fae-4eb2-a1f9-6fbe1abec15e"
+      },
+      {
+        "parameters": {
+          "amount": 1
+        },
+        "type": "n8n-nodes-base.wait",
+        "typeVersion": 1.1,
+        "position": [
+          -1488,
+          160
+        ],
+        "id": "5454579a-3c68-4fb2-8967-515db88c6f90",
+        "name": "Wait1",
+        "webhookId": "2cd1ba59-5dcf-4ec3-a263-ca35ab61909c"
+      },
+      {
+        "parameters": {
+          "content": "CONDICIÓN RECHAZAR\nEs lo que sale en la página de \"Estás seguro de que quieres rechazar la historia?\"",
+          "height": 592,
+          "width": 1952,
+          "color": 6
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -848,
+          1264
+        ],
+        "id": "934684ff-df35-424b-a3a4-87186ad5bf38",
+        "name": "Sticky Note9"
+      },
+      {
+        "parameters": {
+          "content": "Esta es la página de cuando le das a rechazar historia en la página principal, está enlazada directamente al flow de justo abajo, donde se decide si realmente estás seguro de rechazarla",
+          "height": 224,
+          "width": 256,
+          "color": 3
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          304,
+          896
+        ],
+        "id": "e1a41ebd-fd17-46fd-a8fc-435f4908ac65",
+        "name": "Sticky Note10"
+      },
+      {
+        "parameters": {
+          "content": "Esta parte gestiona si el usuario está seguro de rechazar la historia.\nLa opción de rechazar apunta la acción en el informe y no hace nada más.\nLa opción de no rechazar redirige a otra página en la que se elige que se quiere hacer con la historia, si posponerla o subirla, cada uno de esos botones está enlazado por medio de webhooks con las opciones correspondientes para cada uno",
+          "height": 224,
+          "width": 464,
+          "color": 6
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          576,
+          896
+        ],
+        "id": "146710dc-5953-449c-9284-7287154ae1fb",
+        "name": "Sticky Note11"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "dataTableId": {
+            "__rl": true,
+            "value": "7t1UIjvma8hSpdjP",
+            "mode": "list",
+            "cachedResultName": "historia_camaras",
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
+          },
+          "filters": {
+            "conditions": [
+              {
+                "keyValue": "1"
+              }
+            ]
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "requestId": "={{ $('Edit Fields').item.json[\"token único\"] }}",
+              "Estado": "Pendiente"
+            },
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "requestId",
+                "displayName": "requestId",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "readOnly": false,
+                "removed": false
+              },
+              {
+                "id": "Estado",
+                "displayName": "Estado",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "readOnly": false,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.dataTable",
+        "typeVersion": 1.1,
+        "position": [
+          992,
+          80
+        ],
+        "id": "437682ee-5a25-49aa-a87c-95bceec4456f",
+        "name": "escribir pendiente requestId"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "dataTableId": {
+            "__rl": true,
+            "value": "7t1UIjvma8hSpdjP",
+            "mode": "list",
+            "cachedResultName": "historia_camaras",
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
+          },
+          "filters": {
+            "conditions": [
+              {
+                "keyValue": "1"
+              }
+            ]
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "Estado": "Procesado",
+              "requestId": "={{ $json.query.requestId }}"
+            },
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "requestId",
+                "displayName": "requestId",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "readOnly": false,
+                "removed": false
+              },
+              {
+                "id": "Estado",
+                "displayName": "Estado",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "readOnly": false,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.dataTable",
+        "typeVersion": 1.1,
+        "position": [
+          -1744,
+          368
+        ],
+        "id": "a722f57b-1ff2-404b-8135-97b8d6f398bc",
+        "name": "Update row(s)"
+      },
+      {
+        "parameters": {
+          "respondWith": "text",
+          "responseBody": "ERROR PAYASO",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.5,
+        "position": [
+          -1744,
+          528
+        ],
+        "id": "22844fce-9827-448c-98c2-3fc53ba79dfb",
+        "name": "link usado"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "bb4ead3b-31e0-42d9-9723-16b6693cfa68",
+                "leftValue": "={{ $json.Estado }}",
+                "rightValue": "Pendiente",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals",
+                  "name": "filter.operator.equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          -480,
+          960
+        ],
+        "id": "a8f2261d-1f85-466a-82c9-bea578ef845b",
+        "name": "If4"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "dataTableId": {
+            "__rl": true,
+            "value": "7t1UIjvma8hSpdjP",
+            "mode": "list",
+            "cachedResultName": "historia_camaras",
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
+          },
+          "filters": {
+            "conditions": [
+              {
+                "keyValue": "1"
+              }
+            ]
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "Estado": "Procesado",
+              "requestId": "={{ $json.requestId }}"
+            },
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "requestId",
+                "displayName": "requestId",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "readOnly": false,
+                "removed": false
+              },
+              {
+                "id": "Estado",
+                "displayName": "Estado",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "readOnly": false,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.dataTable",
+        "typeVersion": 1.1,
+        "position": [
+          -320,
+          944
+        ],
+        "id": "4315edff-d643-4513-bd18-b5cdf6465230",
+        "name": "Update row(s)1"
+      },
+      {
+        "parameters": {
+          "respondWith": "text",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.5,
+        "position": [
+          -288,
+          1104
+        ],
+        "id": "f04e6d08-bf1c-46c8-a736-68be1f0df447",
+        "name": "link usado1"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "dataTableId": {
+            "__rl": true,
+            "value": "7t1UIjvma8hSpdjP",
+            "mode": "list",
+            "cachedResultName": "historia_camaras",
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
+          },
+          "filters": {
+            "conditions": [
+              {
+                "keyValue": "1"
+              }
+            ]
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "Estado": "Procesado",
+              "requestId": "={{ $json.query.requestId }}"
+            },
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "requestId",
+                "displayName": "requestId",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "readOnly": false,
+                "removed": false
+              },
+              {
+                "id": "Estado",
+                "displayName": "Estado",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "readOnly": false,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.dataTable",
+        "typeVersion": 1.1,
+        "position": [
+          -752,
+          416
+        ],
+        "id": "1bf076e3-c508-4c08-a928-cf2a6474b24b",
+        "name": "Update row(s)2"
+      },
+      {
+        "parameters": {
+          "respondWith": "text",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.5,
+        "position": [
+          -736,
+          576
+        ],
+        "id": "2fa3e887-f926-4fc3-9890-d18667c6e5d3",
+        "name": "link usado2"
+      },
+      {
+        "parameters": {
+          "operation": "get",
+          "dataTableId": {
+            "__rl": true,
+            "value": "7t1UIjvma8hSpdjP",
+            "mode": "list",
+            "cachedResultName": "historia_camaras",
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
+          },
+          "filters": {
+            "conditions": [
+              {
+                "keyName": "requestId",
+                "keyValue": "={{ $json.query.requestId }}"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.dataTable",
+        "typeVersion": 1.1,
+        "position": [
+          -624,
+          960
+        ],
+        "id": "6ed9fc83-3de6-4eb1-90c0-b3ece5c31121",
+        "name": "Get row(s)"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "bb4ead3b-31e0-42d9-9723-16b6693cfa68",
+                "leftValue": "={{ $json.Estado }}",
+                "rightValue": "Pendiente",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals",
+                  "name": "filter.operator.equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          -896,
+          432
+        ],
+        "id": "bc9646ee-9aa2-49e9-98c3-d2129c4d40ed",
+        "name": "If6"
+      },
+      {
+        "parameters": {
+          "operation": "get",
+          "dataTableId": {
+            "__rl": true,
+            "value": "7t1UIjvma8hSpdjP",
+            "mode": "list",
+            "cachedResultName": "historia_camaras",
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
+          },
+          "filters": {
+            "conditions": [
+              {
+                "keyName": "requestId",
+                "keyValue": "={{ $json.query.requestId }}"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.dataTable",
+        "typeVersion": 1.1,
+        "position": [
+          -1024,
+          432
+        ],
+        "id": "1fe830b2-137f-49c4-a4b4-0b2d4c88b6ed",
+        "name": "Get row(s)1"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "bb4ead3b-31e0-42d9-9723-16b6693cfa68",
+                "leftValue": "={{ $json.Estado }}",
+                "rightValue": "Pendiente",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals",
+                  "name": "filter.operator.equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          -1904,
+          384
+        ],
+        "id": "82bf3a57-5a60-4aa3-855b-22c03e5fac1b",
+        "name": "If5"
+      },
+      {
+        "parameters": {
+          "operation": "get",
+          "dataTableId": {
+            "__rl": true,
+            "value": "7t1UIjvma8hSpdjP",
+            "mode": "list",
+            "cachedResultName": "historia_camaras",
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
+          },
+          "filters": {
+            "conditions": [
+              {
+                "keyName": "requestId",
+                "keyValue": "="
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.dataTable",
+        "typeVersion": 1.1,
+        "position": [
+          -2048,
+          384
+        ],
+        "id": "aefe1f33-7e4b-412a-acb8-f38b9d5a7615",
+        "name": "Get row(s)2"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "bb4ead3b-31e0-42d9-9723-16b6693cfa68",
+                "leftValue": "={{ $json.Estado }}",
+                "rightValue": "Pendiente",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals",
+                  "name": "filter.operator.equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          -528,
+          1520
+        ],
+        "id": "a29ad6e0-9684-41a9-a35d-b330be843b65",
+        "name": "If7"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "dataTableId": {
+            "__rl": true,
+            "value": "7t1UIjvma8hSpdjP",
+            "mode": "list",
+            "cachedResultName": "historia_camaras",
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
+          },
+          "filters": {
+            "conditions": [
+              {
+                "keyValue": "1"
+              }
+            ]
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "requestId": "={{ $json.requestId }}",
+              "Estado": "Pendiente"
+            },
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "requestId",
+                "displayName": "requestId",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "readOnly": false,
+                "removed": false
+              },
+              {
+                "id": "Estado",
+                "displayName": "Estado",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "readOnly": false,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.dataTable",
+        "typeVersion": 1.1,
+        "position": [
+          -336,
+          1504
+        ],
+        "id": "d8e2fa43-6737-4dc6-b59d-743744cf89b5",
+        "name": "Update row(s)3"
+      },
+      {
+        "parameters": {
+          "respondWith": "text",
+          "responseBody": "ERROR PAYASO",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.5,
+        "position": [
+          -320,
+          1664
+        ],
+        "id": "1693023a-5189-416e-9eb1-b33b8edff778",
+        "name": "link usado3"
+      },
+      {
+        "parameters": {
+          "operation": "get",
+          "dataTableId": {
+            "__rl": true,
+            "value": "7t1UIjvma8hSpdjP",
+            "mode": "list",
+            "cachedResultName": "historia_camaras",
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
+          },
+          "filters": {
+            "conditions": [
+              {
+                "keyName": "requestId",
+                "keyValue": "={{ $json.query.requestId }}"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.dataTable",
+        "typeVersion": 1.1,
+        "position": [
+          -656,
+          1520
+        ],
+        "id": "abf5bd4f-80a9-4601-9f5e-b06433f6d1ec",
+        "name": "Get row(s)3"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "dataTableId": {
+            "__rl": true,
+            "value": "7t1UIjvma8hSpdjP",
+            "mode": "list",
+            "cachedResultName": "historia_camaras",
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
+          },
+          "filters": {
+            "conditions": [
+              {
+                "keyValue": "2"
+              }
+            ]
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "requestId": "={{ $json.requestId }}",
+              "Estado": "Pendiente"
+            },
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "requestId",
+                "displayName": "requestId",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "readOnly": false,
+                "removed": false
+              },
+              {
+                "id": "Estado",
+                "displayName": "Estado",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "readOnly": false,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.dataTable",
+        "typeVersion": 1.1,
+        "position": [
+          -16,
+          944
+        ],
+        "id": "a80b5b0e-b7a7-447d-89b4-27c34e21d766",
+        "name": "Update row(s)4"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "dataTableId": {
+            "__rl": true,
+            "value": "7t1UIjvma8hSpdjP",
+            "mode": "list",
+            "cachedResultName": "historia_camaras",
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
+          },
+          "filters": {
+            "conditions": [
+              {
+                "keyValue": "1"
+              }
+            ]
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "contador_no_rechazado": "={{ $json.contador_no_rechazado }}",
+              "Estado": "Procesado",
+              "contador": "={{ $json.contador }}",
+              "requestId": "={{ $json.requestId }}"
+            },
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "requestId",
+                "displayName": "requestId",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "readOnly": false,
+                "removed": false
+              },
+              {
+                "id": "Estado",
+                "displayName": "Estado",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "readOnly": false,
+                "removed": false
+              },
+              {
+                "id": "contador",
+                "displayName": "contador",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "readOnly": false,
+                "removed": false
+              },
+              {
+                "id": "contador_no_rechazado",
+                "displayName": "contador_no_rechazado",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "readOnly": false,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.dataTable",
+        "typeVersion": 1.1,
+        "position": [
+          384,
+          1344
+        ],
+        "id": "2108798b-f3e0-49a9-8b66-d1717b5b0ac0",
+        "name": "Update row(s)5"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "dataTableId": {
+            "__rl": true,
+            "value": "7t1UIjvma8hSpdjP",
+            "mode": "list",
+            "cachedResultName": "historia_camaras",
+            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
+          },
+          "filters": {
+            "conditions": [
+              {
+                "keyValue": "1"
+              }
+            ]
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "contador": "={{ $json.contador }}",
+              "contador_no_rechazado": "={{ $json.contador_no_rechazado }}",
+              "requestId": "={{ $json.requestId }}",
+              "Estado": "Pendiente"
+            },
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "requestId",
+                "displayName": "requestId",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "readOnly": false,
+                "removed": false
+              },
+              {
+                "id": "Estado",
+                "displayName": "Estado",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "readOnly": false,
+                "removed": false
+              },
+              {
+                "id": "contador",
+                "displayName": "contador",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "readOnly": false,
+                "removed": false
+              },
+              {
+                "id": "contador_no_rechazado",
+                "displayName": "contador_no_rechazado",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "readOnly": false,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.dataTable",
+        "typeVersion": 1.1,
+        "position": [
+          352,
+          1632
+        ],
+        "id": "8275308d-3e17-46d2-bd02-4264fafb95ac",
+        "name": "Update row(s)6"
       }
     ],
     "connections": {
-      "When clicking ‘Execute workflow’": {
-        "main": [
-          [
-            {
-              "node": "request_página_principal",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
       "HTTP Request3": {
         "main": [
           [
@@ -1267,7 +2226,7 @@
         "main": [
           [
             {
-              "node": "Send a message",
+              "node": "escribir pendiente requestId",
               "type": "main",
               "index": 0
             }
@@ -1378,7 +2337,7 @@
         "main": [
           [
             {
-              "node": "Facebook Graph API2",
+              "node": "Get row(s)1",
               "type": "main",
               "index": 0
             }
@@ -1416,7 +2375,7 @@
         "main": [
           [
             {
-              "node": "Respond to Webhook1",
+              "node": "Get row(s)2",
               "type": "main",
               "index": 0
             }
@@ -1438,7 +2397,7 @@
         "main": [
           [
             {
-              "node": "datosRechazar",
+              "node": "Get row(s)",
               "type": "main",
               "index": 0
             }
@@ -1449,7 +2408,7 @@
         "main": [
           [
             {
-              "node": "Respond to Webhook Rechazar",
+              "node": "Update row(s)4",
               "type": "main",
               "index": 0
             }
@@ -1482,7 +2441,7 @@
         "main": [
           [
             {
-              "node": "datos_si_no",
+              "node": "Get row(s)3",
               "type": "main",
               "index": 0
             }
@@ -1493,7 +2452,7 @@
         "main": [
           [
             {
-              "node": "datos",
+              "node": "Update row(s)5",
               "type": "main",
               "index": 0
             }
@@ -1526,7 +2485,7 @@
         "main": [
           [
             {
-              "node": "datos2",
+              "node": "Update row(s)6",
               "type": "main",
               "index": 0
             }
@@ -1538,17 +2497,6 @@
           [
             {
               "node": "obtener contador1",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "datos_si_no": {
-        "main": [
-          [
-            {
-              "node": "If2",
               "type": "main",
               "index": 0
             }
@@ -1583,26 +2531,263 @@
             }
           ]
         ]
+      },
+      "Ejecución diaria": {
+        "main": [
+          [
+            {
+              "node": "request_página_principal",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Respond to Webhook4": {
+        "main": [
+          [
+            {
+              "node": "Wait1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Activación manual remota": {
+        "main": [
+          [
+            {
+              "node": "Respond to Webhook4",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Wait1": {
+        "main": [
+          [
+            {
+              "node": "request_página_principal",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "escribir pendiente requestId": {
+        "main": [
+          [
+            {
+              "node": "Send a message",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Update row(s)": {
+        "main": [
+          [
+            {
+              "node": "Respond to Webhook1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If4": {
+        "main": [
+          [
+            {
+              "node": "Update row(s)1",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "link usado1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Update row(s)1": {
+        "main": [
+          [
+            {
+              "node": "datosRechazar",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Update row(s)2": {
+        "main": [
+          [
+            {
+              "node": "Facebook Graph API2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Get row(s)": {
+        "main": [
+          [
+            {
+              "node": "If4",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Get row(s)1": {
+        "main": [
+          [
+            {
+              "node": "If6",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If6": {
+        "main": [
+          [
+            {
+              "node": "Update row(s)2",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "link usado2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Get row(s)2": {
+        "main": [
+          [
+            {
+              "node": "If5",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If5": {
+        "main": [
+          [
+            {
+              "node": "Update row(s)",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "link usado",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If7": {
+        "main": [
+          [
+            {
+              "node": "Update row(s)3",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "link usado3",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Get row(s)3": {
+        "main": [
+          [
+            {
+              "node": "If7",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Update row(s)3": {
+        "main": [
+          [
+            {
+              "node": "If2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Update row(s)4": {
+        "main": [
+          [
+            {
+              "node": "Respond to Webhook Rechazar",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Update row(s)5": {
+        "main": [
+          [
+            {
+              "node": "datos",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Update row(s)6": {
+        "main": [
+          [
+            {
+              "node": "datos2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version 9f383328",
+    "name": "Version 6f1c0048",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "9f383328-d6b5-48a5-a555-665046f84a5b",
+  "activeVersionId": "6f1c0048-9d31-4449-96e9-38b1eaaccc0b",
   "connections": {
-    "When clicking ‘Execute workflow’": {
-      "main": [
-        [
-          {
-            "node": "request_página_principal",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "HTTP Request3": {
       "main": [
         [
@@ -1691,7 +2876,7 @@
       "main": [
         [
           {
-            "node": "Send a message",
+            "node": "escribir pendiente requestId",
             "type": "main",
             "index": 0
           }
@@ -1802,7 +2987,7 @@
       "main": [
         [
           {
-            "node": "Facebook Graph API2",
+            "node": "Get row(s)1",
             "type": "main",
             "index": 0
           }
@@ -1840,7 +3025,7 @@
       "main": [
         [
           {
-            "node": "Respond to Webhook1",
+            "node": "Get row(s)2",
             "type": "main",
             "index": 0
           }
@@ -1862,7 +3047,7 @@
       "main": [
         [
           {
-            "node": "datosRechazar",
+            "node": "Get row(s)",
             "type": "main",
             "index": 0
           }
@@ -1873,7 +3058,7 @@
       "main": [
         [
           {
-            "node": "Respond to Webhook Rechazar",
+            "node": "Update row(s)4",
             "type": "main",
             "index": 0
           }
@@ -1906,7 +3091,7 @@
       "main": [
         [
           {
-            "node": "datos_si_no",
+            "node": "Get row(s)3",
             "type": "main",
             "index": 0
           }
@@ -1917,7 +3102,7 @@
       "main": [
         [
           {
-            "node": "datos",
+            "node": "Update row(s)5",
             "type": "main",
             "index": 0
           }
@@ -1950,7 +3135,7 @@
       "main": [
         [
           {
-            "node": "datos2",
+            "node": "Update row(s)6",
             "type": "main",
             "index": 0
           }
@@ -1962,17 +3147,6 @@
         [
           {
             "node": "obtener contador1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "datos_si_no": {
-      "main": [
-        [
-          {
-            "node": "If2",
             "type": "main",
             "index": 0
           }
@@ -2007,6 +3181,254 @@
           }
         ]
       ]
+    },
+    "Ejecución diaria": {
+      "main": [
+        [
+          {
+            "node": "request_página_principal",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond to Webhook4": {
+      "main": [
+        [
+          {
+            "node": "Wait1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Activación manual remota": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait1": {
+      "main": [
+        [
+          {
+            "node": "request_página_principal",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "escribir pendiente requestId": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row(s)": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If4": {
+      "main": [
+        [
+          {
+            "node": "Update row(s)1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "link usado1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row(s)1": {
+      "main": [
+        [
+          {
+            "node": "datosRechazar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row(s)2": {
+      "main": [
+        [
+          {
+            "node": "Facebook Graph API2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s)": {
+      "main": [
+        [
+          {
+            "node": "If4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s)1": {
+      "main": [
+        [
+          {
+            "node": "If6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If6": {
+      "main": [
+        [
+          {
+            "node": "Update row(s)2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "link usado2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s)2": {
+      "main": [
+        [
+          {
+            "node": "If5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If5": {
+      "main": [
+        [
+          {
+            "node": "Update row(s)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "link usado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If7": {
+      "main": [
+        [
+          {
+            "node": "Update row(s)3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "link usado3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s)3": {
+      "main": [
+        [
+          {
+            "node": "If7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row(s)3": {
+      "main": [
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row(s)4": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook Rechazar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row(s)5": {
+      "main": [
+        [
+          {
+            "node": "datos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row(s)6": {
+      "main": [
+        [
+          {
+            "node": "datos2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-12-11T11:14:07.985Z",
@@ -2017,17 +3439,6 @@
   },
   "name": "Historia_Camaras",
   "nodes": [
-    {
-      "parameters": {},
-      "type": "n8n-nodes-base.manualTrigger",
-      "typeVersion": 1,
-      "position": [
-        -1456,
-        160
-      ],
-      "id": "e592ab28-59d1-4e72-9947-35a971c8baa2",
-      "name": "When clicking ‘Execute workflow’"
-    },
     {
       "parameters": {
         "httpRequestMethod": "POST",
@@ -2041,8 +3452,8 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        -240,
-        832
+        208,
+        400
       ],
       "id": "70f5be56-bcbd-45e8-b707-d1fe8cd7941a",
       "name": "Facebook Graph API1",
@@ -2073,8 +3484,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        -720,
-        848
+        -272,
+        416
       ],
       "id": "edf4ba47-a8ca-4343-8394-708f1e0f7712",
       "name": "HTTP Request3",
@@ -2090,8 +3501,8 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        -560,
-        848
+        -112,
+        416
       ],
       "id": "5579777d-f732-4b98-b233-233d14c7baeb",
       "name": "Wait2",
@@ -2124,8 +3535,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        -400,
-        848
+        48,
+        416
       ],
       "id": "f2e57470-8cb6-4aff-a4f1-776c6d413c60",
       "name": "If1"
@@ -2143,8 +3554,8 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        -1056,
-        848
+        -608,
+        416
       ],
       "id": "0bbfbe8d-31e9-41c6-8d53-89988526abf1",
       "name": "Facebook Graph API2",
@@ -2170,6 +3581,12 @@
               "name": "vista_previa",
               "value": "=https://res.cloudinary.com/dglub1vnw/video/upload/c_pad,w_1080,h_1920,b_black/l_text:Courier_45_bold:ZONA%20BORREGUILES,co_black,e_outline:3/fl_layer_apply,g_north_west,x_10,y_670/l_text:Courier_45_bold:ZONA%20BORREGUILES,co_white/fl_layer_apply,g_north_west,x_13,y_673/{{ $json.public_id }}.jpg",
               "type": "string"
+            },
+            {
+              "id": "4dc0a51e-ecfb-43bb-9ea2-33faf1ebebda",
+              "name": "=token único",
+              "value": "={{ $now.toFormat('yyyyMMddHHmmss') + Math.floor(Math.random()*1000) }}",
+              "type": "string"
             }
           ]
         },
@@ -2178,7 +3595,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        16,
+        224,
         160
       ],
       "id": "8ec922b4-00bc-43fc-8fb3-48a2e73f92d2",
@@ -2193,7 +3610,7 @@
       "type": "n8n-nodes-cloudinary.cloudinary",
       "typeVersion": 1,
       "position": [
-        -144,
+        64,
         160
       ],
       "id": "4c85ba67-fb60-4a26-8c67-4a5bf0283b78",
@@ -2222,7 +3639,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        224,
+        640,
         160
       ],
       "id": "4fecbe0c-ed05-4db3-aa2c-8e9977ab31c2",
@@ -2255,7 +3672,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        384,
+        800,
         160
       ],
       "id": "4e3544c3-0642-49ef-82b2-ecd3367c560b",
@@ -2266,7 +3683,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        560,
+        976,
         240
       ],
       "id": "cdd381ff-6ac2-45ba-9e2a-43a650f57753",
@@ -2281,7 +3698,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        -1200,
+        -992,
         160
       ],
       "id": "2aaa757a-e4c6-4d1a-afa7-70d04f751c29",
@@ -2294,7 +3711,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -1024,
+        -816,
         160
       ],
       "id": "182ae0c9-e916-4427-aec4-7a10a39e4a2c",
@@ -2321,7 +3738,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        -848,
+        -640,
         160
       ],
       "id": "c8780df9-a109-4cee-b438-bbab9e0fdd02",
@@ -2334,7 +3751,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -528,
+        -320,
         160
       ],
       "id": "f57b7f7e-dbe8-413c-a885-a19c5054e907",
@@ -2348,7 +3765,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        -368,
+        -160,
         160
       ],
       "id": "777d5a4a-20a7-412f-bc9f-683c3b198f68",
@@ -2372,7 +3789,7 @@
       "type": "n8n-nodes-base.html",
       "typeVersion": 1.2,
       "position": [
-        -688,
+        -480,
         160
       ],
       "id": "341861a2-cb91-4338-a739-df0b98b10862",
@@ -2401,7 +3818,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        704,
+        1120,
         240
       ],
       "id": "e575ea56-dfa1-45c0-859f-96bb45cd6518",
@@ -2417,7 +3834,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -1264,
+        -1056,
         64
       ],
       "id": "6acdd7c5-d32a-4c6e-aca2-3acbb08403ea",
@@ -2433,7 +3850,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -192,
+        16,
         64
       ],
       "id": "c06ee7e0-d0ad-4922-9665-6e79c6076bc9",
@@ -2443,13 +3860,13 @@
       "parameters": {
         "content": "COMPROBAR SI SE HA PROCESADO\n",
         "height": 416,
-        "width": 704,
+        "width": 912,
         "color": 4
       },
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        160,
+        368,
         32
       ],
       "id": "c401de65-2a78-442b-8f19-88f31b8bfc8f",
@@ -2459,13 +3876,13 @@
       "parameters": {
         "content": "ENVIAR CORREO DE VERIFICACIÓN",
         "height": 192,
-        "width": 336,
+        "width": 544,
         "color": 6
       },
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        528,
+        736,
         32
       ],
       "id": "02064db4-3e3f-4cb6-b043-ba8e91701b76",
@@ -2474,14 +3891,14 @@
     {
       "parameters": {
         "content": "SUBIDA A META\n",
-        "height": 192,
-        "width": 1376
+        "height": 320,
+        "width": 1408
       },
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -1280,
-        800
+        -1056,
+        384
       ],
       "id": "ab8be564-4726-443a-aae2-3afebc817eaa",
       "name": "Sticky Note4"
@@ -2495,8 +3912,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -1232,
-        848
+        -1168,
+        432
       ],
       "id": "fd225dd5-64bd-4381-b7cc-b9cb982c5975",
       "name": "Webhook",
@@ -2506,13 +3923,13 @@
       "parameters": {
         "sendTo": "adrianazorinsanchez@gmail.com",
         "subject": "HISTORIA CÁMARA",
-        "message": "=<!DOCTYPE html>\n<html>\n<head>\n  <style>\n    /* Estilos Generales */\n    body {\n      font-family: Arial, sans-serif;\n      background-color: #f4f4f4;\n      margin: 0;\n      padding: 0;\n    }\n\n    /* Contenedor Principal */\n    .container {\n      max-width: 600px;\n      margin: 20px auto;\n      background-color: #ffffff;\n      border-radius: 8px;\n      overflow: hidden;\n      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);\n    }\n\n    /* Cabecera */\n    .header {\n      background-color: #333333;\n      color: #ffffff;\n      padding: 20px;\n      text-align: center;\n    }\n\n    /* Contenido */\n    .content {\n      padding: 30px;\n      text-align: center;\n      color: #333333;\n    }\n\n    /* Caja de Previsualización */\n    .preview-box {\n      margin: 20px 0;\n      border: 1px solid #eeeeee;\n      padding: 10px;\n      border-radius: 5px;\n      background-color: #fafafa;\n    }\n\n    /* Imágenes */\n    img {\n      max-width: 100%;\n      height: auto;\n      border-radius: 4px;\n      display: block;\n      margin: 0 auto;\n    }\n\n    /* Botón de Confirmación */\n    .btn-confirmar {\n      display: inline-block;\n      background-color: #2ecc71;\n      color: #ffffff !important;\n      padding: 14px 28px;\n      text-decoration: none;\n      border-radius: 5px;\n      font-weight: bold;\n      margin-top: 20px;\n      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n    }\n  </style>\n</head>\n<body>\n\n  <div class=\"container\">\n    \n    <div class=\"header\">\n      <h2 style=\"margin:0;\">Aprobación Requerida</h2>\n    </div>\n\n    <div class=\"content\">\n      <h3>Se requiere aprobación de una historia</h3>\n\n      <div class=\"preview-box\">\n        <p style=\"margin-top: 0; margin-bottom: 10px; font-weight: bold; color: #555;\">\n          Vista previa:\n        </p>\n        \n        <img src=\"{{ $('Edit Fields').item.json.vista_previa }}\" alt=\"Vista Previa\">\n      </div>\n\n      <a href=\"https://n8n.tailwind.es/webhook/historiaCamara?idHistoria={{ $('Edit Fields').item.json.story_url }}\" class=\"btn-confirmar\">\n        Aprobar Historia\n      </a>\n      <a href=\"https://n8n.tailwind.es/webhook/historiaPospuesta\" class=\"btn-confirmar\">\n        Posponer 30 minutos\n      </a>\n      <a href=\"https://n8n.tailwind.es/webhook-test/rechazarHistoria?origen=historiaWebcam&contenido=HistoriaRechazada&idHistoria={{ $('Edit Fields').item.json.story_url }}\" class=\"btn-confirmar\">\n        Rechazar\n      </a>\n    </div>\n\n    <div style=\"background-color: #eeeeee; padding: 10px; text-align: center; font-size: 12px; color: #777;\">\n      Enviado automáticamente desde n8n\n    </div>\n\n  </div>\n\n</body>\n</html>",
+        "message": "=<!DOCTYPE html>\n<html>\n<head>\n  <style>\n    /* Estilos Generales */\n    body {\n      font-family: Arial, sans-serif;\n      background-color: #f4f4f4;\n      margin: 0;\n      padding: 0;\n    }\n\n    /* Contenedor Principal */\n    .container {\n      max-width: 600px;\n      margin: 20px auto;\n      background-color: #ffffff;\n      border-radius: 8px;\n      overflow: hidden;\n      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);\n    }\n\n    /* Cabecera */\n    .header {\n      background-color: #333333;\n      color: #ffffff;\n      padding: 20px;\n      text-align: center;\n    }\n\n    /* Contenido */\n    .content {\n      padding: 30px;\n      text-align: center;\n      color: #333333;\n    }\n\n    /* Caja de Previsualización */\n    .preview-box {\n      margin: 20px 0;\n      border: 1px solid #eeeeee;\n      padding: 10px;\n      border-radius: 5px;\n      background-color: #fafafa;\n    }\n\n    /* Imágenes */\n    img {\n      max-width: 100%;\n      height: auto;\n      border-radius: 4px;\n      display: block;\n      margin: 0 auto;\n    }\n\n    /* Botón de Confirmación */\n    .btn-confirmar {\n      display: inline-block;\n      background-color: #2ecc71;\n      color: #ffffff !important;\n      padding: 14px 28px;\n      text-decoration: none;\n      border-radius: 5px;\n      font-weight: bold;\n      margin-top: 20px;\n      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n    }\n  </style>\n</head>\n<body>\n\n  <div class=\"container\">\n    \n    <div class=\"header\">\n      <h2 style=\"margin:0;\">Aprobación Requerida</h2>\n    </div>\n\n    <div class=\"content\">\n      <h3>Se requiere aprobación de una historia</h3>\n\n      <div class=\"preview-box\">\n        <p style=\"margin-top: 0; margin-bottom: 10px; font-weight: bold; color: #555;\">\n          Vista previa:\n        </p>\n        \n        <img src=\"{{ $('Edit Fields').item.json.vista_previa }}\" alt=\"Vista Previa\">\n      </div>\n\n      <a href=\"https://n8n.tailwind.es/webhook/historiaCamara?idHistoria={{ $('Edit Fields').item.json.story_url }}&requestId={{ $('Edit Fields').item.json['token único'] }}\" class=\"btn-confirmar\">\n        Aprobar Historia\n      </a>\n      <a href=\"https://n8n.tailwind.es/webhook/historiaPospuesta?requestId={{ $('Edit Fields').item.json['token único'] }}\" class=\"btn-confirmar\">\n        Posponer 30 minutos\n      </a>\n      <a href=\"https://n8n.tailwind.es/webhook/rechazarHistoria?origen=historiaWebcam&contenido=HistoriaRechazada&idHistoria={{ $('Edit Fields').item.json.story_url }}&requestId={{ $('Edit Fields').item.json['token único'] }}\" class=\"btn-confirmar\">\n        Rechazar\n      </a>\n    </div>\n\n    <div style=\"background-color: #eeeeee; padding: 10px; text-align: center; font-size: 12px; color: #777;\">\n      Enviado automáticamente desde n8n\n    </div>\n\n  </div>\n\n</body>\n</html>",
         "options": {}
       },
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        560,
+        1136,
         80
       ],
       "id": "73308a25-8f99-40b8-9ef3-0317f097cfcb",
@@ -2534,8 +3951,8 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        -880,
-        848
+        -432,
+        416
       ],
       "id": "3d9447d2-f241-43a3-80ce-1688f72900e5",
       "name": "Respond to Webhook"
@@ -2549,8 +3966,8 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        -1520,
-        384
+        -1568,
+        368
       ],
       "id": "3a961a4f-a452-4c7d-adca-015e96491d83",
       "name": "Respond to Webhook1"
@@ -2564,7 +3981,7 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -1680,
+        -2192,
         384
       ],
       "id": "9a115c23-aedd-4865-bd46-2f851d98028c",
@@ -2578,8 +3995,8 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        -1360,
-        384
+        -1392,
+        368
       ],
       "id": "35d19881-992b-4494-a591-18f39361266c",
       "name": "esperar 30 minutos",
@@ -2594,8 +4011,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -1232,
-        -352
+        -800,
+        960
       ],
       "id": "7facb56f-f11a-4b0c-8a73-2a1872b6bcc7",
       "name": "rechazarHistoria",
@@ -2608,25 +4025,25 @@
             {
               "id": "1fc1ee34-829a-45a3-a4af-fa95470d9512",
               "name": "ORIGEN",
-              "value": "={{ $('Webhook').item.json.query.origen }}",
+              "value": "={{ $('rechazarHistoria').item.json.query.origen }}",
               "type": "string"
             },
             {
               "id": "348d16fa-a017-44c5-9879-665a4936a387",
               "name": "CONTENIDO",
-              "value": "={{ $('Webhook').item.json.query.contenido }}",
-              "type": "string"
-            },
-            {
-              "id": "93855f27-f03b-443c-82bf-153d717f2a4d",
-              "name": "ID_FLOW",
-              "value": "={{ $json.query.idFlow }}",
+              "value": "={{ $('rechazarHistoria').item.json.query.contenido }}",
               "type": "string"
             },
             {
               "id": "43b297bb-9d8d-4af2-97b0-0ddb4711edd1",
               "name": "MAS",
-              "value": "={{ $json.query.idHistoria }}",
+              "value": "={{ $('rechazarHistoria').item.json.query.idHistoria }}",
+              "type": "string"
+            },
+            {
+              "id": "787399fb-18dd-4255-93a1-09ff792ba1de",
+              "name": "requestId",
+              "value": "={{ $now.toFormat('yyyyMMddHHmmss') + Math.floor(Math.random()*1000) + 1 }}",
               "type": "string"
             }
           ]
@@ -2636,8 +4053,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -1072,
-        -352
+        -176,
+        944
       ],
       "id": "a151d550-695a-4b66-8dc1-8b96ac126da1",
       "name": "datosRechazar"
@@ -2645,14 +4062,14 @@
     {
       "parameters": {
         "respondWith": "text",
-        "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Confirmación</title>\n  <style>\n    body {\n      font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif;\n      background-color: #f3f4f6;\n      display: flex;\n      justify-content: center;\n      align-items: center;\n      height: 100vh;\n      margin: 0;\n    }\n    .card {\n      background: white;\n      padding: 40px;\n      border-radius: 12px;\n      box-shadow: 0 10px 25px rgba(0,0,0,0.1);\n      text-align: center;\n      max-width: 400px;\n      border-top: 6px solid #ef4444;\n    }\n    h2 { color: #1f2937; margin-top: 0; font-size: 24px; }\n    p { color: #4b5563; margin: 10px 0; font-size: 16px; }\n    .warning { color: #ef4444; font-weight: bold; margin-bottom: 25px; display: block; }\n    .btn-container { display: flex; gap: 15px; justify-content: center; margin-top: 20px; }\n    \n    /* Estilos de los botones (Enlaces) */\n    .btn {\n      text-decoration: none;\n      padding: 12px 30px;\n      border-radius: 6px;\n      font-weight: bold;\n      font-size: 16px;\n      transition: opacity 0.2s;\n      display: inline-block;\n    }\n    .btn:hover { opacity: 0.8; }\n    \n    /* Botón SI (Acción de Webhook) */\n    .btn-si { background-color: #ef4444; color: white; }\n    \n    /* Botón NO (Cancelar) */\n    .btn-no { background-color: #e5e7eb; color: #374151; }\n  </style>\n</head>\n<body>\n\n  <div class=\"card\">\n    <h2>⚠️ Atención</h2>\n    <p>Estás a punto de rechazar.</p>\n    <p>Esta acción no se puede deshacer.</p>\n    <span class=\"warning\">¿Estás seguro?</span>\n\n    <div class=\"btn-container\">\n      <a href=\"https://n8n.tailwind.es/webhook-test/nothingBoxSi?origen={{ $json.ORIGEN }}&contenido={{ $json.CONTENIDO }}&estado=rechazado&idFlow={{ $json.ID_FLOW }}&mas={{ $json.MAS }}\" class=\"btn btn-si\">SÍ</a>\n\n      <a href=\"https://n8n.tailwind.es/webhook-test/nothingBoxSi?origen={{ $json.ORIGEN }}&contenido={{ $json.CONTENIDO }}&estado=noRechazado&idFlow={{ $json.ID_FLOW }}&mas={{ $json.MAS }}\" class=\"btn btn-no\">NO</a>\n    </div>\n  </div>\n\n</body>\n</html>",
+        "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Confirmación</title>\n  <style>\n    body {\n      font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif;\n      background-color: #f3f4f6;\n      display: flex;\n      justify-content: center;\n      align-items: center;\n      height: 100vh;\n      margin: 0;\n    }\n    .card {\n      background: white;\n      padding: 40px;\n      border-radius: 12px;\n      box-shadow: 0 10px 25px rgba(0,0,0,0.1);\n      text-align: center;\n      max-width: 400px;\n      border-top: 6px solid #ef4444;\n    }\n    h2 { color: #1f2937; margin-top: 0; font-size: 24px; }\n    p { color: #4b5563; margin: 10px 0; font-size: 16px; }\n    .warning { color: #ef4444; font-weight: bold; margin-bottom: 25px; display: block; }\n    .btn-container { display: flex; gap: 15px; justify-content: center; margin-top: 20px; }\n    \n    /* Estilos de los botones (Enlaces) */\n    .btn {\n      text-decoration: none;\n      padding: 12px 30px;\n      border-radius: 6px;\n      font-weight: bold;\n      font-size: 16px;\n      transition: opacity 0.2s;\n      display: inline-block;\n    }\n    .btn:hover { opacity: 0.8; }\n    \n    /* Botón SI (Acción de Webhook) */\n    .btn-si { background-color: #ef4444; color: white; }\n    \n    /* Botón NO (Cancelar) */\n    .btn-no { background-color: #e5e7eb; color: #374151; }\n  </style>\n</head>\n<body>\n\n  <div class=\"card\">\n    <h2>⚠️ Atención</h2>\n    <p>Estás a punto de rechazar.</p>\n    <p>Esta acción no se puede deshacer.</p>\n    <span class=\"warning\">¿Estás seguro?</span>\n\n    <div class=\"btn-container\">\n      <a href=\"https://n8n.tailwind.es/webhook-test/rechazarSi?origen={{ $('datosRechazar').item.json.ORIGEN }}&contenido={{ $('datosRechazar').item.json.CONTENIDO }}&estado=rechazado&requestId={{ $json.requestId }}\" class=\"btn btn-si\">SÍ</a>\n\n      <a href=\"https://n8n.tailwind.es/webhook-test/rechazarSi?origen={{ $('datosRechazar').item.json.ORIGEN }}&contenido={{ $('datosRechazar').item.json.CONTENIDO }}&estado=noRechazado&requestId={{ $json.requestId }}\" class=\"btn btn-no\">NO</a>\n    </div>\n  </div>\n\n</body>\n</html>",
         "options": {}
       },
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        -912,
-        -352
+        144,
+        944
       ],
       "id": "54afc9b8-4f0c-49bf-96af-f83d961af8a8",
       "name": "Respond to Webhook Rechazar"
@@ -2662,10 +4079,10 @@
         "operation": "update",
         "dataTableId": {
           "__rl": true,
-          "value": "FnOKQ90bd0CxI2H5",
+          "value": "7t1UIjvma8hSpdjP",
           "mode": "list",
-          "cachedResultName": "nothingbox",
-          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/FnOKQ90bd0CxI2H5"
+          "cachedResultName": "historia_camaras",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
         },
         "filters": {
           "conditions": [
@@ -2678,12 +4095,32 @@
           "mappingMode": "defineBelow",
           "value": {
             "contador": "={{ $json.row_number + 1}}",
-            "contador_no_rechazados": "={{ $('obtener contador').item.json.contador_no_rechazados }}"
+            "contador_no_rechazado": 0
           },
           "matchingColumns": [
             "contador"
           ],
           "schema": [
+            {
+              "id": "requestId",
+              "displayName": "requestId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
             {
               "id": "contador",
               "displayName": "contador",
@@ -2695,8 +4132,8 @@
               "removed": false
             },
             {
-              "id": "contador_no_rechazados",
-              "displayName": "contador_no_rechazados",
+              "id": "contador_no_rechazado",
+              "displayName": "contador_no_rechazado",
               "required": false,
               "defaultMatch": false,
               "display": true,
@@ -2713,8 +4150,8 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
       "position": [
-        656,
-        -512
+        912,
+        1344
       ],
       "id": "9b26fb52-e2b7-4b2a-9cdc-4e0e1f334c22",
       "name": "sumar contador"
@@ -2740,6 +4177,12 @@
               "name": "CONTADOR",
               "value": "={{ $json.contador }}",
               "type": "number"
+            },
+            {
+              "id": "5bbb4b39-9485-415b-a1ea-7fac0e20f99f",
+              "name": "token_unico",
+              "value": "",
+              "type": "string"
             }
           ]
         },
@@ -2748,8 +4191,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        320,
-        -512
+        560,
+        1344
       ],
       "id": "5a228376-6e29-480e-b480-f2efb1ca87ca",
       "name": "datos"
@@ -2818,8 +4261,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        480,
-        -512
+        752,
+        1344
       ],
       "id": "5a709dcd-83fe-4fa9-a663-a33d0c1dae45",
       "name": "escribir datos",
@@ -2839,8 +4282,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -544,
-        -352
+        -800,
+        1520
       ],
       "id": "34425f3d-064a-4a05-a5ee-152a7d25b887",
       "name": "si",
@@ -2851,10 +4294,10 @@
         "operation": "get",
         "dataTableId": {
           "__rl": true,
-          "value": "FnOKQ90bd0CxI2H5",
+          "value": "7t1UIjvma8hSpdjP",
           "mode": "list",
-          "cachedResultName": "nothingbox",
-          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/FnOKQ90bd0CxI2H5"
+          "cachedResultName": "historia_camaras",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
         },
         "filters": {
           "conditions": [
@@ -2867,8 +4310,8 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
       "position": [
-        160,
-        -512
+        192,
+        1344
       ],
       "id": "b626e203-21c2-4c8a-9cff-385723289213",
       "name": "obtener contador"
@@ -2929,8 +4372,8 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
       "position": [
-        672,
-        -224
+        912,
+        1632
       ],
       "id": "a6e39b97-25d6-4978-b2f6-c7b390801524",
       "name": "sumar contador1"
@@ -2964,8 +4407,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        336,
-        -224
+        576,
+        1632
       ],
       "id": "0ccd4143-6dc7-4a5e-a34e-bc8be3cd37b6",
       "name": "datos2"
@@ -3034,8 +4477,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        496,
-        -224
+        736,
+        1632
       ],
       "id": "427cb2ff-b459-4736-95ab-2e372b34dfa5",
       "name": "escribir datos1",
@@ -3051,10 +4494,10 @@
         "operation": "get",
         "dataTableId": {
           "__rl": true,
-          "value": "FnOKQ90bd0CxI2H5",
+          "value": "7t1UIjvma8hSpdjP",
           "mode": "list",
-          "cachedResultName": "nothingbox",
-          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/FnOKQ90bd0CxI2H5"
+          "cachedResultName": "historia_camaras",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
         },
         "filters": {
           "conditions": [
@@ -3068,7 +4511,7 @@
       "typeVersion": 1.1,
       "position": [
         176,
-        -224
+        1632
       ],
       "id": "f901e8c3-08ec-4bdf-9470-803fbbf9847e",
       "name": "obtener contador1"
@@ -3076,58 +4519,17 @@
     {
       "parameters": {
         "respondWith": "text",
-        "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Selección de Acción</title>\n    <style>\n        body {\n            font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif;\n            background-color: #f3f4f6;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            height: 100vh;\n            margin: 0;\n        }\n        .card {\n            background: white;\n            padding: 40px;\n            border-radius: 12px;\n            box-shadow: 0 10px 25px rgba(0,0,0,0.1);\n            text-align: center;\n            max-width: 450px; /* Un poco más ancho para que quepan los textos */\n            width: 90%;\n            border-top: 6px solid #3b82f6; /* Azul Informativo */\n        }\n        .icon {\n            font-size: 50px;\n            margin-bottom: 15px;\n            display: block;\n        }\n        h2 { \n            color: #1f2937; \n            margin-top: 0; \n            font-size: 24px; \n        }\n        p { \n            color: #4b5563; \n            margin: 10px 0 30px 0; \n            font-size: 18px; \n        }\n        .btn-container { \n            display: flex; \n            flex-direction: column; /* Botones uno encima de otro para mejor lectura en móvil */\n            gap: 15px; \n            justify-content: center; \n        }\n        \n        /* Estilos Base de Botones */\n        .btn {\n            text-decoration: none;\n            padding: 15px 20px;\n            border-radius: 8px;\n            font-weight: bold;\n            font-size: 16px;\n            transition: transform 0.1s, opacity 0.2s;\n            display: block;\n            text-align: center;\n            box-shadow: 0 2px 4px rgba(0,0,0,0.1);\n        }\n        .btn:hover { opacity: 0.9; transform: translateY(-1px); }\n        .btn:active { transform: translateY(1px); }\n        \n        /* Botón Posponer (Naranja - Tiempo) */\n        .btn-posponer { \n            background-color: #f59e0b; \n            color: white; \n        }\n        \n        /* Botón Aceptar (Azul - Acción Principal) */\n        .btn-aceptar { \n            background-color: #3b82f6; \n            color: white; \n        }\n\n    </style>\n</head>\n<body>\n\n    <div class=\"card\">\n        <span class=\"icon\">🤔</span>\n        \n        <h2>No se ha rechazado</h2>\n        <p>¿Qué quieres hacer?</p>\n\n        <div class=\"btn-container\">\n            <a href=\"REEMPLAZAR_URL_POSPONER\" class=\"btn btn-posponer\">\n                ⏱️ POSPONER 30 MINUTOS\n            </a>\n\n            <a href=\"REEMPLAZAR_URL_ACEPTAR\" class=\"btn btn-aceptar\">\n                ✅ ACEPTAR\n            </a>\n        </div>\n    </div>\n\n</body>\n</html>",
+        "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Selección de Acción</title>\n    <style>\n        body {\n            font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif;\n            background-color: #f3f4f6;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            height: 100vh;\n            margin: 0;\n        }\n        .card {\n            background: white;\n            padding: 40px;\n            border-radius: 12px;\n            box-shadow: 0 10px 25px rgba(0,0,0,0.1);\n            text-align: center;\n            max-width: 450px; /* Un poco más ancho para que quepan los textos */\n            width: 90%;\n            border-top: 6px solid #3b82f6; /* Azul Informativo */\n        }\n        .icon {\n            font-size: 50px;\n            margin-bottom: 15px;\n            display: block;\n        }\n        h2 { \n            color: #1f2937; \n            margin-top: 0; \n            font-size: 24px; \n        }\n        p { \n            color: #4b5563; \n            margin: 10px 0 30px 0; \n            font-size: 18px; \n        }\n        .btn-container { \n            display: flex; \n            flex-direction: column; /* Botones uno encima de otro para mejor lectura en móvil */\n            gap: 15px; \n            justify-content: center; \n        }\n        \n        /* Estilos Base de Botones */\n        .btn {\n            text-decoration: none;\n            padding: 15px 20px;\n            border-radius: 8px;\n            font-weight: bold;\n            font-size: 16px;\n            transition: transform 0.1s, opacity 0.2s;\n            display: block;\n            text-align: center;\n            box-shadow: 0 2px 4px rgba(0,0,0,0.1);\n        }\n        .btn:hover { opacity: 0.9; transform: translateY(-1px); }\n        .btn:active { transform: translateY(1px); }\n        \n        /* Botón Posponer (Naranja - Tiempo) */\n        .btn-posponer { \n            background-color: #f59e0b; \n            color: white; \n        }\n        \n        /* Botón Aceptar (Azul - Acción Principal) */\n        .btn-aceptar { \n            background-color: #3b82f6; \n            color: white; \n        }\n\n    </style>\n</head>\n<body>\n\n    <div class=\"card\">\n        <span class=\"icon\">🤔</span>\n        \n        <h2>No se ha rechazado</h2>\n        <p>¿Qué quieres hacer?</p>\n\n        <div class=\"btn-container\">\n            <a href=\"https://n8n.tailwind.es/webhook/historiaPospuesta?requestId=\" class=\"btn btn-posponer\">\n                ⏱️ POSPONER 30 MINUTOS\n            </a>\n\n            <a href=\"https://n8n.tailwind.es/webhook/historiaCamara\" class=\"btn btn-aceptar\">\n                ✅ ACEPTAR HISTORIA\n            </a>\n        </div>\n    </div>\n\n</body>\n</html>",
         "options": {}
       },
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
         0,
-        -224
+        1632
       ],
       "id": "271a6a4d-599d-455c-b699-86c5d10eed12",
       "name": "Respond to Webhook2"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "284b2492-0b5d-46f4-89df-663f252068cf",
-              "name": "",
-              "value": "",
-              "type": "string"
-            },
-            {
-              "id": "da67b1b5-9751-40e0-a4b8-31d51d15c6c9",
-              "name": "",
-              "value": "",
-              "type": "string"
-            },
-            {
-              "id": "23a32b17-5967-4fd9-b9e1-d7891c740482",
-              "name": "",
-              "value": "",
-              "type": "string"
-            },
-            {
-              "id": "7a5c6c5f-9d94-496b-8e36-192286d69c5e",
-              "name": "",
-              "value": "",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        -384,
-        -352
-      ],
-      "id": "4cb7dd56-6534-4a59-8595-8a6832725ae0",
-      "name": "datos_si_no"
     },
     {
       "parameters": {
@@ -3141,7 +4543,7 @@
           "conditions": [
             {
               "id": "eb37d92a-214b-46d4-9bab-842c86e8e860",
-              "leftValue": "={{ $json.query.estado }}",
+              "leftValue": "={{ $('si').item.json.query.estado }}",
               "rightValue": "rechazado",
               "operator": {
                 "type": "string",
@@ -3156,8 +4558,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -192,
-        -352
+        -176,
+        1504
       ],
       "id": "b0625766-366e-4d16-8e08-d72254e31bca",
       "name": "If2"
@@ -3172,13 +4574,1038 @@
       "typeVersion": 1.5,
       "position": [
         0,
-        -512
+        1344
       ],
       "id": "4568449c-95d0-4ca1-9824-cee5dae22b44",
       "name": "Respond to Webhook3"
+    },
+    {
+      "parameters": {
+        "content": "Rechazar la historia",
+        "height": 352,
+        "width": 1136,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -848,
+        896
+      ],
+      "id": "b393dd20-107f-48c5-ac15-36dc31f38403",
+      "name": "Sticky Note6"
+    },
+    {
+      "parameters": {
+        "content": "No rechazar",
+        "height": 192,
+        "width": 1136,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -48,
+        1600
+      ],
+      "id": "f9957b2d-da8a-4e68-a24a-bb35a129a80b",
+      "name": "Sticky Note7"
+    },
+    {
+      "parameters": {
+        "content": "Rechazar\n",
+        "height": 192,
+        "width": 1136,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -48,
+        1312
+      ],
+      "id": "16b3166a-3479-405e-aa50-c151195bf1e4",
+      "name": "Sticky Note8"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 21
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -1648,
+        -64
+      ],
+      "id": "49fa25e5-f301-4918-84b1-47aa1e2acd37",
+      "name": "Ejecución diaria"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Workflow Activado</title>\n    <style>\n        body {\n            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n            background-color: #f4f7f9;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            height: 100vh;\n            margin: 0;\n        }\n        .card {\n            background: white;\n            padding: 2rem;\n            border-radius: 12px;\n            box-shadow: 0 4px 15px rgba(0,0,0,0.1);\n            text-align: center;\n            max-width: 400px;\n        }\n        .icon {\n            font-size: 50px;\n            color: #4CAF50;\n            margin-bottom: 1rem;\n        }\n        h1 {\n            color: #333;\n            font-size: 24px;\n            margin-bottom: 10px;\n        }\n        p {\n            color: #666;\n            line-height: 1.6;\n            margin-bottom: 20px;\n        }\n        .footer-text {\n            font-size: 0.9rem;\n            color: #999;\n            border-top: 1px solid #eee;\n            padding-top: 15px;\n        }\n    </style>\n</head>\n<body>\n    <div class=\"card\">\n        <div class=\"icon\">✅</div>\n        <h1>Se ha activado el workflow</h1>\n        <p>Se te enviará un correo con la información necesaria.</p>\n        <div class=\"footer-text\">\n            Ya puedes cerrar esta página de forma segura.\n        </div>\n    </div>\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        -1648,
+        160
+      ],
+      "id": "7ceb85e6-bb7d-47fd-b8d6-af1d92d4cfb0",
+      "name": "Respond to Webhook4"
+    },
+    {
+      "parameters": {
+        "path": "activarHistoriaCamara",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1840,
+        160
+      ],
+      "id": "df127ed2-3c87-4160-830d-2ab6edc39580",
+      "name": "Activación manual remota",
+      "webhookId": "2cc4c66e-9fae-4eb2-a1f9-6fbe1abec15e"
+    },
+    {
+      "parameters": {
+        "amount": 1
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -1488,
+        160
+      ],
+      "id": "5454579a-3c68-4fb2-8967-515db88c6f90",
+      "name": "Wait1",
+      "webhookId": "2cd1ba59-5dcf-4ec3-a263-ca35ab61909c"
+    },
+    {
+      "parameters": {
+        "content": "CONDICIÓN RECHAZAR\nEs lo que sale en la página de \"Estás seguro de que quieres rechazar la historia?\"",
+        "height": 592,
+        "width": 1952,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -848,
+        1264
+      ],
+      "id": "934684ff-df35-424b-a3a4-87186ad5bf38",
+      "name": "Sticky Note9"
+    },
+    {
+      "parameters": {
+        "content": "Esta es la página de cuando le das a rechazar historia en la página principal, está enlazada directamente al flow de justo abajo, donde se decide si realmente estás seguro de rechazarla",
+        "height": 224,
+        "width": 256,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        304,
+        896
+      ],
+      "id": "e1a41ebd-fd17-46fd-a8fc-435f4908ac65",
+      "name": "Sticky Note10"
+    },
+    {
+      "parameters": {
+        "content": "Esta parte gestiona si el usuario está seguro de rechazar la historia.\nLa opción de rechazar apunta la acción en el informe y no hace nada más.\nLa opción de no rechazar redirige a otra página en la que se elige que se quiere hacer con la historia, si posponerla o subirla, cada uno de esos botones está enlazado por medio de webhooks con las opciones correspondientes para cada uno",
+        "height": 224,
+        "width": 464,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        576,
+        896
+      ],
+      "id": "146710dc-5953-449c-9284-7287154ae1fb",
+      "name": "Sticky Note11"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "dataTableId": {
+          "__rl": true,
+          "value": "7t1UIjvma8hSpdjP",
+          "mode": "list",
+          "cachedResultName": "historia_camaras",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "1"
+            }
+          ]
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "requestId": "={{ $('Edit Fields').item.json[\"token único\"] }}",
+            "Estado": "Pendiente"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "requestId",
+              "displayName": "requestId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        992,
+        80
+      ],
+      "id": "437682ee-5a25-49aa-a87c-95bceec4456f",
+      "name": "escribir pendiente requestId"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "dataTableId": {
+          "__rl": true,
+          "value": "7t1UIjvma8hSpdjP",
+          "mode": "list",
+          "cachedResultName": "historia_camaras",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "1"
+            }
+          ]
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Estado": "Procesado",
+            "requestId": "={{ $json.query.requestId }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "requestId",
+              "displayName": "requestId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        -1744,
+        368
+      ],
+      "id": "a722f57b-1ff2-404b-8135-97b8d6f398bc",
+      "name": "Update row(s)"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "ERROR PAYASO",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        -1744,
+        528
+      ],
+      "id": "22844fce-9827-448c-98c2-3fc53ba79dfb",
+      "name": "link usado"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "bb4ead3b-31e0-42d9-9723-16b6693cfa68",
+              "leftValue": "={{ $json.Estado }}",
+              "rightValue": "Pendiente",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -480,
+        960
+      ],
+      "id": "a8f2261d-1f85-466a-82c9-bea578ef845b",
+      "name": "If4"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "dataTableId": {
+          "__rl": true,
+          "value": "7t1UIjvma8hSpdjP",
+          "mode": "list",
+          "cachedResultName": "historia_camaras",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "1"
+            }
+          ]
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Estado": "Procesado",
+            "requestId": "={{ $json.requestId }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "requestId",
+              "displayName": "requestId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        -320,
+        944
+      ],
+      "id": "4315edff-d643-4513-bd18-b5cdf6465230",
+      "name": "Update row(s)1"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        -288,
+        1104
+      ],
+      "id": "f04e6d08-bf1c-46c8-a736-68be1f0df447",
+      "name": "link usado1"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "dataTableId": {
+          "__rl": true,
+          "value": "7t1UIjvma8hSpdjP",
+          "mode": "list",
+          "cachedResultName": "historia_camaras",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "1"
+            }
+          ]
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Estado": "Procesado",
+            "requestId": "={{ $json.query.requestId }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "requestId",
+              "displayName": "requestId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        -752,
+        416
+      ],
+      "id": "1bf076e3-c508-4c08-a928-cf2a6474b24b",
+      "name": "Update row(s)2"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        -736,
+        576
+      ],
+      "id": "2fa3e887-f926-4fc3-9890-d18667c6e5d3",
+      "name": "link usado2"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "7t1UIjvma8hSpdjP",
+          "mode": "list",
+          "cachedResultName": "historia_camaras",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "requestId",
+              "keyValue": "={{ $json.query.requestId }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        -624,
+        960
+      ],
+      "id": "6ed9fc83-3de6-4eb1-90c0-b3ece5c31121",
+      "name": "Get row(s)"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "bb4ead3b-31e0-42d9-9723-16b6693cfa68",
+              "leftValue": "={{ $json.Estado }}",
+              "rightValue": "Pendiente",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -896,
+        432
+      ],
+      "id": "bc9646ee-9aa2-49e9-98c3-d2129c4d40ed",
+      "name": "If6"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "7t1UIjvma8hSpdjP",
+          "mode": "list",
+          "cachedResultName": "historia_camaras",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "requestId",
+              "keyValue": "={{ $json.query.requestId }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        -1024,
+        432
+      ],
+      "id": "1fe830b2-137f-49c4-a4b4-0b2d4c88b6ed",
+      "name": "Get row(s)1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "bb4ead3b-31e0-42d9-9723-16b6693cfa68",
+              "leftValue": "={{ $json.Estado }}",
+              "rightValue": "Pendiente",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -1904,
+        384
+      ],
+      "id": "82bf3a57-5a60-4aa3-855b-22c03e5fac1b",
+      "name": "If5"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "7t1UIjvma8hSpdjP",
+          "mode": "list",
+          "cachedResultName": "historia_camaras",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "requestId",
+              "keyValue": "="
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        -2048,
+        384
+      ],
+      "id": "aefe1f33-7e4b-412a-acb8-f38b9d5a7615",
+      "name": "Get row(s)2"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "bb4ead3b-31e0-42d9-9723-16b6693cfa68",
+              "leftValue": "={{ $json.Estado }}",
+              "rightValue": "Pendiente",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -528,
+        1520
+      ],
+      "id": "a29ad6e0-9684-41a9-a35d-b330be843b65",
+      "name": "If7"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "dataTableId": {
+          "__rl": true,
+          "value": "7t1UIjvma8hSpdjP",
+          "mode": "list",
+          "cachedResultName": "historia_camaras",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "1"
+            }
+          ]
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "requestId": "={{ $json.requestId }}",
+            "Estado": "Pendiente"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "requestId",
+              "displayName": "requestId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        -336,
+        1504
+      ],
+      "id": "d8e2fa43-6737-4dc6-b59d-743744cf89b5",
+      "name": "Update row(s)3"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "ERROR PAYASO",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        -320,
+        1664
+      ],
+      "id": "1693023a-5189-416e-9eb1-b33b8edff778",
+      "name": "link usado3"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "7t1UIjvma8hSpdjP",
+          "mode": "list",
+          "cachedResultName": "historia_camaras",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "requestId",
+              "keyValue": "={{ $json.query.requestId }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        -656,
+        1520
+      ],
+      "id": "abf5bd4f-80a9-4601-9f5e-b06433f6d1ec",
+      "name": "Get row(s)3"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "dataTableId": {
+          "__rl": true,
+          "value": "7t1UIjvma8hSpdjP",
+          "mode": "list",
+          "cachedResultName": "historia_camaras",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "2"
+            }
+          ]
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "requestId": "={{ $json.requestId }}",
+            "Estado": "Pendiente"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "requestId",
+              "displayName": "requestId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        -16,
+        944
+      ],
+      "id": "a80b5b0e-b7a7-447d-89b4-27c34e21d766",
+      "name": "Update row(s)4"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "dataTableId": {
+          "__rl": true,
+          "value": "7t1UIjvma8hSpdjP",
+          "mode": "list",
+          "cachedResultName": "historia_camaras",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "1"
+            }
+          ]
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "contador_no_rechazado": "={{ $json.contador_no_rechazado }}",
+            "Estado": "Procesado",
+            "contador": "={{ $json.contador }}",
+            "requestId": "={{ $json.requestId }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "requestId",
+              "displayName": "requestId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "contador",
+              "displayName": "contador",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "contador_no_rechazado",
+              "displayName": "contador_no_rechazado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        384,
+        1344
+      ],
+      "id": "2108798b-f3e0-49a9-8b66-d1717b5b0ac0",
+      "name": "Update row(s)5"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "dataTableId": {
+          "__rl": true,
+          "value": "7t1UIjvma8hSpdjP",
+          "mode": "list",
+          "cachedResultName": "historia_camaras",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/7t1UIjvma8hSpdjP"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyValue": "1"
+            }
+          ]
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "contador": "={{ $json.contador }}",
+            "contador_no_rechazado": "={{ $json.contador_no_rechazado }}",
+            "requestId": "={{ $json.requestId }}",
+            "Estado": "Pendiente"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "requestId",
+              "displayName": "requestId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Estado",
+              "displayName": "Estado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "contador",
+              "displayName": "contador",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "contador_no_rechazado",
+              "displayName": "contador_no_rechazado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        352,
+        1632
+      ],
+      "id": "8275308d-3e17-46d2-bd02-4264fafb95ac",
+      "name": "Update row(s)6"
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "posponer": [
+      {
+        "json": {
+          "headers": {
+            "connection": "upgrade",
+            "host": "n8n.tailwind.es",
+            "x-forwarded-for": "2.136.43.122",
+            "x-forwarded-proto": "https",
+            "sec-ch-ua": "\"Brave\";v=\"143\", \"Chromium\";v=\"143\", \"Not A(Brand\";v=\"24\"",
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": "\"Linux\"",
+            "upgrade-insecure-requests": "1",
+            "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+            "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+            "sec-gpc": "1",
+            "accept-language": "es-ES,es;q=0.6",
+            "sec-fetch-site": "cross-site",
+            "sec-fetch-mode": "navigate",
+            "sec-fetch-user": "?1",
+            "sec-fetch-dest": "document",
+            "accept-encoding": "gzip, deflate, br, zstd",
+            "cookie": "rl_page_init_referrer=RudderEncrypt%3AU2FsdGVkX19G9hj2oHUljiLMDFDD4NPAhx36zLECAVM%3D; rl_page_init_referring_domain=RudderEncrypt%3AU2FsdGVkX19DZj0rYYRDnJqpinHJ5WdeJvAQiTnyTb4%3D; ph_phc_4URIAm1uYfJO7j8kWSe0J8lc8IqnstRLS7Jx8NcakHo_posthog=%7B%22%24device_id%22%3A%22019b59c2-251b-7f9d-94c9-0e7af88287b0%22%2C%22distinct_id%22%3A%220f6825be298b3a005d52154ed2c929ac7758de54b6ab4a8d7eb7a8e83f623918%2308853e58-b9e7-4eaa-a226-f2a3e30187ec%22%2C%22%24sesid%22%3A%5B1768377126820%2C%22019bbb68-e0bb-712c-934e-b5fd44a85811%22%2C1768375771320%5D%2C%22%24epp%22%3Atrue%2C%22%24initial_person_info%22%3A%7B%22r%22%3A%22%24direct%22%2C%22u%22%3A%22https%3A%2F%2Fn8n.tailwind.es%2Fsignin%3Fredirect%3D%25252F%22%7D%7D; rl_anonymous_id=RudderEncrypt%3AU2FsdGVkX1%2FOjEmaaKCqnrRrIjpp9KdUHOowegLssn5fSuBSTM19VrEsakQr2tsQg2swj0HSiJ8KLlfczwNz4A%3D%3D; rl_user_id=RudderEncrypt%3AU2FsdGVkX19BBB%2BSwGVaeP%2Bd8lTptBgRShAr9M8pfQ%2F8oOIGP4FNUuwH1gUHLbf1ZQ365lDuaTWkVfSfrsUZHyp8ulvMlg2MB0DGqHCDS2a7dXEEk3TxzHS3hNj0fbIr8yDdoygglLKR3PTPYSBS3IWx4ueIX6pvDoyaoNEPwXs%3D; rl_trait=RudderEncrypt%3AU2FsdGVkX19QDaYXUSm8%2BA%2Bz2iyS8qd49cfGIs7LdcbzfgPGRYaEs0QS72MTObss2awSVlv7axY1a%2F5o12uNAfm%2BNQIrIwvgIemTxBMmsIJE6%2FOGeX4bs5xE33q4XzGZcJkxXXMPnEYfzQ%2BotqsB4ZZ6Z0OVnwnCYgrs3RodN3A%3D; rl_session=RudderEncrypt%3AU2FsdGVkX19BvwuWn9Trr7CAZvRsCIbJW14wnuFVzT61cumsuuRhuC%2FSaxFeq3ReYinUMzJSZpi2aBUR4X%2FV21a%2FCIWnAwAxD7vZYlAspJcK3KmzmCDNKMnrckUv2BO1%2F6RiGdEc1vtzy5%2B5jAYIng%3D%3D"
+          },
+          "params": {},
+          "query": {},
+          "body": {},
+          "webhookUrl": "https://n8n.tailwind.es/webhook/historiaPospuesta",
+          "executionMode": "production"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1"
   },
@@ -3191,9 +5618,16 @@
       "projectId": "x5UZcmGQw2OWHuXb"
     }
   ],
-  "staticData": null,
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrenceRules": []
+    },
+    "node:Ejecución diaria": {
+      "recurrenceRules": []
+    }
+  },
   "tags": [],
-  "triggerCount": 4,
-  "updatedAt": "2026-01-31T09:33:24.945Z",
-  "versionId": "9f383328-d6b5-48a5-a555-665046f84a5b"
+  "triggerCount": 6,
+  "updatedAt": "2026-02-02T15:35:20.017Z",
+  "versionId": "6f1c0048-9d31-4449-96e9-38b1eaaccc0b"
 }
