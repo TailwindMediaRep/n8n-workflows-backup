@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-01-29T10:11:51.000Z",
-    "createdAt": "2026-01-29T10:11:49.998Z",
-    "versionId": "a584d48f-24e9-401a-b6ad-ee63fa2eee98",
+    "updatedAt": "2026-02-02T08:32:15.000Z",
+    "createdAt": "2026-02-02T08:32:13.949Z",
+    "versionId": "046dcd06-0d72-4e98-9bc2-2d45a256690f",
     "workflowId": "hXSd72PLpx6CIiA7",
     "nodes": [
       {
@@ -289,17 +289,20 @@
         "type": "n8n-nodes-base.graphql",
         "typeVersion": 1.1,
         "position": [
-          352,
+          304,
           304
         ],
         "id": "fb5f25bf-aa10-477f-903b-3347b6bdfd93",
         "name": "GraphQL1",
+        "retryOnFail": true,
+        "waitBetweenTries": 5000,
         "credentials": {
           "httpHeaderAuth": {
             "id": "OPt2Cl0dnwcU4qRk",
             "name": "ShopifyInformes"
           }
-        }
+        },
+        "onError": "continueErrorOutput"
       },
       {
         "parameters": {
@@ -328,7 +331,7 @@
         "type": "n8n-nodes-base.filter",
         "typeVersion": 2.2,
         "position": [
-          560,
+          592,
           304
         ],
         "id": "3a15030d-56dc-43aa-b7a7-ee39b5a1464c",
@@ -356,7 +359,7 @@
         "type": "n8n-nodes-base.googleSheets",
         "typeVersion": 4.7,
         "position": [
-          1168,
+          1200,
           304
         ],
         "id": "353aba9b-e574-4316-a3e6-c50e3dfe4702",
@@ -377,7 +380,7 @@
         "type": "n8n-nodes-base.splitInBatches",
         "typeVersion": 3,
         "position": [
-          752,
+          784,
           304
         ],
         "id": "690371e1-eede-40ad-b4b3-b9d98ff0da94",
@@ -389,7 +392,7 @@
         "name": "Replace Me",
         "typeVersion": 1,
         "position": [
-          976,
+          1008,
           304
         ],
         "id": "a9b4b67b-c5af-4ed5-9480-e9c4b4513afb"
@@ -471,7 +474,9 @@
               "AÑO": "={{ $json[\"AÑO\"] }}",
               "CANTIDAD_ACTUAL": "={{ $json.CANTIDAD_PRODUCTO }}"
             },
-            "matchingColumns": [],
+            "matchingColumns": [
+              "PRODUCTO"
+            ],
             "schema": [
               {
                 "id": "PRODUCTO",
@@ -480,7 +485,8 @@
                 "defaultMatch": false,
                 "display": true,
                 "type": "string",
-                "canBeUsedToMatch": true
+                "canBeUsedToMatch": true,
+                "removed": false
               },
               {
                 "id": "ID",
@@ -706,6 +712,17 @@
         ],
         "id": "58de7bf0-26cc-46d5-bd68-1266c26fca5f",
         "name": "Sticky Note5"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          592,
+          560
+        ],
+        "id": "b0f7d201-1d7c-481d-a079-8df470f3a6d9",
+        "name": "No Operation, do nothing2"
       }
     ],
     "connections": {
@@ -817,6 +834,13 @@
               "type": "main",
               "index": 0
             }
+          ],
+          [
+            {
+              "node": "No Operation, do nothing2",
+              "type": "main",
+              "index": 0
+            }
           ]
         ]
       },
@@ -911,11 +935,11 @@
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version a584d48f",
+    "name": "Version 046dcd06",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "a584d48f-24e9-401a-b6ad-ee63fa2eee98",
+  "activeVersionId": "046dcd06-0d72-4e98-9bc2-2d45a256690f",
   "connections": {
     "Webhook": {
       "main": [
@@ -1022,6 +1046,13 @@
         [
           {
             "node": "Filter1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing2",
             "type": "main",
             "index": 0
           }
@@ -1409,17 +1440,20 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        352,
+        304,
         304
       ],
       "id": "fb5f25bf-aa10-477f-903b-3347b6bdfd93",
       "name": "GraphQL1",
+      "retryOnFail": true,
+      "waitBetweenTries": 5000,
       "credentials": {
         "httpHeaderAuth": {
           "id": "OPt2Cl0dnwcU4qRk",
           "name": "ShopifyInformes"
         }
-      }
+      },
+      "onError": "continueErrorOutput"
     },
     {
       "parameters": {
@@ -1448,7 +1482,7 @@
       "type": "n8n-nodes-base.filter",
       "typeVersion": 2.2,
       "position": [
-        560,
+        592,
         304
       ],
       "id": "3a15030d-56dc-43aa-b7a7-ee39b5a1464c",
@@ -1476,7 +1510,7 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        1168,
+        1200,
         304
       ],
       "id": "353aba9b-e574-4316-a3e6-c50e3dfe4702",
@@ -1497,7 +1531,7 @@
       "type": "n8n-nodes-base.splitInBatches",
       "typeVersion": 3,
       "position": [
-        752,
+        784,
         304
       ],
       "id": "690371e1-eede-40ad-b4b3-b9d98ff0da94",
@@ -1509,7 +1543,7 @@
       "name": "Replace Me",
       "typeVersion": 1,
       "position": [
-        976,
+        1008,
         304
       ],
       "id": "a9b4b67b-c5af-4ed5-9480-e9c4b4513afb"
@@ -1591,7 +1625,9 @@
             "AÑO": "={{ $json[\"AÑO\"] }}",
             "CANTIDAD_ACTUAL": "={{ $json.CANTIDAD_PRODUCTO }}"
           },
-          "matchingColumns": [],
+          "matchingColumns": [
+            "PRODUCTO"
+          ],
           "schema": [
             {
               "id": "PRODUCTO",
@@ -1600,7 +1636,8 @@
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true
+              "canBeUsedToMatch": true,
+              "removed": false
             },
             {
               "id": "ID",
@@ -1826,9 +1863,419 @@
       ],
       "id": "58de7bf0-26cc-46d5-bd68-1266c26fca5f",
       "name": "Sticky Note5"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        592,
+        560
+      ],
+      "id": "b0f7d201-1d7c-481d-a079-8df470f3a6d9",
+      "name": "No Operation, do nothing2"
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Schedule Trigger": [
+      {
+        "json": {
+          "timestamp": "2026-02-01T18:00:21.008-05:00",
+          "Readable date": "February 1st 2026, 6:00:21 pm",
+          "Readable time": "6:00:21 pm",
+          "Day of week": "Sunday",
+          "Year": "2026",
+          "Month": "February",
+          "Day of month": "01",
+          "Hour": "18",
+          "Minute": "00",
+          "Second": "21",
+          "Timezone": "America/New_York (UTC-05:00)"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "connection": "upgrade",
+            "host": "n8n.tailwind.es",
+            "x-forwarded-for": "34.78.69.87",
+            "x-forwarded-proto": "https",
+            "content-length": "6619",
+            "user-agent": "Shopify-Captain-Hook",
+            "accept": "*/*",
+            "accept-encoding": "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
+            "content-type": "application/json",
+            "x-shopify-api-version": "2025-10",
+            "x-shopify-event-id": "b0fbe8b5-09c5-439b-8681-64c4f719e475",
+            "x-shopify-hmac-sha256": "BPW8P+D0K1VWpnMWHGWSDmDHlWbVXvnlxL5i7WNSTgU=",
+            "x-shopify-order-id": "7514573078875",
+            "x-shopify-shop-domain": "surfin-store-spain.myshopify.com",
+            "x-shopify-test": "false",
+            "x-shopify-topic": "orders/create",
+            "x-shopify-triggered-at": "2026-02-02T08:20:14.312644992Z",
+            "x-shopify-webhook-id": "b25c1c33-394a-5f36-8135-c95ad6a10f4b"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "id": 7514573078875,
+            "admin_graphql_api_id": "gid://shopify/Order/7514573078875",
+            "app_id": 129785,
+            "browser_ip": "83.48.95.200",
+            "buyer_accepts_marketing": false,
+            "cancel_reason": null,
+            "cancelled_at": null,
+            "cart_token": null,
+            "checkout_id": 48304648618331,
+            "checkout_token": "8da29579-1615-43e4-aec3-93e747e740f9",
+            "client_details": {
+              "accept_language": null,
+              "browser_height": null,
+              "browser_ip": "83.48.95.200",
+              "browser_width": null,
+              "session_hash": null,
+              "user_agent": "Shopify POS/10.19.3/Android/15/Redmi/25099RP13G/production"
+            },
+            "closed_at": "2026-02-02T09:20:14+01:00",
+            "company": null,
+            "confirmation_number": "QNDCJUPQI",
+            "confirmed": true,
+            "contact_email": null,
+            "created_at": "2026-02-02T09:20:13+01:00",
+            "currency": "EUR",
+            "current_shipping_price_set": {
+              "shop_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              }
+            },
+            "current_subtotal_price": "19.95",
+            "current_subtotal_price_set": {
+              "shop_money": {
+                "amount": "19.95",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "19.95",
+                "currency_code": "EUR"
+              }
+            },
+            "current_total_additional_fees_set": null,
+            "current_total_discounts": "0.00",
+            "current_total_discounts_set": {
+              "shop_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              }
+            },
+            "current_total_duties_set": null,
+            "current_total_price": "19.95",
+            "current_total_price_set": {
+              "shop_money": {
+                "amount": "19.95",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "19.95",
+                "currency_code": "EUR"
+              }
+            },
+            "current_total_tax": "0.00",
+            "current_total_tax_set": {
+              "shop_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              }
+            },
+            "customer_locale": "es",
+            "device_id": 8,
+            "discount_codes": [],
+            "duties_included": false,
+            "email": "",
+            "estimated_taxes": false,
+            "financial_status": "paid",
+            "fulfillment_status": "fulfilled",
+            "landing_site": null,
+            "landing_site_ref": null,
+            "location_id": 99018441051,
+            "merchant_business_entity_id": "MTg3OTg3NjUwOTA3",
+            "merchant_of_record_app_id": null,
+            "name": "#71738",
+            "note": null,
+            "note_attributes": [],
+            "number": 70738,
+            "order_number": 71738,
+            "order_status_url": "https://nuance-store.com/87987650907/orders/100b3f025a8fef8a97db469cefd4467d/authenticate?key=f288b444341af5e6c3406ab068c0b917",
+            "original_total_additional_fees_set": null,
+            "original_total_duties_set": null,
+            "payment_gateway_names": [
+              "cash"
+            ],
+            "phone": null,
+            "po_number": null,
+            "presentment_currency": "EUR",
+            "processed_at": "2026-02-02T09:20:12+01:00",
+            "reference": null,
+            "referring_site": null,
+            "source_identifier": "99018441051-8-2259",
+            "source_name": "pos",
+            "source_url": null,
+            "subtotal_price": "19.95",
+            "subtotal_price_set": {
+              "shop_money": {
+                "amount": "19.95",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "19.95",
+                "currency_code": "EUR"
+              }
+            },
+            "tags": "",
+            "tax_exempt": false,
+            "tax_lines": [],
+            "taxes_included": true,
+            "test": false,
+            "token": "100b3f025a8fef8a97db469cefd4467d",
+            "total_cash_rounding_payment_adjustment_set": {
+              "shop_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              }
+            },
+            "total_cash_rounding_refund_adjustment_set": {
+              "shop_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              }
+            },
+            "total_discounts": "0.00",
+            "total_discounts_set": {
+              "shop_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              }
+            },
+            "total_line_items_price": "19.95",
+            "total_line_items_price_set": {
+              "shop_money": {
+                "amount": "19.95",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "19.95",
+                "currency_code": "EUR"
+              }
+            },
+            "total_outstanding": "0.00",
+            "total_price": "19.95",
+            "total_price_set": {
+              "shop_money": {
+                "amount": "19.95",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "19.95",
+                "currency_code": "EUR"
+              }
+            },
+            "total_shipping_price_set": {
+              "shop_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              }
+            },
+            "total_tax": "0.00",
+            "total_tax_set": {
+              "shop_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              }
+            },
+            "total_tip_received": "0.00",
+            "total_weight": 0,
+            "updated_at": "2026-02-02T09:20:14+01:00",
+            "user_id": 115464700251,
+            "billing_address": null,
+            "customer": null,
+            "discount_applications": [],
+            "fulfillments": [
+              {
+                "id": 6697783558491,
+                "admin_graphql_api_id": "gid://shopify/Fulfillment/6697783558491",
+                "created_at": "2026-02-02T09:20:14+01:00",
+                "location_id": 99018441051,
+                "name": "#71738.1",
+                "order_id": 7514573078875,
+                "origin_address": {},
+                "receipt": {},
+                "service": "manual",
+                "shipment_status": null,
+                "status": "success",
+                "tracking_company": null,
+                "tracking_number": null,
+                "tracking_numbers": [],
+                "tracking_url": null,
+                "tracking_urls": [],
+                "updated_at": "2026-02-02T09:20:14+01:00",
+                "line_items": [
+                  {
+                    "id": 18402569126235,
+                    "admin_graphql_api_id": "gid://shopify/LineItem/18402569126235",
+                    "attributed_staffs": [],
+                    "current_quantity": 1,
+                    "fulfillable_quantity": 0,
+                    "fulfillment_service": "manual",
+                    "fulfillment_status": "fulfilled",
+                    "gift_card": false,
+                    "grams": 0,
+                    "name": "Lenz Balaclava - Black / L/XL",
+                    "price": "19.95",
+                    "price_set": {
+                      "shop_money": {
+                        "amount": "19.95",
+                        "currency_code": "EUR"
+                      },
+                      "presentment_money": {
+                        "amount": "19.95",
+                        "currency_code": "EUR"
+                      }
+                    },
+                    "product_exists": true,
+                    "product_id": 10237303914843,
+                    "properties": [],
+                    "quantity": 1,
+                    "requires_shipping": true,
+                    "sku": "51843928129883",
+                    "taxable": true,
+                    "title": "Lenz Balaclava",
+                    "total_discount": "0.00",
+                    "total_discount_set": {
+                      "shop_money": {
+                        "amount": "0.00",
+                        "currency_code": "EUR"
+                      },
+                      "presentment_money": {
+                        "amount": "0.00",
+                        "currency_code": "EUR"
+                      }
+                    },
+                    "variant_id": 51843928129883,
+                    "variant_inventory_management": "shopify",
+                    "variant_title": "Black / L/XL",
+                    "vendor": "Rules Shop",
+                    "tax_lines": [],
+                    "duties": [],
+                    "discount_allocations": []
+                  }
+                ]
+              }
+            ],
+            "line_items": [
+              {
+                "id": 18402569126235,
+                "admin_graphql_api_id": "gid://shopify/LineItem/18402569126235",
+                "attributed_staffs": [],
+                "current_quantity": 1,
+                "fulfillable_quantity": 0,
+                "fulfillment_service": "manual",
+                "fulfillment_status": "fulfilled",
+                "gift_card": false,
+                "grams": 0,
+                "name": "Lenz Balaclava - Black / L/XL",
+                "price": "19.95",
+                "price_set": {
+                  "shop_money": {
+                    "amount": "19.95",
+                    "currency_code": "EUR"
+                  },
+                  "presentment_money": {
+                    "amount": "19.95",
+                    "currency_code": "EUR"
+                  }
+                },
+                "product_exists": true,
+                "product_id": 10237303914843,
+                "properties": [],
+                "quantity": 1,
+                "requires_shipping": true,
+                "sales_line_item_group_id": null,
+                "sku": "51843928129883",
+                "taxable": true,
+                "title": "Lenz Balaclava",
+                "total_discount": "0.00",
+                "total_discount_set": {
+                  "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "EUR"
+                  },
+                  "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "EUR"
+                  }
+                },
+                "variant_id": 51843928129883,
+                "variant_inventory_management": "shopify",
+                "variant_title": "Black / L/XL",
+                "vendor": "Rules Shop",
+                "tax_lines": [],
+                "duties": [],
+                "discount_allocations": []
+              }
+            ],
+            "payment_terms": null,
+            "refunds": [],
+            "shipping_address": null,
+            "shipping_lines": [],
+            "returns": [],
+            "line_item_groups": []
+          },
+          "webhookUrl": "https://n8n.tailwind.es/webhook/sinStock",
+          "executionMode": "production"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1"
   },
@@ -1844,12 +2291,12 @@
   "staticData": {
     "node:Schedule Trigger": {
       "recurrenceRules": [
-        0
+        22
       ]
     }
   },
   "tags": [],
   "triggerCount": 3,
-  "updatedAt": "2026-01-29T10:13:16.006Z",
-  "versionId": "a584d48f-24e9-401a-b6ad-ee63fa2eee98"
+  "updatedAt": "2026-02-02T08:32:47.852Z",
+  "versionId": "046dcd06-0d72-4e98-9bc2-2d45a256690f"
 }
