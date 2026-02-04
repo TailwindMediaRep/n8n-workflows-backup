@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-01-31T18:44:50.000Z",
-    "createdAt": "2026-01-31T18:44:49.195Z",
-    "versionId": "2a6c8161-96da-46f7-904a-c2ce31004fcd",
+    "updatedAt": "2026-02-03T13:45:33.000Z",
+    "createdAt": "2026-02-03T13:45:31.595Z",
+    "versionId": "271cb276-5aec-40eb-bb8a-4265bdb9ec5f",
     "workflowId": "s453S4YZkDDjynYN",
     "nodes": [
       {
@@ -44,8 +44,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          48,
-          576
+          -144,
+          176
         ],
         "id": "4cdfe765-3814-4d6c-8386-333d5b18f607",
         "name": "Code in JavaScript"
@@ -91,8 +91,8 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          192,
-          576
+          0,
+          176
         ],
         "id": "2963a16a-a137-414f-aca4-439be18b907b",
         "name": "Edit Fields"
@@ -107,8 +107,8 @@
         "type": "n8n-nodes-base.graphql",
         "typeVersion": 1.1,
         "position": [
-          336,
-          576
+          144,
+          176
         ],
         "id": "9e556f28-8d43-4be4-ba7b-8d56900cbc4e",
         "name": "GraphQL",
@@ -147,8 +147,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          480,
-          576
+          288,
+          176
         ],
         "id": "07b657b9-de88-4ed6-b4d0-25a5afb60bfe",
         "name": "If"
@@ -163,8 +163,8 @@
         "type": "n8n-nodes-base.graphql",
         "typeVersion": 1.1,
         "position": [
-          704,
-          464
+          512,
+          64
         ],
         "id": "68144495-7bc0-466e-b603-a1fafbd441df",
         "name": "Añadir_cliente",
@@ -185,8 +185,8 @@
         "type": "n8n-nodes-base.gmail",
         "typeVersion": 2.2,
         "position": [
-          1072,
-          464
+          880,
+          64
         ],
         "id": "09ed8cc6-5578-408e-8ff3-1ecbb8888a74",
         "name": "Send a message",
@@ -208,8 +208,8 @@
         "type": "n8n-nodes-base.gmail",
         "typeVersion": 2.2,
         "position": [
-          880,
-          704
+          688,
+          304
         ],
         "id": "a9b80301-c949-4fbb-85a4-eeeeaa265f30",
         "name": "Send a message1",
@@ -228,8 +228,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          32,
-          -240
+          -144,
+          -192
         ],
         "id": "8bc0e663-5e3f-4a51-8174-dcdb04e902d5",
         "name": "Code in JavaScript1"
@@ -269,8 +269,8 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          176,
-          -240
+          0,
+          -192
         ],
         "id": "a97dac04-1287-45fc-bdc5-f1d912402fbb",
         "name": "Edit Fields1"
@@ -285,8 +285,8 @@
         "type": "n8n-nodes-base.graphql",
         "typeVersion": 1.1,
         "position": [
-          320,
-          -240
+          144,
+          -192
         ],
         "id": "9266dc4c-a8b4-4137-ad52-c33168ad7496",
         "name": "GraphQL1",
@@ -325,8 +325,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          464,
-          -240
+          288,
+          -192
         ],
         "id": "b6ea7c20-97b7-4d70-895e-f3aa18aa86b9",
         "name": "If3"
@@ -341,8 +341,8 @@
         "type": "n8n-nodes-base.graphql",
         "typeVersion": 1.1,
         "position": [
-          672,
-          -368
+          496,
+          -320
         ],
         "id": "f6d00919-0089-46fb-b314-93f8adc51178",
         "name": "Añadir_cliente1",
@@ -363,8 +363,8 @@
         "type": "n8n-nodes-base.gmail",
         "typeVersion": 2.2,
         "position": [
-          1072,
-          -368
+          896,
+          -320
         ],
         "id": "c5ac73a8-0655-49ed-b397-32e4c94dbfab",
         "name": "Send a message2",
@@ -386,8 +386,8 @@
         "type": "n8n-nodes-base.gmail",
         "typeVersion": 2.2,
         "position": [
-          864,
-          -144
+          688,
+          -96
         ],
         "id": "f3adfb9a-00fb-4b05-ba3c-0bfefdad6238",
         "name": "Send a message3",
@@ -435,15 +435,15 @@
       {
         "parameters": {
           "content": "## De Wallapop",
-          "height": 864,
-          "width": 1968,
+          "height": 384,
+          "width": 1248,
           "color": 5
         },
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          -160,
-          -544
+          -176,
+          -336
         ],
         "id": "a9eb70be-445d-4bc2-982a-068a3647bb60",
         "name": "Sticky Note"
@@ -451,15 +451,15 @@
       {
         "parameters": {
           "content": "## De Vinted",
-          "height": 816,
-          "width": 1968,
+          "height": 400,
+          "width": 1232,
           "color": 3
         },
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          -160,
-          336
+          -176,
+          48
         ],
         "id": "0402b9a5-e42a-494a-8105-07c95b00002c",
         "name": "Sticky Note1"
@@ -471,8 +471,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          672,
-          -144
+          496,
+          -96
         ],
         "id": "2c939208-ffbf-4f8b-a2a2-90792a9dc5ea",
         "name": "Code in JavaScript2"
@@ -484,8 +484,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          864,
-          -368
+          688,
+          -320
         ],
         "id": "47f30864-04fe-48ae-ac30-c788d656cd55",
         "name": "Code in JavaScript3"
@@ -497,8 +497,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          704,
-          704
+          512,
+          304
         ],
         "id": "ecf3bf9e-e5a9-4366-8c75-f18ef23ac432",
         "name": "Code in JavaScript4"
@@ -510,8 +510,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          896,
-          464
+          704,
+          64
         ],
         "id": "f388e16d-93c4-41b3-be68-5d0404ce6351",
         "name": "Code in JavaScript5"
@@ -717,11 +717,11 @@
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version 2a6c8161",
+    "name": "Version 271cb276",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "2a6c8161-96da-46f7-904a-c2ce31004fcd",
+  "activeVersionId": "271cb276-5aec-40eb-bb8a-4265bdb9ec5f",
   "connections": {
     "Gmail Trigger": {
       "main": [
@@ -967,8 +967,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        48,
-        576
+        -144,
+        176
       ],
       "id": "4cdfe765-3814-4d6c-8386-333d5b18f607",
       "name": "Code in JavaScript"
@@ -1014,8 +1014,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        192,
-        576
+        0,
+        176
       ],
       "id": "2963a16a-a137-414f-aca4-439be18b907b",
       "name": "Edit Fields"
@@ -1030,8 +1030,8 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        336,
-        576
+        144,
+        176
       ],
       "id": "9e556f28-8d43-4be4-ba7b-8d56900cbc4e",
       "name": "GraphQL",
@@ -1070,8 +1070,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        480,
-        576
+        288,
+        176
       ],
       "id": "07b657b9-de88-4ed6-b4d0-25a5afb60bfe",
       "name": "If"
@@ -1086,8 +1086,8 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        704,
-        464
+        512,
+        64
       ],
       "id": "68144495-7bc0-466e-b603-a1fafbd441df",
       "name": "Añadir_cliente",
@@ -1108,8 +1108,8 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        1072,
-        464
+        880,
+        64
       ],
       "id": "09ed8cc6-5578-408e-8ff3-1ecbb8888a74",
       "name": "Send a message",
@@ -1131,8 +1131,8 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        880,
-        704
+        688,
+        304
       ],
       "id": "a9b80301-c949-4fbb-85a4-eeeeaa265f30",
       "name": "Send a message1",
@@ -1151,8 +1151,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        32,
-        -240
+        -144,
+        -192
       ],
       "id": "8bc0e663-5e3f-4a51-8174-dcdb04e902d5",
       "name": "Code in JavaScript1"
@@ -1192,8 +1192,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        176,
-        -240
+        0,
+        -192
       ],
       "id": "a97dac04-1287-45fc-bdc5-f1d912402fbb",
       "name": "Edit Fields1"
@@ -1208,8 +1208,8 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        320,
-        -240
+        144,
+        -192
       ],
       "id": "9266dc4c-a8b4-4137-ad52-c33168ad7496",
       "name": "GraphQL1",
@@ -1248,8 +1248,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        464,
-        -240
+        288,
+        -192
       ],
       "id": "b6ea7c20-97b7-4d70-895e-f3aa18aa86b9",
       "name": "If3"
@@ -1264,8 +1264,8 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        672,
-        -368
+        496,
+        -320
       ],
       "id": "f6d00919-0089-46fb-b314-93f8adc51178",
       "name": "Añadir_cliente1",
@@ -1286,8 +1286,8 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        1072,
-        -368
+        896,
+        -320
       ],
       "id": "c5ac73a8-0655-49ed-b397-32e4c94dbfab",
       "name": "Send a message2",
@@ -1309,8 +1309,8 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        864,
-        -144
+        688,
+        -96
       ],
       "id": "f3adfb9a-00fb-4b05-ba3c-0bfefdad6238",
       "name": "Send a message3",
@@ -1358,15 +1358,15 @@
     {
       "parameters": {
         "content": "## De Wallapop",
-        "height": 864,
-        "width": 1968,
+        "height": 384,
+        "width": 1248,
         "color": 5
       },
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -160,
-        -544
+        -176,
+        -336
       ],
       "id": "a9eb70be-445d-4bc2-982a-068a3647bb60",
       "name": "Sticky Note"
@@ -1374,15 +1374,15 @@
     {
       "parameters": {
         "content": "## De Vinted",
-        "height": 816,
-        "width": 1968,
+        "height": 400,
+        "width": 1232,
         "color": 3
       },
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -160,
-        336
+        -176,
+        48
       ],
       "id": "0402b9a5-e42a-494a-8105-07c95b00002c",
       "name": "Sticky Note1"
@@ -1394,8 +1394,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        672,
-        -144
+        496,
+        -96
       ],
       "id": "2c939208-ffbf-4f8b-a2a2-90792a9dc5ea",
       "name": "Code in JavaScript2"
@@ -1407,8 +1407,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        864,
-        -368
+        688,
+        -320
       ],
       "id": "47f30864-04fe-48ae-ac30-c788d656cd55",
       "name": "Code in JavaScript3"
@@ -1420,8 +1420,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        704,
-        704
+        512,
+        304
       ],
       "id": "ecf3bf9e-e5a9-4366-8c75-f18ef23ac432",
       "name": "Code in JavaScript4"
@@ -1433,8 +1433,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        896,
-        464
+        704,
+        64
       ],
       "id": "f388e16d-93c4-41b3-be68-5d0404ce6351",
       "name": "Code in JavaScript5"
@@ -1470,6 +1470,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-02-01T15:32:31.514Z",
-  "versionId": "2a6c8161-96da-46f7-904a-c2ce31004fcd"
+  "updatedAt": "2026-02-03T13:45:31.592Z",
+  "versionId": "271cb276-5aec-40eb-bb8a-4265bdb9ec5f"
 }
