@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-01-26T13:04:38.000Z",
-    "createdAt": "2026-01-26T13:04:37.231Z",
-    "versionId": "0be4f264-5f42-4620-96d2-d0ca7b0481bc",
+    "updatedAt": "2026-02-03T13:46:47.000Z",
+    "createdAt": "2026-02-03T13:46:45.956Z",
+    "versionId": "4320c4e7-c68d-4c97-984f-044d6d0c2939",
     "workflowId": "UmKsPhbqKY4r9YDi9-dc0",
     "nodes": [
       {
@@ -74,7 +74,7 @@
       {
         "parameters": {
           "content": "## Empleados Vigente y No Vigentes\n**Se capta la información desde Bizneo**",
-          "height": 608,
+          "height": 224,
           "width": 944,
           "color": 5
         },
@@ -82,7 +82,7 @@
         "typeVersion": 1,
         "position": [
           -1056,
-          -144
+          0
         ],
         "id": "a0972494-5d92-4f72-aca7-5c0c9bf6d429",
         "name": "Sticky Note"
@@ -98,7 +98,7 @@
         "typeVersion": 1,
         "position": [
           -112,
-          -144
+          -176
         ],
         "id": "c27b46fb-631e-46c5-9f77-fd631ed84876",
         "name": "Sticky Note1"
@@ -106,7 +106,7 @@
       {
         "parameters": {
           "content": "## No es vigente\n**Si tiene cuenta le quita las etiquetas de Empleado**",
-          "height": 304,
+          "height": 272,
           "width": 992,
           "color": 3
         },
@@ -114,7 +114,7 @@
         "typeVersion": 1,
         "position": [
           -112,
-          160
+          112
         ],
         "id": "c0fbf6d1-16f2-4c51-a344-286cc81a2eed",
         "name": "Sticky Note2"
@@ -294,8 +294,8 @@
         "type": "n8n-nodes-base.graphql",
         "typeVersion": 1.1,
         "position": [
-          -16,
-          288
+          0,
+          208
         ],
         "id": "f5ffdb7b-56d0-40a3-a54e-d93d02197937",
         "name": "Coincidencias_Shopify1",
@@ -313,8 +313,8 @@
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          288,
-          288
+          304,
+          208
         ],
         "id": "2a1a8e87-752b-4cd3-8a5c-77c852d451e1",
         "name": "Existe_en_Shopify"
@@ -342,8 +342,8 @@
         "type": "n8n-nodes-base.graphql",
         "typeVersion": 1.1,
         "position": [
-          640,
-          288
+          656,
+          208
         ],
         "id": "f4ea09c5-285f-4b49-bd67-2ad2893c6692",
         "name": "quitar_etiqueta_empleado",
@@ -481,12 +481,12 @@
         ]
       }
     },
-    "authors": "Info Tailwind",
-    "name": "Version 0be4f264",
+    "authors": "Tailwind Media",
+    "name": "Version 4320c4e7",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "0be4f264-5f42-4620-96d2-d0ca7b0481bc",
+  "activeVersionId": "4320c4e7-c68d-4c97-984f-044d6d0c2939",
   "connections": {
     "Split Out": {
       "main": [
@@ -687,7 +687,7 @@
     {
       "parameters": {
         "content": "## Empleados Vigente y No Vigentes\n**Se capta la información desde Bizneo**",
-        "height": 608,
+        "height": 224,
         "width": 944,
         "color": 5
       },
@@ -695,7 +695,7 @@
       "typeVersion": 1,
       "position": [
         -1056,
-        -144
+        0
       ],
       "id": "a0972494-5d92-4f72-aca7-5c0c9bf6d429",
       "name": "Sticky Note"
@@ -711,7 +711,7 @@
       "typeVersion": 1,
       "position": [
         -112,
-        -144
+        -176
       ],
       "id": "c27b46fb-631e-46c5-9f77-fd631ed84876",
       "name": "Sticky Note1"
@@ -719,7 +719,7 @@
     {
       "parameters": {
         "content": "## No es vigente\n**Si tiene cuenta le quita las etiquetas de Empleado**",
-        "height": 304,
+        "height": 272,
         "width": 992,
         "color": 3
       },
@@ -727,7 +727,7 @@
       "typeVersion": 1,
       "position": [
         -112,
-        160
+        112
       ],
       "id": "c0fbf6d1-16f2-4c51-a344-286cc81a2eed",
       "name": "Sticky Note2"
@@ -907,8 +907,8 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        -16,
-        288
+        0,
+        208
       ],
       "id": "f5ffdb7b-56d0-40a3-a54e-d93d02197937",
       "name": "Coincidencias_Shopify1",
@@ -926,8 +926,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        288,
-        288
+        304,
+        208
       ],
       "id": "2a1a8e87-752b-4cd3-8a5c-77c852d451e1",
       "name": "Existe_en_Shopify"
@@ -955,8 +955,8 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        640,
-        288
+        656,
+        208
       ],
       "id": "f4ea09c5-285f-4b49-bd67-2ad2893c6692",
       "name": "quitar_etiqueta_empleado",
@@ -985,6 +985,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-01-26T13:04:37.228Z",
-  "versionId": "0be4f264-5f42-4620-96d2-d0ca7b0481bc"
+  "updatedAt": "2026-02-03T13:46:45.955Z",
+  "versionId": "4320c4e7-c68d-4c97-984f-044d6d0c2939"
 }
