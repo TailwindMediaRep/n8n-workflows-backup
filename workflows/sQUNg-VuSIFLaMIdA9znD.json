@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-01-31T08:40:25.000Z",
-    "createdAt": "2026-01-31T08:40:23.691Z",
-    "versionId": "201a3338-7bce-48a4-9d66-3a3c044b552c",
+    "updatedAt": "2026-02-03T14:35:56.000Z",
+    "createdAt": "2026-02-03T14:35:54.426Z",
+    "versionId": "61e0a021-2a40-40b3-a6b0-c6ce1b0b686a",
     "workflowId": "sQUNg-VuSIFLaMIdA9znD",
     "nodes": [
       {
@@ -2054,6 +2054,36 @@
         ],
         "id": "62875833-b388-4db3-8958-e726c4d976d9",
         "name": "Sticky Note3"
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-07/graphql.json",
+          "query": "query getOrder($id: ID!) {\n  order(id: $id) {\n    id\n    name\n    createdAt\n    totalPriceSet {\n      shopMoney {\n        amount\n      }\n    }\n    # Obtenemos los descuentos aplicados a cada producto\n    lineItems(first: 10) {\n      edges {\n        node {\n          title\n          sku\n          quantity\n          originalUnitPriceSet {\n            shopMoney {\n              amount\n            }\n          }\n          discountAllocations {\n            allocatedAmountSet {\n              shopMoney {\n                amount\n              }\n            }\n          }\n        }\n      }\n    }\n    # Vital para el crédito en tienda\n    transactions(first: 10) {\n      gateway\n      formattedGateway\n      kind\n      status\n      amountSet {\n        shopMoney {\n          amount\n        }\n      }\n    }\n    fulfillments {\n      location {\n        name\n      }\n    }\n  }\n}",
+          "variables": "={\n  \"id\": \"gid://shopify/Order/7518765089115\"\n}",
+          "headerParametersUi": {
+            "parameter": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          336,
+          -272
+        ],
+        "id": "a4721366-bdfb-45ab-91d9-1bc5acc8ffd7",
+        "name": "GraphQL2",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
       }
     ],
     "connections": {
@@ -2387,11 +2417,11 @@
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version 201a3338",
+    "name": "Version 61e0a021",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "201a3338-7bce-48a4-9d66-3a3c044b552c",
+  "activeVersionId": "61e0a021-2a40-40b3-a6b0-c6ce1b0b686a",
   "connections": {
     "Webhook": {
       "main": [
@@ -4778,6 +4808,36 @@
       ],
       "id": "62875833-b388-4db3-8958-e726c4d976d9",
       "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-07/graphql.json",
+        "query": "query getOrder($id: ID!) {\n  order(id: $id) {\n    id\n    name\n    createdAt\n    totalPriceSet {\n      shopMoney {\n        amount\n      }\n    }\n    # Obtenemos los descuentos aplicados a cada producto\n    lineItems(first: 10) {\n      edges {\n        node {\n          title\n          sku\n          quantity\n          originalUnitPriceSet {\n            shopMoney {\n              amount\n            }\n          }\n          discountAllocations {\n            allocatedAmountSet {\n              shopMoney {\n                amount\n              }\n            }\n          }\n        }\n      }\n    }\n    # Vital para el crédito en tienda\n    transactions(first: 10) {\n      gateway\n      formattedGateway\n      kind\n      status\n      amountSet {\n        shopMoney {\n          amount\n        }\n      }\n    }\n    fulfillments {\n      location {\n        name\n      }\n    }\n  }\n}",
+        "variables": "={\n  \"id\": \"gid://shopify/Order/7518765089115\"\n}",
+        "headerParametersUi": {
+          "parameter": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        336,
+        -272
+      ],
+      "id": "a4721366-bdfb-45ab-91d9-1bc5acc8ffd7",
+      "name": "GraphQL2",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -4797,6 +4857,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 3,
-  "updatedAt": "2026-01-31T08:40:23.683Z",
-  "versionId": "201a3338-7bce-48a4-9d66-3a3c044b552c"
+  "updatedAt": "2026-02-03T14:35:54.421Z",
+  "versionId": "61e0a021-2a40-40b3-a6b0-c6ce1b0b686a"
 }
