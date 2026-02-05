@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-02-02T08:51:59.000Z",
-    "createdAt": "2026-02-02T08:51:58.358Z",
-    "versionId": "0e922213-c75d-4ef8-afb5-5dc2d98d3d86",
+    "updatedAt": "2026-02-04T15:07:31.000Z",
+    "createdAt": "2026-02-04T15:07:16.385Z",
+    "versionId": "12e5a58a-68dc-4eea-a17b-f58ae1a9ed76",
     "workflowId": "8zLv7DpNHO5BT9ay",
     "nodes": [
       {
@@ -85,30 +85,7 @@
       },
       {
         "parameters": {
-          "authentication": "headerAuth",
-          "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
-          "requestFormat": "json",
-          "query": "query getOrderData($id: ID!) {\n  order(id: $id) {\n    customer {\n      id\n    }\n    discountCodes\n  }\n}",
-          "variables": "={\n  \"id\": \"gid://shopify/Order/{{ $json.body.order_id }}\"\n}"
-        },
-        "name": "Get Refund Customer1",
-        "type": "n8n-nodes-base.graphql",
-        "typeVersion": 1,
-        "position": [
-          -2192,
-          1280
-        ],
-        "id": "892eb6b9-c9ce-4dde-9072-34637ceda390",
-        "credentials": {
-          "httpHeaderAuth": {
-            "id": "OPt2Cl0dnwcU4qRk",
-            "name": "ShopifyInformes"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "jsCode": "// 1. Obtener datos del Webhook\n// IMPORTANTE: Aquí debe ir el nombre EXACTO de tu nodo.\n// En tu captura se llama \"Webhook2\". Si lo cambias, actualiza esta línea.\nlet webhookNode;\ntry {\n    webhookNode = $('Webhook2').first().json; \n} catch (error) {\n    // Fallback: Si no se llama Webhook2, intentamos buscar el nodo anterior conectado\n    // Esto hace el código más resistente a cambios de nombre\n    webhookNode = $input.all()[0].json;\n}\n\nconst topic = webhookNode.headers[\"x-shopify-topic\"];\nconst body = webhookNode.body;\n\nlet customerId = \"\";\nlet amountToProcess = 0;\nlet discountCode = null;\n\nif (topic.includes('orders/create')) {\n    // === ES UN PEDIDO ===\n    if (body.customer && body.customer.admin_graphql_api_id) {\n        customerId = body.customer.admin_graphql_api_id;\n    }\n\n    // --- DETECCIÓN DE CÓDIGO/NOMBRE DE DESCUENTO ---\n    \n    // PRIORIDAD 1: Códigos de Descuento (Cupones estándar)\n    if (body.discount_codes && body.discount_codes.length > 0) {\n        discountCode = body.discount_codes[0].code;\n    }\n    // PRIORIDAD 2: Aplicaciones de Descuento (Manuales POS, Automáticos, Scripts)\n    else if (body.discount_applications && body.discount_applications.length > 0) {\n        discountCode = body.discount_applications[0].title;\n    }\n\n    // --- DETECCIÓN DE MONTO ---\n    const totalDiscounts = parseFloat(body.total_discounts || \"0\");\n    \n    // Solo acumulamos si hubo un descuento real\n    if (totalDiscounts > 0) {\n        amountToProcess = parseFloat(body.total_price);\n    } else {\n        amountToProcess = 0;\n    }\n\n} else if (topic.includes('refunds/create')) {\n    // === ES UNA DEVOLUCIÓN ===\n    // En las devoluciones, los datos vienen del nodo GraphQL anterior, no del webhook directo\n    // Usamos try/catch por si se ejecuta manualmente sin datos previos\n    let orderData = null;\n    try {\n        orderData = $input.item.json.data ? $input.item.json.data.order : null;\n    } catch(e) {}\n    \n    if (orderData && orderData.customer) {\n         customerId = orderData.customer.id;\n         \n         if (orderData.discountCodes && orderData.discountCodes.length > 0) {\n             const codeItem = orderData.discountCodes[0];\n             discountCode = (typeof codeItem === 'string') ? codeItem : codeItem.code;\n         } \n    } else {\n         customerId = body.order_id; \n    }\n\n    const transactions = body.transactions || [];\n    const totalRefunded = transactions.reduce((acc, curr) => acc + parseFloat(curr.amount), 0);\n    \n    amountToProcess = -Math.abs(totalRefunded);\n}\n\nreturn {\n    json: {\n        customerId: customerId,\n        amountToProcess: amountToProcess,\n        discountCode: discountCode\n    }\n};"
+          "jsCode": "// ================================================================\n// 1. OBTENCIÓN ROBUSTA DE DATOS (WEBHOOK VS GRAPHQL)\n// ================================================================\nlet webhookNode;\nlet webhookBody;\nlet webhookHeaders;\n\ntry {\n    // Intentamos leer el nodo \"Webhook2\" explícitamente\n    if ($('Webhook2') && $('Webhook2').first()) {\n        webhookNode = $('Webhook2').first().json;\n    } else {\n        // Fallback: Si no se llama \"Webhook2\", usamos el primer input disponible\n        webhookNode = $input.all()[0].json;\n    }\n} catch (error) {\n    webhookNode = {};\n}\n\n// Normalización: Asegurar que tenemos headers y body disponibles\nif (webhookNode.headers && webhookNode.body) {\n    // Caso A: Venimos directo del Webhook\n    webhookHeaders = webhookNode.headers;\n    webhookBody = webhookNode.body;\n} else if ($input.item.json.headers && $input.item.json.body) {\n    // Caso B: El input actual conserva la estructura del webhook\n    webhookHeaders = $input.item.json.headers;\n    webhookBody = $input.item.json.body;\n} else {\n    // Caso C: Estamos tras el nodo GraphQL (\"Get Refund Customer1\").\n    // Aquí el $input es la respuesta de Shopify, así que forzamos la lectura del nodo Webhook2\n    // para recuperar las transacciones originales.\n    try {\n        const whSource = $('Webhook2').first().json;\n        webhookHeaders = whSource.headers;\n        webhookBody = whSource.body;\n    } catch(e) {\n        // Si todo falla, dejamos objetos vacíos para evitar crash, pero el flujo fallará lógicamente\n        webhookHeaders = {};\n        webhookBody = {};\n    }\n}\n\nconst topic = webhookHeaders[\"x-shopify-topic\"] || \"\";\nconst body = webhookBody || {};\n\n// Variables de salida\nlet customerId = \"\";\nlet amountToProcess = 0;\nlet discountCode = null;\n\n// ================================================================\n// 2. LÓGICA PRINCIPAL (PEDIDOS VS DEVOLUCIONES)\n// ================================================================\n\nif (topic.includes('orders/create')) {\n    // ------------------------------------------------------------\n    // CASO: NUEVO PEDIDO\n    // ------------------------------------------------------------\n    \n    // A. Obtener ID Cliente\n    if (body.customer && body.customer.admin_graphql_api_id) {\n        customerId = body.customer.admin_graphql_api_id;\n    }\n\n    // B. Detectar Descuento\n    if (body.discount_codes && body.discount_codes.length > 0) {\n        discountCode = body.discount_codes[0].code;\n    } else if (body.discount_applications && body.discount_applications.length > 0) {\n        discountCode = body.discount_applications[0].title;\n    }\n\n    // C. Calcular Monto (Solo si hubo descuento aplicado)\n    const totalDiscounts = parseFloat(body.total_discounts || \"0\");\n    if (totalDiscounts > 0) {\n        amountToProcess = parseFloat(body.total_price);\n    } else {\n        amountToProcess = 0;\n    }\n\n} else if (topic.includes('refunds/create')) {\n    // ------------------------------------------------------------\n    // CASO: DEVOLUCIÓN (REFUND)\n    // ------------------------------------------------------------\n\n    // A. Obtener datos enriquecidos desde GraphQL (Nodo anterior)\n    let orderData = null;\n    try {\n        orderData = $input.item.json.data ? $input.item.json.data.order : null;\n    } catch(e) {}\n    \n    // B. Obtener ID Cliente y Código del pedido original\n    if (orderData && orderData.customer) {\n         customerId = orderData.customer.id;\n         \n         if (orderData.discountCodes && orderData.discountCodes.length > 0) {\n             const codeItem = orderData.discountCodes[0];\n             discountCode = (typeof codeItem === 'string') ? codeItem : codeItem.code;\n         } \n    } else {\n         // Fallback de emergencia\n         customerId = body.order_id; \n    }\n\n    // C. CALCULAR MONTO A RESTAR (LÓGICA CRÍTICA \"FOLLOW THE MONEY\")\n    // Buscamos el array de transacciones financieras en el cuerpo del webhook.\n    const transactions = body.transactions || [];\n    \n    // Sumamos solo si hay dinero devuelto. \n    // Si transactions es [] (Cambio de Talla), el total será 0.\n    const totalRefunded = transactions.reduce((acc, curr) => {\n        return acc + parseFloat(curr.amount || 0);\n    }, 0);\n    \n    // Convertimos a negativo para restar del saldo acumulado\n    amountToProcess = -Math.abs(totalRefunded);\n}\n\n// ================================================================\n// 3. RETORNO FINAL\n// ================================================================\nreturn {\n    json: {\n        customerId: customerId,\n        amountToProcess: amountToProcess,\n        discountCode: discountCode\n    }\n};"
         },
         "name": "Code Unificador1",
         "type": "n8n-nodes-base.code",
@@ -290,6 +267,28 @@
         ],
         "id": "65e5f3b5-b2ea-4207-bcd4-2069c9519464",
         "name": "No Operation, do nothing1"
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+          "query": "query getOrderCompleteDetails($id: ID!) {\n  order(id: $id) {\n    id\n    name\n    createdAt\n    processedAt\n    displayFinancialStatus\n    displayFulfillmentStatus\n    tags\n    note\n    email\n    phone\n    sourceIdentifier\n    app {\n      name\n    }\n    \n    # 1. CLIENTE\n    customer {\n      id\n      firstName\n      lastName\n      email\n      numberOfOrders\n    }\n\n    # 2. DINERO Y TOTALES\n    currentSubtotalPriceSet {\n      shopMoney {\n        amount\n        currencyCode\n      }\n    }\n    totalPriceSet {\n      shopMoney {\n        amount\n        currencyCode\n      }\n    }\n    totalReceivedSet {\n      shopMoney {\n        amount\n        currencyCode\n      }\n    }\n    totalDiscountsSet {\n      shopMoney {\n        amount\n        currencyCode\n      }\n    }\n\n    # DETALLE DE DESCUENTOS\n    discountApplications(first: 10) {\n      edges {\n        node {\n          targetSelection\n          allocationMethod\n          value {\n            ... on MoneyV2 {\n              amount\n              currencyCode\n            }\n            ... on PricingPercentageValue {\n              percentage\n            }\n          }\n          ... on DiscountCodeApplication {\n            code\n          }\n          ... on ManualDiscountApplication {\n            title\n            description\n          }\n          ... on AutomaticDiscountApplication {\n            title\n          }\n          ... on ScriptDiscountApplication {\n            title\n          }\n        }\n      }\n    }\n\n    # 3. LÍNEAS DE PRODUCTO\n    lineItems(first: 50) {\n      edges {\n        node {\n          id\n          title\n          variantTitle\n          sku\n          quantity\n          originalTotalSet {\n            shopMoney {\n              amount\n              currencyCode\n            }\n          }\n          variant {\n            id\n            price\n          }\n        }\n      }\n    }\n\n    # 4. CUMPLIMIENTOS (Fulfillments) - SECCIÓN CORREGIDA\n    fulfillments(first: 10) {\n      id\n      name\n      status\n      createdAt\n      # 'trackingCompany' eliminado. Ahora se pide dentro de trackingInfo:\n      trackingInfo {\n        company\n        number\n        url\n      }\n      location {\n        name\n      }\n      fulfillmentLineItems(first: 20) {\n        edges {\n          node {\n            quantity\n            lineItem {\n              title\n              variantTitle\n            }\n          }\n        }\n      }\n    }\n\n    # 5. DEVOLUCIONES (Refunds)\n    refunds(first: 10) {\n      id\n      createdAt\n      note\n      refundLineItems(first: 20) {\n        edges {\n          node {\n            quantity\n            lineItem {\n              title\n              variantTitle\n              sku\n            }\n            subtotalSet {\n              shopMoney {\n                amount\n                currencyCode\n              }\n            }\n          }\n        }\n      }\n    }\n\n    # 6. EVENTOS (Timeline)\n    events(first: 50) {\n      edges {\n        node {\n          id\n          message\n          createdAt\n        }\n      }\n    }\n  }\n}",
+          "variables": "={\n  \"id\": \"gid://shopify/Order/{{ $json.body.order_id }}\"\n}"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          -2176,
+          1248
+        ],
+        "id": "75217c5a-468f-49ce-8da2-f12e4026194f",
+        "name": "GraphQL",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "THkhgrtze1uBo6Ft",
+            "name": "Token Informes Shopify"
+          }
+        }
       }
     ],
     "connections": {
@@ -308,22 +307,11 @@
         "main": [
           [
             {
-              "node": "Get Refund Customer1",
+              "node": "GraphQL",
               "type": "main",
               "index": 0
             }
           ],
-          [
-            {
-              "node": "Code Unificador1",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Get Refund Customer1": {
-        "main": [
           [
             {
               "node": "Code Unificador1",
@@ -412,14 +400,25 @@
             }
           ]
         ]
+      },
+      "GraphQL": {
+        "main": [
+          [
+            {
+              "node": "Code Unificador1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version 0e922213",
+    "name": "Version 12e5a58a",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "0e922213-c75d-4ef8-afb5-5dc2d98d3d86",
+  "activeVersionId": "12e5a58a-68dc-4eea-a17b-f58ae1a9ed76",
   "connections": {
     "Webhook2": {
       "main": [
@@ -436,22 +435,11 @@
       "main": [
         [
           {
-            "node": "Get Refund Customer1",
+            "node": "GraphQL",
             "type": "main",
             "index": 0
           }
         ],
-        [
-          {
-            "node": "Code Unificador1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Get Refund Customer1": {
-      "main": [
         [
           {
             "node": "Code Unificador1",
@@ -535,6 +523,17 @@
         [
           {
             "node": "No Operation, do nothing1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GraphQL": {
+      "main": [
+        [
+          {
+            "node": "Code Unificador1",
             "type": "main",
             "index": 0
           }
@@ -629,30 +628,7 @@
     },
     {
       "parameters": {
-        "authentication": "headerAuth",
-        "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
-        "requestFormat": "json",
-        "query": "query getOrderData($id: ID!) {\n  order(id: $id) {\n    customer {\n      id\n    }\n    discountCodes\n  }\n}",
-        "variables": "={\n  \"id\": \"gid://shopify/Order/{{ $json.body.order_id }}\"\n}"
-      },
-      "name": "Get Refund Customer1",
-      "type": "n8n-nodes-base.graphql",
-      "typeVersion": 1,
-      "position": [
-        -2192,
-        1280
-      ],
-      "id": "892eb6b9-c9ce-4dde-9072-34637ceda390",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "OPt2Cl0dnwcU4qRk",
-          "name": "ShopifyInformes"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "jsCode": "// 1. Obtener datos del Webhook\n// IMPORTANTE: Aquí debe ir el nombre EXACTO de tu nodo.\n// En tu captura se llama \"Webhook2\". Si lo cambias, actualiza esta línea.\nlet webhookNode;\ntry {\n    webhookNode = $('Webhook2').first().json; \n} catch (error) {\n    // Fallback: Si no se llama Webhook2, intentamos buscar el nodo anterior conectado\n    // Esto hace el código más resistente a cambios de nombre\n    webhookNode = $input.all()[0].json;\n}\n\nconst topic = webhookNode.headers[\"x-shopify-topic\"];\nconst body = webhookNode.body;\n\nlet customerId = \"\";\nlet amountToProcess = 0;\nlet discountCode = null;\n\nif (topic.includes('orders/create')) {\n    // === ES UN PEDIDO ===\n    if (body.customer && body.customer.admin_graphql_api_id) {\n        customerId = body.customer.admin_graphql_api_id;\n    }\n\n    // --- DETECCIÓN DE CÓDIGO/NOMBRE DE DESCUENTO ---\n    \n    // PRIORIDAD 1: Códigos de Descuento (Cupones estándar)\n    if (body.discount_codes && body.discount_codes.length > 0) {\n        discountCode = body.discount_codes[0].code;\n    }\n    // PRIORIDAD 2: Aplicaciones de Descuento (Manuales POS, Automáticos, Scripts)\n    else if (body.discount_applications && body.discount_applications.length > 0) {\n        discountCode = body.discount_applications[0].title;\n    }\n\n    // --- DETECCIÓN DE MONTO ---\n    const totalDiscounts = parseFloat(body.total_discounts || \"0\");\n    \n    // Solo acumulamos si hubo un descuento real\n    if (totalDiscounts > 0) {\n        amountToProcess = parseFloat(body.total_price);\n    } else {\n        amountToProcess = 0;\n    }\n\n} else if (topic.includes('refunds/create')) {\n    // === ES UNA DEVOLUCIÓN ===\n    // En las devoluciones, los datos vienen del nodo GraphQL anterior, no del webhook directo\n    // Usamos try/catch por si se ejecuta manualmente sin datos previos\n    let orderData = null;\n    try {\n        orderData = $input.item.json.data ? $input.item.json.data.order : null;\n    } catch(e) {}\n    \n    if (orderData && orderData.customer) {\n         customerId = orderData.customer.id;\n         \n         if (orderData.discountCodes && orderData.discountCodes.length > 0) {\n             const codeItem = orderData.discountCodes[0];\n             discountCode = (typeof codeItem === 'string') ? codeItem : codeItem.code;\n         } \n    } else {\n         customerId = body.order_id; \n    }\n\n    const transactions = body.transactions || [];\n    const totalRefunded = transactions.reduce((acc, curr) => acc + parseFloat(curr.amount), 0);\n    \n    amountToProcess = -Math.abs(totalRefunded);\n}\n\nreturn {\n    json: {\n        customerId: customerId,\n        amountToProcess: amountToProcess,\n        discountCode: discountCode\n    }\n};"
+        "jsCode": "// ================================================================\n// 1. OBTENCIÓN ROBUSTA DE DATOS (WEBHOOK VS GRAPHQL)\n// ================================================================\nlet webhookNode;\nlet webhookBody;\nlet webhookHeaders;\n\ntry {\n    // Intentamos leer el nodo \"Webhook2\" explícitamente\n    if ($('Webhook2') && $('Webhook2').first()) {\n        webhookNode = $('Webhook2').first().json;\n    } else {\n        // Fallback: Si no se llama \"Webhook2\", usamos el primer input disponible\n        webhookNode = $input.all()[0].json;\n    }\n} catch (error) {\n    webhookNode = {};\n}\n\n// Normalización: Asegurar que tenemos headers y body disponibles\nif (webhookNode.headers && webhookNode.body) {\n    // Caso A: Venimos directo del Webhook\n    webhookHeaders = webhookNode.headers;\n    webhookBody = webhookNode.body;\n} else if ($input.item.json.headers && $input.item.json.body) {\n    // Caso B: El input actual conserva la estructura del webhook\n    webhookHeaders = $input.item.json.headers;\n    webhookBody = $input.item.json.body;\n} else {\n    // Caso C: Estamos tras el nodo GraphQL (\"Get Refund Customer1\").\n    // Aquí el $input es la respuesta de Shopify, así que forzamos la lectura del nodo Webhook2\n    // para recuperar las transacciones originales.\n    try {\n        const whSource = $('Webhook2').first().json;\n        webhookHeaders = whSource.headers;\n        webhookBody = whSource.body;\n    } catch(e) {\n        // Si todo falla, dejamos objetos vacíos para evitar crash, pero el flujo fallará lógicamente\n        webhookHeaders = {};\n        webhookBody = {};\n    }\n}\n\nconst topic = webhookHeaders[\"x-shopify-topic\"] || \"\";\nconst body = webhookBody || {};\n\n// Variables de salida\nlet customerId = \"\";\nlet amountToProcess = 0;\nlet discountCode = null;\n\n// ================================================================\n// 2. LÓGICA PRINCIPAL (PEDIDOS VS DEVOLUCIONES)\n// ================================================================\n\nif (topic.includes('orders/create')) {\n    // ------------------------------------------------------------\n    // CASO: NUEVO PEDIDO\n    // ------------------------------------------------------------\n    \n    // A. Obtener ID Cliente\n    if (body.customer && body.customer.admin_graphql_api_id) {\n        customerId = body.customer.admin_graphql_api_id;\n    }\n\n    // B. Detectar Descuento\n    if (body.discount_codes && body.discount_codes.length > 0) {\n        discountCode = body.discount_codes[0].code;\n    } else if (body.discount_applications && body.discount_applications.length > 0) {\n        discountCode = body.discount_applications[0].title;\n    }\n\n    // C. Calcular Monto (Solo si hubo descuento aplicado)\n    const totalDiscounts = parseFloat(body.total_discounts || \"0\");\n    if (totalDiscounts > 0) {\n        amountToProcess = parseFloat(body.total_price);\n    } else {\n        amountToProcess = 0;\n    }\n\n} else if (topic.includes('refunds/create')) {\n    // ------------------------------------------------------------\n    // CASO: DEVOLUCIÓN (REFUND)\n    // ------------------------------------------------------------\n\n    // A. Obtener datos enriquecidos desde GraphQL (Nodo anterior)\n    let orderData = null;\n    try {\n        orderData = $input.item.json.data ? $input.item.json.data.order : null;\n    } catch(e) {}\n    \n    // B. Obtener ID Cliente y Código del pedido original\n    if (orderData && orderData.customer) {\n         customerId = orderData.customer.id;\n         \n         if (orderData.discountCodes && orderData.discountCodes.length > 0) {\n             const codeItem = orderData.discountCodes[0];\n             discountCode = (typeof codeItem === 'string') ? codeItem : codeItem.code;\n         } \n    } else {\n         // Fallback de emergencia\n         customerId = body.order_id; \n    }\n\n    // C. CALCULAR MONTO A RESTAR (LÓGICA CRÍTICA \"FOLLOW THE MONEY\")\n    // Buscamos el array de transacciones financieras en el cuerpo del webhook.\n    const transactions = body.transactions || [];\n    \n    // Sumamos solo si hay dinero devuelto. \n    // Si transactions es [] (Cambio de Talla), el total será 0.\n    const totalRefunded = transactions.reduce((acc, curr) => {\n        return acc + parseFloat(curr.amount || 0);\n    }, 0);\n    \n    // Convertimos a negativo para restar del saldo acumulado\n    amountToProcess = -Math.abs(totalRefunded);\n}\n\n// ================================================================\n// 3. RETORNO FINAL\n// ================================================================\nreturn {\n    json: {\n        customerId: customerId,\n        amountToProcess: amountToProcess,\n        discountCode: discountCode\n    }\n};"
       },
       "name": "Code Unificador1",
       "type": "n8n-nodes-base.code",
@@ -834,6 +810,28 @@
       ],
       "id": "65e5f3b5-b2ea-4207-bcd4-2069c9519464",
       "name": "No Operation, do nothing1"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+        "query": "query getOrderCompleteDetails($id: ID!) {\n  order(id: $id) {\n    id\n    name\n    createdAt\n    processedAt\n    displayFinancialStatus\n    displayFulfillmentStatus\n    tags\n    note\n    email\n    phone\n    sourceIdentifier\n    app {\n      name\n    }\n    \n    # 1. CLIENTE\n    customer {\n      id\n      firstName\n      lastName\n      email\n      numberOfOrders\n    }\n\n    # 2. DINERO Y TOTALES\n    currentSubtotalPriceSet {\n      shopMoney {\n        amount\n        currencyCode\n      }\n    }\n    totalPriceSet {\n      shopMoney {\n        amount\n        currencyCode\n      }\n    }\n    totalReceivedSet {\n      shopMoney {\n        amount\n        currencyCode\n      }\n    }\n    totalDiscountsSet {\n      shopMoney {\n        amount\n        currencyCode\n      }\n    }\n\n    # DETALLE DE DESCUENTOS\n    discountApplications(first: 10) {\n      edges {\n        node {\n          targetSelection\n          allocationMethod\n          value {\n            ... on MoneyV2 {\n              amount\n              currencyCode\n            }\n            ... on PricingPercentageValue {\n              percentage\n            }\n          }\n          ... on DiscountCodeApplication {\n            code\n          }\n          ... on ManualDiscountApplication {\n            title\n            description\n          }\n          ... on AutomaticDiscountApplication {\n            title\n          }\n          ... on ScriptDiscountApplication {\n            title\n          }\n        }\n      }\n    }\n\n    # 3. LÍNEAS DE PRODUCTO\n    lineItems(first: 50) {\n      edges {\n        node {\n          id\n          title\n          variantTitle\n          sku\n          quantity\n          originalTotalSet {\n            shopMoney {\n              amount\n              currencyCode\n            }\n          }\n          variant {\n            id\n            price\n          }\n        }\n      }\n    }\n\n    # 4. CUMPLIMIENTOS (Fulfillments) - SECCIÓN CORREGIDA\n    fulfillments(first: 10) {\n      id\n      name\n      status\n      createdAt\n      # 'trackingCompany' eliminado. Ahora se pide dentro de trackingInfo:\n      trackingInfo {\n        company\n        number\n        url\n      }\n      location {\n        name\n      }\n      fulfillmentLineItems(first: 20) {\n        edges {\n          node {\n            quantity\n            lineItem {\n              title\n              variantTitle\n            }\n          }\n        }\n      }\n    }\n\n    # 5. DEVOLUCIONES (Refunds)\n    refunds(first: 10) {\n      id\n      createdAt\n      note\n      refundLineItems(first: 20) {\n        edges {\n          node {\n            quantity\n            lineItem {\n              title\n              variantTitle\n              sku\n            }\n            subtotalSet {\n              shopMoney {\n                amount\n                currencyCode\n              }\n            }\n          }\n        }\n      }\n    }\n\n    # 6. EVENTOS (Timeline)\n    events(first: 50) {\n      edges {\n        node {\n          id\n          message\n          createdAt\n        }\n      }\n    }\n  }\n}",
+        "variables": "={\n  \"id\": \"gid://shopify/Order/{{ $json.body.order_id }}\"\n}"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        -2176,
+        1248
+      ],
+      "id": "75217c5a-468f-49ce-8da2-f12e4026194f",
+      "name": "GraphQL",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THkhgrtze1uBo6Ft",
+          "name": "Token Informes Shopify"
+        }
+      }
     }
   ],
   "pinData": {
@@ -843,30 +841,30 @@
           "headers": {
             "connection": "upgrade",
             "host": "n8n.tailwind.es",
-            "x-forwarded-for": "34.78.69.87",
+            "x-forwarded-for": "35.205.48.0",
             "x-forwarded-proto": "https",
-            "content-length": "2134",
+            "content-length": "3118",
             "user-agent": "Shopify-Captain-Hook",
             "accept": "*/*",
             "accept-encoding": "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
             "content-type": "application/json",
             "x-shopify-api-version": "2026-01",
-            "x-shopify-event-id": "d8cbf066-77d0-4bd8-b6ba-f2fa1686977c",
-            "x-shopify-hmac-sha256": "YjTb2mnzVIn5TIZXxE4qvqG6NIQKaPmSkOLMjZ/wQQI=",
+            "x-shopify-event-id": "fe86dccc-5c69-4040-8dc8-9401e94f2f76",
+            "x-shopify-hmac-sha256": "ZMrIwAuvP1ImwK31fmH0r0eWifPBuSWm6oyTOW0MJf0=",
             "x-shopify-shop-domain": "surfin-store-spain.myshopify.com",
             "x-shopify-topic": "refunds/create",
-            "x-shopify-triggered-at": "2026-02-01T19:18:30.531684869Z",
-            "x-shopify-webhook-id": "0c8d8b28-5217-594d-8970-ad61061ee166"
+            "x-shopify-triggered-at": "2026-01-31T19:14:11.667467614Z",
+            "x-shopify-webhook-id": "c6fdaa20-5418-541c-bbfc-61318816d861"
           },
           "params": {},
           "query": {},
           "body": {
-            "id": 1100647825755,
-            "order_id": 7513466077531,
-            "created_at": "2026-02-01T20:18:30+01:00",
+            "id": 1100567314779,
+            "order_id": 7509953610075,
+            "created_at": "2026-01-31T20:14:11+01:00",
             "note": null,
-            "user_id": 127777374555,
-            "processed_at": "2026-02-01T20:18:30+01:00",
+            "user_id": 126905516379,
+            "processed_at": "2026-01-31T20:14:11+01:00",
             "duties": [],
             "total_duties_set": {
               "shop_money": {
@@ -879,51 +877,51 @@
               }
             },
             "return": {
-              "id": 44230705499,
-              "admin_graphql_api_id": "gid://shopify/Return/44230705499"
+              "id": 44155339099,
+              "admin_graphql_api_id": "gid://shopify/Return/44155339099"
             },
             "restock": true,
             "refund_shipping_lines": [],
-            "admin_graphql_api_id": "gid://shopify/Refund/1100647825755",
+            "admin_graphql_api_id": "gid://shopify/Refund/1100567314779",
             "order_adjustments": [],
             "refund_line_items": [
               {
-                "id": 822013690203,
-                "line_item_id": 18400234799451,
+                "id": 821932360027,
+                "line_item_id": 18392409571675,
                 "quantity": 1,
                 "restock_type": "return",
-                "location_id": 108915917147,
-                "subtotal": 65,
+                "location_id": 99018441051,
+                "subtotal": 285,
                 "total_tax": 0,
                 "line_item": {
-                  "id": 18400234799451,
-                  "variant_id": 51904460816731,
-                  "title": "The North Face Wms Montana Ski Guantes",
+                  "id": 18392409571675,
+                  "variant_id": 51626594500955,
+                  "title": "Oakley Baldface Shell Pantalones",
                   "quantity": 1,
-                  "sku": "51904460816731",
-                  "variant_title": "White Dune / XS",
-                  "vendor": "The North Face",
+                  "sku": "51626594500955",
+                  "variant_title": "Army Green / S",
+                  "vendor": "Oakley",
                   "fulfillment_service": "manual",
-                  "product_id": 10254688092507,
+                  "product_id": 10166791569755,
                   "requires_shipping": true,
                   "taxable": true,
                   "gift_card": false,
-                  "name": "The North Face Wms Montana Ski Guantes - White Dune / XS",
+                  "name": "Oakley Baldface Shell Pantalones - Army Green / S",
                   "variant_inventory_management": "shopify",
                   "properties": [],
                   "product_exists": true,
                   "fulfillable_quantity": 0,
                   "grams": 0,
-                  "price": "65.00",
+                  "price": "380.00",
                   "total_discount": "0.00",
                   "fulfillment_status": "fulfilled",
                   "price_set": {
                     "shop_money": {
-                      "amount": "65.00",
+                      "amount": "380.00",
                       "currency_code": "EUR"
                     },
                     "presentment_money": {
-                      "amount": "65.00",
+                      "amount": "380.00",
                       "currency_code": "EUR"
                     }
                   },
@@ -937,28 +935,43 @@
                       "currency_code": "EUR"
                     }
                   },
-                  "discount_allocations": [],
+                  "discount_allocations": [
+                    {
+                      "amount": "95.00",
+                      "discount_application_index": 0,
+                      "amount_set": {
+                        "shop_money": {
+                          "amount": "95.00",
+                          "currency_code": "EUR"
+                        },
+                        "presentment_money": {
+                          "amount": "95.00",
+                          "currency_code": "EUR"
+                        }
+                      }
+                    }
+                  ],
                   "origin_location": {
-                    "id": 4053736948059,
+                    "id": 4053648212315,
                     "country_code": "ES",
                     "province_code": "GR",
-                    "name": "Rules The North Face",
-                    "address1": "Grupo Explanada 2",
-                    "address2": "",
+                    "name": "Rules Oakley",
+                    "address1": "Plaza Pradollano S/N",
+                    "address2": "Edificio Telecabina Local 2",
                     "city": "Sierra Nevada",
                     "zip": "18196"
                   },
-                  "admin_graphql_api_id": "gid://shopify/LineItem/18400234799451",
+                  "admin_graphql_api_id": "gid://shopify/LineItem/18392409571675",
                   "duties": [],
                   "tax_lines": []
                 },
                 "subtotal_set": {
                   "shop_money": {
-                    "amount": "65.00",
+                    "amount": "285.00",
                     "currency_code": "EUR"
                   },
                   "presentment_money": {
-                    "amount": "65.00",
+                    "amount": "285.00",
                     "currency_code": "EUR"
                   }
                 },
@@ -974,7 +987,46 @@
                 }
               }
             ],
-            "transactions": []
+            "transactions": [
+              {
+                "id": 9068041896283,
+                "order_id": 7509953610075,
+                "kind": "refund",
+                "gateway": "shopify_store_credit",
+                "status": "success",
+                "message": "Refunded 285,00 € EUR to store credit.",
+                "created_at": "2026-01-31T20:14:11+01:00",
+                "test": false,
+                "authorization": "932249947",
+                "location_id": 99018441051,
+                "user_id": 126905516379,
+                "parent_id": null,
+                "processed_at": "2026-01-31T20:14:11+01:00",
+                "device_id": 5938086235,
+                "error_code": null,
+                "source_name": "pos",
+                "receipt": {
+                  "account_id": 932249947,
+                  "credit_operation_id": 1446347099
+                },
+                "amount": "285.00",
+                "currency": "EUR",
+                "payment_id": "#71648.1",
+                "total_unsettled_set": {
+                  "presentment_money": {
+                    "amount": "0.0",
+                    "currency": "EUR"
+                  },
+                  "shop_money": {
+                    "amount": "0.0",
+                    "currency": "EUR"
+                  }
+                },
+                "manual_payment_gateway": false,
+                "amount_rounding": null,
+                "admin_graphql_api_id": "gid://shopify/OrderTransaction/9068041896283"
+              }
+            ]
           },
           "webhookUrl": "https://n8n.tailwind.es/webhook/monto-descuentos",
           "executionMode": "production"
@@ -1001,6 +1053,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-02-02T08:51:58.356Z",
-  "versionId": "0e922213-c75d-4ef8-afb5-5dc2d98d3d86"
+  "updatedAt": "2026-02-04T15:07:16.384Z",
+  "versionId": "12e5a58a-68dc-4eea-a17b-f58ae1a9ed76"
 }
