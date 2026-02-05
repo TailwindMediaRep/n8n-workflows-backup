@@ -1,14 +1,555 @@
 {
-  "active": false,
-  "activeVersion": null,
-  "activeVersionId": null,
-  "connections": {},
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-02-04T15:30:15.000Z",
+    "createdAt": "2026-02-04T15:30:14.304Z",
+    "versionId": "b7fa757d-2561-44bb-b81f-1e75f00dc42d",
+    "workflowId": "3EsLWbaigVn4UtgZ",
+    "nodes": [
+      {
+        "parameters": {
+          "path": "formularioCliente",
+          "responseMode": "responseNode",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -192,
+          -464
+        ],
+        "id": "f9eb2426-a554-44e4-a3e4-af1bee41c37e",
+        "name": "Webhook",
+        "webhookId": "a6a381ac-d816-4a71-bf84-f114a36719e3"
+      },
+      {
+        "parameters": {
+          "respondWith": "text",
+          "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Formulario de Contacto</title>\n    <style>\n        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #f4f4f9; }\n        form { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }\n        h2 { margin-bottom: 1.5rem; color: #333; text-align: center; }\n        label { display: block; margin-bottom: .5rem; color: #666; font-size: 0.9rem; }\n        input { width: 100%; padding: 0.8rem; margin-bottom: 1.2rem; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }\n        button { width: 100%; padding: 1rem; background: #3ecf8e; border: none; border-radius: 4px; color: white; font-weight: bold; cursor: pointer; transition: background 0.3s; }\n        button:hover { background: #34b27b; }\n        #error-msg { display: none; background: #ffebee; color: #c62828; padding: 10px; border-radius: 4px; border: 1px solid #ef9a9a; margin-bottom: 1.2rem; font-size: 0.85rem; text-align: center; }\n    </style>\n</head>\n<body>\n    <form action=\"https://n8n.tailwind.es/webhook/formularioEnviado\" method=\"POST\">\n        <h2>Registro</h2>\n        <div id=\"error-msg\">El teléfono tiene que estar en formato XXX XX XX XX</div>\n        <label for=\"nombre\">Nombre</label>\n        <input type=\"text\" id=\"nombre\" name=\"nombre\" placeholder=\"Ej. Juan\" required>\n        <label for=\"apellidos\">Apellidos</label>\n        <input type=\"text\" id=\"apellidos\" name=\"apellidos\" placeholder=\"Ej. Pérez García\" required>\n        <label for=\"telefono\">Número de teléfono</label>\n        <input type=\"tel\" id=\"telefono\" name=\"telefono\" placeholder=\"Ej. 600 00 00 00\" required>\n        <label for=\"email\">Correo electrónico</label>\n        <input type=\"email\" id=\"email\" name=\"email\" placeholder=\"correo@ejemplo.com\" required>\n        <button type=\"submit\">Enviar</button>\n    </form>\n    <script>\n        const params = new URLSearchParams(window.location.search);\n        if (params.get('error') === 'true') {\n            document.getElementById('error-msg').style.display = 'block';\n        }\n    </script>\n</body>\n</html>",
+          "options": {
+            "responseHeaders": {
+              "entries": [
+                {
+                  "name": "Content-Type",
+                  "value": "text/html"
+                }
+              ]
+            }
+          }
+        },
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.5,
+        "position": [
+          16,
+          -464
+        ],
+        "id": "65f0c60f-d5eb-4e33-a438-5287d2de6fc2",
+        "name": "Respond to Webhook"
+      },
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "formularioEnviado",
+          "responseMode": "responseNode",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -208,
+          -272
+        ],
+        "id": "807e34f3-9586-4125-8ed6-a3f9044fdadd",
+        "name": "formulario enviado",
+        "webhookId": "a6a381ac-d816-4a71-bf84-f114a36719e3"
+      },
+      {
+        "parameters": {
+          "respondWith": "text",
+          "responseBody": "<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Confirmación</title>\n    <style>\n        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #f4f4f9; }\n        .card { background: white; padding: 3rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center; max-width: 400px; }\n        .icon { color: #3ecf8e; font-size: 3rem; margin-bottom: 1rem; }\n        h1 { color: #333; font-size: 1.5rem; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px; }\n        p { color: #666; font-size: 1.1rem; line-height: 1.5; }\n    </style>\n</head>\n<body>\n\n    <div class=\"card\">\n        <div class=\"icon\">✓</div>\n        <h1>INFORMACIÓN RECIBIDA</h1>\n        <p>Gracias por enviar el cuestionario</p>\n    </div>\n\n</body>\n</html>",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.5,
+        "position": [
+          192,
+          -352
+        ],
+        "id": "2554ab82-813c-49ef-9a6b-da27d83dfb06",
+        "name": "Respond to Webhook1"
+      },
+      {
+        "parameters": {
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "ClientesPrueba",
+            "mode": "list",
+            "cachedResultName": "ClientesPrueba"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "nombre": "={{ $json.body.nombre }}",
+              "apellido": "={{ $json.body.apellidos }}",
+              "telefono": "={{ $json.body.telefono }}",
+              "correo": "={{ $json.body.email }}",
+              "id": 0
+            },
+            "matchingColumns": [
+              "id"
+            ],
+            "schema": [
+              {
+                "id": "id",
+                "displayName": "id",
+                "required": false,
+                "defaultMatch": true,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "nombre",
+                "displayName": "nombre",
+                "required": true,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "apellido",
+                "displayName": "apellido",
+                "required": true,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "telefono",
+                "displayName": "telefono",
+                "required": true,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "correo",
+                "displayName": "correo",
+                "required": true,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          0,
+          -272
+        ],
+        "id": "afb30288-b227-49e4-8a18-37ded6d08c3a",
+        "name": "Insert rows in a table1",
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        },
+        "onError": "continueErrorOutput"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "af5a5952-5591-402c-8623-b9319fc0be8e",
+                "leftValue": "={{ $json.error.name }}",
+                "rightValue": "NodeOperationError",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          1088,
+          -448
+        ],
+        "id": "82f88fa4-d3a2-4d87-99db-4c2c8491299a",
+        "name": "If"
+      },
+      {
+        "parameters": {
+          "respondWith": "redirect",
+          "redirectURL": "https://n8n.tailwind.es/webhook/formularioCliente?error=true",
+          "options": {
+            "responseCode": 302
+          }
+        },
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.5,
+        "position": [
+          192,
+          -192
+        ],
+        "id": "06727e07-e4ff-41ca-ae20-8554b2ff0541",
+        "name": "Respond to Webhook2"
+      }
+    ],
+    "connections": {
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "Respond to Webhook",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "formulario enviado": {
+        "main": [
+          [
+            {
+              "node": "Insert rows in a table1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Insert rows in a table1": {
+        "main": [
+          [
+            {
+              "node": "Respond to Webhook1",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Respond to Webhook2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If": {
+        "main": [
+          [],
+          []
+        ]
+      }
+    },
+    "authors": "Tailwind Media",
+    "name": "Version b7fa757d",
+    "description": "",
+    "autosaved": false
+  },
+  "activeVersionId": "b7fa757d-2561-44bb-b81f-1e75f00dc42d",
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "formulario enviado": {
+      "main": [
+        [
+          {
+            "node": "Insert rows in a table1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert rows in a table1": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond to Webhook2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [],
+        []
+      ]
+    }
+  },
   "createdAt": "2025-11-29T08:38:38.521Z",
   "id": "3EsLWbaigVn4UtgZ",
   "isArchived": false,
-  "meta": null,
-  "name": "vacio",
-  "nodes": [],
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "pruebaBaseDeDatos",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "formularioCliente",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -192,
+        -464
+      ],
+      "id": "f9eb2426-a554-44e4-a3e4-af1bee41c37e",
+      "name": "Webhook",
+      "webhookId": "a6a381ac-d816-4a71-bf84-f114a36719e3"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Formulario de Contacto</title>\n    <style>\n        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #f4f4f9; }\n        form { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }\n        h2 { margin-bottom: 1.5rem; color: #333; text-align: center; }\n        label { display: block; margin-bottom: .5rem; color: #666; font-size: 0.9rem; }\n        input { width: 100%; padding: 0.8rem; margin-bottom: 1.2rem; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }\n        button { width: 100%; padding: 1rem; background: #3ecf8e; border: none; border-radius: 4px; color: white; font-weight: bold; cursor: pointer; transition: background 0.3s; }\n        button:hover { background: #34b27b; }\n        #error-msg { display: none; background: #ffebee; color: #c62828; padding: 10px; border-radius: 4px; border: 1px solid #ef9a9a; margin-bottom: 1.2rem; font-size: 0.85rem; text-align: center; }\n    </style>\n</head>\n<body>\n    <form action=\"https://n8n.tailwind.es/webhook/formularioEnviado\" method=\"POST\">\n        <h2>Registro</h2>\n        <div id=\"error-msg\">El teléfono tiene que estar en formato XXX XX XX XX</div>\n        <label for=\"nombre\">Nombre</label>\n        <input type=\"text\" id=\"nombre\" name=\"nombre\" placeholder=\"Ej. Juan\" required>\n        <label for=\"apellidos\">Apellidos</label>\n        <input type=\"text\" id=\"apellidos\" name=\"apellidos\" placeholder=\"Ej. Pérez García\" required>\n        <label for=\"telefono\">Número de teléfono</label>\n        <input type=\"tel\" id=\"telefono\" name=\"telefono\" placeholder=\"Ej. 600 00 00 00\" required>\n        <label for=\"email\">Correo electrónico</label>\n        <input type=\"email\" id=\"email\" name=\"email\" placeholder=\"correo@ejemplo.com\" required>\n        <button type=\"submit\">Enviar</button>\n    </form>\n    <script>\n        const params = new URLSearchParams(window.location.search);\n        if (params.get('error') === 'true') {\n            document.getElementById('error-msg').style.display = 'block';\n        }\n    </script>\n</body>\n</html>",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/html"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        16,
+        -464
+      ],
+      "id": "65f0c60f-d5eb-4e33-a438-5287d2de6fc2",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "formularioEnviado",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -208,
+        -272
+      ],
+      "id": "807e34f3-9586-4125-8ed6-a3f9044fdadd",
+      "name": "formulario enviado",
+      "webhookId": "a6a381ac-d816-4a71-bf84-f114a36719e3"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Confirmación</title>\n    <style>\n        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #f4f4f9; }\n        .card { background: white; padding: 3rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center; max-width: 400px; }\n        .icon { color: #3ecf8e; font-size: 3rem; margin-bottom: 1rem; }\n        h1 { color: #333; font-size: 1.5rem; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 1px; }\n        p { color: #666; font-size: 1.1rem; line-height: 1.5; }\n    </style>\n</head>\n<body>\n\n    <div class=\"card\">\n        <div class=\"icon\">✓</div>\n        <h1>INFORMACIÓN RECIBIDA</h1>\n        <p>Gracias por enviar el cuestionario</p>\n    </div>\n\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        192,
+        -352
+      ],
+      "id": "2554ab82-813c-49ef-9a6b-da27d83dfb06",
+      "name": "Respond to Webhook1"
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "ClientesPrueba",
+          "mode": "list",
+          "cachedResultName": "ClientesPrueba"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "nombre": "={{ $json.body.nombre }}",
+            "apellido": "={{ $json.body.apellidos }}",
+            "telefono": "={{ $json.body.telefono }}",
+            "correo": "={{ $json.body.email }}",
+            "id": 0
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "nombre",
+              "displayName": "nombre",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "apellido",
+              "displayName": "apellido",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "telefono",
+              "displayName": "telefono",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "correo",
+              "displayName": "correo",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        0,
+        -272
+      ],
+      "id": "afb30288-b227-49e4-8a18-37ded6d08c3a",
+      "name": "Insert rows in a table1",
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "af5a5952-5591-402c-8623-b9319fc0be8e",
+              "leftValue": "={{ $json.error.name }}",
+              "rightValue": "NodeOperationError",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1088,
+        -448
+      ],
+      "id": "82f88fa4-d3a2-4d87-99db-4c2c8491299a",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "respondWith": "redirect",
+        "redirectURL": "https://n8n.tailwind.es/webhook/formularioCliente?error=true",
+        "options": {
+          "responseCode": 302
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        192,
+        -192
+      ],
+      "id": "06727e07-e4ff-41ca-ae20-8554b2ff0541",
+      "name": "Respond to Webhook2"
+    }
+  ],
   "pinData": {},
   "settings": {
     "executionOrder": "v1"
@@ -24,7 +565,7 @@
   ],
   "staticData": null,
   "tags": [],
-  "triggerCount": 1,
-  "updatedAt": "2026-01-20T12:05:17.742Z",
-  "versionId": "868fb628-e1ec-4793-8f77-4bcd085b4096"
+  "triggerCount": 2,
+  "updatedAt": "2026-02-04T15:30:14.302Z",
+  "versionId": "b7fa757d-2561-44bb-b81f-1e75f00dc42d"
 }
