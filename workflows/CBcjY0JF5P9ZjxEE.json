@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-02-03T12:15:48.000Z",
-    "createdAt": "2026-02-03T12:15:47.071Z",
-    "versionId": "0ac5f770-78b1-4811-9427-1534c8f915bc",
+    "updatedAt": "2026-02-04T15:14:52.000Z",
+    "createdAt": "2026-02-04T15:14:51.305Z",
+    "versionId": "57d925b8-b8c9-4a86-ad37-7f0f50606019",
     "workflowId": "CBcjY0JF5P9ZjxEE",
     "nodes": [
       {
@@ -2117,8 +2117,8 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          -2256,
-          816
+          -3552,
+          288
         ],
         "id": "a4b1565b-ed05-444f-b416-395c6c8a5828",
         "name": "Sticky Note14"
@@ -2752,11 +2752,11 @@
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version 0ac5f770",
+    "name": "Version 57d925b8",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "0ac5f770-78b1-4811-9427-1534c8f915bc",
+  "activeVersionId": "57d925b8-b8c9-4a86-ad37-7f0f50606019",
   "connections": {
     "HTTP Request3": {
       "main": [
@@ -5503,8 +5503,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -2256,
-        816
+        -3552,
+        288
       ],
       "id": "a4b1565b-ed05-444f-b416-395c6c8a5828",
       "name": "Sticky Note14"
@@ -5574,6 +5574,6 @@
   },
   "tags": [],
   "triggerCount": 6,
-  "updatedAt": "2026-02-03T12:15:47.068Z",
-  "versionId": "0ac5f770-78b1-4811-9427-1534c8f915bc"
+  "updatedAt": "2026-02-04T15:14:51.303Z",
+  "versionId": "57d925b8-b8c9-4a86-ad37-7f0f50606019"
 }
