@@ -1,721 +1,53 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-01-31T09:27:30.000Z",
-    "createdAt": "2026-01-31T09:27:29.343Z",
-    "versionId": "b2feb5a4-21eb-4db6-a9f5-69cff66cf1e3",
+    "updatedAt": "2026-02-05T08:22:20.000Z",
+    "createdAt": "2026-02-05T08:22:17.796Z",
+    "versionId": "39a18b86-72d2-47a1-9ee4-e84d28264b07",
     "workflowId": "e80tfOpD4TdBh8EF",
     "nodes": [
       {
+        "parameters": {},
+        "type": "n8n-nodes-base.errorTrigger",
+        "typeVersion": 1,
+        "position": [
+          -352,
+          -48
+        ],
+        "id": "4c3b3173-5c2b-4adf-bd3a-5fbc0c17cbb6",
+        "name": "Error Trigger"
+      },
+      {
         "parameters": {
-          "path": "nothingBox",
-          "responseMode": "responseNode",
+          "fromEmail": "info@tailwind.es",
+          "toEmail": "emiliano@tailwind.es",
+          "subject": "=🚨 Error en n8n | Workflow {{$workflow.name}}",
+          "html": "=<!DOCTYPE html>\n\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <title>Error n8n</title>\n</head>\n<body style=\"font-family: Arial, Helvetica, sans-serif; background-color:#f5f6f8; padding:20px;\">\n  <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n    <tr>\n      <td align=\"center\">\n        <table width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#ffffff; border-radius:6px; overflow:hidden;\">\n\n```\n      <!-- Header -->\n      <tr>\n        <td style=\"background:#d92d20; color:#ffffff; padding:16px 24px;\">\n          <h2 style=\"margin:0;\">🚨 Error en n8n</h2>\n        </td>\n      </tr>\n\n      <!-- Body -->\n      <tr>\n        <td style=\"padding:24px; color:#333333;\">\n          <p style=\"margin-top:0;\">\n            Se ha producido un error en uno de los workflows de <strong>n8n</strong>.\n          </p>\n\n          <table width=\"100%\" cellpadding=\"6\" cellspacing=\"0\" style=\"border-collapse:collapse; margin:16px 0;\">\n            <tr>\n              <td width=\"30%\" style=\"font-weight:bold;\">Workflow</td>\n              <td>{{$workflow.name}}</td>\n            </tr>\n            <tr>\n              <td style=\"font-weight:bold;\">Execution ID</td>\n              <td>{{$json.execution.id}}</td>\n            </tr>\n            <tr>\n              <td style=\"font-weight:bold;\">Nodo</td>\n              <td>{{$json.error.node.name}}</td>\n            </tr>\n            <tr>\n              <td style=\"font-weight:bold;\">Fecha</td>\n              <td>{{new Date().toISOString()}}</td>\n            </tr>\n          </table>\n\n          <p style=\"font-weight:bold; margin-bottom:6px;\">Mensaje de error</p>\n          <pre style=\"background:#f4f4f4; padding:12px; border-radius:4px; white-space:pre-wrap; font-size:13px;\">\n```\n\n{{$json.error.message}} </pre>\n\n```\n          <p style=\"font-weight:bold; margin-bottom:6px;\">Stack trace</p>\n          <pre style=\"background:#f4f4f4; padding:12px; border-radius:4px; white-space:pre-wrap; font-size:12px;\">\n```\n\n{{$json.error.stack}} </pre>\n\n```\n          <p style=\"margin-top:24px;\">\n            👉 Revisa la ejecución en n8n usando el <strong>Execution ID</strong> para ver el contexto completo.\n          </p>\n        </td>\n      </tr>\n\n      <!-- Footer -->\n      <tr>\n        <td style=\"background:#f0f1f3; padding:12px 24px; font-size:12px; color:#666;\">\n          Este correo ha sido generado automáticamente por n8n.\n        </td>\n      </tr>\n\n    </table>\n  </td>\n</tr>\n```\n\n  </table>\n</body>\n</html>\n",
           "options": {}
         },
-        "type": "n8n-nodes-base.webhook",
+        "type": "n8n-nodes-base.emailSend",
         "typeVersion": 2.1,
         "position": [
           -144,
-          -304
+          -48
         ],
-        "id": "eea1c911-9644-4f75-89c4-0d9d46f2bbb9",
-        "name": "Webhook",
-        "webhookId": "ead5a850-6cef-40c0-88db-d770260a62e8"
-      },
-      {
-        "parameters": {
-          "operation": "update",
-          "dataTableId": {
-            "__rl": true,
-            "value": "FnOKQ90bd0CxI2H5",
-            "mode": "list",
-            "cachedResultName": "nothingbox",
-            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/FnOKQ90bd0CxI2H5"
-          },
-          "filters": {
-            "conditions": [
-              {
-                "keyValue": "1"
-              }
-            ]
-          },
-          "columns": {
-            "mappingMode": "defineBelow",
-            "value": {
-              "contador": "={{ $json.row_number + 1}}",
-              "contador_no_rechazados": "={{ $('obtener contador').item.json.contador_no_rechazados }}"
-            },
-            "matchingColumns": [
-              "contador"
-            ],
-            "schema": [
-              {
-                "id": "contador",
-                "displayName": "contador",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "number",
-                "readOnly": false,
-                "removed": false
-              },
-              {
-                "id": "contador_no_rechazados",
-                "displayName": "contador_no_rechazados",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "number",
-                "readOnly": false,
-                "removed": false
-              }
-            ],
-            "attemptToConvertTypes": false,
-            "convertFieldsToString": false
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.dataTable",
-        "typeVersion": 1.1,
-        "position": [
-          1104,
-          -144
-        ],
-        "id": "9e0c9b06-1b14-4e39-8c94-1adff6b7bfbe",
-        "name": "sumar contador"
-      },
-      {
-        "parameters": {
-          "assignments": {
-            "assignments": [
-              {
-                "id": "1fc1ee34-829a-45a3-a4af-fa95470d9512",
-                "name": "ORIGEN",
-                "value": "={{ $('si').item.json.query.origen }}",
-                "type": "string"
-              },
-              {
-                "id": "348d16fa-a017-44c5-9879-665a4936a387",
-                "name": "CONTENIDO",
-                "value": "={{ $('si').item.json.query.contenido }}",
-                "type": "string"
-              },
-              {
-                "id": "1e3fccd6-21e4-48d2-af81-a5372f6807eb",
-                "name": "CONTADOR",
-                "value": "={{ $json.contador }}",
-                "type": "number"
-              }
-            ]
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.set",
-        "typeVersion": 3.4,
-        "position": [
-          768,
-          -144
-        ],
-        "id": "86f0e295-1a98-4660-aaec-a0118208b3da",
-        "name": "datos"
-      },
-      {
-        "parameters": {
-          "operation": "update",
-          "documentId": {
-            "__rl": true,
-            "value": "1kE01W7ucOTrCpfrN_bC8b4WMvE9tTgQf9lBvjLPwj50",
-            "mode": "id"
-          },
-          "sheetName": {
-            "__rl": true,
-            "value": "Rechazados",
-            "mode": "name"
-          },
-          "columns": {
-            "mappingMode": "defineBelow",
-            "value": {
-              "row_number": "={{ $json.CONTADOR }}",
-              "ORIGEN": "={{ $json.ORIGEN }}",
-              "CONTENIDO": "={{ $json.CONTENIDO }}"
-            },
-            "matchingColumns": [
-              "row_number"
-            ],
-            "schema": [
-              {
-                "id": "ORIGEN",
-                "displayName": "ORIGEN",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "CONTENIDO",
-                "displayName": "CONTENIDO",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "row_number",
-                "displayName": "row_number",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "number",
-                "canBeUsedToMatch": true,
-                "readOnly": true,
-                "removed": false
-              }
-            ],
-            "attemptToConvertTypes": false,
-            "convertFieldsToString": false
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.googleSheets",
-        "typeVersion": 4.7,
-        "position": [
-          928,
-          -144
-        ],
-        "id": "19035f47-2af1-4703-8349-9ee717cb5f2f",
-        "name": "escribir datos",
+        "id": "5aa12673-abad-4ced-ab9b-881ffef4d5a4",
+        "name": "Send email",
+        "webhookId": "8d409db8-656a-4aa1-9065-749bdc5600a9",
         "credentials": {
-          "googleSheetsOAuth2Api": {
-            "id": "RCuKUCifcA4jENcY",
-            "name": "Google Sheets account"
+          "smtp": {
+            "id": "MiD3YXIjExt0Aik1",
+            "name": "info@tailwind.es"
           }
         }
-      },
-      {
-        "parameters": {
-          "respondWith": "text",
-          "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Confirmación</title>\n  <style>\n    body {\n      font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif;\n      background-color: #f3f4f6;\n      display: flex;\n      justify-content: center;\n      align-items: center;\n      height: 100vh;\n      margin: 0;\n    }\n    .card {\n      background: white;\n      padding: 40px;\n      border-radius: 12px;\n      box-shadow: 0 10px 25px rgba(0,0,0,0.1);\n      text-align: center;\n      max-width: 400px;\n      border-top: 6px solid #ef4444;\n    }\n    h2 { color: #1f2937; margin-top: 0; font-size: 24px; }\n    p { color: #4b5563; margin: 10px 0; font-size: 16px; }\n    .warning { color: #ef4444; font-weight: bold; margin-bottom: 25px; display: block; }\n    .btn-container { display: flex; gap: 15px; justify-content: center; margin-top: 20px; }\n    \n    /* Estilos de los botones (Enlaces) */\n    .btn {\n      text-decoration: none;\n      padding: 12px 30px;\n      border-radius: 6px;\n      font-weight: bold;\n      font-size: 16px;\n      transition: opacity 0.2s;\n      display: inline-block;\n    }\n    .btn:hover { opacity: 0.8; }\n    \n    /* Botón SI (Acción de Webhook) */\n    .btn-si { background-color: #ef4444; color: white; }\n    \n    /* Botón NO (Cancelar) */\n    .btn-no { background-color: #e5e7eb; color: #374151; }\n  </style>\n</head>\n<body>\n\n  <div class=\"card\">\n    <h2>⚠️ Atención</h2>\n    <p>Estás a punto de rechazar.</p>\n    <p>Esta acción no se puede deshacer.</p>\n    <span class=\"warning\">¿Estás seguro?</span>\n\n    <div class=\"btn-container\">\n      <a href=\"https://n8n.tailwind.es/webhook-test/nothingBoxSi?origen={{ $json.ORIGEN }}&contenido={{ $json.CONTENIDO }}&estado=rechazado&idFlow={{ $json.ID_FLOW }}&mas={{ $json.MAS }}\" class=\"btn btn-si\">SÍ</a>\n\n      <a href=\"https://n8n.tailwind.es/webhook-test/nothingBoxSi?origen={{ $json.ORIGEN }}&contenido={{ $json.CONTENIDO }}&estado=noRechazado&idFlow={{ $json.ID_FLOW }}&mas={{ $json.MAS }}\" class=\"btn btn-no\">NO</a>\n    </div>\n  </div>\n\n</body>\n</html>",
-          "options": {}
-        },
-        "type": "n8n-nodes-base.respondToWebhook",
-        "typeVersion": 1.5,
-        "position": [
-          208,
-          -304
-        ],
-        "id": "3c347d74-9887-4f1c-ad1b-f794340e4165",
-        "name": "Respond to Webhook"
-      },
-      {
-        "parameters": {
-          "path": "nothingBoxSi",
-          "responseMode": "responseNode",
-          "options": {}
-        },
-        "type": "n8n-nodes-base.webhook",
-        "typeVersion": 2.1,
-        "position": [
-          -144,
-          16
-        ],
-        "id": "b1a47101-4691-44b2-98b0-e3c3d91ac954",
-        "name": "si",
-        "webhookId": "8d74fb79-3a60-4b85-8eae-63028c20ecb5"
-      },
-      {
-        "parameters": {
-          "assignments": {
-            "assignments": [
-              {
-                "id": "1fc1ee34-829a-45a3-a4af-fa95470d9512",
-                "name": "ORIGEN",
-                "value": "={{ $('Webhook').item.json.query.origen }}",
-                "type": "string"
-              },
-              {
-                "id": "348d16fa-a017-44c5-9879-665a4936a387",
-                "name": "CONTENIDO",
-                "value": "={{ $('Webhook').item.json.query.contenido }}",
-                "type": "string"
-              },
-              {
-                "id": "93855f27-f03b-443c-82bf-153d717f2a4d",
-                "name": "ID_FLOW",
-                "value": "={{ $json.query.idFlow }}",
-                "type": "string"
-              },
-              {
-                "id": "43b297bb-9d8d-4af2-97b0-0ddb4711edd1",
-                "name": "MAS",
-                "value": "={{ $json.query.idHistoria }}",
-                "type": "string"
-              }
-            ]
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.set",
-        "typeVersion": 3.4,
-        "position": [
-          32,
-          -304
-        ],
-        "id": "6ede3315-f9cf-4f22-afdd-be4319101c55",
-        "name": "datos1"
-      },
-      {
-        "parameters": {
-          "conditions": {
-            "options": {
-              "caseSensitive": true,
-              "leftValue": "",
-              "typeValidation": "strict",
-              "version": 3
-            },
-            "conditions": [
-              {
-                "id": "eb37d92a-214b-46d4-9bab-842c86e8e860",
-                "leftValue": "={{ $json.query.estado }}",
-                "rightValue": "rechazado",
-                "operator": {
-                  "type": "string",
-                  "operation": "equals"
-                }
-              }
-            ],
-            "combinator": "and"
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.if",
-        "typeVersion": 2.3,
-        "position": [
-          256,
-          16
-        ],
-        "id": "9b6dacb4-56e0-4664-9cd7-5bbbcade5752",
-        "name": "If"
-      },
-      {
-        "parameters": {
-          "operation": "get",
-          "dataTableId": {
-            "__rl": true,
-            "value": "FnOKQ90bd0CxI2H5",
-            "mode": "list",
-            "cachedResultName": "nothingbox",
-            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/FnOKQ90bd0CxI2H5"
-          },
-          "filters": {
-            "conditions": [
-              {
-                "keyValue": "1"
-              }
-            ]
-          }
-        },
-        "type": "n8n-nodes-base.dataTable",
-        "typeVersion": 1.1,
-        "position": [
-          608,
-          -144
-        ],
-        "id": "f1ae6cff-1ec4-455e-971d-d53fd2f1cc4a",
-        "name": "obtener contador"
-      },
-      {
-        "parameters": {
-          "operation": "update",
-          "dataTableId": {
-            "__rl": true,
-            "value": "FnOKQ90bd0CxI2H5",
-            "mode": "list",
-            "cachedResultName": "nothingbox",
-            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/FnOKQ90bd0CxI2H5"
-          },
-          "filters": {
-            "conditions": [
-              {
-                "keyValue": "1"
-              }
-            ]
-          },
-          "columns": {
-            "mappingMode": "defineBelow",
-            "value": {
-              "contador": "={{ $('obtener contador1').item.json.contador }}",
-              "contador_no_rechazados": "={{ $json.row_number + 1}}"
-            },
-            "matchingColumns": [
-              "contador"
-            ],
-            "schema": [
-              {
-                "id": "contador",
-                "displayName": "contador",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "number",
-                "readOnly": false,
-                "removed": false
-              },
-              {
-                "id": "contador_no_rechazados",
-                "displayName": "contador_no_rechazados",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "number",
-                "readOnly": false,
-                "removed": false
-              }
-            ],
-            "attemptToConvertTypes": false,
-            "convertFieldsToString": false
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.dataTable",
-        "typeVersion": 1.1,
-        "position": [
-          1120,
-          144
-        ],
-        "id": "9aa2ddcd-4d0a-421f-a1f5-a8c5ebf3ca43",
-        "name": "sumar contador1"
-      },
-      {
-        "parameters": {
-          "assignments": {
-            "assignments": [
-              {
-                "id": "1fc1ee34-829a-45a3-a4af-fa95470d9512",
-                "name": "ORIGEN",
-                "value": "={{ $('si').item.json.query.origen }}",
-                "type": "string"
-              },
-              {
-                "id": "348d16fa-a017-44c5-9879-665a4936a387",
-                "name": "CONTENIDO",
-                "value": "={{ $('si').item.json.query.contenido }}",
-                "type": "string"
-              },
-              {
-                "id": "1e3fccd6-21e4-48d2-af81-a5372f6807eb",
-                "name": "CONTADOR",
-                "value": "={{ $json.contador_no_rechazados }}",
-                "type": "number"
-              }
-            ]
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.set",
-        "typeVersion": 3.4,
-        "position": [
-          784,
-          144
-        ],
-        "id": "9dd14026-08ed-4e3c-abcb-e7e5e3a98beb",
-        "name": "datos2"
-      },
-      {
-        "parameters": {
-          "operation": "update",
-          "documentId": {
-            "__rl": true,
-            "value": "1kE01W7ucOTrCpfrN_bC8b4WMvE9tTgQf9lBvjLPwj50",
-            "mode": "id"
-          },
-          "sheetName": {
-            "__rl": true,
-            "value": "No Rechazados",
-            "mode": "name"
-          },
-          "columns": {
-            "mappingMode": "defineBelow",
-            "value": {
-              "row_number": "={{ $json.CONTADOR }}",
-              "ORIGEN": "={{ $json.ORIGEN }}",
-              "CONTENIDO": "={{ $json.CONTENIDO }}"
-            },
-            "matchingColumns": [
-              "row_number"
-            ],
-            "schema": [
-              {
-                "id": "ORIGEN",
-                "displayName": "ORIGEN",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "CONTENIDO",
-                "displayName": "CONTENIDO",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "row_number",
-                "displayName": "row_number",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "number",
-                "canBeUsedToMatch": true,
-                "readOnly": true,
-                "removed": false
-              }
-            ],
-            "attemptToConvertTypes": false,
-            "convertFieldsToString": false
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.googleSheets",
-        "typeVersion": 4.7,
-        "position": [
-          944,
-          144
-        ],
-        "id": "4f31c31a-443a-4429-adf8-2803aacf1c1f",
-        "name": "escribir datos1",
-        "credentials": {
-          "googleSheetsOAuth2Api": {
-            "id": "RCuKUCifcA4jENcY",
-            "name": "Google Sheets account"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "operation": "get",
-          "dataTableId": {
-            "__rl": true,
-            "value": "FnOKQ90bd0CxI2H5",
-            "mode": "list",
-            "cachedResultName": "nothingbox",
-            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/FnOKQ90bd0CxI2H5"
-          },
-          "filters": {
-            "conditions": [
-              {
-                "keyValue": "1"
-              }
-            ]
-          }
-        },
-        "type": "n8n-nodes-base.dataTable",
-        "typeVersion": 1.1,
-        "position": [
-          624,
-          144
-        ],
-        "id": "3cc72c9c-9d21-43ff-8201-d76ff504c16c",
-        "name": "obtener contador1"
-      },
-      {
-        "parameters": {
-          "respondWith": "text",
-          "responseBody": "<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Acción Completada</title>\n    <style>\n        body {\n            font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif;\n            background-color: #f3f4f6;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            height: 100vh;\n            margin: 0;\n        }\n        .card {\n            background: white;\n            padding: 40px;\n            border-radius: 12px;\n            box-shadow: 0 10px 25px rgba(0,0,0,0.1);\n            text-align: center;\n            max-width: 400px;\n            border-top: 6px solid #10b981; /* Verde Éxito */\n        }\n        .icon {\n            font-size: 50px;\n            margin-bottom: 20px;\n            display: block;\n        }\n        h2 { \n            color: #1f2937; \n            margin-top: 0; \n            margin-bottom: 15px;\n            font-size: 24px; \n        }\n        p { \n            color: #4b5563; \n            margin: 10px 0; \n            line-height: 1.5;\n            font-size: 16px; \n        }\n        .doc-name {\n            background-color: #f3f4f6;\n            padding: 2px 6px;\n            border-radius: 4px;\n            font-family: monospace;\n            color: #374151;\n            font-weight: bold;\n        }\n        button {\n            background-color: #10b981;\n            color: white;\n            border: none;\n            padding: 12px 40px;\n            border-radius: 6px;\n            font-weight: bold;\n            font-size: 16px;\n            cursor: pointer;\n            margin-top: 25px;\n            transition: background 0.2s;\n        }\n        button:hover {\n            background-color: #059669;\n        }\n    </style>\n</head>\n<body>\n\n    <div class=\"card\">\n        <span class=\"icon\">✅</span>\n        \n        <h2>Rechazado con éxito</h2>\n        \n        <p>\n            El fallo quedará apuntado en el documento <span class=\"doc-name\">nothingbox</span> de Drive.\n        </p>\n        \n        <button onclick=\"cerrarPestana()\">ACEPTAR</button>\n    </div>\n\n    <script>\n        function cerrarPestana() {\n            // Intenta cerrar la ventana\n            window.close();\n            \n            // Truco adicional para navegadores que bloquean window.close()\n            // si la pestaña no fue abierta por script\n            window.open('','_parent','');\n            window.close();\n\n            // Si el navegador bloquea el cierre (medida de seguridad común),\n            // mostramos un mensaje final.\n            setTimeout(function() {\n                document.body.innerHTML = \"<div style='text-align:center; padding:50px; font-family:sans-serif; color:#4b5563;'><h3>Puedes cerrar esta pestaña manualmente.</h3></div>\";\n            }, 100);\n        }\n    </script>\n\n</body>\n</html>",
-          "options": {}
-        },
-        "type": "n8n-nodes-base.respondToWebhook",
-        "typeVersion": 1.5,
-        "position": [
-          448,
-          -144
-        ],
-        "id": "c68d5906-203a-411f-8c32-4b96d7765aba",
-        "name": "Respond to Webhook1"
-      },
-      {
-        "parameters": {
-          "respondWith": "text",
-          "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Selección de Acción</title>\n    <style>\n        body {\n            font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif;\n            background-color: #f3f4f6;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            height: 100vh;\n            margin: 0;\n        }\n        .card {\n            background: white;\n            padding: 40px;\n            border-radius: 12px;\n            box-shadow: 0 10px 25px rgba(0,0,0,0.1);\n            text-align: center;\n            max-width: 450px; /* Un poco más ancho para que quepan los textos */\n            width: 90%;\n            border-top: 6px solid #3b82f6; /* Azul Informativo */\n        }\n        .icon {\n            font-size: 50px;\n            margin-bottom: 15px;\n            display: block;\n        }\n        h2 { \n            color: #1f2937; \n            margin-top: 0; \n            font-size: 24px; \n        }\n        p { \n            color: #4b5563; \n            margin: 10px 0 30px 0; \n            font-size: 18px; \n        }\n        .btn-container { \n            display: flex; \n            flex-direction: column; /* Botones uno encima de otro para mejor lectura en móvil */\n            gap: 15px; \n            justify-content: center; \n        }\n        \n        /* Estilos Base de Botones */\n        .btn {\n            text-decoration: none;\n            padding: 15px 20px;\n            border-radius: 8px;\n            font-weight: bold;\n            font-size: 16px;\n            transition: transform 0.1s, opacity 0.2s;\n            display: block;\n            text-align: center;\n            box-shadow: 0 2px 4px rgba(0,0,0,0.1);\n        }\n        .btn:hover { opacity: 0.9; transform: translateY(-1px); }\n        .btn:active { transform: translateY(1px); }\n        \n        /* Botón Posponer (Naranja - Tiempo) */\n        .btn-posponer { \n            background-color: #f59e0b; \n            color: white; \n        }\n        \n        /* Botón Aceptar (Azul - Acción Principal) */\n        .btn-aceptar { \n            background-color: #3b82f6; \n            color: white; \n        }\n\n    </style>\n</head>\n<body>\n\n    <div class=\"card\">\n        <span class=\"icon\">🤔</span>\n        \n        <h2>No se ha rechazado</h2>\n        <p>¿Qué quieres hacer?</p>\n\n        <div class=\"btn-container\">\n            <a href=\"REEMPLAZAR_URL_POSPONER\" class=\"btn btn-posponer\">\n                ⏱️ POSPONER 30 MINUTOS\n            </a>\n\n            <a href=\"REEMPLAZAR_URL_ACEPTAR\" class=\"btn btn-aceptar\">\n                ✅ ACEPTAR\n            </a>\n        </div>\n    </div>\n\n</body>\n</html>",
-          "options": {}
-        },
-        "type": "n8n-nodes-base.respondToWebhook",
-        "typeVersion": 1.5,
-        "position": [
-          448,
-          144
-        ],
-        "id": "11839037-8ef2-488b-85ad-d83e6bad889a",
-        "name": "Respond to Webhook2"
-      },
-      {
-        "parameters": {
-          "options": {}
-        },
-        "type": "n8n-nodes-base.set",
-        "typeVersion": 3.4,
-        "position": [
-          64,
-          16
-        ],
-        "id": "898d2944-8382-409f-bda5-5801d64ef139",
-        "name": "datos_si_no"
       }
     ],
     "connections": {
-      "Webhook": {
+      "Error Trigger": {
         "main": [
           [
             {
-              "node": "datos1",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "datos": {
-        "main": [
-          [
-            {
-              "node": "escribir datos",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "escribir datos": {
-        "main": [
-          [
-            {
-              "node": "sumar contador",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "si": {
-        "main": [
-          [
-            {
-              "node": "datos_si_no",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "datos1": {
-        "main": [
-          [
-            {
-              "node": "Respond to Webhook",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "If": {
-        "main": [
-          [
-            {
-              "node": "Respond to Webhook1",
-              "type": "main",
-              "index": 0
-            }
-          ],
-          [
-            {
-              "node": "Respond to Webhook2",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "obtener contador": {
-        "main": [
-          [
-            {
-              "node": "datos",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "datos2": {
-        "main": [
-          [
-            {
-              "node": "escribir datos1",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "escribir datos1": {
-        "main": [
-          [
-            {
-              "node": "sumar contador1",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "obtener contador1": {
-        "main": [
-          [
-            {
-              "node": "datos2",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Respond to Webhook1": {
-        "main": [
-          [
-            {
-              "node": "obtener contador",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Respond to Webhook2": {
-        "main": [
-          [
-            {
-              "node": "obtener contador1",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "datos_si_no": {
-        "main": [
-          [
-            {
-              "node": "If",
+              "node": "Send email",
               "type": "main",
               "index": 0
             }
@@ -724,20 +56,68 @@
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version b2feb5a4",
+    "name": "Version 39a18b86",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "b2feb5a4-21eb-4db6-a9f5-69cff66cf1e3",
-  "connections": {},
+  "activeVersionId": "39a18b86-72d2-47a1-9ee4-e84d28264b07",
+  "connections": {
+    "Error Trigger": {
+      "main": [
+        [
+          {
+            "node": "Send email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
   "createdAt": "2025-12-03T09:13:23.128Z",
   "id": "e80tfOpD4TdBh8EF",
   "isArchived": false,
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "vacio",
-  "nodes": [],
+  "name": "AVISO_ERRORES",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [
+        -784,
+        -64
+      ],
+      "id": "4c3b3173-5c2b-4adf-bd3a-5fbc0c17cbb6",
+      "name": "Error Trigger"
+    },
+    {
+      "parameters": {
+        "fromEmail": "info@tailwind.es",
+        "toEmail": "emiliano@tailwind.es",
+        "subject": "=🚨 Error en n8n | Workflow {{$workflow.name}}",
+        "html": "=<!DOCTYPE html>\n\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <title>Error n8n</title>\n</head>\n<body style=\"font-family: Arial, Helvetica, sans-serif; background-color:#f5f6f8; padding:20px;\">\n  <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n    <tr>\n      <td align=\"center\">\n        <table width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#ffffff; border-radius:6px; overflow:hidden;\">\n\n```\n      <!-- Header -->\n      <tr>\n        <td style=\"background:#d92d20; color:#ffffff; padding:16px 24px;\">\n          <h2 style=\"margin:0;\">🚨 Error en n8n</h2>\n        </td>\n      </tr>\n\n      <!-- Body -->\n      <tr>\n        <td style=\"padding:24px; color:#333333;\">\n          <p style=\"margin-top:0;\">\n            Se ha producido un error en uno de los workflows de <strong>n8n</strong>.\n          </p>\n\n          <table width=\"100%\" cellpadding=\"6\" cellspacing=\"0\" style=\"border-collapse:collapse; margin:16px 0;\">\n            <tr>\n              <td width=\"30%\" style=\"font-weight:bold;\">Workflow</td>\n              <td>{{$workflow.name}}</td>\n            </tr>\n            <tr>\n              <td style=\"font-weight:bold;\">Execution ID</td>\n              <td>{{$json.execution.id}}</td>\n            </tr>\n            <tr>\n              <td style=\"font-weight:bold;\">Nodo</td>\n              <td>{{$json.error.node.name}}</td>\n            </tr>\n            <tr>\n              <td style=\"font-weight:bold;\">Fecha</td>\n              <td>{{new Date().toISOString()}}</td>\n            </tr>\n          </table>\n\n          <p style=\"font-weight:bold; margin-bottom:6px;\">Mensaje de error</p>\n          <pre style=\"background:#f4f4f4; padding:12px; border-radius:4px; white-space:pre-wrap; font-size:13px;\">\n```\n\n{{$json.error.message}} </pre>\n\n```\n          <p style=\"font-weight:bold; margin-bottom:6px;\">Stack trace</p>\n          <pre style=\"background:#f4f4f4; padding:12px; border-radius:4px; white-space:pre-wrap; font-size:12px;\">\n```\n\n{{$json.error.stack}} </pre>\n\n```\n          <p style=\"margin-top:24px;\">\n            👉 Revisa la ejecución en n8n usando el <strong>Execution ID</strong> para ver el contexto completo.\n          </p>\n        </td>\n      </tr>\n\n      <!-- Footer -->\n      <tr>\n        <td style=\"background:#f0f1f3; padding:12px 24px; font-size:12px; color:#666;\">\n          Este correo ha sido generado automáticamente por n8n.\n        </td>\n      </tr>\n\n    </table>\n  </td>\n</tr>\n```\n\n  </table>\n</body>\n</html>\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        -576,
+        -64
+      ],
+      "id": "5aa12673-abad-4ced-ab9b-881ffef4d5a4",
+      "name": "Send email",
+      "webhookId": "8d409db8-656a-4aa1-9065-749bdc5600a9",
+      "credentials": {
+        "smtp": {
+          "id": "MiD3YXIjExt0Aik1",
+          "name": "info@tailwind.es"
+        }
+      }
+    }
+  ],
   "pinData": {},
   "settings": {
     "executionOrder": "v1"
@@ -757,7 +137,7 @@
     }
   },
   "tags": [],
-  "triggerCount": 2,
-  "updatedAt": "2026-02-03T13:17:31.896Z",
-  "versionId": "c65b47ed-8d3c-4768-b36a-09626cf74ca1"
+  "triggerCount": 0,
+  "updatedAt": "2026-02-05T08:25:05.942Z",
+  "versionId": "1611bf3f-2a25-4a7e-8913-7730d7c331ea"
 }
