@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-02-04T10:37:19.000Z",
-    "createdAt": "2026-02-04T10:37:17.954Z",
-    "versionId": "8b5c8cfb-8ebd-4fc1-b05c-ddea38dc72b7",
+    "updatedAt": "2026-02-05T13:50:33.000Z",
+    "createdAt": "2026-02-05T13:45:01.384Z",
+    "versionId": "3ebaa34a-24d2-4620-8f8f-f0696b8d95ed",
     "workflowId": "9pcwl5XAK1pZ6dfl",
     "nodes": [
       {
@@ -15,406 +15,12 @@
         "type": "n8n-nodes-base.webhook",
         "typeVersion": 2.1,
         "position": [
-          -720,
-          16
+          -1088,
+          32
         ],
         "id": "cfd98e02-755b-443c-9698-ff7a15589388",
         "name": "Webhook",
         "webhookId": "7c1e3b37-6cc8-4f4a-81e3-c5897bdf497c"
-      },
-      {
-        "parameters": {
-          "authentication": "headerAuth",
-          "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-07/graphql.json",
-          "query": "query getOrder($id: ID!) {\n\n  order(id: $id) {\n\n    id\n\n    name\n\n    createdAt\n\n    email\n\n    totalPriceSet {\n\n      shopMoney {\n\n        amount\n\n        currencyCode\n\n      }\n\n    }\n\n    lineItems(first: 10) {\n\n      edges {\n\n        node {\n\n          title\n\n          quantity\n\n          originalUnitPriceSet {\n\n            shopMoney {\n\n              amount\n\n              currencyCode\n\n            }\n\n          }\n\n        }\n\n      }\n\n    }\n\n    fulfillments {\n\n      id\n\n      location {\n\n        name\n\n        address {\n\n          address1\n\n          city\n\n          province\n\n          country\n\n          zip\n\n        }\n\n      }\n\n    }\n\n    transactions(first: 5) {\n\n      formattedGateway\n\n      kind\n\n      status\n\n    }\n\n    customer {\n\n      firstName\n\n      lastName\n\n      email\n\n    }\n\n  }\n\n}\n",
-          "variables": "={\n  \"id\": \"gid://shopify/Order/{{ $('Webhook').item.json.body.id }}\"\n}",
-          "headerParametersUi": {
-            "parameter": [
-              {
-                "name": "Content-Type",
-                "value": "application/json"
-              }
-            ]
-          }
-        },
-        "type": "n8n-nodes-base.graphql",
-        "typeVersion": 1.1,
-        "position": [
-          64,
-          336
-        ],
-        "id": "bd92d3ea-ce04-498f-b937-837bde2848c8",
-        "name": "GraphQL",
-        "credentials": {
-          "httpHeaderAuth": {
-            "id": "OPt2Cl0dnwcU4qRk",
-            "name": "ShopifyInformes"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "jsCode": "// El nodo Code de n8n espera que devolvamos un array de objetos.\nconst outputItems = [];\n\n// Obtenemos el valor del contador del nodo anterior\n// items[0].json.Contador → 2 en tu ejemplo\nlet numeroFila = items[0].json.Contador;\nlet ID_documento = items[0].json.ID_Documento;\n\n// 1. Accedemos al cuerpo real del pedido de Shopify, que está anidado.\nconst orderBody = $node['Webhook'].json.body; \n\n// 2. Extraemos los artículos de línea (productos) y la moneda.\nconst lineItems = orderBody.line_items;\nconst orderCurrency = orderBody.currency;\n\n// Iteramos sobre cada producto individual\nfor (const item of lineItems) {\n\n  const originalPrice = parseFloat(item.price);\n\n  let totalDiscountAmount = 0;\n  for (const allocation of item.discount_allocations) {\n    totalDiscountAmount += parseFloat(allocation.amount);\n  }\n\n  const finalPaidPrice = originalPrice - totalDiscountAmount;\n\n  // Creamos un nuevo objeto y añadimos \"numero_fila\"\n  outputItems.push({\n    json: {\n      ID_documento: ID_documento,\n      numero_fila: numeroFila,   // ← Nuevo campo\n      product_name: item.title,\n      sku: item.sku,\n      variant_title: item.variant_title,\n      original_price: originalPrice.toFixed(2),\n      total_discount_applied: totalDiscountAmount.toFixed(2),\n      final_paid_price: finalPaidPrice.toFixed(2),\n      currency: orderCurrency\n    }\n  });\n\n  // ↑ Incrementamos para el siguiente item\n  numeroFila++;\n}\n\n// Devolvemos el array con los nuevos objetos.\nreturn outputItems;\n"
-        },
-        "type": "n8n-nodes-base.code",
-        "typeVersion": 2,
-        "position": [
-          64,
-          480
-        ],
-        "id": "6d883b62-b1eb-4505-a4e2-51d814aeb2f3",
-        "name": "Code in JavaScript"
-      },
-      {
-        "parameters": {
-          "numberInputs": 3
-        },
-        "type": "n8n-nodes-base.merge",
-        "typeVersion": 3.2,
-        "position": [
-          304,
-          320
-        ],
-        "id": "0e878fa7-a810-4d2f-92a1-a501047bf01c",
-        "name": "Merge"
-      },
-      {
-        "parameters": {
-          "assignments": {
-            "assignments": [
-              {
-                "id": "31828549-6a33-4e8a-91ad-fdb9692a7e34",
-                "name": "SUCURSAL DE VENTA",
-                "value": "={{ $json.fulfillmentLocation }}",
-                "type": "string"
-              },
-              {
-                "id": "e89736ae-2f29-40c8-80b4-2181722ee3f5",
-                "name": "METODO DE PAGO",
-                "value": "={{ $json.transactionGateway }}",
-                "type": "string"
-              },
-              {
-                "id": "dc4a77f5-966d-4efc-b755-1f0fe34f6958",
-                "name": "COSTO POR UNIDAD",
-                "value": "={{ $json.product.unit_cost }}",
-                "type": "string"
-              },
-              {
-                "id": "76140f31-efab-4a68-b737-53f04a9a7b81",
-                "name": "COSTE DE PRODUCTO",
-                "value": "={{ $json.product.original_price }}",
-                "type": "string"
-              },
-              {
-                "id": "d295df2e-e935-41ef-a2b1-7923cabd1a92",
-                "name": "PRECIO PAGADO",
-                "value": "={{ $json.product.final_paid_price }}",
-                "type": "string"
-              },
-              {
-                "id": "adb9ae5a-50d9-4923-b706-31a9a5b86e66",
-                "name": "DESCUENTO",
-                "value": "={{ $json.product.total_discount_applied }}",
-                "type": "string"
-              },
-              {
-                "id": "c2b11c61-81c1-4b6d-94ec-c55b6872e5e0",
-                "name": "NOMBRE DE PRODUCTO",
-                "value": "={{ $json.product.product_name }}",
-                "type": "string"
-              },
-              {
-                "id": "f7cbe128-fbe4-4bfb-b5ec-d7eed2f87b84",
-                "name": "VARIANTE",
-                "value": "={{ $json.product.variant_title }}",
-                "type": "string"
-              },
-              {
-                "id": "1e31a3b3-a073-4113-9047-95110c3d7987",
-                "name": "NUMERO_FILA",
-                "value": "={{ $json.product.numero_fila }}",
-                "type": "number"
-              },
-              {
-                "id": "e4c20adf-aa16-46e1-9851-3844e08241a6",
-                "name": "ID_DOCUMENTO",
-                "value": "={{ $json.product.ID_documento }}",
-                "type": "string"
-              }
-            ]
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.set",
-        "typeVersion": 3.4,
-        "position": [
-          576,
-          336
-        ],
-        "id": "d2a7492a-a7c1-48e9-9e97-8b4fc4436529",
-        "name": "Edit Fields"
-      },
-      {
-        "parameters": {
-          "jsCode": "// 1. Validaciones básicas\nif (items.length < 2) {\n    throw new Error(\"Se esperaban al menos 2 ítems de entrada.\");\n}\n\n// Inicializamos variables\nlet orderData = null;\nconst productRows = []; // Aquí guardaremos los ítems que tienen ID_documento\nconst costMap = {}; // Aquí guardaremos los costos indexados por SKU\n\n// 2. Clasificar los ítems de entrada\nfor (const item of items) {\n    const json = item.json;\n\n    // A) Es la ORDEN (tiene data.order)\n    if (json.data && json.data.order) {\n        orderData = json.data.order;\n    } \n    // B) Es información de COSTO de Shopify (tiene data.productVariant)\n    else if (json.data && json.data.productVariant) {\n        const variant = json.data.productVariant;\n        const sku = variant.sku;\n        const costAmount = variant.inventoryItem?.unitCost?.amount;\n        \n        // Guardamos el costo en un objeto usando el SKU como clave para buscarlo rápido después\n        if (sku && costAmount) {\n            costMap[sku] = costAmount;\n        }\n    }\n    // C) Es el ítem procesado (tiene ID_documento)\n    else if (json.ID_documento) {\n        productRows.push(json);\n    }\n}\n\nif (!orderData) {\n    throw new Error(\"No se encontró el ítem de la orden de Shopify.\");\n}\n\nif (productRows.length === 0) {\n    throw new Error(\"No se encontraron ítems de producto con ID_documento.\");\n}\n\n// 3. Crear objeto base de la orden\nconst baseOrderData = {\n    id: orderData.id,\n    name: orderData.name,\n    createdAt: orderData.createdAt,\n    totalPrice: orderData.totalPriceSet?.shopMoney?.amount || 'N/A',\n    currencyCode: orderData.totalPriceSet?.shopMoney?.currencyCode || 'N/A',\n    \n    // Datos del cliente\n    customer: orderData.customer,\n    \n    // Datos de envío\n    fulfillmentLocation: orderData.fulfillments?.[0]?.location?.name || 'N/A',\n    fulfillmentAddress: orderData.fulfillments?.[0]?.location?.address || 'N/A',\n    \n    // Datos de la transacción\n    transactionGateway: orderData.transactions?.[0]?.formattedGateway || 'N/A',\n    transactionKind: orderData.transactions?.[0]?.kind || 'N/A',\n    transactionStatus: orderData.transactions?.[0]?.status || 'N/A',\n};\n\n// 4. Iterar sobre los productos y fusionar (incluyendo el costo encontrado)\nconst combinedItems = [];\n\nfor (const productData of productRows) {\n    \n    // Buscamos si existe un costo guardado para este SKU\n    const sku = productData.sku;\n    const unitCost = costMap[sku] || '0.00'; // Si no encuentra match, pone 0.00 o N/A\n\n    const combinedItem = {\n        ...baseOrderData,\n        \n        product: {\n            ID_documento: productData.ID_documento,\n            numero_fila: productData.numero_fila,\n            product_name: productData.product_name,\n            sku: productData.sku,\n            variant_title: productData.variant_title,\n            original_price: productData.original_price,\n            total_discount_applied: productData.total_discount_applied,\n            final_paid_price: productData.final_paid_price,\n            currency: productData.currency,\n            // Aquí agregamos el campo solicitado\n            unit_cost: unitCost \n        }\n    };\n    \n    combinedItems.push({\n        json: combinedItem,\n    });\n}\n\nreturn combinedItems;"
-        },
-        "type": "n8n-nodes-base.code",
-        "typeVersion": 2,
-        "position": [
-          432,
-          336
-        ],
-        "id": "3e2a555f-bce7-4cd7-a9b6-8329e99f80dd",
-        "name": "Code in JavaScript1"
-      },
-      {
-        "parameters": {
-          "operation": "update",
-          "documentId": {
-            "__rl": true,
-            "value": "={{ $json.ID_DOCUMENTO}}",
-            "mode": "id"
-          },
-          "sheetName": {
-            "__rl": true,
-            "value": "gid=0",
-            "mode": "list",
-            "cachedResultName": "Hoja 1",
-            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19bvtVxQK6uMbxP2HZKgGEGM_KWyvJM3vLp1APRSSTEY/edit#gid=0"
-          },
-          "columns": {
-            "mappingMode": "defineBelow",
-            "value": {
-              "row_number": "={{ $json.NUMERO_FILA }}",
-              "SUCURSAL DE VENTA": "={{ $json['SUCURSAL DE VENTA'] }}",
-              "MÉTODO DE PAGO": "={{ $json['METODO DE PAGO'] }}",
-              "COSTE POR UNIDAD": "={{ $json['COSTO POR UNIDAD'] }}",
-              "PRECIO DE PRODUCTO": "={{ $json['COSTE DE PRODUCTO'] }}",
-              "PRECIO PAGADO": "={{ $json['PRECIO PAGADO'] }}",
-              "DESCUENTO": "={{ $json.DESCUENTO }}",
-              "NOMBRE DE PRODUCTO": "={{ $json['NOMBRE DE PRODUCTO'] }}",
-              "VARIANTE": "={{ $json.VARIANTE }}"
-            },
-            "matchingColumns": [
-              "row_number"
-            ],
-            "schema": [
-              {
-                "id": "SUCURSAL DE VENTA",
-                "displayName": "SUCURSAL DE VENTA",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "MÉTODO DE PAGO",
-                "displayName": "MÉTODO DE PAGO",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "COSTE POR UNIDAD",
-                "displayName": "COSTE POR UNIDAD",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "PRECIO DE PRODUCTO",
-                "displayName": "PRECIO DE PRODUCTO",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "PRECIO PAGADO",
-                "displayName": "PRECIO PAGADO",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "DESCUENTO",
-                "displayName": "DESCUENTO",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "NOMBRE DE PRODUCTO",
-                "displayName": "NOMBRE DE PRODUCTO",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "VARIANTE",
-                "displayName": "VARIANTE",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "SURFIN SIERRA NEVADA",
-                "displayName": "SURFIN SIERRA NEVADA",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "Tarjeta",
-                "displayName": "Tarjeta",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "Efectivo",
-                "displayName": "Efectivo",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "Venta Web",
-                "displayName": "Venta Web",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "TOTAL",
-                "displayName": "TOTAL",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "row_number",
-                "displayName": "row_number",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "number",
-                "canBeUsedToMatch": true,
-                "readOnly": true,
-                "removed": false
-              }
-            ],
-            "attemptToConvertTypes": false,
-            "convertFieldsToString": false
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.googleSheets",
-        "typeVersion": 4.7,
-        "position": [
-          720,
-          336
-        ],
-        "id": "cf93f41f-2f8e-4ce2-8148-1ff0a591f0c3",
-        "name": "Update row in sheet",
-        "executeOnce": false,
-        "credentials": {
-          "googleSheetsOAuth2Api": {
-            "id": "RCuKUCifcA4jENcY",
-            "name": "Google Sheets account"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "authentication": "headerAuth",
-          "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-07/graphql.json",
-          "query": "query getVariantCost($id: ID!) {\n  productVariant(id: $id) {\n    id\n    sku\n    title\n    inventoryItem {\n      id\n      unitCost {\n        amount\n        currencyCode\n      }\n    }\n  }\n}\n\n",
-          "variables": "={\n  \"id\": \"{{ $json['ID VARIANTE'] }}\"\n}",
-          "headerParametersUi": {
-            "parameter": [
-              {
-                "name": "Content-Type",
-                "value": "application/json"
-              }
-            ]
-          }
-        },
-        "type": "n8n-nodes-base.graphql",
-        "typeVersion": 1.1,
-        "position": [
-          112,
-          192
-        ],
-        "id": "52e47291-9354-4842-90a3-9e253bb5f2b8",
-        "name": "GraphQL1",
-        "credentials": {
-          "httpHeaderAuth": {
-            "id": "OPt2Cl0dnwcU4qRk",
-            "name": "ShopifyInformes"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "assignments": {
-            "assignments": [
-              {
-                "id": "711be730-983a-47e6-99f2-d818a44482be",
-                "name": "ID VARIANTE",
-                "value": "=gid://shopify/ProductVariant/{{ $('Webhook').item.json.body.line_items[0].variant_id }}",
-                "type": "string"
-              }
-            ]
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.set",
-        "typeVersion": 3.4,
-        "position": [
-          0,
-          192
-        ],
-        "id": "011b07d2-70e1-4c78-831d-f018ab93b8ee",
-        "name": "Edit Fields1"
       },
       {
         "parameters": {
@@ -434,123 +40,36 @@
                   "type": "string",
                   "operation": "equals"
                 }
+              },
+              {
+                "id": "a851fb06-e4c3-42fa-95ec-ecb05cf72335",
+                "leftValue": "={{ $('Webhook').item.json.headers[\"x-shopify-topic\"] }}",
+                "rightValue": "refunds/create",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals"
+                }
               }
             ],
-            "combinator": "and"
+            "combinator": "or"
           },
           "options": {}
         },
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          -400,
-          16
+          -752,
+          32
         ],
         "id": "7dda907f-0194-4a60-9830-ed092e805176",
         "name": "If"
       },
       {
         "parameters": {
-          "assignments": {
-            "assignments": [
-              {
-                "id": "711be730-983a-47e6-99f2-d818a44482be",
-                "name": "ID VARIANTE",
-                "value": "=gid://shopify/ProductVariant/{{ $json.body[0].body.refund_line_items[0].line_item.variant_id }}",
-                "type": "string"
-              }
-            ]
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.set",
-        "typeVersion": 3.4,
-        "position": [
-          -1056,
-          -848
-        ],
-        "id": "6c05c99f-1355-4ce4-8163-6b8922011fa8",
-        "name": "Edit Fields2"
-      },
-      {
-        "parameters": {
-          "authentication": "headerAuth",
-          "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-07/graphql.json",
-          "query": "query getVariantCost($id: ID!) {\n  productVariant(id: $id) {\n    id\n    sku\n    title\n    inventoryItem {\n      id\n      unitCost {\n        amount\n        currencyCode\n      }\n    }\n  }\n}\n\n",
-          "variables": "={\n  \"id\": \"{{ $json['ID VARIANTE'] }}\"\n}",
-          "headerParametersUi": {
-            "parameter": [
-              {
-                "name": "Content-Type",
-                "value": "application/json"
-              }
-            ]
-          }
-        },
-        "type": "n8n-nodes-base.graphql",
-        "typeVersion": 1.1,
-        "position": [
-          -912,
-          -848
-        ],
-        "id": "dcaccb8e-4026-4e8a-b8de-e853f298a1a4",
-        "name": "GraphQL2",
-        "credentials": {
-          "httpHeaderAuth": {
-            "id": "OPt2Cl0dnwcU4qRk",
-            "name": "ShopifyInformes"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "jsCode": "// 1. Obtenemos el JSON de entrada\nlet inputData = $input.first().json;\n\n// --- LA CLAVE ESTÁ AQUÍ ---\n// Si el JSON viene dentro de un array [ {...} ] (como en tu caso), \n// sacamos el primer objeto para poder leer el \"body\"\nif (Array.isArray(inputData)) {\n    inputData = inputData[0];\n}\n// --------------------------\n\n// 2. Preparamos el array de salida\nconst results = [];\n\n// 3. Buscamos los productos a reembolsar\nconst itemsToRefund = inputData?.body?.refund_line_items || [];\n\n// 4. Bucle para procesar cada producto\nfor (const item of itemsToRefund) {\n  \n  // Extraemos la info importante de cada producto\n  const productData = {\n    // Datos del producto\n    title: item.line_item.title,\n    sku: item.line_item.sku,\n    quantity_refunded: item.quantity,\n    refund_subtotal: item.subtotal,\n    \n    // IDs útiles para Shopify\n    refund_item_id: item.id,\n    product_id: item.line_item.product_id,\n    variant_id: item.line_item.variant_id,\n    \n    // Contexto general del pedido (muy útil para los siguientes nodos)\n    order_id: inputData.body.order_id,\n    main_refund_id: inputData.body.id\n  };\n\n  // 5. Lo metemos en el array con el formato de n8n\n  results.push({ json: productData });\n}\n\n// 6. Devolvemos la lista dividida\nreturn results;"
-        },
-        "type": "n8n-nodes-base.code",
-        "typeVersion": 2,
-        "position": [
-          -928,
-          -720
-        ],
-        "id": "4891afaf-d1b4-41e4-9f5e-88fc04e51ab4",
-        "name": "Code in JavaScript2"
-      },
-      {
-        "parameters": {
-          "authentication": "headerAuth",
-          "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-07/graphql.json",
-          "query": "query getOrderByNumber($query: String!) {\n  orders(first: 1, query: $query) {\n    edges {\n      node {\n        id\n        name\n        createdAt\n        email\n        totalPriceSet {\n          shopMoney {\n            amount\n            currencyCode\n          }\n        }\n        # (El resto de tus campos aquí)\n      }\n    }\n  }\n}",
-          "variables": "={\n  \"query\": \"name:#68251\"\n}",
-          "headerParametersUi": {
-            "parameter": [
-              {
-                "name": "Content-Type",
-                "value": "application/json"
-              }
-            ]
-          }
-        },
-        "type": "n8n-nodes-base.graphql",
-        "typeVersion": 1.1,
-        "position": [
-          -928,
-          -544
-        ],
-        "id": "ce3df804-f160-4595-a9a6-972d504e8a61",
-        "name": "GraphQL4",
-        "credentials": {
-          "httpHeaderAuth": {
-            "id": "OPt2Cl0dnwcU4qRk",
-            "name": "ShopifyInformes"
-          }
-        }
-      },
-      {
-        "parameters": {
           "authentication": "headerAuth",
           "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-07/graphql.json",
           "query": "query getOrder($id: ID!) {\n  order(id: $id) {\n    id\n    name\n    createdAt\n    email\n    totalPriceSet {\n      shopMoney {\n        amount\n        currencyCode\n      }\n    }\n    lineItems(first: 10) {\n      edges {\n        node {\n          title\n          quantity\n          # NUEVO: Si esto es menor que 'quantity', significa que se ha devuelto\n          refundableQuantity \n          originalUnitPriceSet {\n            shopMoney {\n              amount\n              currencyCode\n            }\n          }\n        }\n      }\n    }\n    # NUEVO: Sección completa con el historial de devoluciones\n    refunds(first: 5) {\n      id\n      createdAt\n      note\n      totalRefundedSet {\n        shopMoney {\n          amount\n          currencyCode\n        }\n      }\n      refundLineItems(first: 10) {\n        edges {\n          node {\n            quantity\n            lineItem {\n              title\n            }\n          }\n        }\n      }\n    }\n    fulfillments {\n      id\n      location {\n        name\n        address {\n          address1\n          city\n          province\n          country\n          zip\n        }\n      }\n    }\n    transactions(first: 5) {\n      formattedGateway\n      kind\n      status\n    }\n    customer {\n      firstName\n      lastName\n      email\n    }\n  }\n}",
-          "variables": "={\n  \"id\": \"gid://shopify/Order/{{ $('Webhook').item.json.body[0].body.order_id }}\"\n}",
+          "variables": "={\n  \"id\": \"gid://shopify/Order/{{ $('Webhook').item.json.body.order_id }}\"\n}",
           "headerParametersUi": {
             "parameter": [
               {
@@ -563,8 +82,8 @@
         "type": "n8n-nodes-base.graphql",
         "typeVersion": 1.1,
         "position": [
-          -144,
-          -496
+          -496,
+          -64
         ],
         "id": "0feeb4e4-6205-4f45-b33e-30697ae63f7c",
         "name": "obtener pedido",
@@ -574,41 +93,6 @@
             "name": "ShopifyInformes"
           }
         }
-      },
-      {
-        "parameters": {
-          "assignments": {
-            "assignments": [
-              {
-                "id": "d2f36c27-ee64-40be-8789-ef4eb61419a7",
-                "name": "ID_PEDIDO",
-                "value": "={{ $('Webhook').item.json.body[0].body.order_id }}",
-                "type": "number"
-              },
-              {
-                "id": "f2c237a7-0ab4-424f-b366-fc627e4714ab",
-                "name": "RESTOCK",
-                "value": "={{ $('Webhook').item.json.body[0].body.restock }}",
-                "type": "boolean"
-              },
-              {
-                "id": "677de4a1-38c2-4054-a04e-9dc7c943a6e3",
-                "name": "SUCURSAL",
-                "value": "={{ $json.data.order.fulfillments[0].location.name }}",
-                "type": "string"
-              }
-            ]
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.set",
-        "typeVersion": 3.4,
-        "position": [
-          -576,
-          -848
-        ],
-        "id": "17e99e95-353b-4778-b47d-704203675c78",
-        "name": "datos devolucion"
       },
       {
         "parameters": {
@@ -631,309 +115,11 @@
         "type": "n8n-nodes-base.dataTable",
         "typeVersion": 1,
         "position": [
-          -544,
-          16
+          -912,
+          32
         ],
         "id": "6474297f-c463-4e5d-983b-d8b896c15de6",
         "name": "obtener contador"
-      },
-      {
-        "parameters": {
-          "jsCode": "// Array de salida\nconst outputItems = [];\n\n// -----------------------------------------------------------\n// 1. OBTENER EL CONTADOR (Del input que me acabas de enseñar)\n// -----------------------------------------------------------\n// Tu input es: { \"contador\": 2, ... }\n// Usamos items[0].json.contador (con 'c' minúscula)\nlet contadorFila = items[0].json.contador || 1;\n\n// -----------------------------------------------------------\n// 2. OBTENER DATOS DEL WEBHOOK (Referencia absoluta)\n// -----------------------------------------------------------\n// Vamos a buscar los datos originales del pedido al inicio del todo\nconst webhookData = $('Webhook').first().json;\n\n// Navegamos hasta el cuerpo del mensaje de Shopify\nconst shopifyPayload = webhookData.body?.[0]?.body;\n\n// Verificamos que existan artículos\nif (shopifyPayload && shopifyPayload.refund_line_items) {\n\n    const orderId = shopifyPayload.order_id;\n    const currency = shopifyPayload.currency || 'EUR';\n    const refundItems = shopifyPayload.refund_line_items;\n\n    // -----------------------------------------------------------\n    // 3. PROCESAMIENTO (Bucle)\n    // -----------------------------------------------------------\n    for (const item of refundItems) {\n        \n        const lineItem = item.line_item;\n\n        // Cálculos de dinero\n        const originalPrice = parseFloat(lineItem.price || 0);\n\n        let totalDiscount = 0;\n        if (lineItem.discount_allocations) {\n            for (const allocation of lineItem.discount_allocations) {\n                totalDiscount += parseFloat(allocation.amount || 0);\n            }\n        }\n\n        const finalPaidPrice = originalPrice - totalDiscount;\n\n        // Construcción del objeto de salida\n        outputItems.push({\n            json: {\n                // Datos generales\n                ID_documento: orderId,\n                numero_fila: contadorFila, // Aquí usamos el 2 que entra por el input\n                \n                // Datos del producto\n                product_name: lineItem.title,\n                sku: lineItem.sku,\n                variant_title: lineItem.variant_title,\n                quantity_refunded: item.quantity,\n                \n                // Precios formateados\n                original_price: originalPrice.toFixed(2),\n                total_discount_applied: totalDiscount.toFixed(2),\n                final_paid_price: finalPaidPrice.toFixed(2),\n                currency: currency\n            }\n        });\n\n        // Incrementamos el contador para la siguiente fila (si hay más de 1 artículo)\n        // Si entró un 2, el siguiente artículo será el 3, etc.\n        contadorFila++;\n    }\n\n} else {\n    // Si falla la lectura del Webhook\n    outputItems.push({\n        json: {\n            error: \"No se encontraron los datos del Webhook o refund_line_items\"\n        }\n    });\n}\n\nreturn outputItems;"
-        },
-        "type": "n8n-nodes-base.code",
-        "typeVersion": 2,
-        "position": [
-          -144,
-          -160
-        ],
-        "id": "53da0702-7ad8-4a53-94a0-2e4a0ffedf06",
-        "name": "Code in JavaScript3"
-      },
-      {
-        "parameters": {
-          "authentication": "headerAuth",
-          "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-07/graphql.json",
-          "query": "query getVariantCost($id: ID!) {\n  productVariant(id: $id) {\n    id\n    sku\n    title\n    inventoryItem {\n      id\n      unitCost {\n        amount\n        currencyCode\n      }\n    }\n  }\n}\n\n",
-          "variables": "={\n  \"id\": \"gid://shopify/ProductVariant/{{ $('Webhook').item.json.body[0].body.refund_line_items[0].line_item.variant_id }}\"\n}",
-          "headerParametersUi": {
-            "parameter": [
-              {
-                "name": "Content-Type",
-                "value": "application/json"
-              }
-            ]
-          }
-        },
-        "type": "n8n-nodes-base.graphql",
-        "typeVersion": 1.1,
-        "position": [
-          -144,
-          -304
-        ],
-        "id": "57ba00f2-ca97-4a8f-aadd-169028f30031",
-        "name": "obtener variante",
-        "credentials": {
-          "httpHeaderAuth": {
-            "id": "OPt2Cl0dnwcU4qRk",
-            "name": "ShopifyInformes"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "assignments": {
-            "assignments": [
-              {
-                "id": "711be730-983a-47e6-99f2-d818a44482be",
-                "name": "NOMBRE VARIANTE",
-                "value": "={{ $json.data.productVariant.title }}",
-                "type": "string"
-              },
-              {
-                "id": "b001f050-f93f-4216-8668-a4232e40b826",
-                "name": "COSTE UNITARIO",
-                "value": "={{ $json.data.productVariant.inventoryItem.unitCost.amount }}",
-                "type": "string"
-              }
-            ]
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.set",
-        "typeVersion": 3.4,
-        "position": [
-          16,
-          -304
-        ],
-        "id": "7d1c1701-b8fc-419c-b979-50286173ed7d",
-        "name": "datos variante"
-      },
-      {
-        "parameters": {
-          "assignments": {
-            "assignments": [
-              {
-                "id": "e94e384b-de36-4c55-b1da-56e3d6a69d4b",
-                "name": "NOMBRE PRODUCTO",
-                "value": "={{ $json.product_name }}",
-                "type": "string"
-              },
-              {
-                "id": "1c7b82a1-bc76-41e8-98db-8607a5c9364f",
-                "name": "PRECIO ORIGINAL",
-                "value": "={{ $json.original_price }}",
-                "type": "string"
-              },
-              {
-                "id": "260d132d-d99a-4a12-a202-20221dc6dff8",
-                "name": "DESCUENTO",
-                "value": "={{ $json.total_discount_applied }}",
-                "type": "string"
-              },
-              {
-                "id": "17120bb8-ebdd-480c-86f0-9f2da532e707",
-                "name": "PRECIO FINAL",
-                "value": "={{ $json.final_paid_price }}",
-                "type": "string"
-              },
-              {
-                "id": "d4416ff1-8c8e-4933-aba8-b8d01dd37c6c",
-                "name": "NUMERO FILA",
-                "value": "={{ $json.numero_fila }}",
-                "type": "number"
-              }
-            ]
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.set",
-        "typeVersion": 3.4,
-        "position": [
-          16,
-          -160
-        ],
-        "id": "78a0227a-33f9-43b0-b77c-412099472ce0",
-        "name": "datos line_item"
-      },
-      {
-        "parameters": {
-          "numberInputs": 3
-        },
-        "type": "n8n-nodes-base.merge",
-        "typeVersion": 3.2,
-        "position": [
-          272,
-          -320
-        ],
-        "id": "aa253a35-c541-4864-a80c-5b35500d4cc7",
-        "name": "juntar informacion"
-      },
-      {
-        "parameters": {
-          "jsCode": "// Variable para guardar el resultado unificado\nlet filaUnificada = {};\n\n// 1. ITERAR Y FUSIONAR\n// Recorremos los 3 objetos que llegan en el input y copiamos sus propiedades\n// al objeto 'filaUnificada'.\nfor (const item of items) {\n    // Copiamos todas las claves del item actual (json) a nuestro objeto final\n    Object.assign(filaUnificada, item.json);\n}\n\n// 2. RETORNO\n// Devolvemos un array con un único objeto que contiene todo junto\nreturn [\n    {\n        json: filaUnificada\n    }\n];"
-        },
-        "type": "n8n-nodes-base.code",
-        "typeVersion": 2,
-        "position": [
-          448,
-          -304
-        ],
-        "id": "3568bc76-e477-4d2f-b060-be831ddfe2ce",
-        "name": "hacer un item"
-      },
-      {
-        "parameters": {
-          "operation": "update",
-          "documentId": {
-            "__rl": true,
-            "value": "={{ $('obtener contador').first().json.id_documento }}",
-            "mode": "id"
-          },
-          "sheetName": {
-            "__rl": true,
-            "value": "Hoja 1",
-            "mode": "name"
-          },
-          "columns": {
-            "mappingMode": "defineBelow",
-            "value": {
-              "row_number": "={{ $json[\"NUMERO FILA\"] }}",
-              "ID PEDIDO": "={{ $json.ID_PEDIDO }}",
-              "SUCURSAL DE VENTA": "={{ $json.SUCURSAL }}",
-              "MÉTODO DE PAGO": "DEVOLUCIÓN",
-              "COSTE POR UNIDAD": "={{ $json[\"COSTE UNITARIO\"] }}",
-              "NOMBRE DE PRODUCTO": "={{ $json[\"NOMBRE PRODUCTO\"] }}",
-              "DESCUENTO": "={{ $json.DESCUENTO }}",
-              "PRECIO PAGADO": "={{ $json[\"PRECIO FINAL\"] }}",
-              "PRECIO DE PRODUCTO": "={{ $json[\"PRECIO ORIGINAL\"] }}",
-              "VARIANTE": "={{ $json[\"NOMBRE VARIANTE\"] }}"
-            },
-            "matchingColumns": [
-              "row_number"
-            ],
-            "schema": [
-              {
-                "id": "ID PEDIDO",
-                "displayName": "ID PEDIDO",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "SUCURSAL DE VENTA",
-                "displayName": "SUCURSAL DE VENTA",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "MÉTODO DE PAGO",
-                "displayName": "MÉTODO DE PAGO",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "COSTE POR UNIDAD",
-                "displayName": "COSTE POR UNIDAD",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "PRECIO DE PRODUCTO",
-                "displayName": "PRECIO DE PRODUCTO",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "PRECIO PAGADO",
-                "displayName": "PRECIO PAGADO",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "DESCUENTO",
-                "displayName": "DESCUENTO",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "NOMBRE DE PRODUCTO",
-                "displayName": "NOMBRE DE PRODUCTO",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "VARIANTE",
-                "displayName": "VARIANTE",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "row_number",
-                "displayName": "row_number",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "number",
-                "canBeUsedToMatch": true,
-                "readOnly": true,
-                "removed": false
-              }
-            ],
-            "attemptToConvertTypes": false,
-            "convertFieldsToString": false
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.googleSheets",
-        "typeVersion": 4.7,
-        "position": [
-          624,
-          -304
-        ],
-        "id": "6c05a4dd-084e-4d1c-8e1c-263a64bb45d8",
-        "name": "Update row in sheet1",
-        "credentials": {
-          "googleSheetsOAuth2Api": {
-            "id": "RCuKUCifcA4jENcY",
-            "name": "Google Sheets account"
-          }
-        }
       },
       {
         "parameters": {
@@ -955,7 +141,7 @@
           "columns": {
             "mappingMode": "defineBelow",
             "value": {
-              "contador": "={{ $('hacer un item').item.json[\"NUMERO FILA\"] + 1}}",
+              "contador": "={{ $json.row_number + 1}}",
               "id_documento": "={{ $('obtener contador').first().json.id_documento }}"
             },
             "matchingColumns": [],
@@ -989,65 +175,11 @@
         "type": "n8n-nodes-base.dataTable",
         "typeVersion": 1,
         "position": [
-          800,
-          -304
+          464,
+          16
         ],
         "id": "bed162b7-65a5-4818-9e13-bb7e229b46c4",
         "name": "sumar contador"
-      },
-      {
-        "parameters": {
-          "jsCode": "const order = items[0].json.data.order;\nconst lineItems = order.lineItems.edges;\nconst refunds = order.refunds;\n\n// 1. EXTRAER EL ID NUMÉRICO\n// Tomamos \"gid://shopify/Order/7488936378715\" y nos quedamos con lo último después de la barra \"/\"\nconst realOrderId = order.id.split('/').pop(); \n\n// 2. Crear un mapa para contar cuántas unidades se devolvieron de cada cosa\nlet contadorDevoluciones = {};\n\nrefunds.forEach(refund => {\n  refund.refundLineItems.edges.forEach(edge => {\n    const title = edge.node.lineItem.title;\n    const qty = edge.node.quantity;\n    \n    if (!contadorDevoluciones[title]) {\n      contadorDevoluciones[title] = 0;\n    }\n    contadorDevoluciones[title] += qty;\n  });\n});\n\nlet resultadoFinal = [];\n\n// 3. Recorrer los productos originales y asignar estado uno por uno\nlineItems.forEach(edge => {\n  const item = edge.node;\n  const title = item.title;\n  const price = item.originalUnitPriceSet.shopMoney.amount;\n  const quantity = item.quantity; \n\n  // Desglosamos la cantidad individualmente\n  for (let i = 0; i < quantity; i++) {\n    let estado = \"comprado\";\n\n    // Si hay devoluciones pendientes para este título, lo marcamos como devuelto\n    if (contadorDevoluciones[title] && contadorDevoluciones[title] > 0) {\n      estado = \"devuelto\";\n      contadorDevoluciones[title]--; \n    }\n\n    resultadoFinal.push({\n      json: {\n        orden_id: realOrderId, // <--- AQUÍ ESTÁ EL CAMBIO (antes era order.name)\n        producto: title,\n        precio: price,\n        estado: estado,\n        cliente: order.email\n      }\n    });\n  }\n});\n\nreturn resultadoFinal;"
-        },
-        "type": "n8n-nodes-base.code",
-        "typeVersion": 2,
-        "position": [
-          16,
-          -496
-        ],
-        "id": "d6b5ac17-46b9-40e2-bd68-51b44a38f407",
-        "name": "info productos"
-      },
-      {
-        "parameters": {
-          "operation": "get",
-          "dataTableId": {
-            "__rl": true,
-            "mode": "name",
-            "value": "=8eQeIQsn3DD6xrOV"
-          },
-          "filters": {
-            "conditions": [
-              {
-                "keyName": "id_pedido",
-                "keyValue": "={{ $json.orden_id }}"
-              }
-            ]
-          }
-        },
-        "type": "n8n-nodes-base.dataTable",
-        "typeVersion": 1.1,
-        "position": [
-          192,
-          -496
-        ],
-        "id": "a2eec079-05bc-4862-98a4-8be11f2a7cf8",
-        "name": "buscar id pedido en tabla",
-        "executeOnce": true
-      },
-      {
-        "parameters": {
-          "amount": 1
-        },
-        "type": "n8n-nodes-base.wait",
-        "typeVersion": 1.1,
-        "position": [
-          624,
-          -464
-        ],
-        "id": "4ec68255-484d-4b13-989e-49ee9e23da3b",
-        "name": "Wait",
-        "webhookId": "231b04ca-61ab-4d96-b703-8a7a82c509fe"
       },
       {
         "parameters": {
@@ -1074,8 +206,8 @@
         "type": "n8n-nodes-base.googleSheets",
         "typeVersion": 4.7,
         "position": [
-          400,
-          -496
+          -400,
+          96
         ],
         "id": "88244861-8da4-4978-958f-6f7d064ab40f",
         "name": "obtener producto en otro informe",
@@ -1091,7 +223,7 @@
           "operation": "update",
           "documentId": {
             "__rl": true,
-            "value": "={{ $('buscar id pedido en tabla').item.json.id_documento }}",
+            "value": "=1NnQWrr02pcOLmsh_nNSDMVTFq8OJ6gq58X5tM3RhoJM",
             "mode": "id"
           },
           "sheetName": {
@@ -1102,174 +234,13 @@
           "columns": {
             "mappingMode": "defineBelow",
             "value": {
-              "row_number": "={{ $json.row_number }}",
-              "ID PEDIDO": "={{ $json[\"ID PEDIDO\"] }}",
-              "SUCURSAL DE VENTA": "PRODUCTO DEVUELTO",
-              "MÉTODO DE PAGO": "//////////",
-              "COSTE POR UNIDAD": "//////////",
-              "PRECIO DE PRODUCTO": "//////////",
-              "PRECIO PAGADO": "//////////",
-              "DESCUENTO": "//////////",
-              "NOMBRE DE PRODUCTO": "//////////",
-              "VARIANTE": "//////////"
-            },
-            "matchingColumns": [
-              "row_number"
-            ],
-            "schema": [
-              {
-                "id": "ID PEDIDO",
-                "displayName": "ID PEDIDO",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true
-              },
-              {
-                "id": "SUCURSAL DE VENTA",
-                "displayName": "SUCURSAL DE VENTA",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true
-              },
-              {
-                "id": "MÉTODO DE PAGO",
-                "displayName": "MÉTODO DE PAGO",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true
-              },
-              {
-                "id": "COSTE POR UNIDAD",
-                "displayName": "COSTE POR UNIDAD",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true
-              },
-              {
-                "id": "PRECIO DE PRODUCTO",
-                "displayName": "PRECIO DE PRODUCTO",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true
-              },
-              {
-                "id": "PRECIO PAGADO",
-                "displayName": "PRECIO PAGADO",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true
-              },
-              {
-                "id": "DESCUENTO",
-                "displayName": "DESCUENTO",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true
-              },
-              {
-                "id": "NOMBRE DE PRODUCTO",
-                "displayName": "NOMBRE DE PRODUCTO",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true
-              },
-              {
-                "id": "VARIANTE",
-                "displayName": "VARIANTE",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true
-              },
-              {
-                "id": "row_number",
-                "displayName": "row_number",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "number",
-                "canBeUsedToMatch": true,
-                "readOnly": true,
-                "removed": false
-              }
-            ],
-            "attemptToConvertTypes": false,
-            "convertFieldsToString": false
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.googleSheets",
-        "typeVersion": 4.7,
-        "position": [
-          816,
-          -464
-        ],
-        "id": "ce7b1521-8d7f-4f20-bed1-4f204a178ee7",
-        "name": "borrar producto en otro informe",
-        "credentials": {
-          "googleSheetsOAuth2Api": {
-            "id": "RCuKUCifcA4jENcY",
-            "name": "Google Sheets account"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "amount": 1
-        },
-        "type": "n8n-nodes-base.wait",
-        "typeVersion": 1.1,
-        "position": [
-          -752,
-          -688
-        ],
-        "id": "99a3cc03-e8d5-4baf-bba4-b9d4e3439dd8",
-        "name": "Wait1",
-        "webhookId": "231b04ca-61ab-4d96-b703-8a7a82c509fe"
-      },
-      {
-        "parameters": {
-          "operation": "update",
-          "documentId": {
-            "__rl": true,
-            "value": "={{ $('obtener contador').first().json.id_documento }}",
-            "mode": "id"
-          },
-          "sheetName": {
-            "__rl": true,
-            "value": "Hoja 1",
-            "mode": "name"
-          },
-          "columns": {
-            "mappingMode": "defineBelow",
-            "value": {
-              "row_number": "={{ $json[\"NUMERO FILA\"] }}",
-              "ID PEDIDO": "={{ $json.ID_PEDIDO }}",
-              "SUCURSAL DE VENTA": "={{ $json.SUCURSAL }}",
-              "MÉTODO DE PAGO": "DEVOLUCIÓN",
-              "COSTE POR UNIDAD": "={{ $json[\"COSTE UNITARIO\"] }}",
-              "NOMBRE DE PRODUCTO": "={{ $json[\"NOMBRE PRODUCTO\"] }}",
-              "DESCUENTO": "={{ $json.DESCUENTO }}",
-              "PRECIO PAGADO": "={{ $json[\"PRECIO FINAL\"] }}",
-              "PRECIO DE PRODUCTO": "={{ $json[\"PRECIO ORIGINAL\"] }}",
-              "VARIANTE": "={{ $json[\"NOMBRE VARIANTE\"] }}"
+              "row_number": "={{ $json.Numero_linea }}",
+              "PRECIO PAGADO": "={{ $json.Precio }}",
+              "NOMBRE DE PRODUCTO": "={{ $json.Texto }}",
+              "ID PEDIDO": "={{ $('Webhook').first().json.body.order_id }}",
+              "SUCURSAL DE VENTA": "={{ $('obtener pedido').first().json.data.order.fulfillments[0].location.name }}",
+              "MÉTODO DE PAGO": "={{ $('obtener pedido').first().json.data.order.transactions[0].formattedGateway }}",
+              "VARIANTE": "DEVOLUCIÓN"
             },
             "matchingColumns": [
               "row_number"
@@ -1385,187 +356,8 @@
         "type": "n8n-nodes-base.googleSheets",
         "typeVersion": 4.7,
         "position": [
-          -608,
-          -688
-        ],
-        "id": "10261708-3495-4e25-9896-9cd98b69cdfb",
-        "name": "Update row in sheet2",
-        "credentials": {
-          "googleSheetsOAuth2Api": {
-            "id": "RCuKUCifcA4jENcY",
-            "name": "Google Sheets account"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  item.json.myNewField = 1;\n}\n\nreturn $input.all();"
-        },
-        "type": "n8n-nodes-base.code",
-        "typeVersion": 2,
-        "position": [
-          -752,
-          -864
-        ],
-        "id": "715677e8-4458-4270-b4c5-0a34f578efab",
-        "name": "Code in JavaScript4"
-      },
-      {
-        "parameters": {
-          "jsCode": "// 1. OBTENER EL VALOR INICIAL DEL CONTADOR\n// Buscamos en el nodo específico 'obtener contador'\nlet contadorBase = 1; // Valor por defecto por seguridad\n\ntry {\n    const datosContador = $('obtener contador').first().json;\n    \n    // Leemos 'contador' (o 'Contador' por si acaso viene con mayúscula)\n    // Usamos parseInt para asegurar que sea un número y no texto\n    const valorLeido = datosContador.contador || datosContador.Contador;\n    \n    if (valorLeido) {\n        contadorBase = parseInt(valorLeido);\n    }\n} catch (e) {\n    console.log(\"No se pudo leer el nodo 'obtener contador'. Se usará 1.\");\n}\n\n// 2. RECORRER LOS ITEMS Y ACTUALIZAR EL NÚMERO DE FILA\n// 'items' contiene el array de todos los productos que entran al nodo\nfor (let i = 0; i < items.length; i++) {\n    \n    // Calculamos el número para esta fila específica:\n    // (Valor Base) + (Índice actual 0, 1, 2...)\n    const nuevoNumero = contadorBase + i;\n\n    // Asignamos el nuevo valor al campo row_number\n    items[i].json.row_number = nuevoNumero;\n}\n\n// 3. DEVOLVER LOS DATOS MODIFICADOS\nreturn items;"
-        },
-        "type": "n8n-nodes-base.code",
-        "typeVersion": 2,
-        "position": [
-          624,
-          -640
-        ],
-        "id": "df8c1e6d-6580-4115-8dd9-b45334d8c74a",
-        "name": "ajustar numero de fila"
-      },
-      {
-        "parameters": {
-          "operation": "update",
-          "documentId": {
-            "__rl": true,
-            "value": "={{ $('obtener contador').item.json.id_documento }}",
-            "mode": "id"
-          },
-          "sheetName": {
-            "__rl": true,
-            "value": "Hoja 1",
-            "mode": "name"
-          },
-          "columns": {
-            "mappingMode": "defineBelow",
-            "value": {
-              "row_number": "={{ $json.row_number }}",
-              "ID PEDIDO": "={{ $json[\"ID PEDIDO\"] }}",
-              "SUCURSAL DE VENTA": "={{ $json[\"SUCURSAL DE VENTA\"] }}",
-              "MÉTODO DE PAGO": "={{ $json[\"MÉTODO DE PAGO\"] }}",
-              "COSTE POR UNIDAD": "={{ $json[\"COSTE POR UNIDAD\"] }}",
-              "PRECIO DE PRODUCTO": "={{ $json[\"PRECIO DE PRODUCTO\"] }}",
-              "PRECIO PAGADO": "={{ $json[\"PRECIO PAGADO\"] }}",
-              "DESCUENTO": "={{ $json.DESCUENTO }}",
-              "NOMBRE DE PRODUCTO": "={{ $json[\"NOMBRE DE PRODUCTO\"] }}",
-              "VARIANTE": "={{ $json.VARIANTE }}"
-            },
-            "matchingColumns": [
-              "row_number"
-            ],
-            "schema": [
-              {
-                "id": "ID PEDIDO",
-                "displayName": "ID PEDIDO",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "SUCURSAL DE VENTA",
-                "displayName": "SUCURSAL DE VENTA",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "MÉTODO DE PAGO",
-                "displayName": "MÉTODO DE PAGO",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "COSTE POR UNIDAD",
-                "displayName": "COSTE POR UNIDAD",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "PRECIO DE PRODUCTO",
-                "displayName": "PRECIO DE PRODUCTO",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "PRECIO PAGADO",
-                "displayName": "PRECIO PAGADO",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "DESCUENTO",
-                "displayName": "DESCUENTO",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "NOMBRE DE PRODUCTO",
-                "displayName": "NOMBRE DE PRODUCTO",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "VARIANTE",
-                "displayName": "VARIANTE",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
-              },
-              {
-                "id": "row_number",
-                "displayName": "row_number",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "number",
-                "canBeUsedToMatch": true,
-                "readOnly": true,
-                "removed": false
-              }
-            ],
-            "attemptToConvertTypes": false,
-            "convertFieldsToString": false
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.googleSheets",
-        "typeVersion": 4.7,
-        "position": [
-          816,
-          -640
+          272,
+          16
         ],
         "id": "d702682b-8b7b-40de-8736-6775774287f9",
         "name": "escribir en informe de hoy",
@@ -1573,6 +365,105 @@
           "googleSheetsOAuth2Api": {
             "id": "RCuKUCifcA4jENcY",
             "name": "Google Sheets account"
+          }
+        }
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.merge",
+        "typeVersion": 3.2,
+        "position": [
+          -256,
+          16
+        ],
+        "id": "83856bf3-b702-4a6f-b0bd-70d04e885263",
+        "name": "Merge1"
+      },
+      {
+        "parameters": {
+          "jsCode": "// --- 1. PREPARACIÓN DE DATOS ---\nconst shopifyItem = items.find(i => i.json.data && i.json.data.order);\nconst dbItems = items.filter(i => i.json['ID PEDIDO']);\n\nif (!shopifyItem) return [];\n\nconst order = shopifyItem.json.data.order;\nconst orderIdSimple = order.id.replace(\"gid://shopify/Order/\", \"\");\nconst movements = [];\n\n// MAPA DEL HISTÓRICO (Lo que el cliente tenía antes de hoy)\n// Usamos un mapa para controlar las cantidades: { \"Gafas\": 1, \"Camiseta\": 2 }\nconst inventoryChecklist = {};\n\ndbItems.forEach(item => {\n    const name = item.json['NOMBRE DE PRODUCTO'];\n    const price = parseFloat(item.json['PRECIO PAGADO'] || 0);\n    \n    if (inventoryChecklist[name]) {\n        inventoryChecklist[name].qty += 1;\n    } else {\n        inventoryChecklist[name] = { qty: 1, price: price };\n    }\n});\n\n// --- 2. PROCESAR \"DEVUELTO\" ---\n// Primero miramos exclusivamente el Refund de hoy\nif (order.refunds && order.refunds.length > 0) {\n    const currentRefund = order.refunds[0]; \n\n    for (const edge of currentRefund.refundLineItems.edges) {\n        const refundItem = edge.node;\n        const name = refundItem.lineItem.title;\n        const qtyReturned = refundItem.quantity;\n        \n        // Buscamos el precio original\n        let price = 0;\n        if (inventoryChecklist[name]) {\n            price = inventoryChecklist[name].price;\n            // IMPORTANTE: \"Gastamos\" el stock histórico. \n            // Si tenía 1 y devuelve 1, ahora en el histórico virtual queda 0.\n            inventoryChecklist[name].qty -= qtyReturned;\n        } else {\n             // Fallback por si no estaba en base de datos\n             const originalLine = order.lineItems.edges.find(e => e.node.title === name);\n             price = originalLine ? parseFloat(originalLine.node.originalUnitPriceSet.shopMoney.amount) : 0;\n        }\n\n        movements.push({\n            \"ID PEDIDO\": orderIdSimple,\n            \"TIPO\": \"DEVUELTO\",\n            \"PRODUCTO\": name,\n            \"CANTIDAD\": -qtyReturned,\n            \"IMPORTE\": (price * qtyReturned) * -1\n        });\n    }\n}\n\n// --- 3. PROCESAR \"SIN CAMBIOS\" Y \"CAMBIO\" ---\n// Ahora recorremos el pedido actual (items vivos)\nfor (const edge of order.lineItems.edges) {\n    const item = edge.node;\n    \n    // Solo miramos items activos (no devueltos completamente en el pasado)\n    if (item.refundableQuantity > 0) {\n        const name = item.title;\n        const currentQty = item.refundableQuantity;\n        const currentPrice = parseFloat(item.originalUnitPriceSet.shopMoney.amount);\n        \n        // Verificamos cuánto queda en el checklist del histórico\n        const oldData = inventoryChecklist[name];\n        const oldQtyAvailable = oldData ? Math.max(0, oldData.qty) : 0;\n\n        // CÁLCULO DE DESGLOSE\n        // 1. ¿Cuántos son SIN CAMBIOS? (El solapamiento entre lo que hay y lo que había)\n        const qtyUnchanged = Math.min(currentQty, oldQtyAvailable);\n        \n        // 2. ¿Cuántos son CAMBIO? (Lo que hay de más respecto a lo viejo)\n        const qtyNew = Math.max(0, currentQty - oldQtyAvailable);\n\n        // -- GENERAR LÍNEA: SIN CAMBIOS --\n        if (qtyUnchanged > 0) {\n            movements.push({\n                \"ID PEDIDO\": orderIdSimple,\n                \"TIPO\": \"SIN CAMBIOS\",\n                \"PRODUCTO\": name,\n                \"CANTIDAD\": qtyUnchanged,\n                \"IMPORTE\": 0 // 0 porque financieramente no afecta al reporte de hoy\n            });\n            // Restamos del checklist para no repetirlo\n            if (inventoryChecklist[name]) inventoryChecklist[name].qty -= qtyUnchanged;\n        }\n\n        // -- GENERAR LÍNEA: CAMBIO --\n        if (qtyNew > 0) {\n            movements.push({\n                \"ID PEDIDO\": orderIdSimple,\n                \"TIPO\": \"CAMBIO\", // Es nuevo o sustitución\n                \"PRODUCTO\": name,\n                \"CANTIDAD\": qtyNew,\n                \"IMPORTE\": currentPrice * qtyNew // Valor positivo\n            });\n        }\n    }\n}\n\nreturn movements;"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          -96,
+          16
+        ],
+        "id": "9e73f29f-6b1e-4f1e-829a-6cb9a4a98162",
+        "name": "juntar información"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "aaebdeef-6cac-4712-a953-8e04b1ff3cbc",
+                "name": "Precio",
+                "value": "={{ $items().reduce((acumulador, item) => acumulador + (parseFloat(item.json[\"IMPORTE\"]) || 0), 0).toFixed(2) }}",
+                "type": "number"
+              },
+              {
+                "id": "82bc8e66-6f80-4613-b1ec-128a8f37050e",
+                "name": "Texto",
+                "value": "={{ $items().map(item => item.json[\"PRODUCTO\"] + \" (\" + item.json[\"TIPO\"] + \")\").join(\", \") }}",
+                "type": "string"
+              },
+              {
+                "id": "ecd82425-252d-456c-878a-87c828085f50",
+                "name": "Numero_linea",
+                "value": "={{ $('obtener contador').first().json.contador }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          96,
+          16
+        ],
+        "id": "24ddd213-d872-42e1-a420-3be6c3be9c1f",
+        "name": "formatear informacion para sheets",
+        "executeOnce": true
+      },
+      {
+        "parameters": {
+          "operation": "select",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "Pedidos-Documentos",
+            "mode": "list",
+            "cachedResultName": "Pedidos-Documentos"
+          },
+          "where": {
+            "values": [
+              {
+                "column": "id_pedido",
+                "value": "={{ $('Webhook').item.json.body.order_id }}"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          -576,
+          96
+        ],
+        "id": "b8220807-8f47-48c2-b93a-ee9bcfb860e5",
+        "name": "Select rows from a table",
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
           }
         }
       }
@@ -1589,88 +480,6 @@
           ]
         ]
       },
-      "GraphQL": {
-        "main": [
-          [
-            {
-              "node": "Merge",
-              "type": "main",
-              "index": 1
-            }
-          ]
-        ]
-      },
-      "Code in JavaScript": {
-        "main": [
-          [
-            {
-              "node": "Merge",
-              "type": "main",
-              "index": 2
-            }
-          ]
-        ]
-      },
-      "Merge": {
-        "main": [
-          [
-            {
-              "node": "Code in JavaScript1",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Edit Fields": {
-        "main": [
-          [
-            {
-              "node": "Update row in sheet",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Code in JavaScript1": {
-        "main": [
-          [
-            {
-              "node": "Edit Fields",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Update row in sheet": {
-        "main": [
-          []
-        ]
-      },
-      "GraphQL1": {
-        "main": [
-          [
-            {
-              "node": "Merge",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Edit Fields1": {
-        "main": [
-          [
-            {
-              "node": "GraphQL1",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
       "If": {
         "main": [
           [
@@ -1680,51 +489,19 @@
               "index": 0
             },
             {
-              "node": "obtener variante",
-              "type": "main",
-              "index": 0
-            },
-            {
-              "node": "Code in JavaScript3",
+              "node": "Select rows from a table",
               "type": "main",
               "index": 0
             }
           ],
-          [
-            {
-              "node": "Edit Fields1",
-              "type": "main",
-              "index": 0
-            },
-            {
-              "node": "GraphQL",
-              "type": "main",
-              "index": 0
-            },
-            {
-              "node": "Code in JavaScript",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Edit Fields2": {
-        "main": [
-          [
-            {
-              "node": "GraphQL2",
-              "type": "main",
-              "index": 0
-            }
-          ]
+          []
         ]
       },
       "obtener pedido": {
         "main": [
           [
             {
-              "node": "info productos",
+              "node": "Merge1",
               "type": "main",
               "index": 0
             }
@@ -1742,66 +519,51 @@
           ]
         ]
       },
-      "obtener variante": {
+      "obtener producto en otro informe": {
         "main": [
           [
             {
-              "node": "datos variante",
+              "node": "Merge1",
+              "type": "main",
+              "index": 1
+            }
+          ]
+        ]
+      },
+      "Merge1": {
+        "main": [
+          [
+            {
+              "node": "juntar información",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "datos variante": {
-        "main": [
-          []
-        ]
-      },
-      "Code in JavaScript3": {
+      "juntar información": {
         "main": [
           [
             {
-              "node": "datos line_item",
+              "node": "formatear informacion para sheets",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "datos devolucion": {
-        "main": [
-          []
-        ]
-      },
-      "datos line_item": {
-        "main": [
-          []
-        ]
-      },
-      "juntar informacion": {
+      "formatear informacion para sheets": {
         "main": [
           [
             {
-              "node": "hacer un item",
+              "node": "escribir en informe de hoy",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "hacer un item": {
-        "main": [
-          [
-            {
-              "node": "Update row in sheet1",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Update row in sheet1": {
+      "escribir en informe de hoy": {
         "main": [
           [
             {
@@ -1812,29 +574,7 @@
           ]
         ]
       },
-      "info productos": {
-        "main": [
-          [
-            {
-              "node": "buscar id pedido en tabla",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Wait": {
-        "main": [
-          [
-            {
-              "node": "borrar producto en otro informe",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "buscar id pedido en tabla": {
+      "Select rows from a table": {
         "main": [
           [
             {
@@ -1844,140 +584,20 @@
             }
           ]
         ]
-      },
-      "obtener producto en otro informe": {
-        "main": [
-          [
-            {
-              "node": "ajustar numero de fila",
-              "type": "main",
-              "index": 0
-            },
-            {
-              "node": "Wait",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Wait1": {
-        "main": [
-          [
-            {
-              "node": "Update row in sheet2",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "ajustar numero de fila": {
-        "main": [
-          [
-            {
-              "node": "escribir en informe de hoy",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version 8b5c8cfb",
+    "name": "Version 3ebaa34a",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "8b5c8cfb-8ebd-4fc1-b05c-ddea38dc72b7",
+  "activeVersionId": "3ebaa34a-24d2-4620-8f8f-f0696b8d95ed",
   "connections": {
     "Webhook": {
       "main": [
         [
           {
             "node": "obtener contador",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "GraphQL": {
-      "main": [
-        [
-          {
-            "node": "Merge",
-            "type": "main",
-            "index": 1
-          }
-        ]
-      ]
-    },
-    "Code in JavaScript": {
-      "main": [
-        [
-          {
-            "node": "Merge",
-            "type": "main",
-            "index": 2
-          }
-        ]
-      ]
-    },
-    "Merge": {
-      "main": [
-        [
-          {
-            "node": "Code in JavaScript1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Edit Fields": {
-      "main": [
-        [
-          {
-            "node": "Update row in sheet",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Code in JavaScript1": {
-      "main": [
-        [
-          {
-            "node": "Edit Fields",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Update row in sheet": {
-      "main": [
-        []
-      ]
-    },
-    "GraphQL1": {
-      "main": [
-        [
-          {
-            "node": "Merge",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Edit Fields1": {
-      "main": [
-        [
-          {
-            "node": "GraphQL1",
             "type": "main",
             "index": 0
           }
@@ -1993,51 +613,19 @@
             "index": 0
           },
           {
-            "node": "obtener variante",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Code in JavaScript3",
+            "node": "Select rows from a table",
             "type": "main",
             "index": 0
           }
         ],
-        [
-          {
-            "node": "Edit Fields1",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "GraphQL",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Code in JavaScript",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Edit Fields2": {
-      "main": [
-        [
-          {
-            "node": "GraphQL2",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "obtener pedido": {
       "main": [
         [
           {
-            "node": "info productos",
+            "node": "Merge1",
             "type": "main",
             "index": 0
           }
@@ -2055,66 +643,51 @@
         ]
       ]
     },
-    "obtener variante": {
+    "obtener producto en otro informe": {
       "main": [
         [
           {
-            "node": "datos variante",
+            "node": "Merge1",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge1": {
+      "main": [
+        [
+          {
+            "node": "juntar información",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "datos variante": {
-      "main": [
-        []
-      ]
-    },
-    "Code in JavaScript3": {
+    "juntar información": {
       "main": [
         [
           {
-            "node": "datos line_item",
+            "node": "formatear informacion para sheets",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "datos devolucion": {
-      "main": [
-        []
-      ]
-    },
-    "datos line_item": {
-      "main": [
-        []
-      ]
-    },
-    "juntar informacion": {
+    "formatear informacion para sheets": {
       "main": [
         [
           {
-            "node": "hacer un item",
+            "node": "escribir en informe de hoy",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "hacer un item": {
-      "main": [
-        [
-          {
-            "node": "Update row in sheet1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Update row in sheet1": {
+    "escribir en informe de hoy": {
       "main": [
         [
           {
@@ -2125,71 +698,11 @@
         ]
       ]
     },
-    "info productos": {
-      "main": [
-        [
-          {
-            "node": "buscar id pedido en tabla",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Wait": {
-      "main": [
-        [
-          {
-            "node": "borrar producto en otro informe",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "buscar id pedido en tabla": {
+    "Select rows from a table": {
       "main": [
         [
           {
             "node": "obtener producto en otro informe",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "obtener producto en otro informe": {
-      "main": [
-        [
-          {
-            "node": "ajustar numero de fila",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Wait",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Wait1": {
-      "main": [
-        [
-          {
-            "node": "Update row in sheet2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "ajustar numero de fila": {
-      "main": [
-        [
-          {
-            "node": "escribir en informe de hoy",
             "type": "main",
             "index": 0
           }
@@ -2214,406 +727,12 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -720,
-        16
+        -1088,
+        32
       ],
       "id": "cfd98e02-755b-443c-9698-ff7a15589388",
       "name": "Webhook",
       "webhookId": "7c1e3b37-6cc8-4f4a-81e3-c5897bdf497c"
-    },
-    {
-      "parameters": {
-        "authentication": "headerAuth",
-        "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-07/graphql.json",
-        "query": "query getOrder($id: ID!) {\n\n  order(id: $id) {\n\n    id\n\n    name\n\n    createdAt\n\n    email\n\n    totalPriceSet {\n\n      shopMoney {\n\n        amount\n\n        currencyCode\n\n      }\n\n    }\n\n    lineItems(first: 10) {\n\n      edges {\n\n        node {\n\n          title\n\n          quantity\n\n          originalUnitPriceSet {\n\n            shopMoney {\n\n              amount\n\n              currencyCode\n\n            }\n\n          }\n\n        }\n\n      }\n\n    }\n\n    fulfillments {\n\n      id\n\n      location {\n\n        name\n\n        address {\n\n          address1\n\n          city\n\n          province\n\n          country\n\n          zip\n\n        }\n\n      }\n\n    }\n\n    transactions(first: 5) {\n\n      formattedGateway\n\n      kind\n\n      status\n\n    }\n\n    customer {\n\n      firstName\n\n      lastName\n\n      email\n\n    }\n\n  }\n\n}\n",
-        "variables": "={\n  \"id\": \"gid://shopify/Order/{{ $('Webhook').item.json.body.id }}\"\n}",
-        "headerParametersUi": {
-          "parameter": [
-            {
-              "name": "Content-Type",
-              "value": "application/json"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.graphql",
-      "typeVersion": 1.1,
-      "position": [
-        64,
-        336
-      ],
-      "id": "bd92d3ea-ce04-498f-b937-837bde2848c8",
-      "name": "GraphQL",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "OPt2Cl0dnwcU4qRk",
-          "name": "ShopifyInformes"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "jsCode": "// El nodo Code de n8n espera que devolvamos un array de objetos.\nconst outputItems = [];\n\n// Obtenemos el valor del contador del nodo anterior\n// items[0].json.Contador → 2 en tu ejemplo\nlet numeroFila = items[0].json.Contador;\nlet ID_documento = items[0].json.ID_Documento;\n\n// 1. Accedemos al cuerpo real del pedido de Shopify, que está anidado.\nconst orderBody = $node['Webhook'].json.body; \n\n// 2. Extraemos los artículos de línea (productos) y la moneda.\nconst lineItems = orderBody.line_items;\nconst orderCurrency = orderBody.currency;\n\n// Iteramos sobre cada producto individual\nfor (const item of lineItems) {\n\n  const originalPrice = parseFloat(item.price);\n\n  let totalDiscountAmount = 0;\n  for (const allocation of item.discount_allocations) {\n    totalDiscountAmount += parseFloat(allocation.amount);\n  }\n\n  const finalPaidPrice = originalPrice - totalDiscountAmount;\n\n  // Creamos un nuevo objeto y añadimos \"numero_fila\"\n  outputItems.push({\n    json: {\n      ID_documento: ID_documento,\n      numero_fila: numeroFila,   // ← Nuevo campo\n      product_name: item.title,\n      sku: item.sku,\n      variant_title: item.variant_title,\n      original_price: originalPrice.toFixed(2),\n      total_discount_applied: totalDiscountAmount.toFixed(2),\n      final_paid_price: finalPaidPrice.toFixed(2),\n      currency: orderCurrency\n    }\n  });\n\n  // ↑ Incrementamos para el siguiente item\n  numeroFila++;\n}\n\n// Devolvemos el array con los nuevos objetos.\nreturn outputItems;\n"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        64,
-        480
-      ],
-      "id": "6d883b62-b1eb-4505-a4e2-51d814aeb2f3",
-      "name": "Code in JavaScript"
-    },
-    {
-      "parameters": {
-        "numberInputs": 3
-      },
-      "type": "n8n-nodes-base.merge",
-      "typeVersion": 3.2,
-      "position": [
-        304,
-        320
-      ],
-      "id": "0e878fa7-a810-4d2f-92a1-a501047bf01c",
-      "name": "Merge"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "31828549-6a33-4e8a-91ad-fdb9692a7e34",
-              "name": "SUCURSAL DE VENTA",
-              "value": "={{ $json.fulfillmentLocation }}",
-              "type": "string"
-            },
-            {
-              "id": "e89736ae-2f29-40c8-80b4-2181722ee3f5",
-              "name": "METODO DE PAGO",
-              "value": "={{ $json.transactionGateway }}",
-              "type": "string"
-            },
-            {
-              "id": "dc4a77f5-966d-4efc-b755-1f0fe34f6958",
-              "name": "COSTO POR UNIDAD",
-              "value": "={{ $json.product.unit_cost }}",
-              "type": "string"
-            },
-            {
-              "id": "76140f31-efab-4a68-b737-53f04a9a7b81",
-              "name": "COSTE DE PRODUCTO",
-              "value": "={{ $json.product.original_price }}",
-              "type": "string"
-            },
-            {
-              "id": "d295df2e-e935-41ef-a2b1-7923cabd1a92",
-              "name": "PRECIO PAGADO",
-              "value": "={{ $json.product.final_paid_price }}",
-              "type": "string"
-            },
-            {
-              "id": "adb9ae5a-50d9-4923-b706-31a9a5b86e66",
-              "name": "DESCUENTO",
-              "value": "={{ $json.product.total_discount_applied }}",
-              "type": "string"
-            },
-            {
-              "id": "c2b11c61-81c1-4b6d-94ec-c55b6872e5e0",
-              "name": "NOMBRE DE PRODUCTO",
-              "value": "={{ $json.product.product_name }}",
-              "type": "string"
-            },
-            {
-              "id": "f7cbe128-fbe4-4bfb-b5ec-d7eed2f87b84",
-              "name": "VARIANTE",
-              "value": "={{ $json.product.variant_title }}",
-              "type": "string"
-            },
-            {
-              "id": "1e31a3b3-a073-4113-9047-95110c3d7987",
-              "name": "NUMERO_FILA",
-              "value": "={{ $json.product.numero_fila }}",
-              "type": "number"
-            },
-            {
-              "id": "e4c20adf-aa16-46e1-9851-3844e08241a6",
-              "name": "ID_DOCUMENTO",
-              "value": "={{ $json.product.ID_documento }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        576,
-        336
-      ],
-      "id": "d2a7492a-a7c1-48e9-9e97-8b4fc4436529",
-      "name": "Edit Fields"
-    },
-    {
-      "parameters": {
-        "jsCode": "// 1. Validaciones básicas\nif (items.length < 2) {\n    throw new Error(\"Se esperaban al menos 2 ítems de entrada.\");\n}\n\n// Inicializamos variables\nlet orderData = null;\nconst productRows = []; // Aquí guardaremos los ítems que tienen ID_documento\nconst costMap = {}; // Aquí guardaremos los costos indexados por SKU\n\n// 2. Clasificar los ítems de entrada\nfor (const item of items) {\n    const json = item.json;\n\n    // A) Es la ORDEN (tiene data.order)\n    if (json.data && json.data.order) {\n        orderData = json.data.order;\n    } \n    // B) Es información de COSTO de Shopify (tiene data.productVariant)\n    else if (json.data && json.data.productVariant) {\n        const variant = json.data.productVariant;\n        const sku = variant.sku;\n        const costAmount = variant.inventoryItem?.unitCost?.amount;\n        \n        // Guardamos el costo en un objeto usando el SKU como clave para buscarlo rápido después\n        if (sku && costAmount) {\n            costMap[sku] = costAmount;\n        }\n    }\n    // C) Es el ítem procesado (tiene ID_documento)\n    else if (json.ID_documento) {\n        productRows.push(json);\n    }\n}\n\nif (!orderData) {\n    throw new Error(\"No se encontró el ítem de la orden de Shopify.\");\n}\n\nif (productRows.length === 0) {\n    throw new Error(\"No se encontraron ítems de producto con ID_documento.\");\n}\n\n// 3. Crear objeto base de la orden\nconst baseOrderData = {\n    id: orderData.id,\n    name: orderData.name,\n    createdAt: orderData.createdAt,\n    totalPrice: orderData.totalPriceSet?.shopMoney?.amount || 'N/A',\n    currencyCode: orderData.totalPriceSet?.shopMoney?.currencyCode || 'N/A',\n    \n    // Datos del cliente\n    customer: orderData.customer,\n    \n    // Datos de envío\n    fulfillmentLocation: orderData.fulfillments?.[0]?.location?.name || 'N/A',\n    fulfillmentAddress: orderData.fulfillments?.[0]?.location?.address || 'N/A',\n    \n    // Datos de la transacción\n    transactionGateway: orderData.transactions?.[0]?.formattedGateway || 'N/A',\n    transactionKind: orderData.transactions?.[0]?.kind || 'N/A',\n    transactionStatus: orderData.transactions?.[0]?.status || 'N/A',\n};\n\n// 4. Iterar sobre los productos y fusionar (incluyendo el costo encontrado)\nconst combinedItems = [];\n\nfor (const productData of productRows) {\n    \n    // Buscamos si existe un costo guardado para este SKU\n    const sku = productData.sku;\n    const unitCost = costMap[sku] || '0.00'; // Si no encuentra match, pone 0.00 o N/A\n\n    const combinedItem = {\n        ...baseOrderData,\n        \n        product: {\n            ID_documento: productData.ID_documento,\n            numero_fila: productData.numero_fila,\n            product_name: productData.product_name,\n            sku: productData.sku,\n            variant_title: productData.variant_title,\n            original_price: productData.original_price,\n            total_discount_applied: productData.total_discount_applied,\n            final_paid_price: productData.final_paid_price,\n            currency: productData.currency,\n            // Aquí agregamos el campo solicitado\n            unit_cost: unitCost \n        }\n    };\n    \n    combinedItems.push({\n        json: combinedItem,\n    });\n}\n\nreturn combinedItems;"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        432,
-        336
-      ],
-      "id": "3e2a555f-bce7-4cd7-a9b6-8329e99f80dd",
-      "name": "Code in JavaScript1"
-    },
-    {
-      "parameters": {
-        "operation": "update",
-        "documentId": {
-          "__rl": true,
-          "value": "={{ $json.ID_DOCUMENTO}}",
-          "mode": "id"
-        },
-        "sheetName": {
-          "__rl": true,
-          "value": "gid=0",
-          "mode": "list",
-          "cachedResultName": "Hoja 1",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/19bvtVxQK6uMbxP2HZKgGEGM_KWyvJM3vLp1APRSSTEY/edit#gid=0"
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "row_number": "={{ $json.NUMERO_FILA }}",
-            "SUCURSAL DE VENTA": "={{ $json['SUCURSAL DE VENTA'] }}",
-            "MÉTODO DE PAGO": "={{ $json['METODO DE PAGO'] }}",
-            "COSTE POR UNIDAD": "={{ $json['COSTO POR UNIDAD'] }}",
-            "PRECIO DE PRODUCTO": "={{ $json['COSTE DE PRODUCTO'] }}",
-            "PRECIO PAGADO": "={{ $json['PRECIO PAGADO'] }}",
-            "DESCUENTO": "={{ $json.DESCUENTO }}",
-            "NOMBRE DE PRODUCTO": "={{ $json['NOMBRE DE PRODUCTO'] }}",
-            "VARIANTE": "={{ $json.VARIANTE }}"
-          },
-          "matchingColumns": [
-            "row_number"
-          ],
-          "schema": [
-            {
-              "id": "SUCURSAL DE VENTA",
-              "displayName": "SUCURSAL DE VENTA",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "MÉTODO DE PAGO",
-              "displayName": "MÉTODO DE PAGO",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "COSTE POR UNIDAD",
-              "displayName": "COSTE POR UNIDAD",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "PRECIO DE PRODUCTO",
-              "displayName": "PRECIO DE PRODUCTO",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "PRECIO PAGADO",
-              "displayName": "PRECIO PAGADO",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "DESCUENTO",
-              "displayName": "DESCUENTO",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "NOMBRE DE PRODUCTO",
-              "displayName": "NOMBRE DE PRODUCTO",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "VARIANTE",
-              "displayName": "VARIANTE",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "SURFIN SIERRA NEVADA",
-              "displayName": "SURFIN SIERRA NEVADA",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "Tarjeta",
-              "displayName": "Tarjeta",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "Efectivo",
-              "displayName": "Efectivo",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "Venta Web",
-              "displayName": "Venta Web",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "TOTAL",
-              "displayName": "TOTAL",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "row_number",
-              "displayName": "row_number",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "number",
-              "canBeUsedToMatch": true,
-              "readOnly": true,
-              "removed": false
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4.7,
-      "position": [
-        720,
-        336
-      ],
-      "id": "cf93f41f-2f8e-4ce2-8148-1ff0a591f0c3",
-      "name": "Update row in sheet",
-      "executeOnce": false,
-      "credentials": {
-        "googleSheetsOAuth2Api": {
-          "id": "RCuKUCifcA4jENcY",
-          "name": "Google Sheets account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "authentication": "headerAuth",
-        "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-07/graphql.json",
-        "query": "query getVariantCost($id: ID!) {\n  productVariant(id: $id) {\n    id\n    sku\n    title\n    inventoryItem {\n      id\n      unitCost {\n        amount\n        currencyCode\n      }\n    }\n  }\n}\n\n",
-        "variables": "={\n  \"id\": \"{{ $json['ID VARIANTE'] }}\"\n}",
-        "headerParametersUi": {
-          "parameter": [
-            {
-              "name": "Content-Type",
-              "value": "application/json"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.graphql",
-      "typeVersion": 1.1,
-      "position": [
-        112,
-        192
-      ],
-      "id": "52e47291-9354-4842-90a3-9e253bb5f2b8",
-      "name": "GraphQL1",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "OPt2Cl0dnwcU4qRk",
-          "name": "ShopifyInformes"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "711be730-983a-47e6-99f2-d818a44482be",
-              "name": "ID VARIANTE",
-              "value": "=gid://shopify/ProductVariant/{{ $('Webhook').item.json.body.line_items[0].variant_id }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        0,
-        192
-      ],
-      "id": "011b07d2-70e1-4c78-831d-f018ab93b8ee",
-      "name": "Edit Fields1"
     },
     {
       "parameters": {
@@ -2633,123 +752,36 @@
                 "type": "string",
                 "operation": "equals"
               }
+            },
+            {
+              "id": "a851fb06-e4c3-42fa-95ec-ecb05cf72335",
+              "leftValue": "={{ $('Webhook').item.json.headers[\"x-shopify-topic\"] }}",
+              "rightValue": "refunds/create",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
             }
           ],
-          "combinator": "and"
+          "combinator": "or"
         },
         "options": {}
       },
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        -400,
-        16
+        -752,
+        32
       ],
       "id": "7dda907f-0194-4a60-9830-ed092e805176",
       "name": "If"
     },
     {
       "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "711be730-983a-47e6-99f2-d818a44482be",
-              "name": "ID VARIANTE",
-              "value": "=gid://shopify/ProductVariant/{{ $json.body[0].body.refund_line_items[0].line_item.variant_id }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        -1056,
-        -848
-      ],
-      "id": "6c05c99f-1355-4ce4-8163-6b8922011fa8",
-      "name": "Edit Fields2"
-    },
-    {
-      "parameters": {
-        "authentication": "headerAuth",
-        "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-07/graphql.json",
-        "query": "query getVariantCost($id: ID!) {\n  productVariant(id: $id) {\n    id\n    sku\n    title\n    inventoryItem {\n      id\n      unitCost {\n        amount\n        currencyCode\n      }\n    }\n  }\n}\n\n",
-        "variables": "={\n  \"id\": \"{{ $json['ID VARIANTE'] }}\"\n}",
-        "headerParametersUi": {
-          "parameter": [
-            {
-              "name": "Content-Type",
-              "value": "application/json"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.graphql",
-      "typeVersion": 1.1,
-      "position": [
-        -912,
-        -848
-      ],
-      "id": "dcaccb8e-4026-4e8a-b8de-e853f298a1a4",
-      "name": "GraphQL2",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "OPt2Cl0dnwcU4qRk",
-          "name": "ShopifyInformes"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "jsCode": "// 1. Obtenemos el JSON de entrada\nlet inputData = $input.first().json;\n\n// --- LA CLAVE ESTÁ AQUÍ ---\n// Si el JSON viene dentro de un array [ {...} ] (como en tu caso), \n// sacamos el primer objeto para poder leer el \"body\"\nif (Array.isArray(inputData)) {\n    inputData = inputData[0];\n}\n// --------------------------\n\n// 2. Preparamos el array de salida\nconst results = [];\n\n// 3. Buscamos los productos a reembolsar\nconst itemsToRefund = inputData?.body?.refund_line_items || [];\n\n// 4. Bucle para procesar cada producto\nfor (const item of itemsToRefund) {\n  \n  // Extraemos la info importante de cada producto\n  const productData = {\n    // Datos del producto\n    title: item.line_item.title,\n    sku: item.line_item.sku,\n    quantity_refunded: item.quantity,\n    refund_subtotal: item.subtotal,\n    \n    // IDs útiles para Shopify\n    refund_item_id: item.id,\n    product_id: item.line_item.product_id,\n    variant_id: item.line_item.variant_id,\n    \n    // Contexto general del pedido (muy útil para los siguientes nodos)\n    order_id: inputData.body.order_id,\n    main_refund_id: inputData.body.id\n  };\n\n  // 5. Lo metemos en el array con el formato de n8n\n  results.push({ json: productData });\n}\n\n// 6. Devolvemos la lista dividida\nreturn results;"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        -928,
-        -720
-      ],
-      "id": "4891afaf-d1b4-41e4-9f5e-88fc04e51ab4",
-      "name": "Code in JavaScript2"
-    },
-    {
-      "parameters": {
-        "authentication": "headerAuth",
-        "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-07/graphql.json",
-        "query": "query getOrderByNumber($query: String!) {\n  orders(first: 1, query: $query) {\n    edges {\n      node {\n        id\n        name\n        createdAt\n        email\n        totalPriceSet {\n          shopMoney {\n            amount\n            currencyCode\n          }\n        }\n        # (El resto de tus campos aquí)\n      }\n    }\n  }\n}",
-        "variables": "={\n  \"query\": \"name:#68251\"\n}",
-        "headerParametersUi": {
-          "parameter": [
-            {
-              "name": "Content-Type",
-              "value": "application/json"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.graphql",
-      "typeVersion": 1.1,
-      "position": [
-        -928,
-        -544
-      ],
-      "id": "ce3df804-f160-4595-a9a6-972d504e8a61",
-      "name": "GraphQL4",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "OPt2Cl0dnwcU4qRk",
-          "name": "ShopifyInformes"
-        }
-      }
-    },
-    {
-      "parameters": {
         "authentication": "headerAuth",
         "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-07/graphql.json",
         "query": "query getOrder($id: ID!) {\n  order(id: $id) {\n    id\n    name\n    createdAt\n    email\n    totalPriceSet {\n      shopMoney {\n        amount\n        currencyCode\n      }\n    }\n    lineItems(first: 10) {\n      edges {\n        node {\n          title\n          quantity\n          # NUEVO: Si esto es menor que 'quantity', significa que se ha devuelto\n          refundableQuantity \n          originalUnitPriceSet {\n            shopMoney {\n              amount\n              currencyCode\n            }\n          }\n        }\n      }\n    }\n    # NUEVO: Sección completa con el historial de devoluciones\n    refunds(first: 5) {\n      id\n      createdAt\n      note\n      totalRefundedSet {\n        shopMoney {\n          amount\n          currencyCode\n        }\n      }\n      refundLineItems(first: 10) {\n        edges {\n          node {\n            quantity\n            lineItem {\n              title\n            }\n          }\n        }\n      }\n    }\n    fulfillments {\n      id\n      location {\n        name\n        address {\n          address1\n          city\n          province\n          country\n          zip\n        }\n      }\n    }\n    transactions(first: 5) {\n      formattedGateway\n      kind\n      status\n    }\n    customer {\n      firstName\n      lastName\n      email\n    }\n  }\n}",
-        "variables": "={\n  \"id\": \"gid://shopify/Order/{{ $('Webhook').item.json.body[0].body.order_id }}\"\n}",
+        "variables": "={\n  \"id\": \"gid://shopify/Order/{{ $('Webhook').item.json.body.order_id }}\"\n}",
         "headerParametersUi": {
           "parameter": [
             {
@@ -2762,8 +794,8 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        -144,
-        -496
+        -496,
+        -64
       ],
       "id": "0feeb4e4-6205-4f45-b33e-30697ae63f7c",
       "name": "obtener pedido",
@@ -2773,41 +805,6 @@
           "name": "ShopifyInformes"
         }
       }
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "d2f36c27-ee64-40be-8789-ef4eb61419a7",
-              "name": "ID_PEDIDO",
-              "value": "={{ $('Webhook').item.json.body[0].body.order_id }}",
-              "type": "number"
-            },
-            {
-              "id": "f2c237a7-0ab4-424f-b366-fc627e4714ab",
-              "name": "RESTOCK",
-              "value": "={{ $('Webhook').item.json.body[0].body.restock }}",
-              "type": "boolean"
-            },
-            {
-              "id": "677de4a1-38c2-4054-a04e-9dc7c943a6e3",
-              "name": "SUCURSAL",
-              "value": "={{ $json.data.order.fulfillments[0].location.name }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        -576,
-        -848
-      ],
-      "id": "17e99e95-353b-4778-b47d-704203675c78",
-      "name": "datos devolucion"
     },
     {
       "parameters": {
@@ -2830,309 +827,11 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1,
       "position": [
-        -544,
-        16
+        -912,
+        32
       ],
       "id": "6474297f-c463-4e5d-983b-d8b896c15de6",
       "name": "obtener contador"
-    },
-    {
-      "parameters": {
-        "jsCode": "// Array de salida\nconst outputItems = [];\n\n// -----------------------------------------------------------\n// 1. OBTENER EL CONTADOR (Del input que me acabas de enseñar)\n// -----------------------------------------------------------\n// Tu input es: { \"contador\": 2, ... }\n// Usamos items[0].json.contador (con 'c' minúscula)\nlet contadorFila = items[0].json.contador || 1;\n\n// -----------------------------------------------------------\n// 2. OBTENER DATOS DEL WEBHOOK (Referencia absoluta)\n// -----------------------------------------------------------\n// Vamos a buscar los datos originales del pedido al inicio del todo\nconst webhookData = $('Webhook').first().json;\n\n// Navegamos hasta el cuerpo del mensaje de Shopify\nconst shopifyPayload = webhookData.body?.[0]?.body;\n\n// Verificamos que existan artículos\nif (shopifyPayload && shopifyPayload.refund_line_items) {\n\n    const orderId = shopifyPayload.order_id;\n    const currency = shopifyPayload.currency || 'EUR';\n    const refundItems = shopifyPayload.refund_line_items;\n\n    // -----------------------------------------------------------\n    // 3. PROCESAMIENTO (Bucle)\n    // -----------------------------------------------------------\n    for (const item of refundItems) {\n        \n        const lineItem = item.line_item;\n\n        // Cálculos de dinero\n        const originalPrice = parseFloat(lineItem.price || 0);\n\n        let totalDiscount = 0;\n        if (lineItem.discount_allocations) {\n            for (const allocation of lineItem.discount_allocations) {\n                totalDiscount += parseFloat(allocation.amount || 0);\n            }\n        }\n\n        const finalPaidPrice = originalPrice - totalDiscount;\n\n        // Construcción del objeto de salida\n        outputItems.push({\n            json: {\n                // Datos generales\n                ID_documento: orderId,\n                numero_fila: contadorFila, // Aquí usamos el 2 que entra por el input\n                \n                // Datos del producto\n                product_name: lineItem.title,\n                sku: lineItem.sku,\n                variant_title: lineItem.variant_title,\n                quantity_refunded: item.quantity,\n                \n                // Precios formateados\n                original_price: originalPrice.toFixed(2),\n                total_discount_applied: totalDiscount.toFixed(2),\n                final_paid_price: finalPaidPrice.toFixed(2),\n                currency: currency\n            }\n        });\n\n        // Incrementamos el contador para la siguiente fila (si hay más de 1 artículo)\n        // Si entró un 2, el siguiente artículo será el 3, etc.\n        contadorFila++;\n    }\n\n} else {\n    // Si falla la lectura del Webhook\n    outputItems.push({\n        json: {\n            error: \"No se encontraron los datos del Webhook o refund_line_items\"\n        }\n    });\n}\n\nreturn outputItems;"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        -144,
-        -160
-      ],
-      "id": "53da0702-7ad8-4a53-94a0-2e4a0ffedf06",
-      "name": "Code in JavaScript3"
-    },
-    {
-      "parameters": {
-        "authentication": "headerAuth",
-        "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-07/graphql.json",
-        "query": "query getVariantCost($id: ID!) {\n  productVariant(id: $id) {\n    id\n    sku\n    title\n    inventoryItem {\n      id\n      unitCost {\n        amount\n        currencyCode\n      }\n    }\n  }\n}\n\n",
-        "variables": "={\n  \"id\": \"gid://shopify/ProductVariant/{{ $('Webhook').item.json.body[0].body.refund_line_items[0].line_item.variant_id }}\"\n}",
-        "headerParametersUi": {
-          "parameter": [
-            {
-              "name": "Content-Type",
-              "value": "application/json"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.graphql",
-      "typeVersion": 1.1,
-      "position": [
-        -144,
-        -304
-      ],
-      "id": "57ba00f2-ca97-4a8f-aadd-169028f30031",
-      "name": "obtener variante",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "OPt2Cl0dnwcU4qRk",
-          "name": "ShopifyInformes"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "711be730-983a-47e6-99f2-d818a44482be",
-              "name": "NOMBRE VARIANTE",
-              "value": "={{ $json.data.productVariant.title }}",
-              "type": "string"
-            },
-            {
-              "id": "b001f050-f93f-4216-8668-a4232e40b826",
-              "name": "COSTE UNITARIO",
-              "value": "={{ $json.data.productVariant.inventoryItem.unitCost.amount }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        16,
-        -304
-      ],
-      "id": "7d1c1701-b8fc-419c-b979-50286173ed7d",
-      "name": "datos variante"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "e94e384b-de36-4c55-b1da-56e3d6a69d4b",
-              "name": "NOMBRE PRODUCTO",
-              "value": "={{ $json.product_name }}",
-              "type": "string"
-            },
-            {
-              "id": "1c7b82a1-bc76-41e8-98db-8607a5c9364f",
-              "name": "PRECIO ORIGINAL",
-              "value": "={{ $json.original_price }}",
-              "type": "string"
-            },
-            {
-              "id": "260d132d-d99a-4a12-a202-20221dc6dff8",
-              "name": "DESCUENTO",
-              "value": "={{ $json.total_discount_applied }}",
-              "type": "string"
-            },
-            {
-              "id": "17120bb8-ebdd-480c-86f0-9f2da532e707",
-              "name": "PRECIO FINAL",
-              "value": "={{ $json.final_paid_price }}",
-              "type": "string"
-            },
-            {
-              "id": "d4416ff1-8c8e-4933-aba8-b8d01dd37c6c",
-              "name": "NUMERO FILA",
-              "value": "={{ $json.numero_fila }}",
-              "type": "number"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        16,
-        -160
-      ],
-      "id": "78a0227a-33f9-43b0-b77c-412099472ce0",
-      "name": "datos line_item"
-    },
-    {
-      "parameters": {
-        "numberInputs": 3
-      },
-      "type": "n8n-nodes-base.merge",
-      "typeVersion": 3.2,
-      "position": [
-        272,
-        -320
-      ],
-      "id": "aa253a35-c541-4864-a80c-5b35500d4cc7",
-      "name": "juntar informacion"
-    },
-    {
-      "parameters": {
-        "jsCode": "// Variable para guardar el resultado unificado\nlet filaUnificada = {};\n\n// 1. ITERAR Y FUSIONAR\n// Recorremos los 3 objetos que llegan en el input y copiamos sus propiedades\n// al objeto 'filaUnificada'.\nfor (const item of items) {\n    // Copiamos todas las claves del item actual (json) a nuestro objeto final\n    Object.assign(filaUnificada, item.json);\n}\n\n// 2. RETORNO\n// Devolvemos un array con un único objeto que contiene todo junto\nreturn [\n    {\n        json: filaUnificada\n    }\n];"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        448,
-        -304
-      ],
-      "id": "3568bc76-e477-4d2f-b060-be831ddfe2ce",
-      "name": "hacer un item"
-    },
-    {
-      "parameters": {
-        "operation": "update",
-        "documentId": {
-          "__rl": true,
-          "value": "={{ $('obtener contador').first().json.id_documento }}",
-          "mode": "id"
-        },
-        "sheetName": {
-          "__rl": true,
-          "value": "Hoja 1",
-          "mode": "name"
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "row_number": "={{ $json[\"NUMERO FILA\"] }}",
-            "ID PEDIDO": "={{ $json.ID_PEDIDO }}",
-            "SUCURSAL DE VENTA": "={{ $json.SUCURSAL }}",
-            "MÉTODO DE PAGO": "DEVOLUCIÓN",
-            "COSTE POR UNIDAD": "={{ $json[\"COSTE UNITARIO\"] }}",
-            "NOMBRE DE PRODUCTO": "={{ $json[\"NOMBRE PRODUCTO\"] }}",
-            "DESCUENTO": "={{ $json.DESCUENTO }}",
-            "PRECIO PAGADO": "={{ $json[\"PRECIO FINAL\"] }}",
-            "PRECIO DE PRODUCTO": "={{ $json[\"PRECIO ORIGINAL\"] }}",
-            "VARIANTE": "={{ $json[\"NOMBRE VARIANTE\"] }}"
-          },
-          "matchingColumns": [
-            "row_number"
-          ],
-          "schema": [
-            {
-              "id": "ID PEDIDO",
-              "displayName": "ID PEDIDO",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "SUCURSAL DE VENTA",
-              "displayName": "SUCURSAL DE VENTA",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "MÉTODO DE PAGO",
-              "displayName": "MÉTODO DE PAGO",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "COSTE POR UNIDAD",
-              "displayName": "COSTE POR UNIDAD",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "PRECIO DE PRODUCTO",
-              "displayName": "PRECIO DE PRODUCTO",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "PRECIO PAGADO",
-              "displayName": "PRECIO PAGADO",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "DESCUENTO",
-              "displayName": "DESCUENTO",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "NOMBRE DE PRODUCTO",
-              "displayName": "NOMBRE DE PRODUCTO",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "VARIANTE",
-              "displayName": "VARIANTE",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "row_number",
-              "displayName": "row_number",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "number",
-              "canBeUsedToMatch": true,
-              "readOnly": true,
-              "removed": false
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4.7,
-      "position": [
-        624,
-        -304
-      ],
-      "id": "6c05a4dd-084e-4d1c-8e1c-263a64bb45d8",
-      "name": "Update row in sheet1",
-      "credentials": {
-        "googleSheetsOAuth2Api": {
-          "id": "RCuKUCifcA4jENcY",
-          "name": "Google Sheets account"
-        }
-      }
     },
     {
       "parameters": {
@@ -3154,7 +853,7 @@
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "contador": "={{ $('hacer un item').item.json[\"NUMERO FILA\"] + 1}}",
+            "contador": "={{ $json.row_number + 1}}",
             "id_documento": "={{ $('obtener contador').first().json.id_documento }}"
           },
           "matchingColumns": [],
@@ -3188,65 +887,11 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1,
       "position": [
-        800,
-        -304
+        464,
+        16
       ],
       "id": "bed162b7-65a5-4818-9e13-bb7e229b46c4",
       "name": "sumar contador"
-    },
-    {
-      "parameters": {
-        "jsCode": "const order = items[0].json.data.order;\nconst lineItems = order.lineItems.edges;\nconst refunds = order.refunds;\n\n// 1. EXTRAER EL ID NUMÉRICO\n// Tomamos \"gid://shopify/Order/7488936378715\" y nos quedamos con lo último después de la barra \"/\"\nconst realOrderId = order.id.split('/').pop(); \n\n// 2. Crear un mapa para contar cuántas unidades se devolvieron de cada cosa\nlet contadorDevoluciones = {};\n\nrefunds.forEach(refund => {\n  refund.refundLineItems.edges.forEach(edge => {\n    const title = edge.node.lineItem.title;\n    const qty = edge.node.quantity;\n    \n    if (!contadorDevoluciones[title]) {\n      contadorDevoluciones[title] = 0;\n    }\n    contadorDevoluciones[title] += qty;\n  });\n});\n\nlet resultadoFinal = [];\n\n// 3. Recorrer los productos originales y asignar estado uno por uno\nlineItems.forEach(edge => {\n  const item = edge.node;\n  const title = item.title;\n  const price = item.originalUnitPriceSet.shopMoney.amount;\n  const quantity = item.quantity; \n\n  // Desglosamos la cantidad individualmente\n  for (let i = 0; i < quantity; i++) {\n    let estado = \"comprado\";\n\n    // Si hay devoluciones pendientes para este título, lo marcamos como devuelto\n    if (contadorDevoluciones[title] && contadorDevoluciones[title] > 0) {\n      estado = \"devuelto\";\n      contadorDevoluciones[title]--; \n    }\n\n    resultadoFinal.push({\n      json: {\n        orden_id: realOrderId, // <--- AQUÍ ESTÁ EL CAMBIO (antes era order.name)\n        producto: title,\n        precio: price,\n        estado: estado,\n        cliente: order.email\n      }\n    });\n  }\n});\n\nreturn resultadoFinal;"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        16,
-        -496
-      ],
-      "id": "d6b5ac17-46b9-40e2-bd68-51b44a38f407",
-      "name": "info productos"
-    },
-    {
-      "parameters": {
-        "operation": "get",
-        "dataTableId": {
-          "__rl": true,
-          "mode": "name",
-          "value": "=8eQeIQsn3DD6xrOV"
-        },
-        "filters": {
-          "conditions": [
-            {
-              "keyName": "id_pedido",
-              "keyValue": "={{ $json.orden_id }}"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.dataTable",
-      "typeVersion": 1.1,
-      "position": [
-        192,
-        -496
-      ],
-      "id": "a2eec079-05bc-4862-98a4-8be11f2a7cf8",
-      "name": "buscar id pedido en tabla",
-      "executeOnce": true
-    },
-    {
-      "parameters": {
-        "amount": 1
-      },
-      "type": "n8n-nodes-base.wait",
-      "typeVersion": 1.1,
-      "position": [
-        624,
-        -464
-      ],
-      "id": "4ec68255-484d-4b13-989e-49ee9e23da3b",
-      "name": "Wait",
-      "webhookId": "231b04ca-61ab-4d96-b703-8a7a82c509fe"
     },
     {
       "parameters": {
@@ -3273,8 +918,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        400,
-        -496
+        -400,
+        96
       ],
       "id": "88244861-8da4-4978-958f-6f7d064ab40f",
       "name": "obtener producto en otro informe",
@@ -3290,7 +935,7 @@
         "operation": "update",
         "documentId": {
           "__rl": true,
-          "value": "={{ $('buscar id pedido en tabla').item.json.id_documento }}",
+          "value": "=1NnQWrr02pcOLmsh_nNSDMVTFq8OJ6gq58X5tM3RhoJM",
           "mode": "id"
         },
         "sheetName": {
@@ -3301,174 +946,13 @@
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "row_number": "={{ $json.row_number }}",
-            "ID PEDIDO": "={{ $json[\"ID PEDIDO\"] }}",
-            "SUCURSAL DE VENTA": "PRODUCTO DEVUELTO",
-            "MÉTODO DE PAGO": "//////////",
-            "COSTE POR UNIDAD": "//////////",
-            "PRECIO DE PRODUCTO": "//////////",
-            "PRECIO PAGADO": "//////////",
-            "DESCUENTO": "//////////",
-            "NOMBRE DE PRODUCTO": "//////////",
-            "VARIANTE": "//////////"
-          },
-          "matchingColumns": [
-            "row_number"
-          ],
-          "schema": [
-            {
-              "id": "ID PEDIDO",
-              "displayName": "ID PEDIDO",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "SUCURSAL DE VENTA",
-              "displayName": "SUCURSAL DE VENTA",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "MÉTODO DE PAGO",
-              "displayName": "MÉTODO DE PAGO",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "COSTE POR UNIDAD",
-              "displayName": "COSTE POR UNIDAD",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "PRECIO DE PRODUCTO",
-              "displayName": "PRECIO DE PRODUCTO",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "PRECIO PAGADO",
-              "displayName": "PRECIO PAGADO",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "DESCUENTO",
-              "displayName": "DESCUENTO",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "NOMBRE DE PRODUCTO",
-              "displayName": "NOMBRE DE PRODUCTO",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "VARIANTE",
-              "displayName": "VARIANTE",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
-            },
-            {
-              "id": "row_number",
-              "displayName": "row_number",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "number",
-              "canBeUsedToMatch": true,
-              "readOnly": true,
-              "removed": false
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4.7,
-      "position": [
-        816,
-        -464
-      ],
-      "id": "ce7b1521-8d7f-4f20-bed1-4f204a178ee7",
-      "name": "borrar producto en otro informe",
-      "credentials": {
-        "googleSheetsOAuth2Api": {
-          "id": "RCuKUCifcA4jENcY",
-          "name": "Google Sheets account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "amount": 1
-      },
-      "type": "n8n-nodes-base.wait",
-      "typeVersion": 1.1,
-      "position": [
-        -752,
-        -688
-      ],
-      "id": "99a3cc03-e8d5-4baf-bba4-b9d4e3439dd8",
-      "name": "Wait1",
-      "webhookId": "231b04ca-61ab-4d96-b703-8a7a82c509fe"
-    },
-    {
-      "parameters": {
-        "operation": "update",
-        "documentId": {
-          "__rl": true,
-          "value": "={{ $('obtener contador').first().json.id_documento }}",
-          "mode": "id"
-        },
-        "sheetName": {
-          "__rl": true,
-          "value": "Hoja 1",
-          "mode": "name"
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "row_number": "={{ $json[\"NUMERO FILA\"] }}",
-            "ID PEDIDO": "={{ $json.ID_PEDIDO }}",
-            "SUCURSAL DE VENTA": "={{ $json.SUCURSAL }}",
-            "MÉTODO DE PAGO": "DEVOLUCIÓN",
-            "COSTE POR UNIDAD": "={{ $json[\"COSTE UNITARIO\"] }}",
-            "NOMBRE DE PRODUCTO": "={{ $json[\"NOMBRE PRODUCTO\"] }}",
-            "DESCUENTO": "={{ $json.DESCUENTO }}",
-            "PRECIO PAGADO": "={{ $json[\"PRECIO FINAL\"] }}",
-            "PRECIO DE PRODUCTO": "={{ $json[\"PRECIO ORIGINAL\"] }}",
-            "VARIANTE": "={{ $json[\"NOMBRE VARIANTE\"] }}"
+            "row_number": "={{ $json.Numero_linea }}",
+            "PRECIO PAGADO": "={{ $json.Precio }}",
+            "NOMBRE DE PRODUCTO": "={{ $json.Texto }}",
+            "ID PEDIDO": "={{ $('Webhook').first().json.body.order_id }}",
+            "SUCURSAL DE VENTA": "={{ $('obtener pedido').first().json.data.order.fulfillments[0].location.name }}",
+            "MÉTODO DE PAGO": "={{ $('obtener pedido').first().json.data.order.transactions[0].formattedGateway }}",
+            "VARIANTE": "DEVOLUCIÓN"
           },
           "matchingColumns": [
             "row_number"
@@ -3584,187 +1068,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -608,
-        -688
-      ],
-      "id": "10261708-3495-4e25-9896-9cd98b69cdfb",
-      "name": "Update row in sheet2",
-      "credentials": {
-        "googleSheetsOAuth2Api": {
-          "id": "RCuKUCifcA4jENcY",
-          "name": "Google Sheets account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nfor (const item of $input.all()) {\n  item.json.myNewField = 1;\n}\n\nreturn $input.all();"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        -752,
-        -864
-      ],
-      "id": "715677e8-4458-4270-b4c5-0a34f578efab",
-      "name": "Code in JavaScript4"
-    },
-    {
-      "parameters": {
-        "jsCode": "// 1. OBTENER EL VALOR INICIAL DEL CONTADOR\n// Buscamos en el nodo específico 'obtener contador'\nlet contadorBase = 1; // Valor por defecto por seguridad\n\ntry {\n    const datosContador = $('obtener contador').first().json;\n    \n    // Leemos 'contador' (o 'Contador' por si acaso viene con mayúscula)\n    // Usamos parseInt para asegurar que sea un número y no texto\n    const valorLeido = datosContador.contador || datosContador.Contador;\n    \n    if (valorLeido) {\n        contadorBase = parseInt(valorLeido);\n    }\n} catch (e) {\n    console.log(\"No se pudo leer el nodo 'obtener contador'. Se usará 1.\");\n}\n\n// 2. RECORRER LOS ITEMS Y ACTUALIZAR EL NÚMERO DE FILA\n// 'items' contiene el array de todos los productos que entran al nodo\nfor (let i = 0; i < items.length; i++) {\n    \n    // Calculamos el número para esta fila específica:\n    // (Valor Base) + (Índice actual 0, 1, 2...)\n    const nuevoNumero = contadorBase + i;\n\n    // Asignamos el nuevo valor al campo row_number\n    items[i].json.row_number = nuevoNumero;\n}\n\n// 3. DEVOLVER LOS DATOS MODIFICADOS\nreturn items;"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        624,
-        -640
-      ],
-      "id": "df8c1e6d-6580-4115-8dd9-b45334d8c74a",
-      "name": "ajustar numero de fila"
-    },
-    {
-      "parameters": {
-        "operation": "update",
-        "documentId": {
-          "__rl": true,
-          "value": "={{ $('obtener contador').item.json.id_documento }}",
-          "mode": "id"
-        },
-        "sheetName": {
-          "__rl": true,
-          "value": "Hoja 1",
-          "mode": "name"
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "row_number": "={{ $json.row_number }}",
-            "ID PEDIDO": "={{ $json[\"ID PEDIDO\"] }}",
-            "SUCURSAL DE VENTA": "={{ $json[\"SUCURSAL DE VENTA\"] }}",
-            "MÉTODO DE PAGO": "={{ $json[\"MÉTODO DE PAGO\"] }}",
-            "COSTE POR UNIDAD": "={{ $json[\"COSTE POR UNIDAD\"] }}",
-            "PRECIO DE PRODUCTO": "={{ $json[\"PRECIO DE PRODUCTO\"] }}",
-            "PRECIO PAGADO": "={{ $json[\"PRECIO PAGADO\"] }}",
-            "DESCUENTO": "={{ $json.DESCUENTO }}",
-            "NOMBRE DE PRODUCTO": "={{ $json[\"NOMBRE DE PRODUCTO\"] }}",
-            "VARIANTE": "={{ $json.VARIANTE }}"
-          },
-          "matchingColumns": [
-            "row_number"
-          ],
-          "schema": [
-            {
-              "id": "ID PEDIDO",
-              "displayName": "ID PEDIDO",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "SUCURSAL DE VENTA",
-              "displayName": "SUCURSAL DE VENTA",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "MÉTODO DE PAGO",
-              "displayName": "MÉTODO DE PAGO",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "COSTE POR UNIDAD",
-              "displayName": "COSTE POR UNIDAD",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "PRECIO DE PRODUCTO",
-              "displayName": "PRECIO DE PRODUCTO",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "PRECIO PAGADO",
-              "displayName": "PRECIO PAGADO",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "DESCUENTO",
-              "displayName": "DESCUENTO",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "NOMBRE DE PRODUCTO",
-              "displayName": "NOMBRE DE PRODUCTO",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "VARIANTE",
-              "displayName": "VARIANTE",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "row_number",
-              "displayName": "row_number",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "number",
-              "canBeUsedToMatch": true,
-              "readOnly": true,
-              "removed": false
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4.7,
-      "position": [
-        816,
-        -640
+        272,
+        16
       ],
       "id": "d702682b-8b7b-40de-8736-6775774287f9",
       "name": "escribir en informe de hoy",
@@ -3772,6 +1077,105 @@
         "googleSheetsOAuth2Api": {
           "id": "RCuKUCifcA4jENcY",
           "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -256,
+        16
+      ],
+      "id": "83856bf3-b702-4a6f-b0bd-70d04e885263",
+      "name": "Merge1"
+    },
+    {
+      "parameters": {
+        "jsCode": "// --- 1. PREPARACIÓN DE DATOS ---\nconst shopifyItem = items.find(i => i.json.data && i.json.data.order);\nconst dbItems = items.filter(i => i.json['ID PEDIDO']);\n\nif (!shopifyItem) return [];\n\nconst order = shopifyItem.json.data.order;\nconst orderIdSimple = order.id.replace(\"gid://shopify/Order/\", \"\");\nconst movements = [];\n\n// MAPA DEL HISTÓRICO (Lo que el cliente tenía antes de hoy)\n// Usamos un mapa para controlar las cantidades: { \"Gafas\": 1, \"Camiseta\": 2 }\nconst inventoryChecklist = {};\n\ndbItems.forEach(item => {\n    const name = item.json['NOMBRE DE PRODUCTO'];\n    const price = parseFloat(item.json['PRECIO PAGADO'] || 0);\n    \n    if (inventoryChecklist[name]) {\n        inventoryChecklist[name].qty += 1;\n    } else {\n        inventoryChecklist[name] = { qty: 1, price: price };\n    }\n});\n\n// --- 2. PROCESAR \"DEVUELTO\" ---\n// Primero miramos exclusivamente el Refund de hoy\nif (order.refunds && order.refunds.length > 0) {\n    const currentRefund = order.refunds[0]; \n\n    for (const edge of currentRefund.refundLineItems.edges) {\n        const refundItem = edge.node;\n        const name = refundItem.lineItem.title;\n        const qtyReturned = refundItem.quantity;\n        \n        // Buscamos el precio original\n        let price = 0;\n        if (inventoryChecklist[name]) {\n            price = inventoryChecklist[name].price;\n            // IMPORTANTE: \"Gastamos\" el stock histórico. \n            // Si tenía 1 y devuelve 1, ahora en el histórico virtual queda 0.\n            inventoryChecklist[name].qty -= qtyReturned;\n        } else {\n             // Fallback por si no estaba en base de datos\n             const originalLine = order.lineItems.edges.find(e => e.node.title === name);\n             price = originalLine ? parseFloat(originalLine.node.originalUnitPriceSet.shopMoney.amount) : 0;\n        }\n\n        movements.push({\n            \"ID PEDIDO\": orderIdSimple,\n            \"TIPO\": \"DEVUELTO\",\n            \"PRODUCTO\": name,\n            \"CANTIDAD\": -qtyReturned,\n            \"IMPORTE\": (price * qtyReturned) * -1\n        });\n    }\n}\n\n// --- 3. PROCESAR \"SIN CAMBIOS\" Y \"CAMBIO\" ---\n// Ahora recorremos el pedido actual (items vivos)\nfor (const edge of order.lineItems.edges) {\n    const item = edge.node;\n    \n    // Solo miramos items activos (no devueltos completamente en el pasado)\n    if (item.refundableQuantity > 0) {\n        const name = item.title;\n        const currentQty = item.refundableQuantity;\n        const currentPrice = parseFloat(item.originalUnitPriceSet.shopMoney.amount);\n        \n        // Verificamos cuánto queda en el checklist del histórico\n        const oldData = inventoryChecklist[name];\n        const oldQtyAvailable = oldData ? Math.max(0, oldData.qty) : 0;\n\n        // CÁLCULO DE DESGLOSE\n        // 1. ¿Cuántos son SIN CAMBIOS? (El solapamiento entre lo que hay y lo que había)\n        const qtyUnchanged = Math.min(currentQty, oldQtyAvailable);\n        \n        // 2. ¿Cuántos son CAMBIO? (Lo que hay de más respecto a lo viejo)\n        const qtyNew = Math.max(0, currentQty - oldQtyAvailable);\n\n        // -- GENERAR LÍNEA: SIN CAMBIOS --\n        if (qtyUnchanged > 0) {\n            movements.push({\n                \"ID PEDIDO\": orderIdSimple,\n                \"TIPO\": \"SIN CAMBIOS\",\n                \"PRODUCTO\": name,\n                \"CANTIDAD\": qtyUnchanged,\n                \"IMPORTE\": 0 // 0 porque financieramente no afecta al reporte de hoy\n            });\n            // Restamos del checklist para no repetirlo\n            if (inventoryChecklist[name]) inventoryChecklist[name].qty -= qtyUnchanged;\n        }\n\n        // -- GENERAR LÍNEA: CAMBIO --\n        if (qtyNew > 0) {\n            movements.push({\n                \"ID PEDIDO\": orderIdSimple,\n                \"TIPO\": \"CAMBIO\", // Es nuevo o sustitución\n                \"PRODUCTO\": name,\n                \"CANTIDAD\": qtyNew,\n                \"IMPORTE\": currentPrice * qtyNew // Valor positivo\n            });\n        }\n    }\n}\n\nreturn movements;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -96,
+        16
+      ],
+      "id": "9e73f29f-6b1e-4f1e-829a-6cb9a4a98162",
+      "name": "juntar información"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "aaebdeef-6cac-4712-a953-8e04b1ff3cbc",
+              "name": "Precio",
+              "value": "={{ $items().reduce((acumulador, item) => acumulador + (parseFloat(item.json[\"IMPORTE\"]) || 0), 0).toFixed(2) }}",
+              "type": "number"
+            },
+            {
+              "id": "82bc8e66-6f80-4613-b1ec-128a8f37050e",
+              "name": "Texto",
+              "value": "={{ $items().map(item => item.json[\"PRODUCTO\"] + \" (\" + item.json[\"TIPO\"] + \")\").join(\", \") }}",
+              "type": "string"
+            },
+            {
+              "id": "ecd82425-252d-456c-878a-87c828085f50",
+              "name": "Numero_linea",
+              "value": "={{ $('obtener contador').first().json.contador }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        96,
+        16
+      ],
+      "id": "24ddd213-d872-42e1-a420-3be6c3be9c1f",
+      "name": "formatear informacion para sheets",
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "Pedidos-Documentos",
+          "mode": "list",
+          "cachedResultName": "Pedidos-Documentos"
+        },
+        "where": {
+          "values": [
+            {
+              "column": "id_pedido",
+              "value": "={{ $('Webhook').item.json.body.order_id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -576,
+        96
+      ],
+      "id": "b8220807-8f47-48c2-b93a-ee9bcfb860e5",
+      "name": "Select rows from a table",
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
         }
       }
     }
@@ -3783,47 +1187,123 @@
           "headers": {
             "connection": "upgrade",
             "host": "n8n.tailwind.es",
-            "x-forwarded-for": "2.136.43.122",
+            "x-forwarded-for": "127.0.0.1",
             "x-forwarded-proto": "https",
-            "content-length": "3330",
-            "user-agent": "python-requests/2.31.0",
-            "accept-encoding": "gzip, deflate, br",
+            "content-length": "3000",
+            "user-agent": "Shopify-Captain-Hook-Simulation",
             "accept": "*/*",
-            "content-type": "application/json"
+            "accept-encoding": "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
+            "content-type": "application/json",
+            "x-shopify-api-version": "2024-01",
+            "x-shopify-topic": "refunds/create",
+            "x-shopify-shop-domain": "rulesshop.myshopify.com",
+            "x-shopify-webhook-id": "simulated-webhook-id"
           },
           "params": {},
           "query": {},
-          "body": [
-            {
-              "headers": {
-                "connection": "upgrade",
-                "host": "n8n.tailwind.es",
-                "x-forwarded-for": "35.195.23.165",
-                "x-forwarded-proto": "https",
-                "content-length": "2321",
-                "user-agent": "Shopify-Captain-Hook",
-                "accept": "*/*",
-                "accept-encoding": "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
-                "content-type": "application/json",
-                "x-shopify-api-version": "2026-01",
-                "x-shopify-event-id": "8cbe95a2-2b46-47f6-948a-46786396f0a4",
-                "x-shopify-hmac-sha256": "j8waaau+dWgCiepA/Aq7i8a48omB8DXRitcrKFZGqMY=",
-                "x-shopify-shop-domain": "surfin-store-spain.myshopify.com",
-                "x-shopify-topic": "refunds/create",
-                "x-shopify-triggered-at": "2026-01-30T16:28:36.618898575Z",
-                "x-shopify-webhook-id": "3201dfd5-d347-5e98-9a00-4e4c71b1c872"
+          "body": {
+            "id": 1087055659355,
+            "order_id": 7334475825499,
+            "created_at": "2025-12-08T13:25:57+01:00",
+            "note": null,
+            "user_id": 115464700251,
+            "processed_at": "2025-12-08T13:25:57+01:00",
+            "duties": [],
+            "total_duties_set": {
+              "shop_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
               },
-              "params": {},
-              "query": {},
-              "body": {
-                "id": 1100275974491,
-                "order_id": 7488936378715,
-                "created_at": "2026-01-30T17:28:36+01:00",
-                "note": null,
-                "user_id": 126889165147,
-                "processed_at": "2026-01-30T17:28:36+01:00",
-                "duties": [],
-                "total_duties_set": {
+              "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              }
+            },
+            "return": {
+              "id": 38647759195,
+              "admin_graphql_api_id": "gid://shopify/Return/38647759195"
+            },
+            "restock": true,
+            "refund_shipping_lines": [],
+            "admin_graphql_api_id": "gid://shopify/Refund/1087055659355",
+            "order_adjustments": [],
+            "refund_line_items": [
+              {
+                "id": 801039155547,
+                "line_item_id": 18033986175323,
+                "quantity": 1,
+                "restock_type": "return",
+                "location_id": 99018441051,
+                "subtotal": 250,
+                "total_tax": 0,
+                "line_item": {
+                  "id": 18033986175323,
+                  "variant_id": 51692298469723,
+                  "title": "Oakley W Icicle Softhshell Pantalones",
+                  "quantity": 1,
+                  "sku": "51692298469723",
+                  "variant_title": "Mist / S",
+                  "vendor": "Rules Shop",
+                  "fulfillment_service": "manual",
+                  "product_id": 10158317863259,
+                  "requires_shipping": true,
+                  "taxable": true,
+                  "gift_card": false,
+                  "name": "Oakley W Icicle Softhshell Pantalones - Mist / S",
+                  "variant_inventory_management": "shopify",
+                  "properties": [],
+                  "product_exists": true,
+                  "fulfillable_quantity": 0,
+                  "grams": 0,
+                  "price": "250.00",
+                  "total_discount": "0.00",
+                  "fulfillment_status": "fulfilled",
+                  "price_set": {
+                    "shop_money": {
+                      "amount": "250.00",
+                      "currency_code": "EUR"
+                    },
+                    "presentment_money": {
+                      "amount": "250.00",
+                      "currency_code": "EUR"
+                    }
+                  },
+                  "total_discount_set": {
+                    "shop_money": {
+                      "amount": "0.00",
+                      "currency_code": "EUR"
+                    },
+                    "presentment_money": {
+                      "amount": "0.00",
+                      "currency_code": "EUR"
+                    }
+                  },
+                  "discount_allocations": [],
+                  "origin_location": {
+                    "id": 4053648212315,
+                    "country_code": "ES",
+                    "province_code": "GR",
+                    "name": "Rules Oakley",
+                    "address1": "Plaza Pradollano S/N",
+                    "address2": "Edificio Telecabina Local 2",
+                    "city": "Sierra Nevada",
+                    "zip": "18196"
+                  },
+                  "admin_graphql_api_id": "gid://shopify/LineItem/18033986175323",
+                  "duties": [],
+                  "tax_lines": []
+                },
+                "subtotal_set": {
+                  "shop_money": {
+                    "amount": "250.00",
+                    "currency_code": "EUR"
+                  },
+                  "presentment_money": {
+                    "amount": "250.00",
+                    "currency_code": "EUR"
+                  }
+                },
+                "total_tax_set": {
                   "shop_money": {
                     "amount": "0.00",
                     "currency_code": "EUR"
@@ -3832,129 +1312,99 @@
                     "amount": "0.00",
                     "currency_code": "EUR"
                   }
-                },
-                "return": {
-                  "id": 44034785627,
-                  "admin_graphql_api_id": "gid://shopify/Return/44034785627"
-                },
-                "restock": true,
-                "refund_shipping_lines": [],
-                "admin_graphql_api_id": "gid://shopify/Refund/1100275974491",
-                "order_adjustments": [],
-                "refund_line_items": [
-                  {
-                    "id": 821654225243,
-                    "line_item_id": 18343670284635,
-                    "quantity": 1,
-                    "restock_type": "return",
-                    "location_id": 99759620443,
-                    "subtotal": 95.2,
-                    "total_tax": 0,
-                    "line_item": {
-                      "id": 18343670284635,
-                      "variant_id": 51188427030875,
-                      "title": "Oakley Target Line L Máscara",
-                      "quantity": 1,
-                      "sku": "51188427030875",
-                      "variant_title": "Matte/Black / Fire/Iridium / No",
-                      "vendor": "Oakley",
-                      "fulfillment_service": "manual",
-                      "product_id": 10055084409179,
-                      "requires_shipping": true,
-                      "taxable": true,
-                      "gift_card": false,
-                      "name": "Oakley Target Line L Máscara - Matte/Black / Fire/Iridium / No",
-                      "variant_inventory_management": "shopify",
-                      "properties": [],
-                      "product_exists": true,
-                      "fulfillable_quantity": 0,
-                      "grams": 0,
-                      "price": "119.00",
-                      "total_discount": "23.80",
-                      "fulfillment_status": "fulfilled",
-                      "price_set": {
-                        "shop_money": {
-                          "amount": "119.00",
-                          "currency_code": "EUR"
-                        },
-                        "presentment_money": {
-                          "amount": "119.00",
-                          "currency_code": "EUR"
-                        }
-                      },
-                      "total_discount_set": {
-                        "shop_money": {
-                          "amount": "23.80",
-                          "currency_code": "EUR"
-                        },
-                        "presentment_money": {
-                          "amount": "23.80",
-                          "currency_code": "EUR"
-                        }
-                      },
-                      "discount_allocations": [
-                        {
-                          "amount": "23.80",
-                          "discount_application_index": 1,
-                          "amount_set": {
-                            "shop_money": {
-                              "amount": "23.80",
-                              "currency_code": "EUR"
-                            },
-                            "presentment_money": {
-                              "amount": "23.80",
-                              "currency_code": "EUR"
-                            }
-                          }
-                        }
-                      ],
-                      "origin_location": {
-                        "id": 4053345829211,
-                        "country_code": "ES",
-                        "province_code": "GR",
-                        "name": "Rules Shop",
-                        "address1": "Calle Zamora 123",
-                        "address2": "Nave A",
-                        "city": "Ogíjares",
-                        "zip": "18151"
-                      },
-                      "admin_graphql_api_id": "gid://shopify/LineItem/18343670284635",
-                      "duties": [],
-                      "tax_lines": []
-                    },
-                    "subtotal_set": {
-                      "shop_money": {
-                        "amount": "95.20",
-                        "currency_code": "EUR"
-                      },
-                      "presentment_money": {
-                        "amount": "95.20",
-                        "currency_code": "EUR"
-                      }
-                    },
-                    "total_tax_set": {
-                      "shop_money": {
-                        "amount": "0.00",
-                        "currency_code": "EUR"
-                      },
-                      "presentment_money": {
-                        "amount": "0.00",
-                        "currency_code": "EUR"
-                      }
-                    }
-                  }
-                ],
-                "transactions": []
+                }
               },
-              "webhookUrl": "https://n8n.tailwind.es/webhook/monto-descuentos",
-              "executionMode": "production"
-            }
-          ],
-          "webhookUrl": "https://n8n.tailwind.es/webhook-test/informeDiarioPrueba",
+              {
+                "id": 801039188315,
+                "line_item_id": 18033986240859,
+                "quantity": 1,
+                "restock_type": "return",
+                "location_id": 99018441051,
+                "subtotal": 300,
+                "total_tax": 0,
+                "line_item": {
+                  "id": 18033986240859,
+                  "variant_id": 51693320110427,
+                  "title": "Oakley W. Kendall RC Shell Chaqueta",
+                  "quantity": 1,
+                  "sku": "51693320110427",
+                  "variant_title": "Mist/White / S",
+                  "vendor": "Oakley",
+                  "fulfillment_service": "manual",
+                  "product_id": 10190005535067,
+                  "requires_shipping": true,
+                  "taxable": true,
+                  "gift_card": false,
+                  "name": "Oakley W. Kendall RC Shell Chaqueta - Mist/White / S",
+                  "variant_inventory_management": "shopify",
+                  "properties": [],
+                  "product_exists": true,
+                  "fulfillable_quantity": 0,
+                  "grams": 0,
+                  "price": "300.00",
+                  "total_discount": "0.00",
+                  "fulfillment_status": "fulfilled",
+                  "price_set": {
+                    "shop_money": {
+                      "amount": "300.00",
+                      "currency_code": "EUR"
+                    },
+                    "presentment_money": {
+                      "amount": "300.00",
+                      "currency_code": "EUR"
+                    }
+                  },
+                  "total_discount_set": {
+                    "shop_money": {
+                      "amount": "0.00",
+                      "currency_code": "EUR"
+                    },
+                    "presentment_money": {
+                      "amount": "0.00",
+                      "currency_code": "EUR"
+                    }
+                  },
+                  "discount_allocations": [],
+                  "origin_location": {
+                    "id": 4053648212315,
+                    "country_code": "ES",
+                    "province_code": "GR",
+                    "name": "Rules Oakley",
+                    "address1": "Plaza Pradollano S/N",
+                    "address2": "Edificio Telecabina Local 2",
+                    "city": "Sierra Nevada",
+                    "zip": "18196"
+                  },
+                  "admin_graphql_api_id": "gid://shopify/LineItem/18033986240859",
+                  "duties": [],
+                  "tax_lines": []
+                },
+                "subtotal_set": {
+                  "shop_money": {
+                    "amount": "300.00",
+                    "currency_code": "EUR"
+                  },
+                  "presentment_money": {
+                    "amount": "300.00",
+                    "currency_code": "EUR"
+                  }
+                },
+                "total_tax_set": {
+                  "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "EUR"
+                  },
+                  "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "EUR"
+                  }
+                }
+              }
+            ],
+            "transactions": []
+          },
+          "webhookUrl": "https://n8n.tailwind.es/webhook/simulacion",
           "executionMode": "test"
-        },
-        "pairedItem": {
-          "item": 0
         }
       }
     ]
@@ -3974,6 +1424,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-02-04T10:37:17.951Z",
-  "versionId": "8b5c8cfb-8ebd-4fc1-b05c-ddea38dc72b7"
+  "updatedAt": "2026-02-05T13:50:32.351Z",
+  "versionId": "3ebaa34a-24d2-4620-8f8f-f0696b8d95ed"
 }
