@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-02-03T14:35:56.000Z",
-    "createdAt": "2026-02-03T14:35:54.426Z",
-    "versionId": "61e0a021-2a40-40b3-a6b0-c6ce1b0b686a",
+    "updatedAt": "2026-02-05T13:22:45.000Z",
+    "createdAt": "2026-02-05T13:22:44.075Z",
+    "versionId": "824e44fe-4ef3-44f3-9adc-06bbeafdb2e4",
     "workflowId": "sQUNg-VuSIFLaMIdA9znD",
     "nodes": [
       {
@@ -421,12 +421,23 @@
               "PRECIO PAGADO": "={{ $json['PRECIO PAGADO'] }}",
               "DESCUENTO": "={{ $json.DESCUENTO }}",
               "NOMBRE DE PRODUCTO": "={{ $json['NOMBRE DE PRODUCTO'] }}",
-              "VARIANTE": "={{ $json.VARIANTE }}"
+              "VARIANTE": "={{ $json.VARIANTE }}",
+              "ID PEDIDO": "={{ $('Webhook').first().json.body.id }}"
             },
             "matchingColumns": [
               "row_number"
             ],
             "schema": [
+              {
+                "id": "ID PEDIDO",
+                "displayName": "ID PEDIDO",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
               {
                 "id": "SUCURSAL DE VENTA",
                 "displayName": "SUCURSAL DE VENTA",
@@ -745,7 +756,7 @@
         "parameters": {
           "content": "ACTUALIZAR DOCUMENTO CON CADA PEDIDO",
           "height": 448,
-          "width": 1456,
+          "width": 1632,
           "color": 3
         },
         "type": "n8n-nodes-base.stickyNote",
@@ -2057,31 +2068,71 @@
       },
       {
         "parameters": {
-          "authentication": "headerAuth",
-          "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-07/graphql.json",
-          "query": "query getOrder($id: ID!) {\n  order(id: $id) {\n    id\n    name\n    createdAt\n    totalPriceSet {\n      shopMoney {\n        amount\n      }\n    }\n    # Obtenemos los descuentos aplicados a cada producto\n    lineItems(first: 10) {\n      edges {\n        node {\n          title\n          sku\n          quantity\n          originalUnitPriceSet {\n            shopMoney {\n              amount\n            }\n          }\n          discountAllocations {\n            allocatedAmountSet {\n              shopMoney {\n                amount\n              }\n            }\n          }\n        }\n      }\n    }\n    # Vital para el crédito en tienda\n    transactions(first: 10) {\n      gateway\n      formattedGateway\n      kind\n      status\n      amountSet {\n        shopMoney {\n          amount\n        }\n      }\n    }\n    fulfillments {\n      location {\n        name\n      }\n    }\n  }\n}",
-          "variables": "={\n  \"id\": \"gid://shopify/Order/7518765089115\"\n}",
-          "headerParametersUi": {
-            "parameter": [
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "Pedidos-Documentos",
+            "mode": "list",
+            "cachedResultName": "Pedidos-Documentos"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "id_pedido": "={{ $('Update row in sheet').item.json[\"ID PEDIDO\"] }}",
+              "id_documento": "={{ $('Get row(s)').first().json.ID_Documento }}",
+              "fecha": "={{ $now.format('dd/LL/yyyy') }}"
+            },
+            "matchingColumns": [],
+            "schema": [
               {
-                "name": "Content-Type",
-                "value": "application/json"
+                "id": "id_pedido",
+                "displayName": "id_pedido",
+                "required": true,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "id_documento",
+                "displayName": "id_documento",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "fecha",
+                "displayName": "fecha",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "dateTime",
+                "canBeUsedToMatch": true
               }
-            ]
-          }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
         },
-        "type": "n8n-nodes-base.graphql",
-        "typeVersion": 1.1,
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
         "position": [
-          336,
-          -272
+          1808,
+          480
         ],
-        "id": "a4721366-bdfb-45ab-91d9-1bc5acc8ffd7",
-        "name": "GraphQL2",
+        "id": "7dab9750-96c6-4a7d-97c9-100169c69795",
+        "name": "Insert rows in a table",
         "credentials": {
-          "httpHeaderAuth": {
-            "id": "OPt2Cl0dnwcU4qRk",
-            "name": "ShopifyInformes"
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
           }
         }
       }
@@ -2414,14 +2465,25 @@
             }
           ]
         ]
+      },
+      "Update row(s)1": {
+        "main": [
+          [
+            {
+              "node": "Insert rows in a table",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version 61e0a021",
+    "name": "Version 824e44fe",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "61e0a021-2a40-40b3-a6b0-c6ce1b0b686a",
+  "activeVersionId": "824e44fe-4ef3-44f3-9adc-06bbeafdb2e4",
   "connections": {
     "Webhook": {
       "main": [
@@ -2745,6 +2807,17 @@
         [
           {
             "node": "Get row(s)2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row(s)1": {
+      "main": [
+        [
+          {
+            "node": "Insert rows in a table",
             "type": "main",
             "index": 0
           }
@@ -3175,12 +3248,23 @@
             "PRECIO PAGADO": "={{ $json['PRECIO PAGADO'] }}",
             "DESCUENTO": "={{ $json.DESCUENTO }}",
             "NOMBRE DE PRODUCTO": "={{ $json['NOMBRE DE PRODUCTO'] }}",
-            "VARIANTE": "={{ $json.VARIANTE }}"
+            "VARIANTE": "={{ $json.VARIANTE }}",
+            "ID PEDIDO": "={{ $('Webhook').first().json.body.id }}"
           },
           "matchingColumns": [
             "row_number"
           ],
           "schema": [
+            {
+              "id": "ID PEDIDO",
+              "displayName": "ID PEDIDO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
             {
               "id": "SUCURSAL DE VENTA",
               "displayName": "SUCURSAL DE VENTA",
@@ -3499,7 +3583,7 @@
       "parameters": {
         "content": "ACTUALIZAR DOCUMENTO CON CADA PEDIDO",
         "height": 448,
-        "width": 1456,
+        "width": 1632,
         "color": 3
       },
       "type": "n8n-nodes-base.stickyNote",
@@ -4811,36 +4895,471 @@
     },
     {
       "parameters": {
-        "authentication": "headerAuth",
-        "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-07/graphql.json",
-        "query": "query getOrder($id: ID!) {\n  order(id: $id) {\n    id\n    name\n    createdAt\n    totalPriceSet {\n      shopMoney {\n        amount\n      }\n    }\n    # Obtenemos los descuentos aplicados a cada producto\n    lineItems(first: 10) {\n      edges {\n        node {\n          title\n          sku\n          quantity\n          originalUnitPriceSet {\n            shopMoney {\n              amount\n            }\n          }\n          discountAllocations {\n            allocatedAmountSet {\n              shopMoney {\n                amount\n              }\n            }\n          }\n        }\n      }\n    }\n    # Vital para el crédito en tienda\n    transactions(first: 10) {\n      gateway\n      formattedGateway\n      kind\n      status\n      amountSet {\n        shopMoney {\n          amount\n        }\n      }\n    }\n    fulfillments {\n      location {\n        name\n      }\n    }\n  }\n}",
-        "variables": "={\n  \"id\": \"gid://shopify/Order/7518765089115\"\n}",
-        "headerParametersUi": {
-          "parameter": [
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "Pedidos-Documentos",
+          "mode": "list",
+          "cachedResultName": "Pedidos-Documentos"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id_pedido": "={{ $('Update row in sheet').item.json[\"ID PEDIDO\"] }}",
+            "id_documento": "={{ $('Get row(s)').first().json.ID_Documento }}",
+            "fecha": "={{ $now.format('dd/LL/yyyy') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
             {
-              "name": "Content-Type",
-              "value": "application/json"
+              "id": "id_pedido",
+              "displayName": "id_pedido",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "id_documento",
+              "displayName": "id_documento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "fecha",
+              "displayName": "fecha",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true
             }
-          ]
-        }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
       },
-      "type": "n8n-nodes-base.graphql",
-      "typeVersion": 1.1,
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
       "position": [
-        336,
-        -272
+        1808,
+        480
       ],
-      "id": "a4721366-bdfb-45ab-91d9-1bc5acc8ffd7",
-      "name": "GraphQL2",
+      "id": "7dab9750-96c6-4a7d-97c9-100169c69795",
+      "name": "Insert rows in a table",
       "credentials": {
-        "httpHeaderAuth": {
-          "id": "OPt2Cl0dnwcU4qRk",
-          "name": "ShopifyInformes"
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
         }
       }
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "connection": "upgrade",
+            "host": "n8n.tailwind.es",
+            "x-forwarded-for": "34.34.152.237",
+            "x-forwarded-proto": "https",
+            "content-length": "7314",
+            "user-agent": "Shopify-Captain-Hook",
+            "accept": "*/*",
+            "accept-encoding": "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
+            "content-type": "application/json",
+            "x-shopify-api-version": "2025-10",
+            "x-shopify-event-id": "c8e373fe-500a-4acd-a927-53a216ba2b8b",
+            "x-shopify-hmac-sha256": "Vl8fymojE5xMeVzzM0zenMEkCqbmEfchXWSc86phdng=",
+            "x-shopify-order-id": "7525433508187",
+            "x-shopify-shop-domain": "surfin-store-spain.myshopify.com",
+            "x-shopify-test": "false",
+            "x-shopify-topic": "orders/create",
+            "x-shopify-triggered-at": "2026-02-05T13:04:10.248258121Z",
+            "x-shopify-webhook-id": "a23f91e1-6d90-5e99-a9ba-ec6dff98fc98"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "id": 7525433508187,
+            "admin_graphql_api_id": "gid://shopify/Order/7525433508187",
+            "app_id": 129785,
+            "browser_ip": "2.136.43.78",
+            "buyer_accepts_marketing": false,
+            "cancel_reason": null,
+            "cancelled_at": null,
+            "cart_token": null,
+            "checkout_id": 48321509982555,
+            "checkout_token": "d80723fc-fc21-46d0-8d21-5a56c4ef5808",
+            "client_details": {
+              "accept_language": null,
+              "browser_height": null,
+              "browser_ip": "2.136.43.78",
+              "browser_width": null,
+              "session_hash": null,
+              "user_agent": "Shopify POS/10.15.2/Android/15/Redmi/25040RP0AE/production"
+            },
+            "closed_at": "2026-02-05T14:04:11+01:00",
+            "company": null,
+            "confirmation_number": "4WGELFNVE",
+            "confirmed": true,
+            "contact_email": "juanmasu19082005@gmail.com",
+            "created_at": "2026-02-05T14:04:09+01:00",
+            "currency": "EUR",
+            "current_shipping_price_set": {
+              "shop_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              }
+            },
+            "current_subtotal_price": "85.00",
+            "current_subtotal_price_set": {
+              "shop_money": {
+                "amount": "85.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "85.00",
+                "currency_code": "EUR"
+              }
+            },
+            "current_total_additional_fees_set": null,
+            "current_total_discounts": "0.00",
+            "current_total_discounts_set": {
+              "shop_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              }
+            },
+            "current_total_duties_set": null,
+            "current_total_price": "85.00",
+            "current_total_price_set": {
+              "shop_money": {
+                "amount": "85.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "85.00",
+                "currency_code": "EUR"
+              }
+            },
+            "current_total_tax": "0.00",
+            "current_total_tax_set": {
+              "shop_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              }
+            },
+            "customer_locale": "es",
+            "device_id": 20,
+            "discount_codes": [],
+            "duties_included": false,
+            "email": "juanmasu19082005@gmail.com",
+            "estimated_taxes": false,
+            "financial_status": "paid",
+            "fulfillment_status": "fulfilled",
+            "landing_site": null,
+            "landing_site_ref": null,
+            "location_id": 108915917147,
+            "merchant_business_entity_id": "MTg3OTg3NjUwOTA3",
+            "merchant_of_record_app_id": null,
+            "name": "#71868",
+            "note": null,
+            "note_attributes": [],
+            "number": 70868,
+            "order_number": 71868,
+            "order_status_url": "https://nuance-store.com/87987650907/orders/280e9f3249a986d79e6b2c4f57ba5d39/authenticate?key=afd215cb5337d28482402d1cbd449376",
+            "original_total_additional_fees_set": null,
+            "original_total_duties_set": null,
+            "payment_gateway_names": [
+              "Tarjeta"
+            ],
+            "phone": null,
+            "po_number": null,
+            "presentment_currency": "EUR",
+            "processed_at": "2026-02-05T14:04:08+01:00",
+            "reference": null,
+            "referring_site": null,
+            "source_identifier": "108915917147-20-1151",
+            "source_name": "pos",
+            "source_url": null,
+            "subtotal_price": "85.00",
+            "subtotal_price_set": {
+              "shop_money": {
+                "amount": "85.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "85.00",
+                "currency_code": "EUR"
+              }
+            },
+            "tags": "",
+            "tax_exempt": false,
+            "tax_lines": [],
+            "taxes_included": true,
+            "test": false,
+            "token": "280e9f3249a986d79e6b2c4f57ba5d39",
+            "total_cash_rounding_payment_adjustment_set": {
+              "shop_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              }
+            },
+            "total_cash_rounding_refund_adjustment_set": {
+              "shop_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              }
+            },
+            "total_discounts": "0.00",
+            "total_discounts_set": {
+              "shop_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              }
+            },
+            "total_line_items_price": "85.00",
+            "total_line_items_price_set": {
+              "shop_money": {
+                "amount": "85.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "85.00",
+                "currency_code": "EUR"
+              }
+            },
+            "total_outstanding": "0.00",
+            "total_price": "85.00",
+            "total_price_set": {
+              "shop_money": {
+                "amount": "85.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "85.00",
+                "currency_code": "EUR"
+              }
+            },
+            "total_shipping_price_set": {
+              "shop_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              }
+            },
+            "total_tax": "0.00",
+            "total_tax_set": {
+              "shop_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              }
+            },
+            "total_tip_received": "0.00",
+            "total_weight": 0,
+            "updated_at": "2026-02-05T14:04:11+01:00",
+            "user_id": 126641570139,
+            "billing_address": null,
+            "customer": {
+              "id": 10159357362523,
+              "created_at": "2026-02-05T14:03:30+01:00",
+              "updated_at": "2026-02-05T14:04:09+01:00",
+              "first_name": "Juan Manuel",
+              "last_name": "Suarez",
+              "state": "disabled",
+              "note": "",
+              "verified_email": true,
+              "multipass_identifier": null,
+              "tax_exempt": false,
+              "email": "juanmasu19082005@gmail.com",
+              "phone": null,
+              "currency": "EUR",
+              "tax_exemptions": [],
+              "admin_graphql_api_id": "gid://shopify/Customer/10159357362523"
+            },
+            "discount_applications": [],
+            "fulfillments": [
+              {
+                "id": 6710982410587,
+                "admin_graphql_api_id": "gid://shopify/Fulfillment/6710982410587",
+                "created_at": "2026-02-05T14:04:10+01:00",
+                "location_id": 108915917147,
+                "name": "#71868.1",
+                "order_id": 7525433508187,
+                "origin_address": {},
+                "receipt": {},
+                "service": "manual",
+                "shipment_status": null,
+                "status": "success",
+                "tracking_company": null,
+                "tracking_number": null,
+                "tracking_numbers": [],
+                "tracking_url": null,
+                "tracking_urls": [],
+                "updated_at": "2026-02-05T14:04:10+01:00",
+                "line_items": [
+                  {
+                    "id": 18423245930843,
+                    "admin_graphql_api_id": "gid://shopify/LineItem/18423245930843",
+                    "attributed_staffs": [],
+                    "current_quantity": 1,
+                    "fulfillable_quantity": 0,
+                    "fulfillment_service": "manual",
+                    "fulfillment_status": "fulfilled",
+                    "gift_card": false,
+                    "grams": 0,
+                    "name": "The North Face Yumiori 1/4 Zip Forro Polar - TNF Black/Asphalt Grey/Monument Grey / L",
+                    "price": "85.00",
+                    "price_set": {
+                      "shop_money": {
+                        "amount": "85.00",
+                        "currency_code": "EUR"
+                      },
+                      "presentment_money": {
+                        "amount": "85.00",
+                        "currency_code": "EUR"
+                      }
+                    },
+                    "product_exists": true,
+                    "product_id": 10254930542939,
+                    "properties": [],
+                    "quantity": 1,
+                    "requires_shipping": true,
+                    "sku": "51905154056539",
+                    "taxable": true,
+                    "title": "The North Face Yumiori 1/4 Zip Forro Polar",
+                    "total_discount": "0.00",
+                    "total_discount_set": {
+                      "shop_money": {
+                        "amount": "0.00",
+                        "currency_code": "EUR"
+                      },
+                      "presentment_money": {
+                        "amount": "0.00",
+                        "currency_code": "EUR"
+                      }
+                    },
+                    "variant_id": 51905154056539,
+                    "variant_inventory_management": "shopify",
+                    "variant_title": "TNF Black/Asphalt Grey/Monument Grey / L",
+                    "vendor": "The North Face",
+                    "tax_lines": [],
+                    "duties": [],
+                    "discount_allocations": []
+                  }
+                ]
+              }
+            ],
+            "line_items": [
+              {
+                "id": 18423245930843,
+                "admin_graphql_api_id": "gid://shopify/LineItem/18423245930843",
+                "attributed_staffs": [],
+                "current_quantity": 1,
+                "fulfillable_quantity": 0,
+                "fulfillment_service": "manual",
+                "fulfillment_status": "fulfilled",
+                "gift_card": false,
+                "grams": 0,
+                "name": "The North Face Yumiori 1/4 Zip Forro Polar - TNF Black/Asphalt Grey/Monument Grey / L",
+                "price": "85.00",
+                "price_set": {
+                  "shop_money": {
+                    "amount": "85.00",
+                    "currency_code": "EUR"
+                  },
+                  "presentment_money": {
+                    "amount": "85.00",
+                    "currency_code": "EUR"
+                  }
+                },
+                "product_exists": true,
+                "product_id": 10254930542939,
+                "properties": [],
+                "quantity": 1,
+                "requires_shipping": true,
+                "sales_line_item_group_id": null,
+                "sku": "51905154056539",
+                "taxable": true,
+                "title": "The North Face Yumiori 1/4 Zip Forro Polar",
+                "total_discount": "0.00",
+                "total_discount_set": {
+                  "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "EUR"
+                  },
+                  "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "EUR"
+                  }
+                },
+                "variant_id": 51905154056539,
+                "variant_inventory_management": "shopify",
+                "variant_title": "TNF Black/Asphalt Grey/Monument Grey / L",
+                "vendor": "The North Face",
+                "tax_lines": [],
+                "duties": [],
+                "discount_allocations": []
+              }
+            ],
+            "payment_terms": null,
+            "refunds": [],
+            "shipping_address": null,
+            "shipping_lines": [],
+            "returns": [],
+            "line_item_groups": []
+          },
+          "webhookUrl": "https://n8n.tailwind.es/webhook/informeDiario",
+          "executionMode": "production"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1",
     "availableInMCP": false
@@ -4857,6 +5376,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 3,
-  "updatedAt": "2026-02-04T08:05:50.333Z",
-  "versionId": "61e0a021-2a40-40b3-a6b0-c6ce1b0b686a"
+  "updatedAt": "2026-02-05T13:22:44.071Z",
+  "versionId": "824e44fe-4ef3-44f3-9adc-06bbeafdb2e4"
 }
