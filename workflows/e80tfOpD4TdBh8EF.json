@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-02-05T08:22:20.000Z",
-    "createdAt": "2026-02-05T08:22:17.796Z",
-    "versionId": "39a18b86-72d2-47a1-9ee4-e84d28264b07",
+    "updatedAt": "2026-02-06T09:41:00.000Z",
+    "createdAt": "2026-02-06T09:40:59.909Z",
+    "versionId": "cb01eff2-0150-4626-8336-af7f6ae435ac",
     "workflowId": "e80tfOpD4TdBh8EF",
     "nodes": [
       {
@@ -11,35 +11,87 @@
         "type": "n8n-nodes-base.errorTrigger",
         "typeVersion": 1,
         "position": [
-          -352,
-          -48
+          -784,
+          -64
         ],
         "id": "4c3b3173-5c2b-4adf-bd3a-5fbc0c17cbb6",
         "name": "Error Trigger"
       },
       {
         "parameters": {
-          "fromEmail": "info@tailwind.es",
-          "toEmail": "emiliano@tailwind.es",
-          "subject": "=🚨 Error en n8n | Workflow {{$workflow.name}}",
-          "html": "=<!DOCTYPE html>\n\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <title>Error n8n</title>\n</head>\n<body style=\"font-family: Arial, Helvetica, sans-serif; background-color:#f5f6f8; padding:20px;\">\n  <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n    <tr>\n      <td align=\"center\">\n        <table width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#ffffff; border-radius:6px; overflow:hidden;\">\n\n```\n      <!-- Header -->\n      <tr>\n        <td style=\"background:#d92d20; color:#ffffff; padding:16px 24px;\">\n          <h2 style=\"margin:0;\">🚨 Error en n8n</h2>\n        </td>\n      </tr>\n\n      <!-- Body -->\n      <tr>\n        <td style=\"padding:24px; color:#333333;\">\n          <p style=\"margin-top:0;\">\n            Se ha producido un error en uno de los workflows de <strong>n8n</strong>.\n          </p>\n\n          <table width=\"100%\" cellpadding=\"6\" cellspacing=\"0\" style=\"border-collapse:collapse; margin:16px 0;\">\n            <tr>\n              <td width=\"30%\" style=\"font-weight:bold;\">Workflow</td>\n              <td>{{$workflow.name}}</td>\n            </tr>\n            <tr>\n              <td style=\"font-weight:bold;\">Execution ID</td>\n              <td>{{$json.execution.id}}</td>\n            </tr>\n            <tr>\n              <td style=\"font-weight:bold;\">Nodo</td>\n              <td>{{$json.error.node.name}}</td>\n            </tr>\n            <tr>\n              <td style=\"font-weight:bold;\">Fecha</td>\n              <td>{{new Date().toISOString()}}</td>\n            </tr>\n          </table>\n\n          <p style=\"font-weight:bold; margin-bottom:6px;\">Mensaje de error</p>\n          <pre style=\"background:#f4f4f4; padding:12px; border-radius:4px; white-space:pre-wrap; font-size:13px;\">\n```\n\n{{$json.error.message}} </pre>\n\n```\n          <p style=\"font-weight:bold; margin-bottom:6px;\">Stack trace</p>\n          <pre style=\"background:#f4f4f4; padding:12px; border-radius:4px; white-space:pre-wrap; font-size:12px;\">\n```\n\n{{$json.error.stack}} </pre>\n\n```\n          <p style=\"margin-top:24px;\">\n            👉 Revisa la ejecución en n8n usando el <strong>Execution ID</strong> para ver el contexto completo.\n          </p>\n        </td>\n      </tr>\n\n      <!-- Footer -->\n      <tr>\n        <td style=\"background:#f0f1f3; padding:12px 24px; font-size:12px; color:#666;\">\n          Este correo ha sido generado automáticamente por n8n.\n        </td>\n      </tr>\n\n    </table>\n  </td>\n</tr>\n```\n\n  </table>\n</body>\n</html>\n",
+          "sendTo": "emilianomartinezvrd@gmail.com,adrianazorinsanchez@gmail.com",
+          "subject": "=🚨 Error en n8n: {{ $json.workflow.name }} (Exec: {{ $json.execution.id }})",
+          "message": "=<!DOCTYPE html>\n<html>\n<head>\n  <style>\n    body { font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; }\n    .container { max-width: 600px; margin: 0 auto; border: 1px solid #e1e1e1; border-radius: 8px; overflow: hidden; }\n    .header { background-color: #D92D20; color: white; padding: 20px; text-align: center; }\n    .content { padding: 25px; background-color: #ffffff; }\n    .info-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }\n    .info-table td { padding: 8px 0; border-bottom: 1px solid #eee; }\n    .label { font-weight: bold; color: #555; width: 140px; }\n    .error-box { background-color: #FEF2F2; border-left: 4px solid #D92D20; padding: 15px; margin: 20px 0; border-radius: 4px; }\n    .code-block { background-color: #f4f6f8; padding: 10px; border-radius: 4px; font-family: monospace; font-size: 12px; overflow-x: auto; white-space: pre-wrap; color: #c00; }\n    .btn { display: inline-block; background-color: #111827; color: #ffffff !important; text-decoration: none; padding: 12px 24px; border-radius: 6px; font-weight: bold; margin-top: 10px; }\n    .footer { background-color: #f9fafb; padding: 15px; text-align: center; font-size: 12px; color: #6b7280; }\n  </style>\n</head>\n<body>\n  <div class=\"container\">\n    <div class=\"header\">\n      <h2 style=\"margin:0;\">⚠️ Fallo en Ejecución</h2>\n    </div>\n\n    <div class=\"content\">\n      <p>Hola,</p>\n      <p>El workflow <strong>{{ $json.workflow.name }}</strong> ha fallado. Aquí tienes los detalles:</p>\n\n      <table class=\"info-table\">\n        <tr>\n          <td class=\"label\">Workflow ID:</td>\n          <td>{{ $json.workflow.id }}</td>\n        </tr>\n        <tr>\n          <td class=\"label\">Execution ID:</td>\n          <td>{{ $json.execution.id }}</td>\n        </tr>\n        <tr>\n          <td class=\"label\">Nodo Fallido:</td>\n          <td>{{ $json.execution.lastNodeExecuted }}</td>\n        </tr>\n      </table>\n\n      <div class=\"error-box\">\n        <strong>Mensaje de Error:</strong>\n        <div style=\"margin-top:5px;\">{{ $json.execution.error.message }}</div>\n      </div>\n\n      <p style=\"font-size:13px; margin-bottom:5px;\"><strong>Stack Trace:</strong></p>\n      <div class=\"code-block\">\n{{ $json.execution.error.stack }}\n      </div>\n\n      <div style=\"text-align: center; margin-top: 30px;\">\n        <a href=\"{{ $json.execution.url }}\" class=\"btn\" target=\"_blank\">\n          🛠️ Ver Ejecución en n8n\n        </a>\n      </div>\n    </div>\n\n    <div class=\"footer\">\n      Alerta automática generada por n8n Error Workflow.\n    </div>\n  </div>\n</body>\n</html>",
           "options": {}
         },
-        "type": "n8n-nodes-base.emailSend",
-        "typeVersion": 2.1,
+        "type": "n8n-nodes-base.gmail",
+        "typeVersion": 2.2,
         "position": [
-          -144,
-          -48
+          -800,
+          -224
         ],
-        "id": "5aa12673-abad-4ced-ab9b-881ffef4d5a4",
-        "name": "Send email",
-        "webhookId": "8d409db8-656a-4aa1-9065-749bdc5600a9",
+        "id": "22190d78-2750-4887-ae31-d7826e185ad3",
+        "name": "Send a message",
+        "webhookId": "340ca331-ccd9-4c8b-af0a-e09a9186e292",
         "credentials": {
-          "smtp": {
-            "id": "MiD3YXIjExt0Aik1",
+          "gmailOAuth2": {
+            "id": "wR7U82S8bmDH4odC",
             "name": "info@tailwind.es"
           }
         }
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "d982844d-3253-494f-af0b-7b966dea9b6f",
+                "name": "nombre_flow",
+                "value": "={{ $json.workflow.name }}",
+                "type": "string"
+              },
+              {
+                "id": "5df76786-b7cc-4265-8cdb-774f3c671cb9",
+                "name": "id_flow",
+                "value": "={{ $json.workflow.id }}",
+                "type": "string"
+              },
+              {
+                "id": "fb6026e0-509d-47f8-98cc-3dcd03f43e91",
+                "name": "descripcion",
+                "value": "={{ $json.execution.error.description }}",
+                "type": "string"
+              },
+              {
+                "id": "79268df7-291b-4635-b486-5a9986f6ebc2",
+                "name": "mensaje",
+                "value": "={{ $json.execution.error.message }}",
+                "type": "string"
+              },
+              {
+                "id": "c21e0212-5df3-4eaf-ae8b-3dbe9ebb368a",
+                "name": "fecha",
+                "value": "={{ $now.setZone('Europe/Madrid').toFormat('dd/LL/yyyy') }}",
+                "type": "string"
+              },
+              {
+                "id": "d562adfe-24f4-48c5-b3e2-ecac969db6b2",
+                "name": "hora",
+                "value": "={{ $now.setZone('Europe/Madrid').toFormat('HH:mm') }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -576,
+          -64
+        ],
+        "id": "883e14b0-b098-4c0b-9b2d-956b894076d1",
+        "name": "Edit Fields"
       }
     ],
     "connections": {
@@ -47,7 +99,7 @@
         "main": [
           [
             {
-              "node": "Send email",
+              "node": "Edit Fields",
               "type": "main",
               "index": 0
             }
@@ -56,17 +108,28 @@
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version 39a18b86",
+    "name": "Version cb01eff2",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "39a18b86-72d2-47a1-9ee4-e84d28264b07",
+  "activeVersionId": "cb01eff2-0150-4626-8336-af7f6ae435ac",
   "connections": {
     "Error Trigger": {
       "main": [
         [
           {
-            "node": "Send email",
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Update a database page",
             "type": "main",
             "index": 0
           }
@@ -95,30 +158,138 @@
     },
     {
       "parameters": {
-        "fromEmail": "info@tailwind.es",
-        "toEmail": "emiliano@tailwind.es",
-        "subject": "=🚨 Error en n8n | Workflow {{$workflow.name}}",
-        "html": "=<!DOCTYPE html>\n\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <title>Error n8n</title>\n</head>\n<body style=\"font-family: Arial, Helvetica, sans-serif; background-color:#f5f6f8; padding:20px;\">\n  <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">\n    <tr>\n      <td align=\"center\">\n        <table width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#ffffff; border-radius:6px; overflow:hidden;\">\n\n```\n      <!-- Header -->\n      <tr>\n        <td style=\"background:#d92d20; color:#ffffff; padding:16px 24px;\">\n          <h2 style=\"margin:0;\">🚨 Error en n8n</h2>\n        </td>\n      </tr>\n\n      <!-- Body -->\n      <tr>\n        <td style=\"padding:24px; color:#333333;\">\n          <p style=\"margin-top:0;\">\n            Se ha producido un error en uno de los workflows de <strong>n8n</strong>.\n          </p>\n\n          <table width=\"100%\" cellpadding=\"6\" cellspacing=\"0\" style=\"border-collapse:collapse; margin:16px 0;\">\n            <tr>\n              <td width=\"30%\" style=\"font-weight:bold;\">Workflow</td>\n              <td>{{$workflow.name}}</td>\n            </tr>\n            <tr>\n              <td style=\"font-weight:bold;\">Execution ID</td>\n              <td>{{$json.execution.id}}</td>\n            </tr>\n            <tr>\n              <td style=\"font-weight:bold;\">Nodo</td>\n              <td>{{$json.error.node.name}}</td>\n            </tr>\n            <tr>\n              <td style=\"font-weight:bold;\">Fecha</td>\n              <td>{{new Date().toISOString()}}</td>\n            </tr>\n          </table>\n\n          <p style=\"font-weight:bold; margin-bottom:6px;\">Mensaje de error</p>\n          <pre style=\"background:#f4f4f4; padding:12px; border-radius:4px; white-space:pre-wrap; font-size:13px;\">\n```\n\n{{$json.error.message}} </pre>\n\n```\n          <p style=\"font-weight:bold; margin-bottom:6px;\">Stack trace</p>\n          <pre style=\"background:#f4f4f4; padding:12px; border-radius:4px; white-space:pre-wrap; font-size:12px;\">\n```\n\n{{$json.error.stack}} </pre>\n\n```\n          <p style=\"margin-top:24px;\">\n            👉 Revisa la ejecución en n8n usando el <strong>Execution ID</strong> para ver el contexto completo.\n          </p>\n        </td>\n      </tr>\n\n      <!-- Footer -->\n      <tr>\n        <td style=\"background:#f0f1f3; padding:12px 24px; font-size:12px; color:#666;\">\n          Este correo ha sido generado automáticamente por n8n.\n        </td>\n      </tr>\n\n    </table>\n  </td>\n</tr>\n```\n\n  </table>\n</body>\n</html>\n",
+        "sendTo": "emilianomartinezvrd@gmail.com,adrianazorinsanchez@gmail.com",
+        "subject": "=🚨 Error en n8n: {{ $json.workflow.name }} (Exec: {{ $json.execution.id }})",
+        "message": "=<!DOCTYPE html>\n<html>\n<head>\n  <style>\n    body { font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; }\n    .container { max-width: 600px; margin: 0 auto; border: 1px solid #e1e1e1; border-radius: 8px; overflow: hidden; }\n    .header { background-color: #D92D20; color: white; padding: 20px; text-align: center; }\n    .content { padding: 25px; background-color: #ffffff; }\n    .info-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }\n    .info-table td { padding: 8px 0; border-bottom: 1px solid #eee; }\n    .label { font-weight: bold; color: #555; width: 140px; }\n    .error-box { background-color: #FEF2F2; border-left: 4px solid #D92D20; padding: 15px; margin: 20px 0; border-radius: 4px; }\n    .code-block { background-color: #f4f6f8; padding: 10px; border-radius: 4px; font-family: monospace; font-size: 12px; overflow-x: auto; white-space: pre-wrap; color: #c00; }\n    .btn { display: inline-block; background-color: #111827; color: #ffffff !important; text-decoration: none; padding: 12px 24px; border-radius: 6px; font-weight: bold; margin-top: 10px; }\n    .footer { background-color: #f9fafb; padding: 15px; text-align: center; font-size: 12px; color: #6b7280; }\n  </style>\n</head>\n<body>\n  <div class=\"container\">\n    <div class=\"header\">\n      <h2 style=\"margin:0;\">⚠️ Fallo en Ejecución</h2>\n    </div>\n\n    <div class=\"content\">\n      <p>Hola,</p>\n      <p>El workflow <strong>{{ $json.workflow.name }}</strong> ha fallado. Aquí tienes los detalles:</p>\n\n      <table class=\"info-table\">\n        <tr>\n          <td class=\"label\">Workflow ID:</td>\n          <td>{{ $json.workflow.id }}</td>\n        </tr>\n        <tr>\n          <td class=\"label\">Execution ID:</td>\n          <td>{{ $json.execution.id }}</td>\n        </tr>\n        <tr>\n          <td class=\"label\">Nodo Fallido:</td>\n          <td>{{ $json.execution.lastNodeExecuted }}</td>\n        </tr>\n      </table>\n\n      <div class=\"error-box\">\n        <strong>Mensaje de Error:</strong>\n        <div style=\"margin-top:5px;\">{{ $json.execution.error.message }}</div>\n      </div>\n\n      <p style=\"font-size:13px; margin-bottom:5px;\"><strong>Stack Trace:</strong></p>\n      <div class=\"code-block\">\n{{ $json.execution.error.stack }}\n      </div>\n\n      <div style=\"text-align: center; margin-top: 30px;\">\n        <a href=\"{{ $json.execution.url }}\" class=\"btn\" target=\"_blank\">\n          🛠️ Ver Ejecución en n8n\n        </a>\n      </div>\n    </div>\n\n    <div class=\"footer\">\n      Alerta automática generada por n8n Error Workflow.\n    </div>\n  </div>\n</body>\n</html>",
         "options": {}
       },
-      "type": "n8n-nodes-base.emailSend",
-      "typeVersion": 2.1,
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -800,
+        -224
+      ],
+      "id": "22190d78-2750-4887-ae31-d7826e185ad3",
+      "name": "Send a message",
+      "webhookId": "340ca331-ccd9-4c8b-af0a-e09a9186e292",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "wR7U82S8bmDH4odC",
+          "name": "info@tailwind.es"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d982844d-3253-494f-af0b-7b966dea9b6f",
+              "name": "nombre_flow",
+              "value": "={{ $json.workflow.name }}",
+              "type": "string"
+            },
+            {
+              "id": "5df76786-b7cc-4265-8cdb-774f3c671cb9",
+              "name": "id_flow",
+              "value": "={{ $json.workflow.id }}",
+              "type": "string"
+            },
+            {
+              "id": "fb6026e0-509d-47f8-98cc-3dcd03f43e91",
+              "name": "descripcion",
+              "value": "={{ $json.execution.error.description }}",
+              "type": "string"
+            },
+            {
+              "id": "79268df7-291b-4635-b486-5a9986f6ebc2",
+              "name": "mensaje",
+              "value": "={{ $json.execution.error.message }}",
+              "type": "string"
+            },
+            {
+              "id": "c21e0212-5df3-4eaf-ae8b-3dbe9ebb368a",
+              "name": "fecha",
+              "value": "={{ $now.setZone('Europe/Madrid').toFormat('dd/LL/yyyy') }}",
+              "type": "string"
+            },
+            {
+              "id": "d562adfe-24f4-48c5-b3e2-ecac969db6b2",
+              "name": "hora",
+              "value": "={{ $now.setZone('Europe/Madrid').toFormat('HH:mm') }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
       "position": [
         -576,
         -64
       ],
-      "id": "5aa12673-abad-4ced-ab9b-881ffef4d5a4",
-      "name": "Send email",
-      "webhookId": "8d409db8-656a-4aa1-9065-749bdc5600a9",
-      "credentials": {
-        "smtp": {
-          "id": "MiD3YXIjExt0Aik1",
-          "name": "info@tailwind.es"
-        }
-      }
+      "id": "883e14b0-b098-4c0b-9b2d-956b894076d1",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "operation": "update",
+        "pageId": {
+          "__rl": true,
+          "mode": "url",
+          "value": ""
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2.2,
+      "position": [
+        -368,
+        -64
+      ],
+      "id": "2fabb402-db47-46c1-ae62-e4313173c1f2",
+      "name": "Update a database page"
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Error Trigger": [
+      {
+        "json": {
+          "execution": {
+            "id": "17085",
+            "url": "https://n8n.tailwind.es/workflow/3EsLWbaigVn4UtgZ/executions/17085",
+            "error": {
+              "level": "error",
+              "tags": {},
+              "description": "SyntaxError",
+              "message": "Unexpected identifier 'item' ",
+              "stack": "evalmachine.<anonymous>:2\nfor (cons item of $input.all()) {\n          ^^^^\n\nSyntaxError: Unexpected identifier 'item'\n    at new Script (node:vm:117:7)\n    at createScript (node:vm:269:10)\n    at runInContext (node:vm:300:10)\n    at result (/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+task-runner@file+packages+@n8n+task-runner_@opentelemetry+api@1.9.0_@opentelemetry_eb51b38615a039445701c88b088f88d0/node_modules/@n8n/task-runner/dist/js-task-runner/js-task-runner.js:185:61)\n    at new Promise (<anonymous>)\n    at JsTaskRunner.runForAllItems (/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+task-runner@file+packages+@n8n+task-runner_@opentelemetry+api@1.9.0_@opentelemetry_eb51b38615a039445701c88b088f88d0/node_modules/@n8n/task-runner/dist/js-task-runner/js-task-runner.js:178:34)\n    at JsTaskRunner.executeTask (/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+task-runner@file+packages+@n8n+task-runner_@opentelemetry+api@1.9.0_@opentelemetry_eb51b38615a039445701c88b088f88d0/node_modules/@n8n/task-runner/dist/js-task-runner/js-task-runner.js:128:26)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async Object.waitingForSettings (/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+task-runner@file+packages+@n8n+task-runner_@opentelemetry+api@1.9.0_@opentelemetry_eb51b38615a039445701c88b088f88d0/node_modules/@n8n/task-runner/dist/task-runner.js:256:17)\n    at async TaskState.caseOf (/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+task-runner@file+packages+@n8n+task-runner_@opentelemetry+api@1.9.0_@opentelemetry_eb51b38615a039445701c88b088f88d0/node_modules/@n8n/task-runner/dist/task-state.js:56:16)"
+            },
+            "lastNodeExecuted": "Code in JavaScript",
+            "mode": "trigger",
+            "executionContext": {
+              "version": 1,
+              "establishedAt": 1770370025019,
+              "source": "trigger",
+              "triggerNode": {
+                "name": "Schedule Trigger",
+                "type": "n8n-nodes-base.scheduleTrigger"
+              }
+            }
+          },
+          "workflow": {
+            "id": "3EsLWbaigVn4UtgZ",
+            "name": "ruletaRusa"
+          }
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1"
   },
@@ -138,6 +309,6 @@
   },
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2026-02-05T08:25:05.942Z",
-  "versionId": "1611bf3f-2a25-4a7e-8913-7730d7c331ea"
+  "updatedAt": "2026-02-06T09:55:34.476Z",
+  "versionId": "cfc93341-759e-4320-b64f-da98e0c05cfe"
 }
