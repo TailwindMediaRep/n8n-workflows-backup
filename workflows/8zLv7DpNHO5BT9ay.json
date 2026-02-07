@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-02-04T15:07:31.000Z",
-    "createdAt": "2026-02-04T15:07:16.385Z",
-    "versionId": "12e5a58a-68dc-4eea-a17b-f58ae1a9ed76",
+    "updatedAt": "2026-02-06T08:04:53.000Z",
+    "createdAt": "2026-02-06T08:04:51.269Z",
+    "versionId": "cdcfd770-0ae3-4428-91b1-f4593515aadd",
     "workflowId": "8zLv7DpNHO5BT9ay",
     "nodes": [
       {
@@ -85,7 +85,7 @@
       },
       {
         "parameters": {
-          "jsCode": "// ================================================================\n// 1. OBTENCIÓN ROBUSTA DE DATOS (WEBHOOK VS GRAPHQL)\n// ================================================================\nlet webhookNode;\nlet webhookBody;\nlet webhookHeaders;\n\ntry {\n    // Intentamos leer el nodo \"Webhook2\" explícitamente\n    if ($('Webhook2') && $('Webhook2').first()) {\n        webhookNode = $('Webhook2').first().json;\n    } else {\n        // Fallback: Si no se llama \"Webhook2\", usamos el primer input disponible\n        webhookNode = $input.all()[0].json;\n    }\n} catch (error) {\n    webhookNode = {};\n}\n\n// Normalización: Asegurar que tenemos headers y body disponibles\nif (webhookNode.headers && webhookNode.body) {\n    // Caso A: Venimos directo del Webhook\n    webhookHeaders = webhookNode.headers;\n    webhookBody = webhookNode.body;\n} else if ($input.item.json.headers && $input.item.json.body) {\n    // Caso B: El input actual conserva la estructura del webhook\n    webhookHeaders = $input.item.json.headers;\n    webhookBody = $input.item.json.body;\n} else {\n    // Caso C: Estamos tras el nodo GraphQL (\"Get Refund Customer1\").\n    // Aquí el $input es la respuesta de Shopify, así que forzamos la lectura del nodo Webhook2\n    // para recuperar las transacciones originales.\n    try {\n        const whSource = $('Webhook2').first().json;\n        webhookHeaders = whSource.headers;\n        webhookBody = whSource.body;\n    } catch(e) {\n        // Si todo falla, dejamos objetos vacíos para evitar crash, pero el flujo fallará lógicamente\n        webhookHeaders = {};\n        webhookBody = {};\n    }\n}\n\nconst topic = webhookHeaders[\"x-shopify-topic\"] || \"\";\nconst body = webhookBody || {};\n\n// Variables de salida\nlet customerId = \"\";\nlet amountToProcess = 0;\nlet discountCode = null;\n\n// ================================================================\n// 2. LÓGICA PRINCIPAL (PEDIDOS VS DEVOLUCIONES)\n// ================================================================\n\nif (topic.includes('orders/create')) {\n    // ------------------------------------------------------------\n    // CASO: NUEVO PEDIDO\n    // ------------------------------------------------------------\n    \n    // A. Obtener ID Cliente\n    if (body.customer && body.customer.admin_graphql_api_id) {\n        customerId = body.customer.admin_graphql_api_id;\n    }\n\n    // B. Detectar Descuento\n    if (body.discount_codes && body.discount_codes.length > 0) {\n        discountCode = body.discount_codes[0].code;\n    } else if (body.discount_applications && body.discount_applications.length > 0) {\n        discountCode = body.discount_applications[0].title;\n    }\n\n    // C. Calcular Monto (Solo si hubo descuento aplicado)\n    const totalDiscounts = parseFloat(body.total_discounts || \"0\");\n    if (totalDiscounts > 0) {\n        amountToProcess = parseFloat(body.total_price);\n    } else {\n        amountToProcess = 0;\n    }\n\n} else if (topic.includes('refunds/create')) {\n    // ------------------------------------------------------------\n    // CASO: DEVOLUCIÓN (REFUND)\n    // ------------------------------------------------------------\n\n    // A. Obtener datos enriquecidos desde GraphQL (Nodo anterior)\n    let orderData = null;\n    try {\n        orderData = $input.item.json.data ? $input.item.json.data.order : null;\n    } catch(e) {}\n    \n    // B. Obtener ID Cliente y Código del pedido original\n    if (orderData && orderData.customer) {\n         customerId = orderData.customer.id;\n         \n         if (orderData.discountCodes && orderData.discountCodes.length > 0) {\n             const codeItem = orderData.discountCodes[0];\n             discountCode = (typeof codeItem === 'string') ? codeItem : codeItem.code;\n         } \n    } else {\n         // Fallback de emergencia\n         customerId = body.order_id; \n    }\n\n    // C. CALCULAR MONTO A RESTAR (LÓGICA CRÍTICA \"FOLLOW THE MONEY\")\n    // Buscamos el array de transacciones financieras en el cuerpo del webhook.\n    const transactions = body.transactions || [];\n    \n    // Sumamos solo si hay dinero devuelto. \n    // Si transactions es [] (Cambio de Talla), el total será 0.\n    const totalRefunded = transactions.reduce((acc, curr) => {\n        return acc + parseFloat(curr.amount || 0);\n    }, 0);\n    \n    // Convertimos a negativo para restar del saldo acumulado\n    amountToProcess = -Math.abs(totalRefunded);\n}\n\n// ================================================================\n// 3. RETORNO FINAL\n// ================================================================\nreturn {\n    json: {\n        customerId: customerId,\n        amountToProcess: amountToProcess,\n        discountCode: discountCode\n    }\n};"
+          "jsCode": "// ================================================================\n// 1. OBTENCIÓN ROBUSTA DE DATOS (WEBHOOK VS GRAPHQL)\n// ================================================================\nlet webhookNode;\nlet webhookBody;\nlet webhookHeaders;\n\ntry {\n    // Intentamos leer el nodo \"Webhook2\" explícitamente\n    if ($('Webhook2') && $('Webhook2').first()) {\n        webhookNode = $('Webhook2').first().json;\n    } else {\n        // Fallback: Si no se llama \"Webhook2\", usamos el primer input disponible\n        webhookNode = $input.all()[0].json;\n    }\n} catch (error) {\n    webhookNode = {};\n}\n\n// Normalización: Asegurar que tenemos headers y body disponibles\nif (webhookNode.headers && webhookNode.body) {\n    webhookHeaders = webhookNode.headers;\n    webhookBody = webhookNode.body;\n} else if ($input.item.json.headers && $input.item.json.body) {\n    webhookHeaders = $input.item.json.headers;\n    webhookBody = $input.item.json.body;\n} else {\n    try {\n        const whSource = $('Webhook2').first().json;\n        webhookHeaders = whSource.headers;\n        webhookBody = whSource.body;\n    } catch(e) {\n        webhookHeaders = {};\n        webhookBody = {};\n    }\n}\n\nconst topic = webhookHeaders[\"x-shopify-topic\"] || \"\";\nconst body = webhookBody || {};\n\n// Variables de salida\nlet customerId = \"\";\nlet amountToProcess = 0;\n// CAMBIO: Inicializamos con el texto deseado en lugar de null\nlet discountCode = \"No encontrado\"; \n\n// ================================================================\n// 2. LÓGICA PRINCIPAL (PEDIDOS VS DEVOLUCIONES)\n// ================================================================\n\nif (topic.includes('orders/create')) {\n    // ------------------------------------------------------------\n    // CASO: NUEVO PEDIDO\n    // ------------------------------------------------------------\n    \n    if (body.customer && body.customer.admin_graphql_api_id) {\n        customerId = body.customer.admin_graphql_api_id;\n    }\n\n    if (body.discount_codes && body.discount_codes.length > 0) {\n        discountCode = body.discount_codes[0].code;\n    } else if (body.discount_applications && body.discount_applications.length > 0) {\n        discountCode = body.discount_applications[0].title;\n    }\n\n    const totalDiscounts = parseFloat(body.total_discounts || \"0\");\n    if (totalDiscounts > 0) {\n        amountToProcess = parseFloat(body.total_price);\n    } else {\n        amountToProcess = 0;\n    }\n\n} else if (topic.includes('refunds/create')) {\n    // ------------------------------------------------------------\n    // CASO: DEVOLUCIÓN (REFUND)\n    // ------------------------------------------------------------\n\n    let orderData = null;\n    try {\n        orderData = $input.item.json.data ? $input.item.json.data.order : null;\n    } catch(e) {}\n    \n    if (orderData && orderData.customer) {\n         customerId = orderData.customer.id;\n         \n         if (orderData.discountCodes && orderData.discountCodes.length > 0) {\n             const codeItem = orderData.discountCodes[0];\n             discountCode = (typeof codeItem === 'string') ? codeItem : codeItem.code;\n         } \n    } else {\n         customerId = body.order_id; \n    }\n\n    const transactions = body.transactions || [];\n    const totalRefunded = transactions.reduce((acc, curr) => {\n        return acc + parseFloat(curr.amount || 0);\n    }, 0);\n    \n    amountToProcess = -Math.abs(totalRefunded);\n}\n\n// ================================================================\n// 3. RETORNO FINAL\n// ================================================================\n\n// Doble seguridad: Si por alguna razón la lógica anterior asignó un valor vacío o nulo\nif (!discountCode || discountCode === \"\") {\n    discountCode = \"No encontrado\";\n}\n\nreturn {\n    json: {\n        customerId: customerId,\n        amountToProcess: amountToProcess,\n        discountCode: discountCode\n    }\n};"
         },
         "name": "Code Unificador1",
         "type": "n8n-nodes-base.code",
@@ -234,7 +234,16 @@
             },
             "conditions": [
               {
-                "id": "e15f527b-54b1-4b5e-be43-2d09dfe005a4",
+                "id": "f154c2f9-c53f-4d46-83cd-ee2ce08e82f0",
+                "leftValue": "={{ $json.discountCode }}",
+                "rightValue": "No encontrado",
+                "operator": {
+                  "type": "string",
+                  "operation": "notEquals"
+                }
+              },
+              {
+                "id": "94322cb2-6cc3-4811-a339-9c332f3f3983",
                 "leftValue": "={{ $json.customerId }}",
                 "rightValue": "",
                 "operator": {
@@ -414,11 +423,11 @@
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version 12e5a58a",
+    "name": "Version cdcfd770",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "12e5a58a-68dc-4eea-a17b-f58ae1a9ed76",
+  "activeVersionId": "cdcfd770-0ae3-4428-91b1-f4593515aadd",
   "connections": {
     "Webhook2": {
       "main": [
@@ -628,7 +637,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// ================================================================\n// 1. OBTENCIÓN ROBUSTA DE DATOS (WEBHOOK VS GRAPHQL)\n// ================================================================\nlet webhookNode;\nlet webhookBody;\nlet webhookHeaders;\n\ntry {\n    // Intentamos leer el nodo \"Webhook2\" explícitamente\n    if ($('Webhook2') && $('Webhook2').first()) {\n        webhookNode = $('Webhook2').first().json;\n    } else {\n        // Fallback: Si no se llama \"Webhook2\", usamos el primer input disponible\n        webhookNode = $input.all()[0].json;\n    }\n} catch (error) {\n    webhookNode = {};\n}\n\n// Normalización: Asegurar que tenemos headers y body disponibles\nif (webhookNode.headers && webhookNode.body) {\n    // Caso A: Venimos directo del Webhook\n    webhookHeaders = webhookNode.headers;\n    webhookBody = webhookNode.body;\n} else if ($input.item.json.headers && $input.item.json.body) {\n    // Caso B: El input actual conserva la estructura del webhook\n    webhookHeaders = $input.item.json.headers;\n    webhookBody = $input.item.json.body;\n} else {\n    // Caso C: Estamos tras el nodo GraphQL (\"Get Refund Customer1\").\n    // Aquí el $input es la respuesta de Shopify, así que forzamos la lectura del nodo Webhook2\n    // para recuperar las transacciones originales.\n    try {\n        const whSource = $('Webhook2').first().json;\n        webhookHeaders = whSource.headers;\n        webhookBody = whSource.body;\n    } catch(e) {\n        // Si todo falla, dejamos objetos vacíos para evitar crash, pero el flujo fallará lógicamente\n        webhookHeaders = {};\n        webhookBody = {};\n    }\n}\n\nconst topic = webhookHeaders[\"x-shopify-topic\"] || \"\";\nconst body = webhookBody || {};\n\n// Variables de salida\nlet customerId = \"\";\nlet amountToProcess = 0;\nlet discountCode = null;\n\n// ================================================================\n// 2. LÓGICA PRINCIPAL (PEDIDOS VS DEVOLUCIONES)\n// ================================================================\n\nif (topic.includes('orders/create')) {\n    // ------------------------------------------------------------\n    // CASO: NUEVO PEDIDO\n    // ------------------------------------------------------------\n    \n    // A. Obtener ID Cliente\n    if (body.customer && body.customer.admin_graphql_api_id) {\n        customerId = body.customer.admin_graphql_api_id;\n    }\n\n    // B. Detectar Descuento\n    if (body.discount_codes && body.discount_codes.length > 0) {\n        discountCode = body.discount_codes[0].code;\n    } else if (body.discount_applications && body.discount_applications.length > 0) {\n        discountCode = body.discount_applications[0].title;\n    }\n\n    // C. Calcular Monto (Solo si hubo descuento aplicado)\n    const totalDiscounts = parseFloat(body.total_discounts || \"0\");\n    if (totalDiscounts > 0) {\n        amountToProcess = parseFloat(body.total_price);\n    } else {\n        amountToProcess = 0;\n    }\n\n} else if (topic.includes('refunds/create')) {\n    // ------------------------------------------------------------\n    // CASO: DEVOLUCIÓN (REFUND)\n    // ------------------------------------------------------------\n\n    // A. Obtener datos enriquecidos desde GraphQL (Nodo anterior)\n    let orderData = null;\n    try {\n        orderData = $input.item.json.data ? $input.item.json.data.order : null;\n    } catch(e) {}\n    \n    // B. Obtener ID Cliente y Código del pedido original\n    if (orderData && orderData.customer) {\n         customerId = orderData.customer.id;\n         \n         if (orderData.discountCodes && orderData.discountCodes.length > 0) {\n             const codeItem = orderData.discountCodes[0];\n             discountCode = (typeof codeItem === 'string') ? codeItem : codeItem.code;\n         } \n    } else {\n         // Fallback de emergencia\n         customerId = body.order_id; \n    }\n\n    // C. CALCULAR MONTO A RESTAR (LÓGICA CRÍTICA \"FOLLOW THE MONEY\")\n    // Buscamos el array de transacciones financieras en el cuerpo del webhook.\n    const transactions = body.transactions || [];\n    \n    // Sumamos solo si hay dinero devuelto. \n    // Si transactions es [] (Cambio de Talla), el total será 0.\n    const totalRefunded = transactions.reduce((acc, curr) => {\n        return acc + parseFloat(curr.amount || 0);\n    }, 0);\n    \n    // Convertimos a negativo para restar del saldo acumulado\n    amountToProcess = -Math.abs(totalRefunded);\n}\n\n// ================================================================\n// 3. RETORNO FINAL\n// ================================================================\nreturn {\n    json: {\n        customerId: customerId,\n        amountToProcess: amountToProcess,\n        discountCode: discountCode\n    }\n};"
+        "jsCode": "// ================================================================\n// 1. OBTENCIÓN ROBUSTA DE DATOS (WEBHOOK VS GRAPHQL)\n// ================================================================\nlet webhookNode;\nlet webhookBody;\nlet webhookHeaders;\n\ntry {\n    // Intentamos leer el nodo \"Webhook2\" explícitamente\n    if ($('Webhook2') && $('Webhook2').first()) {\n        webhookNode = $('Webhook2').first().json;\n    } else {\n        // Fallback: Si no se llama \"Webhook2\", usamos el primer input disponible\n        webhookNode = $input.all()[0].json;\n    }\n} catch (error) {\n    webhookNode = {};\n}\n\n// Normalización: Asegurar que tenemos headers y body disponibles\nif (webhookNode.headers && webhookNode.body) {\n    webhookHeaders = webhookNode.headers;\n    webhookBody = webhookNode.body;\n} else if ($input.item.json.headers && $input.item.json.body) {\n    webhookHeaders = $input.item.json.headers;\n    webhookBody = $input.item.json.body;\n} else {\n    try {\n        const whSource = $('Webhook2').first().json;\n        webhookHeaders = whSource.headers;\n        webhookBody = whSource.body;\n    } catch(e) {\n        webhookHeaders = {};\n        webhookBody = {};\n    }\n}\n\nconst topic = webhookHeaders[\"x-shopify-topic\"] || \"\";\nconst body = webhookBody || {};\n\n// Variables de salida\nlet customerId = \"\";\nlet amountToProcess = 0;\n// CAMBIO: Inicializamos con el texto deseado en lugar de null\nlet discountCode = \"No encontrado\"; \n\n// ================================================================\n// 2. LÓGICA PRINCIPAL (PEDIDOS VS DEVOLUCIONES)\n// ================================================================\n\nif (topic.includes('orders/create')) {\n    // ------------------------------------------------------------\n    // CASO: NUEVO PEDIDO\n    // ------------------------------------------------------------\n    \n    if (body.customer && body.customer.admin_graphql_api_id) {\n        customerId = body.customer.admin_graphql_api_id;\n    }\n\n    if (body.discount_codes && body.discount_codes.length > 0) {\n        discountCode = body.discount_codes[0].code;\n    } else if (body.discount_applications && body.discount_applications.length > 0) {\n        discountCode = body.discount_applications[0].title;\n    }\n\n    const totalDiscounts = parseFloat(body.total_discounts || \"0\");\n    if (totalDiscounts > 0) {\n        amountToProcess = parseFloat(body.total_price);\n    } else {\n        amountToProcess = 0;\n    }\n\n} else if (topic.includes('refunds/create')) {\n    // ------------------------------------------------------------\n    // CASO: DEVOLUCIÓN (REFUND)\n    // ------------------------------------------------------------\n\n    let orderData = null;\n    try {\n        orderData = $input.item.json.data ? $input.item.json.data.order : null;\n    } catch(e) {}\n    \n    if (orderData && orderData.customer) {\n         customerId = orderData.customer.id;\n         \n         if (orderData.discountCodes && orderData.discountCodes.length > 0) {\n             const codeItem = orderData.discountCodes[0];\n             discountCode = (typeof codeItem === 'string') ? codeItem : codeItem.code;\n         } \n    } else {\n         customerId = body.order_id; \n    }\n\n    const transactions = body.transactions || [];\n    const totalRefunded = transactions.reduce((acc, curr) => {\n        return acc + parseFloat(curr.amount || 0);\n    }, 0);\n    \n    amountToProcess = -Math.abs(totalRefunded);\n}\n\n// ================================================================\n// 3. RETORNO FINAL\n// ================================================================\n\n// Doble seguridad: Si por alguna razón la lógica anterior asignó un valor vacío o nulo\nif (!discountCode || discountCode === \"\") {\n    discountCode = \"No encontrado\";\n}\n\nreturn {\n    json: {\n        customerId: customerId,\n        amountToProcess: amountToProcess,\n        discountCode: discountCode\n    }\n};"
       },
       "name": "Code Unificador1",
       "type": "n8n-nodes-base.code",
@@ -777,7 +786,16 @@
           },
           "conditions": [
             {
-              "id": "e15f527b-54b1-4b5e-be43-2d09dfe005a4",
+              "id": "f154c2f9-c53f-4d46-83cd-ee2ce08e82f0",
+              "leftValue": "={{ $json.discountCode }}",
+              "rightValue": "No encontrado",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            },
+            {
+              "id": "94322cb2-6cc3-4811-a339-9c332f3f3983",
               "leftValue": "={{ $json.customerId }}",
               "rightValue": "",
               "operator": {
@@ -834,7 +852,562 @@
       }
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Webhook2": [
+      {
+        "json": {
+          "headers": {
+            "connection": "upgrade",
+            "host": "n8n.tailwind.es",
+            "x-forwarded-for": "35.241.181.198",
+            "x-forwarded-proto": "https",
+            "content-length": "9932",
+            "user-agent": "Shopify-Captain-Hook",
+            "accept": "*/*",
+            "accept-encoding": "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
+            "content-type": "application/json",
+            "x-shopify-api-version": "2026-01",
+            "x-shopify-event-id": "21a4959c-583b-4b77-b058-dfafdc6fc1cb",
+            "x-shopify-hmac-sha256": "o4RxoYKjkECuvHvCdWBMFxbkICDYrB5YPq3biMjqpJ4=",
+            "x-shopify-order-id": "7528126775643",
+            "x-shopify-shop-domain": "surfin-store-spain.myshopify.com",
+            "x-shopify-test": "false",
+            "x-shopify-topic": "orders/create",
+            "x-shopify-triggered-at": "2026-02-06T12:08:24.625494162Z",
+            "x-shopify-webhook-id": "61fbc6ca-692b-5c10-b00e-b0a7a98173bf"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "id": 7528126775643,
+            "admin_graphql_api_id": "gid://shopify/Order/7528126775643",
+            "app_id": 129785,
+            "browser_ip": "2.136.43.78",
+            "buyer_accepts_marketing": false,
+            "cancel_reason": null,
+            "cancelled_at": null,
+            "cart_token": null,
+            "checkout_id": 48334208827739,
+            "checkout_token": "e148561b-872c-4f0a-98d2-dc0d28069602",
+            "client_details": {
+              "accept_language": null,
+              "browser_height": null,
+              "browser_ip": "2.136.43.78",
+              "browser_width": null,
+              "session_hash": null,
+              "user_agent": "Shopify POS/10.15.2/Android/15/Redmi/25040RP0AE/production"
+            },
+            "closed_at": "2026-02-06T13:08:25+01:00",
+            "company": null,
+            "confirmation_number": "XVG5KN5V2",
+            "confirmed": true,
+            "contact_email": null,
+            "created_at": "2026-02-06T13:08:23+01:00",
+            "currency": "EUR",
+            "current_shipping_price_set": {
+              "shop_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              }
+            },
+            "current_subtotal_price": "153.00",
+            "current_subtotal_price_set": {
+              "shop_money": {
+                "amount": "153.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "153.00",
+                "currency_code": "EUR"
+              }
+            },
+            "current_total_additional_fees_set": null,
+            "current_total_discounts": "102.00",
+            "current_total_discounts_set": {
+              "shop_money": {
+                "amount": "102.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "102.00",
+                "currency_code": "EUR"
+              }
+            },
+            "current_total_duties_set": null,
+            "current_total_price": "153.00",
+            "current_total_price_set": {
+              "shop_money": {
+                "amount": "153.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "153.00",
+                "currency_code": "EUR"
+              }
+            },
+            "current_total_tax": "0.00",
+            "current_total_tax_set": {
+              "shop_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              }
+            },
+            "customer_locale": "es",
+            "device_id": 20,
+            "discount_codes": [
+              {
+                "code": "Autorizado por Gerardo",
+                "amount": "102.00",
+                "type": "percentage"
+              }
+            ],
+            "duties_included": false,
+            "email": "",
+            "estimated_taxes": false,
+            "financial_status": "paid",
+            "fulfillment_status": "fulfilled",
+            "landing_site": null,
+            "landing_site_ref": null,
+            "location_id": 108915917147,
+            "merchant_business_entity_id": "MTg3OTg3NjUwOTA3",
+            "merchant_of_record_app_id": null,
+            "name": "#71906",
+            "note": null,
+            "note_attributes": [],
+            "number": 70906,
+            "order_number": 71906,
+            "order_status_url": "https://nuance-store.com/87987650907/orders/b232d991f567527dffad3b8f60ab5365/authenticate?key=f94848f6d3bfc5215dd15fe3c62006ac",
+            "original_total_additional_fees_set": null,
+            "original_total_duties_set": null,
+            "payment_gateway_names": [
+              "cash"
+            ],
+            "phone": null,
+            "po_number": null,
+            "presentment_currency": "EUR",
+            "processed_at": "2026-02-06T13:08:22+01:00",
+            "reference": null,
+            "referring_site": null,
+            "source_identifier": "108915917147-20-1166",
+            "source_name": "pos",
+            "source_url": null,
+            "subtotal_price": "153.00",
+            "subtotal_price_set": {
+              "shop_money": {
+                "amount": "153.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "153.00",
+                "currency_code": "EUR"
+              }
+            },
+            "tags": "",
+            "tax_exempt": false,
+            "tax_lines": [],
+            "taxes_included": true,
+            "test": false,
+            "token": "b232d991f567527dffad3b8f60ab5365",
+            "total_cash_rounding_payment_adjustment_set": {
+              "shop_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              }
+            },
+            "total_cash_rounding_refund_adjustment_set": {
+              "shop_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              }
+            },
+            "total_discounts": "102.00",
+            "total_discounts_set": {
+              "shop_money": {
+                "amount": "102.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "102.00",
+                "currency_code": "EUR"
+              }
+            },
+            "total_line_items_price": "255.00",
+            "total_line_items_price_set": {
+              "shop_money": {
+                "amount": "255.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "255.00",
+                "currency_code": "EUR"
+              }
+            },
+            "total_outstanding": "0.00",
+            "total_price": "153.00",
+            "total_price_set": {
+              "shop_money": {
+                "amount": "153.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "153.00",
+                "currency_code": "EUR"
+              }
+            },
+            "total_shipping_price_set": {
+              "shop_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              }
+            },
+            "total_tax": "0.00",
+            "total_tax_set": {
+              "shop_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              }
+            },
+            "total_tip_received": "0.00",
+            "total_weight": 0,
+            "updated_at": "2026-02-06T13:08:25+01:00",
+            "user_id": 127346606427,
+            "billing_address": null,
+            "customer": null,
+            "discount_applications": [
+              {
+                "target_type": "line_item",
+                "type": "manual",
+                "value": "40.0",
+                "value_type": "percentage",
+                "allocation_method": "across",
+                "target_selection": "all",
+                "title": "Autorizado por Gerardo",
+                "description": null
+              }
+            ],
+            "fulfillments": [
+              {
+                "id": 6713964167515,
+                "admin_graphql_api_id": "gid://shopify/Fulfillment/6713964167515",
+                "created_at": "2026-02-06T13:08:24+01:00",
+                "location_id": 108915917147,
+                "name": "#71906.1",
+                "order_id": 7528126775643,
+                "origin_address": {},
+                "receipt": {},
+                "service": "manual",
+                "shipment_status": null,
+                "status": "success",
+                "tracking_company": null,
+                "tracking_number": null,
+                "tracking_numbers": [],
+                "tracking_url": null,
+                "tracking_urls": [],
+                "updated_at": "2026-02-06T13:08:24+01:00",
+                "line_items": [
+                  {
+                    "id": 18428674933083,
+                    "admin_graphql_api_id": "gid://shopify/LineItem/18428674933083",
+                    "attributed_staffs": [],
+                    "current_quantity": 1,
+                    "fulfillable_quantity": 0,
+                    "fulfillment_service": "manual",
+                    "fulfillment_status": "fulfilled",
+                    "gift_card": false,
+                    "grams": 0,
+                    "name": "The North Face Mns Extreme Pile 2 Fz Forro Polar - White Dune / S",
+                    "price": "170.00",
+                    "price_set": {
+                      "shop_money": {
+                        "amount": "170.00",
+                        "currency_code": "EUR"
+                      },
+                      "presentment_money": {
+                        "amount": "170.00",
+                        "currency_code": "EUR"
+                      }
+                    },
+                    "product_exists": true,
+                    "product_id": 10267874754907,
+                    "properties": [],
+                    "quantity": 1,
+                    "requires_shipping": true,
+                    "sku": "51959726735707",
+                    "taxable": true,
+                    "title": "The North Face Mns Extreme Pile 2 Fz Forro Polar",
+                    "total_discount": "0.00",
+                    "total_discount_set": {
+                      "shop_money": {
+                        "amount": "0.00",
+                        "currency_code": "EUR"
+                      },
+                      "presentment_money": {
+                        "amount": "0.00",
+                        "currency_code": "EUR"
+                      }
+                    },
+                    "variant_id": 51959726735707,
+                    "variant_inventory_management": "shopify",
+                    "variant_title": "White Dune / S",
+                    "vendor": "The North Face",
+                    "tax_lines": [],
+                    "duties": [],
+                    "discount_allocations": [
+                      {
+                        "amount": "68.00",
+                        "amount_set": {
+                          "shop_money": {
+                            "amount": "68.00",
+                            "currency_code": "EUR"
+                          },
+                          "presentment_money": {
+                            "amount": "68.00",
+                            "currency_code": "EUR"
+                          }
+                        },
+                        "discount_application_index": 0
+                      }
+                    ]
+                  },
+                  {
+                    "id": 18428674965851,
+                    "admin_graphql_api_id": "gid://shopify/LineItem/18428674965851",
+                    "attributed_staffs": [],
+                    "current_quantity": 1,
+                    "fulfillable_quantity": 0,
+                    "fulfillment_service": "manual",
+                    "fulfillment_status": "fulfilled",
+                    "gift_card": false,
+                    "grams": 0,
+                    "name": "The North Face Yumiori 1/4 Zip Forro Polar - TNF Black/Asphalt Grey/Monument Grey / M",
+                    "price": "85.00",
+                    "price_set": {
+                      "shop_money": {
+                        "amount": "85.00",
+                        "currency_code": "EUR"
+                      },
+                      "presentment_money": {
+                        "amount": "85.00",
+                        "currency_code": "EUR"
+                      }
+                    },
+                    "product_exists": true,
+                    "product_id": 10254930542939,
+                    "properties": [],
+                    "quantity": 1,
+                    "requires_shipping": true,
+                    "sku": "51905154023771",
+                    "taxable": true,
+                    "title": "The North Face Yumiori 1/4 Zip Forro Polar",
+                    "total_discount": "0.00",
+                    "total_discount_set": {
+                      "shop_money": {
+                        "amount": "0.00",
+                        "currency_code": "EUR"
+                      },
+                      "presentment_money": {
+                        "amount": "0.00",
+                        "currency_code": "EUR"
+                      }
+                    },
+                    "variant_id": 51905154023771,
+                    "variant_inventory_management": "shopify",
+                    "variant_title": "TNF Black/Asphalt Grey/Monument Grey / M",
+                    "vendor": "The North Face",
+                    "tax_lines": [],
+                    "duties": [],
+                    "discount_allocations": [
+                      {
+                        "amount": "34.00",
+                        "amount_set": {
+                          "shop_money": {
+                            "amount": "34.00",
+                            "currency_code": "EUR"
+                          },
+                          "presentment_money": {
+                            "amount": "34.00",
+                            "currency_code": "EUR"
+                          }
+                        },
+                        "discount_application_index": 0
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "line_items": [
+              {
+                "id": 18428674933083,
+                "admin_graphql_api_id": "gid://shopify/LineItem/18428674933083",
+                "attributed_staffs": [],
+                "current_quantity": 1,
+                "fulfillable_quantity": 0,
+                "fulfillment_service": "manual",
+                "fulfillment_status": "fulfilled",
+                "gift_card": false,
+                "grams": 0,
+                "name": "The North Face Mns Extreme Pile 2 Fz Forro Polar - White Dune / S",
+                "price": "170.00",
+                "price_set": {
+                  "shop_money": {
+                    "amount": "170.00",
+                    "currency_code": "EUR"
+                  },
+                  "presentment_money": {
+                    "amount": "170.00",
+                    "currency_code": "EUR"
+                  }
+                },
+                "product_exists": true,
+                "product_id": 10267874754907,
+                "properties": [],
+                "quantity": 1,
+                "requires_shipping": true,
+                "sales_line_item_group_id": null,
+                "sku": "51959726735707",
+                "taxable": true,
+                "title": "The North Face Mns Extreme Pile 2 Fz Forro Polar",
+                "total_discount": "0.00",
+                "total_discount_set": {
+                  "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "EUR"
+                  },
+                  "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "EUR"
+                  }
+                },
+                "variant_id": 51959726735707,
+                "variant_inventory_management": "shopify",
+                "variant_title": "White Dune / S",
+                "vendor": "The North Face",
+                "tax_lines": [],
+                "duties": [],
+                "discount_allocations": [
+                  {
+                    "amount": "68.00",
+                    "amount_set": {
+                      "shop_money": {
+                        "amount": "68.00",
+                        "currency_code": "EUR"
+                      },
+                      "presentment_money": {
+                        "amount": "68.00",
+                        "currency_code": "EUR"
+                      }
+                    },
+                    "discount_application_index": 0
+                  }
+                ]
+              },
+              {
+                "id": 18428674965851,
+                "admin_graphql_api_id": "gid://shopify/LineItem/18428674965851",
+                "attributed_staffs": [],
+                "current_quantity": 1,
+                "fulfillable_quantity": 0,
+                "fulfillment_service": "manual",
+                "fulfillment_status": "fulfilled",
+                "gift_card": false,
+                "grams": 0,
+                "name": "The North Face Yumiori 1/4 Zip Forro Polar - TNF Black/Asphalt Grey/Monument Grey / M",
+                "price": "85.00",
+                "price_set": {
+                  "shop_money": {
+                    "amount": "85.00",
+                    "currency_code": "EUR"
+                  },
+                  "presentment_money": {
+                    "amount": "85.00",
+                    "currency_code": "EUR"
+                  }
+                },
+                "product_exists": true,
+                "product_id": 10254930542939,
+                "properties": [],
+                "quantity": 1,
+                "requires_shipping": true,
+                "sales_line_item_group_id": null,
+                "sku": "51905154023771",
+                "taxable": true,
+                "title": "The North Face Yumiori 1/4 Zip Forro Polar",
+                "total_discount": "0.00",
+                "total_discount_set": {
+                  "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "EUR"
+                  },
+                  "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "EUR"
+                  }
+                },
+                "variant_id": 51905154023771,
+                "variant_inventory_management": "shopify",
+                "variant_title": "TNF Black/Asphalt Grey/Monument Grey / M",
+                "vendor": "The North Face",
+                "tax_lines": [],
+                "duties": [],
+                "discount_allocations": [
+                  {
+                    "amount": "34.00",
+                    "amount_set": {
+                      "shop_money": {
+                        "amount": "34.00",
+                        "currency_code": "EUR"
+                      },
+                      "presentment_money": {
+                        "amount": "34.00",
+                        "currency_code": "EUR"
+                      }
+                    },
+                    "discount_application_index": 0
+                  }
+                ]
+              }
+            ],
+            "payment_terms": null,
+            "refunds": [],
+            "shipping_address": null,
+            "shipping_lines": [],
+            "returns": [],
+            "line_item_groups": []
+          },
+          "webhookUrl": "https://n8n.tailwind.es/webhook/monto-descuentos",
+          "executionMode": "production"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1",
     "availableInMCP": false
@@ -851,6 +1424,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-02-05T13:49:52.607Z",
-  "versionId": "12e5a58a-68dc-4eea-a17b-f58ae1a9ed76"
+  "updatedAt": "2026-02-06T14:01:50.734Z",
+  "versionId": "cdcfd770-0ae3-4428-91b1-f4593515aadd"
 }
