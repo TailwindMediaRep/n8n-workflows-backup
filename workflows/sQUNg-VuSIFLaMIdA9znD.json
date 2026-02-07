@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-02-05T13:22:45.000Z",
-    "createdAt": "2026-02-05T13:22:44.075Z",
-    "versionId": "824e44fe-4ef3-44f3-9adc-06bbeafdb2e4",
+    "updatedAt": "2026-02-06T13:01:19.000Z",
+    "createdAt": "2026-02-06T13:01:17.884Z",
+    "versionId": "50453d47-aaf3-4bdb-b7ec-50b4392da2e0",
     "workflowId": "sQUNg-VuSIFLaMIdA9znD",
     "nodes": [
       {
@@ -2068,6 +2068,7 @@
       },
       {
         "parameters": {
+          "operation": "upsert",
           "schema": {
             "__rl": true,
             "mode": "list",
@@ -2082,11 +2083,13 @@
           "columns": {
             "mappingMode": "defineBelow",
             "value": {
-              "id_pedido": "={{ $('Update row in sheet').item.json[\"ID PEDIDO\"] }}",
-              "id_documento": "={{ $('Get row(s)').first().json.ID_Documento }}",
-              "fecha": "={{ $now.format('dd/LL/yyyy') }}"
+              "id_documento": "={{ $json.ID_Documento }}",
+              "id_pedido": "={{ $('Webhook').first().json.body.id }}",
+              "fecha": "={{ $now.format('dd-LL-yyyy') }}"
             },
-            "matchingColumns": [],
+            "matchingColumns": [
+              "id_pedido"
+            ],
             "schema": [
               {
                 "id": "id_pedido",
@@ -2095,7 +2098,8 @@
                 "defaultMatch": false,
                 "display": true,
                 "type": "number",
-                "canBeUsedToMatch": true
+                "canBeUsedToMatch": true,
+                "removed": false
               },
               {
                 "id": "id_documento",
@@ -2104,7 +2108,7 @@
                 "defaultMatch": false,
                 "display": true,
                 "type": "string",
-                "canBeUsedToMatch": true
+                "canBeUsedToMatch": false
               },
               {
                 "id": "fecha",
@@ -2113,7 +2117,7 @@
                 "defaultMatch": false,
                 "display": true,
                 "type": "dateTime",
-                "canBeUsedToMatch": true
+                "canBeUsedToMatch": false
               }
             ],
             "attemptToConvertTypes": false,
@@ -2128,6 +2132,76 @@
           480
         ],
         "id": "7dab9750-96c6-4a7d-97c9-100169c69795",
+        "name": "Insert or update rows in a table",
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "Documentos_Sheets",
+            "mode": "list",
+            "cachedResultName": "Documentos_Sheets"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "id_documento": "={{ $('Copy file').item.json.id }}",
+              "nombre": "={{ $('Copy file').item.json.name }}",
+              "tipo": "informe"
+            },
+            "matchingColumns": [],
+            "schema": [
+              {
+                "id": "id_documento",
+                "displayName": "id_documento",
+                "required": true,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "tipo",
+                "displayName": "tipo",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "nombre",
+                "displayName": "nombre",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          1344,
+          128
+        ],
+        "id": "0c1bdfd2-d89f-4a5b-8bb3-a3177e0bbd7b",
         "name": "Insert rows in a table",
         "credentials": {
           "postgres": {
@@ -2470,6 +2544,17 @@
         "main": [
           [
             {
+              "node": "Insert or update rows in a table",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Insert row": {
+        "main": [
+          [
+            {
               "node": "Insert rows in a table",
               "type": "main",
               "index": 0
@@ -2479,11 +2564,11 @@
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version 824e44fe",
+    "name": "Version 50453d47",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "824e44fe-4ef3-44f3-9adc-06bbeafdb2e4",
+  "activeVersionId": "50453d47-aaf3-4bdb-b7ec-50b4392da2e0",
   "connections": {
     "Webhook": {
       "main": [
@@ -2814,6 +2899,17 @@
       ]
     },
     "Update row(s)1": {
+      "main": [
+        [
+          {
+            "node": "Insert or update rows in a table",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert row": {
       "main": [
         [
           {
@@ -4895,6 +4991,7 @@
     },
     {
       "parameters": {
+        "operation": "upsert",
         "schema": {
           "__rl": true,
           "mode": "list",
@@ -4909,11 +5006,13 @@
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "id_pedido": "={{ $('Update row in sheet').item.json[\"ID PEDIDO\"] }}",
-            "id_documento": "={{ $('Get row(s)').first().json.ID_Documento }}",
-            "fecha": "={{ $now.format('dd/LL/yyyy') }}"
+            "id_documento": "={{ $json.ID_Documento }}",
+            "id_pedido": "={{ $('Webhook').first().json.body.id }}",
+            "fecha": "={{ $now.format('dd-LL-yyyy') }}"
           },
-          "matchingColumns": [],
+          "matchingColumns": [
+            "id_pedido"
+          ],
           "schema": [
             {
               "id": "id_pedido",
@@ -4922,7 +5021,8 @@
               "defaultMatch": false,
               "display": true,
               "type": "number",
-              "canBeUsedToMatch": true
+              "canBeUsedToMatch": true,
+              "removed": false
             },
             {
               "id": "id_documento",
@@ -4931,7 +5031,7 @@
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true
+              "canBeUsedToMatch": false
             },
             {
               "id": "fecha",
@@ -4940,7 +5040,7 @@
               "defaultMatch": false,
               "display": true,
               "type": "dateTime",
-              "canBeUsedToMatch": true
+              "canBeUsedToMatch": false
             }
           ],
           "attemptToConvertTypes": false,
@@ -4955,6 +5055,76 @@
         480
       ],
       "id": "7dab9750-96c6-4a7d-97c9-100169c69795",
+      "name": "Insert or update rows in a table",
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "Documentos_Sheets",
+          "mode": "list",
+          "cachedResultName": "Documentos_Sheets"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id_documento": "={{ $('Copy file').item.json.id }}",
+            "nombre": "={{ $('Copy file').item.json.name }}",
+            "tipo": "informe"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "id_documento",
+              "displayName": "id_documento",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "tipo",
+              "displayName": "tipo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "nombre",
+              "displayName": "nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1344,
+        128
+      ],
+      "id": "0c1bdfd2-d89f-4a5b-8bb3-a3177e0bbd7b",
       "name": "Insert rows in a table",
       "credentials": {
         "postgres": {
@@ -4971,50 +5141,50 @@
           "headers": {
             "connection": "upgrade",
             "host": "n8n.tailwind.es",
-            "x-forwarded-for": "34.34.152.237",
+            "x-forwarded-for": "35.205.131.179",
             "x-forwarded-proto": "https",
-            "content-length": "7314",
+            "content-length": "8563",
             "user-agent": "Shopify-Captain-Hook",
             "accept": "*/*",
             "accept-encoding": "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
             "content-type": "application/json",
             "x-shopify-api-version": "2025-10",
-            "x-shopify-event-id": "c8e373fe-500a-4acd-a927-53a216ba2b8b",
-            "x-shopify-hmac-sha256": "Vl8fymojE5xMeVzzM0zenMEkCqbmEfchXWSc86phdng=",
-            "x-shopify-order-id": "7525433508187",
+            "x-shopify-event-id": "258dea0e-3d27-4045-8dad-7f3a178d1410",
+            "x-shopify-hmac-sha256": "GFVwd1eInupPdX9xIE+s5ucqhU1MdnoUBNv/xs1z4vk=",
+            "x-shopify-order-id": "7526353502555",
             "x-shopify-shop-domain": "surfin-store-spain.myshopify.com",
             "x-shopify-test": "false",
             "x-shopify-topic": "orders/create",
-            "x-shopify-triggered-at": "2026-02-05T13:04:10.248258121Z",
-            "x-shopify-webhook-id": "a23f91e1-6d90-5e99-a9ba-ec6dff98fc98"
+            "x-shopify-triggered-at": "2026-02-05T17:17:00.719180461Z",
+            "x-shopify-webhook-id": "1cd5b907-2db6-54e1-84f9-776a6d51cae8"
           },
           "params": {},
           "query": {},
           "body": {
-            "id": 7525433508187,
-            "admin_graphql_api_id": "gid://shopify/Order/7525433508187",
+            "id": 7526353502555,
+            "admin_graphql_api_id": "gid://shopify/Order/7526353502555",
             "app_id": 129785,
-            "browser_ip": "2.136.43.78",
+            "browser_ip": "83.48.95.200",
             "buyer_accepts_marketing": false,
             "cancel_reason": null,
             "cancelled_at": null,
             "cart_token": null,
-            "checkout_id": 48321509982555,
-            "checkout_token": "d80723fc-fc21-46d0-8d21-5a56c4ef5808",
+            "checkout_id": 48329695887707,
+            "checkout_token": "c90f8a3e-2682-462d-a67d-91ba7d569f48",
             "client_details": {
               "accept_language": null,
               "browser_height": null,
-              "browser_ip": "2.136.43.78",
+              "browser_ip": "83.48.95.200",
               "browser_width": null,
               "session_hash": null,
-              "user_agent": "Shopify POS/10.15.2/Android/15/Redmi/25040RP0AE/production"
+              "user_agent": "Shopify POS/10.19.3/Android/15/Redmi/25099RP13G/production"
             },
-            "closed_at": "2026-02-05T14:04:11+01:00",
+            "closed_at": "2026-02-05T18:17:01+01:00",
             "company": null,
-            "confirmation_number": "4WGELFNVE",
+            "confirmation_number": "2ENTQEUZ6",
             "confirmed": true,
-            "contact_email": "juanmasu19082005@gmail.com",
-            "created_at": "2026-02-05T14:04:09+01:00",
+            "contact_email": null,
+            "created_at": "2026-02-05T18:16:59+01:00",
             "currency": "EUR",
             "current_shipping_price_set": {
               "shop_money": {
@@ -5026,14 +5196,14 @@
                 "currency_code": "EUR"
               }
             },
-            "current_subtotal_price": "85.00",
+            "current_subtotal_price": "84.90",
             "current_subtotal_price_set": {
               "shop_money": {
-                "amount": "85.00",
+                "amount": "84.90",
                 "currency_code": "EUR"
               },
               "presentment_money": {
-                "amount": "85.00",
+                "amount": "84.90",
                 "currency_code": "EUR"
               }
             },
@@ -5050,14 +5220,14 @@
               }
             },
             "current_total_duties_set": null,
-            "current_total_price": "85.00",
+            "current_total_price": "84.90",
             "current_total_price_set": {
               "shop_money": {
-                "amount": "85.00",
+                "amount": "84.90",
                 "currency_code": "EUR"
               },
               "presentment_money": {
-                "amount": "85.00",
+                "amount": "84.90",
                 "currency_code": "EUR"
               }
             },
@@ -5073,46 +5243,46 @@
               }
             },
             "customer_locale": "es",
-            "device_id": 20,
+            "device_id": 8,
             "discount_codes": [],
             "duties_included": false,
-            "email": "juanmasu19082005@gmail.com",
+            "email": "",
             "estimated_taxes": false,
             "financial_status": "paid",
             "fulfillment_status": "fulfilled",
             "landing_site": null,
             "landing_site_ref": null,
-            "location_id": 108915917147,
+            "location_id": 99018441051,
             "merchant_business_entity_id": "MTg3OTg3NjUwOTA3",
             "merchant_of_record_app_id": null,
-            "name": "#71868",
+            "name": "#71885",
             "note": null,
             "note_attributes": [],
-            "number": 70868,
-            "order_number": 71868,
-            "order_status_url": "https://nuance-store.com/87987650907/orders/280e9f3249a986d79e6b2c4f57ba5d39/authenticate?key=afd215cb5337d28482402d1cbd449376",
+            "number": 70885,
+            "order_number": 71885,
+            "order_status_url": "https://nuance-store.com/87987650907/orders/aaa830d18fc7e9be27b8c790d0866ff4/authenticate?key=d54e3e5a77a568b774c353008e95f384",
             "original_total_additional_fees_set": null,
             "original_total_duties_set": null,
             "payment_gateway_names": [
-              "Tarjeta"
+              "cash"
             ],
             "phone": null,
             "po_number": null,
             "presentment_currency": "EUR",
-            "processed_at": "2026-02-05T14:04:08+01:00",
+            "processed_at": "2026-02-05T18:16:58+01:00",
             "reference": null,
             "referring_site": null,
-            "source_identifier": "108915917147-20-1151",
+            "source_identifier": "99018441051-8-2303",
             "source_name": "pos",
             "source_url": null,
-            "subtotal_price": "85.00",
+            "subtotal_price": "84.90",
             "subtotal_price_set": {
               "shop_money": {
-                "amount": "85.00",
+                "amount": "84.90",
                 "currency_code": "EUR"
               },
               "presentment_money": {
-                "amount": "85.00",
+                "amount": "84.90",
                 "currency_code": "EUR"
               }
             },
@@ -5121,7 +5291,7 @@
             "tax_lines": [],
             "taxes_included": true,
             "test": false,
-            "token": "280e9f3249a986d79e6b2c4f57ba5d39",
+            "token": "aaa830d18fc7e9be27b8c790d0866ff4",
             "total_cash_rounding_payment_adjustment_set": {
               "shop_money": {
                 "amount": "0.00",
@@ -5153,26 +5323,26 @@
                 "currency_code": "EUR"
               }
             },
-            "total_line_items_price": "85.00",
+            "total_line_items_price": "84.90",
             "total_line_items_price_set": {
               "shop_money": {
-                "amount": "85.00",
+                "amount": "84.90",
                 "currency_code": "EUR"
               },
               "presentment_money": {
-                "amount": "85.00",
+                "amount": "84.90",
                 "currency_code": "EUR"
               }
             },
             "total_outstanding": "0.00",
-            "total_price": "85.00",
+            "total_price": "84.90",
             "total_price_set": {
               "shop_money": {
-                "amount": "85.00",
+                "amount": "84.90",
                 "currency_code": "EUR"
               },
               "presentment_money": {
-                "amount": "85.00",
+                "amount": "84.90",
                 "currency_code": "EUR"
               }
             },
@@ -5199,35 +5369,19 @@
             },
             "total_tip_received": "0.00",
             "total_weight": 0,
-            "updated_at": "2026-02-05T14:04:11+01:00",
-            "user_id": 126641570139,
+            "updated_at": "2026-02-05T18:17:01+01:00",
+            "user_id": 126905516379,
             "billing_address": null,
-            "customer": {
-              "id": 10159357362523,
-              "created_at": "2026-02-05T14:03:30+01:00",
-              "updated_at": "2026-02-05T14:04:09+01:00",
-              "first_name": "Juan Manuel",
-              "last_name": "Suarez",
-              "state": "disabled",
-              "note": "",
-              "verified_email": true,
-              "multipass_identifier": null,
-              "tax_exempt": false,
-              "email": "juanmasu19082005@gmail.com",
-              "phone": null,
-              "currency": "EUR",
-              "tax_exemptions": [],
-              "admin_graphql_api_id": "gid://shopify/Customer/10159357362523"
-            },
+            "customer": null,
             "discount_applications": [],
             "fulfillments": [
               {
-                "id": 6710982410587,
-                "admin_graphql_api_id": "gid://shopify/Fulfillment/6710982410587",
-                "created_at": "2026-02-05T14:04:10+01:00",
-                "location_id": 108915917147,
-                "name": "#71868.1",
-                "order_id": 7525433508187,
+                "id": 6712015389019,
+                "admin_graphql_api_id": "gid://shopify/Fulfillment/6712015389019",
+                "created_at": "2026-02-05T18:17:00+01:00",
+                "location_id": 99018441051,
+                "name": "#71885.1",
+                "order_id": 7526353502555,
                 "origin_address": {},
                 "receipt": {},
                 "service": "manual",
@@ -5238,11 +5392,11 @@
                 "tracking_numbers": [],
                 "tracking_url": null,
                 "tracking_urls": [],
-                "updated_at": "2026-02-05T14:04:10+01:00",
+                "updated_at": "2026-02-05T18:17:00+01:00",
                 "line_items": [
                   {
-                    "id": 18423245930843,
-                    "admin_graphql_api_id": "gid://shopify/LineItem/18423245930843",
+                    "id": 18424960549211,
+                    "admin_graphql_api_id": "gid://shopify/LineItem/18424960549211",
                     "attributed_staffs": [],
                     "current_quantity": 1,
                     "fulfillable_quantity": 0,
@@ -5250,26 +5404,26 @@
                     "fulfillment_status": "fulfilled",
                     "gift_card": false,
                     "grams": 0,
-                    "name": "The North Face Yumiori 1/4 Zip Forro Polar - TNF Black/Asphalt Grey/Monument Grey / L",
-                    "price": "85.00",
+                    "name": "Oakley O-Shiesty Balaclava - Blackout / U",
+                    "price": "45.00",
                     "price_set": {
                       "shop_money": {
-                        "amount": "85.00",
+                        "amount": "45.00",
                         "currency_code": "EUR"
                       },
                       "presentment_money": {
-                        "amount": "85.00",
+                        "amount": "45.00",
                         "currency_code": "EUR"
                       }
                     },
                     "product_exists": true,
-                    "product_id": 10254930542939,
+                    "product_id": 10194128044379,
                     "properties": [],
                     "quantity": 1,
                     "requires_shipping": true,
-                    "sku": "51905154056539",
+                    "sku": "52080404889947",
                     "taxable": true,
-                    "title": "The North Face Yumiori 1/4 Zip Forro Polar",
+                    "title": "Oakley O-Shiesty Balaclava",
                     "total_discount": "0.00",
                     "total_discount_set": {
                       "shop_money": {
@@ -5281,10 +5435,59 @@
                         "currency_code": "EUR"
                       }
                     },
-                    "variant_id": 51905154056539,
+                    "variant_id": 52080404889947,
                     "variant_inventory_management": "shopify",
-                    "variant_title": "TNF Black/Asphalt Grey/Monument Grey / L",
-                    "vendor": "The North Face",
+                    "variant_title": "Blackout / U",
+                    "vendor": "Oakley",
+                    "tax_lines": [],
+                    "duties": [],
+                    "discount_allocations": []
+                  },
+                  {
+                    "id": 18424960581979,
+                    "admin_graphql_api_id": "gid://shopify/LineItem/18424960581979",
+                    "attributed_staffs": [],
+                    "current_quantity": 2,
+                    "fulfillable_quantity": 0,
+                    "fulfillment_service": "manual",
+                    "fulfillment_status": "fulfilled",
+                    "gift_card": false,
+                    "grams": 0,
+                    "name": "Lenz Balaclava - Black / S/M",
+                    "price": "19.95",
+                    "price_set": {
+                      "shop_money": {
+                        "amount": "19.95",
+                        "currency_code": "EUR"
+                      },
+                      "presentment_money": {
+                        "amount": "19.95",
+                        "currency_code": "EUR"
+                      }
+                    },
+                    "product_exists": true,
+                    "product_id": 10237303914843,
+                    "properties": [],
+                    "quantity": 2,
+                    "requires_shipping": true,
+                    "sku": "51843928097115",
+                    "taxable": true,
+                    "title": "Lenz Balaclava",
+                    "total_discount": "0.00",
+                    "total_discount_set": {
+                      "shop_money": {
+                        "amount": "0.00",
+                        "currency_code": "EUR"
+                      },
+                      "presentment_money": {
+                        "amount": "0.00",
+                        "currency_code": "EUR"
+                      }
+                    },
+                    "variant_id": 51843928097115,
+                    "variant_inventory_management": "shopify",
+                    "variant_title": "Black / S/M",
+                    "vendor": "Rules Shop",
                     "tax_lines": [],
                     "duties": [],
                     "discount_allocations": []
@@ -5294,8 +5497,8 @@
             ],
             "line_items": [
               {
-                "id": 18423245930843,
-                "admin_graphql_api_id": "gid://shopify/LineItem/18423245930843",
+                "id": 18424960549211,
+                "admin_graphql_api_id": "gid://shopify/LineItem/18424960549211",
                 "attributed_staffs": [],
                 "current_quantity": 1,
                 "fulfillable_quantity": 0,
@@ -5303,27 +5506,27 @@
                 "fulfillment_status": "fulfilled",
                 "gift_card": false,
                 "grams": 0,
-                "name": "The North Face Yumiori 1/4 Zip Forro Polar - TNF Black/Asphalt Grey/Monument Grey / L",
-                "price": "85.00",
+                "name": "Oakley O-Shiesty Balaclava - Blackout / U",
+                "price": "45.00",
                 "price_set": {
                   "shop_money": {
-                    "amount": "85.00",
+                    "amount": "45.00",
                     "currency_code": "EUR"
                   },
                   "presentment_money": {
-                    "amount": "85.00",
+                    "amount": "45.00",
                     "currency_code": "EUR"
                   }
                 },
                 "product_exists": true,
-                "product_id": 10254930542939,
+                "product_id": 10194128044379,
                 "properties": [],
                 "quantity": 1,
                 "requires_shipping": true,
                 "sales_line_item_group_id": null,
-                "sku": "51905154056539",
+                "sku": "52080404889947",
                 "taxable": true,
-                "title": "The North Face Yumiori 1/4 Zip Forro Polar",
+                "title": "Oakley O-Shiesty Balaclava",
                 "total_discount": "0.00",
                 "total_discount_set": {
                   "shop_money": {
@@ -5335,10 +5538,60 @@
                     "currency_code": "EUR"
                   }
                 },
-                "variant_id": 51905154056539,
+                "variant_id": 52080404889947,
                 "variant_inventory_management": "shopify",
-                "variant_title": "TNF Black/Asphalt Grey/Monument Grey / L",
-                "vendor": "The North Face",
+                "variant_title": "Blackout / U",
+                "vendor": "Oakley",
+                "tax_lines": [],
+                "duties": [],
+                "discount_allocations": []
+              },
+              {
+                "id": 18424960581979,
+                "admin_graphql_api_id": "gid://shopify/LineItem/18424960581979",
+                "attributed_staffs": [],
+                "current_quantity": 2,
+                "fulfillable_quantity": 0,
+                "fulfillment_service": "manual",
+                "fulfillment_status": "fulfilled",
+                "gift_card": false,
+                "grams": 0,
+                "name": "Lenz Balaclava - Black / S/M",
+                "price": "19.95",
+                "price_set": {
+                  "shop_money": {
+                    "amount": "19.95",
+                    "currency_code": "EUR"
+                  },
+                  "presentment_money": {
+                    "amount": "19.95",
+                    "currency_code": "EUR"
+                  }
+                },
+                "product_exists": true,
+                "product_id": 10237303914843,
+                "properties": [],
+                "quantity": 2,
+                "requires_shipping": true,
+                "sales_line_item_group_id": null,
+                "sku": "51843928097115",
+                "taxable": true,
+                "title": "Lenz Balaclava",
+                "total_discount": "0.00",
+                "total_discount_set": {
+                  "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "EUR"
+                  },
+                  "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "EUR"
+                  }
+                },
+                "variant_id": 51843928097115,
+                "variant_inventory_management": "shopify",
+                "variant_title": "Black / S/M",
+                "vendor": "Rules Shop",
                 "tax_lines": [],
                 "duties": [],
                 "discount_allocations": []
@@ -5358,11 +5611,34 @@
           "item": 0
         }
       }
+    ],
+    "Schedule Trigger": [
+      {
+        "json": {
+          "timestamp": "2026-02-06T00:00:46.011-05:00",
+          "Readable date": "February 6th 2026, 12:00:46 am",
+          "Readable time": "12:00:46 am",
+          "Day of week": "Friday",
+          "Year": "2026",
+          "Month": "February",
+          "Day of month": "06",
+          "Hour": "00",
+          "Minute": "00",
+          "Second": "46",
+          "Timezone": "America/New_York (UTC-05:00)"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
     ]
   },
   "settings": {
     "executionOrder": "v1",
-    "availableInMCP": false
+    "availableInMCP": false,
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "e80tfOpD4TdBh8EF"
   },
   "shared": [
     {
@@ -5376,6 +5652,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 3,
-  "updatedAt": "2026-02-05T13:22:44.071Z",
-  "versionId": "824e44fe-4ef3-44f3-9adc-06bbeafdb2e4"
+  "updatedAt": "2026-02-06T13:01:17.882Z",
+  "versionId": "50453d47-aaf3-4bdb-b7ec-50b4392da2e0"
 }
