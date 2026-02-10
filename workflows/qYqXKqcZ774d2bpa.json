@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-02-06T14:56:26.000Z",
-    "createdAt": "2026-02-06T14:56:25.367Z",
-    "versionId": "31c0d1b8-c0d3-4eb8-8514-15e002adf56f",
+    "updatedAt": "2026-02-09T09:55:35.000Z",
+    "createdAt": "2026-02-09T09:55:34.022Z",
+    "versionId": "df2fe689-b537-4f92-9e34-917bde686457",
     "workflowId": "qYqXKqcZ774d2bpa",
     "nodes": [
       {
@@ -20,8 +20,8 @@
         "type": "n8n-nodes-base.scheduleTrigger",
         "typeVersion": 1.1,
         "position": [
-          -1968,
-          368
+          -1952,
+          336
         ],
         "id": "ba278eca-b5c0-42c2-b2d7-1cb4eb28ad14",
         "name": "Inicio de Mes (Día 1)"
@@ -530,8 +530,8 @@
         "type": "n8n-nodes-base.googleSheets",
         "typeVersion": 4.7,
         "position": [
-          -480,
-          480
+          -448,
+          432
         ],
         "id": "715c3b3f-0444-435f-ac20-8188d186e39d",
         "name": "Leer Informe de ese Día",
@@ -541,8 +541,7 @@
             "id": "RCuKUCifcA4jENcY",
             "name": "Google Sheets account"
           }
-        },
-        "onError": "continueErrorOutput"
+        }
       },
       {
         "parameters": {
@@ -725,21 +724,6 @@
           }
         },
         "onError": "continueErrorOutput"
-      },
-      {
-        "parameters": {
-          "amount": 1,
-          "unit": "minutes"
-        },
-        "type": "n8n-nodes-base.wait",
-        "typeVersion": 1.1,
-        "position": [
-          -304,
-          496
-        ],
-        "id": "28d6ad39-a80e-4fd9-a5eb-df2466e8b96f",
-        "name": "Espera 1m",
-        "webhookId": "57665f85-f34c-4a9b-81e3-71d620974b94"
       },
       {
         "parameters": {
@@ -1057,12 +1041,12 @@
       },
       {
         "parameters": {
-          "jsCode": "// 1. Capturamos todos los ítems que llegan al nodo correctamente\nconst allItems = $input.all();\n\n// 2. Definimos las columnas que SÍ queremos conservar\nconst columnasAceptadas = [\n  \"row_number\", \n  \"SUCURSAL DE VENTA\", \n  \"MÉTODO DE PAGO\", \n  \"COSTE POR UNIDAD\", \n  \"PRECIO DE PRODUCTO\", \n  \"PRECIO PAGADO\", \n  \"DESCUENTO\", \n  \"NOMBRE DE PRODUCTO\", \n  \"VARIANTE\"\n];\n\n// 3. Procesamos la lista usando la estructura correcta de n8n (.json)\nconst itemsLimpios = allItems\n  .map(item => item.json) // Accedemos a los datos de cada ítem\n  .filter(data => data[\"NOMBRE DE PRODUCTO\"] && data[\"NOMBRE DE PRODUCTO\"].toString().trim() !== \"\") // Quitamos filas vacías\n  .map(data => {\n    let nuevoObjeto = {};\n    \n    // Solo copiamos las columnas aceptadas\n    columnasAceptadas.forEach(col => {\n      nuevoObjeto[col] = data[col];\n    });\n    \n    return nuevoObjeto;\n  });\n\n// 4. Devolvemos el objeto único final\nreturn {\n  total_registros: itemsLimpios.length,\n  items: itemsLimpios\n};"
+          "jsCode": "// --- TU LÓGICA DE LIMPIEZA (NO TOCAR) ---\nconst allItems = $input.all();\nconst columnasAceptadas = [\n  \"row_number\", \"SUCURSAL DE VENTA\", \"MÉTODO DE PAGO\", \n  \"COSTE POR UNIDAD\", \"PRECIO DE PRODUCTO\", \"PRECIO PAGADO\", \n  \"DESCUENTO\", \"NOMBRE DE PRODUCTO\", \"VARIANTE\"\n];\n\nconst itemsLimpios = allItems\n  .map(item => item.json)\n  .filter(data => data[\"NOMBRE DE PRODUCTO\"] && data[\"NOMBRE DE PRODUCTO\"].toString().trim() !== \"\")\n  .map(data => {\n    let nuevoObjeto = {};\n    columnasAceptadas.forEach(col => nuevoObjeto[col] = data[col]);\n    return nuevoObjeto;\n  });\n\n// --- PARTE NUEVA: ACUMULAR EN MEMORIA GLOBAL ---\n\n// 1. Accedemos a la memoria global\nconst staticData = $getWorkflowStaticData('global');\n\n// 2. DETECTAMOS SI ES LA PRIMERA VUELTA DEL BUCLE\n// Usamos el nombre exacto de tu nodo SplitInBatches: \"Bucle: Uno a Uno\"\n// Si el índice es 0, significa que el bucle acaba de empezar -> Limpiamos la bolsa\nif ($node[\"Bucle: Uno a Uno\"].runIndex === 0) {\n    staticData.misItemsGuardados = [];\n}\n\n// 3. Aseguramos que el array existe\nif (!staticData.misItemsGuardados) {\n    staticData.misItemsGuardados = [];\n}\n\n// 4. Guardamos los items de ESTA vuelta en la bolsa común\nif (itemsLimpios.length > 0) {\n    staticData.misItemsGuardados.push(...itemsLimpios);\n}\n\n// Devolvemos los datos procesados para que el flujo siga\nreturn { processed: true, count: itemsLimpios.length };"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
-          224,
+          -256,
           432
         ],
         "id": "0566c206-7b5a-4e3d-8278-a300db2b6a6a",
@@ -1078,8 +1062,8 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          -736,
-          384
+          -704,
+          336
         ],
         "id": "0a7df961-56a6-4e5d-a97b-eb7ba5c6bd0d",
         "name": "Sticky Note5"
@@ -1121,7 +1105,7 @@
         "type": "n8n-nodes-base.manualTrigger",
         "typeVersion": 1,
         "position": [
-          -1968,
+          -2224,
           608
         ],
         "id": "e51c40f8-a227-4f9c-b137-75968f2de83e",
@@ -1198,12 +1182,52 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          -128,
-          464
+          32,
+          704
         ],
         "id": "e019d66f-62e8-4243-8f76-05626c049638",
         "name": "Edit Fields",
         "executeOnce": false
+      },
+      {
+        "parameters": {
+          "amount": 10
+        },
+        "type": "n8n-nodes-base.wait",
+        "typeVersion": 1.1,
+        "position": [
+          -80,
+          432
+        ],
+        "id": "28d6ad39-a80e-4fd9-a5eb-df2466e8b96f",
+        "name": "Espera 1s",
+        "webhookId": "57665f85-f34c-4a9b-81e3-71d620974b94"
+      },
+      {
+        "parameters": {
+          "jsCode": "// Accedemos a la memoria global del workflow\nconst staticData = getWorkflowStaticData('global');\n\n// La limpiamos por si quedó basura de una ejecución anterior fallida\nstaticData.misItemsAcumulados = [];\n\nreturn { status: \"Memoria Limpia\" };"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          -2128,
+          288
+        ],
+        "id": "83db026a-74cf-496c-b945-9e2d9bece458",
+        "name": "iniciar memoria"
+      },
+      {
+        "parameters": {
+          "jsCode": "// 1. Accedemos a la misma memoria global\nconst staticData = $getWorkflowStaticData('global');\n\n// 2. Sacamos todo lo que fuimos guardando vuelta a vuelta\nconst todosLosItems = staticData.misItemsGuardados || [];\n\n// 3. ¡Listo! Aquí tienes tus 600 items\nreturn todosLosItems;"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          -464,
+          144
+        ],
+        "id": "c53daf0e-4785-4887-8415-45a4af841923",
+        "name": "juntar datos"
       }
     ],
     "connections": {
@@ -1217,11 +1241,6 @@
           [
             {
               "node": "Obtener Informes Diarios",
-              "type": "main",
-              "index": 0
-            },
-            {
-              "node": "Prep Shopify",
               "type": "main",
               "index": 0
             }
@@ -1330,7 +1349,13 @@
       },
       "Bucle: Uno a Uno": {
         "main": [
-          [],
+          [
+            {
+              "node": "juntar datos",
+              "type": "main",
+              "index": 0
+            }
+          ],
           [
             {
               "node": "Leer Informe de ese Día",
@@ -1344,18 +1369,12 @@
         "main": [
           [
             {
-              "node": "Edit Fields",
+              "node": "Acumular en memoria",
               "type": "main",
               "index": 0
             }
           ],
-          [
-            {
-              "node": "Espera 1m",
-              "type": "main",
-              "index": 0
-            }
-          ]
+          []
         ]
       },
       "Configurar Fechas": {
@@ -1374,17 +1393,6 @@
           [
             {
               "node": "Loop Over Items",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Espera 1m": {
-        "main": [
-          [
-            {
-              "node": "Leer Informe de ese Día",
               "type": "main",
               "index": 0
             }
@@ -1452,7 +1460,13 @@
       },
       "Acumular en memoria": {
         "main": [
-          []
+          [
+            {
+              "node": "Espera 1s",
+              "type": "main",
+              "index": 0
+            }
+          ]
         ]
       },
       "When clicking ‘Execute workflow’": {
@@ -1468,6 +1482,11 @@
       },
       "Edit Fields": {
         "main": [
+          []
+        ]
+      },
+      "Espera 1s": {
+        "main": [
           [
             {
               "node": "Bucle: Uno a Uno",
@@ -1476,20 +1495,20 @@
             }
           ]
         ]
+      },
+      "iniciar memoria": {
+        "main": [
+          []
+        ]
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version 31c0d1b8",
+    "name": "Version df2fe689",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "31c0d1b8-c0d3-4eb8-8514-15e002adf56f",
+  "activeVersionId": "df2fe689-b537-4f92-9e34-917bde686457",
   "connections": {
-    "Inicio de Mes (Día 1)": {
-      "main": [
-        []
-      ]
-    },
     "Crear Informe Maestro": {
       "main": [
         [
@@ -1581,7 +1600,13 @@
     },
     "Unir Todos los Pedidos": {
       "main": [
-        []
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
       ]
     },
     "Acumular en Memoria": {
@@ -1608,7 +1633,18 @@
     },
     "Bucle: Uno a Uno": {
       "main": [
-        [],
+        [
+          {
+            "node": "juntar datos",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Tabla Marcas",
+            "type": "main",
+            "index": 0
+          }
+        ],
         [
           {
             "node": "Leer Informe de ese Día",
@@ -1622,18 +1658,12 @@
       "main": [
         [
           {
-            "node": "Edit Fields",
+            "node": "Acumular en memoria",
             "type": "main",
             "index": 0
           }
         ],
-        [
-          {
-            "node": "Espera 1m",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Configurar Fechas": {
@@ -1652,17 +1682,6 @@
         [
           {
             "node": "Loop Over Items",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Espera 1m": {
-      "main": [
-        [
-          {
-            "node": "Leer Informe de ese Día",
             "type": "main",
             "index": 0
           }
@@ -1730,7 +1749,13 @@
     },
     "Acumular en memoria": {
       "main": [
-        []
+        [
+          {
+            "node": "Espera 1s",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "When clicking ‘Execute workflow’": {
@@ -1746,9 +1771,52 @@
     },
     "Edit Fields": {
       "main": [
+        []
+      ]
+    },
+    "Espera 1s": {
+      "main": [
         [
           {
             "node": "Bucle: Uno a Uno",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "iniciar memoria": {
+      "main": [
+        []
+      ]
+    },
+    "juntar datos": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Select rows from a table",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Select rows from a table": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
             "type": "main",
             "index": 0
           }
@@ -1764,26 +1832,6 @@
   },
   "name": "PRUEBA INFORME MENSUAL",
   "nodes": [
-    {
-      "parameters": {
-        "rule": {
-          "interval": [
-            {
-              "field": "months",
-              "triggerAtHour": 5
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.scheduleTrigger",
-      "typeVersion": 1.1,
-      "position": [
-        -1968,
-        368
-      ],
-      "id": "ba278eca-b5c0-42c2-b2d7-1cb4eb28ad14",
-      "name": "Inicio de Mes (Día 1)"
-    },
     {
       "parameters": {
         "operation": "copy",
@@ -1824,7 +1872,7 @@
       "typeVersion": 1,
       "position": [
         -1264,
-        368
+        432
       ],
       "id": "da0a4e1a-bf85-45ae-9403-8f89aaa615ba",
       "name": "Obtener Informes Diarios"
@@ -1837,7 +1885,7 @@
       "typeVersion": 2,
       "position": [
         -1056,
-        368
+        432
       ],
       "id": "e27b3624-d883-4b1d-bddc-7934b890fc06",
       "name": "Limpiar y Analizar Productos"
@@ -1956,8 +2004,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -576,
-        1040
+        -224,
+        832
       ],
       "id": "a5e7501f-ad93-43b6-bb94-2dd14abcadc0",
       "name": "Unir Todos los Pedidos"
@@ -2132,7 +2180,7 @@
       "typeVersion": 3,
       "position": [
         -640,
-        368
+        432
       ],
       "id": "b7320c16-4c2d-4328-a3c4-cd6225d9c362",
       "name": "Bucle: Uno a Uno"
@@ -2256,8 +2304,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        416,
-        32
+        96,
+        -64
       ],
       "id": "e719c9c9-c485-4d34-86da-a51e868ef63b",
       "name": "Escribir detalle",
@@ -2288,8 +2336,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        -480,
-        480
+        -448,
+        432
       ],
       "id": "715c3b3f-0444-435f-ac20-8188d186e39d",
       "name": "Leer Informe de ese Día",
@@ -2299,8 +2347,7 @@
           "id": "RCuKUCifcA4jENcY",
           "name": "Google Sheets account"
         }
-      },
-      "onError": "continueErrorOutput"
+      }
     },
     {
       "parameters": {
@@ -2315,13 +2362,13 @@
             {
               "id": "id_rango_inicio",
               "name": "FECHA_INICIO",
-              "value": "={{ $today.minus({months: 1}).startOf('month').format('yyyy-MM-dd') }}T00:00:00Z",
+              "value": "={{ $today.startOf('month').format('yyyy-MM-dd') }}T00:00:00Z",
               "type": "string"
             },
             {
               "id": "id_rango_fin",
               "name": "FECHA_FIN",
-              "value": "={{ $today.minus({months: 1}).endOf('month').format('yyyy-MM-dd') }}T23:59:59Z",
+              "value": "={{ $today.endOf('month').format('yyyy-MM-dd') }}T23:59:59Z",
               "type": "string"
             }
           ]
@@ -2469,8 +2516,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        416,
-        176
+        96,
+        80
       ],
       "id": "897d3242-f971-4099-9e99-57f654a990b9",
       "name": "Escribir marcas",
@@ -2486,21 +2533,6 @@
     },
     {
       "parameters": {
-        "amount": 1,
-        "unit": "minutes"
-      },
-      "type": "n8n-nodes-base.wait",
-      "typeVersion": 1.1,
-      "position": [
-        -304,
-        496
-      ],
-      "id": "28d6ad39-a80e-4fd9-a5eb-df2466e8b96f",
-      "name": "Espera 1m",
-      "webhookId": "57665f85-f34c-4a9b-81e3-71d620974b94"
-    },
-    {
-      "parameters": {
         "operation": "get",
         "dataTableId": {
           "__rl": true,
@@ -2513,8 +2545,8 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
       "position": [
-        -128,
-        176
+        -448,
+        80
       ],
       "id": "db96fd26-93bc-4607-a88d-9250030054ed",
       "name": "Tabla Marcas"
@@ -2638,8 +2670,8 @@
       "type": "n8n-nodes-base.googleSheets",
       "typeVersion": 4.7,
       "position": [
-        624,
-        320
+        96,
+        224
       ],
       "id": "45fa8839-fbd2-4465-80a2-d6434cd645ae",
       "name": "Escribir sucursales",
@@ -2674,8 +2706,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        32,
-        176
+        -288,
+        80
       ],
       "id": "c209e694-cb8f-4f98-97d6-a3615a3b4f24",
       "name": "Calculo_Maestro"
@@ -2759,8 +2791,8 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        192,
-        160
+        -128,
+        64
       ],
       "id": "c8b2be2b-d78b-4c9c-bb18-568b645a8124",
       "name": "Elegir tipo de input"
@@ -2791,8 +2823,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        592,
-        -32
+        64,
+        -112
       ],
       "id": "79c5364e-a76f-41a8-a1e2-19c333fa6e0d",
       "name": "Sticky Note3"
@@ -2801,26 +2833,26 @@
       "parameters": {
         "content": "HACER LOS CÁLCULOS CON LA INFORMACIÓN DE LOS INFORMES DIARIOS\n",
         "height": 224,
-        "width": 528,
+        "width": 496,
         "color": 4
       },
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        48,
-        112
+        -272,
+        16
       ],
       "id": "34ecc7f4-0731-40bc-bdc8-cf008a10aadf",
       "name": "Sticky Note4"
     },
     {
       "parameters": {
-        "jsCode": "// 1. Capturamos todos los ítems que llegan al nodo correctamente\nconst allItems = $input.all();\n\n// 2. Definimos las columnas que SÍ queremos conservar\nconst columnasAceptadas = [\n  \"row_number\", \n  \"SUCURSAL DE VENTA\", \n  \"MÉTODO DE PAGO\", \n  \"COSTE POR UNIDAD\", \n  \"PRECIO DE PRODUCTO\", \n  \"PRECIO PAGADO\", \n  \"DESCUENTO\", \n  \"NOMBRE DE PRODUCTO\", \n  \"VARIANTE\"\n];\n\n// 3. Procesamos la lista usando la estructura correcta de n8n (.json)\nconst itemsLimpios = allItems\n  .map(item => item.json) // Accedemos a los datos de cada ítem\n  .filter(data => data[\"NOMBRE DE PRODUCTO\"] && data[\"NOMBRE DE PRODUCTO\"].toString().trim() !== \"\") // Quitamos filas vacías\n  .map(data => {\n    let nuevoObjeto = {};\n    \n    // Solo copiamos las columnas aceptadas\n    columnasAceptadas.forEach(col => {\n      nuevoObjeto[col] = data[col];\n    });\n    \n    return nuevoObjeto;\n  });\n\n// 4. Devolvemos el objeto único final\nreturn {\n  total_registros: itemsLimpios.length,\n  items: itemsLimpios\n};"
+        "jsCode": "// --- 1. CONFIGURACIÓN ---\nconst allItems = $input.all();\n\n// LISTA DE COLUMNAS EXACTAS QUE QUEREMOS\nconst columnasAceptadas = [\n  \"ID PEDIDO\", \n  \"row_number\", \n  \"SUCURSAL DE VENTA\", \n  \"MÉTODO DE PAGO\", \n  \"COSTE POR UNIDAD\", \n  \"PRECIO DE PRODUCTO\", \n  \"PRECIO PAGADO\", \n  \"DESCUENTO\", \n  \"NOMBRE DE PRODUCTO\", \n  \"VARIANTE\"\n];\n\n// --- 2. PROCESAMIENTO ---\nconst itemsLimpios = allItems\n  .map(item => item.json)\n  .filter(data => data[\"NOMBRE DE PRODUCTO\"] && data[\"NOMBRE DE PRODUCTO\"].toString().trim() !== \"\")\n  .map(data => {\n    let nuevoObjeto = {};\n    \n    columnasAceptadas.forEach(col => {\n      // LOGICA ID PEDIDO\n      if (col === \"ID PEDIDO\") {\n        const valor = data[col];\n        // Si existe y no está vacío, lo ponemos. Si no, texto por defecto.\n        if (valor && valor.toString().trim() !== \"\") {\n           nuevoObjeto[col] = valor;\n        } else {\n           nuevoObjeto[col] = \"Sin código de pedido\";\n        }\n      } \n      // RESTO DE COLUMNAS\n      else {\n        // Si la columna no existe en el Excel, ponemos undefined o lo dejamos vacío\n        nuevoObjeto[col] = data[col];\n      }\n    });\n    \n    return nuevoObjeto;\n  });\n\n// --- 3. MEMORIA GLOBAL (NOMBRE NUEVO) ---\nconst staticData = $getWorkflowStaticData('global');\n\n// Detectamos si es la primera vuelta para reiniciar la lista NUEVA\nif ($node[\"Bucle: Uno a Uno\"].runIndex === 0) {\n    staticData.inventarioLimpio = []; \n}\n\n// Inicializamos si no existe\nif (!staticData.inventarioLimpio) {\n    staticData.inventarioLimpio = [];\n}\n\n// Guardamos\nif (itemsLimpios.length > 0) {\n    staticData.inventarioLimpio.push(...itemsLimpios);\n}\n\nreturn { \n    processed: true, \n    count: itemsLimpios.length \n};"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        224,
+        -256,
         432
       ],
       "id": "0566c206-7b5a-4e3d-8278-a300db2b6a6a",
@@ -2836,8 +2868,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -736,
-        384
+        -704,
+        336
       ],
       "id": "0a7df961-56a6-4e5d-a97b-eb7ba5c6bd0d",
       "name": "Sticky Note5"
@@ -2879,7 +2911,7 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -1968,
+        -2224,
         608
       ],
       "id": "e51c40f8-a227-4f9c-b137-75968f2de83e",
@@ -2890,63 +2922,99 @@
         "assignments": {
           "assignments": [
             {
-              "id": "bad4145c-a3f9-4296-9b75-e9e61b7dd389",
-              "name": "row_number",
-              "value": "={{ $json.row_number }}",
-              "type": "number"
-            },
-            {
-              "id": "4e122c68-7526-4f4d-9b69-85dbab87f1ee",
+              "id": "b8d434fd-10a6-428c-8037-fad14e9c4ff2",
               "name": "ID PEDIDO",
-              "value": "={{ $json[\"ID PEDIDO\"] }}",
+              "value": "={{ $('Merge').item.json[\"ID PEDIDO\"] }}",
               "type": "number"
             },
             {
-              "id": "eac9c408-338c-47f3-b984-9e1827bc21da",
+              "id": "28a797fe-23df-42cd-9768-f49b9e9ed648",
+              "name": "user_id",
+              "value": "={{ $('Merge').item.json.user_id }}",
+              "type": "number"
+            },
+            {
+              "id": "3906a8b7-ed33-4c7b-8d17-f3d52add380f",
+              "name": "Nombre empleado",
+              "value": "={{ $json.Nombre }}",
+              "type": "string"
+            },
+            {
+              "id": "087e686e-82a7-4aee-9433-475a1cb6219b",
+              "name": "Apellidos empleado",
+              "value": "={{ $json.Apellidos }}",
+              "type": "string"
+            },
+            {
+              "id": "d1479a34-09fd-41cd-a8a8-40f8b1b4cd8f",
               "name": "SUCURSAL DE VENTA",
-              "value": "={{ $json[\"SUCURSAL DE VENTA\"] }}",
+              "value": "={{ $('Merge').item.json[\"SUCURSAL DE VENTA\"] }}",
               "type": "string"
             },
             {
-              "id": "8a4c4a70-2652-4d3b-b122-620f3069e408",
+              "id": "737708ed-e76c-414f-8b5e-44868c86b676",
               "name": "MÉTODO DE PAGO",
-              "value": "={{ $json[\"MÉTODO DE PAGO\"] }}",
+              "value": "={{ $('Merge').item.json[\"MÉTODO DE PAGO\"] }}",
               "type": "string"
             },
             {
-              "id": "06e472a9-5941-4f37-be43-3b3fdeace260",
+              "id": "88a0319c-d427-47ea-89cf-6cb05711d727",
               "name": "COSTE POR UNIDAD",
-              "value": "={{ $json[\"COSTE POR UNIDAD\"] }}",
+              "value": "={{ $('Merge').item.json[\"COSTE POR UNIDAD\"] }}",
               "type": "string"
             },
             {
-              "id": "75e6dd83-a1ed-48ff-a468-9c7dfb1ce315",
+              "id": "0179d933-5161-4cc6-8e48-22579f6b16ee",
               "name": "PRECIO DE PRODUCTO",
-              "value": "={{ $json[\"PRECIO DE PRODUCTO\"] }}",
+              "value": "={{ $('Merge').item.json[\"PRECIO DE PRODUCTO\"] }}",
               "type": "string"
             },
             {
-              "id": "1caa6898-22d0-4133-b537-2866221affea",
+              "id": "fa9744ef-b316-4bc7-a60d-ebe63ac1c551",
               "name": "PRECIO PAGADO",
-              "value": "={{ $json[\"PRECIO PAGADO\"] }}",
+              "value": "={{ $('Merge').item.json[\"PRECIO PAGADO\"] }}",
               "type": "string"
             },
             {
-              "id": "14b9324f-1569-4a39-a4f9-25df8e645089",
+              "id": "dc142fca-2f03-44f7-86f8-22bc768dbf31",
               "name": "DESCUENTO",
-              "value": "={{ $json.DESCUENTO }}",
+              "value": "={{ $('Merge').item.json.DESCUENTO }}",
               "type": "string"
             },
             {
-              "id": "c7841413-e5cb-4a32-a802-e8167a0968fc",
+              "id": "abe8ab7d-25f7-42a0-bdaa-d69fff6fb002",
+              "name": "PRECIO PAGADO",
+              "value": "={{ $('Merge').item.json[\"PRECIO PAGADO\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "104be7e9-5368-47cf-9504-c1906bf7e029",
+              "name": "DESCUENTO",
+              "value": "={{ $('Merge').item.json.DESCUENTO }}",
+              "type": "string"
+            },
+            {
+              "id": "da346580-a5b7-4a88-8049-b0535d163a34",
               "name": "NOMBRE DE PRODUCTO",
-              "value": "={{ $json[\"NOMBRE DE PRODUCTO\"] }}",
+              "value": "={{ $('Merge').item.json[\"NOMBRE DE PRODUCTO\"] }}",
               "type": "string"
             },
             {
-              "id": "0bb512b8-8f4f-482d-a218-6d6ad154e388",
+              "id": "fe2f9730-7f93-4213-8d42-27846a39a0f5",
               "name": "VARIANTE",
-              "value": "={{ $json.VARIANTE }}",
+              "value": "={{ $('Merge').item.json.VARIANTE }}",
+              "type": "string"
+            },
+            {
+              "id": "81819489-519e-47c2-90ab-06e9cc7a373d",
+              "name": "name",
+              "value": "={{ $('Merge').item.json.name }}",
+              "type": "string"
+            },
+            {
+              "id": "64767b45-084a-401c-8f1b-c455ac688531",
+              "name": "total_price",
+              "value": "={{ $('Merge').item.json.total_price }}",
               "type": "string"
             }
           ]
@@ -2956,12 +3024,129 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -128,
-        464
+        304,
+        768
       ],
       "id": "e019d66f-62e8-4243-8f76-05626c049638",
       "name": "Edit Fields",
       "executeOnce": false
+    },
+    {
+      "parameters": {
+        "amount": 1
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -80,
+        432
+      ],
+      "id": "28d6ad39-a80e-4fd9-a5eb-df2466e8b96f",
+      "name": "Espera 1s",
+      "webhookId": "57665f85-f34c-4a9b-81e3-71d620974b94"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Accedemos a la memoria global del workflow\nconst staticData = getWorkflowStaticData('global');\n\n// La limpiamos por si quedó basura de una ejecución anterior fallida\nstaticData.misItemsAcumulados = [];\n\nreturn { status: \"Memoria Limpia\" };"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -2128,
+        288
+      ],
+      "id": "83db026a-74cf-496c-b945-9e2d9bece458",
+      "name": "iniciar memoria"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Accedemos a la memoria global\nconst staticData = $getWorkflowStaticData('global');\n\n// 2. IMPORTANTE: Leemos la variable NUEVA \"inventarioLimpio\"\n// (Antes buscabas \"misItemsGuardados\", por eso salía vacío)\nconst todosLosItems = staticData.inventarioLimpio || [];\n\n// 3. Verificación extra: Si está vacío, avisamos\nif (todosLosItems.length === 0) {\n    return [\n        { warning: \"La lista está vacía. Asegúrate de haber ejecutado el botón 'Execute Workflow' completo.\" }\n    ];\n}\n\n// 4. ¡Listo! Aquí tienes tus items\nreturn todosLosItems;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -224,
+        704
+      ],
+      "id": "c53daf0e-4785-4887-8415-45a4af841923",
+      "name": "juntar datos"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Obtenemos los datos de ambos nodos\n// Nota: Ajusta 'NodoProductos' y 'NodoPedidos' a los nombres reales de tus nodos\nconst productos = Object.values($input.all().map(i => i.json)); \n// Si los datos vienen de dos entradas distintas en el nodo Code:\nconst listaProductos = $(['juntar datos']).all(); // El que tiene los nombres de producto\nconst listaPedidos = $(['Unir Todos Los Productos']).all();   // El que tiene el user_id\n\nconst result = [];\n\n// 2. Creamos un mapa de pedidos para búsqueda rápida por ID\nconst pedidosMap = {};\nlistaPedidos.forEach(p => {\n  pedidosMap[p.json.id.toString()] = p.json;\n});\n\n// 3. Iteramos sobre los productos, filtramos y unimos\nfor (const item of listaProductos) {\n  const producto = item.json;\n  const idPedido = producto[\"ID PEDIDO\"];\n\n  // Filtramos: Solo procesamos si el ID es numérico (ID real)\n  if (idPedido && idPedido !== \"Sin código de pedido\") {\n    const idStr = idPedido.toString();\n    \n    // Buscamos si existe ese ID en el segundo input\n    if (pedidosMap[idStr]) {\n      result.push({\n        ...producto,           // Datos del producto original\n        ...pedidosMap[idStr]   // Añade \"user_id\", \"name\" (#orden), etc.\n      });\n    }\n  }\n}\n\nreturn result;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        304,
+        576
+      ],
+      "id": "5e19dfa0-36cf-4015-a7fb-19f1ea6fdfdb",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "advanced": true,
+        "mergeByFields": {
+          "values": [
+            {
+              "field1": "ID PEDIDO",
+              "field2": "id"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -64,
+        768
+      ],
+      "id": "db67b35e-1a58-4246-a1a5-9f9554515e6e",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "Empleados",
+          "mode": "list",
+          "cachedResultName": "Empleados"
+        },
+        "returnAll": true,
+        "where": {
+          "values": [
+            {
+              "column": "id_empleado",
+              "value": "={{ $json.user_id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        112,
+        768
+      ],
+      "id": "578355d2-24cb-465e-b0a9-0c41e3a1ccc1",
+      "name": "Select rows from a table",
+      "alwaysOutputData": true,
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -2985,6 +3170,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-02-06T14:56:25.366Z",
-  "versionId": "31c0d1b8-c0d3-4eb8-8514-15e002adf56f"
+  "updatedAt": "2026-02-09T13:42:10.353Z",
+  "versionId": "bf6c1bf5-72cd-40ee-aaac-b9da4960d6b3"
 }
