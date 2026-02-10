@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-01-30T10:45:50.000Z",
-    "createdAt": "2026-01-30T10:45:42.486Z",
-    "versionId": "70ae61e7-3847-4bc7-a755-381a42e04c37",
+    "updatedAt": "2026-02-09T09:17:17.000Z",
+    "createdAt": "2026-02-09T09:17:15.068Z",
+    "versionId": "69ce37ba-3900-40c6-814d-72af7e0cf425",
     "workflowId": "cnuDKnZrHmDy4QDh",
     "nodes": [
       {
@@ -35,8 +35,8 @@
         "type": "n8n-nodes-base.googleSheetsTrigger",
         "typeVersion": 1,
         "position": [
-          -752,
-          -240
+          -800,
+          -272
         ],
         "id": "7ad34ec0-9110-48cf-90b6-691ccbf01cbd",
         "name": "Google Sheets Trigger",
@@ -72,7 +72,7 @@
               {
                 "id": "a50d5b0a-c301-4ff3-916e-8c2a0508d9ef",
                 "name": "link_aprobar",
-                "value": "==https://n8n.tailwind.es/webhook/aprobar-profesor?email={{ $json[\"Correo Electrónico\"] }}&nombre={{ encodeURIComponent($json.Nombre) }}&apellido={{ encodeURIComponent($json.Apellido) }}&telefono={{ encodeURIComponent($json[\"Teléfono Móvil\"]) }}&expiracion={{ $now.plus({hours: 48}).toMillis() }}",
+                "value": "=https://n8n.tailwind.es/webhook/gestion-profesor?email={{ $json[\"Correo Electrónico\"] }}&nombre={{ encodeURIComponent($json.Nombre) }}&apellido={{ encodeURIComponent($json.Apellido) }}&telefono={{ encodeURIComponent($json[\"Teléfono Móvil\"]) }}&expiracion={{ $now.plus({hours: 48}).toMillis() }}",
                 "type": "string"
               }
             ]
@@ -82,27 +82,11 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          -544,
-          -240
+          -592,
+          -272
         ],
         "id": "7166c0e6-3862-4388-aab4-3633ecfc45a4",
         "name": "Edit Fields"
-      },
-      {
-        "parameters": {
-          "path": "aprobar-profesor",
-          "responseMode": "responseNode",
-          "options": {}
-        },
-        "type": "n8n-nodes-base.webhook",
-        "typeVersion": 2.1,
-        "position": [
-          -800,
-          160
-        ],
-        "id": "0257e178-b89d-423f-adcc-f1054d17ebac",
-        "name": "Webhook",
-        "webhookId": "920a92c4-3002-455f-8e74-4289a8aee57c"
       },
       {
         "parameters": {
@@ -115,7 +99,7 @@
         "typeVersion": 1.1,
         "position": [
           -96,
-          128
+          592
         ],
         "id": "e9db9940-52f1-4808-b41a-190c763d237e",
         "name": "GraphQL",
@@ -129,14 +113,14 @@
       {
         "parameters": {
           "respondWith": "text",
-          "responseBody": "=<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Confirmación</title>\n</head>\n<body style=\"\n    margin: 0;\n    padding: 0;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;\n    background-color: #f0fdf4;\n    height: 100vh;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n\">\n    <div style=\"\n        background: white;\n        padding: 30px 20px;\n        border-radius: 16px;\n        box-shadow: 0 10px 25px rgba(0,0,0,0.1);\n        width: 90%;\n        max-width: 400px;\n        text-align: center;\n        box-sizing: border-box;\n    \">\n        <div style=\"font-size: 48px; margin-bottom: 10px;\">✅</div>\n\n        <h1 style=\"color: #16a34a; margin: 0 0 15px 0; font-size: 28px;\">¡Hecho!</h1>\n        \n        <p style=\"color: #4b5563; font-size: 16px; line-height: 1.5; margin-bottom: 20px;\">\n            Se ha creado la cuenta en Shopify para:\n        </p>\n\n        <div style=\"background-color: #f3f4f6; padding: 15px; border-radius: 8px; margin-bottom: 20px;\">\n            <h3 style=\"margin: 0; color: #1f2937; font-size: 18px; word-wrap: break-word;\">\n                {{ $('Webhook').item.json.query.nombre }} {{ $('Webhook').item.json.query.apellido }}\n            </h3>\n        </div>\n\n        <p style=\"color: #6b7280; font-size: 14px; margin: 0;\">\n            📩 Se le ha enviado el correo de bienvenida.\n        </p>\n    </div>\n</body>\n</html>",
+          "responseBody": "=<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Confirmación</title>\n</head>\n<body style=\"\n    margin: 0;\n    padding: 0;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;\n    background-color: #f0fdf4;\n    height: 100vh;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n\">\n    <div style=\"\n        background: white;\n        padding: 30px 20px;\n        border-radius: 16px;\n        box-shadow: 0 10px 25px rgba(0,0,0,0.1);\n        width: 90%;\n        max-width: 400px;\n        text-align: center;\n        box-sizing: border-box;\n    \">\n        <div style=\"font-size: 48px; margin-bottom: 10px;\">✅</div>\n\n        <h1 style=\"color: #16a34a; margin: 0 0 15px 0; font-size: 28px;\">¡Hecho!</h1>\n        \n        <p style=\"color: #4b5563; font-size: 16px; line-height: 1.5; margin-bottom: 20px;\">\n            Se ha creado la cuenta en Shopify para:\n        </p>\n\n        <div style=\"background-color: #f3f4f6; padding: 15px; border-radius: 8px; margin-bottom: 20px;\">\n            <h3 style=\"margin: 0; color: #1f2937; font-size: 18px; word-wrap: break-word;\">\n                {{ $('Webhook_Aprobado').item.json.query.nombre }} {{ $('Webhook_Aprobado').item.json.query.apellido }}\n            </h3>\n        </div>\n\n        <p style=\"color: #6b7280; font-size: 14px; margin: 0;\">\n            📩 Se le ha enviado el correo de bienvenida.\n        </p>\n    </div>\n</body>\n</html>",
           "options": {}
         },
         "type": "n8n-nodes-base.respondToWebhook",
         "typeVersion": 1.5,
         "position": [
           720,
-          192
+          656
         ],
         "id": "7093e262-a20b-4d2a-af66-afb1179f1e76",
         "name": "Respond to Webhook"
@@ -153,8 +137,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          -352,
-          -240
+          -400,
+          -272
         ],
         "id": "a6c03a51-6008-4851-940e-89f821e808d6",
         "name": "HTTP Request"
@@ -162,7 +146,7 @@
       {
         "parameters": {
           "content": "## Respuesta Formulario Google\n**Coge la respuesta mediante una hoja de calculo de info@tailwind.es y manda los datos de GoHighLevel (crm) para que mande el mensaje de Whatsapp desde ahí**",
-          "height": 288,
+          "height": 256,
           "width": 1136,
           "color": 6
         },
@@ -177,8 +161,8 @@
       },
       {
         "parameters": {
-          "content": "## Validación Aprobada\n**Aprueba el link de validación, crea la cuenta de Shopify para que pueda usar el 40%PROFESOR y le manda un mensaje de que ha sido aceptado mediante correo electrónico**",
-          "height": 528,
+          "content": "## Validación Aprobada\n**Aprueba en el link de validación, crea la cuenta de Shopify para que pueda usar el 40%PROFESOR y le manda un mensaje de que ha sido aceptado mediante correo electrónico**",
+          "height": 512,
           "width": 2368,
           "color": 4
         },
@@ -186,7 +170,7 @@
         "typeVersion": 1,
         "position": [
           -848,
-          -64
+          400
         ],
         "id": "43e75f41-d3b7-4d36-89d8-d17b3659dc10",
         "name": "Sticky Note2"
@@ -194,21 +178,21 @@
       {
         "parameters": {
           "respondWith": "text",
-          "responseBody": "=<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Confirmación</title>\n</head>\n<body style=\"\n    margin: 0;\n    padding: 0;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;\n    background-color: #f0fdf4;\n    height: 100vh;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n\">\n    <div style=\"\n        background: white;\n        padding: 30px 20px;\n        border-radius: 16px;\n        box-shadow: 0 10px 25px rgba(0,0,0,0.1);\n        width: 90%;\n        max-width: 400px;\n        text-align: center;\n        box-sizing: border-box;\n    \">\n        <div style=\"font-size: 48px; margin-bottom: 10px;\">✅</div>\n\n        <h1 style=\"color: #16a34a; margin: 0 0 15px 0; font-size: 28px;\">¡Hecho!</h1>\n        \n        <p style=\"color: #4b5563; font-size: 16px; line-height: 1.5; margin-bottom: 20px;\">\n            Se ha actualizado la cuenta en Shopify para:\n        </p>\n\n        <div style=\"background-color: #f3f4f6; padding: 15px; border-radius: 8px; margin-bottom: 20px;\">\n            <h3 style=\"margin: 0; color: #1f2937; font-size: 18px; word-wrap: break-word;\">\n                {{ $('Webhook').item.json.query.nombre }} {{ $('Webhook').item.json.query.apellido }}\n            </h3>\n        </div>\n\n        <p style=\"color: #6b7280; font-size: 14px; margin: 0;\">\n            📩 Se le ha enviado el correo de bienvenida.\n        </p>\n    </div>\n</body>\n</html>",
+          "responseBody": "=<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Confirmación</title>\n</head>\n<body style=\"\n    margin: 0;\n    padding: 0;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;\n    background-color: #f0fdf4;\n    height: 100vh;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n\">\n    <div style=\"\n        background: white;\n        padding: 30px 20px;\n        border-radius: 16px;\n        box-shadow: 0 10px 25px rgba(0,0,0,0.1);\n        width: 90%;\n        max-width: 400px;\n        text-align: center;\n        box-sizing: border-box;\n    \">\n        <div style=\"font-size: 48px; margin-bottom: 10px;\">✅</div>\n\n        <h1 style=\"color: #16a34a; margin: 0 0 15px 0; font-size: 28px;\">¡Hecho!</h1>\n        \n        <p style=\"color: #4b5563; font-size: 16px; line-height: 1.5; margin-bottom: 20px;\">\n            Se ha actualizado la cuenta en Shopify para:\n        </p>\n\n        <div style=\"background-color: #f3f4f6; padding: 15px; border-radius: 8px; margin-bottom: 20px;\">\n            <h3 style=\"margin: 0; color: #1f2937; font-size: 18px; word-wrap: break-word;\">\n                {{ $('Webhook_Aprobado').item.json.query.nombre }} {{ $('Webhook_Aprobado').item.json.query.apellido }}\n            </h3>\n        </div>\n\n        <p style=\"color: #6b7280; font-size: 14px; margin: 0;\">\n            📩 Se le ha enviado el correo de bienvenida.\n        </p>\n    </div>\n</body>\n</html>",
           "options": {}
         },
         "type": "n8n-nodes-base.respondToWebhook",
         "typeVersion": 1.5,
         "position": [
           1296,
-          32
+          496
         ],
         "id": "08ff5ebf-0680-4bce-a7d0-904cdb8e5f35",
         "name": "Respond to Webhook1"
       },
       {
         "parameters": {
-          "sendTo": "={{ $('Webhook').item.json.query.email }}",
+          "sendTo": "={{ $('Webhook_Aprobado').item.json.query.email }}",
           "subject": "✅ Alta Aprobada: Cuenta Profesional Rules Shop",
           "message": "=<div style=\"background-color: #f3f4f6; padding: 40px 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333333;\">\n    <div style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05);\">\n        \n        <div style=\"background-color: #000000; padding: 20px; text-align: center;\">\n            <h1 style=\"color: #ffffff; margin: 0; font-size: 24px;\">Rules Shop PRO 🏂</h1>\n        </div>\n\n        <div style=\"padding: 40px 30px;\">\n            <p style=\"font-size: 18px; line-height: 1.6;\">Hola <strong>{{ $json.data.customerUpdate.customer.firstName }} {{ $json.data.customerUpdate.customer.lastName }}</strong>,</p>\n            \n            <p style=\"font-size: 16px; line-height: 1.6; color: #4b5563;\">¡Todo listo! Hemos <strong>actualizado tu ficha de cliente</strong> correctamente.</p>\n            \n            <p style=\"font-size: 16px; line-height: 1.6; color: #4b5563;\">Al comprobar tus datos, vimos que ya tenías una cuenta con nosotros. Tu perfil ha sido marcado como <strong style=\"color: #16a34a;\">AUTORIZADO ✅</strong> en tu usuario actual.</p>\n\n            <div style=\"background-color: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 6px; padding: 20px; margin: 25px 0; text-align: center;\">\n                <p style=\"margin: 0; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: #166534;\">Tu nivel de descuento</p>\n                \n                <div style=\"font-size: 24px; font-weight: bold; color: #15803d; margin: 15px 0; line-height: 1.3;\">\n                    40% en OAKLEY y<br>THE NORTH FACE\n                </div>\n                \n                <div style=\"border-top: 1px solid #bbf7d0; width: 60%; margin: 10px auto;\"></div>\n                \n                <div style=\"font-size: 20px; font-weight: bold; color: #15803d; margin-top: 10px;\">\n                    20% en Equipamiento\n                </div>\n            </div>\n            <div style=\"background-color: #f9fafb; padding: 20px; border-radius: 6px; font-size: 13px; color: #6b7280; border-left: 4px solid #d1d5db;\">\n                <h3 style=\"margin-top: 0; color: #374151; font-size: 14px;\">⚠️ RESTRICCIONES DEL PROGRAMA:</h3>\n                <ul style=\"padding-left: 20px; margin-bottom: 0;\">\n                    <li style=\"margin-bottom: 8px;\">Este programa es un privilegio personal e intransferible.</li>\n                    <li style=\"margin-bottom: 8px;\">No permite compras para amigos, familiares ni regalos a terceros.</li>\n                    <li>Queda prohibida la reventa de productos adquiridos con este descuento.</li>\n                </ul>\n                <p style=\"margin-top: 15px; margin-bottom: 0; font-weight: bold; font-size: 12px;\">AL PARTICIPAR EN ESTE PROGRAMA, USTED ACEPTA ESTOS TÉRMINOS.</p>\n            </div>\n\n            <p style=\"margin-top: 30px; font-size: 16px;\">¡Nos vemos en la nieve! ❄️</p>\n            <p style=\"font-style: italic; color: #6b7280;\">El equipo de Rules Shop.</p>\n        </div>\n        \n        <div style=\"background-color: #f3f4f6; padding: 20px; text-align: center; font-size: 12px; color: #9ca3af;\">\n            <p style=\"margin: 0;\">Mensaje automático enviado desde Rules Shop.</p>\n        </div>\n    </div>\n</div>",
           "options": {}
@@ -217,7 +201,7 @@
         "typeVersion": 2.2,
         "position": [
           912,
-          32
+          496
         ],
         "id": "90dec506-0a68-4200-9fd4-bf78490b83b7",
         "name": "cuenta_existente",
@@ -231,16 +215,16 @@
       },
       {
         "parameters": {
-          "sendTo": "={{ $('Webhook').item.json.query.email }}",
+          "sendTo": "={{ $('Webhook_Aprobado').item.json.query.email }}",
           "subject": "✅ Alta Aprobada: Cuenta Profesional Rules Shop",
-          "message": "=<div style=\"background-color: #f3f4f6; padding: 40px 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333333;\">\n    <div style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05);\">\n        \n        <div style=\"background-color: #000000; padding: 20px; text-align: center;\">\n            <h1 style=\"color: #ffffff; margin: 0; font-size: 24px;\">Rules Shop PRO 🏂</h1>\n        </div>\n\n        <div style=\"padding: 40px 30px;\">\n            <p style=\"font-size: 18px; line-height: 1.6;\">Hola <strong>{{ $('Webhook').item.json.query.nombre }} {{ $('Webhook').item.json.query.apellido }}</strong>,</p>\n            \n            <p style=\"font-size: 16px; line-height: 1.6; color: #4b5563;\">¡Traemos buenas noticias! Tu perfil profesional ha sido <strong style=\"color: #16a34a;\">AUTORIZADO ✅</strong>.</p>\n            \n            <p style=\"font-size: 16px; line-height: 1.6; color: #4b5563;\">Ya puedes usar este mismo correo electrónico para identificarte. Tu tarifa especial se aplicará automáticamente.</p>\n\n            <div style=\"background-color: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 6px; padding: 20px; margin: 25px 0; text-align: center;\">\n                <p style=\"margin: 0; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: #166534;\">Tu nivel de descuento</p>\n                \n                <div style=\"font-size: 24px; font-weight: bold; color: #15803d; margin: 15px 0; line-height: 1.3;\">\n                    40% en OAKLEY y<br>THE NORTH FACE\n                </div>\n                \n                <div style=\"border-top: 1px solid #bbf7d0; width: 60%; margin: 10px auto;\"></div>\n                \n                <div style=\"font-size: 20px; font-weight: bold; color: #15803d; margin-top: 10px;\">\n                    20% en Equipamiento\n                </div>\n            </div>\n            <div style=\"background-color: #f9fafb; padding: 20px; border-radius: 6px; font-size: 13px; color: #6b7280; border-left: 4px solid #d1d5db;\">\n                <h3 style=\"margin-top: 0; color: #374151; font-size: 14px;\">⚠️ RESTRICCIONES DEL PROGRAMA:</h3>\n                <ul style=\"padding-left: 20px; margin-bottom: 0;\">\n                    <li style=\"margin-bottom: 8px;\">Este programa es un privilegio personal e intransferible.</li>\n                    <li style=\"margin-bottom: 8px;\">No permite compras para amigos, familiares ni regalos a terceros.</li>\n                    <li>Queda prohibida la reventa de productos adquiridos con este descuento.</li>\n                </ul>\n                <p style=\"margin-top: 15px; margin-bottom: 0; font-weight: bold; font-size: 12px;\">AL PARTICIPAR EN ESTE PROGRAMA, USTED ACEPTA ESTOS TÉRMINOS.</p>\n            </div>\n\n            <p style=\"margin-top: 30px; font-size: 16px;\">¡Nos vemos en la nieve! ❄️</p>\n            <p style=\"font-style: italic; color: #6b7280;\">El equipo de Rules Shop.</p>\n        </div>\n        \n        <div style=\"background-color: #f3f4f6; padding: 20px; text-align: center; font-size: 12px; color: #9ca3af;\">\n            <p style=\"margin: 0;\">Mensaje automático enviado desde Rules Shop.</p>\n        </div>\n    </div>\n</div>",
+          "message": "=<div style=\"background-color: #f3f4f6; padding: 40px 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333333;\">\n    <div style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05);\">\n        \n        <div style=\"background-color: #000000; padding: 20px; text-align: center;\">\n            <h1 style=\"color: #ffffff; margin: 0; font-size: 24px;\">Rules Shop PRO 🏂</h1>\n        </div>\n\n        <div style=\"padding: 40px 30px;\">\n            <p style=\"font-size: 18px; line-height: 1.6;\">Hola <strong>{{ $('Webhook_Aprobado').item.json.query.nombre }} {{ $('Webhook_Aprobado').item.json.query.apellido }}</strong>,</p>\n            \n            <p style=\"font-size: 16px; line-height: 1.6; color: #4b5563;\">¡Traemos buenas noticias! Tu perfil profesional ha sido <strong style=\"color: #16a34a;\">AUTORIZADO ✅</strong>.</p>\n            \n            <p style=\"font-size: 16px; line-height: 1.6; color: #4b5563;\">Ya puedes usar este mismo correo electrónico para identificarte. Tu tarifa especial se aplicará automáticamente.</p>\n\n            <div style=\"background-color: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 6px; padding: 20px; margin: 25px 0; text-align: center;\">\n                <p style=\"margin: 0; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: #166534;\">Tu nivel de descuento</p>\n                \n                <div style=\"font-size: 24px; font-weight: bold; color: #15803d; margin: 15px 0; line-height: 1.3;\">\n                    40% en OAKLEY y<br>THE NORTH FACE\n                </div>\n                \n                <div style=\"border-top: 1px solid #bbf7d0; width: 60%; margin: 10px auto;\"></div>\n                \n                <div style=\"font-size: 20px; font-weight: bold; color: #15803d; margin-top: 10px;\">\n                    20% en Equipamiento\n                </div>\n            </div>\n            <div style=\"background-color: #f9fafb; padding: 20px; border-radius: 6px; font-size: 13px; color: #6b7280; border-left: 4px solid #d1d5db;\">\n                <h3 style=\"margin-top: 0; color: #374151; font-size: 14px;\">⚠️ RESTRICCIONES DEL PROGRAMA:</h3>\n                <ul style=\"padding-left: 20px; margin-bottom: 0;\">\n                    <li style=\"margin-bottom: 8px;\">Este programa es un privilegio personal e intransferible.</li>\n                    <li style=\"margin-bottom: 8px;\">No permite compras para amigos, familiares ni regalos a terceros.</li>\n                    <li>Queda prohibida la reventa de productos adquiridos con este descuento.</li>\n                </ul>\n                <p style=\"margin-top: 15px; margin-bottom: 0; font-weight: bold; font-size: 12px;\">AL PARTICIPAR EN ESTE PROGRAMA, USTED ACEPTA ESTOS TÉRMINOS.</p>\n            </div>\n\n            <p style=\"margin-top: 30px; font-size: 16px;\">¡Nos vemos en la nieve! ❄️</p>\n            <p style=\"font-style: italic; color: #6b7280;\">El equipo de Rules Shop.</p>\n        </div>\n        \n        <div style=\"background-color: #f3f4f6; padding: 20px; text-align: center; font-size: 12px; color: #9ca3af;\">\n            <p style=\"margin: 0;\">Mensaje automático enviado desde Rules Shop.</p>\n        </div>\n    </div>\n</div>",
           "options": {}
         },
         "type": "n8n-nodes-base.gmail",
         "typeVersion": 2.2,
         "position": [
           272,
-          192
+          656
         ],
         "id": "c9751bd3-9bd1-41cd-85cc-4aaee7940a73",
         "name": "cuenta_creada",
@@ -264,7 +248,7 @@
             "conditions": [
               {
                 "id": "8b16a42d-b5d8-4566-b621-148f30b39911",
-                "leftValue": "={{ $('Webhook').item.json.query.expiracion.toNumber() }}",
+                "leftValue": "={{ $('Webhook_Aprobado').item.json.query.expiracion.toNumber() }}",
                 "rightValue": "={{ $now.toMillis() }}",
                 "operator": {
                   "type": "number",
@@ -280,7 +264,7 @@
         "typeVersion": 2.3,
         "position": [
           -304,
-          288
+          736
         ],
         "id": "084ffaf6-da30-4f74-92e7-d169a22b429b",
         "name": "Verificar_Caducidad"
@@ -295,33 +279,10 @@
         "typeVersion": 1.5,
         "position": [
           80,
-          304
+          752
         ],
         "id": "201815e8-520f-4f99-a1dc-389365815099",
         "name": "Respond to Webhook2"
-      },
-      {
-        "parameters": {
-          "sendTo": "={{ $json.query.email }}",
-          "subject": "📄 Actualización sobre tu solicitud: Cuenta Profesional Rules Shop",
-          "message": "=<div style=\"background-color: #f3f4f6; padding: 40px 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333333;\">     <div style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05);\">                  <div style=\"background-color: #000000; padding: 20px; text-align: center;\">             <h1 style=\"color: #ffffff; margin: 0; font-size: 24px;\">Rules Shop PRO 🏂</h1>         </div>          <div style=\"padding: 40px 30px;\">             <p style=\"font-size: 18px; line-height: 1.6;\">Hola <strong>{{ $json.query.nombre }} {{ $json.query.apellido }}</strong>,</p>                          <p style=\"font-size: 16px; line-height: 1.6; color: #4b5563;\">                 Gracias por tu interés en formar parte del programa de profesionales de Rules Shop y por enviarnos tu documentación.             </p>                          <p style=\"font-size: 16px; line-height: 1.6; color: #4b5563;\">                 Nuestro equipo ha revisado tu solicitud detalladamente. En esta ocasión, <strong>no hemos podido validar tu perfil</strong> para acceder a las tarifas especiales del programa PRO.             </p>              <div style=\"background-color: #fef2f2; border: 1px solid #fecaca; border-radius: 6px; padding: 20px; margin: 25px 0; text-align: center;\">                 <p style=\"margin: 0; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: #991b1b;\">Estado de la solicitud</p>                 <div style=\"font-size: 24px; font-weight: bold; color: #dc2626; margin: 10px 0;\">NO APROBADA ✋</div>                 <p style=\"font-size: 14px; color: #7f1d1d; margin: 0;\">La documentación aportada no cumple con los requisitos actuales.</p>             </div>              <div style=\"background-color: #f9fafb; padding: 20px; border-radius: 6px; font-size: 13px; color: #6b7280; border-left: 4px solid #9ca3af;\">                 <h3 style=\"margin-top: 0; color: #374151; font-size: 14px;\">¿Crees que es un error?</h3>                 <p style=\"margin: 0; line-height: 1.5;\">                     Si consideras que ha habido una equivocación o dispones de documentación actualizada (Título vigente o Vida laboral reciente), te invitamos a responder a este correo adjuntando los nuevos archivos para una segunda revisión.                 </p>             </div>              <p style=\"margin-top: 30px; font-size: 16px;\">                 Sigues siendo bienvenido en nuestra tienda y comunidad. ¡Esperamos verte pronto disfrutando de la temporada!             </p>                          <p style=\"margin-top: 30px; font-size: 16px;\">Un saludo,</p>             <p style=\"font-style: italic; color: #6b7280;\">El equipo de Rules Shop.</p>         </div>                  <div style=\"background-color: #f3f4f6; padding: 20px; text-align: center; font-size: 12px; color: #9ca3af;\">             <p style=\"margin: 0;\">&copy; Rules Shop. Sierra Nevada.</p>         </div>     </div> </div>",
-          "options": {}
-        },
-        "type": "n8n-nodes-base.gmail",
-        "typeVersion": 2.2,
-        "position": [
-          -96,
-          304
-        ],
-        "id": "46434455-9b52-49de-adf3-98a0321ae548",
-        "name": "Send a message",
-        "webhookId": "a8ec28c0-85f5-441d-9bcd-a3152df9be95",
-        "credentials": {
-          "gmailOAuth2": {
-            "id": "2piqh63wCF24vapD",
-            "name": "profesionales@rules-shop.es"
-          }
-        }
       },
       {
         "parameters": {
@@ -334,7 +295,7 @@
         "typeVersion": 1.1,
         "position": [
           480,
-          32
+          496
         ],
         "id": "7884e8ab-01e6-4870-ae2f-c9a0f6ec816b",
         "name": "Buscar_ID_Cliente",
@@ -375,7 +336,7 @@
         "typeVersion": 4.7,
         "position": [
           -640,
-          160
+          624
         ],
         "id": "43538da5-809f-446e-9cb2-dc0405cb3bb7",
         "name": "Get row(s) in sheet",
@@ -396,7 +357,7 @@
         "typeVersion": 1.5,
         "position": [
           -304,
-          64
+          528
         ],
         "id": "16d5d421-37ed-4c9a-be44-d0f46e8c3694",
         "name": "Respond to Webhook3"
@@ -430,7 +391,7 @@
         "typeVersion": 2.3,
         "position": [
           -480,
-          160
+          624
         ],
         "id": "71288c43-1b35-4991-9617-83dfe097af79",
         "name": "Estado_Validacion"
@@ -472,7 +433,7 @@
         "typeVersion": 2.3,
         "position": [
           80,
-          128
+          592
         ],
         "id": "e471444b-f471-49d9-bb4f-de659a9ebae7",
         "name": "Si_Existe"
@@ -615,7 +576,7 @@
         "typeVersion": 4.7,
         "position": [
           1120,
-          32
+          496
         ],
         "id": "40ba9e2d-8950-4fa2-bf34-1a3e5221bcc6",
         "name": "Update row in sheet",
@@ -764,7 +725,7 @@
         "typeVersion": 4.7,
         "position": [
           480,
-          192
+          656
         ],
         "id": "88c9b20b-20c3-462a-b6c6-acf00666d7ee",
         "name": "Update row in sheet1",
@@ -780,13 +741,13 @@
           "authentication": "headerAuth",
           "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
           "query": "mutation customerUpdate($input: CustomerInput!) {\n  customerUpdate(input: $input) {\n    customer {\n      id\n      email\n      firstName\n      lastName\n      tags\n      phone\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
-          "variables": "={\n  \"input\": {\n    \"id\": \"{{ $('Buscar_ID_Cliente').item.json.data.customers.edges[0].node.id }}\",\n    \"firstName\": \"{{ $('Webhook').item.json.query.nombre }}\",\n    \"lastName\": \"{{ $('Webhook').item.json.query.apellido }}\",\n    \n    \"tags\": \"{{ ($('Buscar_ID_Cliente').item.json.data.customers.edges[0].node.tags || []).concat(['Profesor', 'DescuentoProfesor']) }}\",\n    \n    \"note\": \"Perfil actualizado y validado automáticamente vía WhatsApp el {{ $now.toFormat('dd/MM/yyyy') }}\",\n    \"phone\": \"{{ $('Webhook').item.json.query.telefono && $('Webhook').item.json.query.telefono.toString().replace(/\\D/g,'').length > 8 ? ($('Webhook').item.json.query.telefono.toString().includes('+') ? $('Webhook').item.json.query.telefono.toString().replace(/ /g,'') : '+34' + $('Webhook').item.json.query.telefono.toString().replace(/\\D/g,'')) : null }}\"\n  }\n}"
+          "variables": "={\n  \"input\": {\n    \"id\": \"{{ $('Buscar_ID_Cliente').item.json.data.customers.edges[0].node.id }}\",\n    \"firstName\": \"{{ $('Webhook_Aprobado').item.json.query.nombre }}\",\n    \"lastName\": \"{{ $('Webhook_Aprobado').item.json.query.apellido }}\",\n    \n    \"tags\": \"{{ ($('Buscar_ID_Cliente').item.json.data.customers.edges[0].node.tags || []).concat(['Profesor', 'DescuentoProfesor']) }}\",\n    \n    \"note\": \"Perfil actualizado y validado automáticamente vía WhatsApp el {{ $now.toFormat('dd/MM/yyyy') }}\",\n    \"phone\": \"{{ $('Webhook_Aprobado').item.json.query.telefono && $('Webhook_Aprobado').item.json.query.telefono.toString().replace(/\\D/g,'').length > 8 ? ($('Webhook_Aprobado').item.json.query.telefono.toString().includes('+') ? $('Webhook_Aprobado').item.json.query.telefono.toString().replace(/ /g,'') : '+34' + $('Webhook_Aprobado').item.json.query.telefono.toString().replace(/\\D/g,'')) : null }}\"\n  }\n}"
         },
         "type": "n8n-nodes-base.graphql",
         "typeVersion": 1.1,
         "position": [
           720,
-          32
+          496
         ],
         "id": "20b324c0-a79a-434e-864f-8aeb88eb1a38",
         "name": "Actualizar_Cliente",
@@ -799,16 +760,371 @@
       },
       {
         "parameters": {
-          "jsCode": "// Capturamos los datos limpios\nconst email = $('Webhook').item.json.query.email;\nconst telefono = $('Webhook').item.json.query.telefono;\n\nreturn {\n  // Estas dos son para que tú las veas separadas en el output:\n  \"mi_email\": email,\n  \"mi_telefono\": telefono,\n  \n  // Esta es la variable combinada que OBLIGATORIAMENTE necesita Shopify:\n  \"busqueda_shopify\": `email:${email} OR phone:${telefono}`\n}"
+          "jsCode": "// Capturamos los datos limpios\nconst email = $('Webhook_Aprobado').item.json.query.email;\nconst telefono = $('Webhook_Aprobado').item.json.query.telefono;\n\nreturn {\n  // Estas dos son para que tú las veas separadas en el output:\n  \"mi_email\": email,\n  \"mi_telefono\": telefono,\n  \n  // Esta es la variable combinada que OBLIGATORIAMENTE necesita Shopify:\n  \"busqueda_shopify\": `email:${email} OR phone:${telefono}`\n}"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
         "position": [
           272,
-          32
+          496
         ],
         "id": "dc4ffbab-3b2b-4f6f-86e8-e0b06b329928",
         "name": "Code in JavaScript"
+      },
+      {
+        "parameters": {
+          "path": "gestion-profesor",
+          "responseMode": "responseNode",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -800,
+          -16
+        ],
+        "id": "c7c83ad7-6112-47cf-828f-8b1bd7f7010c",
+        "name": "Webhook_Menu",
+        "webhookId": "a41e8e2e-6f73-4b09-8110-63fff0a58878"
+      },
+      {
+        "parameters": {
+          "respondWith": "text",
+          "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Gestión de Solicitud</title>\n  <style>\n    body {\n      font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif;\n      background-color: #f3f4f6;\n      display: flex;\n      justify-content: center;\n      align-items: center;\n      min-height: 100vh;\n      margin: 0;\n      padding: 20px;\n    }\n    .card {\n      background: white;\n      padding: 30px;\n      border-radius: 16px;\n      box-shadow: 0 10px 25px rgba(0,0,0,0.1);\n      width: 100%;\n      max-width: 450px;\n      text-align: center;\n    }\n    h2 { margin-top: 0; color: #111827; margin-bottom: 20px; }\n    \n    .info-box {\n      text-align: left;\n      background: #f9fafb;\n      padding: 20px;\n      border-radius: 12px;\n      margin-bottom: 25px;\n      border: 1px solid #e5e7eb;\n      color: #374151;\n      font-size: 15px;\n      line-height: 1.6;\n    }\n\n    /* Contenedor flexible para los botones */\n    .button-container {\n      display: flex;\n      gap: 15px;\n      justify-content: space-between;\n    }\n\n    .btn {\n      flex: 1;\n      padding: 15px 10px;\n      border-radius: 8px;\n      text-decoration: none;\n      font-weight: bold;\n      color: white;\n      transition: opacity 0.2s;\n      display: flex;\n      align-items: center;\n      justify-content: center;\n      font-size: 14px;\n    }\n\n    .btn:hover { opacity: 0.9; }\n\n    /* Botón RECHAZAR (Izquierda - Rojo) */\n    .btn-reject {\n      background-color: #ef4444;\n      border: 1px solid #dc2626;\n    }\n\n    /* Botón APROBAR (Derecha - Verde) */\n    .btn-approve {\n      background-color: #16a34a;\n      border: 1px solid #15803d;\n    }\n  </style>\n</head>\n<body>\n\n  <div class=\"card\">\n    <div style=\"font-size: 40px; margin-bottom: 10px;\">👮‍♂️</div>\n    <h2>Revisión de Profesor</h2>\n\n    <div class=\"info-box\">\n      <strong>👤 Nombre:</strong> {{ $json.query.nombre }} {{ $json.query.apellido }}<br>\n      <strong>📧 Email:</strong> {{ $json.query.email }}<br>\n      <strong>📱 Teléfono:</strong> {{ $json.query.telefono }}\n    </div>\n\n    <div class=\"button-container\">\n      \n      <a href=\"https://n8n.tailwind.es/webhook/rechazar-profesor?email={{ $json.query.email }}&nombre={{ $json.query.nombre }}&apellido={{ $json.query.apellido }}\" \n         class=\"btn btn-reject\"\n         onclick=\"return confirm('⚠️ ¿Estás SEGURO de que quieres RECHAZAR a este profesor?')\">\n         ❌ RECHAZAR\n      </a>\n\n      <a href=\"https://n8n.tailwind.es/webhook/aprobar-profesor?email={{ $json.query.email }}&nombre={{ $json.query.nombre }}&apellido={{ $json.query.apellido }}&telefono={{ $json.query.telefono }}&expiracion={{ $json.query.expiracion }}\" \n         class=\"btn btn-approve\">\n         ✅ APROBAR\n      </a>\n\n    </div>\n  </div>\n\n</body>\n</html>",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.5,
+        "position": [
+          -592,
+          -16
+        ],
+        "id": "5704d7a3-a128-4921-85c2-eb1136bc879e",
+        "name": "Respond to Webhook4"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "documentId": {
+            "__rl": true,
+            "value": "16auxC5pQ4ydDh1LxCKiPC5ClQ1WCN3R5ogY1Smmbm4c",
+            "mode": "list",
+            "cachedResultName": "Solicitud de Alta - Profesionales Rules Oakley (respuestas)",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/16auxC5pQ4ydDh1LxCKiPC5ClQ1WCN3R5ogY1Smmbm4c/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": 512939465,
+            "mode": "list",
+            "cachedResultName": "Respuestas de formulario",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/16auxC5pQ4ydDh1LxCKiPC5ClQ1WCN3R5ogY1Smmbm4c/edit#gid=512939465"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "Estado Validación": "NO VALIDADO",
+              "row_number": "={{ $json.row_number }}"
+            },
+            "matchingColumns": [
+              "row_number"
+            ],
+            "schema": [
+              {
+                "id": "Marca temporal",
+                "displayName": "Marca temporal",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "Nombre",
+                "displayName": "Nombre",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "Apellido",
+                "displayName": "Apellido",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "Correo Electrónico",
+                "displayName": "Correo Electrónico",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "Teléfono Móvil",
+                "displayName": "Teléfono Móvil",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "Adjuntar Vida Laboral Actual",
+                "displayName": "Adjuntar Vida Laboral Actual",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "Adjuntar Título / Certificación de Profesor",
+                "displayName": "Adjuntar Título / Certificación de Profesor",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "Aceptación de condiciones",
+                "displayName": "Aceptación de condiciones",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "Nota Manual",
+                "displayName": "Nota Manual",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "Estado Validación",
+                "displayName": "Estado Validación",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "row_number",
+                "displayName": "row_number",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "readOnly": true,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          -384,
+          224
+        ],
+        "id": "eadd6307-1f9c-42fe-b3ef-79fe82ad60eb",
+        "name": "Update row in sheet2",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "RCuKUCifcA4jENcY",
+            "name": "Google Sheets account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "respondWith": "text",
+          "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Solicitud Rechazada</title>\n  <style>\n    body {\n      font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif;\n      background-color: #fef2f2; /* Fondo rojo muy suave */\n      display: flex;\n      justify-content: center;\n      align-items: center;\n      height: 100vh;\n      margin: 0;\n      padding: 20px;\n    }\n    .card {\n      background: white;\n      padding: 40px 30px;\n      border-radius: 16px;\n      box-shadow: 0 10px 25px rgba(0,0,0,0.05);\n      width: 100%;\n      max-width: 400px;\n      text-align: center;\n      border-top: 6px solid #ef4444; /* Borde superior rojo */\n    }\n    .icon-container {\n      background-color: #fee2e2;\n      color: #dc2626;\n      width: 80px;\n      height: 80px;\n      border-radius: 50%;\n      display: flex;\n      align-items: center;\n      justify-content: center;\n      font-size: 40px;\n      margin: 0 auto 20px auto;\n    }\n    h1 {\n      color: #991b1b;\n      margin: 0 0 10px 0;\n      font-size: 24px;\n    }\n    p {\n      color: #4b5563;\n      font-size: 16px;\n      line-height: 1.5;\n      margin-bottom: 20px;\n    }\n    .status-box {\n      background-color: #f3f4f6;\n      border-radius: 8px;\n      padding: 15px;\n      text-align: left;\n      font-size: 14px;\n      color: #374151;\n      margin-bottom: 25px;\n    }\n    .check-item {\n      display: flex;\n      align-items: center;\n      margin-bottom: 8px;\n    }\n    .check-item:last-child { margin-bottom: 0; }\n    .check-icon { margin-right: 10px; color: #ef4444; }\n    \n    .footer {\n      font-size: 13px;\n      color: #9ca3af;\n      margin-top: 20px;\n    }\n  </style>\n</head>\n<body>\n\n  <div class=\"card\">\n    <div class=\"icon-container\">\n      🗑️\n    </div>\n\n    <h1>Solicitud Rechazada</h1>\n    \n    <p>\n      La solicitud de <strong>{{ $('Webhook_Rechazo').item.json.query.nombre }} {{ $('Webhook_Rechazo').item.json.query.apellido }}</strong> ha sido procesada correctamente.\n    </p>\n\n    <div class=\"status-box\">\n      <div class=\"check-item\">\n        <span class=\"check-icon\">✔</span> Estado cambiado a \"NO VALIDADO\".\n      </div>\n      <div class=\"check-item\">\n        <span class=\"check-icon\">✔</span> Email de rechazo enviado.\n      </div>\n      <div class=\"check-item\">\n        <span class=\"check-icon\">✔</span> Expediente archivado.\n      </div>\n    </div>\n\n    <p class=\"footer\">\n      Puedes cerrar esta ventana.\n    </p>\n  </div>\n\n</body>\n</html>",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.5,
+        "position": [
+          16,
+          224
+        ],
+        "id": "cd54a1b8-8690-4fdc-a822-39de1d5eff25",
+        "name": "Respond to Webhook5"
+      },
+      {
+        "parameters": {
+          "documentId": {
+            "__rl": true,
+            "value": "16auxC5pQ4ydDh1LxCKiPC5ClQ1WCN3R5ogY1Smmbm4c",
+            "mode": "list",
+            "cachedResultName": "Solicitud de Alta - Profesionales Rules Oakley (respuestas)",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/16auxC5pQ4ydDh1LxCKiPC5ClQ1WCN3R5ogY1Smmbm4c/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": 512939465,
+            "mode": "list",
+            "cachedResultName": "Respuestas de formulario",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/16auxC5pQ4ydDh1LxCKiPC5ClQ1WCN3R5ogY1Smmbm4c/edit#gid=512939465"
+          },
+          "filtersUI": {
+            "values": [
+              {
+                "lookupColumn": "Correo Electrónico",
+                "lookupValue": "={{ $json.query.email.trim() }}"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          -592,
+          224
+        ],
+        "id": "969e9fc5-c9bc-4416-8530-3c578f81ab7f",
+        "name": "Get row(s) in sheet1",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "RCuKUCifcA4jENcY",
+            "name": "Google Sheets account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "path": "rechazar-profesor",
+          "responseMode": "responseNode",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -800,
+          224
+        ],
+        "id": "b28d9a15-21e4-45d3-a930-92d6d7172d1d",
+        "name": "Webhook_Rechazo",
+        "webhookId": "9dc474f3-1ff7-4fa7-8c29-5b66de2a6e49"
+      },
+      {
+        "parameters": {
+          "path": "aprobar-profesor",
+          "responseMode": "responseNode",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -800,
+          624
+        ],
+        "id": "0257e178-b89d-423f-adcc-f1054d17ebac",
+        "name": "Webhook_Aprobado",
+        "webhookId": "920a92c4-3002-455f-8e74-4289a8aee57c"
+      },
+      {
+        "parameters": {
+          "content": "## Validación Rechazada\n**Rechaza en el link de validación, se le pone en el google sheets la etiqueta NO VALIDADO y se le manda un correo diciendo que ha sido rechazado**",
+          "height": 240,
+          "width": 1696,
+          "color": 3
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -848,
+          144
+        ],
+        "id": "a5553ade-6ae7-4d05-905b-d75af2e0e01e",
+        "name": "Sticky Note"
+      },
+      {
+        "parameters": {
+          "content": "## Menu de Aprobación\n**Elige si aceptar o rechazar los documentos adjuntos del profesor**",
+          "height": 224,
+          "width": 1696
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -848,
+          -96
+        ],
+        "id": "6d51601e-dd0f-49c9-8073-b5199d4e5591",
+        "name": "Sticky Note3"
+      },
+      {
+        "parameters": {
+          "sendTo": "={{ $json.query.email }}",
+          "subject": "📄 Actualización sobre tu solicitud: Cuenta Profesional Rules Shop",
+          "message": "=<div style=\"background-color: #f3f4f6; padding: 40px 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333333;\">     <div style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05);\">                  <div style=\"background-color: #000000; padding: 20px; text-align: center;\">             <h1 style=\"color: #ffffff; margin: 0; font-size: 24px;\">Rules Shop PRO 🏂</h1>         </div>          <div style=\"padding: 40px 30px;\">             <p style=\"font-size: 18px; line-height: 1.6;\">Hola <strong>{{ $json.query.nombre }} {{ $json.query.apellido }}</strong>,</p>                          <p style=\"font-size: 16px; line-height: 1.6; color: #4b5563;\">                 Gracias por tu interés en formar parte del programa de profesionales de Rules Shop y por enviarnos tu documentación.             </p>                          <p style=\"font-size: 16px; line-height: 1.6; color: #4b5563;\">                 Nuestro equipo ha revisado tu solicitud detalladamente. En esta ocasión, <strong>no hemos podido validar tu perfil</strong> para acceder a las tarifas especiales del programa PRO.             </p>              <div style=\"background-color: #fef2f2; border: 1px solid #fecaca; border-radius: 6px; padding: 20px; margin: 25px 0; text-align: center;\">                 <p style=\"margin: 0; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: #991b1b;\">Estado de la solicitud</p>                 <div style=\"font-size: 24px; font-weight: bold; color: #dc2626; margin: 10px 0;\">NO APROBADA ✋</div>                 <p style=\"font-size: 14px; color: #7f1d1d; margin: 0;\">La documentación aportada no cumple con los requisitos actuales.</p>             </div>              <div style=\"background-color: #f9fafb; padding: 20px; border-radius: 6px; font-size: 13px; color: #6b7280; border-left: 4px solid #9ca3af;\">                 <h3 style=\"margin-top: 0; color: #374151; font-size: 14px;\">¿Crees que es un error?</h3>                 <p style=\"margin: 0; line-height: 1.5;\">                     Si consideras que ha habido una equivocación o dispones de documentación actualizada (Título vigente o Vida laboral reciente), te invitamos a responder a este correo adjuntando los nuevos archivos para una segunda revisión.                 </p>             </div>              <p style=\"margin-top: 30px; font-size: 16px;\">                 Sigues siendo bienvenido en nuestra tienda y comunidad. ¡Esperamos verte pronto disfrutando de la temporada!             </p>                          <p style=\"margin-top: 30px; font-size: 16px;\">Un saludo,</p>             <p style=\"font-style: italic; color: #6b7280;\">El equipo de Rules Shop.</p>         </div>                  <div style=\"background-color: #f3f4f6; padding: 20px; text-align: center; font-size: 12px; color: #9ca3af;\">             <p style=\"margin: 0;\">&copy; Rules Shop. Sierra Nevada.</p>         </div>     </div> </div>",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.gmail",
+        "typeVersion": 2.2,
+        "position": [
+          -96,
+          752
+        ],
+        "id": "46434455-9b52-49de-adf3-98a0321ae548",
+        "name": "no_aprobado",
+        "webhookId": "a8ec28c0-85f5-441d-9bcd-a3152df9be95",
+        "credentials": {
+          "gmailOAuth2": {
+            "id": "2piqh63wCF24vapD",
+            "name": "profesionales@rules-shop.es"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "sendTo": "={{ $('Webhook_Rechazo').item.json.query.email }}",
+          "subject": "📄 Actualización sobre tu solicitud: Cuenta Profesional Rules Shop",
+          "message": "=<div style=\"background-color: #f3f4f6; padding: 40px 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333333;\">     <div style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05);\">                  <div style=\"background-color: #000000; padding: 20px; text-align: center;\">             <h1 style=\"color: #ffffff; margin: 0; font-size: 24px;\">Rules Shop PRO 🏂</h1>         </div>          <div style=\"padding: 40px 30px;\">             <p style=\"font-size: 18px; line-height: 1.6;\">Hola <strong>{{ $('Webhook_Rechazo').item.json.query.nombre }} {{ $('Webhook_Rechazo').item.json.query.apellido }}</strong>,</p>                          <p style=\"font-size: 16px; line-height: 1.6; color: #4b5563;\">                 Gracias por tu interés en formar parte del programa de profesionales de Rules Shop y por enviarnos tu documentación.             </p>                          <p style=\"font-size: 16px; line-height: 1.6; color: #4b5563;\">                 Nuestro equipo ha revisado tu solicitud detalladamente. En esta ocasión, <strong>no hemos podido validar tu perfil</strong> para acceder a las tarifas especiales del programa PRO.             </p>              <div style=\"background-color: #fef2f2; border: 1px solid #fecaca; border-radius: 6px; padding: 20px; margin: 25px 0; text-align: center;\">                 <p style=\"margin: 0; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: #991b1b;\">Estado de la solicitud</p>                 <div style=\"font-size: 24px; font-weight: bold; color: #dc2626; margin: 10px 0;\">NO APROBADA ✋</div>                 <p style=\"font-size: 14px; color: #7f1d1d; margin: 0;\">La documentación aportada no cumple con los requisitos actuales.</p>             </div>              <div style=\"background-color: #f9fafb; padding: 20px; border-radius: 6px; font-size: 13px; color: #6b7280; border-left: 4px solid #9ca3af;\">                 <h3 style=\"margin-top: 0; color: #374151; font-size: 14px;\">¿Crees que es un error?</h3>                 <p style=\"margin: 0; line-height: 1.5;\">                     Si consideras que ha habido una equivocación o dispones de documentación actualizada (Título vigente o Vida laboral reciente), te invitamos a responder a este correo adjuntando los nuevos archivos para una segunda revisión.                 </p>             </div>              <p style=\"margin-top: 30px; font-size: 16px;\">                 Sigues siendo bienvenido en nuestra tienda y comunidad. ¡Esperamos verte pronto disfrutando de la temporada!             </p>                          <p style=\"margin-top: 30px; font-size: 16px;\">Un saludo,</p>             <p style=\"font-style: italic; color: #6b7280;\">El equipo de Rules Shop.</p>         </div>                  <div style=\"background-color: #f3f4f6; padding: 20px; text-align: center; font-size: 12px; color: #9ca3af;\">             <p style=\"margin: 0;\">&copy; Rules Shop. Sierra Nevada.</p>         </div>     </div> </div>",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.gmail",
+        "typeVersion": 2.2,
+        "position": [
+          -176,
+          224
+        ],
+        "id": "c9912fa2-cc18-4db1-9231-145065f20e91",
+        "name": "no_aprobado1",
+        "webhookId": "a8ec28c0-85f5-441d-9bcd-a3152df9be95",
+        "credentials": {
+          "gmailOAuth2": {
+            "id": "2piqh63wCF24vapD",
+            "name": "profesionales@rules-shop.es"
+          }
+        }
       }
     ],
     "connections": {
@@ -828,17 +1144,6 @@
           [
             {
               "node": "HTTP Request",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Webhook": {
-        "main": [
-          [
-            {
-              "node": "Get row(s) in sheet",
               "type": "main",
               "index": 0
             }
@@ -887,14 +1192,9 @@
               "index": 0
             }
           ],
-          []
-        ]
-      },
-      "Send a message": {
-        "main": [
           [
             {
-              "node": "Respond to Webhook2",
+              "node": "no_aprobado",
               "type": "main",
               "index": 0
             }
@@ -1002,14 +1302,96 @@
             }
           ]
         ]
+      },
+      "Webhook_Menu": {
+        "main": [
+          [
+            {
+              "node": "Respond to Webhook4",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Update row in sheet2": {
+        "main": [
+          [
+            {
+              "node": "no_aprobado1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Respond to Webhook5": {
+        "main": [
+          []
+        ]
+      },
+      "Get row(s) in sheet1": {
+        "main": [
+          [
+            {
+              "node": "Update row in sheet2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Webhook_Rechazo": {
+        "main": [
+          [
+            {
+              "node": "Get row(s) in sheet1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Webhook_Aprobado": {
+        "main": [
+          [
+            {
+              "node": "Get row(s) in sheet",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "no_aprobado": {
+        "main": [
+          [
+            {
+              "node": "Respond to Webhook2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "no_aprobado1": {
+        "main": [
+          [
+            {
+              "node": "Respond to Webhook5",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version 70ae61e7",
+    "name": "Version 69ce37ba",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "70ae61e7-3847-4bc7-a755-381a42e04c37",
+  "activeVersionId": "69ce37ba-3900-40c6-814d-72af7e0cf425",
   "connections": {
     "Google Sheets Trigger": {
       "main": [
@@ -1027,17 +1409,6 @@
         [
           {
             "node": "HTTP Request",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Webhook": {
-      "main": [
-        [
-          {
-            "node": "Get row(s) in sheet",
             "type": "main",
             "index": 0
           }
@@ -1086,14 +1457,9 @@
             "index": 0
           }
         ],
-        []
-      ]
-    },
-    "Send a message": {
-      "main": [
         [
           {
-            "node": "Respond to Webhook2",
+            "node": "no_aprobado",
             "type": "main",
             "index": 0
           }
@@ -1201,6 +1567,88 @@
           }
         ]
       ]
+    },
+    "Webhook_Menu": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row in sheet2": {
+      "main": [
+        [
+          {
+            "node": "no_aprobado1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond to Webhook5": {
+      "main": [
+        []
+      ]
+    },
+    "Get row(s) in sheet1": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook_Rechazo": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook_Aprobado": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "no_aprobado": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "no_aprobado1": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-12-12T07:23:55.975Z",
@@ -1240,8 +1688,8 @@
       "type": "n8n-nodes-base.googleSheetsTrigger",
       "typeVersion": 1,
       "position": [
-        -752,
-        -240
+        -800,
+        -272
       ],
       "id": "7ad34ec0-9110-48cf-90b6-691ccbf01cbd",
       "name": "Google Sheets Trigger",
@@ -1277,7 +1725,7 @@
             {
               "id": "a50d5b0a-c301-4ff3-916e-8c2a0508d9ef",
               "name": "link_aprobar",
-              "value": "==https://n8n.tailwind.es/webhook/aprobar-profesor?email={{ $json[\"Correo Electrónico\"] }}&nombre={{ encodeURIComponent($json.Nombre) }}&apellido={{ encodeURIComponent($json.Apellido) }}&telefono={{ encodeURIComponent($json[\"Teléfono Móvil\"]) }}&expiracion={{ $now.plus({hours: 48}).toMillis() }}",
+              "value": "=https://n8n.tailwind.es/webhook/gestion-profesor?email={{ $json[\"Correo Electrónico\"] }}&nombre={{ encodeURIComponent($json.Nombre) }}&apellido={{ encodeURIComponent($json.Apellido) }}&telefono={{ encodeURIComponent($json[\"Teléfono Móvil\"]) }}&expiracion={{ $now.plus({hours: 48}).toMillis() }}",
               "type": "string"
             }
           ]
@@ -1287,27 +1735,11 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -544,
-        -240
+        -592,
+        -272
       ],
       "id": "7166c0e6-3862-4388-aab4-3633ecfc45a4",
       "name": "Edit Fields"
-    },
-    {
-      "parameters": {
-        "path": "aprobar-profesor",
-        "responseMode": "responseNode",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2.1,
-      "position": [
-        -800,
-        160
-      ],
-      "id": "0257e178-b89d-423f-adcc-f1054d17ebac",
-      "name": "Webhook",
-      "webhookId": "920a92c4-3002-455f-8e74-4289a8aee57c"
     },
     {
       "parameters": {
@@ -1320,7 +1752,7 @@
       "typeVersion": 1.1,
       "position": [
         -96,
-        128
+        592
       ],
       "id": "e9db9940-52f1-4808-b41a-190c763d237e",
       "name": "GraphQL",
@@ -1334,14 +1766,14 @@
     {
       "parameters": {
         "respondWith": "text",
-        "responseBody": "=<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Confirmación</title>\n</head>\n<body style=\"\n    margin: 0;\n    padding: 0;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;\n    background-color: #f0fdf4;\n    height: 100vh;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n\">\n    <div style=\"\n        background: white;\n        padding: 30px 20px;\n        border-radius: 16px;\n        box-shadow: 0 10px 25px rgba(0,0,0,0.1);\n        width: 90%;\n        max-width: 400px;\n        text-align: center;\n        box-sizing: border-box;\n    \">\n        <div style=\"font-size: 48px; margin-bottom: 10px;\">✅</div>\n\n        <h1 style=\"color: #16a34a; margin: 0 0 15px 0; font-size: 28px;\">¡Hecho!</h1>\n        \n        <p style=\"color: #4b5563; font-size: 16px; line-height: 1.5; margin-bottom: 20px;\">\n            Se ha creado la cuenta en Shopify para:\n        </p>\n\n        <div style=\"background-color: #f3f4f6; padding: 15px; border-radius: 8px; margin-bottom: 20px;\">\n            <h3 style=\"margin: 0; color: #1f2937; font-size: 18px; word-wrap: break-word;\">\n                {{ $('Webhook').item.json.query.nombre }} {{ $('Webhook').item.json.query.apellido }}\n            </h3>\n        </div>\n\n        <p style=\"color: #6b7280; font-size: 14px; margin: 0;\">\n            📩 Se le ha enviado el correo de bienvenida.\n        </p>\n    </div>\n</body>\n</html>",
+        "responseBody": "=<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Confirmación</title>\n</head>\n<body style=\"\n    margin: 0;\n    padding: 0;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;\n    background-color: #f0fdf4;\n    height: 100vh;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n\">\n    <div style=\"\n        background: white;\n        padding: 30px 20px;\n        border-radius: 16px;\n        box-shadow: 0 10px 25px rgba(0,0,0,0.1);\n        width: 90%;\n        max-width: 400px;\n        text-align: center;\n        box-sizing: border-box;\n    \">\n        <div style=\"font-size: 48px; margin-bottom: 10px;\">✅</div>\n\n        <h1 style=\"color: #16a34a; margin: 0 0 15px 0; font-size: 28px;\">¡Hecho!</h1>\n        \n        <p style=\"color: #4b5563; font-size: 16px; line-height: 1.5; margin-bottom: 20px;\">\n            Se ha creado la cuenta en Shopify para:\n        </p>\n\n        <div style=\"background-color: #f3f4f6; padding: 15px; border-radius: 8px; margin-bottom: 20px;\">\n            <h3 style=\"margin: 0; color: #1f2937; font-size: 18px; word-wrap: break-word;\">\n                {{ $('Webhook_Aprobado').item.json.query.nombre }} {{ $('Webhook_Aprobado').item.json.query.apellido }}\n            </h3>\n        </div>\n\n        <p style=\"color: #6b7280; font-size: 14px; margin: 0;\">\n            📩 Se le ha enviado el correo de bienvenida.\n        </p>\n    </div>\n</body>\n</html>",
         "options": {}
       },
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
         720,
-        192
+        656
       ],
       "id": "7093e262-a20b-4d2a-af66-afb1179f1e76",
       "name": "Respond to Webhook"
@@ -1358,8 +1790,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        -352,
-        -240
+        -400,
+        -272
       ],
       "id": "a6c03a51-6008-4851-940e-89f821e808d6",
       "name": "HTTP Request"
@@ -1367,7 +1799,7 @@
     {
       "parameters": {
         "content": "## Respuesta Formulario Google\n**Coge la respuesta mediante una hoja de calculo de info@tailwind.es y manda los datos de GoHighLevel (crm) para que mande el mensaje de Whatsapp desde ahí**",
-        "height": 288,
+        "height": 256,
         "width": 1136,
         "color": 6
       },
@@ -1382,8 +1814,8 @@
     },
     {
       "parameters": {
-        "content": "## Validación Aprobada\n**Aprueba el link de validación, crea la cuenta de Shopify para que pueda usar el 40%PROFESOR y le manda un mensaje de que ha sido aceptado mediante correo electrónico**",
-        "height": 528,
+        "content": "## Validación Aprobada\n**Aprueba en el link de validación, crea la cuenta de Shopify para que pueda usar el 40%PROFESOR y le manda un mensaje de que ha sido aceptado mediante correo electrónico**",
+        "height": 512,
         "width": 2368,
         "color": 4
       },
@@ -1391,7 +1823,7 @@
       "typeVersion": 1,
       "position": [
         -848,
-        -64
+        400
       ],
       "id": "43e75f41-d3b7-4d36-89d8-d17b3659dc10",
       "name": "Sticky Note2"
@@ -1399,21 +1831,21 @@
     {
       "parameters": {
         "respondWith": "text",
-        "responseBody": "=<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Confirmación</title>\n</head>\n<body style=\"\n    margin: 0;\n    padding: 0;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;\n    background-color: #f0fdf4;\n    height: 100vh;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n\">\n    <div style=\"\n        background: white;\n        padding: 30px 20px;\n        border-radius: 16px;\n        box-shadow: 0 10px 25px rgba(0,0,0,0.1);\n        width: 90%;\n        max-width: 400px;\n        text-align: center;\n        box-sizing: border-box;\n    \">\n        <div style=\"font-size: 48px; margin-bottom: 10px;\">✅</div>\n\n        <h1 style=\"color: #16a34a; margin: 0 0 15px 0; font-size: 28px;\">¡Hecho!</h1>\n        \n        <p style=\"color: #4b5563; font-size: 16px; line-height: 1.5; margin-bottom: 20px;\">\n            Se ha actualizado la cuenta en Shopify para:\n        </p>\n\n        <div style=\"background-color: #f3f4f6; padding: 15px; border-radius: 8px; margin-bottom: 20px;\">\n            <h3 style=\"margin: 0; color: #1f2937; font-size: 18px; word-wrap: break-word;\">\n                {{ $('Webhook').item.json.query.nombre }} {{ $('Webhook').item.json.query.apellido }}\n            </h3>\n        </div>\n\n        <p style=\"color: #6b7280; font-size: 14px; margin: 0;\">\n            📩 Se le ha enviado el correo de bienvenida.\n        </p>\n    </div>\n</body>\n</html>",
+        "responseBody": "=<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Confirmación</title>\n</head>\n<body style=\"\n    margin: 0;\n    padding: 0;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;\n    background-color: #f0fdf4;\n    height: 100vh;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n\">\n    <div style=\"\n        background: white;\n        padding: 30px 20px;\n        border-radius: 16px;\n        box-shadow: 0 10px 25px rgba(0,0,0,0.1);\n        width: 90%;\n        max-width: 400px;\n        text-align: center;\n        box-sizing: border-box;\n    \">\n        <div style=\"font-size: 48px; margin-bottom: 10px;\">✅</div>\n\n        <h1 style=\"color: #16a34a; margin: 0 0 15px 0; font-size: 28px;\">¡Hecho!</h1>\n        \n        <p style=\"color: #4b5563; font-size: 16px; line-height: 1.5; margin-bottom: 20px;\">\n            Se ha actualizado la cuenta en Shopify para:\n        </p>\n\n        <div style=\"background-color: #f3f4f6; padding: 15px; border-radius: 8px; margin-bottom: 20px;\">\n            <h3 style=\"margin: 0; color: #1f2937; font-size: 18px; word-wrap: break-word;\">\n                {{ $('Webhook_Aprobado').item.json.query.nombre }} {{ $('Webhook_Aprobado').item.json.query.apellido }}\n            </h3>\n        </div>\n\n        <p style=\"color: #6b7280; font-size: 14px; margin: 0;\">\n            📩 Se le ha enviado el correo de bienvenida.\n        </p>\n    </div>\n</body>\n</html>",
         "options": {}
       },
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
         1296,
-        32
+        496
       ],
       "id": "08ff5ebf-0680-4bce-a7d0-904cdb8e5f35",
       "name": "Respond to Webhook1"
     },
     {
       "parameters": {
-        "sendTo": "={{ $('Webhook').item.json.query.email }}",
+        "sendTo": "={{ $('Webhook_Aprobado').item.json.query.email }}",
         "subject": "✅ Alta Aprobada: Cuenta Profesional Rules Shop",
         "message": "=<div style=\"background-color: #f3f4f6; padding: 40px 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333333;\">\n    <div style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05);\">\n        \n        <div style=\"background-color: #000000; padding: 20px; text-align: center;\">\n            <h1 style=\"color: #ffffff; margin: 0; font-size: 24px;\">Rules Shop PRO 🏂</h1>\n        </div>\n\n        <div style=\"padding: 40px 30px;\">\n            <p style=\"font-size: 18px; line-height: 1.6;\">Hola <strong>{{ $json.data.customerUpdate.customer.firstName }} {{ $json.data.customerUpdate.customer.lastName }}</strong>,</p>\n            \n            <p style=\"font-size: 16px; line-height: 1.6; color: #4b5563;\">¡Todo listo! Hemos <strong>actualizado tu ficha de cliente</strong> correctamente.</p>\n            \n            <p style=\"font-size: 16px; line-height: 1.6; color: #4b5563;\">Al comprobar tus datos, vimos que ya tenías una cuenta con nosotros. Tu perfil ha sido marcado como <strong style=\"color: #16a34a;\">AUTORIZADO ✅</strong> en tu usuario actual.</p>\n\n            <div style=\"background-color: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 6px; padding: 20px; margin: 25px 0; text-align: center;\">\n                <p style=\"margin: 0; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: #166534;\">Tu nivel de descuento</p>\n                \n                <div style=\"font-size: 24px; font-weight: bold; color: #15803d; margin: 15px 0; line-height: 1.3;\">\n                    40% en OAKLEY y<br>THE NORTH FACE\n                </div>\n                \n                <div style=\"border-top: 1px solid #bbf7d0; width: 60%; margin: 10px auto;\"></div>\n                \n                <div style=\"font-size: 20px; font-weight: bold; color: #15803d; margin-top: 10px;\">\n                    20% en Equipamiento\n                </div>\n            </div>\n            <div style=\"background-color: #f9fafb; padding: 20px; border-radius: 6px; font-size: 13px; color: #6b7280; border-left: 4px solid #d1d5db;\">\n                <h3 style=\"margin-top: 0; color: #374151; font-size: 14px;\">⚠️ RESTRICCIONES DEL PROGRAMA:</h3>\n                <ul style=\"padding-left: 20px; margin-bottom: 0;\">\n                    <li style=\"margin-bottom: 8px;\">Este programa es un privilegio personal e intransferible.</li>\n                    <li style=\"margin-bottom: 8px;\">No permite compras para amigos, familiares ni regalos a terceros.</li>\n                    <li>Queda prohibida la reventa de productos adquiridos con este descuento.</li>\n                </ul>\n                <p style=\"margin-top: 15px; margin-bottom: 0; font-weight: bold; font-size: 12px;\">AL PARTICIPAR EN ESTE PROGRAMA, USTED ACEPTA ESTOS TÉRMINOS.</p>\n            </div>\n\n            <p style=\"margin-top: 30px; font-size: 16px;\">¡Nos vemos en la nieve! ❄️</p>\n            <p style=\"font-style: italic; color: #6b7280;\">El equipo de Rules Shop.</p>\n        </div>\n        \n        <div style=\"background-color: #f3f4f6; padding: 20px; text-align: center; font-size: 12px; color: #9ca3af;\">\n            <p style=\"margin: 0;\">Mensaje automático enviado desde Rules Shop.</p>\n        </div>\n    </div>\n</div>",
         "options": {}
@@ -1422,7 +1854,7 @@
       "typeVersion": 2.2,
       "position": [
         912,
-        32
+        496
       ],
       "id": "90dec506-0a68-4200-9fd4-bf78490b83b7",
       "name": "cuenta_existente",
@@ -1436,16 +1868,16 @@
     },
     {
       "parameters": {
-        "sendTo": "={{ $('Webhook').item.json.query.email }}",
+        "sendTo": "={{ $('Webhook_Aprobado').item.json.query.email }}",
         "subject": "✅ Alta Aprobada: Cuenta Profesional Rules Shop",
-        "message": "=<div style=\"background-color: #f3f4f6; padding: 40px 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333333;\">\n    <div style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05);\">\n        \n        <div style=\"background-color: #000000; padding: 20px; text-align: center;\">\n            <h1 style=\"color: #ffffff; margin: 0; font-size: 24px;\">Rules Shop PRO 🏂</h1>\n        </div>\n\n        <div style=\"padding: 40px 30px;\">\n            <p style=\"font-size: 18px; line-height: 1.6;\">Hola <strong>{{ $('Webhook').item.json.query.nombre }} {{ $('Webhook').item.json.query.apellido }}</strong>,</p>\n            \n            <p style=\"font-size: 16px; line-height: 1.6; color: #4b5563;\">¡Traemos buenas noticias! Tu perfil profesional ha sido <strong style=\"color: #16a34a;\">AUTORIZADO ✅</strong>.</p>\n            \n            <p style=\"font-size: 16px; line-height: 1.6; color: #4b5563;\">Ya puedes usar este mismo correo electrónico para identificarte. Tu tarifa especial se aplicará automáticamente.</p>\n\n            <div style=\"background-color: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 6px; padding: 20px; margin: 25px 0; text-align: center;\">\n                <p style=\"margin: 0; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: #166534;\">Tu nivel de descuento</p>\n                \n                <div style=\"font-size: 24px; font-weight: bold; color: #15803d; margin: 15px 0; line-height: 1.3;\">\n                    40% en OAKLEY y<br>THE NORTH FACE\n                </div>\n                \n                <div style=\"border-top: 1px solid #bbf7d0; width: 60%; margin: 10px auto;\"></div>\n                \n                <div style=\"font-size: 20px; font-weight: bold; color: #15803d; margin-top: 10px;\">\n                    20% en Equipamiento\n                </div>\n            </div>\n            <div style=\"background-color: #f9fafb; padding: 20px; border-radius: 6px; font-size: 13px; color: #6b7280; border-left: 4px solid #d1d5db;\">\n                <h3 style=\"margin-top: 0; color: #374151; font-size: 14px;\">⚠️ RESTRICCIONES DEL PROGRAMA:</h3>\n                <ul style=\"padding-left: 20px; margin-bottom: 0;\">\n                    <li style=\"margin-bottom: 8px;\">Este programa es un privilegio personal e intransferible.</li>\n                    <li style=\"margin-bottom: 8px;\">No permite compras para amigos, familiares ni regalos a terceros.</li>\n                    <li>Queda prohibida la reventa de productos adquiridos con este descuento.</li>\n                </ul>\n                <p style=\"margin-top: 15px; margin-bottom: 0; font-weight: bold; font-size: 12px;\">AL PARTICIPAR EN ESTE PROGRAMA, USTED ACEPTA ESTOS TÉRMINOS.</p>\n            </div>\n\n            <p style=\"margin-top: 30px; font-size: 16px;\">¡Nos vemos en la nieve! ❄️</p>\n            <p style=\"font-style: italic; color: #6b7280;\">El equipo de Rules Shop.</p>\n        </div>\n        \n        <div style=\"background-color: #f3f4f6; padding: 20px; text-align: center; font-size: 12px; color: #9ca3af;\">\n            <p style=\"margin: 0;\">Mensaje automático enviado desde Rules Shop.</p>\n        </div>\n    </div>\n</div>",
+        "message": "=<div style=\"background-color: #f3f4f6; padding: 40px 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333333;\">\n    <div style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05);\">\n        \n        <div style=\"background-color: #000000; padding: 20px; text-align: center;\">\n            <h1 style=\"color: #ffffff; margin: 0; font-size: 24px;\">Rules Shop PRO 🏂</h1>\n        </div>\n\n        <div style=\"padding: 40px 30px;\">\n            <p style=\"font-size: 18px; line-height: 1.6;\">Hola <strong>{{ $('Webhook_Aprobado').item.json.query.nombre }} {{ $('Webhook_Aprobado').item.json.query.apellido }}</strong>,</p>\n            \n            <p style=\"font-size: 16px; line-height: 1.6; color: #4b5563;\">¡Traemos buenas noticias! Tu perfil profesional ha sido <strong style=\"color: #16a34a;\">AUTORIZADO ✅</strong>.</p>\n            \n            <p style=\"font-size: 16px; line-height: 1.6; color: #4b5563;\">Ya puedes usar este mismo correo electrónico para identificarte. Tu tarifa especial se aplicará automáticamente.</p>\n\n            <div style=\"background-color: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 6px; padding: 20px; margin: 25px 0; text-align: center;\">\n                <p style=\"margin: 0; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: #166534;\">Tu nivel de descuento</p>\n                \n                <div style=\"font-size: 24px; font-weight: bold; color: #15803d; margin: 15px 0; line-height: 1.3;\">\n                    40% en OAKLEY y<br>THE NORTH FACE\n                </div>\n                \n                <div style=\"border-top: 1px solid #bbf7d0; width: 60%; margin: 10px auto;\"></div>\n                \n                <div style=\"font-size: 20px; font-weight: bold; color: #15803d; margin-top: 10px;\">\n                    20% en Equipamiento\n                </div>\n            </div>\n            <div style=\"background-color: #f9fafb; padding: 20px; border-radius: 6px; font-size: 13px; color: #6b7280; border-left: 4px solid #d1d5db;\">\n                <h3 style=\"margin-top: 0; color: #374151; font-size: 14px;\">⚠️ RESTRICCIONES DEL PROGRAMA:</h3>\n                <ul style=\"padding-left: 20px; margin-bottom: 0;\">\n                    <li style=\"margin-bottom: 8px;\">Este programa es un privilegio personal e intransferible.</li>\n                    <li style=\"margin-bottom: 8px;\">No permite compras para amigos, familiares ni regalos a terceros.</li>\n                    <li>Queda prohibida la reventa de productos adquiridos con este descuento.</li>\n                </ul>\n                <p style=\"margin-top: 15px; margin-bottom: 0; font-weight: bold; font-size: 12px;\">AL PARTICIPAR EN ESTE PROGRAMA, USTED ACEPTA ESTOS TÉRMINOS.</p>\n            </div>\n\n            <p style=\"margin-top: 30px; font-size: 16px;\">¡Nos vemos en la nieve! ❄️</p>\n            <p style=\"font-style: italic; color: #6b7280;\">El equipo de Rules Shop.</p>\n        </div>\n        \n        <div style=\"background-color: #f3f4f6; padding: 20px; text-align: center; font-size: 12px; color: #9ca3af;\">\n            <p style=\"margin: 0;\">Mensaje automático enviado desde Rules Shop.</p>\n        </div>\n    </div>\n</div>",
         "options": {}
       },
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
         272,
-        192
+        656
       ],
       "id": "c9751bd3-9bd1-41cd-85cc-4aaee7940a73",
       "name": "cuenta_creada",
@@ -1469,7 +1901,7 @@
           "conditions": [
             {
               "id": "8b16a42d-b5d8-4566-b621-148f30b39911",
-              "leftValue": "={{ $('Webhook').item.json.query.expiracion.toNumber() }}",
+              "leftValue": "={{ $('Webhook_Aprobado').item.json.query.expiracion.toNumber() }}",
               "rightValue": "={{ $now.toMillis() }}",
               "operator": {
                 "type": "number",
@@ -1485,7 +1917,7 @@
       "typeVersion": 2.3,
       "position": [
         -304,
-        288
+        736
       ],
       "id": "084ffaf6-da30-4f74-92e7-d169a22b429b",
       "name": "Verificar_Caducidad"
@@ -1500,33 +1932,10 @@
       "typeVersion": 1.5,
       "position": [
         80,
-        304
+        752
       ],
       "id": "201815e8-520f-4f99-a1dc-389365815099",
       "name": "Respond to Webhook2"
-    },
-    {
-      "parameters": {
-        "sendTo": "={{ $json.query.email }}",
-        "subject": "📄 Actualización sobre tu solicitud: Cuenta Profesional Rules Shop",
-        "message": "=<div style=\"background-color: #f3f4f6; padding: 40px 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333333;\">     <div style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05);\">                  <div style=\"background-color: #000000; padding: 20px; text-align: center;\">             <h1 style=\"color: #ffffff; margin: 0; font-size: 24px;\">Rules Shop PRO 🏂</h1>         </div>          <div style=\"padding: 40px 30px;\">             <p style=\"font-size: 18px; line-height: 1.6;\">Hola <strong>{{ $json.query.nombre }} {{ $json.query.apellido }}</strong>,</p>                          <p style=\"font-size: 16px; line-height: 1.6; color: #4b5563;\">                 Gracias por tu interés en formar parte del programa de profesionales de Rules Shop y por enviarnos tu documentación.             </p>                          <p style=\"font-size: 16px; line-height: 1.6; color: #4b5563;\">                 Nuestro equipo ha revisado tu solicitud detalladamente. En esta ocasión, <strong>no hemos podido validar tu perfil</strong> para acceder a las tarifas especiales del programa PRO.             </p>              <div style=\"background-color: #fef2f2; border: 1px solid #fecaca; border-radius: 6px; padding: 20px; margin: 25px 0; text-align: center;\">                 <p style=\"margin: 0; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: #991b1b;\">Estado de la solicitud</p>                 <div style=\"font-size: 24px; font-weight: bold; color: #dc2626; margin: 10px 0;\">NO APROBADA ✋</div>                 <p style=\"font-size: 14px; color: #7f1d1d; margin: 0;\">La documentación aportada no cumple con los requisitos actuales.</p>             </div>              <div style=\"background-color: #f9fafb; padding: 20px; border-radius: 6px; font-size: 13px; color: #6b7280; border-left: 4px solid #9ca3af;\">                 <h3 style=\"margin-top: 0; color: #374151; font-size: 14px;\">¿Crees que es un error?</h3>                 <p style=\"margin: 0; line-height: 1.5;\">                     Si consideras que ha habido una equivocación o dispones de documentación actualizada (Título vigente o Vida laboral reciente), te invitamos a responder a este correo adjuntando los nuevos archivos para una segunda revisión.                 </p>             </div>              <p style=\"margin-top: 30px; font-size: 16px;\">                 Sigues siendo bienvenido en nuestra tienda y comunidad. ¡Esperamos verte pronto disfrutando de la temporada!             </p>                          <p style=\"margin-top: 30px; font-size: 16px;\">Un saludo,</p>             <p style=\"font-style: italic; color: #6b7280;\">El equipo de Rules Shop.</p>         </div>                  <div style=\"background-color: #f3f4f6; padding: 20px; text-align: center; font-size: 12px; color: #9ca3af;\">             <p style=\"margin: 0;\">&copy; Rules Shop. Sierra Nevada.</p>         </div>     </div> </div>",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.gmail",
-      "typeVersion": 2.2,
-      "position": [
-        -96,
-        304
-      ],
-      "id": "46434455-9b52-49de-adf3-98a0321ae548",
-      "name": "Send a message",
-      "webhookId": "a8ec28c0-85f5-441d-9bcd-a3152df9be95",
-      "credentials": {
-        "gmailOAuth2": {
-          "id": "2piqh63wCF24vapD",
-          "name": "profesionales@rules-shop.es"
-        }
-      }
     },
     {
       "parameters": {
@@ -1539,7 +1948,7 @@
       "typeVersion": 1.1,
       "position": [
         480,
-        32
+        496
       ],
       "id": "7884e8ab-01e6-4870-ae2f-c9a0f6ec816b",
       "name": "Buscar_ID_Cliente",
@@ -1580,7 +1989,7 @@
       "typeVersion": 4.7,
       "position": [
         -640,
-        160
+        624
       ],
       "id": "43538da5-809f-446e-9cb2-dc0405cb3bb7",
       "name": "Get row(s) in sheet",
@@ -1601,7 +2010,7 @@
       "typeVersion": 1.5,
       "position": [
         -304,
-        64
+        528
       ],
       "id": "16d5d421-37ed-4c9a-be44-d0f46e8c3694",
       "name": "Respond to Webhook3"
@@ -1635,7 +2044,7 @@
       "typeVersion": 2.3,
       "position": [
         -480,
-        160
+        624
       ],
       "id": "71288c43-1b35-4991-9617-83dfe097af79",
       "name": "Estado_Validacion"
@@ -1677,7 +2086,7 @@
       "typeVersion": 2.3,
       "position": [
         80,
-        128
+        592
       ],
       "id": "e471444b-f471-49d9-bb4f-de659a9ebae7",
       "name": "Si_Existe"
@@ -1820,7 +2229,7 @@
       "typeVersion": 4.7,
       "position": [
         1120,
-        32
+        496
       ],
       "id": "40ba9e2d-8950-4fa2-bf34-1a3e5221bcc6",
       "name": "Update row in sheet",
@@ -1969,7 +2378,7 @@
       "typeVersion": 4.7,
       "position": [
         480,
-        192
+        656
       ],
       "id": "88c9b20b-20c3-462a-b6c6-acf00666d7ee",
       "name": "Update row in sheet1",
@@ -1985,13 +2394,13 @@
         "authentication": "headerAuth",
         "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
         "query": "mutation customerUpdate($input: CustomerInput!) {\n  customerUpdate(input: $input) {\n    customer {\n      id\n      email\n      firstName\n      lastName\n      tags\n      phone\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
-        "variables": "={\n  \"input\": {\n    \"id\": \"{{ $('Buscar_ID_Cliente').item.json.data.customers.edges[0].node.id }}\",\n    \"firstName\": \"{{ $('Webhook').item.json.query.nombre }}\",\n    \"lastName\": \"{{ $('Webhook').item.json.query.apellido }}\",\n    \n    \"tags\": \"{{ ($('Buscar_ID_Cliente').item.json.data.customers.edges[0].node.tags || []).concat(['Profesor', 'DescuentoProfesor']) }}\",\n    \n    \"note\": \"Perfil actualizado y validado automáticamente vía WhatsApp el {{ $now.toFormat('dd/MM/yyyy') }}\",\n    \"phone\": \"{{ $('Webhook').item.json.query.telefono && $('Webhook').item.json.query.telefono.toString().replace(/\\D/g,'').length > 8 ? ($('Webhook').item.json.query.telefono.toString().includes('+') ? $('Webhook').item.json.query.telefono.toString().replace(/ /g,'') : '+34' + $('Webhook').item.json.query.telefono.toString().replace(/\\D/g,'')) : null }}\"\n  }\n}"
+        "variables": "={\n  \"input\": {\n    \"id\": \"{{ $('Buscar_ID_Cliente').item.json.data.customers.edges[0].node.id }}\",\n    \"firstName\": \"{{ $('Webhook_Aprobado').item.json.query.nombre }}\",\n    \"lastName\": \"{{ $('Webhook_Aprobado').item.json.query.apellido }}\",\n    \n    \"tags\": \"{{ ($('Buscar_ID_Cliente').item.json.data.customers.edges[0].node.tags || []).concat(['Profesor', 'DescuentoProfesor']) }}\",\n    \n    \"note\": \"Perfil actualizado y validado automáticamente vía WhatsApp el {{ $now.toFormat('dd/MM/yyyy') }}\",\n    \"phone\": \"{{ $('Webhook_Aprobado').item.json.query.telefono && $('Webhook_Aprobado').item.json.query.telefono.toString().replace(/\\D/g,'').length > 8 ? ($('Webhook_Aprobado').item.json.query.telefono.toString().includes('+') ? $('Webhook_Aprobado').item.json.query.telefono.toString().replace(/ /g,'') : '+34' + $('Webhook_Aprobado').item.json.query.telefono.toString().replace(/\\D/g,'')) : null }}\"\n  }\n}"
       },
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
         720,
-        32
+        496
       ],
       "id": "20b324c0-a79a-434e-864f-8aeb88eb1a38",
       "name": "Actualizar_Cliente",
@@ -2004,21 +2413,397 @@
     },
     {
       "parameters": {
-        "jsCode": "// Capturamos los datos limpios\nconst email = $('Webhook').item.json.query.email;\nconst telefono = $('Webhook').item.json.query.telefono;\n\nreturn {\n  // Estas dos son para que tú las veas separadas en el output:\n  \"mi_email\": email,\n  \"mi_telefono\": telefono,\n  \n  // Esta es la variable combinada que OBLIGATORIAMENTE necesita Shopify:\n  \"busqueda_shopify\": `email:${email} OR phone:${telefono}`\n}"
+        "jsCode": "// Capturamos los datos limpios\nconst email = $('Webhook_Aprobado').item.json.query.email;\nconst telefono = $('Webhook_Aprobado').item.json.query.telefono;\n\nreturn {\n  // Estas dos son para que tú las veas separadas en el output:\n  \"mi_email\": email,\n  \"mi_telefono\": telefono,\n  \n  // Esta es la variable combinada que OBLIGATORIAMENTE necesita Shopify:\n  \"busqueda_shopify\": `email:${email} OR phone:${telefono}`\n}"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
         272,
-        32
+        496
       ],
       "id": "dc4ffbab-3b2b-4f6f-86e8-e0b06b329928",
       "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "path": "gestion-profesor",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -800,
+        -16
+      ],
+      "id": "c7c83ad7-6112-47cf-828f-8b1bd7f7010c",
+      "name": "Webhook_Menu",
+      "webhookId": "a41e8e2e-6f73-4b09-8110-63fff0a58878"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Gestión de Solicitud</title>\n  <style>\n    body {\n      font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif;\n      background-color: #f3f4f6;\n      display: flex;\n      justify-content: center;\n      align-items: center;\n      min-height: 100vh;\n      margin: 0;\n      padding: 20px;\n    }\n    .card {\n      background: white;\n      padding: 30px;\n      border-radius: 16px;\n      box-shadow: 0 10px 25px rgba(0,0,0,0.1);\n      width: 100%;\n      max-width: 450px;\n      text-align: center;\n    }\n    h2 { margin-top: 0; color: #111827; margin-bottom: 20px; }\n    \n    .info-box {\n      text-align: left;\n      background: #f9fafb;\n      padding: 20px;\n      border-radius: 12px;\n      margin-bottom: 25px;\n      border: 1px solid #e5e7eb;\n      color: #374151;\n      font-size: 15px;\n      line-height: 1.6;\n    }\n\n    /* Contenedor flexible para los botones */\n    .button-container {\n      display: flex;\n      gap: 15px;\n      justify-content: space-between;\n    }\n\n    .btn {\n      flex: 1;\n      padding: 15px 10px;\n      border-radius: 8px;\n      text-decoration: none;\n      font-weight: bold;\n      color: white;\n      transition: opacity 0.2s;\n      display: flex;\n      align-items: center;\n      justify-content: center;\n      font-size: 14px;\n    }\n\n    .btn:hover { opacity: 0.9; }\n\n    /* Botón RECHAZAR (Izquierda - Rojo) */\n    .btn-reject {\n      background-color: #ef4444;\n      border: 1px solid #dc2626;\n    }\n\n    /* Botón APROBAR (Derecha - Verde) */\n    .btn-approve {\n      background-color: #16a34a;\n      border: 1px solid #15803d;\n    }\n  </style>\n</head>\n<body>\n\n  <div class=\"card\">\n    <div style=\"font-size: 40px; margin-bottom: 10px;\">👮‍♂️</div>\n    <h2>Revisión de Profesor</h2>\n\n    <div class=\"info-box\">\n      <strong>👤 Nombre:</strong> {{ $json.query.nombre }} {{ $json.query.apellido }}<br>\n      <strong>📧 Email:</strong> {{ $json.query.email }}<br>\n      <strong>📱 Teléfono:</strong> {{ $json.query.telefono }}\n    </div>\n\n    <div class=\"button-container\">\n      \n      <a href=\"https://n8n.tailwind.es/webhook/rechazar-profesor?email={{ $json.query.email }}&nombre={{ $json.query.nombre }}&apellido={{ $json.query.apellido }}\" \n         class=\"btn btn-reject\"\n         onclick=\"return confirm('⚠️ ¿Estás SEGURO de que quieres RECHAZAR a este profesor?')\">\n         ❌ RECHAZAR\n      </a>\n\n      <a href=\"https://n8n.tailwind.es/webhook/aprobar-profesor?email={{ $json.query.email }}&nombre={{ $json.query.nombre }}&apellido={{ $json.query.apellido }}&telefono={{ $json.query.telefono }}&expiracion={{ $json.query.expiracion }}\" \n         class=\"btn btn-approve\">\n         ✅ APROBAR\n      </a>\n\n    </div>\n  </div>\n\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        -592,
+        -16
+      ],
+      "id": "5704d7a3-a128-4921-85c2-eb1136bc879e",
+      "name": "Respond to Webhook4"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "16auxC5pQ4ydDh1LxCKiPC5ClQ1WCN3R5ogY1Smmbm4c",
+          "mode": "list",
+          "cachedResultName": "Solicitud de Alta - Profesionales Rules Oakley (respuestas)",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/16auxC5pQ4ydDh1LxCKiPC5ClQ1WCN3R5ogY1Smmbm4c/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 512939465,
+          "mode": "list",
+          "cachedResultName": "Respuestas de formulario",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/16auxC5pQ4ydDh1LxCKiPC5ClQ1WCN3R5ogY1Smmbm4c/edit#gid=512939465"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Estado Validación": "NO VALIDADO",
+            "row_number": "={{ $json.row_number }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "Marca temporal",
+              "displayName": "Marca temporal",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Nombre",
+              "displayName": "Nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Apellido",
+              "displayName": "Apellido",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Correo Electrónico",
+              "displayName": "Correo Electrónico",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Teléfono Móvil",
+              "displayName": "Teléfono Móvil",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Adjuntar Vida Laboral Actual",
+              "displayName": "Adjuntar Vida Laboral Actual",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Adjuntar Título / Certificación de Profesor",
+              "displayName": "Adjuntar Título / Certificación de Profesor",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Aceptación de condiciones",
+              "displayName": "Aceptación de condiciones",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Nota Manual",
+              "displayName": "Nota Manual",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Estado Validación",
+              "displayName": "Estado Validación",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -384,
+        224
+      ],
+      "id": "eadd6307-1f9c-42fe-b3ef-79fe82ad60eb",
+      "name": "Update row in sheet2",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "RCuKUCifcA4jENcY",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Solicitud Rechazada</title>\n  <style>\n    body {\n      font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif;\n      background-color: #fef2f2; /* Fondo rojo muy suave */\n      display: flex;\n      justify-content: center;\n      align-items: center;\n      height: 100vh;\n      margin: 0;\n      padding: 20px;\n    }\n    .card {\n      background: white;\n      padding: 40px 30px;\n      border-radius: 16px;\n      box-shadow: 0 10px 25px rgba(0,0,0,0.05);\n      width: 100%;\n      max-width: 400px;\n      text-align: center;\n      border-top: 6px solid #ef4444; /* Borde superior rojo */\n    }\n    .icon-container {\n      background-color: #fee2e2;\n      color: #dc2626;\n      width: 80px;\n      height: 80px;\n      border-radius: 50%;\n      display: flex;\n      align-items: center;\n      justify-content: center;\n      font-size: 40px;\n      margin: 0 auto 20px auto;\n    }\n    h1 {\n      color: #991b1b;\n      margin: 0 0 10px 0;\n      font-size: 24px;\n    }\n    p {\n      color: #4b5563;\n      font-size: 16px;\n      line-height: 1.5;\n      margin-bottom: 20px;\n    }\n    .status-box {\n      background-color: #f3f4f6;\n      border-radius: 8px;\n      padding: 15px;\n      text-align: left;\n      font-size: 14px;\n      color: #374151;\n      margin-bottom: 25px;\n    }\n    .check-item {\n      display: flex;\n      align-items: center;\n      margin-bottom: 8px;\n    }\n    .check-item:last-child { margin-bottom: 0; }\n    .check-icon { margin-right: 10px; color: #ef4444; }\n    \n    .footer {\n      font-size: 13px;\n      color: #9ca3af;\n      margin-top: 20px;\n    }\n  </style>\n</head>\n<body>\n\n  <div class=\"card\">\n    <div class=\"icon-container\">\n      🗑️\n    </div>\n\n    <h1>Solicitud Rechazada</h1>\n    \n    <p>\n      La solicitud de <strong>{{ $('Webhook_Rechazo').item.json.query.nombre }} {{ $('Webhook_Rechazo').item.json.query.apellido }}</strong> ha sido procesada correctamente.\n    </p>\n\n    <div class=\"status-box\">\n      <div class=\"check-item\">\n        <span class=\"check-icon\">✔</span> Estado cambiado a \"NO VALIDADO\".\n      </div>\n      <div class=\"check-item\">\n        <span class=\"check-icon\">✔</span> Email de rechazo enviado.\n      </div>\n      <div class=\"check-item\">\n        <span class=\"check-icon\">✔</span> Expediente archivado.\n      </div>\n    </div>\n\n    <p class=\"footer\">\n      Puedes cerrar esta ventana.\n    </p>\n  </div>\n\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        16,
+        224
+      ],
+      "id": "cd54a1b8-8690-4fdc-a822-39de1d5eff25",
+      "name": "Respond to Webhook5"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "16auxC5pQ4ydDh1LxCKiPC5ClQ1WCN3R5ogY1Smmbm4c",
+          "mode": "list",
+          "cachedResultName": "Solicitud de Alta - Profesionales Rules Oakley (respuestas)",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/16auxC5pQ4ydDh1LxCKiPC5ClQ1WCN3R5ogY1Smmbm4c/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 512939465,
+          "mode": "list",
+          "cachedResultName": "Respuestas de formulario",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/16auxC5pQ4ydDh1LxCKiPC5ClQ1WCN3R5ogY1Smmbm4c/edit#gid=512939465"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Correo Electrónico",
+              "lookupValue": "={{ $json.query.email.trim() }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -592,
+        224
+      ],
+      "id": "969e9fc5-c9bc-4416-8530-3c578f81ab7f",
+      "name": "Get row(s) in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "RCuKUCifcA4jENcY",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "path": "rechazar-profesor",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -800,
+        224
+      ],
+      "id": "b28d9a15-21e4-45d3-a930-92d6d7172d1d",
+      "name": "Webhook_Rechazo",
+      "webhookId": "9dc474f3-1ff7-4fa7-8c29-5b66de2a6e49"
+    },
+    {
+      "parameters": {
+        "path": "aprobar-profesor",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -800,
+        624
+      ],
+      "id": "0257e178-b89d-423f-adcc-f1054d17ebac",
+      "name": "Webhook_Aprobado",
+      "webhookId": "920a92c4-3002-455f-8e74-4289a8aee57c"
+    },
+    {
+      "parameters": {
+        "content": "## Validación Rechazada\n**Rechaza en el link de validación, se le pone en el google sheets la etiqueta NO VALIDADO y se le manda un correo diciendo que ha sido rechazado**",
+        "height": 240,
+        "width": 1696,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -848,
+        144
+      ],
+      "id": "a5553ade-6ae7-4d05-905b-d75af2e0e01e",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Menu de Aprobación\n**Elige si aceptar o rechazar los documentos adjuntos del profesor**",
+        "height": 224,
+        "width": 1696
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -848,
+        -96
+      ],
+      "id": "6d51601e-dd0f-49c9-8073-b5199d4e5591",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.query.email }}",
+        "subject": "📄 Actualización sobre tu solicitud: Cuenta Profesional Rules Shop",
+        "message": "=<div style=\"background-color: #f3f4f6; padding: 40px 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333333;\">     <div style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05);\">                  <div style=\"background-color: #000000; padding: 20px; text-align: center;\">             <h1 style=\"color: #ffffff; margin: 0; font-size: 24px;\">Rules Shop PRO 🏂</h1>         </div>          <div style=\"padding: 40px 30px;\">             <p style=\"font-size: 18px; line-height: 1.6;\">Hola <strong>{{ $json.query.nombre }} {{ $json.query.apellido }}</strong>,</p>                          <p style=\"font-size: 16px; line-height: 1.6; color: #4b5563;\">                 Gracias por tu interés en formar parte del programa de profesionales de Rules Shop y por enviarnos tu documentación.             </p>                          <p style=\"font-size: 16px; line-height: 1.6; color: #4b5563;\">                 Nuestro equipo ha revisado tu solicitud detalladamente. En esta ocasión, <strong>no hemos podido validar tu perfil</strong> para acceder a las tarifas especiales del programa PRO.             </p>              <div style=\"background-color: #fef2f2; border: 1px solid #fecaca; border-radius: 6px; padding: 20px; margin: 25px 0; text-align: center;\">                 <p style=\"margin: 0; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: #991b1b;\">Estado de la solicitud</p>                 <div style=\"font-size: 24px; font-weight: bold; color: #dc2626; margin: 10px 0;\">NO APROBADA ✋</div>                 <p style=\"font-size: 14px; color: #7f1d1d; margin: 0;\">La documentación aportada no cumple con los requisitos actuales.</p>             </div>              <div style=\"background-color: #f9fafb; padding: 20px; border-radius: 6px; font-size: 13px; color: #6b7280; border-left: 4px solid #9ca3af;\">                 <h3 style=\"margin-top: 0; color: #374151; font-size: 14px;\">¿Crees que es un error?</h3>                 <p style=\"margin: 0; line-height: 1.5;\">                     Si consideras que ha habido una equivocación o dispones de documentación actualizada (Título vigente o Vida laboral reciente), te invitamos a responder a este correo adjuntando los nuevos archivos para una segunda revisión.                 </p>             </div>              <p style=\"margin-top: 30px; font-size: 16px;\">                 Sigues siendo bienvenido en nuestra tienda y comunidad. ¡Esperamos verte pronto disfrutando de la temporada!             </p>                          <p style=\"margin-top: 30px; font-size: 16px;\">Un saludo,</p>             <p style=\"font-style: italic; color: #6b7280;\">El equipo de Rules Shop.</p>         </div>                  <div style=\"background-color: #f3f4f6; padding: 20px; text-align: center; font-size: 12px; color: #9ca3af;\">             <p style=\"margin: 0;\">&copy; Rules Shop. Sierra Nevada.</p>         </div>     </div> </div>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -96,
+        752
+      ],
+      "id": "46434455-9b52-49de-adf3-98a0321ae548",
+      "name": "no_aprobado",
+      "webhookId": "a8ec28c0-85f5-441d-9bcd-a3152df9be95",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "2piqh63wCF24vapD",
+          "name": "profesionales@rules-shop.es"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Webhook_Rechazo').item.json.query.email }}",
+        "subject": "📄 Actualización sobre tu solicitud: Cuenta Profesional Rules Shop",
+        "message": "=<div style=\"background-color: #f3f4f6; padding: 40px 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333333;\">     <div style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05);\">                  <div style=\"background-color: #000000; padding: 20px; text-align: center;\">             <h1 style=\"color: #ffffff; margin: 0; font-size: 24px;\">Rules Shop PRO 🏂</h1>         </div>          <div style=\"padding: 40px 30px;\">             <p style=\"font-size: 18px; line-height: 1.6;\">Hola <strong>{{ $('Webhook_Rechazo').item.json.query.nombre }} {{ $('Webhook_Rechazo').item.json.query.apellido }}</strong>,</p>                          <p style=\"font-size: 16px; line-height: 1.6; color: #4b5563;\">                 Gracias por tu interés en formar parte del programa de profesionales de Rules Shop y por enviarnos tu documentación.             </p>                          <p style=\"font-size: 16px; line-height: 1.6; color: #4b5563;\">                 Nuestro equipo ha revisado tu solicitud detalladamente. En esta ocasión, <strong>no hemos podido validar tu perfil</strong> para acceder a las tarifas especiales del programa PRO.             </p>              <div style=\"background-color: #fef2f2; border: 1px solid #fecaca; border-radius: 6px; padding: 20px; margin: 25px 0; text-align: center;\">                 <p style=\"margin: 0; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: #991b1b;\">Estado de la solicitud</p>                 <div style=\"font-size: 24px; font-weight: bold; color: #dc2626; margin: 10px 0;\">NO APROBADA ✋</div>                 <p style=\"font-size: 14px; color: #7f1d1d; margin: 0;\">La documentación aportada no cumple con los requisitos actuales.</p>             </div>              <div style=\"background-color: #f9fafb; padding: 20px; border-radius: 6px; font-size: 13px; color: #6b7280; border-left: 4px solid #9ca3af;\">                 <h3 style=\"margin-top: 0; color: #374151; font-size: 14px;\">¿Crees que es un error?</h3>                 <p style=\"margin: 0; line-height: 1.5;\">                     Si consideras que ha habido una equivocación o dispones de documentación actualizada (Título vigente o Vida laboral reciente), te invitamos a responder a este correo adjuntando los nuevos archivos para una segunda revisión.                 </p>             </div>              <p style=\"margin-top: 30px; font-size: 16px;\">                 Sigues siendo bienvenido en nuestra tienda y comunidad. ¡Esperamos verte pronto disfrutando de la temporada!             </p>                          <p style=\"margin-top: 30px; font-size: 16px;\">Un saludo,</p>             <p style=\"font-style: italic; color: #6b7280;\">El equipo de Rules Shop.</p>         </div>                  <div style=\"background-color: #f3f4f6; padding: 20px; text-align: center; font-size: 12px; color: #9ca3af;\">             <p style=\"margin: 0;\">&copy; Rules Shop. Sierra Nevada.</p>         </div>     </div> </div>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -176,
+        224
+      ],
+      "id": "c9912fa2-cc18-4db1-9231-145065f20e91",
+      "name": "no_aprobado1",
+      "webhookId": "a8ec28c0-85f5-441d-9bcd-a3152df9be95",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "2piqh63wCF24vapD",
+          "name": "profesionales@rules-shop.es"
+        }
+      }
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Google Sheets Trigger": [
+      {
+        "json": {
+          "Marca temporal": "9/02/2026 9:28:27",
+          "Nombre": "Maximo",
+          "Apellido": "Soleño",
+          "Correo Electrónico": "maximosoleno@gmail.com",
+          "Teléfono Móvil": "+34657448593",
+          "Adjuntar Vida Laboral Actual": "https://drive.google.com/open?id=1e47hOPTVvem_blTmKA9_XkeAF0fYMk0b",
+          "Adjuntar Título / Certificación de Profesor": "https://drive.google.com/open?id=1ny11EwkPi58N9XywpSJ-z2OtKnstkoHj",
+          "Aceptación de condiciones": "He leído y acepto la Política de Privacidad y las condiciones del programa.",
+          "Nota Manual": "",
+          "Estado Validación": ""
+        }
+      }
+    ]
+  },
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false,
+    "errorWorkflow": "e80tfOpD4TdBh8EF"
   },
   "shared": [
     {
@@ -2038,11 +2823,11 @@
     "node:Google Sheets Trigger": {
       "documentId": "16auxC5pQ4ydDh1LxCKiPC5ClQ1WCN3R5ogY1Smmbm4c",
       "sheetId": 512939465,
-      "lastIndexChecked": 12
+      "lastIndexChecked": 15
     }
   },
   "tags": [],
-  "triggerCount": 2,
-  "updatedAt": "2026-01-30T10:45:42.484Z",
-  "versionId": "70ae61e7-3847-4bc7-a755-381a42e04c37"
+  "triggerCount": 4,
+  "updatedAt": "2026-02-09T09:17:22.762Z",
+  "versionId": "69ce37ba-3900-40c6-814d-72af7e0cf425"
 }
