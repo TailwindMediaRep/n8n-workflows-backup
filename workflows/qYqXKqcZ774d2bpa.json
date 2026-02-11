@@ -1620,27 +1620,11 @@
         ]
       ]
     },
-    "Escribir Empleados": {
-      "main": [
-        [
-          {
-            "node": "Loop Over Items",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Bucle: Uno a Uno": {
       "main": [
         [
           {
             "node": "juntar datos",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Tabla Marcas",
             "type": "main",
             "index": 0
           }
@@ -1681,66 +1665,7 @@
       "main": [
         [
           {
-            "node": "Loop Over Items",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Tabla Marcas": {
-      "main": [
-        [
-          {
-            "node": "Calculo_Maestro",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Loop Over Items": {
-      "main": [
-        [],
-        [
-          {
-            "node": "Escribir Empleados",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Calculo_Maestro": {
-      "main": [
-        [
-          {
-            "node": "Elegir tipo de input",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Elegir tipo de input": {
-      "main": [
-        [
-          {
-            "node": "Escribir detalle",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Escribir marcas",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Escribir sucursales",
+            "node": "escribir bonos empleados",
             "type": "main",
             "index": 0
           }
@@ -1767,11 +1692,6 @@
             "index": 0
           }
         ]
-      ]
-    },
-    "Edit Fields": {
-      "main": [
-        []
       ]
     },
     "Espera 1s": {
@@ -1816,11 +1736,118 @@
       "main": [
         [
           {
-            "node": "Edit Fields",
+            "node": "datos finales",
             "type": "main",
             "index": 0
           }
         ]
+      ]
+    },
+    "calcular ventas empleados": {
+      "main": [
+        [
+          {
+            "node": "escribir ranking empleados",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "datos finales": {
+      "main": [
+        [
+          {
+            "node": "calcular ventas empleados",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Calcular Ranking Empleados",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "calcular sucursales",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "obtener marcas",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "calcular productos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "obtener marcas": {
+      "main": [
+        [
+          {
+            "node": "calcular marcas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "calcular sucursales": {
+      "main": [
+        [
+          {
+            "node": "escribir sucursales",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "calcular productos": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "escribir tickets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "calcular marcas": {
+      "main": [
+        [
+          {
+            "node": "escribir marcas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "escribir productos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "escribir productos": {
+      "main": [
+        []
       ]
     }
   },
@@ -2025,123 +2052,6 @@
     },
     {
       "parameters": {
-        "operation": "update",
-        "documentId": {
-          "__rl": true,
-          "value": "={{ $('Crear Informe Maestro').first().json.id }}",
-          "mode": "id"
-        },
-        "sheetName": {
-          "__rl": true,
-          "value": "Bonos Empleados",
-          "mode": "name"
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "row_number": "={{ $json.numero_fila }}",
-            "BONOS INDIVIDUALES": "={{ $json[\"Nombre Empleado\"] }}",
-            "TOTAL VENDIDO": "={{ $json[\"Total Vendido\"] }}"
-          },
-          "matchingColumns": [
-            "row_number"
-          ],
-          "schema": [
-            {
-              "id": "BONOS INDIVIDUALES",
-              "displayName": "BONOS INDIVIDUALES",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "TOTAL VENDIDO",
-              "displayName": "TOTAL VENDIDO",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "BONO 90€",
-              "displayName": "BONO 90€",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "BONO 120€",
-              "displayName": "BONO 120€",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "BONO 150€",
-              "displayName": "BONO 150€",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "BONO 200€",
-              "displayName": "BONO 200€",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "row_number",
-              "displayName": "row_number",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "number",
-              "canBeUsedToMatch": true,
-              "readOnly": true,
-              "removed": false
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4.7,
-      "position": [
-        112,
-        1056
-      ],
-      "id": "e5203c4f-7924-48e3-a64d-d34d119ef791",
-      "name": "Escribir Empleados",
-      "credentials": {
-        "googleSheetsOAuth2Api": {
-          "id": "RCuKUCifcA4jENcY",
-          "name": "Google Sheets account"
-        }
-      },
-      "onError": "continueErrorOutput"
-    },
-    {
-      "parameters": {
         "content": "RUTA 1: VENTAS\nEl ID del archivo viene del nodo principal, así que ahora podemos escribir directamente.",
         "height": 140,
         "width": 304,
@@ -2184,140 +2094,6 @@
       ],
       "id": "b7320c16-4c2d-4328-a3c4-cd6225d9c362",
       "name": "Bucle: Uno a Uno"
-    },
-    {
-      "parameters": {
-        "operation": "update",
-        "documentId": {
-          "__rl": true,
-          "value": "={{ $('Crear Informe Maestro').first().json.id }}",
-          "mode": "id"
-        },
-        "sheetName": {
-          "__rl": true,
-          "value": "Top Productos",
-          "mode": "name"
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "row_number": "={{ $json.fila_excel }}",
-            "NOMBRE PRODUCTO": "={{ $json.Producto }}",
-            "VARIANTE": "={{ $json.Variante }}",
-            "PRECIO": "={{ $json.Precio }}",
-            "UNIDADES VENDIDAS": "={{ $json.Unidades }}",
-            "TOTAL": "={{ $json.Total }}",
-            "TICKETS VENDIDOS": "={{ $json.Skatepark_Entradas_Vendidas }}",
-            "PRECIO TOTAL": "={{ $json.Skatepark_Ingresos_Totales }}"
-          },
-          "matchingColumns": [
-            "row_number"
-          ],
-          "schema": [
-            {
-              "id": "NOMBRE PRODUCTO",
-              "displayName": "NOMBRE PRODUCTO",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "VARIANTE",
-              "displayName": "VARIANTE",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "PRECIO",
-              "displayName": "PRECIO",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "UNIDADES VENDIDAS",
-              "displayName": "UNIDADES VENDIDAS",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "TOTAL",
-              "displayName": "TOTAL",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "TICKETS VENDIDOS",
-              "displayName": "TICKETS VENDIDOS",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "PRECIO TOTAL",
-              "displayName": "PRECIO TOTAL",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "row_number",
-              "displayName": "row_number",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "number",
-              "canBeUsedToMatch": true,
-              "readOnly": true,
-              "removed": false
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4.7,
-      "position": [
-        96,
-        -64
-      ],
-      "id": "e719c9c9-c485-4d34-86da-a51e868ef63b",
-      "name": "Escribir detalle",
-      "alwaysOutputData": false,
-      "executeOnce": false,
-      "credentials": {
-        "googleSheetsOAuth2Api": {
-          "id": "RCuKUCifcA4jENcY",
-          "name": "Google Sheets account"
-        }
-      },
-      "onError": "continueErrorOutput"
     },
     {
       "parameters": {
@@ -2386,416 +2162,16 @@
     },
     {
       "parameters": {
-        "jsCode": "// 1. Recuperamos la lista de pedidos (Input)\nconst orders = items.map(item => item.json);\n\n// 2. Diccionario de Nombres\nconst employeeMap = {\n    \"126641570139\": \"Arturo Fernandez Caballero\",\n    \"126890148187\": \"Sandra Rogel Aguilera\",\n    \"126889361755\": \"Alejandro Pavon\",\n    \"127346573659\": \"Facundo Altamirano Pozzi\",\n    \"127144952155\": \"Jose Maria Restoy Varela\",\n    \"126790828379\": \"Florencia cielo Alarcon\",\n    \"115464700251\": \"Miguel Navarro\",\n    \"126641602907\": \"Eugenia La Piettra\",\n    \"126759141723\": \"Lorenzo Jimenez\",\n    \"127472533851\": \"Pablo roldan\",\n    \"127149113691\": \"Facundo Pereira\",\n    \"127346606427\": \"Nerea Fernández\",\n    \"125804478811\": \"Anabel Labella\",\n    \"127578997083\": \"Cesar Moreno\",\n    \"126889165147\": \"Julio Hermoso Fernández\",\n    \"126766121307\": \"Unai Rodríguez Alarcón\",\n    \"127048155483\": \"Gerardo Cairo\",\n    \"126888640859\": \"Facundo Altamirano Pozzi\",\n    \"123965866331\": \"Thomas Fontoura\",\n    \"126895620443\": \"Fabio Cortés Martín\",\n    \"126953292123\": \"Carlota Ramirez Palacios\",\n    \"126905516379\": \"André Ferreira\", \n    \"126888149339\": \"Alejandro Vasallo Bancalero\",\n    \"126905123163\": \"Ana Isabel Robles González\",\n    \"127310987611\": \"Paula Perez\",\n    \"114932875611\": \"Emiliano Martinez Verdecchia\",\n    \"125110976859\": \"Adrián Azorín\",\n    \"127346704731\": \"Rober Alonso\",\n    \"114884346203\": \"Lorena Verdecchia\",\n    \"126812389723\": \"Cuenta Multiusuario\",\n    \"115083706715\": \"Antonio Gabriel Lopez Moreno\"\n};\n\n// Objeto para acumular las ventas por ID\nconst salesSummary = {};\n\n// 3. Bucle para SUMAR ventas\nfor (const order of orders) {\n    const userId = order.user_id;\n    if (!userId) continue;\n\n    let price = parseFloat(order.total_price);\n    if (isNaN(price)) price = 0;\n\n    if (salesSummary[userId]) {\n        salesSummary[userId] += price;\n    } else {\n        salesSummary[userId] = price;\n    }\n}\n\n// 4. Transformar a lista temporal\nlet tempResults = [];\nfor (const [id, total] of Object.entries(salesSummary)) {\n    const nombre = employeeMap[id] || \"Desconocido (\" + id + \")\";\n    tempResults.push({\n        nombre: nombre,\n        total: parseFloat(total.toFixed(2))\n    });\n}\n\n// 5. Ordenar de mayor a menor venta\ntempResults.sort((a, b) => b.total - a.total);\n\n// 6. Generar JSON final con NUMERO DE FILA ACTUALIZADO\nconst finalResults = tempResults.map((item, index) => {\n    return {\n        json: {\n            \"numero_fila\": index + 31, // <--- Ahora empieza en 30\n            \"Nombre Empleado\": item.nombre,\n            \"Total Vendido\": item.total\n        }\n    };\n});\n\nreturn finalResults;"
+        "jsCode": "// Objeto para acumular las ventas por empleado\nconst ventasPorEmpleado = {};\n\n// 1. Recorremos todos los items de entrada para sumar\nfor (const item of $input.all()) {\n  const data = item.json;\n\n  // Construir nombre completo\n  const nombre = data[\"Nombre empleado\"] || \"Desconocido\";\n  const apellidos = data[\"Apellidos empleado\"] || \"\";\n  const nombreCompleto = `${nombre} ${apellidos}`.trim();\n\n  // Obtener el precio pagado\n  const precio = parseFloat(data[\"PRECIO PAGADO\"]) || 0;\n\n  // Sumar al acumulado\n  if (!ventasPorEmpleado[nombreCompleto]) {\n    ventasPorEmpleado[nombreCompleto] = 0;\n  }\n  ventasPorEmpleado[nombreCompleto] += precio;\n}\n\n// 2. Transformar el objeto en un array temporal\nlet listaEmpleados = Object.keys(ventasPorEmpleado).map(nombre => {\n  return {\n    \"nombre\": nombre,\n    \"total facturado\": Number(ventasPorEmpleado[nombre].toFixed(2))\n  };\n});\n\n// 3. ORDENAR de Mayor a Menor facturación\nlistaEmpleados.sort((a, b) => b[\"total facturado\"] - a[\"total facturado\"]);\n\n// 4. Asignar el contador y el formato final para n8n\nconst resultado = listaEmpleados.map((empleado, index) => {\n  // Añadimos el contador al objeto ya ordenado\n  empleado[\"contador\"] = 31 + index;\n  \n  return { json: empleado };\n});\n\nreturn resultado;"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -224,
-        1040
+        528,
+        608
       ],
       "id": "b3531d9c-b6d2-447e-8f39-14124207a8a3",
       "name": "Calcular Ranking Empleados"
-    },
-    {
-      "parameters": {
-        "operation": "update",
-        "documentId": {
-          "__rl": true,
-          "value": "={{ $('Crear Informe Maestro').first().json.id }}",
-          "mode": "id"
-        },
-        "sheetName": {
-          "__rl": true,
-          "value": "Top Productos",
-          "mode": "name"
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "row_number": "={{ $json.fila_excel }}",
-            "NOMBRE PRODUCTO": "=",
-            "VARIANTE": "=",
-            "PRECIO": "={{ $json.Marca }}",
-            "UNIDADES VENDIDAS": "={{ $json.Unidades }}",
-            "TOTAL": "={{ $json.Total }}",
-            "TICKETS VENDIDOS": "=",
-            "PRECIO TOTAL": "="
-          },
-          "matchingColumns": [
-            "row_number"
-          ],
-          "schema": [
-            {
-              "id": "NOMBRE PRODUCTO",
-              "displayName": "NOMBRE PRODUCTO",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "VARIANTE",
-              "displayName": "VARIANTE",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "PRECIO",
-              "displayName": "PRECIO",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "UNIDADES VENDIDAS",
-              "displayName": "UNIDADES VENDIDAS",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "TOTAL",
-              "displayName": "TOTAL",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "TICKETS VENDIDOS",
-              "displayName": "TICKETS VENDIDOS",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "PRECIO TOTAL",
-              "displayName": "PRECIO TOTAL",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "row_number",
-              "displayName": "row_number",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "number",
-              "canBeUsedToMatch": true,
-              "readOnly": true,
-              "removed": false
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4.7,
-      "position": [
-        96,
-        80
-      ],
-      "id": "897d3242-f971-4099-9e99-57f654a990b9",
-      "name": "Escribir marcas",
-      "alwaysOutputData": false,
-      "executeOnce": false,
-      "credentials": {
-        "googleSheetsOAuth2Api": {
-          "id": "RCuKUCifcA4jENcY",
-          "name": "Google Sheets account"
-        }
-      },
-      "onError": "continueErrorOutput"
-    },
-    {
-      "parameters": {
-        "operation": "get",
-        "dataTableId": {
-          "__rl": true,
-          "value": "KvNMRefeRetJtcGA",
-          "mode": "list",
-          "cachedResultName": "marcas_summit",
-          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/KvNMRefeRetJtcGA"
-        }
-      },
-      "type": "n8n-nodes-base.dataTable",
-      "typeVersion": 1.1,
-      "position": [
-        -448,
-        80
-      ],
-      "id": "db96fd26-93bc-4607-a88d-9250030054ed",
-      "name": "Tabla Marcas"
-    },
-    {
-      "parameters": {
-        "operation": "update",
-        "documentId": {
-          "__rl": true,
-          "value": "={{ $('Crear Informe Maestro').first().json.id }}",
-          "mode": "id"
-        },
-        "sheetName": {
-          "__rl": true,
-          "value": "Top Productos",
-          "mode": "name"
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "row_number": "={{ $json.fila_excel }}",
-            "NOMBRE PRODUCTO": "=",
-            "VARIANTE": "=",
-            "PRECIO": "={{ $json.Sucursal }}",
-            "UNIDADES VENDIDAS": "={{ $json.Transacciones }}",
-            "TOTAL": "={{ $json.Total }}",
-            "TICKETS VENDIDOS": "=",
-            "PRECIO TOTAL": "="
-          },
-          "matchingColumns": [
-            "row_number"
-          ],
-          "schema": [
-            {
-              "id": "NOMBRE PRODUCTO",
-              "displayName": "NOMBRE PRODUCTO",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "VARIANTE",
-              "displayName": "VARIANTE",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "PRECIO",
-              "displayName": "PRECIO",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "UNIDADES VENDIDAS",
-              "displayName": "UNIDADES VENDIDAS",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "TOTAL",
-              "displayName": "TOTAL",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "TICKETS VENDIDOS",
-              "displayName": "TICKETS VENDIDOS",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "PRECIO TOTAL",
-              "displayName": "PRECIO TOTAL",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
-            },
-            {
-              "id": "row_number",
-              "displayName": "row_number",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "number",
-              "canBeUsedToMatch": true,
-              "readOnly": true,
-              "removed": false
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4.7,
-      "position": [
-        96,
-        224
-      ],
-      "id": "45fa8839-fbd2-4465-80a2-d6434cd645ae",
-      "name": "Escribir sucursales",
-      "alwaysOutputData": false,
-      "executeOnce": false,
-      "credentials": {
-        "googleSheetsOAuth2Api": {
-          "id": "RCuKUCifcA4jENcY",
-          "name": "Google Sheets account"
-        }
-      },
-      "onError": "continueErrorOutput"
-    },
-    {
-      "parameters": {
-        "batchSize": 10,
-        "options": {}
-      },
-      "type": "n8n-nodes-base.splitInBatches",
-      "typeVersion": 3,
-      "position": [
-        -48,
-        1040
-      ],
-      "id": "eb786408-7b2c-4450-aeb3-9247cdd563d1",
-      "name": "Loop Over Items"
-    },
-    {
-      "parameters": {
-        "jsCode": "// 1. CONFIGURACIÓN Y DATOS\nconst staticData = $getWorkflowStaticData('global');\nconst allSales = staticData.allProducts || [];\n\nif (allSales.length === 0) {\n    return [{ json: { mensaje: \"⚠️ Ejecuta el bucle primero.\" } }];\n}\n\n// NORMALIZACIÓN DE MARCAS: Limpiamos espacios y pasamos a MAYÚSCULAS\nconst LISTA_MARCAS = items\n    .map(item => (item.json['Nombre_del_Proveedor'] || '').toString().trim().toUpperCase())\n    .filter(marca => marca.length > 1);\n\n// Ordenamos por longitud de mayor a menor para evitar que \"NIKE\" se coma a \"NIKE SB\"\nLISTA_MARCAS.sort((a, b) => b.length - a.length);\n\n// Contenedores\nconst productStats = {};\nconst brandStats = {};\nconst branchStats = {};\n\n// Configuración Skatepark\nlet skateparkCount = 0;\nlet skateparkRevenue = 0;\nconst SKATEPARK_NAME = \"TICKET ENTRADA SKATEPARK\";\nconst FILA_SUCURSALES = 26; \n\n// 2. PROCESAMIENTO ÚNICO (Con Normalización)\nfor (const sale of allSales) {\n    // --- LA REGLA DE ORO: NORMALIZACIÓN ---\n    // Convertimos a texto, quitamos espacios fantasma y pasamos a MAYÚSCULAS\n    const productName = (sale['NOMBRE DE PRODUCTO'] || \"SIN NOMBRE\").toString().trim().toUpperCase();\n    const branchName = (sale['SUCURSAL DE VENTA'] || \"N/A\").toString().trim().toUpperCase();\n    const variantOriginal = (sale['VARIANTE'] || '').toString().trim(); \n    const variantKey = variantOriginal.toUpperCase(); \n\n    // Limpieza números (mantienes tu lógica original que estaba perfecta)\n    let priceStr = (sale['PRECIO PAGADO'] || '0').toString();\n    let costStr = (sale['COSTE DE PRODUCTO'] || '0').toString();\n    let unitPriceStr = (sale['PRECIO DE PRODUCTO'] || '0').toString();\n    \n    const paidPrice = parseFloat(priceStr.replace(',', '.')) || 0;\n    const cost = parseFloat(costStr.replace(',', '.')) || 0;\n    const listPrice = parseFloat(unitPriceStr.replace(',', '.')) || 0;\n\n    // Lógica Skatepark (buscamos en el nombre ya en mayúsculas)\n    if (productName.includes(SKATEPARK_NAME)) {\n        skateparkCount += 1;\n        skateparkRevenue += paidPrice;\n        continue; \n    }\n\n    if (productName !== \"SIN NOMBRE\") {\n        // A) PRODUCTOS\n        const prodKey = `${productName} - ${variantKey}`;\n        \n        if (!productStats[prodKey]) {\n            productStats[prodKey] = {\n                Producto: productName, \n                Variante: variantOriginal, // Guardamos la original para que quede bonita en el Excel\n                Precio: listPrice,\n                Ventas: 0, Unidades: 0, Beneficio: 0\n            };\n        }\n        productStats[prodKey].Ventas += paidPrice;\n        productStats[prodKey].Unidades += 1;\n        productStats[prodKey].Beneficio += (paidPrice - cost);\n\n        // B) MARCAS\n        let detectedBrand = \"OTRAS\"; // Usamos mayúsculas por consistencia\n        \n        for (const marca of LISTA_MARCAS) {\n            // Si la marca es un número (ej. \"686\"), usamos Regex de coincidencia exacta\n            if (!isNaN(marca)) {\n                const regex = new RegExp(`\\\\b${marca}\\\\b`);\n                if (regex.test(productName)) {\n                    detectedBrand = marca;\n                    break;\n                }\n            } else {\n                // Si es texto normal\n                if (productName.includes(marca)) {\n                    detectedBrand = marca;\n                    break;\n                }\n            }\n        }\n\n        // Parche manual para The North Face (buscando en mayúsculas)\n        if (detectedBrand === \"OTRAS\" && (productName.includes(\"NORTH FACE\") || productName.includes(\" TNF \"))) {\n            detectedBrand = \"THE NORTH FACE\";\n        }\n\n        if (!brandStats[detectedBrand]) {\n            brandStats[detectedBrand] = { Marca: detectedBrand, Ventas: 0, Unidades: 0 };\n        }\n        brandStats[detectedBrand].Ventas += paidPrice;\n        brandStats[detectedBrand].Unidades += 1;\n    }\n\n    // C) SUCURSALES\n    if (branchName !== \"N/A\" && branchName !== \"\") {\n        if (!branchStats[branchName]) {\n            branchStats[branchName] = { Sucursal: branchName, Ventas: 0, Transacciones: 0 };\n        }\n        branchStats[branchName].Ventas += paidPrice;\n        branchStats[branchName].Transacciones += 1;\n    }\n}\n\n// 3. GENERAR RESULTADOS (TOP 10 y demás lógica original)\nconst finalOutput = [];\n\n// --- PRODUCTOS ---\nconst sortedProds = Object.values(productStats).sort((a, b) => \n    b.Unidades !== a.Unidades ? b.Unidades - a.Unidades : b.Ventas - a.Ventas\n).slice(0, 10);\n\nsortedProds.forEach((p, i) => {\n    const item = {\n        tipo: \"producto\",\n        fila_excel: i + 2,\n        Producto: p.Producto,\n        Variante: p.Variante,\n        Precio: parseFloat(p.Precio.toFixed(2)),\n        Unidades: p.Unidades,\n        Total: parseFloat(p.Ventas.toFixed(2)),\n        Beneficio: parseFloat(p.Beneficio.toFixed(2))\n    };\n    if (i === 0) {\n        item.Skatepark_Entradas_Vendidas = skateparkCount;\n        item.Skatepark_Ingresos_Totales = parseFloat(skateparkRevenue.toFixed(2));\n    }\n    finalOutput.push({ json: item });\n});\n\n// --- MARCAS ---\nconst sortedBrands = Object.values(brandStats)\n    .filter(b => b.Marca !== \"OTRAS\")\n    .sort((a, b) => b.Unidades !== a.Unidades ? b.Unidades - a.Unidades : b.Ventas - a.Ventas)\n    .slice(0, 10);\n\nsortedBrands.forEach((b, i) => {\n    finalOutput.push({\n        json: {\n            tipo: \"marca\",\n            fila_excel: i + 14, \n            Marca: b.Marca,\n            Unidades: b.Unidades,\n            Total: parseFloat(b.Ventas.toFixed(2))\n        }\n    });\n});\n\n// --- SUCURSALES ---\nconst sortedBranches = Object.values(branchStats).sort((a, b) => b.Ventas - a.Ventas);\n\nsortedBranches.forEach((b, i) => {\n    finalOutput.push({\n        json: {\n            tipo: \"sucursal\",\n            fila_excel: i + FILA_SUCURSALES, \n            Sucursal: b.Sucursal,\n            Transacciones: b.Transacciones,\n            Total: parseFloat(b.Ventas.toFixed(2))\n        }\n    });\n});\n\n// 4. LIMPIEZA FINAL\nstaticData.allProducts = [];\n\nreturn finalOutput;"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        -288,
-        80
-      ],
-      "id": "c209e694-cb8f-4f98-97d6-a3615a3b4f24",
-      "name": "Calculo_Maestro"
-    },
-    {
-      "parameters": {
-        "rules": {
-          "values": [
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 3
-                },
-                "conditions": [
-                  {
-                    "leftValue": "={{ $json.tipo }}",
-                    "rightValue": "producto",
-                    "operator": {
-                      "type": "string",
-                      "operation": "equals"
-                    },
-                    "id": "e3281762-2b3c-41e1-bcd5-6d1e82e10c0d"
-                  }
-                ],
-                "combinator": "and"
-              }
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 3
-                },
-                "conditions": [
-                  {
-                    "id": "bd5f0dee-b77a-43e9-a0d6-b1df7ccd262c",
-                    "leftValue": "={{ $json.tipo }}",
-                    "rightValue": "marca",
-                    "operator": {
-                      "type": "string",
-                      "operation": "equals",
-                      "name": "filter.operator.equals"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              }
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 3
-                },
-                "conditions": [
-                  {
-                    "id": "395d8bc3-96de-4d5b-be62-bec164fe3c72",
-                    "leftValue": "={{ $json.tipo }}",
-                    "rightValue": "sucursal",
-                    "operator": {
-                      "type": "string",
-                      "operation": "equals",
-                      "name": "filter.operator.equals"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              }
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.switch",
-      "typeVersion": 3.4,
-      "position": [
-        -128,
-        64
-      ],
-      "id": "c8b2be2b-d78b-4c9c-bb18-568b645a8124",
-      "name": "Elegir tipo de input"
     },
     {
       "parameters": {
@@ -2812,38 +2188,6 @@
       ],
       "id": "54f3936a-7187-4043-aa2a-4ab0c2f00674",
       "name": "Sticky Note2"
-    },
-    {
-      "parameters": {
-        "content": "ESCRIBIR EN EL ARCHIVO\n",
-        "height": 512,
-        "width": 160,
-        "color": 5
-      },
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        64,
-        -112
-      ],
-      "id": "79c5364e-a76f-41a8-a1e2-19c333fa6e0d",
-      "name": "Sticky Note3"
-    },
-    {
-      "parameters": {
-        "content": "HACER LOS CÁLCULOS CON LA INFORMACIÓN DE LOS INFORMES DIARIOS\n",
-        "height": 224,
-        "width": 496,
-        "color": 4
-      },
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        -272,
-        16
-      ],
-      "id": "34ecc7f4-0731-40bc-bdc8-cf008a10aadf",
-      "name": "Sticky Note4"
     },
     {
       "parameters": {
@@ -2876,22 +2220,6 @@
     },
     {
       "parameters": {
-        "content": "ESCRIBIR EN EL ARCHIVO\n",
-        "height": 192,
-        "width": 336,
-        "color": 5
-      },
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        -96,
-        1008
-      ],
-      "id": "0aeb0ec2-4e5d-4c51-80c8-7d9481f5a459",
-      "name": "Sticky Note6"
-    },
-    {
-      "parameters": {
         "content": "LEER INFORMACIÓN DE LOS EMPLEADOS EN SHOPIFY\n",
         "height": 400,
         "width": 992,
@@ -2911,11 +2239,406 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -2224,
-        608
+        -1648,
+        848
       ],
       "id": "e51c40f8-a227-4f9c-b137-75968f2de83e",
       "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "amount": 1
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -80,
+        432
+      ],
+      "id": "28d6ad39-a80e-4fd9-a5eb-df2466e8b96f",
+      "name": "Espera 1s",
+      "webhookId": "57665f85-f34c-4a9b-81e3-71d620974b94"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Accedemos a la memoria global del workflow\nconst staticData = getWorkflowStaticData('global');\n\n// La limpiamos por si quedó basura de una ejecución anterior fallida\nstaticData.misItemsAcumulados = [];\n\nreturn { status: \"Memoria Limpia\" };"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -2128,
+        288
+      ],
+      "id": "83db026a-74cf-496c-b945-9e2d9bece458",
+      "name": "iniciar memoria"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Accedemos a la memoria global\nconst staticData = $getWorkflowStaticData('global');\n\n// 2. IMPORTANTE: Leemos la variable NUEVA \"inventarioLimpio\"\n// (Antes buscabas \"misItemsGuardados\", por eso salía vacío)\nconst todosLosItems = staticData.inventarioLimpio || [];\n\n// 3. Verificación extra: Si está vacío, avisamos\nif (todosLosItems.length === 0) {\n    return [\n        { warning: \"La lista está vacía. Asegúrate de haber ejecutado el botón 'Execute Workflow' completo.\" }\n    ];\n}\n\n// 4. ¡Listo! Aquí tienes tus items\nreturn todosLosItems;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -224,
+        704
+      ],
+      "id": "c53daf0e-4785-4887-8415-45a4af841923",
+      "name": "juntar datos"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "advanced": true,
+        "mergeByFields": {
+          "values": [
+            {
+              "field1": "ID PEDIDO",
+              "field2": "id"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -64,
+        768
+      ],
+      "id": "db67b35e-1a58-4246-a1a5-9f9554515e6e",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "Empleados",
+          "mode": "list",
+          "cachedResultName": "Empleados"
+        },
+        "returnAll": true,
+        "where": {
+          "values": [
+            {
+              "column": "id_empleado",
+              "value": "={{ $json.user_id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        112,
+        768
+      ],
+      "id": "578355d2-24cb-465e-b0a9-0c41e3a1ccc1",
+      "name": "Select rows from a table",
+      "alwaysOutputData": true,
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Obtener todos los items de entrada\nconst allItems = $input.all();\nconst reporte = {};\n\n// 2. Identificar todas las sucursales únicas primero\nconst listaSucursales = new Set();\n\nfor (const item of allItems) {\n  const sucursal = item.json[\"SUCURSAL DE VENTA\"];\n  if (sucursal) {\n    listaSucursales.add(sucursal);\n  }\n}\n\n// 3. Recorrer los datos para agrupar por empleado\nfor (const item of allItems) {\n  const data = item.json;\n\n  // Construir nombre completo\n  const nombre = data[\"Nombre empleado\"] || \"Desconocido\";\n  const apellidos = data[\"Apellidos empleado\"] || \"\";\n  const nombreCompleto = `${nombre} ${apellidos}`.trim();\n\n  const sucursalActual = data[\"SUCURSAL DE VENTA\"];\n  const precio = parseFloat(data[\"PRECIO PAGADO\"]) || 0;\n\n  // Si es la primera vez que vemos a este empleado, inicializamos su estructura\n  if (!reporte[nombreCompleto]) {\n    reporte[nombreCompleto] = {\n      \"Empleado\": nombreCompleto\n      // El contador lo asignaremos al final para que sea correlativo\n    };\n\n    // Inicializamos TODAS las sucursales en 0 para este empleado\n    listaSucursales.forEach(sucursal => {\n      reporte[nombreCompleto][sucursal] = {\n        \"ventas\": 0,\n        \"facturado\": 0\n      };\n    });\n  }\n\n  // Sumamos los datos a la sucursal correspondiente\n  if (reporte[nombreCompleto][sucursalActual]) {\n    reporte[nombreCompleto][sucursalActual].ventas += 1;\n    reporte[nombreCompleto][sucursalActual].facturado += precio;\n  }\n}\n\n// 4. Generar el resultado final, redondeando decimales y añadiendo el contador\n// Object.values(reporte) nos da un array con los objetos de los empleados\nconst resultado = Object.values(reporte).map((filaEmpleado, index) => {\n\n  // AÑADIMOS EL CONTADOR:\n  // index empieza en 0, así que: 0 + 4 = 4, 1 + 4 = 5, etc.\n  filaEmpleado[\"contador\"] = index + 4;\n\n  // Redondeamos los montos facturados a 2 decimales\n  for (const key in filaEmpleado) {\n    if (typeof filaEmpleado[key] === 'object' && filaEmpleado[key] !== null) {\n      filaEmpleado[key].facturado = Number(filaEmpleado[key].facturado.toFixed(2));\n    }\n  }\n\n  return { json: filaEmpleado };\n});\n\nreturn resultado;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        528,
+        448
+      ],
+      "id": "5e19dfa0-36cf-4015-a7fb-19f1ea6fdfdb",
+      "name": "calcular ventas empleados"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Crear Informe Maestro').first().json.id }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Ranking Empleados",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $json.contador }}",
+            "Surfin Ventas": "={{ $json['Surfin Sierra Nevada'].ventas }}",
+            "Surfin Facturado": "={{ $json['Surfin Sierra Nevada'].facturado }}",
+            "Rules Ventas": "={{ $json['Rules Shop'].ventas }}",
+            "Rules Facturado": "={{ $json['Rules Shop'].facturado }}",
+            "Rules Oakley Ventas": "={{ $json['Rules Oakley'].ventas }}",
+            "Rules Oakley Facturado": "={{ $json['Rules Oakley'].facturado }}",
+            "Rules The North Face Ventas": "={{ $json['Rules The North Face'].ventas }}",
+            "Rules The North Face Facturado": "={{ $json['Rules The North Face'].facturado }}",
+            "Nuance Ventas": "={{ $json.Nuance.ventas }}",
+            "Nuance Facturado": "={{ $json.Nuance.facturado }}",
+            "Nuance Lodge Ventas": "={{ $json['Nuance Lodge'].ventas }}",
+            "Nuance Lodge Facturado": "={{ $json['Nuance Lodge'].facturado }}",
+            "Melia Ventas": "={{ $json['Melia Sierra Nevada'].ventas }}",
+            "Melia Facturado": "={{ $json['Melia Sierra Nevada'].facturado }}",
+            "Empleado": "={{ $json.Empleado }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "Empleado",
+              "displayName": "Empleado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Surfin Ventas",
+              "displayName": "Surfin Ventas",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Surfin Facturado",
+              "displayName": "Surfin Facturado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Rules Ventas",
+              "displayName": "Rules Ventas",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Rules Facturado",
+              "displayName": "Rules Facturado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Rules Oakley Ventas",
+              "displayName": "Rules Oakley Ventas",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Rules Oakley Facturado",
+              "displayName": "Rules Oakley Facturado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Rules The North Face Ventas",
+              "displayName": "Rules The North Face Ventas",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Rules The North Face Facturado",
+              "displayName": "Rules The North Face Facturado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Nuance Ventas",
+              "displayName": "Nuance Ventas",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Nuance Facturado",
+              "displayName": "Nuance Facturado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Nuance Lodge Ventas",
+              "displayName": "Nuance Lodge Ventas",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Nuance Lodge Facturado",
+              "displayName": "Nuance Lodge Facturado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Melia Ventas",
+              "displayName": "Melia Ventas",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Melia Facturado",
+              "displayName": "Melia Facturado",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        704,
+        448
+      ],
+      "id": "111ca10e-00a2-46d3-a64a-4f4412f98d11",
+      "name": "escribir ranking empleados",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "RCuKUCifcA4jENcY",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Objeto para acumular estadísticas por sucursal\nconst estadisticasSucursales = {};\n\n// 1. Recorremos todos los items de entrada\nfor (const item of $input.all()) {\n  const data = item.json;\n\n  // Obtenemos el nombre de la sucursal (o \"Desconocida\" si viene vacío)\n  const sucursal = data[\"SUCURSAL DE VENTA\"] || \"Desconocida\";\n  \n  // Obtenemos el precio pagado, asegurando que sea un número\n  const precio = parseFloat(data[\"PRECIO PAGADO\"]) || 0;\n\n  // Inicializamos la sucursal si no existe en el objeto\n  if (!estadisticasSucursales[sucursal]) {\n    estadisticasSucursales[sucursal] = {\n      ventas: 0,\n      facturado: 0\n    };\n  }\n\n  // Acumulamos los datos\n  estadisticasSucursales[sucursal].ventas += 1;\n  estadisticasSucursales[sucursal].facturado += precio;\n}\n\n// 2. Transformamos el objeto en un array para poder ordenarlo\nlet listaSucursales = Object.keys(estadisticasSucursales).map(nombre => {\n  return {\n    \"sucursal\": nombre,\n    \"número de ventas\": estadisticasSucursales[nombre].ventas,\n    \"total facturado\": estadisticasSucursales[nombre].facturado\n  };\n});\n\n// 3. ORDENAR de Mayor a Menor facturación\nlistaSucursales.sort((a, b) => b[\"total facturado\"] - a[\"total facturado\"]);\n\n// 4. Formatear salida final con redondeo y contador\nconst resultado = listaSucursales.map((item, index) => {\n  // Redondeamos el total a 2 decimales\n  item[\"total facturado\"] = Number(item[\"total facturado\"].toFixed(2));\n  \n  // Asignamos el contador: índice 0 + 26 = 26, índice 1 + 26 = 27, etc.\n  item[\"contador\"] = 26 + index;\n\n  return { json: item };\n});\n\nreturn resultado;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        528,
+        768
+      ],
+      "id": "a94a2f52-34c7-4efc-bb99-7e8094357023",
+      "name": "calcular sucursales"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Objeto para agrupar los productos normales\nconst productosAgrupados = {};\n\n// Variable para almacenar el Ticket por separado\nconst nombreTicket = \"/ / TICKET ENTRADA SKATEPARK\";\nlet datosTicket = {\n  \"NOMBRE\": nombreTicket,\n  \"VARIANTE\": \"General\",\n  \"PRECIO DE PRODUCTO\": 0,\n  \"UNIDADES VENDIDAS\": 0,\n  \"TOTAL FACTURADO\": 0,\n  \"contador\": 2\n};\nlet hayVentasTicket = false;\n\n// 1. Recorrer todas las ventas\nfor (const item of $input.all()) {\n  const data = item.json;\n\n  const nombre = data[\"NOMBRE DE PRODUCTO\"] || \"Desconocido\";\n  const variante = data[\"VARIANTE\"] || \"\";\n  const precioUnitario = parseFloat(data[\"PRECIO DE PRODUCTO\"]) || 0;\n  const precioPagado = parseFloat(data[\"PRECIO PAGADO\"]) || 0;\n\n  // --- LÓGICA TICKET ---\n  if (nombre === nombreTicket) {\n    hayVentasTicket = true;\n    // Actualizamos el precio unitario (por si varía, cogemos el último o el más alto)\n    if (precioUnitario > datosTicket[\"PRECIO DE PRODUCTO\"]) {\n       datosTicket[\"PRECIO DE PRODUCTO\"] = precioUnitario;\n    }\n    datosTicket[\"UNIDADES VENDIDAS\"] += 1;\n    datosTicket[\"TOTAL FACTURADO\"] += precioPagado;\n    continue;\n  }\n\n  // --- LÓGICA PRODUCTOS ---\n  const key = `${nombre}|${variante}`;\n\n  if (!productosAgrupados[key]) {\n    productosAgrupados[key] = {\n      \"NOMBRE\": nombre,\n      \"VARIANTE\": variante,\n      \"PRECIO DE PRODUCTO\": precioUnitario,\n      \"UNIDADES VENDIDAS\": 0,\n      \"TOTAL FACTURADO\": 0\n    };\n  }\n\n  productosAgrupados[key][\"UNIDADES VENDIDAS\"] += 1;\n  productosAgrupados[key][\"TOTAL FACTURADO\"] += precioPagado;\n}\n\n// 2. Ordenar productos\nlet listaProductos = Object.values(productosAgrupados);\n\nlistaProductos.sort((a, b) => {\n  if (b[\"UNIDADES VENDIDAS\"] === a[\"UNIDADES VENDIDAS\"]) {\n    return b[\"TOTAL FACTURADO\"] - a[\"TOTAL FACTURADO\"];\n  }\n  return b[\"UNIDADES VENDIDAS\"] - a[\"UNIDADES VENDIDAS\"];\n});\n\n// 3. Crear el Top 10 y formatearlo\nconst top10 = listaProductos.slice(0, 10).map((producto, index) => {\n  producto[\"TOTAL FACTURADO\"] = Number(producto[\"TOTAL FACTURADO\"].toFixed(2));\n  producto[\"contador\"] = 2 + index; // Empieza en 2, 3, 4...\n  return producto;\n});\n\n// 4. Formatear el Ticket\nif (hayVentasTicket) {\n  datosTicket[\"TOTAL FACTURADO\"] = Number(datosTicket[\"TOTAL FACTURADO\"].toFixed(2));\n} else {\n  // Si no hubo ventas, puedes decidir si dejarlo a 0 o ponerlo null. \n  // Lo dejo con los valores a 0 por si necesitas mostrarlo igualmente.\n}\n\n// 5. Devolver la estructura anidada\nreturn {\n  json: {\n    \"ticket\": datosTicket,\n    \"top\": top10\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        528,
+        912
+      ],
+      "id": "bff06340-422b-4440-a181-69c03499ee1d",
+      "name": "calcular productos"
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "Marcas_Summit",
+          "mode": "list",
+          "cachedResultName": "Marcas_Summit"
+        },
+        "returnAll": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        528,
+        1056
+      ],
+      "id": "805d71fc-26b8-4293-9f47-e9ccd78da002",
+      "name": "obtener marcas",
+      "executeOnce": true,
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
+        }
+      }
     },
     {
       "parameters": {
@@ -3028,128 +2751,665 @@
         768
       ],
       "id": "e019d66f-62e8-4243-8f76-05626c049638",
-      "name": "Edit Fields",
+      "name": "datos finales",
       "executeOnce": false
     },
     {
       "parameters": {
-        "amount": 1
-      },
-      "type": "n8n-nodes-base.wait",
-      "typeVersion": 1.1,
-      "position": [
-        -80,
-        432
-      ],
-      "id": "28d6ad39-a80e-4fd9-a5eb-df2466e8b96f",
-      "name": "Espera 1s",
-      "webhookId": "57665f85-f34c-4a9b-81e3-71d620974b94"
-    },
-    {
-      "parameters": {
-        "jsCode": "// Accedemos a la memoria global del workflow\nconst staticData = getWorkflowStaticData('global');\n\n// La limpiamos por si quedó basura de una ejecución anterior fallida\nstaticData.misItemsAcumulados = [];\n\nreturn { status: \"Memoria Limpia\" };"
+        "jsCode": "// 1. Obtener las VENTAS del nodo anterior llamado \"datos finales\"\n// Es importante que el nombre coincida exactamente (mayúsculas/minúsculas)\nconst itemsVentas = $('datos finales').all();\n\n// 2. Obtener las MARCAS del input actual (este nodo Code debe recibir la lista de marcas)\nconst itemsMarcas = $input.all();\n\n// Creamos una lista limpia de nombres de marcas\n// IMPORTANTE: Las ordenamos por longitud (de más larga a más corta).\n// Esto evita errores de coincidencia (ej: que detecte \"Pro\" en lugar de \"Prosurf\")\nconst listaMarcas = itemsMarcas\n    .map(item => item.json[\"Nombre_del_Proveedor\"])\n    .filter(nombre => nombre) // Eliminar vacíos\n    .sort((a, b) => b.length - a.length);\n\n// Objeto para acumular los resultados\nconst statsMarcas = {};\n\n// 3. Recorrer las ventas y buscar la marca en el nombre del producto\nfor (const item of itemsVentas) {\n    const venta = item.json;\n    // Pasamos a minúsculas para comparar sin errores\n    const nombreProducto = (venta[\"NOMBRE DE PRODUCTO\"] || \"\").toLowerCase(); \n    const precio = parseFloat(venta[\"PRECIO PAGADO\"]) || 0;\n\n    let marcaEncontrada = null;\n\n    // Buscamos qué marca está incluida en el nombre del producto\n    for (const marca of listaMarcas) {\n        if (nombreProducto.includes(marca.toLowerCase())) {\n            marcaEncontrada = marca; // Guardamos el nombre original (con mayúsculas correctas)\n            break; // Detenemos el bucle al encontrar la primera coincidencia (la más larga)\n        }\n    }\n\n    // Si encontramos la marca, sumamos los datos\n    if (marcaEncontrada) {\n        if (!statsMarcas[marcaEncontrada]) {\n            statsMarcas[marcaEncontrada] = {\n                \"Marca\": marcaEncontrada,\n                \"Unidades Vendidas\": 0,\n                \"Total Facturado\": 0\n            };\n        }\n        statsMarcas[marcaEncontrada][\"Unidades Vendidas\"] += 1;\n        statsMarcas[marcaEncontrada][\"Total Facturado\"] += precio;\n    }\n}\n\n// 4. Convertir objeto a array para ordenar\nlet ranking = Object.values(statsMarcas);\n\n// 5. Ordenar por Unidades Vendidas (Mayor a Menor)\n// Si empatan en unidades, desempatamos por facturación\nranking.sort((a, b) => {\n    if (b[\"Unidades Vendidas\"] === a[\"Unidades Vendidas\"]) {\n        return b[\"Total Facturado\"] - a[\"Total Facturado\"];\n    }\n    return b[\"Unidades Vendidas\"] - a[\"Unidades Vendidas\"];\n});\n\n// 6. Quedarse con el Top 10\nconst top10 = ranking.slice(0, 10);\n\n// 7. Formatear salida (redondear dinero y añadir contador)\nconst resultadoFinal = top10.map((item, index) => {\n    item[\"Total Facturado\"] = Number(item[\"Total Facturado\"].toFixed(2));\n    \n    // El contador empieza en 14\n    item[\"contador\"] = 14 + index;\n\n    return { json: item };\n});\n\nreturn resultadoFinal;"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -2128,
-        288
+        720,
+        1056
       ],
-      "id": "83db026a-74cf-496c-b945-9e2d9bece458",
-      "name": "iniciar memoria"
+      "id": "59020f6f-51fa-4d36-8893-a8d75aa8bf38",
+      "name": "calcular marcas"
     },
     {
       "parameters": {
-        "jsCode": "// 1. Accedemos a la memoria global\nconst staticData = $getWorkflowStaticData('global');\n\n// 2. IMPORTANTE: Leemos la variable NUEVA \"inventarioLimpio\"\n// (Antes buscabas \"misItemsGuardados\", por eso salía vacío)\nconst todosLosItems = staticData.inventarioLimpio || [];\n\n// 3. Verificación extra: Si está vacío, avisamos\nif (todosLosItems.length === 0) {\n    return [\n        { warning: \"La lista está vacía. Asegúrate de haber ejecutado el botón 'Execute Workflow' completo.\" }\n    ];\n}\n\n// 4. ¡Listo! Aquí tienes tus items\nreturn todosLosItems;"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        -224,
-        704
-      ],
-      "id": "c53daf0e-4785-4887-8415-45a4af841923",
-      "name": "juntar datos"
-    },
-    {
-      "parameters": {
-        "jsCode": "// 1. Obtenemos los datos de ambos nodos\n// Nota: Ajusta 'NodoProductos' y 'NodoPedidos' a los nombres reales de tus nodos\nconst productos = Object.values($input.all().map(i => i.json)); \n// Si los datos vienen de dos entradas distintas en el nodo Code:\nconst listaProductos = $(['juntar datos']).all(); // El que tiene los nombres de producto\nconst listaPedidos = $(['Unir Todos Los Productos']).all();   // El que tiene el user_id\n\nconst result = [];\n\n// 2. Creamos un mapa de pedidos para búsqueda rápida por ID\nconst pedidosMap = {};\nlistaPedidos.forEach(p => {\n  pedidosMap[p.json.id.toString()] = p.json;\n});\n\n// 3. Iteramos sobre los productos, filtramos y unimos\nfor (const item of listaProductos) {\n  const producto = item.json;\n  const idPedido = producto[\"ID PEDIDO\"];\n\n  // Filtramos: Solo procesamos si el ID es numérico (ID real)\n  if (idPedido && idPedido !== \"Sin código de pedido\") {\n    const idStr = idPedido.toString();\n    \n    // Buscamos si existe ese ID en el segundo input\n    if (pedidosMap[idStr]) {\n      result.push({\n        ...producto,           // Datos del producto original\n        ...pedidosMap[idStr]   // Añade \"user_id\", \"name\" (#orden), etc.\n      });\n    }\n  }\n}\n\nreturn result;"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        304,
-        576
-      ],
-      "id": "5e19dfa0-36cf-4015-a7fb-19f1ea6fdfdb",
-      "name": "Code in JavaScript"
-    },
-    {
-      "parameters": {
-        "mode": "combine",
-        "advanced": true,
-        "mergeByFields": {
-          "values": [
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Crear Informe Maestro').first().json.id }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Bonos Empleados",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $json.contador }}",
+            "BONOS INDIVIDUALES": "={{ $json.nombre }}",
+            "TOTAL VENDIDO": "={{ $json[\"total facturado\"] }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
             {
-              "field1": "ID PEDIDO",
-              "field2": "id"
+              "id": "BONOS INDIVIDUALES",
+              "displayName": "BONOS INDIVIDUALES",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "TOTAL VENDIDO",
+              "displayName": "TOTAL VENDIDO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "BONO 90€",
+              "displayName": "BONO 90€",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "BONO 120€",
+              "displayName": "BONO 120€",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "BONO 150€",
+              "displayName": "BONO 150€",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "BONO 200€",
+              "displayName": "BONO 200€",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
             }
-          ]
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
         },
         "options": {}
       },
-      "type": "n8n-nodes-base.merge",
-      "typeVersion": 3.2,
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
       "position": [
-        -64,
-        768
+        704,
+        608
       ],
-      "id": "db67b35e-1a58-4246-a1a5-9f9554515e6e",
-      "name": "Merge"
-    },
-    {
-      "parameters": {
-        "operation": "select",
-        "schema": {
-          "__rl": true,
-          "mode": "list",
-          "value": "public"
-        },
-        "table": {
-          "__rl": true,
-          "value": "Empleados",
-          "mode": "list",
-          "cachedResultName": "Empleados"
-        },
-        "returnAll": true,
-        "where": {
-          "values": [
-            {
-              "column": "id_empleado",
-              "value": "={{ $json.user_id }}"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.postgres",
-      "typeVersion": 2.6,
-      "position": [
-        112,
-        768
-      ],
-      "id": "578355d2-24cb-465e-b0a9-0c41e3a1ccc1",
-      "name": "Select rows from a table",
-      "alwaysOutputData": true,
+      "id": "8272ba28-2e72-4e25-aead-18b4282933dd",
+      "name": "escribir bonos empleados",
       "credentials": {
-        "postgres": {
-          "id": "UPETCYNZNCReuZu8",
-          "name": "Postgres Supabase"
+        "googleSheetsOAuth2Api": {
+          "id": "RCuKUCifcA4jENcY",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Crear Informe Maestro').first().json.id }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Top Productos",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $json.contador }}",
+            "TOTAL": "={{ $json[\"total facturado\"] }}",
+            "UNIDADES VENDIDAS": "={{ $json[\"número de ventas\"] }}",
+            "PRECIO": "={{ $json.sucursal }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "NOMBRE PRODUCTO",
+              "displayName": "NOMBRE PRODUCTO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "VARIANTE",
+              "displayName": "VARIANTE",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "PRECIO",
+              "displayName": "PRECIO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "UNIDADES VENDIDAS",
+              "displayName": "UNIDADES VENDIDAS",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "TOTAL",
+              "displayName": "TOTAL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "TICKETS VENDIDOS",
+              "displayName": "TICKETS VENDIDOS",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "PRECIO TOTAL",
+              "displayName": "PRECIO TOTAL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        704,
+        768
+      ],
+      "id": "5d5d1144-b6a4-4517-8c17-f45bd1777cb6",
+      "name": "escribir sucursales",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "RCuKUCifcA4jENcY",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Crear Informe Maestro').first().json.id }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Top Productos",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "PRECIO": "={{ $json.Marca }}",
+            "UNIDADES VENDIDAS": "={{ $json[\"Unidades Vendidas\"] }}",
+            "TOTAL": "={{ $json[\"Total Facturado\"] }}",
+            "row_number": "={{ $json.contador }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "NOMBRE PRODUCTO",
+              "displayName": "NOMBRE PRODUCTO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "VARIANTE",
+              "displayName": "VARIANTE",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "PRECIO",
+              "displayName": "PRECIO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "UNIDADES VENDIDAS",
+              "displayName": "UNIDADES VENDIDAS",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "TOTAL",
+              "displayName": "TOTAL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "TICKETS VENDIDOS",
+              "displayName": "TICKETS VENDIDOS",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "PRECIO TOTAL",
+              "displayName": "PRECIO TOTAL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        880,
+        1056
+      ],
+      "id": "43da738d-3ef2-4763-bced-508223224168",
+      "name": "escribir marcas",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "RCuKUCifcA4jENcY",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "top",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        704,
+        912
+      ],
+      "id": "464123de-46d6-44b1-9d9c-fd1f38b95ac5",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Crear Informe Maestro').first().json.id }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Top Productos",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "NOMBRE PRODUCTO": "={{ $json.NOMBRE }}",
+            "VARIANTE": "={{ $json.VARIANTE }}",
+            "PRECIO": "={{ $json['PRECIO DE PRODUCTO'] }}",
+            "UNIDADES VENDIDAS": "={{ $json['UNIDADES VENDIDAS'] }}",
+            "TOTAL": "={{ $json['TOTAL FACTURADO'] }}",
+            "row_number": "={{ $json.contador }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "NOMBRE PRODUCTO",
+              "displayName": "NOMBRE PRODUCTO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "VARIANTE",
+              "displayName": "VARIANTE",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "PRECIO",
+              "displayName": "PRECIO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "UNIDADES VENDIDAS",
+              "displayName": "UNIDADES VENDIDAS",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "TOTAL",
+              "displayName": "TOTAL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "TICKETS VENDIDOS",
+              "displayName": "TICKETS VENDIDOS",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "PRECIO TOTAL",
+              "displayName": "PRECIO TOTAL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        992,
+        784
+      ],
+      "id": "98e4a5f2-53c7-4783-80ac-e88ea5d9cbfb",
+      "name": "escribir productos",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "RCuKUCifcA4jENcY",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Crear Informe Maestro').first().json.id }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Top Productos",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "TICKETS VENDIDOS": "={{ $json.ticket['UNIDADES VENDIDAS'] }}",
+            "PRECIO TOTAL": "={{ $json.ticket['TOTAL FACTURADO'] }}",
+            "row_number": "={{ $json.ticket.contador }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "NOMBRE PRODUCTO",
+              "displayName": "NOMBRE PRODUCTO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "VARIANTE",
+              "displayName": "VARIANTE",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "PRECIO",
+              "displayName": "PRECIO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "UNIDADES VENDIDAS",
+              "displayName": "UNIDADES VENDIDAS",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "TOTAL",
+              "displayName": "TOTAL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "TICKETS VENDIDOS",
+              "displayName": "TICKETS VENDIDOS",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "PRECIO TOTAL",
+              "displayName": "PRECIO TOTAL",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        992,
+        928
+      ],
+      "id": "ab0a03ed-9087-492a-98a0-0b1b86b9eb32",
+      "name": "escribir tickets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "RCuKUCifcA4jENcY",
+          "name": "Google Sheets account"
         }
       }
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "When clicking ‘Execute workflow’": [
+      {
+        "json": {},
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1"
   },
@@ -3170,6 +3430,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-02-09T13:42:10.353Z",
-  "versionId": "bf6c1bf5-72cd-40ee-aaac-b9da4960d6b3"
+  "updatedAt": "2026-02-10T14:21:13.854Z",
+  "versionId": "16ad9e7f-9a07-442c-a0e6-4cb214878508"
 }
