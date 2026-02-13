@@ -2,7 +2,41 @@
   "active": false,
   "activeVersion": null,
   "activeVersionId": null,
-  "connections": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "crear vista",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "crear vista": {
+      "main": [
+        [
+          {
+            "node": "obtener vista",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "obtener vista": {
+      "main": [
+        [
+          {
+            "node": "Execute a SQL query",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
   "createdAt": "2026-01-24T11:52:06.879Z",
   "id": "ybyk5P0661JeWOCJ",
   "isArchived": false,
@@ -10,7 +44,94 @@
     "templateCredsSetupCompleted": true
   },
   "name": "vacio",
-  "nodes": [],
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -400,
+        -176
+      ],
+      "id": "f1096bb3-91db-4709-8eda-4d24323d7eca",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "CREATE OR REPLACE VIEW \"Vista_Informes_Mes_Pasado\" AS\nSELECT *\nFROM \"Documentos_Sheets\"\nWHERE tipo = 'informe'\n  /* Filtramos que la fecha extraída sea mayor o igual al inicio del mes pasado... */\n  AND TO_DATE(RIGHT(nombre, 10), 'DD/MM/YYYY') >= DATE_TRUNC('month', CURRENT_DATE - INTERVAL '1 month')\n  /* ...y menor estricto que el inicio del mes actual */\n  AND TO_DATE(RIGHT(nombre, 10), 'DD/MM/YYYY') < DATE_TRUNC('month', CURRENT_DATE);",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -208,
+        -176
+      ],
+      "id": "89365a6f-a4a5-494c-8813-44e189b0da07",
+      "name": "crear vista",
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "value": "public",
+          "mode": "list",
+          "cachedResultName": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "Vista_Informes_Mes_Pasado",
+          "mode": "name"
+        },
+        "returnAll": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -16,
+        -176
+      ],
+      "id": "929e1b97-007e-4fba-a55c-12e44f4297b6",
+      "name": "obtener vista",
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "drop view \"Vista_Informes_Mes_Pasado\"",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        192,
+        -176
+      ],
+      "id": "532248cb-e956-4a57-a238-0f6596d34a66",
+      "name": "Execute a SQL query",
+      "executeOnce": true,
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
+        }
+      }
+    }
+  ],
   "pinData": {},
   "settings": {
     "executionOrder": "v1",
@@ -34,6 +155,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-02-03T13:17:20.941Z",
-  "versionId": "2c389ef8-97fd-4c5e-8ba1-2921a5b33ae5"
+  "updatedAt": "2026-02-12T12:14:36.198Z",
+  "versionId": "ad93a10f-c8ed-4ec1-9414-0f843c93cd96"
 }
