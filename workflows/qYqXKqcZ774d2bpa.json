@@ -1513,34 +1513,12 @@
       "main": [
         [
           {
-            "node": "Obtener Informes Diarios",
+            "node": "Prep Shopify",
             "type": "main",
             "index": 0
           },
           {
-            "node": "Prep Shopify",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Obtener Informes Diarios": {
-      "main": [
-        [
-          {
-            "node": "Limpiar y Analizar Productos",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Limpiar y Analizar Productos": {
-      "main": [
-        [
-          {
-            "node": "Bucle: Uno a Uno",
+            "node": "crear vista",
             "type": "main",
             "index": 0
           }
@@ -1705,11 +1683,6 @@
         ]
       ]
     },
-    "iniciar memoria": {
-      "main": [
-        []
-      ]
-    },
     "juntar datos": {
       "main": [
         [
@@ -1849,6 +1822,39 @@
       "main": [
         []
       ]
+    },
+    "crear vista": {
+      "main": [
+        [
+          {
+            "node": "obtener vista",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "obtener vista": {
+      "main": [
+        [
+          {
+            "node": "Bucle: Uno a Uno",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "escribir marcas": {
+      "main": [
+        [
+          {
+            "node": "eliminar vista",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-11-28T09:20:31.945Z",
@@ -1884,38 +1890,6 @@
           "name": "Google Drive account"
         }
       }
-    },
-    {
-      "parameters": {
-        "operation": "get",
-        "dataTableId": {
-          "__rl": true,
-          "value": "8GDVj673ag0hCrVt",
-          "mode": "list",
-          "cachedResultName": "Informe Mensual"
-        }
-      },
-      "type": "n8n-nodes-base.dataTable",
-      "typeVersion": 1,
-      "position": [
-        -1264,
-        432
-      ],
-      "id": "da0a4e1a-bf85-45ae-9403-8f89aaa615ba",
-      "name": "Obtener Informes Diarios"
-    },
-    {
-      "parameters": {
-        "jsCode": "// Lógica de limpieza original + Agrupación de Top Productos\nconst inputItems = items;\nconst uniqueStrings = new Set();\nconst uniqueItems = [];\nconst productCounts = {};\n\n// 1. Limpieza de duplicados\nfor (const item of inputItems) {\n    const itemString = JSON.stringify(item.json);\n    if (!uniqueStrings.has(itemString)) {\n        uniqueStrings.add(itemString);\n        uniqueItems.push(item);\n        \n        // 2. Contar para Ranking\n        const prodName = item.json['NOMBRE DE PRODUCTO'];\n        if(prodName && prodName !== 'SEPARADOR') {\n             if(!productCounts[prodName]) productCounts[prodName] = 0;\n             productCounts[prodName]++;\n        }\n    }\n}\n\nreturn uniqueItems;"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        -1056,
-        432
-      ],
-      "id": "e27b3624-d883-4b1d-bddc-7934b890fc06",
-      "name": "Limpiar y Analizar Productos"
     },
     {
       "parameters": {
@@ -2099,7 +2073,7 @@
       "parameters": {
         "documentId": {
           "__rl": true,
-          "value": "={{ $json.ID_Documento }}",
+          "value": "={{ $json.id_documento }}",
           "mode": "id"
         },
         "sheetName": {
@@ -2118,6 +2092,7 @@
       "id": "715c3b3f-0444-435f-ac20-8188d186e39d",
       "name": "Leer Informe de ese Día",
       "alwaysOutputData": false,
+      "retryOnFail": true,
       "credentials": {
         "googleSheetsOAuth2Api": {
           "id": "RCuKUCifcA4jENcY",
@@ -2221,7 +2196,7 @@
     {
       "parameters": {
         "content": "LEER INFORMACIÓN DE LOS EMPLEADOS EN SHOPIFY\n",
-        "height": 400,
+        "height": 240,
         "width": 992,
         "color": 3
       },
@@ -2239,8 +2214,8 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -1648,
-        848
+        -1952,
+        608
       ],
       "id": "e51c40f8-a227-4f9c-b137-75968f2de83e",
       "name": "When clicking ‘Execute workflow’"
@@ -2258,19 +2233,6 @@
       "id": "28d6ad39-a80e-4fd9-a5eb-df2466e8b96f",
       "name": "Espera 1s",
       "webhookId": "57665f85-f34c-4a9b-81e3-71d620974b94"
-    },
-    {
-      "parameters": {
-        "jsCode": "// Accedemos a la memoria global del workflow\nconst staticData = getWorkflowStaticData('global');\n\n// La limpiamos por si quedó basura de una ejecución anterior fallida\nstaticData.misItemsAcumulados = [];\n\nreturn { status: \"Memoria Limpia\" };"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        -2128,
-        288
-      ],
-      "id": "83db026a-74cf-496c-b945-9e2d9bece458",
-      "name": "iniciar memoria"
     },
     {
       "parameters": {
@@ -2761,7 +2723,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        720,
+        688,
         1056
       ],
       "id": "59020f6f-51fa-4d36-8893-a8d75aa8bf38",
@@ -3398,18 +3360,84 @@
           "name": "Google Sheets account"
         }
       }
-    }
-  ],
-  "pinData": {
-    "When clicking ‘Execute workflow’": [
-      {
-        "json": {},
-        "pairedItem": {
-          "item": 0
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "CREATE OR REPLACE VIEW \"Vista_Informes_Mes_Pasado\" AS\nSELECT *\nFROM \"Documentos_Sheets\"\nWHERE tipo = 'informe'\n  /* Filtramos que la fecha sea mayor o igual al inicio del mes actual */\n  AND TO_DATE(RIGHT(nombre, 10), 'DD/MM/YYYY') >= DATE_TRUNC('month', CURRENT_DATE)\n  /* Y menor que el inicio del mes siguiente */\n  AND TO_DATE(RIGHT(nombre, 10), 'DD/MM/YYYY') < DATE_TRUNC('month', CURRENT_DATE + INTERVAL '1 month');",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -1232,
+        432
+      ],
+      "id": "f5775766-f57d-4069-9332-387233255385",
+      "name": "crear vista",
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
         }
       }
-    ]
-  },
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "value": "public",
+          "mode": "list",
+          "cachedResultName": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "Vista_Informes_Mes_Pasado",
+          "mode": "name"
+        },
+        "returnAll": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -1040,
+        432
+      ],
+      "id": "cb7a8402-4d50-4c4e-845b-b22b53a2b9c6",
+      "name": "obtener vista",
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "drop view \"Vista_Informes_Mes_Pasado\"",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1104,
+        1056
+      ],
+      "id": "d1b85e56-8e05-4a95-8f95-f78a6d606292",
+      "name": "eliminar vista",
+      "executeOnce": true,
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
+        }
+      }
+    }
+  ],
+  "pinData": {},
   "settings": {
     "executionOrder": "v1"
   },
@@ -3430,6 +3458,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-02-10T14:21:13.854Z",
-  "versionId": "16ad9e7f-9a07-442c-a0e6-4cb214878508"
+  "updatedAt": "2026-02-12T12:49:30.568Z",
+  "versionId": "21e9557c-bbca-4bad-ab3a-1846494446d6"
 }
