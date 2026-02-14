@@ -1410,7 +1410,10 @@
   },
   "settings": {
     "executionOrder": "v1",
-    "availableInMCP": false
+    "availableInMCP": false,
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "e80tfOpD4TdBh8EF"
   },
   "shared": [
     {
@@ -1424,6 +1427,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-02-06T14:01:50.734Z",
+  "updatedAt": "2026-02-13T09:57:46.074Z",
   "versionId": "cdcfd770-0ae3-4428-91b1-f4593515aadd"
 }
