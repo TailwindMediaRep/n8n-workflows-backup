@@ -1511,91 +1511,7 @@
   "connections": {
     "Crear Informe Maestro": {
       "main": [
-        [
-          {
-            "node": "Prep Shopify",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "crear vista",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Prep Shopify": {
-      "main": [
-        [
-          {
-            "node": "Shopify API",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Shopify API": {
-      "main": [
-        [
-          {
-            "node": "Acumular en Memoria",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Hay más páginas?": {
-      "main": [
-        [
-          {
-            "node": "Set Next Page",
-            "type": "main",
-            "index": 0
-          }
-        ],
-        [
-          {
-            "node": "Unir Todos los Pedidos",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Set Next Page": {
-      "main": [
-        [
-          {
-            "node": "Shopify API",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Unir Todos los Pedidos": {
-      "main": [
-        [
-          {
-            "node": "Merge",
-            "type": "main",
-            "index": 1
-          }
-        ]
-      ]
-    },
-    "Acumular en Memoria": {
-      "main": [
-        [
-          {
-            "node": "Hay más páginas?",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Bucle: Uno a Uno": {
@@ -1628,17 +1544,6 @@
         []
       ]
     },
-    "Configurar Fechas": {
-      "main": [
-        [
-          {
-            "node": "Crear Informe Maestro",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Calcular Ranking Empleados": {
       "main": [
         [
@@ -1655,17 +1560,6 @@
         [
           {
             "node": "Espera 1s",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "When clicking ‘Execute workflow’": {
-      "main": [
-        [
-          {
-            "node": "Configurar Fechas",
             "type": "main",
             "index": 0
           }
@@ -1855,6 +1749,150 @@
           }
         ]
       ]
+    },
+    "GraphQL": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "GraphQL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s)": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "GraphQL2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GraphQL2": {
+      "main": [
+        [
+          {
+            "node": "GraphQL1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Configurar Fechas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Configurar Fechas": {
+      "main": [
+        [
+          {
+            "node": "Prep Shopify",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Acumular en Memoria": {
+      "main": [
+        [
+          {
+            "node": "Hay más páginas?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Next Page": {
+      "main": [
+        [
+          {
+            "node": "Shopify API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Hay más páginas?": {
+      "main": [
+        [
+          {
+            "node": "Set Next Page",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Unir Todos los Pedidos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Shopify API": {
+      "main": [
+        [
+          {
+            "node": "Acumular en Memoria",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prep Shopify": {
+      "main": [
+        [
+          {
+            "node": "Shopify API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-11-28T09:20:31.945Z",
@@ -1890,139 +1928,6 @@
           "name": "Google Drive account"
         }
       }
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "url_shopify",
-              "name": "url_proxima",
-              "value": "=https://rulesshop.myshopify.com/admin/api/2025-01/orders.json?limit=250&status=any&created_at_min={{ $('Configurar Fechas').item.json.FECHA_INICIO }}&created_at_max={{ $('Configurar Fechas').item.json.FECHA_FIN }}&fields=id,name,total_price,user_id",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        -1264,
-        848
-      ],
-      "id": "e5411988-7c02-483e-8420-ac2e12aa615a",
-      "name": "Prep Shopify"
-    },
-    {
-      "parameters": {
-        "url": "={{ $json.url_proxima }}",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpHeaderAuth",
-        "options": {
-          "response": {
-            "response": {
-              "fullResponse": true
-            }
-          }
-        }
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.3,
-      "position": [
-        -1088,
-        848
-      ],
-      "id": "518b3741-7d29-4729-be2c-b78172a14a40",
-      "name": "Shopify API",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "OPt2Cl0dnwcU4qRk",
-          "name": "ShopifyInformes"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 2
-          },
-          "conditions": [
-            {
-              "id": "cond_link",
-              "leftValue": "={{ $('Shopify API').item.json.headers.link }}",
-              "rightValue": "next",
-              "operator": {
-                "type": "string",
-                "operation": "contains"
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.2,
-      "position": [
-        -768,
-        848
-      ],
-      "id": "6f1925d2-06f9-4916-8223-0d748ee25c76",
-      "name": "Hay más páginas?"
-    },
-    {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "next_url",
-              "name": "url_proxima",
-              "value": "={{ $json.headers.link.match(/<([^>]+)>;\\s*rel=\"next\"/)[1] }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        -608,
-        832
-      ],
-      "id": "b24e5b37-3f22-4b3e-842f-12c4cafad8d5",
-      "name": "Set Next Page"
-    },
-    {
-      "parameters": {
-        "jsCode": "const staticData = $getWorkflowStaticData('global');\nconst listaAcumulada = staticData.listaTemporal || [];\nconst nuevosPedidos = $('Shopify API').item.json.body.orders || [];\nconst listaCompleta = listaAcumulada.concat(nuevosPedidos);\nstaticData.listaTemporal = [];\nreturn listaCompleta.map(p => ({ json: p }));"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        -224,
-        832
-      ],
-      "id": "a5e7501f-ad93-43b6-bb94-2dd14abcadc0",
-      "name": "Unir Todos los Pedidos"
-    },
-    {
-      "parameters": {
-        "jsCode": "const staticData = $getWorkflowStaticData('global');\nif (!staticData.listaTemporal) staticData.listaTemporal = [];\n\n// 1. Capturamos los datos de entrada (incluidos los encabezados/headers)\n// Usamos items[0] porque en n8n v1+ items es el array de entrada\nconst inputData = items[0].json;\nconst pedidos = inputData.body.orders;\n\n// 2. Guardamos los pedidos en la mochila\nstaticData.listaTemporal.push(...pedidos);\n\n// 3. ¡IMPORTANTE! Devolvemos los 'headers' hacia afuera.\n// Así el siguiente nodo podrá leer el link de la página siguiente.\nreturn {\n  json: {\n    status: 'accumulating',\n    headers: inputData.headers\n  }\n};"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        -928,
-        848
-      ],
-      "id": "02bcc516-97d5-4773-a875-6c174ef083b0",
-      "name": "Acumular en Memoria"
     },
     {
       "parameters": {
@@ -2102,41 +2007,6 @@
     },
     {
       "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "id": "id_fecha",
-              "name": "NOMBRE_MES",
-              "value": "={{ $today.minus({months: 1}).setLocale('es').format('MMMM').toUpperCase() }}",
-              "type": "string"
-            },
-            {
-              "id": "id_rango_inicio",
-              "name": "FECHA_INICIO",
-              "value": "={{ $today.startOf('month').format('yyyy-MM-dd') }}T00:00:00Z",
-              "type": "string"
-            },
-            {
-              "id": "id_rango_fin",
-              "name": "FECHA_FIN",
-              "value": "={{ $today.endOf('month').format('yyyy-MM-dd') }}T23:59:59Z",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [
-        -1792,
-        608
-      ],
-      "id": "b214af46-3394-4866-bbe1-53422bd52f0d",
-      "name": "Configurar Fechas"
-    },
-    {
-      "parameters": {
         "jsCode": "// Objeto para acumular las ventas por empleado\nconst ventasPorEmpleado = {};\n\n// 1. Recorremos todos los items de entrada para sumar\nfor (const item of $input.all()) {\n  const data = item.json;\n\n  // Construir nombre completo\n  const nombre = data[\"Nombre empleado\"] || \"Desconocido\";\n  const apellidos = data[\"Apellidos empleado\"] || \"\";\n  const nombreCompleto = `${nombre} ${apellidos}`.trim();\n\n  // Obtener el precio pagado\n  const precio = parseFloat(data[\"PRECIO PAGADO\"]) || 0;\n\n  // Sumar al acumulado\n  if (!ventasPorEmpleado[nombreCompleto]) {\n    ventasPorEmpleado[nombreCompleto] = 0;\n  }\n  ventasPorEmpleado[nombreCompleto] += precio;\n}\n\n// 2. Transformar el objeto en un array temporal\nlet listaEmpleados = Object.keys(ventasPorEmpleado).map(nombre => {\n  return {\n    \"nombre\": nombre,\n    \"total facturado\": Number(ventasPorEmpleado[nombre].toFixed(2))\n  };\n});\n\n// 3. ORDENAR de Mayor a Menor facturación\nlistaEmpleados.sort((a, b) => b[\"total facturado\"] - a[\"total facturado\"]);\n\n// 4. Asignar el contador y el formato final para n8n\nconst resultado = listaEmpleados.map((empleado, index) => {\n  // Añadimos el contador al objeto ya ordenado\n  empleado[\"contador\"] = 31 + index;\n  \n  return { json: empleado };\n});\n\nreturn resultado;"
       },
       "type": "n8n-nodes-base.code",
@@ -2208,17 +2078,6 @@
       ],
       "id": "9eb648e0-0ffb-4d9c-b3c1-616e633836df",
       "name": "Sticky Note7"
-    },
-    {
-      "parameters": {},
-      "type": "n8n-nodes-base.manualTrigger",
-      "typeVersion": 1,
-      "position": [
-        -1952,
-        608
-      ],
-      "id": "e51c40f8-a227-4f9c-b137-75968f2de83e",
-      "name": "When clicking ‘Execute workflow’"
     },
     {
       "parameters": {
@@ -3435,6 +3294,343 @@
           "name": "Postgres Supabase"
         }
       }
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+        "query": "query findCustomerAndCreditID($query: String!) {\n  customers(first: 1, query: $query) {\n    edges {\n      node {\n        id\n        email\n        # Buscamos también la cuenta de crédito del cliente\n        storeCreditAccounts(first: 1) {\n          edges {\n            node {\n              id\n            }\n          }\n        }\n      }\n    }\n  }\n}",
+        "variables": "={\n  \"query\": \"email:{{ $json.Correo }}\"\n}"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        -528,
+        1520
+      ],
+      "id": "63668f8b-ab19-4460-af4d-ba9850a9c519",
+      "name": "GraphQL",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THkhgrtze1uBo6Ft",
+          "name": "Token Informes Shopify"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. INPUT ACTUAL (items): Son los datos que vienen de \"Get row(s)\" (Correos)\nconst datosCorreos = items;\n\n// 2. INPUT ANTERIOR: Recuperamos los datos del nodo \"Calcular Ranking Empleados1\" (Ventas)\n// NOTA: Asegúrate de que el nombre dentro de $('...') sea EXACTO al de tu nodo morado\nlet datosVentas = [];\ntry {\n  datosVentas = $('Calcular Ranking Empleados').all();\n} catch (e) {\n  return [{ json: { error: \"No encuentro el nodo 'Calcular Ranking Empleados1'. Revisa el nombre.\" } }];\n}\n\n// 3. Creamos el mapa para buscar correos (Nombre -> Correo)\nconst mapaCorreos = {};\n\ndatosCorreos.forEach(fila => {\n  const datos = fila.json;\n  \n  // En tu captura de \"Get row(s)\", la columna del nombre se llama \"Nombre\" (no \"Nombre Empleado\")\n  // Usamos .trim() porque en tu captura se ven saltos de línea (\"\\n\")\n  const nombreKey = (datos[\"Nombre\"] || \"\").toString().trim();\n  const email = (datos[\"Correo\"] || \"\").toString().trim(); // Limpiamos el \\n del correo\n  \n  if (nombreKey && email) {\n    mapaCorreos[nombreKey] = email;\n  }\n});\n\n// 4. Procesamos las VENTAS (iteramos sobre datosVentas, NO sobre items)\nconst resultados = [];\n\nfor (const item of datosVentas) {\n  const empleado = item.json;\n  \n  // Aquí sí existen estas columnas porque estamos leyendo del nodo de Ranking\n  const ventas = parseFloat(empleado[\"Total Vendido\"]);\n  const nombreVentas = (empleado[\"Nombre Empleado\"] || \"\").toString().trim();\n  \n  let bonoValor = 0;\n\n  // --- LÓGICA DEL BONO ---\n  if (ventas >= 30000) {\n    bonoValor = 200;\n  } else if (ventas >= 26000) {\n    bonoValor = 150;\n  } else if (ventas >= 22000) {\n    bonoValor = 120;\n  } else if (ventas >= 18000) {\n    bonoValor = 90;\n  }\n\n  // --- GENERACIÓN DEL OUTPUT ---\n  if (bonoValor > 0) {\n    \n    // Buscamos el correo usando el nombre limpio\n    const correoEncontrado = mapaCorreos[nombreVentas];\n\n    resultados.push({\n      json: {\n        \"Nombre Empleado\": nombreVentas,\n        \"Total Vendido\": ventas,\n        \"BONO\": `BONO ${bonoValor}€`,\n        \"MontoBono\": bonoValor,\n        // Si no encuentra el correo, pondrá null.\n        \"Correo\": correoEncontrado || \"No encontrado\"\n      }\n    });\n  }\n}\n\nreturn resultados;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -704,
+        1520
+      ],
+      "id": "03578317-686d-4b3d-ad67-6d06e01c11c2",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "m14tPVcEZzewnVMX",
+          "mode": "list",
+          "cachedResultName": "empleados",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/m14tPVcEZzewnVMX"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "Nombre",
+              "keyValue": "={{ $json[\"Nombre Empleado\"] }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        -880,
+        1520
+      ],
+      "id": "ccb60fd6-673b-44bd-80f9-681b61a87e3f",
+      "name": "Get row(s)"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Obtenemos los resultados de Shopify (Input actual)\nconst shopifyInput = items;\n\n// 2. Obtenemos los datos originales del bono (Code in JavaScript)\nlet bonusInput = [];\ntry {\n  bonusInput = $('Code in JavaScript').all();\n} catch (error) {\n  return [{ json: { error: \"No se encuentran datos del nodo 'Code in JavaScript'\" } }];\n}\n\n// 3. Mapeamos los bonos por correo (limpiando espacios)\nconst mapaBonos = {};\nbonusInput.forEach(item => {\n  const data = item.json;\n  if (data.Correo) {\n    const emailLimpio = data.Correo.toString().trim().toLowerCase();\n    mapaBonos[emailLimpio] = data;\n  }\n});\n\nconst resultadosFinales = [];\n\n// 4. Procesamos la respuesta de Shopify\nfor (const item of shopifyInput) {\n  const shopifyData = item.json;\n\n  // Verificamos si Shopify encontró al cliente\n  if (shopifyData.data && \n      shopifyData.data.customers && \n      shopifyData.data.customers.edges && \n      shopifyData.data.customers.edges.length > 0) {\n    \n    const clienteNode = shopifyData.data.customers.edges[0].node;\n    const emailShopify = clienteNode.email.trim().toLowerCase();\n\n    // Cruzamos con el bono original\n    const bonoOriginal = mapaBonos[emailShopify];\n\n    if (bonoOriginal) {\n      \n      // Intentamos obtener la ID de la cuenta de crédito\n      let creditAccountId = null;\n      if (clienteNode.storeCreditAccounts && \n          clienteNode.storeCreditAccounts.edges && \n          clienteNode.storeCreditAccounts.edges.length > 0) {\n        creditAccountId = clienteNode.storeCreditAccounts.edges[0].node.id;\n      }\n\n      // IMPORTANTE: Ahora devolvemos el resultado SIEMPRE, tenga o no cuenta de crédito.\n      // Si no tiene cuenta, 'CreditAccountID' será null.\n      resultadosFinales.push({\n        json: {\n          \"CustomerID\": clienteNode.id,\n          \"CreditAccountID\": creditAccountId, // Puede ser null si el cliente es nuevo\n          \"MontoBono\": bonoOriginal.MontoBono.toString(),\n          \"EtiquetaBono\": bonoOriginal.BONO,\n          \"Email\": emailShopify,\n          \"TieneCuentaCredito\": creditAccountId ? true : false // Bandera de ayuda\n        }\n      });\n    }\n  }\n}\n\nreturn resultadosFinales;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -352,
+        1520
+      ],
+      "id": "931e8f54-6d9c-4926-9613-8947a71c7fba",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+        "query": "mutation storeCreditAccountCredit($id: ID!, $creditInput: StoreCreditAccountCreditInput!) {\n  storeCreditAccountCredit(id: $id, creditInput: $creditInput) {\n    storeCreditAccountTransaction {\n      id\n      amount {\n        amount\n        currencyCode\n      }\n      balanceAfterTransaction {\n        amount\n        currencyCode\n      }\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}\n",
+        "variables": "={\n  \"id\": \"{{ $json.CreditAccountID }}\",\n  \"creditInput\": {\n    \"creditAmount\": {\n      \"amount\": \"{{ $json.MontoBono }}\",\n      \"currencyCode\": \"EUR\"\n    }\n  }\n}\n"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        64,
+        1520
+      ],
+      "id": "45cf7ed9-32f9-4b7e-9bb1-9ad908231c0f",
+      "name": "GraphQL1",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THkhgrtze1uBo6Ft",
+          "name": "Token Informes Shopify"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+        "query": "mutation AddCustomerTag($id: ID!, $tags: [String!]!) {\n  tagsAdd(id: $id, tags: $tags) {\n    node {\n      id\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
+        "variables": "={\n  \"id\": \"{{ $json.CustomerID }}\",\n  \"tags\": [\"{{ $json.EtiquetaBono }}\"]\n}"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        -128,
+        1520
+      ],
+      "id": "6000736b-1fd6-4b52-a75f-8f9dffb46b3e",
+      "name": "GraphQL2",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THkhgrtze1uBo6Ft",
+          "name": "Token Informes Shopify"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.Email }}",
+        "subject": "=¡Tienes {{ $json.MontoBono }}€ de saldo disponible en tienda! 🎁",
+        "message": "=<!DOCTYPE html>\n<html>\n<head>\n<style>\n  body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }\n  .email-container { max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 40px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }\n  .header { text-align: center; padding-bottom: 20px; border-bottom: 1px solid #eeeeee; }\n  .header h1 { color: #333333; margin: 0; font-size: 24px; }\n  .content { padding: 30px 0; color: #555555; line-height: 1.6; }\n  .credit-box { background-color: #e6fffa; border: 1px solid #38b2ac; color: #234e52; padding: 15px; text-align: center; border-radius: 6px; margin: 20px 0; font-size: 18px; font-weight: bold; }\n  .info-text { font-size: 14px; color: #666; text-align: center; margin-top: -10px; margin-bottom: 20px; font-style: italic; }\n  .warning-box { background-color: #fffaf0; border-left: 4px solid #ed8936; padding: 15px; margin: 20px 0; font-size: 14px; color: #744210; }\n  .footer { text-align: center; font-size: 12px; color: #999999; margin-top: 30px; border-top: 1px solid #eeeeee; padding-top: 20px; }\n</style>\n</head>\n<body>\n\n<div class=\"email-container\">\n  <div class=\"header\">\n    <h1>¡Saldo añadido correctamente!</h1>\n  </div>\n\n  <div class=\"content\">\n    <p>Hola,</p>\n    \n    <p>Queremos informarte que hemos actualizado tu cuenta de cliente. Tienes un nuevo bono de crédito listo para usar.</p>\n\n    <div class=\"credit-box\">\n      Has recibido: {{ $json.MontoBono }}€\n    </div>\n\n    <div class=\"info-text\">\n      *Si ya disponías de saldo anterior en tu cuenta, este importe <strong>se ha sumado</strong> a tu total actual.\n    </div>\n\n    <p>Puedes utilizar este crédito para adquirir cualquier producto en <strong>todas nuestras tiendas</strong>.</p>\n\n    <div class=\"warning-box\">\n      <strong>⚠️ Recordatorio importante:</strong><br>\n      Si decides pagar utilizando tu crédito de tienda, el sistema <u>no permitirá aplicar otros códigos de descuento</u> o cupones promocionales en ese mismo pedido.\n    </div>\n  </div>\n\n  <div class=\"footer\">\n    <p>Saludos,<br><strong>El Equipo de Tailwind</strong></p>\n    <p>Si tienes alguna duda sobre tu saldo total, no dudes en responder a este correo.</p>\n  </div>\n</div>\n\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -128,
+        1696
+      ],
+      "id": "80e5c84a-d412-4849-b647-a31a87027f41",
+      "name": "Send a message",
+      "webhookId": "69b6f5d3-a26d-46a8-8432-61d9aa5edd87",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "wR7U82S8bmDH4odC",
+          "name": "info@tailwind.es"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## PARA ACTUALIZAR BONOS EN SHOPIFY",
+        "height": 400,
+        "width": 1456
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1072,
+        1456
+      ],
+      "id": "a35052e5-9313-45d2-bd83-1635a0476047",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1616,
+        848
+      ],
+      "id": "e51c40f8-a227-4f9c-b137-75968f2de83e",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id_fecha",
+              "name": "NOMBRE_MES",
+              "value": "={{ $today.minus({months: 1}).setLocale('es').format('MMMM').toUpperCase() }}",
+              "type": "string"
+            },
+            {
+              "id": "id_rango_inicio",
+              "name": "FECHA_INICIO",
+              "value": "={{ $today.startOf('month').format('yyyy-MM-dd') }}T00:00:00Z",
+              "type": "string"
+            },
+            {
+              "id": "id_rango_fin",
+              "name": "FECHA_FIN",
+              "value": "={{ $today.endOf('month').format('yyyy-MM-dd') }}T23:59:59Z",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1456,
+        848
+      ],
+      "id": "b214af46-3394-4866-bbe1-53422bd52f0d",
+      "name": "Configurar Fechas"
+    },
+    {
+      "parameters": {
+        "jsCode": "const staticData = $getWorkflowStaticData('global');\nif (!staticData.listaTemporal) staticData.listaTemporal = [];\n\n// 1. Capturamos los datos de entrada (incluidos los encabezados/headers)\n// Usamos items[0] porque en n8n v1+ items es el array de entrada\nconst inputData = items[0].json;\nconst pedidos = inputData.body.orders;\n\n// 2. Guardamos los pedidos en la mochila\nstaticData.listaTemporal.push(...pedidos);\n\n// 3. ¡IMPORTANTE! Devolvemos los 'headers' hacia afuera.\n// Así el siguiente nodo podrá leer el link de la página siguiente.\nreturn {\n  json: {\n    status: 'accumulating',\n    headers: inputData.headers\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -928,
+        848
+      ],
+      "id": "02bcc516-97d5-4773-a875-6c174ef083b0",
+      "name": "Acumular en Memoria"
+    },
+    {
+      "parameters": {
+        "jsCode": "const staticData = $getWorkflowStaticData('global');\nconst listaAcumulada = staticData.listaTemporal || [];\nconst nuevosPedidos = $('Shopify API').item.json.body.orders || [];\nconst listaCompleta = listaAcumulada.concat(nuevosPedidos);\nstaticData.listaTemporal = [];\nreturn listaCompleta.map(p => ({ json: p }));"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -592,
+        1072
+      ],
+      "id": "a5e7501f-ad93-43b6-bb94-2dd14abcadc0",
+      "name": "Unir Todos los Pedidos"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "next_url",
+              "name": "url_proxima",
+              "value": "={{ $json.headers.link.match(/<([^>]+)>;\\s*rel=\"next\"/)[1] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -608,
+        832
+      ],
+      "id": "b24e5b37-3f22-4b3e-842f-12c4cafad8d5",
+      "name": "Set Next Page"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "cond_link",
+              "leftValue": "={{ $('Shopify API').item.json.headers.link }}",
+              "rightValue": "next",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -768,
+        848
+      ],
+      "id": "6f1925d2-06f9-4916-8223-0d748ee25c76",
+      "name": "Hay más páginas?"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url_proxima }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -1088,
+        848
+      ],
+      "id": "518b3741-7d29-4729-be2c-b78172a14a40",
+      "name": "Shopify API",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "url_shopify",
+              "name": "url_proxima",
+              "value": "=https://rulesshop.myshopify.com/admin/api/2025-01/orders.json?limit=250&status=any&created_at_min={{ $('Configurar Fechas').item.json.FECHA_INICIO }}&created_at_max={{ $('Configurar Fechas').item.json.FECHA_FIN }}&fields=id,name,total_price,user_id",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1264,
+        848
+      ],
+      "id": "e5411988-7c02-483e-8420-ac2e12aa615a",
+      "name": "Prep Shopify"
     }
   ],
   "pinData": {},
@@ -3458,6 +3654,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-02-12T12:49:30.568Z",
-  "versionId": "21e9557c-bbca-4bad-ab3a-1846494446d6"
+  "updatedAt": "2026-02-13T09:51:03.231Z",
+  "versionId": "b4a2dbee-1ec0-4d95-a9f9-e1428af2ce04"
 }
