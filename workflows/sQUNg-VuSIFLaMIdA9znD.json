@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-02-06T13:01:19.000Z",
-    "createdAt": "2026-02-06T13:01:17.884Z",
-    "versionId": "50453d47-aaf3-4bdb-b7ec-50b4392da2e0",
+    "updatedAt": "2026-02-13T12:38:45.000Z",
+    "createdAt": "2026-02-13T12:38:43.404Z",
+    "versionId": "35f33302-a6ba-4ace-a756-c21e712d60aa",
     "workflowId": "sQUNg-VuSIFLaMIdA9znD",
     "nodes": [
       {
@@ -98,7 +98,7 @@
         "parameters": {
           "content": "CREAR DOCUMENTO",
           "height": 208,
-          "width": 960,
+          "width": 1136,
           "color": 6
         },
         "type": "n8n-nodes-base.stickyNote",
@@ -286,7 +286,7 @@
       },
       {
         "parameters": {
-          "jsCode": "// 1. Validaciones básicas\nif (items.length < 2) {\n    throw new Error(\"Se esperaban al menos 2 ítems de entrada.\");\n}\n\n// Inicializamos variables\nlet orderData = null;\nconst productRows = []; // Aquí guardaremos los ítems que tienen ID_documento\nconst costMap = {}; // Aquí guardaremos los costos indexados por SKU\n\n// 2. Clasificar los ítems de entrada\nfor (const item of items) {\n    const json = item.json;\n\n    // A) Es la ORDEN (tiene data.order)\n    if (json.data && json.data.order) {\n        orderData = json.data.order;\n    } \n    // B) Es información de COSTO de Shopify (tiene data.productVariant)\n    else if (json.data && json.data.productVariant) {\n        const variant = json.data.productVariant;\n        const sku = variant.sku;\n        const costAmount = variant.inventoryItem?.unitCost?.amount;\n        \n        // Guardamos el costo en un objeto usando el SKU como clave para buscarlo rápido después\n        if (sku && costAmount) {\n            costMap[sku] = costAmount;\n        }\n    }\n    // C) Es el ítem procesado (tiene ID_documento)\n    else if (json.ID_documento) {\n        productRows.push(json);\n    }\n}\n\nif (!orderData) {\n    throw new Error(\"No se encontró el ítem de la orden de Shopify.\");\n}\n\nif (productRows.length === 0) {\n    throw new Error(\"No se encontraron ítems de producto con ID_documento.\");\n}\n\n// 3. Crear objeto base de la orden\nconst baseOrderData = {\n    id: orderData.id,\n    name: orderData.name,\n    createdAt: orderData.createdAt,\n    totalPrice: orderData.totalPriceSet?.shopMoney?.amount || 'N/A',\n    currencyCode: orderData.totalPriceSet?.shopMoney?.currencyCode || 'N/A',\n    \n    // Datos del cliente\n    customer: orderData.customer,\n    \n    // Datos de envío\n    fulfillmentLocation: orderData.fulfillments?.[0]?.location?.name || 'N/A',\n    fulfillmentAddress: orderData.fulfillments?.[0]?.location?.address || 'N/A',\n    \n    // Datos de la transacción\n    transactionGateway: orderData.transactions?.[0]?.formattedGateway || 'N/A',\n    transactionKind: orderData.transactions?.[0]?.kind || 'N/A',\n    transactionStatus: orderData.transactions?.[0]?.status || 'N/A',\n};\n\n// 4. Iterar sobre los productos y fusionar (incluyendo el costo encontrado)\nconst combinedItems = [];\n\nfor (const productData of productRows) {\n    \n    // Buscamos si existe un costo guardado para este SKU\n    const sku = productData.sku;\n    const unitCost = costMap[sku] || '0.00'; // Si no encuentra match, pone 0.00 o N/A\n\n    const combinedItem = {\n        ...baseOrderData,\n        \n        product: {\n            ID_documento: productData.ID_documento,\n            numero_fila: productData.numero_fila,\n            product_name: productData.product_name,\n            sku: productData.sku,\n            variant_title: productData.variant_title,\n            original_price: productData.original_price,\n            total_discount_applied: productData.total_discount_applied,\n            final_paid_price: productData.final_paid_price,\n            currency: productData.currency,\n            // Aquí agregamos el campo solicitado\n            unit_cost: unitCost \n        }\n    };\n    \n    combinedItems.push({\n        json: combinedItem,\n    });\n}\n\nreturn combinedItems;"
+          "jsCode": "// 1. Validaciones básicas\nif (items.length < 2) {\n    throw new Error(\"Se esperaban al menos 2 ítems de entrada.\");\n}\n\n// Inicializamos variables\nlet orderData = null;\nconst productRows = []; // Aquí guardaremos los ítems que tienen ID_documento\nconst costMap = {}; // Aquí guardaremos los costos indexados por SKU\n\n// 2. Clasificar los ítems de entrada\nfor (const item of items) {\n    const json = item.json;\n\n    // A) Es la ORDEN (tiene data.order)\n    if (json.data && json.data.order) {\n        orderData = json.data.order;\n    } \n    // B) Es información de COSTO de Shopify (tiene data.productVariant)\n    else if (json.data && json.data.productVariant) {\n        const variant = json.data.productVariant;\n        const sku = variant.sku;\n        const costAmount = variant.inventoryItem?.unitCost?.amount;\n        \n        // Guardamos el costo en un objeto usando el SKU como clave para buscarlo rápido después\n        if (sku && costAmount) {\n            costMap[sku] = costAmount;\n        }\n    }\n    // C) Es el ítem procesado (tiene ID_documento)\n    else if (json.ID_documento) {\n        productRows.push(json);\n    }\n}\n\nif (!orderData) {\n    throw new Error(\"No se encontró el ítem de la orden de Shopify.\");\n}\n\nif (productRows.length === 0) {\n    throw new Error(\"No se encontraron ítems de producto con ID_documento.\");\n}\n\n// 3. Crear objeto base de la orden\nconst baseOrderData = {\n    id: orderData.id,\n    name: orderData.name,\n    createdAt: orderData.createdAt,\n    totalPrice: orderData.totalPriceSet?.shopMoney?.amount || 'N/A',\n    currencyCode: orderData.totalPriceSet?.shopMoney?.currencyCode || 'N/A',\n    \n    // Datos del cliente\n    customer: orderData.customer,\n    \n    // Datos de envío\n    fulfillmentLocation: orderData.fulfillments?.[0]?.location?.name || 'N/A',\n    fulfillmentAddress: orderData.fulfillments?.[0]?.location?.address || 'N/A',\n    \n    // Datos de la transacción\n    transactionGateway: orderData.transactions?.[0]?.formattedGateway || 'N/A',\n    transactionKind: orderData.transactions?.[0]?.kind || 'N/A',\n    transactionStatus: orderData.transactions?.[0]?.status || 'N/A',\n};\n\n// 4. Iterar sobre los productos y fusionar (incluyendo el costo encontrado)\nconst combinedItems = [];\n\nfor (const productData of productRows) {\n    \n    // Buscamos si existe un costo guardado para este SKU\n    const sku = productData.sku;\n    const unitCost = costMap[sku] || '0.00'; // Si no encuentra match, pone 0.00 o N/A\n\n    const combinedItem = {\n        ...baseOrderData,\n        \n        product: {\n            ID_documento: productData.ID_documento,\n            numero_fila: productData.numero_fila,\n            product_name: productData.product_name,\n            sku: productData.sku,\n            variant_title: productData.variant_title,\n            original_price: productData.original_price,\n            total_discount_applied: productData.total_discount_applied,\n            final_paid_price: productData.final_paid_price,\n            currency: productData.currency,\n            // Aquí agregamos el campo solicitado\n            unit_cost: unitCost \n        }\n    };\n    \n    combinedItems.push({\n        json: combinedItem,\n    });\n}\n\nreturn combinedItems;\n"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -2085,7 +2085,7 @@
             "value": {
               "id_documento": "={{ $json.ID_Documento }}",
               "id_pedido": "={{ $('Webhook').first().json.body.id }}",
-              "fecha": "={{ $now.format('dd-LL-yyyy') }}"
+              "fecha": "={{ $now.format('yyyy-MM-dd') }}"
             },
             "matchingColumns": [
               "id_pedido"
@@ -2564,11 +2564,11 @@
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version 50453d47",
+    "name": "Version 35f33302",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "50453d47-aaf3-4bdb-b7ec-50b4392da2e0",
+  "activeVersionId": "35f33302-a6ba-4ace-a756-c21e712d60aa",
   "connections": {
     "Webhook": {
       "main": [
@@ -3021,7 +3021,7 @@
       "parameters": {
         "content": "CREAR DOCUMENTO",
         "height": 208,
-        "width": 960,
+        "width": 1136,
         "color": 6
       },
       "type": "n8n-nodes-base.stickyNote",
@@ -3209,7 +3209,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// 1. Validaciones básicas\nif (items.length < 2) {\n    throw new Error(\"Se esperaban al menos 2 ítems de entrada.\");\n}\n\n// Inicializamos variables\nlet orderData = null;\nconst productRows = []; // Aquí guardaremos los ítems que tienen ID_documento\nconst costMap = {}; // Aquí guardaremos los costos indexados por SKU\n\n// 2. Clasificar los ítems de entrada\nfor (const item of items) {\n    const json = item.json;\n\n    // A) Es la ORDEN (tiene data.order)\n    if (json.data && json.data.order) {\n        orderData = json.data.order;\n    } \n    // B) Es información de COSTO de Shopify (tiene data.productVariant)\n    else if (json.data && json.data.productVariant) {\n        const variant = json.data.productVariant;\n        const sku = variant.sku;\n        const costAmount = variant.inventoryItem?.unitCost?.amount;\n        \n        // Guardamos el costo en un objeto usando el SKU como clave para buscarlo rápido después\n        if (sku && costAmount) {\n            costMap[sku] = costAmount;\n        }\n    }\n    // C) Es el ítem procesado (tiene ID_documento)\n    else if (json.ID_documento) {\n        productRows.push(json);\n    }\n}\n\nif (!orderData) {\n    throw new Error(\"No se encontró el ítem de la orden de Shopify.\");\n}\n\nif (productRows.length === 0) {\n    throw new Error(\"No se encontraron ítems de producto con ID_documento.\");\n}\n\n// 3. Crear objeto base de la orden\nconst baseOrderData = {\n    id: orderData.id,\n    name: orderData.name,\n    createdAt: orderData.createdAt,\n    totalPrice: orderData.totalPriceSet?.shopMoney?.amount || 'N/A',\n    currencyCode: orderData.totalPriceSet?.shopMoney?.currencyCode || 'N/A',\n    \n    // Datos del cliente\n    customer: orderData.customer,\n    \n    // Datos de envío\n    fulfillmentLocation: orderData.fulfillments?.[0]?.location?.name || 'N/A',\n    fulfillmentAddress: orderData.fulfillments?.[0]?.location?.address || 'N/A',\n    \n    // Datos de la transacción\n    transactionGateway: orderData.transactions?.[0]?.formattedGateway || 'N/A',\n    transactionKind: orderData.transactions?.[0]?.kind || 'N/A',\n    transactionStatus: orderData.transactions?.[0]?.status || 'N/A',\n};\n\n// 4. Iterar sobre los productos y fusionar (incluyendo el costo encontrado)\nconst combinedItems = [];\n\nfor (const productData of productRows) {\n    \n    // Buscamos si existe un costo guardado para este SKU\n    const sku = productData.sku;\n    const unitCost = costMap[sku] || '0.00'; // Si no encuentra match, pone 0.00 o N/A\n\n    const combinedItem = {\n        ...baseOrderData,\n        \n        product: {\n            ID_documento: productData.ID_documento,\n            numero_fila: productData.numero_fila,\n            product_name: productData.product_name,\n            sku: productData.sku,\n            variant_title: productData.variant_title,\n            original_price: productData.original_price,\n            total_discount_applied: productData.total_discount_applied,\n            final_paid_price: productData.final_paid_price,\n            currency: productData.currency,\n            // Aquí agregamos el campo solicitado\n            unit_cost: unitCost \n        }\n    };\n    \n    combinedItems.push({\n        json: combinedItem,\n    });\n}\n\nreturn combinedItems;"
+        "jsCode": "// 1. Validaciones básicas\nif (items.length < 2) {\n    throw new Error(\"Se esperaban al menos 2 ítems de entrada.\");\n}\n\n// Inicializamos variables\nlet orderData = null;\nconst productRows = []; // Aquí guardaremos los ítems que tienen ID_documento\nconst costMap = {}; // Aquí guardaremos los costos indexados por SKU\n\n// 2. Clasificar los ítems de entrada\nfor (const item of items) {\n    const json = item.json;\n\n    // A) Es la ORDEN (tiene data.order)\n    if (json.data && json.data.order) {\n        orderData = json.data.order;\n    } \n    // B) Es información de COSTO de Shopify (tiene data.productVariant)\n    else if (json.data && json.data.productVariant) {\n        const variant = json.data.productVariant;\n        const sku = variant.sku;\n        const costAmount = variant.inventoryItem?.unitCost?.amount;\n        \n        // Guardamos el costo en un objeto usando el SKU como clave para buscarlo rápido después\n        if (sku && costAmount) {\n            costMap[sku] = costAmount;\n        }\n    }\n    // C) Es el ítem procesado (tiene ID_documento)\n    else if (json.ID_documento) {\n        productRows.push(json);\n    }\n}\n\nif (!orderData) {\n    throw new Error(\"No se encontró el ítem de la orden de Shopify.\");\n}\n\nif (productRows.length === 0) {\n    throw new Error(\"No se encontraron ítems de producto con ID_documento.\");\n}\n\n// 3. Crear objeto base de la orden\nconst baseOrderData = {\n    id: orderData.id,\n    name: orderData.name,\n    createdAt: orderData.createdAt,\n    totalPrice: orderData.totalPriceSet?.shopMoney?.amount || 'N/A',\n    currencyCode: orderData.totalPriceSet?.shopMoney?.currencyCode || 'N/A',\n    \n    // Datos del cliente\n    customer: orderData.customer,\n    \n    // Datos de envío\n    fulfillmentLocation: orderData.fulfillments?.[0]?.location?.name || 'N/A',\n    fulfillmentAddress: orderData.fulfillments?.[0]?.location?.address || 'N/A',\n    \n    // Datos de la transacción\n    transactionGateway: orderData.transactions?.[0]?.formattedGateway || 'N/A',\n    transactionKind: orderData.transactions?.[0]?.kind || 'N/A',\n    transactionStatus: orderData.transactions?.[0]?.status || 'N/A',\n};\n\n// 4. Iterar sobre los productos y fusionar (incluyendo el costo encontrado)\nconst combinedItems = [];\n\nfor (const productData of productRows) {\n    \n    // Buscamos si existe un costo guardado para este SKU\n    const sku = productData.sku;\n    const unitCost = costMap[sku] || '0.00'; // Si no encuentra match, pone 0.00 o N/A\n\n    const combinedItem = {\n        ...baseOrderData,\n        \n        product: {\n            ID_documento: productData.ID_documento,\n            numero_fila: productData.numero_fila,\n            product_name: productData.product_name,\n            sku: productData.sku,\n            variant_title: productData.variant_title,\n            original_price: productData.original_price,\n            total_discount_applied: productData.total_discount_applied,\n            final_paid_price: productData.final_paid_price,\n            currency: productData.currency,\n            // Aquí agregamos el campo solicitado\n            unit_cost: unitCost \n        }\n    };\n    \n    combinedItems.push({\n        json: combinedItem,\n    });\n}\n\nreturn combinedItems;\n"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -5008,7 +5008,7 @@
           "value": {
             "id_documento": "={{ $json.ID_Documento }}",
             "id_pedido": "={{ $('Webhook').first().json.body.id }}",
-            "fecha": "={{ $now.format('dd-LL-yyyy') }}"
+            "fecha": "={{ $now.format('yyyy-MM-dd') }}"
           },
           "matchingColumns": [
             "id_pedido"
@@ -5135,56 +5135,76 @@
     }
   ],
   "pinData": {
+    "Schedule Trigger": [
+      {
+        "json": {
+          "timestamp": "2026-02-06T00:00:46.011-05:00",
+          "Readable date": "February 6th 2026, 12:00:46 am",
+          "Readable time": "12:00:46 am",
+          "Day of week": "Friday",
+          "Year": "2026",
+          "Month": "February",
+          "Day of month": "06",
+          "Hour": "00",
+          "Minute": "00",
+          "Second": "46",
+          "Timezone": "America/New_York (UTC-05:00)"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
     "Webhook": [
       {
         "json": {
           "headers": {
             "connection": "upgrade",
             "host": "n8n.tailwind.es",
-            "x-forwarded-for": "35.205.131.179",
+            "x-forwarded-for": "35.241.240.202",
             "x-forwarded-proto": "https",
-            "content-length": "8563",
+            "content-length": "7687",
             "user-agent": "Shopify-Captain-Hook",
             "accept": "*/*",
             "accept-encoding": "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
             "content-type": "application/json",
             "x-shopify-api-version": "2025-10",
-            "x-shopify-event-id": "258dea0e-3d27-4045-8dad-7f3a178d1410",
-            "x-shopify-hmac-sha256": "GFVwd1eInupPdX9xIE+s5ucqhU1MdnoUBNv/xs1z4vk=",
-            "x-shopify-order-id": "7526353502555",
+            "x-shopify-event-id": "758eb0e0-96dc-4a94-bbec-862c09502ca0",
+            "x-shopify-hmac-sha256": "7JE48dpS5cTUmZz2yQ+UbZoCJ5OOmun68aa48A93u+k=",
+            "x-shopify-order-id": "7557383717211",
             "x-shopify-shop-domain": "surfin-store-spain.myshopify.com",
             "x-shopify-test": "false",
             "x-shopify-topic": "orders/create",
-            "x-shopify-triggered-at": "2026-02-05T17:17:00.719180461Z",
-            "x-shopify-webhook-id": "1cd5b907-2db6-54e1-84f9-776a6d51cae8"
+            "x-shopify-triggered-at": "2026-02-13T12:33:07.141639469Z",
+            "x-shopify-webhook-id": "1ecca3af-bdeb-5aed-b3ff-18a7798323d6"
           },
           "params": {},
           "query": {},
           "body": {
-            "id": 7526353502555,
-            "admin_graphql_api_id": "gid://shopify/Order/7526353502555",
+            "id": 7557383717211,
+            "admin_graphql_api_id": "gid://shopify/Order/7557383717211",
             "app_id": 129785,
-            "browser_ip": "83.48.95.200",
+            "browser_ip": "2.136.43.55",
             "buyer_accepts_marketing": false,
             "cancel_reason": null,
             "cancelled_at": null,
             "cart_token": null,
-            "checkout_id": 48329695887707,
-            "checkout_token": "c90f8a3e-2682-462d-a67d-91ba7d569f48",
+            "checkout_id": 48377614106971,
+            "checkout_token": "1692d7ae-5f9b-4999-ba0d-3a3a1f637887",
             "client_details": {
               "accept_language": null,
               "browser_height": null,
-              "browser_ip": "83.48.95.200",
+              "browser_ip": "2.136.43.55",
               "browser_width": null,
               "session_hash": null,
-              "user_agent": "Shopify POS/10.19.3/Android/15/Redmi/25099RP13G/production"
+              "user_agent": "Shopify POS/10.20.0/Android/15/samsung/SM-X210R/production"
             },
-            "closed_at": "2026-02-05T18:17:01+01:00",
+            "closed_at": "2026-02-13T13:33:06+01:00",
             "company": null,
-            "confirmation_number": "2ENTQEUZ6",
+            "confirmation_number": "5IKGL8AML",
             "confirmed": true,
-            "contact_email": null,
-            "created_at": "2026-02-05T18:16:59+01:00",
+            "contact_email": "xulo_jamal@hotmail.com",
+            "created_at": "2026-02-13T13:33:05+01:00",
             "currency": "EUR",
             "current_shipping_price_set": {
               "shop_money": {
@@ -5196,38 +5216,38 @@
                 "currency_code": "EUR"
               }
             },
-            "current_subtotal_price": "84.90",
+            "current_subtotal_price": "63.72",
             "current_subtotal_price_set": {
               "shop_money": {
-                "amount": "84.90",
+                "amount": "63.72",
                 "currency_code": "EUR"
               },
               "presentment_money": {
-                "amount": "84.90",
+                "amount": "63.72",
                 "currency_code": "EUR"
               }
             },
             "current_total_additional_fees_set": null,
-            "current_total_discounts": "0.00",
+            "current_total_discounts": "21.23",
             "current_total_discounts_set": {
               "shop_money": {
-                "amount": "0.00",
+                "amount": "21.23",
                 "currency_code": "EUR"
               },
               "presentment_money": {
-                "amount": "0.00",
+                "amount": "21.23",
                 "currency_code": "EUR"
               }
             },
             "current_total_duties_set": null,
-            "current_total_price": "84.90",
+            "current_total_price": "63.72",
             "current_total_price_set": {
               "shop_money": {
-                "amount": "84.90",
+                "amount": "63.72",
                 "currency_code": "EUR"
               },
               "presentment_money": {
-                "amount": "84.90",
+                "amount": "63.72",
                 "currency_code": "EUR"
               }
             },
@@ -5243,24 +5263,30 @@
               }
             },
             "customer_locale": "es",
-            "device_id": 8,
-            "discount_codes": [],
+            "device_id": 12,
+            "discount_codes": [
+              {
+                "code": "25%EMPLEADO",
+                "amount": "21.23",
+                "type": "percentage"
+              }
+            ],
             "duties_included": false,
-            "email": "",
+            "email": "xulo_jamal@hotmail.com",
             "estimated_taxes": false,
             "financial_status": "paid",
             "fulfillment_status": "fulfilled",
             "landing_site": null,
             "landing_site_ref": null,
-            "location_id": 99018441051,
+            "location_id": 108790317403,
             "merchant_business_entity_id": "MTg3OTg3NjUwOTA3",
             "merchant_of_record_app_id": null,
-            "name": "#71885",
+            "name": "#72255",
             "note": null,
             "note_attributes": [],
-            "number": 70885,
-            "order_number": 71885,
-            "order_status_url": "https://nuance-store.com/87987650907/orders/aaa830d18fc7e9be27b8c790d0866ff4/authenticate?key=d54e3e5a77a568b774c353008e95f384",
+            "number": 71255,
+            "order_number": 72255,
+            "order_status_url": "https://nuance-store.com/87987650907/orders/c163f8a4e35e48ade960f974b20038c2/authenticate?key=476d12aa8b3f33900a5432f0021a573e",
             "original_total_additional_fees_set": null,
             "original_total_duties_set": null,
             "payment_gateway_names": [
@@ -5269,20 +5295,20 @@
             "phone": null,
             "po_number": null,
             "presentment_currency": "EUR",
-            "processed_at": "2026-02-05T18:16:58+01:00",
+            "processed_at": "2026-02-13T13:33:04+01:00",
             "reference": null,
             "referring_site": null,
-            "source_identifier": "99018441051-8-2303",
+            "source_identifier": "108790317403-12-2467",
             "source_name": "pos",
             "source_url": null,
-            "subtotal_price": "84.90",
+            "subtotal_price": "63.72",
             "subtotal_price_set": {
               "shop_money": {
-                "amount": "84.90",
+                "amount": "63.72",
                 "currency_code": "EUR"
               },
               "presentment_money": {
-                "amount": "84.90",
+                "amount": "63.72",
                 "currency_code": "EUR"
               }
             },
@@ -5291,7 +5317,7 @@
             "tax_lines": [],
             "taxes_included": true,
             "test": false,
-            "token": "aaa830d18fc7e9be27b8c790d0866ff4",
+            "token": "c163f8a4e35e48ade960f974b20038c2",
             "total_cash_rounding_payment_adjustment_set": {
               "shop_money": {
                 "amount": "0.00",
@@ -5312,37 +5338,37 @@
                 "currency_code": "EUR"
               }
             },
-            "total_discounts": "0.00",
+            "total_discounts": "21.23",
             "total_discounts_set": {
               "shop_money": {
-                "amount": "0.00",
+                "amount": "21.23",
                 "currency_code": "EUR"
               },
               "presentment_money": {
-                "amount": "0.00",
+                "amount": "21.23",
                 "currency_code": "EUR"
               }
             },
-            "total_line_items_price": "84.90",
+            "total_line_items_price": "84.95",
             "total_line_items_price_set": {
               "shop_money": {
-                "amount": "84.90",
+                "amount": "84.95",
                 "currency_code": "EUR"
               },
               "presentment_money": {
-                "amount": "84.90",
+                "amount": "84.95",
                 "currency_code": "EUR"
               }
             },
             "total_outstanding": "0.00",
-            "total_price": "84.90",
+            "total_price": "63.72",
             "total_price_set": {
               "shop_money": {
-                "amount": "84.90",
+                "amount": "63.72",
                 "currency_code": "EUR"
               },
               "presentment_money": {
-                "amount": "84.90",
+                "amount": "63.72",
                 "currency_code": "EUR"
               }
             },
@@ -5369,19 +5395,45 @@
             },
             "total_tip_received": "0.00",
             "total_weight": 0,
-            "updated_at": "2026-02-05T18:17:01+01:00",
-            "user_id": 126905516379,
+            "updated_at": "2026-02-13T13:33:07+01:00",
+            "user_id": 126759141723,
             "billing_address": null,
-            "customer": null,
-            "discount_applications": [],
+            "customer": {
+              "id": 10115806265691,
+              "created_at": "2026-01-28T06:01:07+01:00",
+              "updated_at": "2026-02-13T13:33:05+01:00",
+              "first_name": "JAMAL",
+              "last_name": "EL MOUGHA",
+              "state": "disabled",
+              "note": null,
+              "verified_email": true,
+              "multipass_identifier": null,
+              "tax_exempt": false,
+              "email": "xulo_jamal@hotmail.com",
+              "phone": null,
+              "currency": "EUR",
+              "tax_exemptions": [],
+              "admin_graphql_api_id": "gid://shopify/Customer/10115806265691"
+            },
+            "discount_applications": [
+              {
+                "target_type": "line_item",
+                "type": "discount_code",
+                "value": "25.0",
+                "value_type": "percentage",
+                "allocation_method": "across",
+                "target_selection": "all",
+                "code": "25%EMPLEADO"
+              }
+            ],
             "fulfillments": [
               {
-                "id": 6712015389019,
-                "admin_graphql_api_id": "gid://shopify/Fulfillment/6712015389019",
-                "created_at": "2026-02-05T18:17:00+01:00",
-                "location_id": 99018441051,
-                "name": "#71885.1",
-                "order_id": 7526353502555,
+                "id": 6735015608667,
+                "admin_graphql_api_id": "gid://shopify/Fulfillment/6735015608667",
+                "created_at": "2026-02-13T13:33:06+01:00",
+                "location_id": 108790317403,
+                "name": "#72255.1",
+                "order_id": 7557383717211,
                 "origin_address": {},
                 "receipt": {},
                 "service": "manual",
@@ -5392,11 +5444,11 @@
                 "tracking_numbers": [],
                 "tracking_url": null,
                 "tracking_urls": [],
-                "updated_at": "2026-02-05T18:17:00+01:00",
+                "updated_at": "2026-02-13T13:33:06+01:00",
                 "line_items": [
                   {
-                    "id": 18424960549211,
-                    "admin_graphql_api_id": "gid://shopify/LineItem/18424960549211",
+                    "id": 18504819867995,
+                    "admin_graphql_api_id": "gid://shopify/LineItem/18504819867995",
                     "attributed_staffs": [],
                     "current_quantity": 1,
                     "fulfillable_quantity": 0,
@@ -5404,26 +5456,26 @@
                     "fulfillment_status": "fulfilled",
                     "gift_card": false,
                     "grams": 0,
-                    "name": "Oakley O-Shiesty Balaclava - Blackout / U",
-                    "price": "45.00",
+                    "name": "Lhotse Papou Botas Après Ski - Camel / 45",
+                    "price": "84.95",
                     "price_set": {
                       "shop_money": {
-                        "amount": "45.00",
+                        "amount": "84.95",
                         "currency_code": "EUR"
                       },
                       "presentment_money": {
-                        "amount": "45.00",
+                        "amount": "84.95",
                         "currency_code": "EUR"
                       }
                     },
                     "product_exists": true,
-                    "product_id": 10194128044379,
+                    "product_id": 10054826328411,
                     "properties": [],
                     "quantity": 1,
                     "requires_shipping": true,
-                    "sku": "52080404889947",
+                    "sku": "51187450249563",
                     "taxable": true,
-                    "title": "Oakley O-Shiesty Balaclava",
+                    "title": "Lhotse Papou Botas Après Ski",
                     "total_discount": "0.00",
                     "total_discount_set": {
                       "shop_money": {
@@ -5435,70 +5487,36 @@
                         "currency_code": "EUR"
                       }
                     },
-                    "variant_id": 52080404889947,
+                    "variant_id": 51187450249563,
                     "variant_inventory_management": "shopify",
-                    "variant_title": "Blackout / U",
-                    "vendor": "Oakley",
+                    "variant_title": "Camel / 45",
+                    "vendor": "Lhotse",
                     "tax_lines": [],
                     "duties": [],
-                    "discount_allocations": []
-                  },
-                  {
-                    "id": 18424960581979,
-                    "admin_graphql_api_id": "gid://shopify/LineItem/18424960581979",
-                    "attributed_staffs": [],
-                    "current_quantity": 2,
-                    "fulfillable_quantity": 0,
-                    "fulfillment_service": "manual",
-                    "fulfillment_status": "fulfilled",
-                    "gift_card": false,
-                    "grams": 0,
-                    "name": "Lenz Balaclava - Black / S/M",
-                    "price": "19.95",
-                    "price_set": {
-                      "shop_money": {
-                        "amount": "19.95",
-                        "currency_code": "EUR"
-                      },
-                      "presentment_money": {
-                        "amount": "19.95",
-                        "currency_code": "EUR"
+                    "discount_allocations": [
+                      {
+                        "amount": "21.23",
+                        "amount_set": {
+                          "shop_money": {
+                            "amount": "21.23",
+                            "currency_code": "EUR"
+                          },
+                          "presentment_money": {
+                            "amount": "21.23",
+                            "currency_code": "EUR"
+                          }
+                        },
+                        "discount_application_index": 0
                       }
-                    },
-                    "product_exists": true,
-                    "product_id": 10237303914843,
-                    "properties": [],
-                    "quantity": 2,
-                    "requires_shipping": true,
-                    "sku": "51843928097115",
-                    "taxable": true,
-                    "title": "Lenz Balaclava",
-                    "total_discount": "0.00",
-                    "total_discount_set": {
-                      "shop_money": {
-                        "amount": "0.00",
-                        "currency_code": "EUR"
-                      },
-                      "presentment_money": {
-                        "amount": "0.00",
-                        "currency_code": "EUR"
-                      }
-                    },
-                    "variant_id": 51843928097115,
-                    "variant_inventory_management": "shopify",
-                    "variant_title": "Black / S/M",
-                    "vendor": "Rules Shop",
-                    "tax_lines": [],
-                    "duties": [],
-                    "discount_allocations": []
+                    ]
                   }
                 ]
               }
             ],
             "line_items": [
               {
-                "id": 18424960549211,
-                "admin_graphql_api_id": "gid://shopify/LineItem/18424960549211",
+                "id": 18504819867995,
+                "admin_graphql_api_id": "gid://shopify/LineItem/18504819867995",
                 "attributed_staffs": [],
                 "current_quantity": 1,
                 "fulfillable_quantity": 0,
@@ -5506,27 +5524,27 @@
                 "fulfillment_status": "fulfilled",
                 "gift_card": false,
                 "grams": 0,
-                "name": "Oakley O-Shiesty Balaclava - Blackout / U",
-                "price": "45.00",
+                "name": "Lhotse Papou Botas Après Ski - Camel / 45",
+                "price": "84.95",
                 "price_set": {
                   "shop_money": {
-                    "amount": "45.00",
+                    "amount": "84.95",
                     "currency_code": "EUR"
                   },
                   "presentment_money": {
-                    "amount": "45.00",
+                    "amount": "84.95",
                     "currency_code": "EUR"
                   }
                 },
                 "product_exists": true,
-                "product_id": 10194128044379,
+                "product_id": 10054826328411,
                 "properties": [],
                 "quantity": 1,
                 "requires_shipping": true,
                 "sales_line_item_group_id": null,
-                "sku": "52080404889947",
+                "sku": "51187450249563",
                 "taxable": true,
-                "title": "Oakley O-Shiesty Balaclava",
+                "title": "Lhotse Papou Botas Après Ski",
                 "total_discount": "0.00",
                 "total_discount_set": {
                   "shop_money": {
@@ -5538,63 +5556,28 @@
                     "currency_code": "EUR"
                   }
                 },
-                "variant_id": 52080404889947,
+                "variant_id": 51187450249563,
                 "variant_inventory_management": "shopify",
-                "variant_title": "Blackout / U",
-                "vendor": "Oakley",
+                "variant_title": "Camel / 45",
+                "vendor": "Lhotse",
                 "tax_lines": [],
                 "duties": [],
-                "discount_allocations": []
-              },
-              {
-                "id": 18424960581979,
-                "admin_graphql_api_id": "gid://shopify/LineItem/18424960581979",
-                "attributed_staffs": [],
-                "current_quantity": 2,
-                "fulfillable_quantity": 0,
-                "fulfillment_service": "manual",
-                "fulfillment_status": "fulfilled",
-                "gift_card": false,
-                "grams": 0,
-                "name": "Lenz Balaclava - Black / S/M",
-                "price": "19.95",
-                "price_set": {
-                  "shop_money": {
-                    "amount": "19.95",
-                    "currency_code": "EUR"
-                  },
-                  "presentment_money": {
-                    "amount": "19.95",
-                    "currency_code": "EUR"
+                "discount_allocations": [
+                  {
+                    "amount": "21.23",
+                    "amount_set": {
+                      "shop_money": {
+                        "amount": "21.23",
+                        "currency_code": "EUR"
+                      },
+                      "presentment_money": {
+                        "amount": "21.23",
+                        "currency_code": "EUR"
+                      }
+                    },
+                    "discount_application_index": 0
                   }
-                },
-                "product_exists": true,
-                "product_id": 10237303914843,
-                "properties": [],
-                "quantity": 2,
-                "requires_shipping": true,
-                "sales_line_item_group_id": null,
-                "sku": "51843928097115",
-                "taxable": true,
-                "title": "Lenz Balaclava",
-                "total_discount": "0.00",
-                "total_discount_set": {
-                  "shop_money": {
-                    "amount": "0.00",
-                    "currency_code": "EUR"
-                  },
-                  "presentment_money": {
-                    "amount": "0.00",
-                    "currency_code": "EUR"
-                  }
-                },
-                "variant_id": 51843928097115,
-                "variant_inventory_management": "shopify",
-                "variant_title": "Black / S/M",
-                "vendor": "Rules Shop",
-                "tax_lines": [],
-                "duties": [],
-                "discount_allocations": []
+                ]
               }
             ],
             "payment_terms": null,
@@ -5606,26 +5589,6 @@
           },
           "webhookUrl": "https://n8n.tailwind.es/webhook/informeDiario",
           "executionMode": "production"
-        },
-        "pairedItem": {
-          "item": 0
-        }
-      }
-    ],
-    "Schedule Trigger": [
-      {
-        "json": {
-          "timestamp": "2026-02-06T00:00:46.011-05:00",
-          "Readable date": "February 6th 2026, 12:00:46 am",
-          "Readable time": "12:00:46 am",
-          "Day of week": "Friday",
-          "Year": "2026",
-          "Month": "February",
-          "Day of month": "06",
-          "Hour": "00",
-          "Minute": "00",
-          "Second": "46",
-          "Timezone": "America/New_York (UTC-05:00)"
         },
         "pairedItem": {
           "item": 0
@@ -5652,6 +5615,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 3,
-  "updatedAt": "2026-02-06T13:01:17.882Z",
-  "versionId": "50453d47-aaf3-4bdb-b7ec-50b4392da2e0"
+  "updatedAt": "2026-02-13T12:38:43.401Z",
+  "versionId": "35f33302-a6ba-4ace-a756-c21e712d60aa"
 }
