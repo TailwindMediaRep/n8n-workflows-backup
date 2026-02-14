@@ -7,29 +7,197 @@
       "main": [
         [
           {
-            "node": "crear vista",
+            "node": "Configurar Fechas",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "crear vista": {
+    "Configurar Fechas": {
       "main": [
         [
           {
-            "node": "obtener vista",
+            "node": "Prep Shopify",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "obtener vista": {
+    "Acumular en Memoria": {
       "main": [
         [
           {
-            "node": "Execute a SQL query",
+            "node": "Hay más páginas?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Next Page": {
+      "main": [
+        [
+          {
+            "node": "Shopify API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Hay más páginas?": {
+      "main": [
+        [
+          {
+            "node": "Set Next Page",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Unir Todos los Pedidos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Shopify API": {
+      "main": [
+        [
+          {
+            "node": "Acumular en Memoria",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prep Shopify": {
+      "main": [
+        [
+          {
+            "node": "Shopify API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Unir Todos los Pedidos": {
+      "main": [
+        [
+          {
+            "node": "obtener empleados",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "obtener empleados": {
+      "main": [
+        [
+          {
+            "node": "la cuenta definitiva el fakin bono",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Configurar Fechas1": {
+      "main": [
+        [
+          {
+            "node": "Prep Shopify1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Acumular en Memoria1": {
+      "main": [
+        [
+          {
+            "node": "Hay más páginas?1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Unir Todos los Pedidos1": {
+      "main": [
+        [
+          {
+            "node": "obtener empleados1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Next Page1": {
+      "main": [
+        [
+          {
+            "node": "Shopify API1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Hay más páginas?1": {
+      "main": [
+        [
+          {
+            "node": "Set Next Page1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Unir Todos los Pedidos1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Shopify API1": {
+      "main": [
+        [
+          {
+            "node": "Acumular en Memoria1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prep Shopify1": {
+      "main": [
+        [
+          {
+            "node": "Shopify API1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "obtener empleados1": {
+      "main": [
+        [
+          {
+            "node": "la cuenta definitiva el fakin bono1",
             "type": "main",
             "index": 0
           }
@@ -43,53 +211,213 @@
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "vacio",
+  "name": "calcular_bono_prueba_no_cambiar",
   "nodes": [
     {
       "parameters": {},
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -400,
-        -176
+        -1136,
+        576
       ],
-      "id": "f1096bb3-91db-4709-8eda-4d24323d7eca",
+      "id": "b722d8ec-89cc-4993-bcf3-0605cda72c9c",
       "name": "When clicking ‘Execute workflow’"
     },
     {
       "parameters": {
-        "operation": "executeQuery",
-        "query": "CREATE OR REPLACE VIEW \"Vista_Informes_Mes_Pasado\" AS\nSELECT *\nFROM \"Documentos_Sheets\"\nWHERE tipo = 'informe'\n  /* Filtramos que la fecha extraída sea mayor o igual al inicio del mes pasado... */\n  AND TO_DATE(RIGHT(nombre, 10), 'DD/MM/YYYY') >= DATE_TRUNC('month', CURRENT_DATE - INTERVAL '1 month')\n  /* ...y menor estricto que el inicio del mes actual */\n  AND TO_DATE(RIGHT(nombre, 10), 'DD/MM/YYYY') < DATE_TRUNC('month', CURRENT_DATE);",
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id_fecha",
+              "name": "NOMBRE_MES",
+              "value": "={{ $today.minus({months: 1}).setLocale('es').format('MMMM').toUpperCase() }}",
+              "type": "string"
+            },
+            {
+              "id": "id_rango_inicio",
+              "name": "FECHA_INICIO",
+              "value": "={{ $today.startOf('month').format('yyyy-MM-dd') }}T00:00:00Z",
+              "type": "string"
+            },
+            {
+              "id": "id_rango_fin",
+              "name": "FECHA_FIN",
+              "value": "={{ $today.endOf('month').format('yyyy-MM-dd') }}T23:59:59Z",
+              "type": "string"
+            }
+          ]
+        },
         "options": {}
       },
-      "type": "n8n-nodes-base.postgres",
-      "typeVersion": 2.6,
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
       "position": [
-        -208,
-        -176
+        -640,
+        176
       ],
-      "id": "89365a6f-a4a5-494c-8813-44e189b0da07",
-      "name": "crear vista",
+      "id": "170dc566-ca19-4edf-9883-577aeb4ba465",
+      "name": "Configurar Fechas"
+    },
+    {
+      "parameters": {
+        "jsCode": "const staticData = $getWorkflowStaticData('global');\nif (!staticData.listaTemporal) staticData.listaTemporal = [];\n\n// 1. Capturamos los datos de entrada (incluidos los encabezados/headers)\n// Usamos items[0] porque en n8n v1+ items es el array de entrada\nconst inputData = items[0].json;\nconst pedidos = inputData.body.orders;\n\n// 2. Guardamos los pedidos en la mochila\nstaticData.listaTemporal.push(...pedidos);\n\n// 3. ¡IMPORTANTE! Devolvemos los 'headers' hacia afuera.\n// Así el siguiente nodo podrá leer el link de la página siguiente.\nreturn {\n  json: {\n    status: 'accumulating',\n    headers: inputData.headers\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -144,
+        176
+      ],
+      "id": "1a684203-39d6-435c-bcfe-b4222d6ee0f9",
+      "name": "Acumular en Memoria"
+    },
+    {
+      "parameters": {
+        "jsCode": "const staticData = $getWorkflowStaticData('global');\nconst listaAcumulada = staticData.listaTemporal || [];\nconst nuevosPedidos = $('Shopify API').item.json.body.orders || [];\nconst listaCompleta = listaAcumulada.concat(nuevosPedidos);\nstaticData.listaTemporal = [];\nreturn listaCompleta.map(p => ({ json: p }));"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        192,
+        400
+      ],
+      "id": "d85cc048-f5ab-4ec3-ada3-4d8b9d4c68b1",
+      "name": "Unir Todos los Pedidos"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "next_url",
+              "name": "url_proxima",
+              "value": "={{ $json.headers.link.match(/<([^>]+)>;\\s*rel=\"next\"/)[1] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        176,
+        160
+      ],
+      "id": "375ad479-13c1-4bdd-9869-0fd8f9c4362f",
+      "name": "Set Next Page"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "cond_link",
+              "leftValue": "={{ $('Shopify API').item.json.headers.link }}",
+              "rightValue": "next",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        16,
+        176
+      ],
+      "id": "33918614-6f46-49ed-97be-975c935362f0",
+      "name": "Hay más páginas?"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url_proxima }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -304,
+        176
+      ],
+      "id": "2dc5cfe3-eefe-4250-8987-6d7270fd143b",
+      "name": "Shopify API",
       "credentials": {
-        "postgres": {
-          "id": "UPETCYNZNCReuZu8",
-          "name": "Postgres Supabase"
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
         }
       }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "url_shopify",
+              "name": "url_proxima",
+              "value": "=https://rulesshop.myshopify.com/admin/api/2025-01/orders.json?limit=250&status=any&financial_status=paid&created_at_min={{ $('Configurar Fechas').item.json.FECHA_INICIO }}&created_at_max={{ $('Configurar Fechas').item.json.FECHA_FIN }}&fields=id,name,total_price,user_id,cancelled_at",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -480,
+        176
+      ],
+      "id": "c6e12ecb-302b-4513-9ef0-cf8dfa991b4d",
+      "name": "Prep Shopify"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Obtenemos los datos de ambos nodos\n// Nota: Asegúrate de que el nombre \"Unir todos los pedidos\" sea EXACTAMENTE igual al nombre de tu nodo.\nconst empleados = $input.all().map(item => item.json);\nconst pedidos = $items(\"Unir Todos los Pedidos\").map(item => item.json);\n\n// 2. Creamos un diccionario (objeto) de empleados para agrupar fácilmente usando el ID como llave\nconst reporteEmpleados = {};\n\nfor (const emp of empleados) {\n  reporteEmpleados[emp.id_empleado] = {\n    id_empleado: emp.id_empleado,\n    Nombre: emp.Nombre,\n    Apellidos: emp.Apellidos,\n    Correo: emp.Correo,\n    total_vendido: 0, // Inicializamos en 0\n    pedidos: []       // Aquí guardaremos los detalles de sus ventas\n  };\n}\n\n// 3. Iteramos sobre los pedidos y los asignamos a su empleado correspondiente\nfor (const pedido of pedidos) {\n  // Convertimos el user_id a texto para que coincida con el id_empleado\n  const id = pedido.user_id.toString(); \n  \n  // Si el empleado existe en nuestro diccionario, evaluamos el pedido\n  if (reporteEmpleados[id]) {\n    \n    // VALIDACIÓN: Buscamos si el pedido ya existe en la lista del empleado\n    const pedidoYaExiste = reporteEmpleados[id].pedidos.find(p => p.id === pedido.id);\n    \n    // Si NO existe, lo agregamos y sumamos al total\n    if (!pedidoYaExiste) {\n      reporteEmpleados[id].pedidos.push(pedido);\n      \n      // Convertimos el precio a decimal y lo sumamos\n      reporteEmpleados[id].total_vendido += parseFloat(pedido.total_price);\n    }\n  }\n}\n\n// 4. Convertimos el diccionario de vuelta a un array para que n8n lo entienda\nconst resultadoFinal = Object.values(reporteEmpleados);\n\n// 5. Opcional: Redondeamos el total a 2 decimales para que se vea bien (ej: 154.30)\nfor (const emp of resultadoFinal) {\n  emp.total_vendido = parseFloat(emp.total_vendido.toFixed(2));\n}\n\n// 6. Devolvemos el resultado\nreturn resultadoFinal;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        608,
+        400
+      ],
+      "id": "1f979961-e1de-4be4-bf76-1dd6b59529a3",
+      "name": "la cuenta definitiva el fakin bono"
     },
     {
       "parameters": {
         "operation": "select",
         "schema": {
           "__rl": true,
-          "value": "public",
           "mode": "list",
-          "cachedResultName": "public"
+          "value": "public"
         },
         "table": {
           "__rl": true,
-          "value": "Vista_Informes_Mes_Pasado",
-          "mode": "name"
+          "value": "Empleados",
+          "mode": "list",
+          "cachedResultName": "Empleados"
         },
         "returnAll": true,
         "options": {}
@@ -97,11 +425,12 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        -16,
-        -176
+        400,
+        400
       ],
-      "id": "929e1b97-007e-4fba-a55c-12e44f4297b6",
-      "name": "obtener vista",
+      "id": "4205abb3-0f05-4623-bfed-814b2c43e880",
+      "name": "obtener empleados",
+      "executeOnce": true,
       "credentials": {
         "postgres": {
           "id": "UPETCYNZNCReuZu8",
@@ -111,18 +440,210 @@
     },
     {
       "parameters": {
-        "operation": "executeQuery",
-        "query": "drop view \"Vista_Informes_Mes_Pasado\"",
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id_fecha",
+              "name": "NOMBRE_MES",
+              "value": "={{ $today.minus({months: 1}).setLocale('es').format('MMMM').toUpperCase() }}",
+              "type": "string"
+            },
+            {
+              "id": "id_rango_inicio",
+              "name": "FECHA_INICIO",
+              "value": "={{ $today.startOf('month').format('yyyy-MM-dd') }}T00:00:00Z",
+              "type": "string"
+            },
+            {
+              "id": "id_rango_fin",
+              "name": "FECHA_FIN",
+              "value": "={{ $today.endOf('month').format('yyyy-MM-dd') }}T23:59:59Z",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -672,
+        800
+      ],
+      "id": "0ec4487d-82ca-415c-99f3-f94d2993e123",
+      "name": "Configurar Fechas1"
+    },
+    {
+      "parameters": {
+        "jsCode": "const staticData = $getWorkflowStaticData('global');\nif (!staticData.listaTemporal) staticData.listaTemporal = [];\n\n// 1. Capturamos los datos de entrada (incluidos los encabezados/headers)\n// Usamos items[0] porque en n8n v1+ items es el array de entrada\nconst inputData = items[0].json;\nconst pedidos = inputData.body.orders;\n\n// 2. Guardamos los pedidos en la mochila\nstaticData.listaTemporal.push(...pedidos);\n\n// 3. ¡IMPORTANTE! Devolvemos los 'headers' hacia afuera.\n// Así el siguiente nodo podrá leer el link de la página siguiente.\nreturn {\n  json: {\n    status: 'accumulating',\n    headers: inputData.headers\n  }\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -176,
+        800
+      ],
+      "id": "76c00f52-4d25-4b28-85f7-5c2592325e1d",
+      "name": "Acumular en Memoria1"
+    },
+    {
+      "parameters": {
+        "jsCode": "const staticData = $getWorkflowStaticData('global');\nconst listaAcumulada = staticData.listaTemporal || [];\nconst nuevosPedidos = $('Shopify API1').item.json.body.orders || [];\nconst listaCompleta = listaAcumulada.concat(nuevosPedidos);\nstaticData.listaTemporal = [];\nreturn listaCompleta.map(p => ({ json: p }));"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        160,
+        1024
+      ],
+      "id": "067b6240-a848-421e-a24d-39a7f6996e0a",
+      "name": "Unir Todos los Pedidos1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "next_url",
+              "name": "url_proxima",
+              "value": "={{ $json.headers.link.match(/<([^>]+)>;\\s*rel=\"next\"/)[1] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        144,
+        784
+      ],
+      "id": "1a9cdb3e-2dc1-4a6b-a1dc-24ae3ba69973",
+      "name": "Set Next Page1"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "cond_link",
+              "leftValue": "={{ $('Shopify API1').item.json.headers.link }}",
+              "rightValue": "next",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -16,
+        800
+      ],
+      "id": "a97bab5e-5095-41bc-bcd6-ee98fb605542",
+      "name": "Hay más páginas?1"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url_proxima }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": true
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -336,
+        800
+      ],
+      "id": "46eb61e8-d542-436a-b539-02f0e429a7d1",
+      "name": "Shopify API1",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "url_shopify",
+              "name": "url_proxima",
+              "value": "=https://rulesshop.myshopify.com/admin/api/2025-01/orders.json?limit=250&status=any&financial_status=any&created_at_min={{ $luxon.DateTime.fromISO($('Configurar Fechas1').item.json.FECHA_INICIO).minus({months: 3}).toISO() }}&created_at_max={{ $('Configurar Fechas1').item.json.FECHA_FIN }}&fields=id,name,total_price,user_id,financial_status,cancelled_at,created_at,refunds",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -512,
+        800
+      ],
+      "id": "aafe62e5-8ee6-439e-af44-59cc14c8f69a",
+      "name": "Prep Shopify1"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Obtenemos datos\nconst empleados = $input.all().map(item => item.json);\nconst pedidos = $items(\"Unir Todos los Pedidos1\").map(item => item.json);\n\n// 2. Definimos las fronteras del mes que estamos analizando\nconst fechaInicioStr = $items(\"Configurar Fechas\")[0].json.FECHA_INICIO;\nconst fechaFinStr = $items(\"Configurar Fechas\")[0].json.FECHA_FIN;\nconst fechaInicio = new Date(fechaInicioStr);\nconst fechaFin = new Date(fechaFinStr);\n\nconst reporteEmpleados = {};\n\nfor (const emp of empleados) {\n  reporteEmpleados[emp.id_empleado] = {\n    id_empleado: emp.id_empleado,\n    Nombre: emp.Nombre,\n    Apellidos: emp.Apellidos,\n    Correo: emp.Correo,\n    total_vendido: 0, \n    pedidos: [] \n  };\n}\n\n// 3. El Motor Analítico\nfor (const pedido of pedidos) {\n  const id = pedido.user_id ? pedido.user_id.toString() : null; \n  \n  if (id && reporteEmpleados[id]) {\n    \n    // Evitamos duplicados por paginación\n    if (reporteEmpleados[id].pedidos.find(p => p.id === pedido.id)) continue;\n\n    let ventaBrutaMes = 0;\n    let devolucionesMes = 0;\n\n    // A) ¿Se VENDIÓ en el mes actual? (Suma)\n    const orderDate = new Date(pedido.created_at);\n    if (orderDate >= fechaInicio && orderDate <= fechaFin) {\n        if (pedido.financial_status !== 'pending' && pedido.financial_status !== 'voided') {\n            ventaBrutaMes = parseFloat(pedido.total_price || 0);\n        }\n    }\n\n    // B) ¿Hubo DEVOLUCIONES procesadas en el mes actual? (Resta)\n    if (pedido.refunds && pedido.refunds.length > 0) {\n        for (const refund of pedido.refunds) {\n            const refundDate = new Date(refund.created_at);\n            \n            // Si el reembolso cayó EXACTAMENTE en nuestro mes de análisis\n            if (refundDate >= fechaInicio && refundDate <= fechaFin) {\n                // Sumamos el dinero real devuelto en las transacciones de este reembolso\n                if (refund.transactions && refund.transactions.length > 0) {\n                    for (const tx of refund.transactions) {\n                        if (tx.kind === 'refund' && tx.status === 'success') {\n                            devolucionesMes += parseFloat(tx.amount || 0);\n                        }\n                    }\n                }\n            }\n        }\n    }\n\n    // C) Calculamos el impacto neto de este pedido en ESTE mes\n    const impactoNeto = ventaBrutaMes - devolucionesMes;\n\n    // D) Si el pedido es antiguo y no generó ninguna devolución este mes, lo ignoramos para no ensuciar tu Excel\n    if (ventaBrutaMes === 0 && devolucionesMes === 0) {\n        continue;\n    }\n\n    // Guardamos los datos para que puedas auditarlo fácilmente\n    pedido.venta_neta_real = parseFloat(impactoNeto.toFixed(2));\n    \n    // Etiqueta para que entiendas qué pasó con este pedido a simple vista\n    if (ventaBrutaMes > 0 && devolucionesMes > 0) pedido.etiqueta_auditoria = \"Vendido y devuelto este mismo mes\";\n    else if (ventaBrutaMes > 0) pedido.etiqueta_auditoria = \"Venta limpia\";\n    else pedido.etiqueta_auditoria = \"Devolución de un pedido antiguo\"; // ¡Aquí está la magia!\n\n    reporteEmpleados[id].pedidos.push(pedido);\n    reporteEmpleados[id].total_vendido += impactoNeto;\n  }\n}\n\n// 4. Redondeamos a 2 decimales y convertimos a array\nconst resultadoFinal = Object.values(reporteEmpleados);\nfor (const emp of resultadoFinal) {\n  emp.total_vendido = parseFloat(emp.total_vendido.toFixed(2));\n}\n\nreturn resultadoFinal;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        576,
+        1024
+      ],
+      "id": "d6664ebe-85b4-4efb-8c85-3af0bfb11c41",
+      "name": "la cuenta definitiva el fakin bono1"
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "Empleados",
+          "mode": "list",
+          "cachedResultName": "Empleados"
+        },
+        "returnAll": true,
         "options": {}
       },
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        192,
-        -176
+        368,
+        1024
       ],
-      "id": "532248cb-e956-4a57-a238-0f6596d34a66",
-      "name": "Execute a SQL query",
+      "id": "4575c2be-ffbe-4c48-a454-05f3f9a44ee7",
+      "name": "obtener empleados1",
       "executeOnce": true,
       "credentials": {
         "postgres": {
@@ -130,12 +651,30 @@
           "name": "Postgres Supabase"
         }
       }
+    },
+    {
+      "parameters": {
+        "content": "",
+        "height": 80,
+        "width": 2384
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1008,
+        592
+      ],
+      "id": "8a1ab1f5-7a65-45ee-8e9e-4e15f962fad6",
+      "name": "Sticky Note"
     }
   ],
   "pinData": {},
   "settings": {
     "executionOrder": "v1",
-    "availableInMCP": false
+    "availableInMCP": false,
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "e80tfOpD4TdBh8EF"
   },
   "shared": [
     {
@@ -155,6 +694,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-02-12T12:14:36.198Z",
-  "versionId": "ad93a10f-c8ed-4ec1-9414-0f843c93cd96"
+  "updatedAt": "2026-02-13T14:18:18.210Z",
+  "versionId": "2c1c9088-824d-4605-9dd7-897f49970f21"
 }
