@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-02-06T09:41:00.000Z",
-    "createdAt": "2026-02-06T09:40:59.909Z",
-    "versionId": "cb01eff2-0150-4626-8336-af7f6ae435ac",
+    "updatedAt": "2026-02-13T11:50:31.000Z",
+    "createdAt": "2026-02-13T11:50:30.111Z",
+    "versionId": "4fd55847-6534-47f2-af6c-6af2aa5c5119",
     "workflowId": "e80tfOpD4TdBh8EF",
     "nodes": [
       {
@@ -20,15 +20,15 @@
       {
         "parameters": {
           "sendTo": "emilianomartinezvrd@gmail.com,adrianazorinsanchez@gmail.com",
-          "subject": "=🚨 Error en n8n: {{ $json.workflow.name }} (Exec: {{ $json.execution.id }})",
-          "message": "=<!DOCTYPE html>\n<html>\n<head>\n  <style>\n    body { font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; }\n    .container { max-width: 600px; margin: 0 auto; border: 1px solid #e1e1e1; border-radius: 8px; overflow: hidden; }\n    .header { background-color: #D92D20; color: white; padding: 20px; text-align: center; }\n    .content { padding: 25px; background-color: #ffffff; }\n    .info-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }\n    .info-table td { padding: 8px 0; border-bottom: 1px solid #eee; }\n    .label { font-weight: bold; color: #555; width: 140px; }\n    .error-box { background-color: #FEF2F2; border-left: 4px solid #D92D20; padding: 15px; margin: 20px 0; border-radius: 4px; }\n    .code-block { background-color: #f4f6f8; padding: 10px; border-radius: 4px; font-family: monospace; font-size: 12px; overflow-x: auto; white-space: pre-wrap; color: #c00; }\n    .btn { display: inline-block; background-color: #111827; color: #ffffff !important; text-decoration: none; padding: 12px 24px; border-radius: 6px; font-weight: bold; margin-top: 10px; }\n    .footer { background-color: #f9fafb; padding: 15px; text-align: center; font-size: 12px; color: #6b7280; }\n  </style>\n</head>\n<body>\n  <div class=\"container\">\n    <div class=\"header\">\n      <h2 style=\"margin:0;\">⚠️ Fallo en Ejecución</h2>\n    </div>\n\n    <div class=\"content\">\n      <p>Hola,</p>\n      <p>El workflow <strong>{{ $json.workflow.name }}</strong> ha fallado. Aquí tienes los detalles:</p>\n\n      <table class=\"info-table\">\n        <tr>\n          <td class=\"label\">Workflow ID:</td>\n          <td>{{ $json.workflow.id }}</td>\n        </tr>\n        <tr>\n          <td class=\"label\">Execution ID:</td>\n          <td>{{ $json.execution.id }}</td>\n        </tr>\n        <tr>\n          <td class=\"label\">Nodo Fallido:</td>\n          <td>{{ $json.execution.lastNodeExecuted }}</td>\n        </tr>\n      </table>\n\n      <div class=\"error-box\">\n        <strong>Mensaje de Error:</strong>\n        <div style=\"margin-top:5px;\">{{ $json.execution.error.message }}</div>\n      </div>\n\n      <p style=\"font-size:13px; margin-bottom:5px;\"><strong>Stack Trace:</strong></p>\n      <div class=\"code-block\">\n{{ $json.execution.error.stack }}\n      </div>\n\n      <div style=\"text-align: center; margin-top: 30px;\">\n        <a href=\"{{ $json.execution.url }}\" class=\"btn\" target=\"_blank\">\n          🛠️ Ver Ejecución en n8n\n        </a>\n      </div>\n    </div>\n\n    <div class=\"footer\">\n      Alerta automática generada por n8n Error Workflow.\n    </div>\n  </div>\n</body>\n</html>",
+          "subject": "=🚨 Error en n8n: {{ $json.nombre_flow }} (Exec: {{ $json.id_flow }})",
+          "message": "=<!DOCTYPE html>\n<html>\n<head>\n  <style>\n    body { font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; }\n    .container { max-width: 600px; margin: 0 auto; border: 1px solid #e1e1e1; border-radius: 8px; overflow: hidden; }\n    .header { background-color: #D92D20; color: white; padding: 20px; text-align: center; }\n    .content { padding: 25px; background-color: #ffffff; }\n    .info-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }\n    .info-table td { padding: 8px 0; border-bottom: 1px solid #eee; }\n    .label { font-weight: bold; color: #555; width: 140px; }\n    .error-box { background-color: #FEF2F2; border-left: 4px solid #D92D20; padding: 15px; margin: 20px 0; border-radius: 4px; }\n    .code-block { background-color: #f4f6f8; padding: 10px; border-radius: 4px; font-family: monospace; font-size: 12px; overflow-x: auto; white-space: pre-wrap; color: #c00; }\n    .btn { display: inline-block; background-color: #111827; color: #ffffff !important; text-decoration: none; padding: 12px 24px; border-radius: 6px; font-weight: bold; margin-top: 10px; }\n    .footer { background-color: #f9fafb; padding: 15px; text-align: center; font-size: 12px; color: #6b7280; }\n  </style>\n</head>\n<body>\n  <div class=\"container\">\n    <div class=\"header\">\n      <h2 style=\"margin:0;\">⚠️ Fallo en Ejecución</h2>\n    </div>\n\n    <div class=\"content\">\n      <p>Hola,</p>\n      <p>El workflow <strong>{{ $json.nombre_flow }}</strong> ha fallado. Aquí tienes los detalles:</p>\n\n      <table class=\"info-table\">\n        <tr>\n          <td class=\"label\">Workflow ID:</td>\n          <td>{{ $json.id_flow }}</td>\n        </tr>\n        <tr>\n          <td class=\"label\">Execution ID:</td>\n          <td>{{ $('Error Trigger').item.json.execution.id }}</td>\n        </tr>\n        <tr>\n          <td class=\"label\">Nodo Fallido:</td>\n          <td>{{ $('Error Trigger').item.json.execution.lastNodeExecuted }}</td>\n        </tr>\n      </table>\n\n      <div class=\"error-box\">\n        <strong>Mensaje de Error:</strong>\n        <div style=\"margin-top:5px;\">{{ $('Error Trigger').item.json.execution.error.message }}</div>\n      </div>\n\n      <p style=\"font-size:13px; margin-bottom:5px;\"><strong>Stack Trace:</strong></p>\n      <div class=\"code-block\">\n{{ $('Error Trigger').item.json.execution.error.stack }}\n      </div>\n\n      <div style=\"text-align: center; margin-top: 30px;\">\n        <a href=\"{{ $('Error Trigger').item.json.execution.url }}\" class=\"btn\" target=\"_blank\">\n          🛠️ Ver Ejecución en n8n\n        </a>\n      </div>\n    </div>\n\n    <div class=\"footer\">\n      Alerta automática generada por n8n Error Workflow.\n    </div>\n  </div>\n</body>\n</html>",
           "options": {}
         },
         "type": "n8n-nodes-base.gmail",
         "typeVersion": 2.2,
         "position": [
-          -800,
-          -224
+          -384,
+          -64
         ],
         "id": "22190d78-2750-4887-ae31-d7826e185ad3",
         "name": "Send a message",
@@ -105,14 +105,25 @@
             }
           ]
         ]
+      },
+      "Edit Fields": {
+        "main": [
+          [
+            {
+              "node": "Send a message",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version cb01eff2",
+    "name": "Version 4fd55847",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "cb01eff2-0150-4626-8336-af7f6ae435ac",
+  "activeVersionId": "4fd55847-6534-47f2-af6c-6af2aa5c5119",
   "connections": {
     "Error Trigger": {
       "main": [
@@ -129,7 +140,7 @@
       "main": [
         [
           {
-            "node": "Update a database page",
+            "node": "Send a message",
             "type": "main",
             "index": 0
           }
@@ -159,15 +170,15 @@
     {
       "parameters": {
         "sendTo": "emilianomartinezvrd@gmail.com,adrianazorinsanchez@gmail.com",
-        "subject": "=🚨 Error en n8n: {{ $json.workflow.name }} (Exec: {{ $json.execution.id }})",
-        "message": "=<!DOCTYPE html>\n<html>\n<head>\n  <style>\n    body { font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; }\n    .container { max-width: 600px; margin: 0 auto; border: 1px solid #e1e1e1; border-radius: 8px; overflow: hidden; }\n    .header { background-color: #D92D20; color: white; padding: 20px; text-align: center; }\n    .content { padding: 25px; background-color: #ffffff; }\n    .info-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }\n    .info-table td { padding: 8px 0; border-bottom: 1px solid #eee; }\n    .label { font-weight: bold; color: #555; width: 140px; }\n    .error-box { background-color: #FEF2F2; border-left: 4px solid #D92D20; padding: 15px; margin: 20px 0; border-radius: 4px; }\n    .code-block { background-color: #f4f6f8; padding: 10px; border-radius: 4px; font-family: monospace; font-size: 12px; overflow-x: auto; white-space: pre-wrap; color: #c00; }\n    .btn { display: inline-block; background-color: #111827; color: #ffffff !important; text-decoration: none; padding: 12px 24px; border-radius: 6px; font-weight: bold; margin-top: 10px; }\n    .footer { background-color: #f9fafb; padding: 15px; text-align: center; font-size: 12px; color: #6b7280; }\n  </style>\n</head>\n<body>\n  <div class=\"container\">\n    <div class=\"header\">\n      <h2 style=\"margin:0;\">⚠️ Fallo en Ejecución</h2>\n    </div>\n\n    <div class=\"content\">\n      <p>Hola,</p>\n      <p>El workflow <strong>{{ $json.workflow.name }}</strong> ha fallado. Aquí tienes los detalles:</p>\n\n      <table class=\"info-table\">\n        <tr>\n          <td class=\"label\">Workflow ID:</td>\n          <td>{{ $json.workflow.id }}</td>\n        </tr>\n        <tr>\n          <td class=\"label\">Execution ID:</td>\n          <td>{{ $json.execution.id }}</td>\n        </tr>\n        <tr>\n          <td class=\"label\">Nodo Fallido:</td>\n          <td>{{ $json.execution.lastNodeExecuted }}</td>\n        </tr>\n      </table>\n\n      <div class=\"error-box\">\n        <strong>Mensaje de Error:</strong>\n        <div style=\"margin-top:5px;\">{{ $json.execution.error.message }}</div>\n      </div>\n\n      <p style=\"font-size:13px; margin-bottom:5px;\"><strong>Stack Trace:</strong></p>\n      <div class=\"code-block\">\n{{ $json.execution.error.stack }}\n      </div>\n\n      <div style=\"text-align: center; margin-top: 30px;\">\n        <a href=\"{{ $json.execution.url }}\" class=\"btn\" target=\"_blank\">\n          🛠️ Ver Ejecución en n8n\n        </a>\n      </div>\n    </div>\n\n    <div class=\"footer\">\n      Alerta automática generada por n8n Error Workflow.\n    </div>\n  </div>\n</body>\n</html>",
+        "subject": "=🚨 Error en n8n: {{ $json.nombre_flow }} (Exec: {{ $json.id_flow }})",
+        "message": "=<!DOCTYPE html>\n<html>\n<head>\n  <style>\n    body { font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; }\n    .container { max-width: 600px; margin: 0 auto; border: 1px solid #e1e1e1; border-radius: 8px; overflow: hidden; }\n    .header { background-color: #D92D20; color: white; padding: 20px; text-align: center; }\n    .content { padding: 25px; background-color: #ffffff; }\n    .info-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }\n    .info-table td { padding: 8px 0; border-bottom: 1px solid #eee; }\n    .label { font-weight: bold; color: #555; width: 140px; }\n    .error-box { background-color: #FEF2F2; border-left: 4px solid #D92D20; padding: 15px; margin: 20px 0; border-radius: 4px; }\n    .code-block { background-color: #f4f6f8; padding: 10px; border-radius: 4px; font-family: monospace; font-size: 12px; overflow-x: auto; white-space: pre-wrap; color: #c00; }\n    .btn { display: inline-block; background-color: #111827; color: #ffffff !important; text-decoration: none; padding: 12px 24px; border-radius: 6px; font-weight: bold; margin-top: 10px; }\n    .footer { background-color: #f9fafb; padding: 15px; text-align: center; font-size: 12px; color: #6b7280; }\n  </style>\n</head>\n<body>\n  <div class=\"container\">\n    <div class=\"header\">\n      <h2 style=\"margin:0;\">⚠️ Fallo en Ejecución</h2>\n    </div>\n\n    <div class=\"content\">\n      <p>Hola,</p>\n      <p>El workflow <strong>{{ $json.nombre_flow }}</strong> ha fallado. Aquí tienes los detalles:</p>\n\n      <table class=\"info-table\">\n        <tr>\n          <td class=\"label\">Workflow ID:</td>\n          <td>{{ $json.id_flow }}</td>\n        </tr>\n        <tr>\n          <td class=\"label\">Execution ID:</td>\n          <td>{{ $('Error Trigger').item.json.execution.id }}</td>\n        </tr>\n        <tr>\n          <td class=\"label\">Nodo Fallido:</td>\n          <td>{{ $('Error Trigger').item.json.execution.lastNodeExecuted }}</td>\n        </tr>\n      </table>\n\n      <div class=\"error-box\">\n        <strong>Mensaje de Error:</strong>\n        <div style=\"margin-top:5px;\">{{ $('Error Trigger').item.json.execution.error.message }}</div>\n      </div>\n\n      <p style=\"font-size:13px; margin-bottom:5px;\"><strong>Stack Trace:</strong></p>\n      <div class=\"code-block\">\n{{ $('Error Trigger').item.json.execution.error.stack }}\n      </div>\n\n      <div style=\"text-align: center; margin-top: 30px;\">\n        <a href=\"{{ $('Error Trigger').item.json.execution.url }}\" class=\"btn\" target=\"_blank\">\n          🛠️ Ver Ejecución en n8n\n        </a>\n      </div>\n    </div>\n\n    <div class=\"footer\">\n      Alerta automática generada por n8n Error Workflow.\n    </div>\n  </div>\n</body>\n</html>",
         "options": {}
       },
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        -800,
-        -224
+        -384,
+        -64
       ],
       "id": "22190d78-2750-4887-ae31-d7826e185ad3",
       "name": "Send a message",
@@ -231,26 +242,6 @@
       ],
       "id": "883e14b0-b098-4c0b-9b2d-956b894076d1",
       "name": "Edit Fields"
-    },
-    {
-      "parameters": {
-        "resource": "databasePage",
-        "operation": "update",
-        "pageId": {
-          "__rl": true,
-          "mode": "url",
-          "value": ""
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.notion",
-      "typeVersion": 2.2,
-      "position": [
-        -368,
-        -64
-      ],
-      "id": "2fabb402-db47-46c1-ae62-e4313173c1f2",
-      "name": "Update a database page"
     }
   ],
   "pinData": {
@@ -258,30 +249,38 @@
       {
         "json": {
           "execution": {
-            "id": "17085",
-            "url": "https://n8n.tailwind.es/workflow/3EsLWbaigVn4UtgZ/executions/17085",
+            "id": "18849",
+            "url": "https://n8n.tailwind.es/workflow/sQUNg-VuSIFLaMIdA9znD/executions/18849",
             "error": {
-              "level": "error",
+              "level": "warning",
               "tags": {},
-              "description": "SyntaxError",
-              "message": "Unexpected identifier 'item' ",
-              "stack": "evalmachine.<anonymous>:2\nfor (cons item of $input.all()) {\n          ^^^^\n\nSyntaxError: Unexpected identifier 'item'\n    at new Script (node:vm:117:7)\n    at createScript (node:vm:269:10)\n    at runInContext (node:vm:300:10)\n    at result (/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+task-runner@file+packages+@n8n+task-runner_@opentelemetry+api@1.9.0_@opentelemetry_eb51b38615a039445701c88b088f88d0/node_modules/@n8n/task-runner/dist/js-task-runner/js-task-runner.js:185:61)\n    at new Promise (<anonymous>)\n    at JsTaskRunner.runForAllItems (/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+task-runner@file+packages+@n8n+task-runner_@opentelemetry+api@1.9.0_@opentelemetry_eb51b38615a039445701c88b088f88d0/node_modules/@n8n/task-runner/dist/js-task-runner/js-task-runner.js:178:34)\n    at JsTaskRunner.executeTask (/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+task-runner@file+packages+@n8n+task-runner_@opentelemetry+api@1.9.0_@opentelemetry_eb51b38615a039445701c88b088f88d0/node_modules/@n8n/task-runner/dist/js-task-runner/js-task-runner.js:128:26)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async Object.waitingForSettings (/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+task-runner@file+packages+@n8n+task-runner_@opentelemetry+api@1.9.0_@opentelemetry_eb51b38615a039445701c88b088f88d0/node_modules/@n8n/task-runner/dist/task-runner.js:256:17)\n    at async TaskState.caseOf (/usr/local/lib/node_modules/n8n/node_modules/.pnpm/@n8n+task-runner@file+packages+@n8n+task-runner_@opentelemetry+api@1.9.0_@opentelemetry_eb51b38615a039445701c88b088f88d0/node_modules/@n8n/task-runner/dist/task-state.js:56:16)"
+              "description": "'fecha' expects a dateTime but we got '13-02-2026' <br/><br/> Consider using <a href=\"https://moment.github.io/luxon/api-docs/index.html#datetimefromformat\" target=\"_blank\"><code>DateTime.fromFormat</code></a> to work with custom date formats.",
+              "timestamp": 1770983174069,
+              "context": {
+                "runIndex": 0,
+                "itemIndex": 0,
+                "nodeCause": "Insert or update rows in a table"
+              },
+              "functionality": "regular",
+              "name": "ExpressionError",
+              "message": "Invalid input for 'fecha' [item 0]",
+              "stack": "ExpressionError: Invalid input for 'fecha' [item 0]\n    at validateValueAgainstSchema (/usr/local/lib/node_modules/n8n/node_modules/.pnpm/n8n-core@file+packages+core_@opentelemetry+api@1.9.0_@opentelemetry+sdk-trace-base@1.30_ec37920eb95917b28efaa783206b20f3/node_modules/n8n-core/src/execution-engine/node-execution-context/utils/validate-value-against-schema.ts:206:9)\n    at ExecuteContext._getNodeParameter (/usr/local/lib/node_modules/n8n/node_modules/.pnpm/n8n-core@file+packages+core_@opentelemetry+api@1.9.0_@opentelemetry+sdk-trace-base@1.30_ec37920eb95917b28efaa783206b20f3/node_modules/n8n-core/src/execution-engine/node-execution-context/node-execution-context.ts:506:42)\n    at ExecuteContext.getNodeParameter (/usr/local/lib/node_modules/n8n/node_modules/.pnpm/n8n-core@file+packages+core_@opentelemetry+api@1.9.0_@opentelemetry+sdk-trace-base@1.30_ec37920eb95917b28efaa783206b20f3/node_modules/n8n-core/src/execution-engine/node-execution-context/execute-context.ts:128:9)\n    at ExecuteContext.execute (/usr/local/lib/node_modules/n8n/node_modules/.pnpm/n8n-nodes-base@file+packages+nodes-base_@aws-sdk+credential-providers@3.808.0_asn1.js@5_8da18263ca0574b0db58d4fefd8173ce/node_modules/n8n-nodes-base/nodes/Postgres/v2/actions/database/upsert.operation.ts:256:18)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at ExecuteContext.router (/usr/local/lib/node_modules/n8n/node_modules/.pnpm/n8n-nodes-base@file+packages+nodes-base_@aws-sdk+credential-providers@3.808.0_asn1.js@5_8da18263ca0574b0db58d4fefd8173ce/node_modules/n8n-nodes-base/nodes/Postgres/v2/actions/router.ts:41:17)\n    at ExecuteContext.execute (/usr/local/lib/node_modules/n8n/node_modules/.pnpm/n8n-nodes-base@file+packages+nodes-base_@aws-sdk+credential-providers@3.808.0_asn1.js@5_8da18263ca0574b0db58d4fefd8173ce/node_modules/n8n-nodes-base/nodes/Postgres/v2/PostgresV2.node.ts:26:10)\n    at WorkflowExecute.executeNode (/usr/local/lib/node_modules/n8n/node_modules/.pnpm/n8n-core@file+packages+core_@opentelemetry+api@1.9.0_@opentelemetry+sdk-trace-base@1.30_ec37920eb95917b28efaa783206b20f3/node_modules/n8n-core/src/execution-engine/workflow-execute.ts:1045:8)\n    at WorkflowExecute.runNode (/usr/local/lib/node_modules/n8n/node_modules/.pnpm/n8n-core@file+packages+core_@opentelemetry+api@1.9.0_@opentelemetry+sdk-trace-base@1.30_ec37920eb95917b28efaa783206b20f3/node_modules/n8n-core/src/execution-engine/workflow-execute.ts:1226:11)\n    at /usr/local/lib/node_modules/n8n/node_modules/.pnpm/n8n-core@file+packages+core_@opentelemetry+api@1.9.0_@opentelemetry+sdk-trace-base@1.30_ec37920eb95917b28efaa783206b20f3/node_modules/n8n-core/src/execution-engine/workflow-execute.ts:1662:27"
             },
-            "lastNodeExecuted": "Code in JavaScript",
-            "mode": "trigger",
+            "lastNodeExecuted": "Insert or update rows in a table",
+            "mode": "webhook",
             "executionContext": {
               "version": 1,
-              "establishedAt": 1770370025019,
-              "source": "trigger",
+              "establishedAt": 1770983171692,
+              "source": "webhook",
               "triggerNode": {
-                "name": "Schedule Trigger",
-                "type": "n8n-nodes-base.scheduleTrigger"
+                "name": "Webhook",
+                "type": "n8n-nodes-base.webhook"
               }
             }
           },
           "workflow": {
-            "id": "3EsLWbaigVn4UtgZ",
-            "name": "ruletaRusa"
+            "id": "sQUNg-VuSIFLaMIdA9znD",
+            "name": "Informe_Diario_Definitivo"
           }
         },
         "pairedItem": {
@@ -309,6 +308,6 @@
   },
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2026-02-06T09:55:34.476Z",
-  "versionId": "cfc93341-759e-4320-b64f-da98e0c05cfe"
+  "updatedAt": "2026-02-13T11:50:30.110Z",
+  "versionId": "4fd55847-6534-47f2-af6c-6af2aa5c5119"
 }
