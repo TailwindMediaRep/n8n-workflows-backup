@@ -2780,24 +2780,7 @@
       }
     }
   ],
-  "pinData": {
-    "Google Sheets Trigger": [
-      {
-        "json": {
-          "Marca temporal": "9/02/2026 9:28:27",
-          "Nombre": "Maximo",
-          "Apellido": "Soleño",
-          "Correo Electrónico": "maximosoleno@gmail.com",
-          "Teléfono Móvil": "+34657448593",
-          "Adjuntar Vida Laboral Actual": "https://drive.google.com/open?id=1e47hOPTVvem_blTmKA9_XkeAF0fYMk0b",
-          "Adjuntar Título / Certificación de Profesor": "https://drive.google.com/open?id=1ny11EwkPi58N9XywpSJ-z2OtKnstkoHj",
-          "Aceptación de condiciones": "He leído y acepto la Política de Privacidad y las condiciones del programa.",
-          "Nota Manual": "",
-          "Estado Validación": ""
-        }
-      }
-    ]
-  },
+  "pinData": {},
   "settings": {
     "executionOrder": "v1",
     "timeSavedMode": "fixed",
@@ -2828,6 +2811,6 @@
   },
   "tags": [],
   "triggerCount": 4,
-  "updatedAt": "2026-02-09T09:17:22.762Z",
+  "updatedAt": "2026-02-15T13:10:35.839Z",
   "versionId": "69ce37ba-3900-40c6-814d-72af7e0cf425"
 }
