@@ -1511,7 +1511,18 @@
   "connections": {
     "Crear Informe Maestro": {
       "main": [
-        []
+        [
+          {
+            "node": "crear vista",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Prep Shopify",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Bucle: Uno a Uno": {
@@ -1825,7 +1836,7 @@
       "main": [
         [
           {
-            "node": "Prep Shopify",
+            "node": "Crear Informe Maestro",
             "type": "main",
             "index": 0
           }
@@ -1917,8 +1928,8 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        -1616,
-        608
+        -1600,
+        656
       ],
       "id": "8916f4e2-0878-4287-90a8-ea2845be9296",
       "name": "Crear Informe Maestro",
@@ -2028,8 +2039,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -2000,
-        576
+        -1984,
+        624
       ],
       "id": "54f3936a-7187-4043-aa2a-4ab0c2f00674",
       "name": "Sticky Note2"
@@ -3458,8 +3469,8 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -1616,
-        848
+        -1936,
+        656
       ],
       "id": "e51c40f8-a227-4f9c-b137-75968f2de83e",
       "name": "When clicking ‘Execute workflow’"
@@ -3493,8 +3504,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -1456,
-        848
+        -1760,
+        656
       ],
       "id": "b214af46-3394-4866-bbe1-53422bd52f0d",
       "name": "Configurar Fechas"
@@ -3654,6 +3665,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-02-13T09:51:03.231Z",
-  "versionId": "b4a2dbee-1ec0-4d95-a9f9-e1428af2ce04"
+  "updatedAt": "2026-02-16T08:34:06.056Z",
+  "versionId": "dabcea7c-116a-4da1-8e29-b0d29a616c2f"
 }
