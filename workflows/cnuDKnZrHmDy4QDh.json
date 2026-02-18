@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-02-09T09:17:17.000Z",
-    "createdAt": "2026-02-09T09:17:15.068Z",
-    "versionId": "69ce37ba-3900-40c6-814d-72af7e0cf425",
+    "updatedAt": "2026-02-17T09:35:57.000Z",
+    "createdAt": "2026-02-17T09:35:54.464Z",
+    "versionId": "6eff5b25-b860-4a0a-b86b-aceff4f1e07f",
     "workflowId": "cnuDKnZrHmDy4QDh",
     "nodes": [
       {
@@ -11,7 +11,9 @@
           "pollTimes": {
             "item": [
               {
-                "mode": "everyMinute"
+                "mode": "everyX",
+                "value": 5,
+                "unit": "minutes"
               }
             ]
           },
@@ -1125,29 +1127,34 @@
             "name": "profesionales@rules-shop.es"
           }
         }
+      },
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "nuevo-registro-sheets",
+          "responseMode": "lastNode",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          448,
+          -512
+        ],
+        "id": "5d19eb08-ed2d-465e-970a-72e3839e49dc",
+        "name": "Webhook",
+        "webhookId": "c7824abb-9bb5-47db-ba55-bae41134785b"
       }
     ],
     "connections": {
       "Google Sheets Trigger": {
         "main": [
-          [
-            {
-              "node": "Edit Fields",
-              "type": "main",
-              "index": 0
-            }
-          ]
+          []
         ]
       },
       "Edit Fields": {
         "main": [
-          [
-            {
-              "node": "HTTP Request",
-              "type": "main",
-              "index": 0
-            }
-          ]
+          []
         ]
       },
       "GraphQL": {
@@ -1384,35 +1391,28 @@
             }
           ]
         ]
+      },
+      "Webhook": {
+        "main": [
+          []
+        ]
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version 69ce37ba",
+    "name": "Version 6eff5b25",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "69ce37ba-3900-40c6-814d-72af7e0cf425",
+  "activeVersionId": "6eff5b25-b860-4a0a-b86b-aceff4f1e07f",
   "connections": {
     "Google Sheets Trigger": {
       "main": [
-        [
-          {
-            "node": "Edit Fields",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Edit Fields": {
       "main": [
-        [
-          {
-            "node": "HTTP Request",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "GraphQL": {
@@ -1649,6 +1649,11 @@
           }
         ]
       ]
+    },
+    "Webhook": {
+      "main": [
+        []
+      ]
     }
   },
   "createdAt": "2025-12-12T07:23:55.975Z",
@@ -1664,7 +1669,9 @@
         "pollTimes": {
           "item": [
             {
-              "mode": "everyMinute"
+              "mode": "everyX",
+              "value": 5,
+              "unit": "minutes"
             }
           ]
         },
@@ -2778,6 +2785,23 @@
           "name": "profesionales@rules-shop.es"
         }
       }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "nuevo-registro-sheets",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        448,
+        -512
+      ],
+      "id": "5d19eb08-ed2d-465e-970a-72e3839e49dc",
+      "name": "Webhook",
+      "webhookId": "c7824abb-9bb5-47db-ba55-bae41134785b"
     }
   ],
   "pinData": {},
@@ -2810,7 +2834,7 @@
     }
   },
   "tags": [],
-  "triggerCount": 4,
-  "updatedAt": "2026-02-15T13:10:35.839Z",
-  "versionId": "69ce37ba-3900-40c6-814d-72af7e0cf425"
+  "triggerCount": 5,
+  "updatedAt": "2026-02-17T09:35:54.460Z",
+  "versionId": "6eff5b25-b860-4a0a-b86b-aceff4f1e07f"
 }
