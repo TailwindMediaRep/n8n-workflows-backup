@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-02-03T13:15:42.000Z",
-    "createdAt": "2026-02-03T13:15:41.817Z",
-    "versionId": "1325560e-5cd1-4b1b-9a29-cb403cc5bb4a",
+    "updatedAt": "2026-02-17T08:59:07.000Z",
+    "createdAt": "2026-02-17T08:58:59.739Z",
+    "versionId": "d09809a5-5abf-43c0-9eb6-81d84c04e363",
     "workflowId": "hXSd72PLpx6CIiA7",
     "nodes": [
       {
@@ -586,8 +586,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          288,
-          -464
+          -32,
+          1072
         ],
         "id": "b66d8c24-ff2e-4dfc-b415-870b1fd579c5",
         "name": "HTTP Request",
@@ -625,8 +625,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          496,
-          -464
+          176,
+          1072
         ],
         "id": "a1edac9d-0099-4f62-b72b-d24b21d71f26",
         "name": "If1"
@@ -645,8 +645,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          704,
-          -608
+          384,
+          928
         ],
         "id": "854831a8-1044-408c-8cd7-4570d881ef51",
         "name": "HTTP Request1",
@@ -662,8 +662,8 @@
         "type": "n8n-nodes-base.noOp",
         "typeVersion": 1,
         "position": [
-          704,
-          -448
+          384,
+          1088
         ],
         "id": "df04fcb6-c3e5-4a0c-8718-077f0f1e2b38",
         "name": "No Operation, do nothing1"
@@ -677,8 +677,8 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          112,
-          -640
+          -208,
+          896
         ],
         "id": "dc676ec8-3947-4004-ba64-a0ab38508e1b",
         "name": "Sticky Note4"
@@ -692,8 +692,8 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          112,
-          -736
+          -208,
+          800
         ],
         "id": "58de7bf0-26cc-46d5-bd68-1266c26fca5f",
         "name": "Sticky Note5"
@@ -708,6 +708,22 @@
         ],
         "id": "b0f7d201-1d7c-481d-a079-8df470f3a6d9",
         "name": "No Operation, do nothing2"
+      },
+      {
+        "parameters": {
+          "content": "## RINCÓN DE PENSAR",
+          "height": 528,
+          "width": 896,
+          "color": 6
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -240,
+          736
+        ],
+        "id": "525ed8ec-796e-4ac1-879a-738c621edc0b",
+        "name": "Sticky Note6"
       }
     ],
     "connections": {
@@ -749,11 +765,6 @@
           [
             {
               "node": "GraphQL",
-              "type": "main",
-              "index": 0
-            },
-            {
-              "node": "HTTP Request",
               "type": "main",
               "index": 0
             }
@@ -920,11 +931,11 @@
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version 1325560e",
+    "name": "Version d09809a5",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "1325560e-5cd1-4b1b-9a29-cb403cc5bb4a",
+  "activeVersionId": "d09809a5-5abf-43c0-9eb6-81d84c04e363",
   "connections": {
     "Webhook": {
       "main": [
@@ -964,11 +975,6 @@
         [
           {
             "node": "GraphQL",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "HTTP Request",
             "type": "main",
             "index": 0
           }
@@ -1722,8 +1728,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        288,
-        -464
+        -32,
+        1072
       ],
       "id": "b66d8c24-ff2e-4dfc-b415-870b1fd579c5",
       "name": "HTTP Request",
@@ -1761,8 +1767,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        496,
-        -464
+        176,
+        1072
       ],
       "id": "a1edac9d-0099-4f62-b72b-d24b21d71f26",
       "name": "If1"
@@ -1781,8 +1787,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        704,
-        -608
+        384,
+        928
       ],
       "id": "854831a8-1044-408c-8cd7-4570d881ef51",
       "name": "HTTP Request1",
@@ -1798,8 +1804,8 @@
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        704,
-        -448
+        384,
+        1088
       ],
       "id": "df04fcb6-c3e5-4a0c-8718-077f0f1e2b38",
       "name": "No Operation, do nothing1"
@@ -1813,8 +1819,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        112,
-        -640
+        -208,
+        896
       ],
       "id": "dc676ec8-3947-4004-ba64-a0ab38508e1b",
       "name": "Sticky Note4"
@@ -1828,8 +1834,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        112,
-        -736
+        -208,
+        800
       ],
       "id": "58de7bf0-26cc-46d5-bd68-1266c26fca5f",
       "name": "Sticky Note5"
@@ -1844,6 +1850,22 @@
       ],
       "id": "b0f7d201-1d7c-481d-a079-8df470f3a6d9",
       "name": "No Operation, do nothing2"
+    },
+    {
+      "parameters": {
+        "content": "## RINCÓN DE PENSAR",
+        "height": 528,
+        "width": 896,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -240,
+        736
+      ],
+      "id": "525ed8ec-796e-4ac1-879a-738c621edc0b",
+      "name": "Sticky Note6"
     }
   ],
   "pinData": {
@@ -2261,12 +2283,12 @@
   "staticData": {
     "node:Schedule Trigger": {
       "recurrenceRules": [
-        22
+        0
       ]
     }
   },
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2026-02-03T13:15:41.816Z",
-  "versionId": "1325560e-5cd1-4b1b-9a29-cb403cc5bb4a"
+  "updatedAt": "2026-02-17T08:58:59.737Z",
+  "versionId": "d09809a5-5abf-43c0-9eb6-81d84c04e363"
 }
