@@ -1612,13 +1612,7 @@
     },
     "If2": {
       "main": [
-        [
-          {
-            "node": "Edit Fields",
-            "type": "main",
-            "index": 0
-          }
-        ],
+        [],
         [
           {
             "node": "Wait3",
@@ -2582,6 +2576,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-02-17T10:08:19.276Z",
-  "versionId": "a35dbb98-81c5-48c6-af96-2cfd8331a285"
+  "updatedAt": "2026-02-19T07:52:49.509Z",
+  "versionId": "be5bd98d-ffe0-4dfd-aaf0-4b051114ab4e"
 }
