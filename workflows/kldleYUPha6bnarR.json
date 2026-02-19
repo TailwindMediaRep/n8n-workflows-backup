@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-02-18T13:22:36.000Z",
-    "createdAt": "2026-02-18T13:22:35.077Z",
-    "versionId": "0e80941a-19e2-4d55-b757-14026dba5dfe",
+    "updatedAt": "2026-02-19T10:31:01.000Z",
+    "createdAt": "2026-02-19T10:31:00.018Z",
+    "versionId": "6996d0f2-4221-4508-833c-e79d0f8c3e96",
     "workflowId": "kldleYUPha6bnarR",
     "nodes": [
       {
@@ -20,8 +20,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          640,
-          -1392
+          1824,
+          -1360
         ],
         "id": "9654ecf1-32ab-4757-adb0-87b9f07315aa",
         "name": "HTTP Request",
@@ -47,8 +47,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          1136,
-          -1392
+          2320,
+          -1360
         ],
         "id": "6222d526-1ca0-4ae2-b996-d6ae44f671c0",
         "name": "HTTP Request1",
@@ -58,21 +58,6 @@
             "name": "Canva"
           }
         }
-      },
-      {
-        "parameters": {
-          "amount": 1
-        },
-        "type": "n8n-nodes-base.wait",
-        "typeVersion": 1.1,
-        "position": [
-          464,
-          -1392
-        ],
-        "id": "c9f8f9ca-6547-4340-bce6-580f2621e75b",
-        "name": "Wait",
-        "webhookId": "8cce73b4-0a6e-4db3-b503-1267489be04b",
-        "executeOnce": true
       },
       {
         "parameters": {
@@ -87,8 +72,8 @@
         "type": "n8n-nodes-base.facebookGraphApi",
         "typeVersion": 1,
         "position": [
-          2432,
-          -1408
+          3616,
+          -1376
         ],
         "id": "7da66ccf-8fd7-48d5-8c6d-db816b75171b",
         "name": "Facebook Graph API",
@@ -112,8 +97,8 @@
         "type": "n8n-nodes-base.facebookGraphApi",
         "typeVersion": 1,
         "position": [
-          3120,
-          -1424
+          4304,
+          -1392
         ],
         "id": "3bb41e32-f010-4102-acc1-fd96e8892501",
         "name": "Facebook Graph API1",
@@ -124,37 +109,6 @@
           }
         },
         "onError": "continueRegularOutput"
-      },
-      {
-        "parameters": {
-          "url": "=https://graph.facebook.com/v20.0/{{ $json.id }}?fields=status,status_code",
-          "authentication": "predefinedCredentialType",
-          "nodeCredentialType": "facebookGraphApi",
-          "sendQuery": true,
-          "queryParameters": {
-            "parameters": [
-              {
-                "name": "access_token",
-                "value": "EAF2z8nVLTA8BQVHL88vghg4RRZBH9svUgZCP93NSZAB9iSDKxTAMvz8DFby8KVqXp6DWFxfFDiSKOUXvXPVVrJcNxjFOmr0ZCXphOZBUUWRkP8sTZC9wwapmP8vlJQN4NHH2eW9zPRmg2SHrQ0AhjI3n2kx1vAa8nOtr6tbQMhcaP0X0eMtOComwFl3zR7zd7HowZDZD"
-              }
-            ]
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.httpRequest",
-        "typeVersion": 4.3,
-        "position": [
-          2640,
-          -1408
-        ],
-        "id": "06240652-f050-41e7-a406-a611f53d1746",
-        "name": "HTTP Request3",
-        "credentials": {
-          "facebookGraphApi": {
-            "id": "F7VbX8jWKCXdAM47",
-            "name": "Facebook Graph account"
-          }
-        }
       },
       {
         "parameters": {
@@ -183,8 +137,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          1968,
-          -1392
+          3152,
+          -1360
         ],
         "id": "88a07af8-5d4d-4c7e-9a1f-4db66d843eef",
         "name": "If"
@@ -199,8 +153,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          2160,
-          -1408
+          3344,
+          -1376
         ],
         "id": "7555d978-506b-45aa-bf1a-cdfafabbe297",
         "name": "HTTP Request6",
@@ -218,8 +172,8 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          1760,
-          -1392
+          2944,
+          -1360
         ],
         "id": "5531d7ae-3e1e-4e70-a013-b7a468dfde34",
         "name": "Wait1",
@@ -235,8 +189,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          1552,
-          -1392
+          2736,
+          -1360
         ],
         "id": "87ba9b82-c2a0-491d-a90b-251cc2de0db3",
         "name": "HTTP Request7",
@@ -252,8 +206,8 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          2784,
-          -1408
+          3968,
+          -1376
         ],
         "id": "475281c7-f520-4d18-8b3a-e8dc41dadfd9",
         "name": "Wait2",
@@ -286,53 +240,11 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          2928,
-          -1408
+          4112,
+          -1376
         ],
         "id": "c3ad2eff-8c1a-4047-ba71-69acd0745b05",
         "name": "If1"
-      },
-      {
-        "parameters": {
-          "operation": "get",
-          "dataTableId": {
-            "__rl": true,
-            "value": "YhO4ZRxZ7YiJDe7A",
-            "mode": "list",
-            "cachedResultName": "Plantillas Canva",
-            "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/YhO4ZRxZ7YiJDe7A"
-          },
-          "filters": {
-            "conditions": [
-              {
-                "keyName": "Nombre_Documento",
-                "keyValue": "={{ $json.body.aspecto_cielo.toUpperCase() }}"
-              }
-            ]
-          }
-        },
-        "type": "n8n-nodes-base.dataTable",
-        "typeVersion": 1,
-        "position": [
-          96,
-          -1392
-        ],
-        "id": "9c7cc8ad-30f3-4ec4-a45f-97179ec78eae",
-        "name": "obtener contador",
-        "executeOnce": false
-      },
-      {
-        "parameters": {
-          "type": "random"
-        },
-        "type": "n8n-nodes-base.sort",
-        "typeVersion": 1,
-        "position": [
-          288,
-          -1392
-        ],
-        "id": "2529ddd5-e228-48e7-a21c-9620590d8f41",
-        "name": "Sort"
       },
       {
         "parameters": {
@@ -351,8 +263,8 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          3280,
-          -1424
+          4464,
+          -1392
         ],
         "id": "7eae2c4f-9d5b-4c4d-8417-1d9d218cbffe",
         "name": "Edit Fields1"
@@ -371,8 +283,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          3440,
-          -1424
+          4624,
+          -1392
         ],
         "id": "b3eeaaf6-1eca-4fe1-bc18-add61e7dfa6d",
         "name": "HTTP Request4",
@@ -390,14 +302,14 @@
       {
         "parameters": {
           "respondWith": "text",
-          "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Parte de Nieve - Sierra Nevada</title>\n    <style>\n        body {\n            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n            background-color: #121212;\n            color: #e0e0e0;\n            margin: 0;\n            padding: 20px;\n            display: flex;\n            justify-content: center;\n        }\n        .form-container {\n            background-color: #1e1e1e;\n            padding: 30px;\n            border-radius: 10px;\n            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);\n            max-width: 650px;\n            width: 100%;\n        }\n        h2 {\n            color: #ffffff;\n            text-align: center;\n            margin-top: 0;\n            margin-bottom: 25px;\n        }\n        .form-group {\n            margin-bottom: 15px;\n        }\n        .form-row {\n            display: flex;\n            gap: 15px;\n            margin-bottom: 15px;\n        }\n        .form-row .form-group {\n            flex: 1;\n            margin-bottom: 0;\n        }\n        label {\n            display: block;\n            font-weight: bold;\n            margin-bottom: 5px;\n            color: #b0bec5;\n            font-size: 13px;\n            text-transform: uppercase;\n            letter-spacing: 0.5px;\n        }\n        input[type=\"text\"],\n        select {\n            width: 100%;\n            padding: 10px;\n            background-color: #2c2c2c;\n            color: #ffffff;\n            border: 1px solid #555555;\n            border-radius: 5px;\n            box-sizing: border-box;\n            font-size: 15px;\n            transition: border-color 0.3s, box-shadow 0.3s;\n        }\n        input[type=\"text\"]::placeholder {\n            color: #757575;\n        }\n        input[type=\"text\"]:focus,\n        select:focus {\n            outline: none;\n            border-color: #4fc3f7;\n            box-shadow: 0 0 0 3px rgba(79, 195, 247, 0.2);\n        }\n        /* Color específico para las opciones del select en algunos navegadores */\n        select option {\n            background-color: #2c2c2c;\n            color: #ffffff;\n        }\n        .input-with-unit {\n            display: flex;\n            align-items: center;\n        }\n        .input-with-unit input {\n            border-top-right-radius: 0;\n            border-bottom-right-radius: 0;\n        }\n        .unit {\n            background-color: #333333;\n            border: 1px solid #555555;\n            border-left: none;\n            padding: 10px;\n            border-top-right-radius: 5px;\n            border-bottom-right-radius: 5px;\n            color: #b0bec5;\n            font-size: 14px;\n        }\n        \n        /* Estilos específicos para los Checkboxes */\n        .checkbox-group {\n            display: grid;\n            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));\n            gap: 10px;\n            margin-top: 8px;\n        }\n        .checkbox-label {\n            display: flex;\n            align-items: center;\n            font-weight: normal;\n            text-transform: none;\n            letter-spacing: normal;\n            color: #e0e0e0;\n            font-size: 14px;\n            cursor: pointer;\n            background-color: #2c2c2c;\n            padding: 10px 12px;\n            border-radius: 5px;\n            border: 1px solid #555555;\n            transition: background-color 0.2s, border-color 0.2s;\n            margin-bottom: 0;\n        }\n        .checkbox-label:hover {\n            background-color: #383838;\n            border-color: #4fc3f7;\n        }\n        .checkbox-label input[type=\"checkbox\"] {\n            margin-right: 10px;\n            accent-color: #0288d1;\n            width: 18px;\n            height: 18px;\n            cursor: pointer;\n        }\n\n        button {\n            width: 100%;\n            background-color: #0288d1;\n            color: white;\n            padding: 14px;\n            border: none;\n            border-radius: 5px;\n            font-size: 16px;\n            font-weight: bold;\n            cursor: pointer;\n            margin-top: 25px;\n            transition: background-color 0.3s;\n        }\n        button:hover {\n            background-color: #0277bd;\n        }\n        @media (max-width: 500px) {\n            .form-row {\n                flex-direction: column;\n                gap: 15px;\n            }\n            .checkbox-group {\n                grid-template-columns: 1fr 1fr;\n            }\n        }\n    </style>\n</head>\n<body>\n\n    <div class=\"form-container\">\n        <h2>❄️ Actualizar Parte de Nieve</h2>\n        \n        <form action=\"https://n8n.tailwind.es/webhook/recibirFormulario\" method=\"POST\">\n            \n            <div class=\"form-group\">\n                <label for=\"calidad_nieve\">Calidad Nieve</label>\n                <input type=\"text\" id=\"calidad_nieve\" name=\"calidad_nieve\" required placeholder=\"Ej. Polvo, Dura, Primavera...\">\n            </div>\n\n            <div class=\"form-group\">\n                <label for=\"aspecto_cielo\">Aspecto del Cielo</label>\n                <select id=\"aspecto_cielo\" name=\"aspecto_cielo\" required>\n                    <option value=\"\" disabled selected>Selecciona una opción</option>\n                    <option value=\"NUBOSO\">NUBOSO</option>\n                    <option value=\"DESPEJADO\">DESPEJADO</option>\n                    <option value=\"SOLEADO\">SOLEADO</option>\n                    <option value=\"NEVANDO\">NEVANDO</option>\n                </select>\n            </div>\n\n            <div class=\"form-group\">\n                <label for=\"visibilidad\">Visibilidad</label>\n                <input type=\"text\" id=\"visibilidad\" name=\"visibilidad\" required placeholder=\"Ej. Buena, Regular, Mala...\">\n            </div>\n\n            <div class=\"form-row\">\n                <div class=\"form-group\">\n                    <label for=\"temp_min\">Temperatura Mínima</label>\n                    <div class=\"input-with-unit\">\n                        <input type=\"text\" id=\"temp_min\" name=\"temp_min\" required placeholder=\"Ej. -5\">\n                        <span class=\"unit\">°C</span>\n                    </div>\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"temp_max\">Temperatura Máxima</label>\n                    <div class=\"input-with-unit\">\n                        <input type=\"text\" id=\"temp_max\" name=\"temp_max\" required placeholder=\"Ej. 2\">\n                        <span class=\"unit\">°C</span>\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"form-row\">\n                <div class=\"form-group\">\n                    <label for=\"viento_min\">Viento Mínimo</label>\n                    <div class=\"input-with-unit\">\n                        <input type=\"text\" id=\"viento_min\" name=\"viento_min\" required placeholder=\"Ej. 10\">\n                        <span class=\"unit\">km/h</span>\n                    </div>\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"viento_max\">Viento Máximo</label>\n                    <div class=\"input-with-unit\">\n                        <input type=\"text\" id=\"viento_max\" name=\"viento_max\" required placeholder=\"Ej. 45\">\n                        <span class=\"unit\">km/h</span>\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"form-row\">\n                <div class=\"form-group\">\n                    <label for=\"espesor_min\">Espesor Mínimo</label>\n                    <div class=\"input-with-unit\">\n                        <input type=\"text\" id=\"espesor_min\" name=\"espesor_min\" required placeholder=\"Ej. 40\">\n                        <span class=\"unit\">cm</span>\n                    </div>\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"espesor_max\">Espesor Máximo</label>\n                    <div class=\"input-with-unit\">\n                        <input type=\"text\" id=\"espesor_max\" name=\"espesor_max\" required placeholder=\"Ej. 120\">\n                        <span class=\"unit\">cm</span>\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"form-row\">\n                <div class=\"form-group\">\n                    <label for=\"remontes_abiertos\">Remontes Abiertos</label>\n                    <input type=\"text\" id=\"remontes_abiertos\" name=\"remontes_abiertos\" required placeholder=\"Ej. 14\">\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"km_esquiables\">Km Esquiables</label>\n                    <div class=\"input-with-unit\">\n                        <input type=\"text\" id=\"km_esquiables\" name=\"km_esquiables\" required placeholder=\"Ej. 55.5\">\n                        <span class=\"unit\">km</span>\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"form-group\">\n                <label for=\"numero_pistas\">Número de Pistas (Total)</label>\n                <input type=\"text\" id=\"numero_pistas\" name=\"numero_pistas\" required placeholder=\"Ej. 42\">\n            </div>\n\n            <div class=\"form-group\">\n                <label>Zonas / Pistas Abiertas</label>\n                <div class=\"checkbox-group\">\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Veleta\"> Veleta</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Laguna\"> Laguna</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Borreguiles\"> Borreguiles</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Pista del Mar\"> Pista del Mar</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Cauchiles Parador\"> Cauchiles Parador</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Loma Dílar\"> Loma Dílar</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Rio Monachil\"> Rio Monachil</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Parque Sulayr\"> Parque Sulayr</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Jardín Alpino\"> Jardín Alpino</label>\n                </div>\n            </div>\n\n            <button type=\"submit\">Enviar Parte de Nieve</button>\n        </form>\n    </div>\n\n</body>\n</html>",
+          "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Parte de Nieve - Sierra Nevada</title>\n    <style>\n        body {\n            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n            background-color: #121212;\n            color: #e0e0e0;\n            margin: 0;\n            padding: 20px;\n            display: flex;\n            justify-content: center;\n        }\n        .form-container {\n            background-color: #1e1e1e;\n            padding: 30px;\n            border-radius: 10px;\n            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);\n            max-width: 650px;\n            width: 100%;\n        }\n        h2 {\n            color: #ffffff;\n            text-align: center;\n            margin-top: 0;\n            margin-bottom: 25px;\n        }\n        .form-group {\n            margin-bottom: 15px;\n        }\n        .form-row {\n            display: flex;\n            gap: 15px;\n            margin-bottom: 15px;\n        }\n        .form-row .form-group {\n            flex: 1;\n            margin-bottom: 0;\n        }\n        label {\n            display: block;\n            font-weight: bold;\n            margin-bottom: 5px;\n            color: #b0bec5;\n            font-size: 13px;\n            text-transform: uppercase;\n            letter-spacing: 0.5px;\n        }\n        input[type=\"text\"],\n        select {\n            width: 100%;\n            padding: 10px;\n            background-color: #2c2c2c;\n            color: #ffffff;\n            border: 1px solid #555555;\n            border-radius: 5px;\n            box-sizing: border-box;\n            font-size: 15px;\n            transition: border-color 0.3s, box-shadow 0.3s;\n        }\n        input[type=\"text\"]::placeholder {\n            color: #757575;\n        }\n        input[type=\"text\"]:focus,\n        select:focus {\n            outline: none;\n            border-color: #4fc3f7;\n            box-shadow: 0 0 0 3px rgba(79, 195, 247, 0.2);\n        }\n        /* Color específico para las opciones del select en algunos navegadores */\n        select option {\n            background-color: #2c2c2c;\n            color: #ffffff;\n        }\n        .input-with-unit {\n            display: flex;\n            align-items: center;\n        }\n        .input-with-unit input {\n            border-top-right-radius: 0;\n            border-bottom-right-radius: 0;\n        }\n        .unit {\n            background-color: #333333;\n            border: 1px solid #555555;\n            border-left: none;\n            padding: 10px;\n            border-top-right-radius: 5px;\n            border-bottom-right-radius: 5px;\n            color: #b0bec5;\n            font-size: 14px;\n        }\n        \n        /* Estilos específicos para los Checkboxes */\n        .checkbox-group {\n            display: grid;\n            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));\n            gap: 10px;\n            margin-top: 8px;\n        }\n        .checkbox-label {\n            display: flex;\n            align-items: center;\n            font-weight: normal;\n            text-transform: none;\n            letter-spacing: normal;\n            color: #e0e0e0;\n            font-size: 14px;\n            cursor: pointer;\n            background-color: #2c2c2c;\n            padding: 10px 12px;\n            border-radius: 5px;\n            border: 1px solid #555555;\n            transition: background-color 0.2s, border-color 0.2s;\n            margin-bottom: 0;\n        }\n        .checkbox-label:hover {\n            background-color: #383838;\n            border-color: #4fc3f7;\n        }\n        .checkbox-label input[type=\"checkbox\"] {\n            margin-right: 10px;\n            accent-color: #0288d1;\n            width: 18px;\n            height: 18px;\n            cursor: pointer;\n        }\n\n        button {\n            width: 100%;\n            background-color: #0288d1;\n            color: white;\n            padding: 14px;\n            border: none;\n            border-radius: 5px;\n            font-size: 16px;\n            font-weight: bold;\n            cursor: pointer;\n            margin-top: 25px;\n            transition: background-color 0.3s;\n        }\n        button:hover {\n            background-color: #0277bd;\n        }\n        @media (max-width: 500px) {\n            .form-row {\n                flex-direction: column;\n                gap: 15px;\n            }\n            .checkbox-group {\n                grid-template-columns: 1fr 1fr;\n            }\n        }\n    </style>\n</head>\n<body>\n\n    <div class=\"form-container\">\n        <h2>❄️ Actualizar Parte de Nieve</h2>\n        \n        <form action=\"https://n8n.tailwind.es/webhook-test/recibirFormulario\" method=\"POST\">\n            \n            <div class=\"form-group\">\n                <label for=\"calidad_nieve\">Calidad Nieve</label>\n                <input type=\"text\" id=\"calidad_nieve\" name=\"calidad_nieve\" required placeholder=\"Ej. Polvo, Dura, Primavera...\">\n            </div>\n\n            <div class=\"form-group\">\n                <label for=\"aspecto_cielo\">Aspecto del Cielo</label>\n                <select id=\"aspecto_cielo\" name=\"aspecto_cielo\" required>\n                    <option value=\"\" disabled selected>Selecciona una opción</option>\n                    <option value=\"NUBOSO\">NUBOSO</option>\n                    <option value=\"DESPEJADO\">DESPEJADO</option>\n                    <option value=\"SOLEADO\">SOLEADO</option>\n                    <option value=\"NEVANDO\">NEVANDO</option>\n                </select>\n            </div>\n\n            <div class=\"form-group\">\n                <label for=\"visibilidad\">Visibilidad</label>\n                <input type=\"text\" id=\"visibilidad\" name=\"visibilidad\" required placeholder=\"Ej. Buena, Regular, Mala...\">\n            </div>\n\n            <div class=\"form-row\">\n                <div class=\"form-group\">\n                    <label for=\"temp_min\">Temperatura Mínima</label>\n                    <div class=\"input-with-unit\">\n                        <input type=\"text\" id=\"temp_min\" name=\"temp_min\" required placeholder=\"Ej. -5\">\n                        <span class=\"unit\">°C</span>\n                    </div>\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"temp_max\">Temperatura Máxima</label>\n                    <div class=\"input-with-unit\">\n                        <input type=\"text\" id=\"temp_max\" name=\"temp_max\" required placeholder=\"Ej. 2\">\n                        <span class=\"unit\">°C</span>\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"form-row\">\n                <div class=\"form-group\">\n                    <label for=\"viento_min\">Viento Mínimo</label>\n                    <div class=\"input-with-unit\">\n                        <input type=\"text\" id=\"viento_min\" name=\"viento_min\" required placeholder=\"Ej. 10\">\n                        <span class=\"unit\">km/h</span>\n                    </div>\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"viento_max\">Viento Máximo</label>\n                    <div class=\"input-with-unit\">\n                        <input type=\"text\" id=\"viento_max\" name=\"viento_max\" required placeholder=\"Ej. 45\">\n                        <span class=\"unit\">km/h</span>\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"form-row\">\n                <div class=\"form-group\">\n                    <label for=\"espesor_min\">Espesor Mínimo</label>\n                    <div class=\"input-with-unit\">\n                        <input type=\"text\" id=\"espesor_min\" name=\"espesor_min\" required placeholder=\"Ej. 40\">\n                        <span class=\"unit\">cm</span>\n                    </div>\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"espesor_max\">Espesor Máximo</label>\n                    <div class=\"input-with-unit\">\n                        <input type=\"text\" id=\"espesor_max\" name=\"espesor_max\" required placeholder=\"Ej. 120\">\n                        <span class=\"unit\">cm</span>\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"form-row\">\n                <div class=\"form-group\">\n                    <label for=\"remontes_abiertos\">Remontes Abiertos</label>\n                    <input type=\"text\" id=\"remontes_abiertos\" name=\"remontes_abiertos\" required placeholder=\"Ej. 14\">\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"km_esquiables\">Km Esquiables</label>\n                    <div class=\"input-with-unit\">\n                        <input type=\"text\" id=\"km_esquiables\" name=\"km_esquiables\" required placeholder=\"Ej. 55.5\">\n                        <span class=\"unit\">km</span>\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"form-group\">\n                <label for=\"numero_pistas\">Número de Pistas (Total)</label>\n                <input type=\"text\" id=\"numero_pistas\" name=\"numero_pistas\" required placeholder=\"Ej. 42\">\n            </div>\n\n            <div class=\"form-group\">\n                <label>Zonas / Pistas Abiertas</label>\n                <div class=\"checkbox-group\">\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Veleta\"> Veleta</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Laguna\"> Laguna</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Borreguiles\"> Borreguiles</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Pista del Mar\"> Pista del Mar</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Cauchiles Parador\"> Cauchiles Parador</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Loma Dílar\"> Loma Dílar</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Rio Monachil\"> Rio Monachil</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Parque Sulayr\"> Parque Sulayr</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Jardín Alpino\"> Jardín Alpino</label>\n                </div>\n            </div>\n\n            <div class=\"form-group\">\n                <label>Cuentas</label>\n                <div class=\"checkbox-group\">\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"cuentas[]\" value=\"Rules\"> Rules</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"cuentas[]\" value=\"Surfin\"> Surfin</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"cuentas[]\" value=\"Sierra Nevada Granada\"> Sierra Nevada Granada</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"cuentas[]\" value=\"Snow Division\"> Snow Division</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"cuentas[]\" value=\"Mesit\"> Mesit</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"cuentas[]\" value=\"Skiroom\"> Skiroom</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"cuentas[]\" value=\"Sierra Nevada VIP\"> Sierra Nevada VIP</label>\n                </div>\n            </div>\n\n            <button type=\"submit\">Enviar Parte de Nieve</button>\n        </form>\n    </div>\n\n</body>\n</html>",
           "options": {}
         },
         "type": "n8n-nodes-base.respondToWebhook",
         "typeVersion": 1.5,
         "position": [
-          -272,
-          -1600
+          416,
+          -1440
         ],
         "id": "8974fa52-b64f-4a01-a41f-e97ac127e6a3",
         "name": "Respond to Webhook"
@@ -411,8 +323,8 @@
         "type": "n8n-nodes-base.webhook",
         "typeVersion": 2.1,
         "position": [
-          -432,
-          -1600
+          256,
+          -1440
         ],
         "id": "64cc4927-7ecd-4b78-bc9a-faf4e19927fa",
         "name": "Formulario",
@@ -428,8 +340,8 @@
         "type": "n8n-nodes-base.webhook",
         "typeVersion": 2.1,
         "position": [
-          -432,
-          -1392
+          256,
+          -1232
         ],
         "id": "8af91482-0831-4c8c-90ed-ee5bdbfdf57c",
         "name": "RecibirFormulario",
@@ -516,16 +428,24 @@
                 "name": "body[\"pistas_abiertas[]\"]",
                 "value": "={{ $('RecibirFormulario').item.json.body[\"pistas_abiertas[]\"] }}",
                 "type": "array"
+              },
+              {
+                "id": "78f168c5-94b0-4b92-8811-d683a25cdd66",
+                "name": "body[\"cuentas[]\"]",
+                "value": "={{ $json.body[\"cuentas[]\"] ? (Array.isArray($json.body[\"cuentas[]\"]) ? $json.body[\"cuentas[]\"] : [$json.body[\"cuentas[]\"]]) : [] }}",
+                "type": "array"
               }
             ]
           },
-          "options": {}
+          "options": {
+            "ignoreConversionErrors": true
+          }
         },
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          -64,
-          -1392
+          624,
+          -1232
         ],
         "id": "fbf24bc9-0430-4a3a-88fd-136c70ba1b2a",
         "name": "Edit Fields3"
@@ -544,8 +464,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          1328,
-          -1392
+          2512,
+          -1360
         ],
         "id": "c1aa6ddb-952c-4894-a11b-d3f37a039c68",
         "name": "PRUEBA",
@@ -563,8 +483,8 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          864,
-          -1392
+          2048,
+          -1360
         ],
         "id": "be6d80b9-8838-469c-8bb1-5e9c75d77d71",
         "name": "Wait4",
@@ -579,37 +499,39 @@
         "type": "n8n-nodes-base.respondToWebhook",
         "typeVersion": 1.5,
         "position": [
-          -240,
-          -1392
+          448,
+          -1232
         ],
         "id": "cd086d64-045c-4105-8f96-198fa0dae5cc",
         "name": "Respond to Webhook1"
       },
       {
         "parameters": {
-          "height": 432,
-          "width": 368,
+          "content": "",
+          "height": 384,
+          "width": 384,
           "color": 3
         },
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          -464,
-          -1680
+          208,
+          -1472
         ],
         "id": "7dcddf5d-7702-4438-9c1a-2439d282d272",
         "name": "Sticky Note"
       },
       {
         "parameters": {
+          "content": "SIERRA NEVADA GRANADA",
           "height": 336,
           "width": 1712
         },
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          576,
-          -1504
+          1760,
+          -1472
         ],
         "id": "77eff92c-8d5d-4d64-ad56-038183791da4",
         "name": "Sticky Note1"
@@ -624,8 +546,8 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          2400,
-          -1504
+          3584,
+          -1472
         ],
         "id": "bde44f7e-06f7-4d1b-adbf-fd7a0d237577",
         "name": "Sticky Note2"
@@ -643,8 +565,8 @@
         "type": "n8n-nodes-base.facebookGraphApi",
         "typeVersion": 1,
         "position": [
-          2432,
-          -1760
+          3616,
+          -1728
         ],
         "id": "1649991c-daa3-4355-b549-f29a13970b09",
         "name": "Facebook Graph API2",
@@ -668,8 +590,8 @@
         "type": "n8n-nodes-base.facebookGraphApi",
         "typeVersion": 1,
         "position": [
-          3120,
-          -1776
+          4304,
+          -1744
         ],
         "id": "b7a1439a-261e-4b7d-b768-cd8ac12059a8",
         "name": "Facebook Graph API3",
@@ -700,8 +622,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          2640,
-          -1760
+          3824,
+          -1728
         ],
         "id": "e25f848f-45eb-455a-a125-7d69a992bd5c",
         "name": "HTTP Request5",
@@ -717,8 +639,8 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          2784,
-          -1760
+          3968,
+          -1728
         ],
         "id": "94ea1db5-6e45-47f1-80d9-ada0e85ca6cc",
         "name": "Wait3",
@@ -751,8 +673,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          2928,
-          -1760
+          4112,
+          -1728
         ],
         "id": "079d857a-822b-4d2d-abb0-fdd8281762cd",
         "name": "If2"
@@ -774,8 +696,8 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          3280,
-          -1776
+          4464,
+          -1744
         ],
         "id": "16fb43a1-558d-40e8-b593-94a56f017429",
         "name": "Edit Fields"
@@ -794,8 +716,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          3440,
-          -1776
+          4624,
+          -1744
         ],
         "id": "028482b8-0845-4c66-be29-8c9ff57e3894",
         "name": "HTTP Request8",
@@ -820,8 +742,8 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          2400,
-          -1856
+          3584,
+          -1824
         ],
         "id": "92455a60-6b64-4093-9b05-0b38c7d78bd8",
         "name": "Sticky Note3"
@@ -839,8 +761,8 @@
         "type": "n8n-nodes-base.facebookGraphApi",
         "typeVersion": 1,
         "position": [
-          2432,
-          -1056
+          3616,
+          -1024
         ],
         "id": "bd5be653-2119-4ea4-a258-24e8452c846a",
         "name": "Facebook Graph API4",
@@ -864,8 +786,8 @@
         "type": "n8n-nodes-base.facebookGraphApi",
         "typeVersion": 1,
         "position": [
-          3120,
-          -1072
+          4304,
+          -1040
         ],
         "id": "fa68e574-b091-4639-a8cd-97ef15710818",
         "name": "Facebook Graph API5",
@@ -896,8 +818,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          2640,
-          -1056
+          3824,
+          -1024
         ],
         "id": "276ad99f-21d2-4e7b-a775-9489c8a0e0e0",
         "name": "HTTP Request9",
@@ -913,8 +835,8 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          2784,
-          -1056
+          3968,
+          -1024
         ],
         "id": "fbd4ef1c-2d52-4a00-b4ba-1d317422e3f0",
         "name": "Wait5",
@@ -947,8 +869,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          2928,
-          -1056
+          4112,
+          -1024
         ],
         "id": "4db01e5f-01ba-4c02-b12b-79b497e91073",
         "name": "If3"
@@ -970,8 +892,8 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          3280,
-          -1072
+          4464,
+          -1040
         ],
         "id": "93f5b1be-3241-4298-98a9-a4ab4c543828",
         "name": "Edit Fields2"
@@ -990,8 +912,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          3440,
-          -1072
+          4624,
+          -1040
         ],
         "id": "910f6db7-b74e-4707-a150-91e00d45cafe",
         "name": "HTTP Request10",
@@ -1016,8 +938,8 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          2400,
-          -1152
+          3584,
+          -1120
         ],
         "id": "a6bdaeaa-e921-4885-954e-50c33704d4f1",
         "name": "Sticky Note4"
@@ -1035,8 +957,8 @@
         "type": "n8n-nodes-base.facebookGraphApi",
         "typeVersion": 1,
         "position": [
-          2432,
-          -2112
+          3616,
+          -2080
         ],
         "id": "b2d37c3b-d837-43d0-8c60-b6b641f7c06f",
         "name": "Facebook Graph API6",
@@ -1060,8 +982,8 @@
         "type": "n8n-nodes-base.facebookGraphApi",
         "typeVersion": 1,
         "position": [
-          3120,
-          -2128
+          4304,
+          -2096
         ],
         "id": "488b66f7-fb64-43df-b350-d6821216c28c",
         "name": "Facebook Graph API7",
@@ -1092,8 +1014,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          2640,
-          -2112
+          3824,
+          -2080
         ],
         "id": "1d73bcf6-f259-43fc-81ef-ca82cccdbe13",
         "name": "HTTP Request11",
@@ -1109,8 +1031,8 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          2784,
-          -2112
+          3968,
+          -2080
         ],
         "id": "dab41c1d-42bb-4b6b-b13a-8d3c3dc89c8f",
         "name": "Wait6",
@@ -1143,8 +1065,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          2928,
-          -2112
+          4112,
+          -2080
         ],
         "id": "6abf9ba1-e69b-4feb-9486-6e3532a04457",
         "name": "If4"
@@ -1166,8 +1088,8 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          3280,
-          -2128
+          4464,
+          -2096
         ],
         "id": "6b2a4807-87bc-4fc2-9146-62edd7b14cf9",
         "name": "Edit Fields4"
@@ -1186,8 +1108,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          3440,
-          -2128
+          4624,
+          -2096
         ],
         "id": "7533ece0-de3a-472e-a8e0-56d3045ff60a",
         "name": "HTTP Request12",
@@ -1212,8 +1134,8 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          2400,
-          -2208
+          3584,
+          -2176
         ],
         "id": "db8cdce1-f555-447e-9d70-f2dca0e06cec",
         "name": "Sticky Note5"
@@ -1231,8 +1153,8 @@
         "type": "n8n-nodes-base.facebookGraphApi",
         "typeVersion": 1,
         "position": [
-          2432,
-          -688
+          3616,
+          -656
         ],
         "id": "782d8ce7-3c1d-49e2-8bab-775e52b16b6a",
         "name": "Facebook Graph API8",
@@ -1256,8 +1178,8 @@
         "type": "n8n-nodes-base.facebookGraphApi",
         "typeVersion": 1,
         "position": [
-          3120,
-          -704
+          4304,
+          -672
         ],
         "id": "2ca3f4f1-6c07-4fec-8fa1-ca022c7c2f46",
         "name": "Facebook Graph API9",
@@ -1288,8 +1210,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          2640,
-          -688
+          3824,
+          -656
         ],
         "id": "bb64dfd4-0bc2-499a-ae7d-59d4f6220904",
         "name": "HTTP Request13",
@@ -1305,8 +1227,8 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          2784,
-          -688
+          3968,
+          -656
         ],
         "id": "0f69dbd5-baed-4ed7-9df0-11dc6f0c0ea8",
         "name": "Wait7",
@@ -1339,8 +1261,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          2928,
-          -688
+          4112,
+          -656
         ],
         "id": "0e371f48-eb71-41d8-a70f-8fd81427cb9f",
         "name": "If5"
@@ -1362,8 +1284,8 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          3280,
-          -704
+          4464,
+          -672
         ],
         "id": "76f36a98-8681-431b-b8cc-520b0e65aff5",
         "name": "Edit Fields5"
@@ -1382,8 +1304,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          3440,
-          -704
+          4624,
+          -672
         ],
         "id": "12f5ca0b-59a6-4e3f-b18c-e785e7e17a6d",
         "name": "HTTP Request14",
@@ -1408,8 +1330,8 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          2400,
-          -784
+          3584,
+          -752
         ],
         "id": "b057cb59-8982-4a1d-96fc-570016176971",
         "name": "Sticky Note6"
@@ -1428,8 +1350,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          640,
-          -1040
+          1824,
+          -1008
         ],
         "id": "7d068ac4-49c4-478c-8b52-3bd6dfb3b2f7",
         "name": "HTTP Request2",
@@ -1455,8 +1377,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          1136,
-          -1040
+          2320,
+          -1008
         ],
         "id": "bcb9fc1d-abaf-412e-9d7e-650000f09efb",
         "name": "HTTP Request15",
@@ -1494,8 +1416,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          1968,
-          -1040
+          3152,
+          -1008
         ],
         "id": "3ec715de-7444-4977-9383-ccb80abf3cde",
         "name": "If6"
@@ -1510,8 +1432,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          2160,
-          -1056
+          3344,
+          -1024
         ],
         "id": "6b312cf3-0c5f-4c9e-bb30-f69714d8e3c4",
         "name": "HTTP Request16",
@@ -1529,8 +1451,8 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          1760,
-          -1040
+          2944,
+          -1008
         ],
         "id": "853d58ce-00e4-4a8a-9723-90051208e1de",
         "name": "Wait8",
@@ -1546,8 +1468,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          1552,
-          -1040
+          2736,
+          -1008
         ],
         "id": "83671c11-ad49-4344-ad79-fcf276b0a50f",
         "name": "HTTP Request17",
@@ -1572,8 +1494,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          1328,
-          -1040
+          2512,
+          -1008
         ],
         "id": "116cd519-9f44-4429-b136-dd56619e84b7",
         "name": "PRUEBA1",
@@ -1591,8 +1513,8 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          864,
-          -1040
+          2048,
+          -1008
         ],
         "id": "11ea1fc4-0857-4724-9d14-57d595ecd769",
         "name": "Wait9",
@@ -1600,14 +1522,15 @@
       },
       {
         "parameters": {
+          "content": "MESIT",
           "height": 336,
           "width": 1712
         },
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          576,
-          -1152
+          1760,
+          -1120
         ],
         "id": "8f03d0d6-a686-4e0a-b47c-f0a9c42f04f4",
         "name": "Sticky Note7"
@@ -1626,8 +1549,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          640,
-          -688
+          1824,
+          -656
         ],
         "id": "31861901-f40c-42fe-947e-a62612d4df81",
         "name": "HTTP Request18",
@@ -1653,8 +1576,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          1136,
-          -688
+          2320,
+          -656
         ],
         "id": "5a17abe4-67b3-4a2f-8d33-52d7e53be514",
         "name": "HTTP Request19",
@@ -1692,8 +1615,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          1968,
-          -688
+          3152,
+          -656
         ],
         "id": "979c6369-4ed1-4624-84f8-0c4e54758722",
         "name": "If7"
@@ -1708,8 +1631,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          2160,
-          -704
+          3344,
+          -672
         ],
         "id": "e5aac2b1-f251-412d-8762-15fe48ae586a",
         "name": "HTTP Request20",
@@ -1727,8 +1650,8 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          1760,
-          -688
+          2944,
+          -656
         ],
         "id": "45df4e01-97ad-4a2c-bd1a-19f773bc5cc5",
         "name": "Wait10",
@@ -1744,8 +1667,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          1552,
-          -688
+          2736,
+          -656
         ],
         "id": "79fbf1d1-4f53-4033-a434-23f39a696352",
         "name": "HTTP Request21",
@@ -1770,8 +1693,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          1328,
-          -688
+          2512,
+          -656
         ],
         "id": "a589a100-8364-4df5-abf5-a07cff91d164",
         "name": "PRUEBA2",
@@ -1789,8 +1712,8 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          864,
-          -688
+          2048,
+          -656
         ],
         "id": "612110aa-7498-448c-a831-ddb421fd2993",
         "name": "Wait11",
@@ -1798,14 +1721,15 @@
       },
       {
         "parameters": {
+          "content": "SNOWDIVISION",
           "height": 336,
           "width": 1712
         },
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          576,
-          -800
+          1760,
+          -768
         ],
         "id": "298991d2-24be-4a2a-a73a-8a129b1e0eca",
         "name": "Sticky Note8"
@@ -1824,8 +1748,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          640,
-          -1744
+          1824,
+          -1712
         ],
         "id": "a7892d56-ec2c-4102-aaa7-2bd0e6c3d623",
         "name": "HTTP Request22",
@@ -1851,8 +1775,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          1136,
-          -1744
+          2320,
+          -1712
         ],
         "id": "6ad838f4-01d7-4bf6-acf6-102d65f9b4da",
         "name": "HTTP Request23",
@@ -1890,8 +1814,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          1968,
-          -1744
+          3152,
+          -1712
         ],
         "id": "21fba3c1-c839-4dec-b1ab-a3dedff658b2",
         "name": "If8"
@@ -1906,8 +1830,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          2160,
-          -1760
+          3344,
+          -1728
         ],
         "id": "67182458-f4ca-4e0a-99d9-7aa4be20fd16",
         "name": "HTTP Request24",
@@ -1925,8 +1849,8 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          1760,
-          -1744
+          2944,
+          -1712
         ],
         "id": "331571a2-3585-47db-8e32-1bec120b6271",
         "name": "Wait12",
@@ -1942,8 +1866,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          1552,
-          -1744
+          2736,
+          -1712
         ],
         "id": "e0a02df8-2058-4b46-aee8-cd96f642d9a1",
         "name": "HTTP Request25",
@@ -1968,8 +1892,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          1328,
-          -1744
+          2512,
+          -1712
         ],
         "id": "0cb5a7da-9606-49de-8f78-79bb69a99baa",
         "name": "PRUEBA3",
@@ -1987,8 +1911,8 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          864,
-          -1744
+          2048,
+          -1712
         ],
         "id": "890b6d56-a9c4-4a89-b360-6ae060959330",
         "name": "Wait13",
@@ -1996,14 +1920,15 @@
       },
       {
         "parameters": {
+          "content": "RULES\n",
           "height": 336,
           "width": 1712
         },
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          576,
-          -1856
+          1760,
+          -1824
         ],
         "id": "57f941b7-6f05-4c38-a9e2-1f94d66b2ec1",
         "name": "Sticky Note9"
@@ -2022,8 +1947,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          640,
-          -2096
+          1824,
+          -2064
         ],
         "id": "cc29fb60-6525-47c2-8f41-9e24bfda5455",
         "name": "HTTP Request26",
@@ -2032,28 +1957,6 @@
         "executeOnce": false,
         "alwaysOutputData": false,
         "notesInFlow": false,
-        "credentials": {
-          "oAuth2Api": {
-            "id": "eHEbZK7oC3pW1LQr",
-            "name": "Canva"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "url": "=https://api.canva.com/rest/v1/autofills/{{ $('HTTP Request26').item.json.job.id }}",
-          "authentication": "genericCredentialType",
-          "genericAuthType": "oAuth2Api",
-          "options": {}
-        },
-        "type": "n8n-nodes-base.httpRequest",
-        "typeVersion": 4.3,
-        "position": [
-          1136,
-          -2096
-        ],
-        "id": "382a76ce-ed9b-4fee-9825-0b05cbb0392a",
-        "name": "HTTP Request27",
         "credentials": {
           "oAuth2Api": {
             "id": "eHEbZK7oC3pW1LQr",
@@ -2088,8 +1991,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          1968,
-          -2096
+          3152,
+          -2064
         ],
         "id": "f0773575-696a-4702-b300-c2990e55fe7b",
         "name": "If9"
@@ -2104,8 +2007,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          2160,
-          -2112
+          3344,
+          -2080
         ],
         "id": "f83bdb42-a69c-47f8-9c4d-98a437c4edd1",
         "name": "HTTP Request28",
@@ -2123,8 +2026,8 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          1760,
-          -2096
+          2944,
+          -2064
         ],
         "id": "29bed0e3-79f6-4c50-bc95-7336e324b172",
         "name": "Wait14",
@@ -2140,8 +2043,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          1552,
-          -2096
+          2736,
+          -2064
         ],
         "id": "2ec1d228-f94e-4627-89ea-84411412a6e8",
         "name": "HTTP Request29",
@@ -2166,8 +2069,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          1328,
-          -2096
+          2512,
+          -2064
         ],
         "id": "6065ce1f-ab40-4138-b4ad-3eadd47c0ace",
         "name": "PRUEBA4",
@@ -2185,8 +2088,8 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          864,
-          -2096
+          2048,
+          -2064
         ],
         "id": "59b652c0-92ff-4245-9cc8-d262428f6ca1",
         "name": "Wait15",
@@ -2194,17 +2097,694 @@
       },
       {
         "parameters": {
+          "content": "SURFIN",
           "height": 336,
           "width": 1712
         },
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          576,
-          -2208
+          1760,
+          -2176
         ],
         "id": "23ffcfb3-0c3b-4eb4-beeb-aead3e3be711",
         "name": "Sticky Note10"
+      },
+      {
+        "parameters": {
+          "url": "=https://api.canva.com/rest/v1/autofills/{{ $('HTTP Request26').item.json.job.id }}",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "oAuth2Api",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          2320,
+          -2064
+        ],
+        "id": "382a76ce-ed9b-4fee-9825-0b05cbb0392a",
+        "name": "HTTP Request27",
+        "credentials": {
+          "oAuth2Api": {
+            "id": "eHEbZK7oC3pW1LQr",
+            "name": "Canva"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "url": "=https://graph.facebook.com/v20.0/{{ $json.id }}?fields=status,status_code",
+          "authentication": "predefinedCredentialType",
+          "nodeCredentialType": "facebookGraphApi",
+          "sendQuery": true,
+          "queryParameters": {
+            "parameters": [
+              {
+                "name": "access_token",
+                "value": "EAF2z8nVLTA8BQVHL88vghg4RRZBH9svUgZCP93NSZAB9iSDKxTAMvz8DFby8KVqXp6DWFxfFDiSKOUXvXPVVrJcNxjFOmr0ZCXphOZBUUWRkP8sTZC9wwapmP8vlJQN4NHH2eW9zPRmg2SHrQ0AhjI3n2kx1vAa8nOtr6tbQMhcaP0X0eMtOComwFl3zR7zd7HowZDZD"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          3792,
+          -1376
+        ],
+        "id": "91bd9f34-7b2d-4cf0-8a12-5d9bdb044cba",
+        "name": "HTTP Request30",
+        "credentials": {
+          "facebookGraphApi": {
+            "id": "F7VbX8jWKCXdAM47",
+            "name": "Facebook Graph account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "rules": {
+            "values": [
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $json.body[\"cuentas[]\"] }}",
+                      "rightValue": "Rules",
+                      "operator": {
+                        "type": "array",
+                        "operation": "contains",
+                        "rightType": "any"
+                      },
+                      "id": "a4f7dee5-0b1b-414f-9bf4-d5b66e663d25"
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "d229774e-8481-4f56-957c-98fb64fba1c7",
+                      "leftValue": "={{ $json.body[\"cuentas[]\"] }}",
+                      "rightValue": "Surfin",
+                      "operator": {
+                        "type": "array",
+                        "operation": "contains",
+                        "rightType": "any"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "57a16e94-11a2-446b-b838-3afbf9558487",
+                      "leftValue": "={{ $json.body[\"cuentas[]\"] }}",
+                      "rightValue": "Sierra Nevada Granada",
+                      "operator": {
+                        "type": "array",
+                        "operation": "contains",
+                        "rightType": "any"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "8ee39b67-c5e2-4282-8b92-2997f13e881a",
+                      "leftValue": "={{ $json.body[\"cuentas[]\"] }}",
+                      "rightValue": "Snow Division",
+                      "operator": {
+                        "type": "array",
+                        "operation": "contains",
+                        "rightType": "any"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "28bec8a7-9917-4d4f-b861-5a1c978b9eea",
+                      "leftValue": "={{ $json.body[\"cuentas[]\"] }}",
+                      "rightValue": "Skiroom",
+                      "operator": {
+                        "type": "array",
+                        "operation": "contains",
+                        "rightType": "any"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "ca59f11f-dc75-4588-8686-222de320d862",
+                      "leftValue": "={{ $json.body[\"cuentas[]\"] }}",
+                      "rightValue": "Sierra Nevada VIP",
+                      "operator": {
+                        "type": "array",
+                        "operation": "contains",
+                        "rightType": "any"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              }
+            ]
+          },
+          "options": {
+            "allMatchingOutputs": true
+          }
+        },
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.4,
+        "position": [
+          784,
+          -1296
+        ],
+        "id": "62ca3c0f-97aa-4a87-b870-9462260ce7ec",
+        "name": "Switch"
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "CREATE OR REPLACE VIEW temporal_rules AS\nSELECT \n    id_documento, \n    nombre, \n    cuenta\nFROM \n    \"Plantillas_Canva\"\nWHERE \n    cuenta = 'Rules' \n    AND nombre = '{{ $json.body.aspecto_cielo }}';",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          960,
+          -2048
+        ],
+        "id": "03c0453e-afe7-451c-abdd-2c87037e9952",
+        "name": "Crear Vista Rules",
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "CREATE OR REPLACE VIEW temporal_surfin AS\nSELECT \n    id_documento, \n    nombre, \n    cuenta\nFROM \n    \"Plantillas_Canva\"\nWHERE \n    cuenta = 'Surfin' \n    AND nombre = '{{ $json.body.aspecto_cielo }}';",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          976,
+          -1664
+        ],
+        "id": "dcb07497-45a0-4ced-bc73-93699c12a7c0",
+        "name": "Crear Vista Surfin",
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "CREATE OR REPLACE VIEW temporal_sng AS\nSELECT \n    id_documento, \n    nombre, \n    cuenta\nFROM \n    \"Plantillas_Canva\"\nWHERE \n    cuenta = 'Sierra Nevada Granada' \n    AND nombre = '{{ $json.body.aspecto_cielo }}';",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          992,
+          -1360
+        ],
+        "id": "38f98b06-61b2-4a3b-9ab2-fa20ef9f47d6",
+        "name": "Crear Vista SNG",
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "CREATE OR REPLACE VIEW temporal_skiroom AS\nSELECT \n    id_documento, \n    nombre, \n    cuenta\nFROM \n    \"Plantillas_Canva\"\nWHERE \n    cuenta = 'Skiroom' \n    AND nombre = '{{ $json.body.aspecto_cielo }}';",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          992,
+          -1072
+        ],
+        "id": "eb93f1c1-6aa4-4da7-9dc8-e1d51b81c614",
+        "name": "Crear vista Skiroom",
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "CREATE OR REPLACE VIEW temporal_sngvip AS\nSELECT \n    id_documento, \n    nombre, \n    cuenta\nFROM \n    \"Plantillas_Canva\"\nWHERE \n    cuenta = 'Sierra Nevada VIP' \n    AND nombre = '{{ $json.body.aspecto_cielo }}';",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          992,
+          -928
+        ],
+        "id": "22f341dd-b73e-4314-9c54-c0deffe86d66",
+        "name": "Crear vista Sierra Nevada VIP",
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "CREATE OR REPLACE VIEW temporal_snowdivision AS\nSELECT \n    id_documento, \n    nombre, \n    cuenta\nFROM \n    \"Plantillas_Canva\"\nWHERE \n    cuenta = 'Snow Division' \n    AND nombre = '{{ $json.body.aspecto_cielo }}';",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          992,
+          -1216
+        ],
+        "id": "ee54a7c0-c9f7-4a21-9814-8b76aa042e39",
+        "name": "Crear Vista Snow Division",
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "DROP VIEW IF EXISTS temporal_rules;",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          1376,
+          -2048
+        ],
+        "id": "1758b16a-ba56-41a9-a39f-c07d7c81e26c",
+        "name": "Eliminar Vista Rules",
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "DROP VIEW IF EXISTS temporal_surfin;",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          1392,
+          -1664
+        ],
+        "id": "8939b807-10f4-4a93-975b-ce05f8896485",
+        "name": "Eliminar Vista Surfin",
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "select",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "temporal_rules",
+            "mode": "name"
+          },
+          "returnAll": true,
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          1136,
+          -2048
+        ],
+        "id": "4ae29102-e3c2-4110-8a65-93bcef34f04f",
+        "name": "Obtener Filas Rules",
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "select",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "temporal_surfin",
+            "mode": "name"
+          },
+          "returnAll": true,
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          1152,
+          -1664
+        ],
+        "id": "7ad8c4e1-136f-40c4-a51a-e4df404d356b",
+        "name": "Obtener Filas Surfin",
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "select",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "temporal_sng",
+            "mode": "name"
+          },
+          "returnAll": true,
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          1168,
+          -1360
+        ],
+        "id": "79508500-6a9b-4ef5-b4fc-88cc540a172a",
+        "name": "Obtener Filas SNG",
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "DROP VIEW IF EXISTS temporal_sng;",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          4864,
+          -1392
+        ],
+        "id": "9c3dc3c7-e7e9-40f4-b2c9-22200e297c82",
+        "name": "Eliminar Vista SNG",
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "select",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "temporal_snowdivision",
+            "mode": "name"
+          },
+          "returnAll": true,
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          1168,
+          -1216
+        ],
+        "id": "94a93178-5bd3-444b-83b3-4e60f53e4ddc",
+        "name": "Obtener Filas Snow Division",
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "DROP VIEW IF EXISTS temporal_snowdivision;",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          1408,
+          -1216
+        ],
+        "id": "84b8ba29-2801-4cf4-b527-ebfcd0876d61",
+        "name": "Eliminar Vista Snow Division",
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "amount": 1
+        },
+        "type": "n8n-nodes-base.wait",
+        "typeVersion": 1.1,
+        "position": [
+          1616,
+          -1360
+        ],
+        "id": "014c7832-2267-4f6d-ab65-22d7e76bb616",
+        "name": "Wait16",
+        "webhookId": "8cce73b4-0a6e-4db3-b503-1267489be04b",
+        "executeOnce": true
+      },
+      {
+        "parameters": {
+          "type": "random"
+        },
+        "type": "n8n-nodes-base.sort",
+        "typeVersion": 1,
+        "position": [
+          1424,
+          -1360
+        ],
+        "id": "e02cb370-e26b-4fe8-a358-24cd6426f6dc",
+        "name": "Sort1"
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "DROP VIEW IF EXISTS temporal_rules;",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          1408,
+          -1072
+        ],
+        "id": "3847abb4-da75-4c68-b61b-d062b187b6d2",
+        "name": "Eliminar Vista Rules1",
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "select",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "temporal_skiroom",
+            "mode": "name"
+          },
+          "returnAll": true,
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          1168,
+          -1072
+        ],
+        "id": "4b7701de-2a70-48fa-a8b8-c727befbb38c",
+        "name": "Obtener Filas Skiroom",
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "select",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "temporal_sngvip",
+            "mode": "name"
+          },
+          "returnAll": true,
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          1168,
+          -928
+        ],
+        "id": "2fcb3278-2701-4f05-b122-9f3352fc0f96",
+        "name": "Obtener Filas Sierra Nevada VIP",
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "DROP VIEW IF EXISTS temporal_sngvip;",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          1408,
+          -928
+        ],
+        "id": "cac03bb3-ae0a-4b8a-ac28-3166ee627618",
+        "name": "Eliminar Vista Sierra Nevada VIP",
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        }
       }
     ],
     "connections": {
@@ -2230,33 +2810,11 @@
           ]
         ]
       },
-      "Wait": {
-        "main": [
-          [
-            {
-              "node": "HTTP Request",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
       "Facebook Graph API": {
         "main": [
           [
             {
-              "node": "HTTP Request3",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "HTTP Request3": {
-        "main": [
-          [
-            {
-              "node": "Wait2",
+              "node": "HTTP Request30",
               "type": "main",
               "index": 0
             }
@@ -2336,29 +2894,7 @@
           ],
           [
             {
-              "node": "HTTP Request3",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "obtener contador": {
-        "main": [
-          [
-            {
-              "node": "Sort",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Sort": {
-        "main": [
-          [
-            {
-              "node": "Wait",
+              "node": "HTTP Request30",
               "type": "main",
               "index": 0
             }
@@ -2389,7 +2925,13 @@
       },
       "HTTP Request4": {
         "main": [
-          []
+          [
+            {
+              "node": "Eliminar Vista SNG",
+              "type": "main",
+              "index": 0
+            }
+          ]
         ]
       },
       "Formulario": {
@@ -2418,7 +2960,7 @@
         "main": [
           [
             {
-              "node": "obtener contador",
+              "node": "Switch",
               "type": "main",
               "index": 0
             }
@@ -3013,17 +3555,6 @@
           ]
         ]
       },
-      "HTTP Request27": {
-        "main": [
-          [
-            {
-              "node": "PRUEBA4",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
       "If9": {
         "main": [
           [
@@ -3085,14 +3616,225 @@
             }
           ]
         ]
+      },
+      "HTTP Request27": {
+        "main": [
+          [
+            {
+              "node": "PRUEBA4",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "HTTP Request30": {
+        "main": [
+          [
+            {
+              "node": "Wait2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Switch": {
+        "main": [
+          [
+            {
+              "node": "Crear Vista Rules",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Crear Vista Surfin",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Crear Vista SNG",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Crear Vista Snow Division",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Crear vista Skiroom",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Crear vista Sierra Nevada VIP",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Crear Vista Rules": {
+        "main": [
+          [
+            {
+              "node": "Obtener Filas Rules",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Crear Vista Surfin": {
+        "main": [
+          [
+            {
+              "node": "Obtener Filas Surfin",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Obtener Filas Rules": {
+        "main": [
+          [
+            {
+              "node": "Eliminar Vista Rules",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Obtener Filas Surfin": {
+        "main": [
+          [
+            {
+              "node": "Eliminar Vista Surfin",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Obtener Filas SNG": {
+        "main": [
+          [
+            {
+              "node": "Sort1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Obtener Filas Snow Division": {
+        "main": [
+          [
+            {
+              "node": "Eliminar Vista Snow Division",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Crear Vista SNG": {
+        "main": [
+          [
+            {
+              "node": "Obtener Filas SNG",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Sort1": {
+        "main": [
+          [
+            {
+              "node": "Wait16",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Wait16": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Crear vista Skiroom": {
+        "main": [
+          [
+            {
+              "node": "Obtener Filas Skiroom",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Crear vista Sierra Nevada VIP": {
+        "main": [
+          [
+            {
+              "node": "Obtener Filas Sierra Nevada VIP",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Obtener Filas Skiroom": {
+        "main": [
+          [
+            {
+              "node": "Eliminar Vista Rules1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Obtener Filas Sierra Nevada VIP": {
+        "main": [
+          [
+            {
+              "node": "Eliminar Vista Sierra Nevada VIP",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version 0e80941a",
+    "name": "Version 6996d0f2",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "0e80941a-19e2-4d55-b757-14026dba5dfe",
+  "activeVersionId": "6996d0f2-4221-4508-833c-e79d0f8c3e96",
   "connections": {
     "HTTP Request": {
       "main": [
@@ -3116,33 +3858,11 @@
         ]
       ]
     },
-    "Wait": {
-      "main": [
-        [
-          {
-            "node": "HTTP Request",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Facebook Graph API": {
       "main": [
         [
           {
-            "node": "HTTP Request3",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "HTTP Request3": {
-      "main": [
-        [
-          {
-            "node": "Wait2",
+            "node": "HTTP Request30",
             "type": "main",
             "index": 0
           }
@@ -3222,29 +3942,7 @@
         ],
         [
           {
-            "node": "HTTP Request3",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "obtener contador": {
-      "main": [
-        [
-          {
-            "node": "Sort",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Sort": {
-      "main": [
-        [
-          {
-            "node": "Wait",
+            "node": "HTTP Request30",
             "type": "main",
             "index": 0
           }
@@ -3275,7 +3973,13 @@
     },
     "HTTP Request4": {
       "main": [
-        []
+        [
+          {
+            "node": "Eliminar Vista SNG",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Formulario": {
@@ -3304,7 +4008,7 @@
       "main": [
         [
           {
-            "node": "obtener contador",
+            "node": "Switch",
             "type": "main",
             "index": 0
           }
@@ -3971,6 +4675,206 @@
           }
         ]
       ]
+    },
+    "HTTP Request30": {
+      "main": [
+        [
+          {
+            "node": "Wait2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Crear Vista Rules",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Crear Vista Surfin",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Crear Vista SNG",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Crear Vista Snow Division",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Crear vista Skiroom",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Crear vista Sierra Nevada VIP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Crear Vista Rules": {
+      "main": [
+        [
+          {
+            "node": "Obtener Filas Rules",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Crear Vista Surfin": {
+      "main": [
+        [
+          {
+            "node": "Obtener Filas Surfin",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Obtener Filas Rules": {
+      "main": [
+        [
+          {
+            "node": "Eliminar Vista Rules",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Obtener Filas Surfin": {
+      "main": [
+        [
+          {
+            "node": "Eliminar Vista Surfin",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Obtener Filas SNG": {
+      "main": [
+        [
+          {
+            "node": "Sort1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Obtener Filas Snow Division": {
+      "main": [
+        [
+          {
+            "node": "Eliminar Vista Snow Division",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Crear Vista SNG": {
+      "main": [
+        [
+          {
+            "node": "Obtener Filas SNG",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sort1": {
+      "main": [
+        [
+          {
+            "node": "Wait16",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait16": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Crear vista Skiroom": {
+      "main": [
+        [
+          {
+            "node": "Obtener Filas Skiroom",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Crear vista Sierra Nevada VIP": {
+      "main": [
+        [
+          {
+            "node": "Obtener Filas Sierra Nevada VIP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Obtener Filas Skiroom": {
+      "main": [
+        [
+          {
+            "node": "Eliminar Vista Rules1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Obtener Filas Sierra Nevada VIP": {
+      "main": [
+        [
+          {
+            "node": "Eliminar Vista Sierra Nevada VIP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-11-29T11:04:16.100Z",
@@ -3995,8 +4899,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        640,
-        -1392
+        1824,
+        -1360
       ],
       "id": "9654ecf1-32ab-4757-adb0-87b9f07315aa",
       "name": "HTTP Request",
@@ -4022,8 +4926,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1136,
-        -1392
+        2320,
+        -1360
       ],
       "id": "6222d526-1ca0-4ae2-b996-d6ae44f671c0",
       "name": "HTTP Request1",
@@ -4036,24 +4940,9 @@
     },
     {
       "parameters": {
-        "amount": 1
-      },
-      "type": "n8n-nodes-base.wait",
-      "typeVersion": 1.1,
-      "position": [
-        464,
-        -1392
-      ],
-      "id": "c9f8f9ca-6547-4340-bce6-580f2621e75b",
-      "name": "Wait",
-      "webhookId": "8cce73b4-0a6e-4db3-b503-1267489be04b",
-      "executeOnce": true
-    },
-    {
-      "parameters": {
         "httpRequestMethod": "POST",
         "graphApiVersion": "v23.0",
-        "node": "17841407565799162",
+        "node": "17841470046184468",
         "edge": "=media",
         "options": {
           "queryParametersJson": "={\n\"video_url\": \"{{ $json.job.urls[0] }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
@@ -4062,15 +4951,15 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        2432,
-        -1408
+        3616,
+        -1376
       ],
       "id": "7da66ccf-8fd7-48d5-8c6d-db816b75171b",
       "name": "Facebook Graph API",
       "credentials": {
         "facebookGraphApi": {
-          "id": "ECltAi3Up7NKSRvi",
-          "name": "Facebook Graph SNG"
+          "id": "F7VbX8jWKCXdAM47",
+          "name": "Facebook Graph account"
         }
       }
     },
@@ -4078,7 +4967,7 @@
       "parameters": {
         "httpRequestMethod": "POST",
         "graphApiVersion": "v23.0",
-        "node": "17841407565799162",
+        "node": "17841470046184468",
         "edge": "media_publish",
         "options": {
           "queryParametersJson": "={\n  \"creation_id\": \"{{$json.id}}\"\n}"
@@ -4087,49 +4976,18 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        3120,
-        -1424
+        4304,
+        -1392
       ],
       "id": "3bb41e32-f010-4102-acc1-fd96e8892501",
       "name": "Facebook Graph API1",
       "credentials": {
         "facebookGraphApi": {
-          "id": "ECltAi3Up7NKSRvi",
-          "name": "Facebook Graph SNG"
-        }
-      },
-      "onError": "continueRegularOutput"
-    },
-    {
-      "parameters": {
-        "url": "=https://graph.facebook.com/v20.0/{{ $json.id }}?fields=status,status_code",
-        "authentication": "predefinedCredentialType",
-        "nodeCredentialType": "facebookGraphApi",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
-            {
-              "name": "access_token",
-              "value": "EAF2z8nVLTA8BQVHL88vghg4RRZBH9svUgZCP93NSZAB9iSDKxTAMvz8DFby8KVqXp6DWFxfFDiSKOUXvXPVVrJcNxjFOmr0ZCXphOZBUUWRkP8sTZC9wwapmP8vlJQN4NHH2eW9zPRmg2SHrQ0AhjI3n2kx1vAa8nOtr6tbQMhcaP0X0eMtOComwFl3zR7zd7HowZDZD"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.3,
-      "position": [
-        2640,
-        -1408
-      ],
-      "id": "06240652-f050-41e7-a406-a611f53d1746",
-      "name": "HTTP Request3",
-      "credentials": {
-        "facebookGraphApi": {
           "id": "F7VbX8jWKCXdAM47",
           "name": "Facebook Graph account"
         }
-      }
+      },
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
@@ -4158,8 +5016,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        1968,
-        -1392
+        3152,
+        -1360
       ],
       "id": "88a07af8-5d4d-4c7e-9a1f-4db66d843eef",
       "name": "If"
@@ -4174,8 +5032,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2160,
-        -1408
+        3344,
+        -1376
       ],
       "id": "7555d978-506b-45aa-bf1a-cdfafabbe297",
       "name": "HTTP Request6",
@@ -4193,8 +5051,8 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        1760,
-        -1392
+        2944,
+        -1360
       ],
       "id": "5531d7ae-3e1e-4e70-a013-b7a468dfde34",
       "name": "Wait1",
@@ -4210,8 +5068,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1552,
-        -1392
+        2736,
+        -1360
       ],
       "id": "87ba9b82-c2a0-491d-a90b-251cc2de0db3",
       "name": "HTTP Request7",
@@ -4227,8 +5085,8 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        2784,
-        -1408
+        3968,
+        -1376
       ],
       "id": "475281c7-f520-4d18-8b3a-e8dc41dadfd9",
       "name": "Wait2",
@@ -4261,53 +5119,11 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        2928,
-        -1408
+        4112,
+        -1376
       ],
       "id": "c3ad2eff-8c1a-4047-ba71-69acd0745b05",
       "name": "If1"
-    },
-    {
-      "parameters": {
-        "operation": "get",
-        "dataTableId": {
-          "__rl": true,
-          "value": "YhO4ZRxZ7YiJDe7A",
-          "mode": "list",
-          "cachedResultName": "Plantillas Canva",
-          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/YhO4ZRxZ7YiJDe7A"
-        },
-        "filters": {
-          "conditions": [
-            {
-              "keyName": "Nombre_Documento",
-              "keyValue": "={{ $json.body.aspecto_cielo.toUpperCase() }}"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.dataTable",
-      "typeVersion": 1,
-      "position": [
-        96,
-        -1392
-      ],
-      "id": "9c7cc8ad-30f3-4ec4-a45f-97179ec78eae",
-      "name": "obtener contador",
-      "executeOnce": false
-    },
-    {
-      "parameters": {
-        "type": "random"
-      },
-      "type": "n8n-nodes-base.sort",
-      "typeVersion": 1,
-      "position": [
-        288,
-        -1392
-      ],
-      "id": "2529ddd5-e228-48e7-a21c-9620590d8f41",
-      "name": "Sort"
     },
     {
       "parameters": {
@@ -4326,8 +5142,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        3280,
-        -1424
+        4464,
+        -1392
       ],
       "id": "7eae2c4f-9d5b-4c4d-8417-1d9d218cbffe",
       "name": "Edit Fields1"
@@ -4346,8 +5162,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        3440,
-        -1424
+        4624,
+        -1392
       ],
       "id": "b3eeaaf6-1eca-4fe1-bc18-add61e7dfa6d",
       "name": "HTTP Request4",
@@ -4365,14 +5181,14 @@
     {
       "parameters": {
         "respondWith": "text",
-        "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Parte de Nieve - Sierra Nevada</title>\n    <style>\n        body {\n            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n            background-color: #121212;\n            color: #e0e0e0;\n            margin: 0;\n            padding: 20px;\n            display: flex;\n            justify-content: center;\n        }\n        .form-container {\n            background-color: #1e1e1e;\n            padding: 30px;\n            border-radius: 10px;\n            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);\n            max-width: 650px;\n            width: 100%;\n        }\n        h2 {\n            color: #ffffff;\n            text-align: center;\n            margin-top: 0;\n            margin-bottom: 25px;\n        }\n        .form-group {\n            margin-bottom: 15px;\n        }\n        .form-row {\n            display: flex;\n            gap: 15px;\n            margin-bottom: 15px;\n        }\n        .form-row .form-group {\n            flex: 1;\n            margin-bottom: 0;\n        }\n        label {\n            display: block;\n            font-weight: bold;\n            margin-bottom: 5px;\n            color: #b0bec5;\n            font-size: 13px;\n            text-transform: uppercase;\n            letter-spacing: 0.5px;\n        }\n        input[type=\"text\"],\n        select {\n            width: 100%;\n            padding: 10px;\n            background-color: #2c2c2c;\n            color: #ffffff;\n            border: 1px solid #555555;\n            border-radius: 5px;\n            box-sizing: border-box;\n            font-size: 15px;\n            transition: border-color 0.3s, box-shadow 0.3s;\n        }\n        input[type=\"text\"]::placeholder {\n            color: #757575;\n        }\n        input[type=\"text\"]:focus,\n        select:focus {\n            outline: none;\n            border-color: #4fc3f7;\n            box-shadow: 0 0 0 3px rgba(79, 195, 247, 0.2);\n        }\n        /* Color específico para las opciones del select en algunos navegadores */\n        select option {\n            background-color: #2c2c2c;\n            color: #ffffff;\n        }\n        .input-with-unit {\n            display: flex;\n            align-items: center;\n        }\n        .input-with-unit input {\n            border-top-right-radius: 0;\n            border-bottom-right-radius: 0;\n        }\n        .unit {\n            background-color: #333333;\n            border: 1px solid #555555;\n            border-left: none;\n            padding: 10px;\n            border-top-right-radius: 5px;\n            border-bottom-right-radius: 5px;\n            color: #b0bec5;\n            font-size: 14px;\n        }\n        \n        /* Estilos específicos para los Checkboxes */\n        .checkbox-group {\n            display: grid;\n            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));\n            gap: 10px;\n            margin-top: 8px;\n        }\n        .checkbox-label {\n            display: flex;\n            align-items: center;\n            font-weight: normal;\n            text-transform: none;\n            letter-spacing: normal;\n            color: #e0e0e0;\n            font-size: 14px;\n            cursor: pointer;\n            background-color: #2c2c2c;\n            padding: 10px 12px;\n            border-radius: 5px;\n            border: 1px solid #555555;\n            transition: background-color 0.2s, border-color 0.2s;\n            margin-bottom: 0;\n        }\n        .checkbox-label:hover {\n            background-color: #383838;\n            border-color: #4fc3f7;\n        }\n        .checkbox-label input[type=\"checkbox\"] {\n            margin-right: 10px;\n            accent-color: #0288d1;\n            width: 18px;\n            height: 18px;\n            cursor: pointer;\n        }\n\n        button {\n            width: 100%;\n            background-color: #0288d1;\n            color: white;\n            padding: 14px;\n            border: none;\n            border-radius: 5px;\n            font-size: 16px;\n            font-weight: bold;\n            cursor: pointer;\n            margin-top: 25px;\n            transition: background-color 0.3s;\n        }\n        button:hover {\n            background-color: #0277bd;\n        }\n        @media (max-width: 500px) {\n            .form-row {\n                flex-direction: column;\n                gap: 15px;\n            }\n            .checkbox-group {\n                grid-template-columns: 1fr 1fr;\n            }\n        }\n    </style>\n</head>\n<body>\n\n    <div class=\"form-container\">\n        <h2>❄️ Actualizar Parte de Nieve</h2>\n        \n        <form action=\"https://n8n.tailwind.es/webhook/recibirFormulario\" method=\"POST\">\n            \n            <div class=\"form-group\">\n                <label for=\"calidad_nieve\">Calidad Nieve</label>\n                <input type=\"text\" id=\"calidad_nieve\" name=\"calidad_nieve\" required placeholder=\"Ej. Polvo, Dura, Primavera...\">\n            </div>\n\n            <div class=\"form-group\">\n                <label for=\"aspecto_cielo\">Aspecto del Cielo</label>\n                <select id=\"aspecto_cielo\" name=\"aspecto_cielo\" required>\n                    <option value=\"\" disabled selected>Selecciona una opción</option>\n                    <option value=\"NUBOSO\">NUBOSO</option>\n                    <option value=\"DESPEJADO\">DESPEJADO</option>\n                    <option value=\"SOLEADO\">SOLEADO</option>\n                    <option value=\"NEVANDO\">NEVANDO</option>\n                </select>\n            </div>\n\n            <div class=\"form-group\">\n                <label for=\"visibilidad\">Visibilidad</label>\n                <input type=\"text\" id=\"visibilidad\" name=\"visibilidad\" required placeholder=\"Ej. Buena, Regular, Mala...\">\n            </div>\n\n            <div class=\"form-row\">\n                <div class=\"form-group\">\n                    <label for=\"temp_min\">Temperatura Mínima</label>\n                    <div class=\"input-with-unit\">\n                        <input type=\"text\" id=\"temp_min\" name=\"temp_min\" required placeholder=\"Ej. -5\">\n                        <span class=\"unit\">°C</span>\n                    </div>\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"temp_max\">Temperatura Máxima</label>\n                    <div class=\"input-with-unit\">\n                        <input type=\"text\" id=\"temp_max\" name=\"temp_max\" required placeholder=\"Ej. 2\">\n                        <span class=\"unit\">°C</span>\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"form-row\">\n                <div class=\"form-group\">\n                    <label for=\"viento_min\">Viento Mínimo</label>\n                    <div class=\"input-with-unit\">\n                        <input type=\"text\" id=\"viento_min\" name=\"viento_min\" required placeholder=\"Ej. 10\">\n                        <span class=\"unit\">km/h</span>\n                    </div>\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"viento_max\">Viento Máximo</label>\n                    <div class=\"input-with-unit\">\n                        <input type=\"text\" id=\"viento_max\" name=\"viento_max\" required placeholder=\"Ej. 45\">\n                        <span class=\"unit\">km/h</span>\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"form-row\">\n                <div class=\"form-group\">\n                    <label for=\"espesor_min\">Espesor Mínimo</label>\n                    <div class=\"input-with-unit\">\n                        <input type=\"text\" id=\"espesor_min\" name=\"espesor_min\" required placeholder=\"Ej. 40\">\n                        <span class=\"unit\">cm</span>\n                    </div>\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"espesor_max\">Espesor Máximo</label>\n                    <div class=\"input-with-unit\">\n                        <input type=\"text\" id=\"espesor_max\" name=\"espesor_max\" required placeholder=\"Ej. 120\">\n                        <span class=\"unit\">cm</span>\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"form-row\">\n                <div class=\"form-group\">\n                    <label for=\"remontes_abiertos\">Remontes Abiertos</label>\n                    <input type=\"text\" id=\"remontes_abiertos\" name=\"remontes_abiertos\" required placeholder=\"Ej. 14\">\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"km_esquiables\">Km Esquiables</label>\n                    <div class=\"input-with-unit\">\n                        <input type=\"text\" id=\"km_esquiables\" name=\"km_esquiables\" required placeholder=\"Ej. 55.5\">\n                        <span class=\"unit\">km</span>\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"form-group\">\n                <label for=\"numero_pistas\">Número de Pistas (Total)</label>\n                <input type=\"text\" id=\"numero_pistas\" name=\"numero_pistas\" required placeholder=\"Ej. 42\">\n            </div>\n\n            <div class=\"form-group\">\n                <label>Zonas / Pistas Abiertas</label>\n                <div class=\"checkbox-group\">\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Veleta\"> Veleta</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Laguna\"> Laguna</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Borreguiles\"> Borreguiles</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Pista del Mar\"> Pista del Mar</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Cauchiles Parador\"> Cauchiles Parador</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Loma Dílar\"> Loma Dílar</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Rio Monachil\"> Rio Monachil</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Parque Sulayr\"> Parque Sulayr</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Jardín Alpino\"> Jardín Alpino</label>\n                </div>\n            </div>\n\n            <button type=\"submit\">Enviar Parte de Nieve</button>\n        </form>\n    </div>\n\n</body>\n</html>",
+        "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Parte de Nieve - Sierra Nevada</title>\n    <style>\n        body {\n            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n            background-color: #121212;\n            color: #e0e0e0;\n            margin: 0;\n            padding: 20px;\n            display: flex;\n            justify-content: center;\n        }\n        .form-container {\n            background-color: #1e1e1e;\n            padding: 30px;\n            border-radius: 10px;\n            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);\n            max-width: 650px;\n            width: 100%;\n        }\n        h2 {\n            color: #ffffff;\n            text-align: center;\n            margin-top: 0;\n            margin-bottom: 25px;\n        }\n        .form-group {\n            margin-bottom: 15px;\n        }\n        .form-row {\n            display: flex;\n            gap: 15px;\n            margin-bottom: 15px;\n        }\n        .form-row .form-group {\n            flex: 1;\n            margin-bottom: 0;\n        }\n        label {\n            display: block;\n            font-weight: bold;\n            margin-bottom: 5px;\n            color: #b0bec5;\n            font-size: 13px;\n            text-transform: uppercase;\n            letter-spacing: 0.5px;\n        }\n        input[type=\"text\"],\n        select {\n            width: 100%;\n            padding: 10px;\n            background-color: #2c2c2c;\n            color: #ffffff;\n            border: 1px solid #555555;\n            border-radius: 5px;\n            box-sizing: border-box;\n            font-size: 15px;\n            transition: border-color 0.3s, box-shadow 0.3s;\n        }\n        input[type=\"text\"]::placeholder {\n            color: #757575;\n        }\n        input[type=\"text\"]:focus,\n        select:focus {\n            outline: none;\n            border-color: #4fc3f7;\n            box-shadow: 0 0 0 3px rgba(79, 195, 247, 0.2);\n        }\n        /* Color específico para las opciones del select en algunos navegadores */\n        select option {\n            background-color: #2c2c2c;\n            color: #ffffff;\n        }\n        .input-with-unit {\n            display: flex;\n            align-items: center;\n        }\n        .input-with-unit input {\n            border-top-right-radius: 0;\n            border-bottom-right-radius: 0;\n        }\n        .unit {\n            background-color: #333333;\n            border: 1px solid #555555;\n            border-left: none;\n            padding: 10px;\n            border-top-right-radius: 5px;\n            border-bottom-right-radius: 5px;\n            color: #b0bec5;\n            font-size: 14px;\n        }\n        \n        /* Estilos específicos para los Checkboxes */\n        .checkbox-group {\n            display: grid;\n            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));\n            gap: 10px;\n            margin-top: 8px;\n        }\n        .checkbox-label {\n            display: flex;\n            align-items: center;\n            font-weight: normal;\n            text-transform: none;\n            letter-spacing: normal;\n            color: #e0e0e0;\n            font-size: 14px;\n            cursor: pointer;\n            background-color: #2c2c2c;\n            padding: 10px 12px;\n            border-radius: 5px;\n            border: 1px solid #555555;\n            transition: background-color 0.2s, border-color 0.2s;\n            margin-bottom: 0;\n        }\n        .checkbox-label:hover {\n            background-color: #383838;\n            border-color: #4fc3f7;\n        }\n        .checkbox-label input[type=\"checkbox\"] {\n            margin-right: 10px;\n            accent-color: #0288d1;\n            width: 18px;\n            height: 18px;\n            cursor: pointer;\n        }\n\n        button {\n            width: 100%;\n            background-color: #0288d1;\n            color: white;\n            padding: 14px;\n            border: none;\n            border-radius: 5px;\n            font-size: 16px;\n            font-weight: bold;\n            cursor: pointer;\n            margin-top: 25px;\n            transition: background-color 0.3s;\n        }\n        button:hover {\n            background-color: #0277bd;\n        }\n        @media (max-width: 500px) {\n            .form-row {\n                flex-direction: column;\n                gap: 15px;\n            }\n            .checkbox-group {\n                grid-template-columns: 1fr 1fr;\n            }\n        }\n    </style>\n</head>\n<body>\n\n    <div class=\"form-container\">\n        <h2>❄️ Actualizar Parte de Nieve</h2>\n        \n        <form action=\"https://n8n.tailwind.es/webhook-test/recibirFormulario\" method=\"POST\">\n            \n            <div class=\"form-group\">\n                <label for=\"calidad_nieve\">Calidad Nieve</label>\n                <input type=\"text\" id=\"calidad_nieve\" name=\"calidad_nieve\" required placeholder=\"Ej. Polvo, Dura, Primavera...\">\n            </div>\n\n            <div class=\"form-group\">\n                <label for=\"aspecto_cielo\">Aspecto del Cielo</label>\n                <select id=\"aspecto_cielo\" name=\"aspecto_cielo\" required>\n                    <option value=\"\" disabled selected>Selecciona una opción</option>\n                    <option value=\"NUBOSO\">NUBOSO</option>\n                    <option value=\"DESPEJADO\">DESPEJADO</option>\n                    <option value=\"SOLEADO\">SOLEADO</option>\n                    <option value=\"NEVANDO\">NEVANDO</option>\n                </select>\n            </div>\n\n            <div class=\"form-group\">\n                <label for=\"visibilidad\">Visibilidad</label>\n                <input type=\"text\" id=\"visibilidad\" name=\"visibilidad\" required placeholder=\"Ej. Buena, Regular, Mala...\">\n            </div>\n\n            <div class=\"form-row\">\n                <div class=\"form-group\">\n                    <label for=\"temp_min\">Temperatura Mínima</label>\n                    <div class=\"input-with-unit\">\n                        <input type=\"text\" id=\"temp_min\" name=\"temp_min\" required placeholder=\"Ej. -5\">\n                        <span class=\"unit\">°C</span>\n                    </div>\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"temp_max\">Temperatura Máxima</label>\n                    <div class=\"input-with-unit\">\n                        <input type=\"text\" id=\"temp_max\" name=\"temp_max\" required placeholder=\"Ej. 2\">\n                        <span class=\"unit\">°C</span>\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"form-row\">\n                <div class=\"form-group\">\n                    <label for=\"viento_min\">Viento Mínimo</label>\n                    <div class=\"input-with-unit\">\n                        <input type=\"text\" id=\"viento_min\" name=\"viento_min\" required placeholder=\"Ej. 10\">\n                        <span class=\"unit\">km/h</span>\n                    </div>\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"viento_max\">Viento Máximo</label>\n                    <div class=\"input-with-unit\">\n                        <input type=\"text\" id=\"viento_max\" name=\"viento_max\" required placeholder=\"Ej. 45\">\n                        <span class=\"unit\">km/h</span>\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"form-row\">\n                <div class=\"form-group\">\n                    <label for=\"espesor_min\">Espesor Mínimo</label>\n                    <div class=\"input-with-unit\">\n                        <input type=\"text\" id=\"espesor_min\" name=\"espesor_min\" required placeholder=\"Ej. 40\">\n                        <span class=\"unit\">cm</span>\n                    </div>\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"espesor_max\">Espesor Máximo</label>\n                    <div class=\"input-with-unit\">\n                        <input type=\"text\" id=\"espesor_max\" name=\"espesor_max\" required placeholder=\"Ej. 120\">\n                        <span class=\"unit\">cm</span>\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"form-row\">\n                <div class=\"form-group\">\n                    <label for=\"remontes_abiertos\">Remontes Abiertos</label>\n                    <input type=\"text\" id=\"remontes_abiertos\" name=\"remontes_abiertos\" required placeholder=\"Ej. 14\">\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"km_esquiables\">Km Esquiables</label>\n                    <div class=\"input-with-unit\">\n                        <input type=\"text\" id=\"km_esquiables\" name=\"km_esquiables\" required placeholder=\"Ej. 55.5\">\n                        <span class=\"unit\">km</span>\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"form-group\">\n                <label for=\"numero_pistas\">Número de Pistas (Total)</label>\n                <input type=\"text\" id=\"numero_pistas\" name=\"numero_pistas\" required placeholder=\"Ej. 42\">\n            </div>\n\n            <div class=\"form-group\">\n                <label>Zonas / Pistas Abiertas</label>\n                <div class=\"checkbox-group\">\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Veleta\"> Veleta</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Laguna\"> Laguna</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Borreguiles\"> Borreguiles</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Pista del Mar\"> Pista del Mar</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Cauchiles Parador\"> Cauchiles Parador</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Loma Dílar\"> Loma Dílar</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Rio Monachil\"> Rio Monachil</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Parque Sulayr\"> Parque Sulayr</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Jardín Alpino\"> Jardín Alpino</label>\n                </div>\n            </div>\n\n            <div class=\"form-group\">\n                <label>Cuentas</label>\n                <div class=\"checkbox-group\">\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"cuentas[]\" value=\"Rules\"> Rules</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"cuentas[]\" value=\"Surfin\"> Surfin</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"cuentas[]\" value=\"Sierra Nevada Granada\"> Sierra Nevada Granada</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"cuentas[]\" value=\"Snow Division\"> Snow Division</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"cuentas[]\" value=\"Mesit\"> Mesit</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"cuentas[]\" value=\"Skiroom\"> Skiroom</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"cuentas[]\" value=\"Sierra Nevada VIP\"> Sierra Nevada VIP</label>\n                </div>\n            </div>\n\n            <button type=\"submit\">Enviar Parte de Nieve</button>\n        </form>\n    </div>\n\n</body>\n</html>",
         "options": {}
       },
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        -272,
-        -1600
+        416,
+        -1440
       ],
       "id": "8974fa52-b64f-4a01-a41f-e97ac127e6a3",
       "name": "Respond to Webhook"
@@ -4386,8 +5202,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -432,
-        -1600
+        256,
+        -1440
       ],
       "id": "64cc4927-7ecd-4b78-bc9a-faf4e19927fa",
       "name": "Formulario",
@@ -4403,8 +5219,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -432,
-        -1392
+        256,
+        -1232
       ],
       "id": "8af91482-0831-4c8c-90ed-ee5bdbfdf57c",
       "name": "RecibirFormulario",
@@ -4491,16 +5307,24 @@
               "name": "body[\"pistas_abiertas[]\"]",
               "value": "={{ $('RecibirFormulario').item.json.body[\"pistas_abiertas[]\"] }}",
               "type": "array"
+            },
+            {
+              "id": "78f168c5-94b0-4b92-8811-d683a25cdd66",
+              "name": "body[\"cuentas[]\"]",
+              "value": "={{ $json.body[\"cuentas[]\"] ? (Array.isArray($json.body[\"cuentas[]\"]) ? $json.body[\"cuentas[]\"] : [$json.body[\"cuentas[]\"]]) : [] }}",
+              "type": "array"
             }
           ]
         },
-        "options": {}
+        "options": {
+          "ignoreConversionErrors": true
+        }
       },
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -64,
-        -1392
+        624,
+        -1232
       ],
       "id": "fbf24bc9-0430-4a3a-88fd-136c70ba1b2a",
       "name": "Edit Fields3"
@@ -4519,8 +5343,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1328,
-        -1392
+        2512,
+        -1360
       ],
       "id": "c1aa6ddb-952c-4894-a11b-d3f37a039c68",
       "name": "PRUEBA",
@@ -4538,8 +5362,8 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        864,
-        -1392
+        2048,
+        -1360
       ],
       "id": "be6d80b9-8838-469c-8bb1-5e9c75d77d71",
       "name": "Wait4",
@@ -4554,23 +5378,24 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        -240,
-        -1392
+        448,
+        -1232
       ],
       "id": "cd086d64-045c-4105-8f96-198fa0dae5cc",
       "name": "Respond to Webhook1"
     },
     {
       "parameters": {
-        "height": 432,
-        "width": 368,
+        "content": "",
+        "height": 384,
+        "width": 384,
         "color": 3
       },
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -464,
-        -1680
+        208,
+        -1472
       ],
       "id": "7dcddf5d-7702-4438-9c1a-2439d282d272",
       "name": "Sticky Note"
@@ -4584,8 +5409,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        576,
-        -1504
+        1760,
+        -1472
       ],
       "id": "77eff92c-8d5d-4d64-ad56-038183791da4",
       "name": "Sticky Note1"
@@ -4600,8 +5425,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        2400,
-        -1504
+        3584,
+        -1472
       ],
       "id": "bde44f7e-06f7-4d1b-adbf-fd7a0d237577",
       "name": "Sticky Note2"
@@ -4619,8 +5444,8 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        2432,
-        -1760
+        3616,
+        -1728
       ],
       "id": "1649991c-daa3-4355-b549-f29a13970b09",
       "name": "Facebook Graph API2",
@@ -4644,8 +5469,8 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        3120,
-        -1776
+        4304,
+        -1744
       ],
       "id": "b7a1439a-261e-4b7d-b768-cd8ac12059a8",
       "name": "Facebook Graph API3",
@@ -4676,8 +5501,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2640,
-        -1760
+        3824,
+        -1728
       ],
       "id": "e25f848f-45eb-455a-a125-7d69a992bd5c",
       "name": "HTTP Request5",
@@ -4693,8 +5518,8 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        2784,
-        -1760
+        3968,
+        -1728
       ],
       "id": "94ea1db5-6e45-47f1-80d9-ada0e85ca6cc",
       "name": "Wait3",
@@ -4727,8 +5552,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        2928,
-        -1760
+        4112,
+        -1728
       ],
       "id": "079d857a-822b-4d2d-abb0-fdd8281762cd",
       "name": "If2"
@@ -4750,8 +5575,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        3280,
-        -1776
+        4464,
+        -1744
       ],
       "id": "16fb43a1-558d-40e8-b593-94a56f017429",
       "name": "Edit Fields"
@@ -4770,8 +5595,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        3440,
-        -1776
+        4624,
+        -1744
       ],
       "id": "028482b8-0845-4c66-be29-8c9ff57e3894",
       "name": "HTTP Request8",
@@ -4796,8 +5621,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        2400,
-        -1856
+        3584,
+        -1824
       ],
       "id": "92455a60-6b64-4093-9b05-0b38c7d78bd8",
       "name": "Sticky Note3"
@@ -4815,8 +5640,8 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        2432,
-        -1056
+        3616,
+        -1024
       ],
       "id": "bd5be653-2119-4ea4-a258-24e8452c846a",
       "name": "Facebook Graph API4",
@@ -4840,8 +5665,8 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        3120,
-        -1072
+        4304,
+        -1040
       ],
       "id": "fa68e574-b091-4639-a8cd-97ef15710818",
       "name": "Facebook Graph API5",
@@ -4872,8 +5697,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2640,
-        -1056
+        3824,
+        -1024
       ],
       "id": "276ad99f-21d2-4e7b-a775-9489c8a0e0e0",
       "name": "HTTP Request9",
@@ -4889,8 +5714,8 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        2784,
-        -1056
+        3968,
+        -1024
       ],
       "id": "fbd4ef1c-2d52-4a00-b4ba-1d317422e3f0",
       "name": "Wait5",
@@ -4923,8 +5748,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        2928,
-        -1056
+        4112,
+        -1024
       ],
       "id": "4db01e5f-01ba-4c02-b12b-79b497e91073",
       "name": "If3"
@@ -4946,8 +5771,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        3280,
-        -1072
+        4464,
+        -1040
       ],
       "id": "93f5b1be-3241-4298-98a9-a4ab4c543828",
       "name": "Edit Fields2"
@@ -4966,8 +5791,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        3440,
-        -1072
+        4624,
+        -1040
       ],
       "id": "910f6db7-b74e-4707-a150-91e00d45cafe",
       "name": "HTTP Request10",
@@ -4992,8 +5817,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        2400,
-        -1152
+        3584,
+        -1120
       ],
       "id": "a6bdaeaa-e921-4885-954e-50c33704d4f1",
       "name": "Sticky Note4"
@@ -5011,8 +5836,8 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        2432,
-        -2112
+        3616,
+        -2080
       ],
       "id": "b2d37c3b-d837-43d0-8c60-b6b641f7c06f",
       "name": "Facebook Graph API6",
@@ -5036,8 +5861,8 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        3120,
-        -2128
+        4304,
+        -2096
       ],
       "id": "488b66f7-fb64-43df-b350-d6821216c28c",
       "name": "Facebook Graph API7",
@@ -5068,8 +5893,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2640,
-        -2112
+        3824,
+        -2080
       ],
       "id": "1d73bcf6-f259-43fc-81ef-ca82cccdbe13",
       "name": "HTTP Request11",
@@ -5085,8 +5910,8 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        2784,
-        -2112
+        3968,
+        -2080
       ],
       "id": "dab41c1d-42bb-4b6b-b13a-8d3c3dc89c8f",
       "name": "Wait6",
@@ -5119,8 +5944,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        2928,
-        -2112
+        4112,
+        -2080
       ],
       "id": "6abf9ba1-e69b-4feb-9486-6e3532a04457",
       "name": "If4"
@@ -5142,8 +5967,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        3280,
-        -2128
+        4464,
+        -2096
       ],
       "id": "6b2a4807-87bc-4fc2-9146-62edd7b14cf9",
       "name": "Edit Fields4"
@@ -5162,8 +5987,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        3440,
-        -2128
+        4624,
+        -2096
       ],
       "id": "7533ece0-de3a-472e-a8e0-56d3045ff60a",
       "name": "HTTP Request12",
@@ -5188,8 +6013,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        2400,
-        -2208
+        3584,
+        -2176
       ],
       "id": "db8cdce1-f555-447e-9d70-f2dca0e06cec",
       "name": "Sticky Note5"
@@ -5207,8 +6032,8 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        2432,
-        -688
+        3616,
+        -656
       ],
       "id": "782d8ce7-3c1d-49e2-8bab-775e52b16b6a",
       "name": "Facebook Graph API8",
@@ -5232,8 +6057,8 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        3120,
-        -704
+        4304,
+        -672
       ],
       "id": "2ca3f4f1-6c07-4fec-8fa1-ca022c7c2f46",
       "name": "Facebook Graph API9",
@@ -5264,8 +6089,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2640,
-        -688
+        3824,
+        -656
       ],
       "id": "bb64dfd4-0bc2-499a-ae7d-59d4f6220904",
       "name": "HTTP Request13",
@@ -5281,8 +6106,8 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        2784,
-        -688
+        3968,
+        -656
       ],
       "id": "0f69dbd5-baed-4ed7-9df0-11dc6f0c0ea8",
       "name": "Wait7",
@@ -5315,8 +6140,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        2928,
-        -688
+        4112,
+        -656
       ],
       "id": "0e371f48-eb71-41d8-a70f-8fd81427cb9f",
       "name": "If5"
@@ -5338,8 +6163,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        3280,
-        -704
+        4464,
+        -672
       ],
       "id": "76f36a98-8681-431b-b8cc-520b0e65aff5",
       "name": "Edit Fields5"
@@ -5358,8 +6183,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        3440,
-        -704
+        4624,
+        -672
       ],
       "id": "12f5ca0b-59a6-4e3f-b18c-e785e7e17a6d",
       "name": "HTTP Request14",
@@ -5384,8 +6209,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        2400,
-        -784
+        3584,
+        -752
       ],
       "id": "b057cb59-8982-4a1d-96fc-570016176971",
       "name": "Sticky Note6"
@@ -5404,8 +6229,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        640,
-        -1040
+        1824,
+        -1008
       ],
       "id": "7d068ac4-49c4-478c-8b52-3bd6dfb3b2f7",
       "name": "HTTP Request2",
@@ -5431,8 +6256,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1136,
-        -1040
+        2320,
+        -1008
       ],
       "id": "bcb9fc1d-abaf-412e-9d7e-650000f09efb",
       "name": "HTTP Request15",
@@ -5470,8 +6295,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        1968,
-        -1040
+        3152,
+        -1008
       ],
       "id": "3ec715de-7444-4977-9383-ccb80abf3cde",
       "name": "If6"
@@ -5486,8 +6311,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2160,
-        -1056
+        3344,
+        -1024
       ],
       "id": "6b312cf3-0c5f-4c9e-bb30-f69714d8e3c4",
       "name": "HTTP Request16",
@@ -5505,8 +6330,8 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        1760,
-        -1040
+        2944,
+        -1008
       ],
       "id": "853d58ce-00e4-4a8a-9723-90051208e1de",
       "name": "Wait8",
@@ -5522,8 +6347,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1552,
-        -1040
+        2736,
+        -1008
       ],
       "id": "83671c11-ad49-4344-ad79-fcf276b0a50f",
       "name": "HTTP Request17",
@@ -5548,8 +6373,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1328,
-        -1040
+        2512,
+        -1008
       ],
       "id": "116cd519-9f44-4429-b136-dd56619e84b7",
       "name": "PRUEBA1",
@@ -5567,8 +6392,8 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        864,
-        -1040
+        2048,
+        -1008
       ],
       "id": "11ea1fc4-0857-4724-9d14-57d595ecd769",
       "name": "Wait9",
@@ -5583,8 +6408,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        576,
-        -1152
+        1760,
+        -1120
       ],
       "id": "8f03d0d6-a686-4e0a-b47c-f0a9c42f04f4",
       "name": "Sticky Note7"
@@ -5603,8 +6428,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        640,
-        -688
+        1824,
+        -656
       ],
       "id": "31861901-f40c-42fe-947e-a62612d4df81",
       "name": "HTTP Request18",
@@ -5630,8 +6455,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1136,
-        -688
+        2320,
+        -656
       ],
       "id": "5a17abe4-67b3-4a2f-8d33-52d7e53be514",
       "name": "HTTP Request19",
@@ -5669,8 +6494,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        1968,
-        -688
+        3152,
+        -656
       ],
       "id": "979c6369-4ed1-4624-84f8-0c4e54758722",
       "name": "If7"
@@ -5685,8 +6510,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2160,
-        -704
+        3344,
+        -672
       ],
       "id": "e5aac2b1-f251-412d-8762-15fe48ae586a",
       "name": "HTTP Request20",
@@ -5704,8 +6529,8 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        1760,
-        -688
+        2944,
+        -656
       ],
       "id": "45df4e01-97ad-4a2c-bd1a-19f773bc5cc5",
       "name": "Wait10",
@@ -5721,8 +6546,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1552,
-        -688
+        2736,
+        -656
       ],
       "id": "79fbf1d1-4f53-4033-a434-23f39a696352",
       "name": "HTTP Request21",
@@ -5747,8 +6572,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1328,
-        -688
+        2512,
+        -656
       ],
       "id": "a589a100-8364-4df5-abf5-a07cff91d164",
       "name": "PRUEBA2",
@@ -5766,8 +6591,8 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        864,
-        -688
+        2048,
+        -656
       ],
       "id": "612110aa-7498-448c-a831-ddb421fd2993",
       "name": "Wait11",
@@ -5782,8 +6607,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        576,
-        -800
+        1760,
+        -768
       ],
       "id": "298991d2-24be-4a2a-a73a-8a129b1e0eca",
       "name": "Sticky Note8"
@@ -5802,8 +6627,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        640,
-        -1744
+        1824,
+        -1712
       ],
       "id": "a7892d56-ec2c-4102-aaa7-2bd0e6c3d623",
       "name": "HTTP Request22",
@@ -5829,8 +6654,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1136,
-        -1744
+        2320,
+        -1712
       ],
       "id": "6ad838f4-01d7-4bf6-acf6-102d65f9b4da",
       "name": "HTTP Request23",
@@ -5868,8 +6693,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        1968,
-        -1744
+        3152,
+        -1712
       ],
       "id": "21fba3c1-c839-4dec-b1ab-a3dedff658b2",
       "name": "If8"
@@ -5884,8 +6709,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2160,
-        -1760
+        3344,
+        -1728
       ],
       "id": "67182458-f4ca-4e0a-99d9-7aa4be20fd16",
       "name": "HTTP Request24",
@@ -5903,8 +6728,8 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        1760,
-        -1744
+        2944,
+        -1712
       ],
       "id": "331571a2-3585-47db-8e32-1bec120b6271",
       "name": "Wait12",
@@ -5920,8 +6745,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1552,
-        -1744
+        2736,
+        -1712
       ],
       "id": "e0a02df8-2058-4b46-aee8-cd96f642d9a1",
       "name": "HTTP Request25",
@@ -5946,8 +6771,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1328,
-        -1744
+        2512,
+        -1712
       ],
       "id": "0cb5a7da-9606-49de-8f78-79bb69a99baa",
       "name": "PRUEBA3",
@@ -5965,8 +6790,8 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        864,
-        -1744
+        2048,
+        -1712
       ],
       "id": "890b6d56-a9c4-4a89-b360-6ae060959330",
       "name": "Wait13",
@@ -5981,8 +6806,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        576,
-        -1856
+        1760,
+        -1824
       ],
       "id": "57f941b7-6f05-4c38-a9e2-1f94d66b2ec1",
       "name": "Sticky Note9"
@@ -6001,8 +6826,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        640,
-        -2096
+        1824,
+        -2064
       ],
       "id": "cc29fb60-6525-47c2-8f41-9e24bfda5455",
       "name": "HTTP Request26",
@@ -6045,8 +6870,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        1968,
-        -2096
+        3152,
+        -2064
       ],
       "id": "f0773575-696a-4702-b300-c2990e55fe7b",
       "name": "If9"
@@ -6061,8 +6886,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2160,
-        -2112
+        3344,
+        -2080
       ],
       "id": "f83bdb42-a69c-47f8-9c4d-98a437c4edd1",
       "name": "HTTP Request28",
@@ -6080,8 +6905,8 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        1760,
-        -2096
+        2944,
+        -2064
       ],
       "id": "29bed0e3-79f6-4c50-bc95-7336e324b172",
       "name": "Wait14",
@@ -6097,8 +6922,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1552,
-        -2096
+        2736,
+        -2064
       ],
       "id": "2ec1d228-f94e-4627-89ea-84411412a6e8",
       "name": "HTTP Request29",
@@ -6123,8 +6948,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1328,
-        -2096
+        2512,
+        -2064
       ],
       "id": "6065ce1f-ab40-4138-b4ad-3eadd47c0ace",
       "name": "PRUEBA4",
@@ -6142,8 +6967,8 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        864,
-        -2096
+        2048,
+        -2064
       ],
       "id": "59b652c0-92ff-4245-9cc8-d262428f6ca1",
       "name": "Wait15",
@@ -6158,8 +6983,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        576,
-        -2208
+        1760,
+        -2176
       ],
       "id": "23ffcfb3-0c3b-4eb4-beeb-aead3e3be711",
       "name": "Sticky Note10"
@@ -6174,8 +6999,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1136,
-        -2096
+        2320,
+        -2064
       ],
       "id": "382a76ce-ed9b-4fee-9825-0b05cbb0392a",
       "name": "HTTP Request27",
@@ -6185,67 +7010,663 @@
           "name": "Canva"
         }
       }
-    }
-  ],
-  "pinData": {
-    "RecibirFormulario": [
-      {
-        "json": {
-          "headers": {
-            "connection": "upgrade",
-            "host": "n8n.tailwind.es",
-            "x-forwarded-for": "2.136.43.122",
-            "x-forwarded-proto": "https",
-            "content-length": "379",
-            "cache-control": "max-age=0",
-            "sec-ch-ua": "\"Not(A:Brand\";v=\"8\", \"Chromium\";v=\"144\", \"Brave\";v=\"144\"",
-            "sec-ch-ua-mobile": "?0",
-            "sec-ch-ua-platform": "\"Linux\"",
-            "origin": "null",
-            "content-type": "application/x-www-form-urlencoded",
-            "upgrade-insecure-requests": "1",
-            "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
-            "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
-            "sec-gpc": "1",
-            "accept-language": "es-ES,es;q=0.8",
-            "sec-fetch-site": "cross-site",
-            "sec-fetch-mode": "navigate",
-            "sec-fetch-user": "?1",
-            "sec-fetch-dest": "document",
-            "accept-encoding": "gzip, deflate, br, zstd"
-          },
-          "params": {},
-          "query": {},
-          "body": {
-            "calidad_nieve": "polvo",
-            "aspecto_cielo": "NUBOSO",
-            "visibilidad": "Buena",
-            "temp_min": "1",
-            "temp_max": "5",
-            "viento_min": "10",
-            "viento_max": "30",
-            "espesor_min": "40",
-            "espesor_max": "50",
-            "remontes_abiertos": "34",
-            "km_esquiables": "300",
-            "numero_pistas": "123",
-            "pistas_abiertas[]": [
-              "Veleta",
-              "Pista del Mar",
-              "Cauchiles Parador",
-              "Loma Dílar",
-              "Jardín Alpino"
-            ]
-          },
-          "webhookUrl": "https://n8n.tailwind.es/webhook/recibirFormulario",
-          "executionMode": "production"
+    },
+    {
+      "parameters": {
+        "url": "=https://graph.facebook.com/v20.0/{{ $json.id }}?fields=status,status_code",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "facebookGraphApi",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "access_token",
+              "value": "EAF2z8nVLTA8BQVHL88vghg4RRZBH9svUgZCP93NSZAB9iSDKxTAMvz8DFby8KVqXp6DWFxfFDiSKOUXvXPVVrJcNxjFOmr0ZCXphOZBUUWRkP8sTZC9wwapmP8vlJQN4NHH2eW9zPRmg2SHrQ0AhjI3n2kx1vAa8nOtr6tbQMhcaP0X0eMtOComwFl3zR7zd7HowZDZD"
+            }
+          ]
         },
-        "pairedItem": {
-          "item": 0
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        3792,
+        -1376
+      ],
+      "id": "91bd9f34-7b2d-4cf0-8a12-5d9bdb044cba",
+      "name": "HTTP Request30",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "F7VbX8jWKCXdAM47",
+          "name": "Facebook Graph account"
         }
       }
-    ]
-  },
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body[\"cuentas[]\"] }}",
+                    "rightValue": "Rules",
+                    "operator": {
+                      "type": "array",
+                      "operation": "contains",
+                      "rightType": "any"
+                    },
+                    "id": "a4f7dee5-0b1b-414f-9bf4-d5b66e663d25"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "d229774e-8481-4f56-957c-98fb64fba1c7",
+                    "leftValue": "={{ $json.body[\"cuentas[]\"] }}",
+                    "rightValue": "Surfin",
+                    "operator": {
+                      "type": "array",
+                      "operation": "contains",
+                      "rightType": "any"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "57a16e94-11a2-446b-b838-3afbf9558487",
+                    "leftValue": "={{ $json.body[\"cuentas[]\"] }}",
+                    "rightValue": "Sierra Nevada Granada",
+                    "operator": {
+                      "type": "array",
+                      "operation": "contains",
+                      "rightType": "any"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "8ee39b67-c5e2-4282-8b92-2997f13e881a",
+                    "leftValue": "={{ $json.body[\"cuentas[]\"] }}",
+                    "rightValue": "Snow Division",
+                    "operator": {
+                      "type": "array",
+                      "operation": "contains",
+                      "rightType": "any"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "28bec8a7-9917-4d4f-b861-5a1c978b9eea",
+                    "leftValue": "={{ $json.body[\"cuentas[]\"] }}",
+                    "rightValue": "Skiroom",
+                    "operator": {
+                      "type": "array",
+                      "operation": "contains",
+                      "rightType": "any"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "ca59f11f-dc75-4588-8686-222de320d862",
+                    "leftValue": "={{ $json.body[\"cuentas[]\"] }}",
+                    "rightValue": "Sierra Nevada VIP",
+                    "operator": {
+                      "type": "array",
+                      "operation": "contains",
+                      "rightType": "any"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {
+          "allMatchingOutputs": true
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        784,
+        -1296
+      ],
+      "id": "62ca3c0f-97aa-4a87-b870-9462260ce7ec",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "CREATE OR REPLACE VIEW temporal_rules AS\nSELECT \n    id_documento, \n    nombre, \n    cuenta\nFROM \n    \"Plantillas_Canva\"\nWHERE \n    cuenta = 'Rules' \n    AND nombre = '{{ $json.body.aspecto_cielo }}';",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        960,
+        -2048
+      ],
+      "id": "03c0453e-afe7-451c-abdd-2c87037e9952",
+      "name": "Crear Vista Rules",
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "CREATE OR REPLACE VIEW temporal_surfin AS\nSELECT \n    id_documento, \n    nombre, \n    cuenta\nFROM \n    \"Plantillas_Canva\"\nWHERE \n    cuenta = 'Surfin' \n    AND nombre = '{{ $json.body.aspecto_cielo }}';",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        976,
+        -1664
+      ],
+      "id": "dcb07497-45a0-4ced-bc73-93699c12a7c0",
+      "name": "Crear Vista Surfin",
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "CREATE OR REPLACE VIEW temporal_sng AS\nSELECT \n    id_documento, \n    nombre, \n    cuenta\nFROM \n    \"Plantillas_Canva\"\nWHERE \n    cuenta = 'Sierra Nevada Granada' \n    AND nombre = '{{ $json.body.aspecto_cielo }}';",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        992,
+        -1360
+      ],
+      "id": "38f98b06-61b2-4a3b-9ab2-fa20ef9f47d6",
+      "name": "Crear Vista SNG",
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "CREATE OR REPLACE VIEW temporal_skiroom AS\nSELECT \n    id_documento, \n    nombre, \n    cuenta\nFROM \n    \"Plantillas_Canva\"\nWHERE \n    cuenta = 'Skiroom' \n    AND nombre = '{{ $json.body.aspecto_cielo }}';",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        992,
+        -1072
+      ],
+      "id": "eb93f1c1-6aa4-4da7-9dc8-e1d51b81c614",
+      "name": "Crear vista Skiroom",
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "CREATE OR REPLACE VIEW temporal_sngvip AS\nSELECT \n    id_documento, \n    nombre, \n    cuenta\nFROM \n    \"Plantillas_Canva\"\nWHERE \n    cuenta = 'Sierra Nevada VIP' \n    AND nombre = '{{ $json.body.aspecto_cielo }}';",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        992,
+        -928
+      ],
+      "id": "22f341dd-b73e-4314-9c54-c0deffe86d66",
+      "name": "Crear vista Sierra Nevada VIP",
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "CREATE OR REPLACE VIEW temporal_snowdivision AS\nSELECT \n    id_documento, \n    nombre, \n    cuenta\nFROM \n    \"Plantillas_Canva\"\nWHERE \n    cuenta = 'Snow Division' \n    AND nombre = '{{ $json.body.aspecto_cielo }}';",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        992,
+        -1216
+      ],
+      "id": "ee54a7c0-c9f7-4a21-9814-8b76aa042e39",
+      "name": "Crear Vista Snow Division",
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "DROP VIEW IF EXISTS temporal_rules;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1376,
+        -2048
+      ],
+      "id": "1758b16a-ba56-41a9-a39f-c07d7c81e26c",
+      "name": "Eliminar Vista Rules",
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "DROP VIEW IF EXISTS temporal_surfin;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1392,
+        -1664
+      ],
+      "id": "8939b807-10f4-4a93-975b-ce05f8896485",
+      "name": "Eliminar Vista Surfin",
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "temporal_rules",
+          "mode": "name"
+        },
+        "returnAll": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1136,
+        -2048
+      ],
+      "id": "4ae29102-e3c2-4110-8a65-93bcef34f04f",
+      "name": "Obtener Filas Rules",
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "temporal_surfin",
+          "mode": "name"
+        },
+        "returnAll": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1152,
+        -1664
+      ],
+      "id": "7ad8c4e1-136f-40c4-a51a-e4df404d356b",
+      "name": "Obtener Filas Surfin",
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "temporal_sng",
+          "mode": "name"
+        },
+        "returnAll": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1168,
+        -1360
+      ],
+      "id": "79508500-6a9b-4ef5-b4fc-88cc540a172a",
+      "name": "Obtener Filas SNG",
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "DROP VIEW IF EXISTS temporal_sng;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        4864,
+        -1392
+      ],
+      "id": "9c3dc3c7-e7e9-40f4-b2c9-22200e297c82",
+      "name": "Eliminar Vista SNG",
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "temporal_snowdivision",
+          "mode": "name"
+        },
+        "returnAll": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1168,
+        -1216
+      ],
+      "id": "94a93178-5bd3-444b-83b3-4e60f53e4ddc",
+      "name": "Obtener Filas Snow Division",
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "DROP VIEW IF EXISTS temporal_snowdivision;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1408,
+        -1216
+      ],
+      "id": "84b8ba29-2801-4cf4-b527-ebfcd0876d61",
+      "name": "Eliminar Vista Snow Division",
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 1
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1616,
+        -1360
+      ],
+      "id": "014c7832-2267-4f6d-ab65-22d7e76bb616",
+      "name": "Wait16",
+      "webhookId": "8cce73b4-0a6e-4db3-b503-1267489be04b",
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "type": "random"
+      },
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        1424,
+        -1360
+      ],
+      "id": "e02cb370-e26b-4fe8-a358-24cd6426f6dc",
+      "name": "Sort1"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "DROP VIEW IF EXISTS temporal_rules;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1408,
+        -1072
+      ],
+      "id": "3847abb4-da75-4c68-b61b-d062b187b6d2",
+      "name": "Eliminar Vista Rules1",
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "temporal_skiroom",
+          "mode": "name"
+        },
+        "returnAll": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1168,
+        -1072
+      ],
+      "id": "4b7701de-2a70-48fa-a8b8-c727befbb38c",
+      "name": "Obtener Filas Skiroom",
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "temporal_sngvip",
+          "mode": "name"
+        },
+        "returnAll": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1168,
+        -928
+      ],
+      "id": "2fcb3278-2701-4f05-b122-9f3352fc0f96",
+      "name": "Obtener Filas Sierra Nevada VIP",
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "DROP VIEW IF EXISTS temporal_sngvip;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1408,
+        -928
+      ],
+      "id": "cac03bb3-ae0a-4b8a-ac28-3166ee627618",
+      "name": "Eliminar Vista Sierra Nevada VIP",
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
+        }
+      }
+    }
+  ],
+  "pinData": {},
   "settings": {
     "executionOrder": "v1",
     "timeSavedMode": "fixed",
@@ -6269,6 +7690,6 @@
   },
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2026-02-18T14:36:35.093Z",
-  "versionId": "8473f477-7adf-43ca-984d-34e7ce31512c"
+  "updatedAt": "2026-02-19T10:31:00.015Z",
+  "versionId": "6996d0f2-4221-4508-833c-e79d0f8c3e96"
 }
