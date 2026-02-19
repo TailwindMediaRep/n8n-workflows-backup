@@ -1,0 +1,364 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "Switch1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-02-19T07:42:00.128Z",
+  "id": "V8cPhTOqE-KfxqneMdBUP",
+  "isArchived": false,
+  "meta": null,
+  "name": "vacio",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -352,
+        -16
+      ],
+      "id": "4fd993b1-59b6-4f48-85b1-1f117df7b8f6",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body[\"cuentas[]\"] }}",
+                    "rightValue": "Rules",
+                    "operator": {
+                      "type": "array",
+                      "operation": "contains",
+                      "rightType": "any"
+                    },
+                    "id": "605eb46f-edbd-44de-bae0-7b3613735a63"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "a4a2ef94-8b85-4b5a-bea5-ff4fd1db2c62",
+                    "leftValue": "={{ $json.body[\"cuentas[]\"] }}",
+                    "rightValue": "Surfin",
+                    "operator": {
+                      "type": "array",
+                      "operation": "contains",
+                      "rightType": "any"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "a6b48176-6140-46ba-86e1-e162016f7090",
+                    "leftValue": "={{ $json.body[\"cuentas[]\"] }}",
+                    "rightValue": "Mesit",
+                    "operator": {
+                      "type": "array",
+                      "operation": "contains",
+                      "rightType": "any"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "b06049b2-e081-4b93-a193-6770452cb676",
+                    "leftValue": "={{ $json.body[\"cuentas[]\"] }}",
+                    "rightValue": "Sierra Nevada Granada",
+                    "operator": {
+                      "type": "array",
+                      "operation": "contains",
+                      "rightType": "any"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "0f9615da-b30d-4d45-9f6b-7d4f7f4351ce",
+                    "leftValue": "={{ $json.body[\"cuentas[]\"] }}",
+                    "rightValue": "Snow Division",
+                    "operator": {
+                      "type": "array",
+                      "operation": "contains",
+                      "rightType": "any"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {
+          "allMatchingOutputs": true
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        112,
+        -64
+      ],
+      "id": "7f934b65-ea89-4494-bfbc-eb2671fad014",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "jsCode": "return [\n  {\n    \"json\": {\n      \"headers\": {\n        \"connection\": \"upgrade\",\n        \"host\": \"n8n.tailwind.es\",\n        \"x-forwarded-for\": \"2.136.43.122\",\n        \"x-forwarded-proto\": \"https\",\n        \"content-length\": \"387\",\n        \"cache-control\": \"max-age=0\",\n        \"sec-ch-ua\": \"\\\"Not(A:Brand\\\";v=\\\"8\\\", \\\"Chromium\\\";v=\\\"144\\\", \\\"Brave\\\";v=\\\"144\\\"\",\n        \"sec-ch-ua-mobile\": \"?0\",\n        \"sec-ch-ua-platform\": \"\\\"Linux\\\"\",\n        \"origin\": \"null\",\n        \"content-type\": \"application/x-www-form-urlencoded\",\n        \"upgrade-insecure-requests\": \"1\",\n        \"user-agent\": \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36\",\n        \"accept\": \"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8\",\n        \"sec-gpc\": \"1\",\n        \"accept-language\": \"es-ES,es;q=0.6\",\n        \"sec-fetch-site\": \"cross-site\",\n        \"sec-fetch-mode\": \"navigate\",\n        \"sec-fetch-user\": \"?1\",\n        \"sec-fetch-dest\": \"document\",\n        \"accept-encoding\": \"gzip, deflate, br, zstd\"\n      },\n      \"params\": {},\n      \"query\": {},\n      \"body\": {\n        \"calidad_nieve\": \"polvo-dura, dura\",\n        \"aspecto_cielo\": \"DESPEJADO\",\n        \"visibilidad\": \"total\",\n        \"temp_min\": \"-7\",\n        \"temp_max\": \"0\",\n        \"viento_min\": \"20\",\n        \"viento_max\": \"60\",\n        \"espesor_min\": \"80\",\n        \"espesor_max\": \"400\",\n        \"remontes_abiertos\": \"17\",\n        \"km_esquiables\": \"71\",\n        \"numero_pistas\": \"89\",\n        \"pistas_abiertas[]\": [\n          \"Veleta\",\n          \"Borreguiles\",\n          \"Cauchiles Parador\",\n          \"Loma Dílar\",\n          \"Rio Monachil\"\n        ],\n        \"cuentas[]\": [\n          \"Rules\",\n          \"Surfin\",\n          \"Mesit\"\n        ]\n      },\n      \"webhookUrl\": \"https://n8n.tailwind.es/webhook/recibirFormulario\",\n      \"executionMode\": \"production\"\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -112,
+        -16
+      ],
+      "id": "47ac92c5-43c1-4020-b6cd-8d9422950fb1",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body['cuentas[]'] }}",
+                    "rightValue": "Rules",
+                    "operator": {
+                      "type": "array",
+                      "operation": "contains"
+                    },
+                    "id": "605eb46f-edbd-44de-bae0-7b3613735a63"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body['cuentas[]'] }}",
+                    "rightValue": "Sierra Nevada Granada",
+                    "operator": {
+                      "type": "array",
+                      "operation": "contains"
+                    },
+                    "id": "cond-2"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body['cuentas[]'] }}",
+                    "rightValue": "Surfin",
+                    "operator": {
+                      "type": "array",
+                      "operation": "contains"
+                    },
+                    "id": "cond-3"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body['cuentas[]'] }}",
+                    "rightValue": "Mesit",
+                    "operator": {
+                      "type": "array",
+                      "operation": "contains"
+                    },
+                    "id": "cond-4"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body['cuentas[]'] }}",
+                    "rightValue": "Snowdivision",
+                    "operator": {
+                      "type": "array",
+                      "operation": "contains"
+                    },
+                    "id": "cond-5"
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        592,
+        -480
+      ],
+      "id": "62559a86-d0b2-4bf4-8ad7-0f12b975eb46",
+      "name": "Switch1"
+    },
+    {
+      "parameters": {
+        "jsCode": "return [\n  {\n    \"json\": {\n      \"headers\": {\n        \"connection\": \"upgrade\",\n        \"host\": \"n8n.tailwind.es\",\n        \"x-forwarded-for\": \"2.136.43.122\",\n        \"x-forwarded-proto\": \"https\",\n        \"content-length\": \"387\",\n        \"cache-control\": \"max-age=0\",\n        \"sec-ch-ua\": \"\\\"Not(A:Brand\\\";v=\\\"8\\\", \\\"Chromium\\\";v=\\\"144\\\", \\\"Brave\\\";v=\\\"144\\\"\",\n        \"sec-ch-ua-mobile\": \"?0\",\n        \"sec-ch-ua-platform\": \"\\\"Linux\\\"\",\n        \"origin\": \"null\",\n        \"content-type\": \"application/x-www-form-urlencoded\",\n        \"upgrade-insecure-requests\": \"1\",\n        \"user-agent\": \"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36\",\n        \"accept\": \"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8\",\n        \"sec-gpc\": \"1\",\n        \"accept-language\": \"es-ES,es;q=0.6\",\n        \"sec-fetch-site\": \"cross-site\",\n        \"sec-fetch-mode\": \"navigate\",\n        \"sec-fetch-user\": \"?1\",\n        \"sec-fetch-dest\": \"document\",\n        \"accept-encoding\": \"gzip, deflate, br, zstd\"\n      },\n      \"params\": {},\n      \"query\": {},\n      \"body\": {\n        \"calidad_nieve\": \"polvo-dura, dura\",\n        \"aspecto_cielo\": \"DESPEJADO\",\n        \"visibilidad\": \"total\",\n        \"temp_min\": \"-7\",\n        \"temp_max\": \"0\",\n        \"viento_min\": \"20\",\n        \"viento_max\": \"60\",\n        \"espesor_min\": \"80\",\n        \"espesor_max\": \"400\",\n        \"remontes_abiertos\": \"17\",\n        \"km_esquiables\": \"71\",\n        \"numero_pistas\": \"89\",\n        \"pistas_abiertas[]\": [\n          \"Veleta\",\n          \"Borreguiles\",\n          \"Cauchiles Parador\",\n          \"Loma Dílar\",\n          \"Rio Monachil\"\n        ],\n        \"cuentas[]\": [\n          \"Rules\",\n          \"Surfin\",\n          \"Mesit\"\n        ]\n      },\n      \"webhookUrl\": \"https://n8n.tailwind.es/webhook/recibirFormulario\",\n      \"executionMode\": \"production\"\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        80,
+        -336
+      ],
+      "id": "d6dcf283-4adc-45da-8eb7-de6614db3fb0",
+      "name": "Code in JavaScript1"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-02-19T07:42:00.137Z",
+      "createdAt": "2026-02-19T07:42:00.137Z",
+      "role": "workflow:owner",
+      "workflowId": "V8cPhTOqE-KfxqneMdBUP",
+      "projectId": "x5UZcmGQw2OWHuXb"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2026-02-19T08:48:31.142Z",
+  "versionId": "3f8d4d0e-f294-4042-b151-9c89926cd061"
+}
