@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-02-19T10:31:01.000Z",
-    "createdAt": "2026-02-19T10:31:00.018Z",
-    "versionId": "6996d0f2-4221-4508-833c-e79d0f8c3e96",
+    "updatedAt": "2026-02-19T15:08:56.000Z",
+    "createdAt": "2026-02-19T15:08:55.317Z",
+    "versionId": "9a5b0b4a-0f39-43e3-b223-b7fd642ca2c4",
     "workflowId": "kldleYUPha6bnarR",
     "nodes": [
       {
@@ -72,7 +72,7 @@
         "type": "n8n-nodes-base.facebookGraphApi",
         "typeVersion": 1,
         "position": [
-          3616,
+          3776,
           -1376
         ],
         "id": "7da66ccf-8fd7-48d5-8c6d-db816b75171b",
@@ -97,7 +97,7 @@
         "type": "n8n-nodes-base.facebookGraphApi",
         "typeVersion": 1,
         "position": [
-          4304,
+          4464,
           -1392
         ],
         "id": "3bb41e32-f010-4102-acc1-fd96e8892501",
@@ -206,7 +206,7 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          3968,
+          4128,
           -1376
         ],
         "id": "475281c7-f520-4d18-8b3a-e8dc41dadfd9",
@@ -240,7 +240,7 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          4112,
+          4272,
           -1376
         ],
         "id": "c3ad2eff-8c1a-4047-ba71-69acd0745b05",
@@ -263,7 +263,7 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          4464,
+          4624,
           -1392
         ],
         "id": "7eae2c4f-9d5b-4c4d-8417-1d9d218cbffe",
@@ -283,7 +283,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          4624,
+          4784,
           -1392
         ],
         "id": "b3eeaaf6-1eca-4fe1-bc18-add61e7dfa6d",
@@ -308,7 +308,7 @@
         "type": "n8n-nodes-base.respondToWebhook",
         "typeVersion": 1.5,
         "position": [
-          416,
+          192,
           -1440
         ],
         "id": "8974fa52-b64f-4a01-a41f-e97ac127e6a3",
@@ -323,7 +323,7 @@
         "type": "n8n-nodes-base.webhook",
         "typeVersion": 2.1,
         "position": [
-          256,
+          32,
           -1440
         ],
         "id": "64cc4927-7ecd-4b78-bc9a-faf4e19927fa",
@@ -340,7 +340,7 @@
         "type": "n8n-nodes-base.webhook",
         "typeVersion": 2.1,
         "position": [
-          256,
+          32,
           -1232
         ],
         "id": "8af91482-0831-4c8c-90ed-ee5bdbfdf57c",
@@ -444,7 +444,7 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          624,
+          400,
           -1232
         ],
         "id": "fbf24bc9-0430-4a3a-88fd-136c70ba1b2a",
@@ -499,7 +499,7 @@
         "type": "n8n-nodes-base.respondToWebhook",
         "typeVersion": 1.5,
         "position": [
-          448,
+          224,
           -1232
         ],
         "id": "cd086d64-045c-4105-8f96-198fa0dae5cc",
@@ -515,7 +515,7 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          208,
+          -16,
           -1472
         ],
         "id": "7dcddf5d-7702-4438-9c1a-2439d282d272",
@@ -546,7 +546,7 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          3584,
+          3744,
           -1472
         ],
         "id": "bde44f7e-06f7-4d1b-adbf-fd7a0d237577",
@@ -565,8 +565,8 @@
         "type": "n8n-nodes-base.facebookGraphApi",
         "typeVersion": 1,
         "position": [
-          3616,
-          -1728
+          3776,
+          -2080
         ],
         "id": "1649991c-daa3-4355-b549-f29a13970b09",
         "name": "Facebook Graph API2",
@@ -590,8 +590,8 @@
         "type": "n8n-nodes-base.facebookGraphApi",
         "typeVersion": 1,
         "position": [
-          4304,
-          -1744
+          4464,
+          -2096
         ],
         "id": "b7a1439a-261e-4b7d-b768-cd8ac12059a8",
         "name": "Facebook Graph API3",
@@ -622,8 +622,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          3824,
-          -1728
+          3984,
+          -2080
         ],
         "id": "e25f848f-45eb-455a-a125-7d69a992bd5c",
         "name": "HTTP Request5",
@@ -639,8 +639,8 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          3968,
-          -1728
+          4128,
+          -2080
         ],
         "id": "94ea1db5-6e45-47f1-80d9-ada0e85ca6cc",
         "name": "Wait3",
@@ -673,8 +673,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          4112,
-          -1728
+          4272,
+          -2080
         ],
         "id": "079d857a-822b-4d2d-abb0-fdd8281762cd",
         "name": "If2"
@@ -696,8 +696,8 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          4464,
-          -1744
+          4624,
+          -2096
         ],
         "id": "16fb43a1-558d-40e8-b593-94a56f017429",
         "name": "Edit Fields"
@@ -716,8 +716,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          4624,
-          -1744
+          4784,
+          -2096
         ],
         "id": "028482b8-0845-4c66-be29-8c9ff57e3894",
         "name": "HTTP Request8",
@@ -742,8 +742,8 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          3584,
-          -1824
+          3744,
+          -2176
         ],
         "id": "92455a60-6b64-4093-9b05-0b38c7d78bd8",
         "name": "Sticky Note3"
@@ -761,7 +761,7 @@
         "type": "n8n-nodes-base.facebookGraphApi",
         "typeVersion": 1,
         "position": [
-          3616,
+          3776,
           -1024
         ],
         "id": "bd5be653-2119-4ea4-a258-24e8452c846a",
@@ -786,7 +786,7 @@
         "type": "n8n-nodes-base.facebookGraphApi",
         "typeVersion": 1,
         "position": [
-          4304,
+          4464,
           -1040
         ],
         "id": "fa68e574-b091-4639-a8cd-97ef15710818",
@@ -818,7 +818,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          3824,
+          3984,
           -1024
         ],
         "id": "276ad99f-21d2-4e7b-a775-9489c8a0e0e0",
@@ -835,7 +835,7 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          3968,
+          4128,
           -1024
         ],
         "id": "fbd4ef1c-2d52-4a00-b4ba-1d317422e3f0",
@@ -869,7 +869,7 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          4112,
+          4272,
           -1024
         ],
         "id": "4db01e5f-01ba-4c02-b12b-79b497e91073",
@@ -892,7 +892,7 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          4464,
+          4624,
           -1040
         ],
         "id": "93f5b1be-3241-4298-98a9-a4ab4c543828",
@@ -912,7 +912,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          4624,
+          4784,
           -1040
         ],
         "id": "910f6db7-b74e-4707-a150-91e00d45cafe",
@@ -938,7 +938,7 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          3584,
+          3744,
           -1120
         ],
         "id": "a6bdaeaa-e921-4885-954e-50c33704d4f1",
@@ -957,8 +957,8 @@
         "type": "n8n-nodes-base.facebookGraphApi",
         "typeVersion": 1,
         "position": [
-          3616,
-          -2080
+          3776,
+          -1728
         ],
         "id": "b2d37c3b-d837-43d0-8c60-b6b641f7c06f",
         "name": "Facebook Graph API6",
@@ -982,8 +982,8 @@
         "type": "n8n-nodes-base.facebookGraphApi",
         "typeVersion": 1,
         "position": [
-          4304,
-          -2096
+          4464,
+          -1744
         ],
         "id": "488b66f7-fb64-43df-b350-d6821216c28c",
         "name": "Facebook Graph API7",
@@ -1014,8 +1014,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          3824,
-          -2080
+          3984,
+          -1728
         ],
         "id": "1d73bcf6-f259-43fc-81ef-ca82cccdbe13",
         "name": "HTTP Request11",
@@ -1031,8 +1031,8 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          3968,
-          -2080
+          4128,
+          -1728
         ],
         "id": "dab41c1d-42bb-4b6b-b13a-8d3c3dc89c8f",
         "name": "Wait6",
@@ -1065,8 +1065,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          4112,
-          -2080
+          4272,
+          -1728
         ],
         "id": "6abf9ba1-e69b-4feb-9486-6e3532a04457",
         "name": "If4"
@@ -1088,8 +1088,8 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          4464,
-          -2096
+          4624,
+          -1744
         ],
         "id": "6b2a4807-87bc-4fc2-9146-62edd7b14cf9",
         "name": "Edit Fields4"
@@ -1108,8 +1108,8 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          4624,
-          -2096
+          4784,
+          -1744
         ],
         "id": "7533ece0-de3a-472e-a8e0-56d3045ff60a",
         "name": "HTTP Request12",
@@ -1134,8 +1134,8 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          3584,
-          -2176
+          3744,
+          -1824
         ],
         "id": "db8cdce1-f555-447e-9d70-f2dca0e06cec",
         "name": "Sticky Note5"
@@ -1153,7 +1153,7 @@
         "type": "n8n-nodes-base.facebookGraphApi",
         "typeVersion": 1,
         "position": [
-          3616,
+          3776,
           -656
         ],
         "id": "782d8ce7-3c1d-49e2-8bab-775e52b16b6a",
@@ -1178,7 +1178,7 @@
         "type": "n8n-nodes-base.facebookGraphApi",
         "typeVersion": 1,
         "position": [
-          4304,
+          4464,
           -672
         ],
         "id": "2ca3f4f1-6c07-4fec-8fa1-ca022c7c2f46",
@@ -1210,7 +1210,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          3824,
+          3984,
           -656
         ],
         "id": "bb64dfd4-0bc2-499a-ae7d-59d4f6220904",
@@ -1227,7 +1227,7 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          3968,
+          4128,
           -656
         ],
         "id": "0f69dbd5-baed-4ed7-9df0-11dc6f0c0ea8",
@@ -1261,7 +1261,7 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          4112,
+          4272,
           -656
         ],
         "id": "0e371f48-eb71-41d8-a70f-8fd81427cb9f",
@@ -1284,7 +1284,7 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          4464,
+          4624,
           -672
         ],
         "id": "76f36a98-8681-431b-b8cc-520b0e65aff5",
@@ -1304,7 +1304,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          4624,
+          4784,
           -672
         ],
         "id": "12f5ca0b-59a6-4e3f-b18c-e785e7e17a6d",
@@ -1330,7 +1330,7 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          3584,
+          3744,
           -752
         ],
         "id": "b057cb59-8982-4a1d-96fc-570016176971",
@@ -1749,7 +1749,7 @@
         "typeVersion": 4.3,
         "position": [
           1824,
-          -1712
+          -2064
         ],
         "id": "a7892d56-ec2c-4102-aaa7-2bd0e6c3d623",
         "name": "HTTP Request22",
@@ -1776,7 +1776,7 @@
         "typeVersion": 4.3,
         "position": [
           2320,
-          -1712
+          -2064
         ],
         "id": "6ad838f4-01d7-4bf6-acf6-102d65f9b4da",
         "name": "HTTP Request23",
@@ -1815,7 +1815,7 @@
         "typeVersion": 2.2,
         "position": [
           3152,
-          -1712
+          -2064
         ],
         "id": "21fba3c1-c839-4dec-b1ab-a3dedff658b2",
         "name": "If8"
@@ -1831,7 +1831,7 @@
         "typeVersion": 4.3,
         "position": [
           3344,
-          -1728
+          -2080
         ],
         "id": "67182458-f4ca-4e0a-99d9-7aa4be20fd16",
         "name": "HTTP Request24",
@@ -1850,7 +1850,7 @@
         "typeVersion": 1.1,
         "position": [
           2944,
-          -1712
+          -2064
         ],
         "id": "331571a2-3585-47db-8e32-1bec120b6271",
         "name": "Wait12",
@@ -1867,7 +1867,7 @@
         "typeVersion": 4.3,
         "position": [
           2736,
-          -1712
+          -2064
         ],
         "id": "e0a02df8-2058-4b46-aee8-cd96f642d9a1",
         "name": "HTTP Request25",
@@ -1893,7 +1893,7 @@
         "typeVersion": 4.3,
         "position": [
           2512,
-          -1712
+          -2064
         ],
         "id": "0cb5a7da-9606-49de-8f78-79bb69a99baa",
         "name": "PRUEBA3",
@@ -1912,7 +1912,7 @@
         "typeVersion": 1.1,
         "position": [
           2048,
-          -1712
+          -2064
         ],
         "id": "890b6d56-a9c4-4a89-b360-6ae060959330",
         "name": "Wait13",
@@ -1928,7 +1928,7 @@
         "typeVersion": 1,
         "position": [
           1760,
-          -1824
+          -2176
         ],
         "id": "57f941b7-6f05-4c38-a9e2-1f94d66b2ec1",
         "name": "Sticky Note9"
@@ -1948,7 +1948,7 @@
         "typeVersion": 4.3,
         "position": [
           1824,
-          -2064
+          -1712
         ],
         "id": "cc29fb60-6525-47c2-8f41-9e24bfda5455",
         "name": "HTTP Request26",
@@ -1992,7 +1992,7 @@
         "typeVersion": 2.2,
         "position": [
           3152,
-          -2064
+          -1712
         ],
         "id": "f0773575-696a-4702-b300-c2990e55fe7b",
         "name": "If9"
@@ -2008,7 +2008,7 @@
         "typeVersion": 4.3,
         "position": [
           3344,
-          -2080
+          -1728
         ],
         "id": "f83bdb42-a69c-47f8-9c4d-98a437c4edd1",
         "name": "HTTP Request28",
@@ -2027,7 +2027,7 @@
         "typeVersion": 1.1,
         "position": [
           2944,
-          -2064
+          -1712
         ],
         "id": "29bed0e3-79f6-4c50-bc95-7336e324b172",
         "name": "Wait14",
@@ -2044,7 +2044,7 @@
         "typeVersion": 4.3,
         "position": [
           2736,
-          -2064
+          -1712
         ],
         "id": "2ec1d228-f94e-4627-89ea-84411412a6e8",
         "name": "HTTP Request29",
@@ -2070,7 +2070,7 @@
         "typeVersion": 4.3,
         "position": [
           2512,
-          -2064
+          -1712
         ],
         "id": "6065ce1f-ab40-4138-b4ad-3eadd47c0ace",
         "name": "PRUEBA4",
@@ -2089,7 +2089,7 @@
         "typeVersion": 1.1,
         "position": [
           2048,
-          -2064
+          -1712
         ],
         "id": "59b652c0-92ff-4245-9cc8-d262428f6ca1",
         "name": "Wait15",
@@ -2105,7 +2105,7 @@
         "typeVersion": 1,
         "position": [
           1760,
-          -2176
+          -1824
         ],
         "id": "23ffcfb3-0c3b-4eb4-beeb-aead3e3be711",
         "name": "Sticky Note10"
@@ -2121,7 +2121,7 @@
         "typeVersion": 4.3,
         "position": [
           2320,
-          -2064
+          -1712
         ],
         "id": "382a76ce-ed9b-4fee-9825-0b05cbb0392a",
         "name": "HTTP Request27",
@@ -2151,7 +2151,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          3792,
+          3952,
           -1376
         ],
         "id": "91bd9f34-7b2d-4cf0-8a12-5d9bdb044cba",
@@ -2246,6 +2246,29 @@
                   },
                   "conditions": [
                     {
+                      "id": "f099ddeb-2201-4565-99c5-e3b98a28eb96",
+                      "leftValue": "={{ $json.body[\"cuentas[]\"] }}",
+                      "rightValue": "Mesit",
+                      "operator": {
+                        "type": "array",
+                        "operation": "contains",
+                        "rightType": "any"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
                       "id": "8ee39b67-c5e2-4282-8b92-2997f13e881a",
                       "leftValue": "={{ $json.body[\"cuentas[]\"] }}",
                       "rightValue": "Snow Division",
@@ -2314,7 +2337,7 @@
         "type": "n8n-nodes-base.switch",
         "typeVersion": 3.4,
         "position": [
-          784,
+          560,
           -1296
         ],
         "id": "62ca3c0f-97aa-4a87-b870-9462260ce7ec",
@@ -2329,8 +2352,8 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          960,
-          -2048
+          928,
+          -2064
         ],
         "id": "03c0453e-afe7-451c-abdd-2c87037e9952",
         "name": "Crear Vista Rules",
@@ -2350,8 +2373,8 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          976,
-          -1664
+          928,
+          -1712
         ],
         "id": "dcb07497-45a0-4ced-bc73-93699c12a7c0",
         "name": "Crear Vista Surfin",
@@ -2371,7 +2394,7 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          992,
+          944,
           -1360
         ],
         "id": "38f98b06-61b2-4a3b-9ab2-fa20ef9f47d6",
@@ -2392,8 +2415,8 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          992,
-          -1072
+          944,
+          -304
         ],
         "id": "eb93f1c1-6aa4-4da7-9dc8-e1d51b81c614",
         "name": "Crear vista Skiroom",
@@ -2413,8 +2436,8 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          992,
-          -928
+          944,
+          48
         ],
         "id": "22f341dd-b73e-4314-9c54-c0deffe86d66",
         "name": "Crear vista Sierra Nevada VIP",
@@ -2434,8 +2457,8 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          992,
-          -1216
+          944,
+          -656
         ],
         "id": "ee54a7c0-c9f7-4a21-9814-8b76aa042e39",
         "name": "Crear Vista Snow Division",
@@ -2455,8 +2478,8 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          1376,
-          -2048
+          5040,
+          -2080
         ],
         "id": "1758b16a-ba56-41a9-a39f-c07d7c81e26c",
         "name": "Eliminar Vista Rules",
@@ -2476,8 +2499,8 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          1392,
-          -1664
+          4992,
+          -1744
         ],
         "id": "8939b807-10f4-4a93-975b-ce05f8896485",
         "name": "Eliminar Vista Surfin",
@@ -2507,8 +2530,8 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          1136,
-          -2048
+          1104,
+          -2064
         ],
         "id": "4ae29102-e3c2-4110-8a65-93bcef34f04f",
         "name": "Obtener Filas Rules",
@@ -2538,8 +2561,8 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          1152,
-          -1664
+          1104,
+          -1712
         ],
         "id": "7ad8c4e1-136f-40c4-a51a-e4df404d356b",
         "name": "Obtener Filas Surfin",
@@ -2569,7 +2592,7 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          1168,
+          1120,
           -1360
         ],
         "id": "79508500-6a9b-4ef5-b4fc-88cc540a172a",
@@ -2590,7 +2613,7 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          4864,
+          4992,
           -1392
         ],
         "id": "9c3dc3c7-e7e9-40f4-b2c9-22200e297c82",
@@ -2621,8 +2644,8 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          1168,
-          -1216
+          1120,
+          -656
         ],
         "id": "94a93178-5bd3-444b-83b3-4e60f53e4ddc",
         "name": "Obtener Filas Snow Division",
@@ -2642,60 +2665,11 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          1408,
-          -1216
+          4992,
+          -672
         ],
         "id": "84b8ba29-2801-4cf4-b527-ebfcd0876d61",
         "name": "Eliminar Vista Snow Division",
-        "credentials": {
-          "postgres": {
-            "id": "UPETCYNZNCReuZu8",
-            "name": "Postgres Supabase"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "amount": 1
-        },
-        "type": "n8n-nodes-base.wait",
-        "typeVersion": 1.1,
-        "position": [
-          1616,
-          -1360
-        ],
-        "id": "014c7832-2267-4f6d-ab65-22d7e76bb616",
-        "name": "Wait16",
-        "webhookId": "8cce73b4-0a6e-4db3-b503-1267489be04b",
-        "executeOnce": true
-      },
-      {
-        "parameters": {
-          "type": "random"
-        },
-        "type": "n8n-nodes-base.sort",
-        "typeVersion": 1,
-        "position": [
-          1424,
-          -1360
-        ],
-        "id": "e02cb370-e26b-4fe8-a358-24cd6426f6dc",
-        "name": "Sort1"
-      },
-      {
-        "parameters": {
-          "operation": "executeQuery",
-          "query": "DROP VIEW IF EXISTS temporal_rules;",
-          "options": {}
-        },
-        "type": "n8n-nodes-base.postgres",
-        "typeVersion": 2.6,
-        "position": [
-          1408,
-          -1072
-        ],
-        "id": "3847abb4-da75-4c68-b61b-d062b187b6d2",
-        "name": "Eliminar Vista Rules1",
         "credentials": {
           "postgres": {
             "id": "UPETCYNZNCReuZu8",
@@ -2722,8 +2696,8 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          1168,
-          -1072
+          1120,
+          -304
         ],
         "id": "4b7701de-2a70-48fa-a8b8-c727befbb38c",
         "name": "Obtener Filas Skiroom",
@@ -2753,8 +2727,8 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          1168,
-          -928
+          1120,
+          48
         ],
         "id": "2fcb3278-2701-4f05-b122-9f3352fc0f96",
         "name": "Obtener Filas Sierra Nevada VIP",
@@ -2774,8 +2748,8 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          1408,
-          -928
+          4992,
+          32
         ],
         "id": "cac03bb3-ae0a-4b8a-ac28-3166ee627618",
         "name": "Eliminar Vista Sierra Nevada VIP",
@@ -2785,6 +2759,1150 @@
             "name": "Postgres Supabase"
           }
         }
+      },
+      {
+        "parameters": {
+          "httpRequestMethod": "POST",
+          "graphApiVersion": "v23.0",
+          "node": "17841470046184468",
+          "edge": "=media",
+          "options": {
+            "queryParametersJson": "={\n\"video_url\": \"{{ $json.job.urls[0] }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
+          }
+        },
+        "type": "n8n-nodes-base.facebookGraphApi",
+        "typeVersion": 1,
+        "position": [
+          3776,
+          48
+        ],
+        "id": "86c3b6f3-c278-4fbf-bcb6-b3747cc44778",
+        "name": "Facebook Graph API10",
+        "credentials": {
+          "facebookGraphApi": {
+            "id": "F7VbX8jWKCXdAM47",
+            "name": "Facebook Graph account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "httpRequestMethod": "POST",
+          "graphApiVersion": "v23.0",
+          "node": "17841470046184468",
+          "edge": "media_publish",
+          "options": {
+            "queryParametersJson": "={\n  \"creation_id\": \"{{$json.id}}\"\n}"
+          }
+        },
+        "type": "n8n-nodes-base.facebookGraphApi",
+        "typeVersion": 1,
+        "position": [
+          4464,
+          32
+        ],
+        "id": "787d4c1c-6c38-4fed-aa6f-5e12aa2c0177",
+        "name": "Facebook Graph API11",
+        "credentials": {
+          "facebookGraphApi": {
+            "id": "F7VbX8jWKCXdAM47",
+            "name": "Facebook Graph account"
+          }
+        },
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "url": "=https://graph.facebook.com/v20.0/{{ $json.id }}?fields=status,status_code",
+          "authentication": "predefinedCredentialType",
+          "nodeCredentialType": "facebookGraphApi",
+          "sendQuery": true,
+          "queryParameters": {
+            "parameters": [
+              {
+                "name": "access_token",
+                "value": "EAF2z8nVLTA8BQVHL88vghg4RRZBH9svUgZCP93NSZAB9iSDKxTAMvz8DFby8KVqXp6DWFxfFDiSKOUXvXPVVrJcNxjFOmr0ZCXphOZBUUWRkP8sTZC9wwapmP8vlJQN4NHH2eW9zPRmg2SHrQ0AhjI3n2kx1vAa8nOtr6tbQMhcaP0X0eMtOComwFl3zR7zd7HowZDZD"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          3984,
+          48
+        ],
+        "id": "3f56ff68-eb0d-4bec-9852-5007fb143561",
+        "name": "HTTP Request31",
+        "credentials": {
+          "facebookGraphApi": {
+            "id": "F7VbX8jWKCXdAM47",
+            "name": "Facebook Graph account"
+          }
+        }
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.wait",
+        "typeVersion": 1.1,
+        "position": [
+          4128,
+          48
+        ],
+        "id": "77852db1-698e-48af-b5c5-c0e3b290d37c",
+        "name": "Wait",
+        "webhookId": "4e9e9bda-286b-4bd6-b112-9133762c2724"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "49c65dc4-2ebe-451b-9788-cd0999f268f1",
+                "leftValue": "={{ $json.status_code }}",
+                "rightValue": "FINISHED",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          4272,
+          48
+        ],
+        "id": "0af9b2cd-4e9f-446b-9d50-d5cd50d4faf7",
+        "name": "If10"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "e5f15ada-1e3d-43a0-87d6-17cb5e1222ac",
+                "name": "ID DOCUMENTO",
+                "value": "={{ $('HTTP Request7').item.json.job.urls[0].match(/(DA[A-Za-z0-9-]+)/)[0] }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          4624,
+          32
+        ],
+        "id": "8a6d8318-c5d1-4e34-a011-2c29fd339d91",
+        "name": "Edit Fields6"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "=https://api.canva.com/rest/v1/folders/move",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "oAuth2Api",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"item_id\": \"{{ $json['ID DOCUMENTO'] }}\",\n  \"to_folder_id\": \"FAF-k76AhRE\"\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          4784,
+          32
+        ],
+        "id": "47d046da-0d54-4720-838b-553b7b24ec4b",
+        "name": "HTTP Request32",
+        "credentials": {
+          "canvaApi": {
+            "id": "tuy7V3JiiZVTJf5e",
+            "name": "Canva account"
+          },
+          "oAuth2Api": {
+            "id": "eHEbZK7oC3pW1LQr",
+            "name": "Canva"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "content": "SNOWDIVISION\n",
+          "height": 336,
+          "width": 1232,
+          "color": 6
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          3744,
+          -48
+        ],
+        "id": "dc975708-50be-4a7f-976f-009f7673e979",
+        "name": "Sticky Note11"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://api.canva.com/rest/v1/autofills",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "oAuth2Api",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"brand_template_id\": \"{{ $json.id_documento }}\",\n  \"export_name\": \"Historia dia hoy\",\n  \"data\": {\n    \"fecha\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $now.format('dd/LL/yyyy') }}\"\n    },\n    \"calidadnieve_general\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.calidad_nieve }}\"\n    },\n    \"estadogeneral\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.aspecto_cielo }}\"\n    },\n    \"visibilidadgeneral\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.visibilidad }}\"\n    },\n    \"temperaturaminima\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.temp_min }}\"\n    },\n    \"temperaturamaxima\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.temp_max }}\"\n    },\n    \"vientominimo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.viento_min }}\"\n    },\n    \"vientomaximo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.viento_max }}\"\n    },\n    \"espesorminimo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.espesor_min }}\"\n    },\n    \"espesormaximo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.espesor_max }}\"\n    },\n    \"remontes_abiertos\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.remontes_abiertos }}\"\n    },\n    \"km_esquiables\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.km_esquiables }}\"\n    },\n    \"pistasabiertas\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body['pistas_abiertas[]'] }}\" \n    },\n    \"numeropistas\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.numero_pistas }}\"\n    }\n  }\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          1824,
+          48
+        ],
+        "id": "0dbf7ac7-5332-4002-9069-7c75bf07c323",
+        "name": "HTTP Request33",
+        "retryOnFail": true,
+        "waitBetweenTries": 3000,
+        "executeOnce": false,
+        "alwaysOutputData": false,
+        "notesInFlow": false,
+        "credentials": {
+          "oAuth2Api": {
+            "id": "eHEbZK7oC3pW1LQr",
+            "name": "Canva"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "url": "=https://api.canva.com/rest/v1/autofills/{{ $('HTTP Request33').item.json.job.id }}",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "oAuth2Api",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          2320,
+          48
+        ],
+        "id": "b297c029-4e63-447d-9c5f-d4e17bd7a213",
+        "name": "HTTP Request34",
+        "credentials": {
+          "oAuth2Api": {
+            "id": "eHEbZK7oC3pW1LQr",
+            "name": "Canva"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "b4f16a6d-f121-4b47-ab09-627eb7d39e74",
+                "leftValue": "={{ $json.job.status }}",
+                "rightValue": "success",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          3152,
+          48
+        ],
+        "id": "c3b69f9b-17e1-42fa-9e4f-98954f72f573",
+        "name": "If11"
+      },
+      {
+        "parameters": {
+          "url": "=https://api.canva.com/rest/v1/exports/{{ $json[\"job\"][\"id\"] }}",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "oAuth2Api",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          3344,
+          32
+        ],
+        "id": "1aca6225-3f7d-4383-a53d-ca3ecd6170eb",
+        "name": "HTTP Request35",
+        "credentials": {
+          "oAuth2Api": {
+            "id": "eHEbZK7oC3pW1LQr",
+            "name": "Canva"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "amount": 10
+        },
+        "type": "n8n-nodes-base.wait",
+        "typeVersion": 1.1,
+        "position": [
+          2944,
+          48
+        ],
+        "id": "0a45c409-70b7-4e70-be79-19ed595c100a",
+        "name": "Wait17",
+        "webhookId": "82707f0f-e107-4b71-9887-ad1255db0d8d"
+      },
+      {
+        "parameters": {
+          "url": "=https://api.canva.com/rest/v1/exports/{{ $json[\"job\"][\"id\"] }}",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "oAuth2Api",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          2736,
+          48
+        ],
+        "id": "632365df-a3a8-45bc-9301-7cff3a3a2750",
+        "name": "HTTP Request36",
+        "credentials": {
+          "oAuth2Api": {
+            "id": "eHEbZK7oC3pW1LQr",
+            "name": "Canva"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://api.canva.com/rest/v1/exports",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "oAuth2Api",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"design_id\": \"{{ $json.job.result.design.id }}\",\n  \"format\": {\n    \"type\": \"mp4\",\n    \"quality\": \"vertical_1080p\"\n  }\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          2512,
+          48
+        ],
+        "id": "5d3d0c42-966d-4721-b363-7ad888572f56",
+        "name": "PRUEBA5",
+        "credentials": {
+          "oAuth2Api": {
+            "id": "eHEbZK7oC3pW1LQr",
+            "name": "Canva"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "amount": 10
+        },
+        "type": "n8n-nodes-base.wait",
+        "typeVersion": 1.1,
+        "position": [
+          2048,
+          48
+        ],
+        "id": "d19a0d44-ed88-4a28-9671-b7cdac5d4188",
+        "name": "Wait18",
+        "webhookId": "c4efde5f-05eb-4612-bdde-f217ed3f5fb1"
+      },
+      {
+        "parameters": {
+          "content": "SIERRA NEVADA VIP\n",
+          "height": 336,
+          "width": 1712
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          1760,
+          -64
+        ],
+        "id": "b2c5f11f-a6a1-4359-8b03-51ed6795ae07",
+        "name": "Sticky Note12"
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "DROP VIEW IF EXISTS temporal_mesit;",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          4992,
+          -1040
+        ],
+        "id": "3847abb4-da75-4c68-b61b-d062b187b6d2",
+        "name": "Eliminar Vista Mesit",
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "httpRequestMethod": "POST",
+          "graphApiVersion": "v23.0",
+          "node": "17841470046184468",
+          "edge": "=media",
+          "options": {
+            "queryParametersJson": "={\n\"video_url\": \"{{ $json.job.urls[0] }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
+          }
+        },
+        "type": "n8n-nodes-base.facebookGraphApi",
+        "typeVersion": 1,
+        "position": [
+          3776,
+          -304
+        ],
+        "id": "11ed9595-588b-4c5f-9235-286f00b1f598",
+        "name": "Facebook Graph API12",
+        "credentials": {
+          "facebookGraphApi": {
+            "id": "F7VbX8jWKCXdAM47",
+            "name": "Facebook Graph account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "httpRequestMethod": "POST",
+          "graphApiVersion": "v23.0",
+          "node": "17841470046184468",
+          "edge": "media_publish",
+          "options": {
+            "queryParametersJson": "={\n  \"creation_id\": \"{{$json.id}}\"\n}"
+          }
+        },
+        "type": "n8n-nodes-base.facebookGraphApi",
+        "typeVersion": 1,
+        "position": [
+          4464,
+          -320
+        ],
+        "id": "1526fc34-53c0-45e1-b820-de38f5909d35",
+        "name": "Facebook Graph API13",
+        "credentials": {
+          "facebookGraphApi": {
+            "id": "F7VbX8jWKCXdAM47",
+            "name": "Facebook Graph account"
+          }
+        },
+        "onError": "continueRegularOutput"
+      },
+      {
+        "parameters": {
+          "url": "=https://graph.facebook.com/v20.0/{{ $json.id }}?fields=status,status_code",
+          "authentication": "predefinedCredentialType",
+          "nodeCredentialType": "facebookGraphApi",
+          "sendQuery": true,
+          "queryParameters": {
+            "parameters": [
+              {
+                "name": "access_token",
+                "value": "EAF2z8nVLTA8BQVHL88vghg4RRZBH9svUgZCP93NSZAB9iSDKxTAMvz8DFby8KVqXp6DWFxfFDiSKOUXvXPVVrJcNxjFOmr0ZCXphOZBUUWRkP8sTZC9wwapmP8vlJQN4NHH2eW9zPRmg2SHrQ0AhjI3n2kx1vAa8nOtr6tbQMhcaP0X0eMtOComwFl3zR7zd7HowZDZD"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          3984,
+          -304
+        ],
+        "id": "d2d10789-b18d-4f12-8bd2-f7d76e5907b4",
+        "name": "HTTP Request37",
+        "credentials": {
+          "facebookGraphApi": {
+            "id": "F7VbX8jWKCXdAM47",
+            "name": "Facebook Graph account"
+          }
+        }
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.wait",
+        "typeVersion": 1.1,
+        "position": [
+          4128,
+          -304
+        ],
+        "id": "f077bed8-6eaa-44d8-a4b2-ea4d4f88165c",
+        "name": "Wait19",
+        "webhookId": "4e9e9bda-286b-4bd6-b112-9133762c2724"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "49c65dc4-2ebe-451b-9788-cd0999f268f1",
+                "leftValue": "={{ $json.status_code }}",
+                "rightValue": "FINISHED",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          4272,
+          -304
+        ],
+        "id": "f49022fe-97b2-451a-91e1-18d249adc70b",
+        "name": "If12"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "e5f15ada-1e3d-43a0-87d6-17cb5e1222ac",
+                "name": "ID DOCUMENTO",
+                "value": "={{ $('HTTP Request7').item.json.job.urls[0].match(/(DA[A-Za-z0-9-]+)/)[0] }}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          4624,
+          -320
+        ],
+        "id": "bc494770-50cd-4591-b0a5-7bbb9366efe2",
+        "name": "Edit Fields7"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "=https://api.canva.com/rest/v1/folders/move",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "oAuth2Api",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"item_id\": \"{{ $json['ID DOCUMENTO'] }}\",\n  \"to_folder_id\": \"FAF-k76AhRE\"\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          4784,
+          -320
+        ],
+        "id": "571b798d-bf26-47f5-a523-796c1e70cb76",
+        "name": "HTTP Request38",
+        "credentials": {
+          "canvaApi": {
+            "id": "tuy7V3JiiZVTJf5e",
+            "name": "Canva account"
+          },
+          "oAuth2Api": {
+            "id": "eHEbZK7oC3pW1LQr",
+            "name": "Canva"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "content": "SKIROOM\n",
+          "height": 336,
+          "width": 1232,
+          "color": 6
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          3744,
+          -400
+        ],
+        "id": "9e6412dc-73d8-4257-b7fa-f70d7a3f4d80",
+        "name": "Sticky Note13"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://api.canva.com/rest/v1/autofills",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "oAuth2Api",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"brand_template_id\": \"{{ $json.id_documento }}\",\n  \"export_name\": \"Historia dia hoy\",\n  \"data\": {\n    \"fecha\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $now.format('dd/LL/yyyy') }}\"\n    },\n    \"calidadnieve_general\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.calidad_nieve }}\"\n    },\n    \"estadogeneral\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.aspecto_cielo }}\"\n    },\n    \"visibilidadgeneral\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.visibilidad }}\"\n    },\n    \"temperaturaminima\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.temp_min }}\"\n    },\n    \"temperaturamaxima\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.temp_max }}\"\n    },\n    \"vientominimo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.viento_min }}\"\n    },\n    \"vientomaximo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.viento_max }}\"\n    },\n    \"espesorminimo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.espesor_min }}\"\n    },\n    \"espesormaximo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.espesor_max }}\"\n    },\n    \"remontes_abiertos\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.remontes_abiertos }}\"\n    },\n    \"km_esquiables\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.km_esquiables }}\"\n    },\n    \"pistasabiertas\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body['pistas_abiertas[]'] }}\" \n    },\n    \"numeropistas\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.numero_pistas }}\"\n    }\n  }\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          1824,
+          -304
+        ],
+        "id": "39bdf0c8-0600-4b02-a52d-afef1ca08b45",
+        "name": "HTTP Request39",
+        "retryOnFail": true,
+        "waitBetweenTries": 3000,
+        "executeOnce": false,
+        "alwaysOutputData": false,
+        "notesInFlow": false,
+        "credentials": {
+          "oAuth2Api": {
+            "id": "eHEbZK7oC3pW1LQr",
+            "name": "Canva"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "url": "=https://api.canva.com/rest/v1/autofills/{{ $('HTTP Request39').item.json.job.id }}",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "oAuth2Api",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          2320,
+          -304
+        ],
+        "id": "c623a0f8-30e4-487f-b0e7-af8aa5234756",
+        "name": "HTTP Request40",
+        "credentials": {
+          "oAuth2Api": {
+            "id": "eHEbZK7oC3pW1LQr",
+            "name": "Canva"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 2
+            },
+            "conditions": [
+              {
+                "id": "b4f16a6d-f121-4b47-ab09-627eb7d39e74",
+                "leftValue": "={{ $json.job.status }}",
+                "rightValue": "success",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.2,
+        "position": [
+          3152,
+          -304
+        ],
+        "id": "89d85dde-9852-4f97-b683-1ef88ead1765",
+        "name": "If13"
+      },
+      {
+        "parameters": {
+          "url": "=https://api.canva.com/rest/v1/exports/{{ $json[\"job\"][\"id\"] }}",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "oAuth2Api",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          3344,
+          -320
+        ],
+        "id": "4c032b71-6d70-47cc-9651-c4cec18de41f",
+        "name": "HTTP Request41",
+        "credentials": {
+          "oAuth2Api": {
+            "id": "eHEbZK7oC3pW1LQr",
+            "name": "Canva"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "amount": 10
+        },
+        "type": "n8n-nodes-base.wait",
+        "typeVersion": 1.1,
+        "position": [
+          2944,
+          -304
+        ],
+        "id": "d3feb345-7ccd-41cb-b89a-881049e287e8",
+        "name": "Wait20",
+        "webhookId": "82707f0f-e107-4b71-9887-ad1255db0d8d"
+      },
+      {
+        "parameters": {
+          "url": "=https://api.canva.com/rest/v1/exports/{{ $json[\"job\"][\"id\"] }}",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "oAuth2Api",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          2736,
+          -304
+        ],
+        "id": "82fb81b1-47f0-492d-9ff1-e8ad65ea679f",
+        "name": "HTTP Request42",
+        "credentials": {
+          "oAuth2Api": {
+            "id": "eHEbZK7oC3pW1LQr",
+            "name": "Canva"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://api.canva.com/rest/v1/exports",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "oAuth2Api",
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"design_id\": \"{{ $json.job.result.design.id }}\",\n  \"format\": {\n    \"type\": \"mp4\",\n    \"quality\": \"vertical_1080p\"\n  }\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          2512,
+          -304
+        ],
+        "id": "0140d16a-0fe2-4b1a-9f46-9f75506988ba",
+        "name": "PRUEBA6",
+        "credentials": {
+          "oAuth2Api": {
+            "id": "eHEbZK7oC3pW1LQr",
+            "name": "Canva"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "amount": 10
+        },
+        "type": "n8n-nodes-base.wait",
+        "typeVersion": 1.1,
+        "position": [
+          2048,
+          -304
+        ],
+        "id": "aceb5ceb-9b55-4a1f-95de-d06c7c84fcdd",
+        "name": "Wait21",
+        "webhookId": "c4efde5f-05eb-4612-bdde-f217ed3f5fb1"
+      },
+      {
+        "parameters": {
+          "content": "SKIROOM",
+          "height": 336,
+          "width": 1712
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          1760,
+          -416
+        ],
+        "id": "340d5dc2-ebd1-4426-a94a-70fcdf5b683e",
+        "name": "Sticky Note14"
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "DROP VIEW IF EXISTS temporal_skiroom;",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          4992,
+          -320
+        ],
+        "id": "ef56b717-4c02-4107-a5aa-5cc0127927f1",
+        "name": "Eliminar Vista Skiroom",
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "CREATE OR REPLACE VIEW temporal_mesit AS\nSELECT \n    id_documento, \n    nombre, \n    cuenta\nFROM \n    \"Plantillas_Canva\"\nWHERE \n    cuenta = 'Mesit' \n    AND nombre = '{{ $json.body.aspecto_cielo }}';",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          944,
+          -1008
+        ],
+        "id": "8679ef63-fabc-4318-a851-4eb51cc878b1",
+        "name": "Crear Vista Mesit",
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "select",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "temporal_mesit",
+            "mode": "name"
+          },
+          "returnAll": true,
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          1120,
+          -1008
+        ],
+        "id": "73b4a496-a36b-47f9-aa69-7ef87e91db56",
+        "name": "Obtener Filas Mesit",
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "type": "random"
+        },
+        "type": "n8n-nodes-base.sort",
+        "typeVersion": 1,
+        "position": [
+          1392,
+          -2064
+        ],
+        "id": "3fa9ee9f-8a7a-4166-b4ab-5db9e8dc2601",
+        "name": "Mezclar Rules"
+      },
+      {
+        "parameters": {
+          "amount": 1
+        },
+        "type": "n8n-nodes-base.wait",
+        "typeVersion": 1.1,
+        "position": [
+          1584,
+          -2064
+        ],
+        "id": "e54de516-dd74-4762-9e88-7beda2367ab7",
+        "name": "Esperar Rules",
+        "webhookId": "8cce73b4-0a6e-4db3-b503-1267489be04b",
+        "executeOnce": true
+      },
+      {
+        "parameters": {
+          "type": "random"
+        },
+        "type": "n8n-nodes-base.sort",
+        "typeVersion": 1,
+        "position": [
+          1392,
+          -1712
+        ],
+        "id": "e1ded1f7-7fe4-4153-b65e-e022cdec73f0",
+        "name": "Mezclar Surfin"
+      },
+      {
+        "parameters": {
+          "amount": 1
+        },
+        "type": "n8n-nodes-base.wait",
+        "typeVersion": 1.1,
+        "position": [
+          1584,
+          -1712
+        ],
+        "id": "84628f75-dfce-4356-8ba1-378173dabeb4",
+        "name": "Esperar Surfin",
+        "webhookId": "8cce73b4-0a6e-4db3-b503-1267489be04b",
+        "executeOnce": true
+      },
+      {
+        "parameters": {
+          "type": "random"
+        },
+        "type": "n8n-nodes-base.sort",
+        "typeVersion": 1,
+        "position": [
+          1392,
+          -1360
+        ],
+        "id": "e02cb370-e26b-4fe8-a358-24cd6426f6dc",
+        "name": "Mezclar SNG"
+      },
+      {
+        "parameters": {
+          "amount": 1
+        },
+        "type": "n8n-nodes-base.wait",
+        "typeVersion": 1.1,
+        "position": [
+          1584,
+          -1360
+        ],
+        "id": "014c7832-2267-4f6d-ab65-22d7e76bb616",
+        "name": "Esperar SNG",
+        "webhookId": "8cce73b4-0a6e-4db3-b503-1267489be04b",
+        "executeOnce": true
+      },
+      {
+        "parameters": {
+          "type": "random"
+        },
+        "type": "n8n-nodes-base.sort",
+        "typeVersion": 1,
+        "position": [
+          1392,
+          -1008
+        ],
+        "id": "54ac63b9-36f2-4a5f-9377-c7fe671ca7e6",
+        "name": "Mezclar Mesit"
+      },
+      {
+        "parameters": {
+          "amount": 1
+        },
+        "type": "n8n-nodes-base.wait",
+        "typeVersion": 1.1,
+        "position": [
+          1584,
+          -1008
+        ],
+        "id": "12128430-62cc-44aa-95d9-21ac5f700db3",
+        "name": "Esperar Mesit",
+        "webhookId": "8cce73b4-0a6e-4db3-b503-1267489be04b",
+        "executeOnce": true
+      },
+      {
+        "parameters": {
+          "type": "random"
+        },
+        "type": "n8n-nodes-base.sort",
+        "typeVersion": 1,
+        "position": [
+          1392,
+          -656
+        ],
+        "id": "d8831d6a-3b0e-4654-aeb4-d4bdce65e172",
+        "name": "Mezclar Snow Division"
+      },
+      {
+        "parameters": {
+          "amount": 1
+        },
+        "type": "n8n-nodes-base.wait",
+        "typeVersion": 1.1,
+        "position": [
+          1584,
+          -656
+        ],
+        "id": "7f2f636f-7371-471d-9624-7ed216326ed2",
+        "name": "Esperar SnowDivision",
+        "webhookId": "8cce73b4-0a6e-4db3-b503-1267489be04b",
+        "executeOnce": true
+      },
+      {
+        "parameters": {
+          "type": "random"
+        },
+        "type": "n8n-nodes-base.sort",
+        "typeVersion": 1,
+        "position": [
+          1392,
+          -304
+        ],
+        "id": "e1da3a11-ba46-4edd-bffe-e8adc0529b23",
+        "name": "Mezclar Skiroom"
+      },
+      {
+        "parameters": {
+          "amount": 1
+        },
+        "type": "n8n-nodes-base.wait",
+        "typeVersion": 1.1,
+        "position": [
+          1584,
+          -304
+        ],
+        "id": "15465844-76e6-4875-9936-447cf84f7330",
+        "name": "Esperar Skiroom",
+        "webhookId": "8cce73b4-0a6e-4db3-b503-1267489be04b",
+        "executeOnce": true
+      },
+      {
+        "parameters": {
+          "type": "random"
+        },
+        "type": "n8n-nodes-base.sort",
+        "typeVersion": 1,
+        "position": [
+          1392,
+          48
+        ],
+        "id": "468d00f2-0fe6-488c-8ca2-94c8586bb23e",
+        "name": "Mezclar Sierra Nevada VIP"
+      },
+      {
+        "parameters": {
+          "amount": 1
+        },
+        "type": "n8n-nodes-base.wait",
+        "typeVersion": 1.1,
+        "position": [
+          1584,
+          48
+        ],
+        "id": "3d9bd948-ce04-4b58-a138-5c46368614ae",
+        "name": "Esperar Sierra Nevada VIP",
+        "webhookId": "8cce73b4-0a6e-4db3-b503-1267489be04b",
+        "executeOnce": true
+      },
+      {
+        "parameters": {
+          "content": "",
+          "height": 2400,
+          "width": 150,
+          "color": 4
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          1232,
+          -2096
+        ],
+        "id": "650c318e-a391-46ad-a15e-9442f516f925",
+        "name": "Sticky Note15"
+      },
+      {
+        "parameters": {
+          "content": "**EXPLICACIÓN**\n\nEste límite marca que ramas están funcionando, conecta los nodos que miran la información en la base de datos con los que procesan la imagen de canva.\n\nSe deben conectar solamente las ramas de las cuentas que ya tengan como mínimo una plantilla para cada estado del cielo, ya que si no no funcionará esa rama.",
+          "height": 320,
+          "width": 320,
+          "color": 4
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          1168,
+          288
+        ],
+        "id": "c4dc5b9c-5161-4f10-874f-97918de5b264",
+        "name": "Sticky Note16"
+      },
+      {
+        "parameters": {
+          "content": "",
+          "height": 2576,
+          "width": 150,
+          "color": 4
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          3536,
+          -2176
+        ],
+        "id": "bf557425-f0c8-44fa-9546-b591e3c38dbb",
+        "name": "Sticky Note17"
+      },
+      {
+        "parameters": {
+          "content": "**EXPLICACIÓN**\n\nEste límite marca que imágenes procesadas se subirán a la historia.\n\nEste límite separa la parte de la rama que procesa la imagen en canva de la parte de la rama que sube esa misma imagen a instagram.\n\nSolamente se conectarán las ramas en las que ya se haya comprobado que todas las plantillas (para cada estado del cielo) se rellenen correctamente",
+          "height": 320,
+          "width": 320,
+          "color": 4
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          3472,
+          320
+        ],
+        "id": "4037226b-d0d1-43ac-8313-cf9c86c989fb",
+        "name": "Sticky Note18"
       }
     ],
     "connections": {
@@ -3664,6 +4782,13 @@
           ],
           [
             {
+              "node": "Crear Vista Mesit",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
               "node": "Crear Vista Snow Division",
               "type": "main",
               "index": 0
@@ -3709,31 +4834,19 @@
       },
       "Obtener Filas Rules": {
         "main": [
-          [
-            {
-              "node": "Eliminar Vista Rules",
-              "type": "main",
-              "index": 0
-            }
-          ]
+          []
         ]
       },
       "Obtener Filas Surfin": {
         "main": [
-          [
-            {
-              "node": "Eliminar Vista Surfin",
-              "type": "main",
-              "index": 0
-            }
-          ]
+          []
         ]
       },
       "Obtener Filas SNG": {
         "main": [
           [
             {
-              "node": "Sort1",
+              "node": "Mezclar SNG",
               "type": "main",
               "index": 0
             }
@@ -3742,13 +4855,7 @@
       },
       "Obtener Filas Snow Division": {
         "main": [
-          [
-            {
-              "node": "Eliminar Vista Snow Division",
-              "type": "main",
-              "index": 0
-            }
-          ]
+          []
         ]
       },
       "Crear Vista SNG": {
@@ -3756,28 +4863,6 @@
           [
             {
               "node": "Obtener Filas SNG",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Sort1": {
-        "main": [
-          [
-            {
-              "node": "Wait16",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Wait16": {
-        "main": [
-          [
-            {
-              "node": "HTTP Request",
               "type": "main",
               "index": 0
             }
@@ -3808,33 +4893,521 @@
       },
       "Obtener Filas Skiroom": {
         "main": [
+          []
+        ]
+      },
+      "Obtener Filas Sierra Nevada VIP": {
+        "main": [
+          []
+        ]
+      },
+      "Facebook Graph API10": {
+        "main": [
           [
             {
-              "node": "Eliminar Vista Rules1",
+              "node": "HTTP Request31",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "Obtener Filas Sierra Nevada VIP": {
+      "Facebook Graph API11": {
         "main": [
           [
             {
-              "node": "Eliminar Vista Sierra Nevada VIP",
+              "node": "Edit Fields6",
               "type": "main",
               "index": 0
             }
           ]
         ]
+      },
+      "HTTP Request31": {
+        "main": [
+          [
+            {
+              "node": "Wait",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Wait": {
+        "main": [
+          [
+            {
+              "node": "If10",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If10": {
+        "main": [
+          [
+            {
+              "node": "Facebook Graph API11",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "HTTP Request31",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Edit Fields6": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request32",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "HTTP Request33": {
+        "main": [
+          [
+            {
+              "node": "Wait18",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "HTTP Request34": {
+        "main": [
+          [
+            {
+              "node": "PRUEBA5",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If11": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request35",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "HTTP Request36",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Wait17": {
+        "main": [
+          [
+            {
+              "node": "If11",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "HTTP Request36": {
+        "main": [
+          [
+            {
+              "node": "Wait17",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "PRUEBA5": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request36",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Wait18": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request34",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Facebook Graph API12": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request37",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Facebook Graph API13": {
+        "main": [
+          [
+            {
+              "node": "Edit Fields7",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "HTTP Request37": {
+        "main": [
+          [
+            {
+              "node": "Wait19",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Wait19": {
+        "main": [
+          [
+            {
+              "node": "If12",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If12": {
+        "main": [
+          [
+            {
+              "node": "Facebook Graph API13",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "HTTP Request37",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Edit Fields7": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request38",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "HTTP Request39": {
+        "main": [
+          [
+            {
+              "node": "Wait21",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "HTTP Request40": {
+        "main": [
+          [
+            {
+              "node": "PRUEBA6",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If13": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request41",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "HTTP Request42",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Wait20": {
+        "main": [
+          [
+            {
+              "node": "If13",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "HTTP Request42": {
+        "main": [
+          [
+            {
+              "node": "Wait20",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "PRUEBA6": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request42",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Wait21": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request40",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Crear Vista Mesit": {
+        "main": [
+          [
+            {
+              "node": "Obtener Filas Mesit",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Crear Vista Snow Division": {
+        "main": [
+          [
+            {
+              "node": "Obtener Filas Snow Division",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Mezclar Rules": {
+        "main": [
+          [
+            {
+              "node": "Esperar Rules",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Mezclar Surfin": {
+        "main": [
+          [
+            {
+              "node": "Esperar Surfin",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Mezclar SNG": {
+        "main": [
+          [
+            {
+              "node": "Esperar SNG",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Esperar SNG": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Mezclar Mesit": {
+        "main": [
+          [
+            {
+              "node": "Esperar Mesit",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Mezclar Snow Division": {
+        "main": [
+          [
+            {
+              "node": "Esperar SnowDivision",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Mezclar Skiroom": {
+        "main": [
+          [
+            {
+              "node": "Esperar Skiroom",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Mezclar Sierra Nevada VIP": {
+        "main": [
+          [
+            {
+              "node": "Esperar Sierra Nevada VIP",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Esperar Rules": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request22",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Esperar Surfin": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request26",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Esperar Mesit": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Esperar SnowDivision": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request18",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Esperar Skiroom": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request39",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Esperar Sierra Nevada VIP": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request33",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "HTTP Request24": {
+        "main": [
+          []
+        ]
+      },
+      "HTTP Request28": {
+        "main": [
+          []
+        ]
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version 6996d0f2",
+    "name": "Version 9a5b0b4a",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "6996d0f2-4221-4508-833c-e79d0f8c3e96",
+  "activeVersionId": "9a5b0b4a-0f39-43e3-b223-b7fd642ca2c4",
   "connections": {
     "HTTP Request": {
       "main": [
@@ -4712,6 +6285,13 @@
         ],
         [
           {
+            "node": "Crear Vista Mesit",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
             "node": "Crear Vista Snow Division",
             "type": "main",
             "index": 0
@@ -4757,31 +6337,19 @@
     },
     "Obtener Filas Rules": {
       "main": [
-        [
-          {
-            "node": "Eliminar Vista Rules",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Obtener Filas Surfin": {
       "main": [
-        [
-          {
-            "node": "Eliminar Vista Surfin",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Obtener Filas SNG": {
       "main": [
         [
           {
-            "node": "Sort1",
+            "node": "Mezclar SNG",
             "type": "main",
             "index": 0
           }
@@ -4790,13 +6358,7 @@
     },
     "Obtener Filas Snow Division": {
       "main": [
-        [
-          {
-            "node": "Eliminar Vista Snow Division",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Crear Vista SNG": {
@@ -4804,28 +6366,6 @@
         [
           {
             "node": "Obtener Filas SNG",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Sort1": {
-      "main": [
-        [
-          {
-            "node": "Wait16",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Wait16": {
-      "main": [
-        [
-          {
-            "node": "HTTP Request",
             "type": "main",
             "index": 0
           }
@@ -4856,24 +6396,512 @@
     },
     "Obtener Filas Skiroom": {
       "main": [
+        []
+      ]
+    },
+    "Obtener Filas Sierra Nevada VIP": {
+      "main": [
+        []
+      ]
+    },
+    "Facebook Graph API10": {
+      "main": [
         [
           {
-            "node": "Eliminar Vista Rules1",
+            "node": "HTTP Request31",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Obtener Filas Sierra Nevada VIP": {
+    "Facebook Graph API11": {
       "main": [
         [
           {
-            "node": "Eliminar Vista Sierra Nevada VIP",
+            "node": "Edit Fields6",
             "type": "main",
             "index": 0
           }
         ]
+      ]
+    },
+    "HTTP Request31": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "If10",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If10": {
+      "main": [
+        [
+          {
+            "node": "Facebook Graph API11",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request31",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields6": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request32",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request33": {
+      "main": [
+        [
+          {
+            "node": "Wait18",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request34": {
+      "main": [
+        [
+          {
+            "node": "PRUEBA5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If11": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request35",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request36",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait17": {
+      "main": [
+        [
+          {
+            "node": "If11",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request36": {
+      "main": [
+        [
+          {
+            "node": "Wait17",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PRUEBA5": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request36",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait18": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request34",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Facebook Graph API12": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request37",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Facebook Graph API13": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields7",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request37": {
+      "main": [
+        [
+          {
+            "node": "Wait19",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait19": {
+      "main": [
+        [
+          {
+            "node": "If12",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If12": {
+      "main": [
+        [
+          {
+            "node": "Facebook Graph API13",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request37",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields7": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request38",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request39": {
+      "main": [
+        [
+          {
+            "node": "Wait21",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request40": {
+      "main": [
+        [
+          {
+            "node": "PRUEBA6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If13": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request41",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request42",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait20": {
+      "main": [
+        [
+          {
+            "node": "If13",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request42": {
+      "main": [
+        [
+          {
+            "node": "Wait20",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PRUEBA6": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request42",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait21": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request40",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Crear Vista Mesit": {
+      "main": [
+        [
+          {
+            "node": "Obtener Filas Mesit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Crear Vista Snow Division": {
+      "main": [
+        [
+          {
+            "node": "Obtener Filas Snow Division",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mezclar Rules": {
+      "main": [
+        [
+          {
+            "node": "Esperar Rules",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mezclar Surfin": {
+      "main": [
+        [
+          {
+            "node": "Esperar Surfin",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mezclar SNG": {
+      "main": [
+        [
+          {
+            "node": "Esperar SNG",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Esperar SNG": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mezclar Mesit": {
+      "main": [
+        [
+          {
+            "node": "Esperar Mesit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mezclar Snow Division": {
+      "main": [
+        [
+          {
+            "node": "Esperar SnowDivision",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mezclar Skiroom": {
+      "main": [
+        [
+          {
+            "node": "Esperar Skiroom",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mezclar Sierra Nevada VIP": {
+      "main": [
+        [
+          {
+            "node": "Esperar Sierra Nevada VIP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Esperar Rules": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request22",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Esperar Surfin": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request26",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Esperar Mesit": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Esperar SnowDivision": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request18",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Esperar Skiroom": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request39",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Esperar Sierra Nevada VIP": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request33",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request24": {
+      "main": [
+        []
+      ]
+    },
+    "HTTP Request28": {
+      "main": [
+        []
       ]
     }
   },
@@ -4951,7 +6979,7 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        3616,
+        3776,
         -1376
       ],
       "id": "7da66ccf-8fd7-48d5-8c6d-db816b75171b",
@@ -4976,7 +7004,7 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        4304,
+        4464,
         -1392
       ],
       "id": "3bb41e32-f010-4102-acc1-fd96e8892501",
@@ -5085,7 +7113,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        3968,
+        4128,
         -1376
       ],
       "id": "475281c7-f520-4d18-8b3a-e8dc41dadfd9",
@@ -5119,7 +7147,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        4112,
+        4272,
         -1376
       ],
       "id": "c3ad2eff-8c1a-4047-ba71-69acd0745b05",
@@ -5142,7 +7170,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        4464,
+        4624,
         -1392
       ],
       "id": "7eae2c4f-9d5b-4c4d-8417-1d9d218cbffe",
@@ -5162,7 +7190,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        4624,
+        4784,
         -1392
       ],
       "id": "b3eeaaf6-1eca-4fe1-bc18-add61e7dfa6d",
@@ -5187,7 +7215,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        416,
+        192,
         -1440
       ],
       "id": "8974fa52-b64f-4a01-a41f-e97ac127e6a3",
@@ -5202,7 +7230,7 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        256,
+        32,
         -1440
       ],
       "id": "64cc4927-7ecd-4b78-bc9a-faf4e19927fa",
@@ -5219,7 +7247,7 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        256,
+        32,
         -1232
       ],
       "id": "8af91482-0831-4c8c-90ed-ee5bdbfdf57c",
@@ -5323,7 +7351,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        624,
+        400,
         -1232
       ],
       "id": "fbf24bc9-0430-4a3a-88fd-136c70ba1b2a",
@@ -5378,7 +7406,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        448,
+        224,
         -1232
       ],
       "id": "cd086d64-045c-4105-8f96-198fa0dae5cc",
@@ -5394,7 +7422,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        208,
+        -16,
         -1472
       ],
       "id": "7dcddf5d-7702-4438-9c1a-2439d282d272",
@@ -5425,7 +7453,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        3584,
+        3744,
         -1472
       ],
       "id": "bde44f7e-06f7-4d1b-adbf-fd7a0d237577",
@@ -5444,8 +7472,8 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        3616,
-        -1728
+        3776,
+        -2080
       ],
       "id": "1649991c-daa3-4355-b549-f29a13970b09",
       "name": "Facebook Graph API2",
@@ -5469,8 +7497,8 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        4304,
-        -1744
+        4464,
+        -2096
       ],
       "id": "b7a1439a-261e-4b7d-b768-cd8ac12059a8",
       "name": "Facebook Graph API3",
@@ -5501,8 +7529,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        3824,
-        -1728
+        3984,
+        -2080
       ],
       "id": "e25f848f-45eb-455a-a125-7d69a992bd5c",
       "name": "HTTP Request5",
@@ -5518,8 +7546,8 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        3968,
-        -1728
+        4128,
+        -2080
       ],
       "id": "94ea1db5-6e45-47f1-80d9-ada0e85ca6cc",
       "name": "Wait3",
@@ -5552,8 +7580,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        4112,
-        -1728
+        4272,
+        -2080
       ],
       "id": "079d857a-822b-4d2d-abb0-fdd8281762cd",
       "name": "If2"
@@ -5575,8 +7603,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        4464,
-        -1744
+        4624,
+        -2096
       ],
       "id": "16fb43a1-558d-40e8-b593-94a56f017429",
       "name": "Edit Fields"
@@ -5595,8 +7623,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        4624,
-        -1744
+        4784,
+        -2096
       ],
       "id": "028482b8-0845-4c66-be29-8c9ff57e3894",
       "name": "HTTP Request8",
@@ -5621,8 +7649,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        3584,
-        -1824
+        3744,
+        -2176
       ],
       "id": "92455a60-6b64-4093-9b05-0b38c7d78bd8",
       "name": "Sticky Note3"
@@ -5640,7 +7668,7 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        3616,
+        3776,
         -1024
       ],
       "id": "bd5be653-2119-4ea4-a258-24e8452c846a",
@@ -5665,7 +7693,7 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        4304,
+        4464,
         -1040
       ],
       "id": "fa68e574-b091-4639-a8cd-97ef15710818",
@@ -5697,7 +7725,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        3824,
+        3984,
         -1024
       ],
       "id": "276ad99f-21d2-4e7b-a775-9489c8a0e0e0",
@@ -5714,7 +7742,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        3968,
+        4128,
         -1024
       ],
       "id": "fbd4ef1c-2d52-4a00-b4ba-1d317422e3f0",
@@ -5748,7 +7776,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        4112,
+        4272,
         -1024
       ],
       "id": "4db01e5f-01ba-4c02-b12b-79b497e91073",
@@ -5771,7 +7799,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        4464,
+        4624,
         -1040
       ],
       "id": "93f5b1be-3241-4298-98a9-a4ab4c543828",
@@ -5791,7 +7819,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        4624,
+        4784,
         -1040
       ],
       "id": "910f6db7-b74e-4707-a150-91e00d45cafe",
@@ -5817,7 +7845,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        3584,
+        3744,
         -1120
       ],
       "id": "a6bdaeaa-e921-4885-954e-50c33704d4f1",
@@ -5836,8 +7864,8 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        3616,
-        -2080
+        3776,
+        -1728
       ],
       "id": "b2d37c3b-d837-43d0-8c60-b6b641f7c06f",
       "name": "Facebook Graph API6",
@@ -5861,8 +7889,8 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        4304,
-        -2096
+        4464,
+        -1744
       ],
       "id": "488b66f7-fb64-43df-b350-d6821216c28c",
       "name": "Facebook Graph API7",
@@ -5893,8 +7921,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        3824,
-        -2080
+        3984,
+        -1728
       ],
       "id": "1d73bcf6-f259-43fc-81ef-ca82cccdbe13",
       "name": "HTTP Request11",
@@ -5910,8 +7938,8 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        3968,
-        -2080
+        4128,
+        -1728
       ],
       "id": "dab41c1d-42bb-4b6b-b13a-8d3c3dc89c8f",
       "name": "Wait6",
@@ -5944,8 +7972,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        4112,
-        -2080
+        4272,
+        -1728
       ],
       "id": "6abf9ba1-e69b-4feb-9486-6e3532a04457",
       "name": "If4"
@@ -5967,8 +7995,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        4464,
-        -2096
+        4624,
+        -1744
       ],
       "id": "6b2a4807-87bc-4fc2-9146-62edd7b14cf9",
       "name": "Edit Fields4"
@@ -5987,8 +8015,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        4624,
-        -2096
+        4784,
+        -1744
       ],
       "id": "7533ece0-de3a-472e-a8e0-56d3045ff60a",
       "name": "HTTP Request12",
@@ -6013,8 +8041,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        3584,
-        -2176
+        3744,
+        -1824
       ],
       "id": "db8cdce1-f555-447e-9d70-f2dca0e06cec",
       "name": "Sticky Note5"
@@ -6032,7 +8060,7 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        3616,
+        3776,
         -656
       ],
       "id": "782d8ce7-3c1d-49e2-8bab-775e52b16b6a",
@@ -6057,7 +8085,7 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        4304,
+        4464,
         -672
       ],
       "id": "2ca3f4f1-6c07-4fec-8fa1-ca022c7c2f46",
@@ -6089,7 +8117,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        3824,
+        3984,
         -656
       ],
       "id": "bb64dfd4-0bc2-499a-ae7d-59d4f6220904",
@@ -6106,7 +8134,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        3968,
+        4128,
         -656
       ],
       "id": "0f69dbd5-baed-4ed7-9df0-11dc6f0c0ea8",
@@ -6140,7 +8168,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        4112,
+        4272,
         -656
       ],
       "id": "0e371f48-eb71-41d8-a70f-8fd81427cb9f",
@@ -6163,7 +8191,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        4464,
+        4624,
         -672
       ],
       "id": "76f36a98-8681-431b-b8cc-520b0e65aff5",
@@ -6183,7 +8211,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        4624,
+        4784,
         -672
       ],
       "id": "12f5ca0b-59a6-4e3f-b18c-e785e7e17a6d",
@@ -6209,7 +8237,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        3584,
+        3744,
         -752
       ],
       "id": "b057cb59-8982-4a1d-96fc-570016176971",
@@ -6628,7 +8656,7 @@
       "typeVersion": 4.3,
       "position": [
         1824,
-        -1712
+        -2064
       ],
       "id": "a7892d56-ec2c-4102-aaa7-2bd0e6c3d623",
       "name": "HTTP Request22",
@@ -6655,7 +8683,7 @@
       "typeVersion": 4.3,
       "position": [
         2320,
-        -1712
+        -2064
       ],
       "id": "6ad838f4-01d7-4bf6-acf6-102d65f9b4da",
       "name": "HTTP Request23",
@@ -6694,7 +8722,7 @@
       "typeVersion": 2.2,
       "position": [
         3152,
-        -1712
+        -2064
       ],
       "id": "21fba3c1-c839-4dec-b1ab-a3dedff658b2",
       "name": "If8"
@@ -6710,7 +8738,7 @@
       "typeVersion": 4.3,
       "position": [
         3344,
-        -1728
+        -2080
       ],
       "id": "67182458-f4ca-4e0a-99d9-7aa4be20fd16",
       "name": "HTTP Request24",
@@ -6729,7 +8757,7 @@
       "typeVersion": 1.1,
       "position": [
         2944,
-        -1712
+        -2064
       ],
       "id": "331571a2-3585-47db-8e32-1bec120b6271",
       "name": "Wait12",
@@ -6746,7 +8774,7 @@
       "typeVersion": 4.3,
       "position": [
         2736,
-        -1712
+        -2064
       ],
       "id": "e0a02df8-2058-4b46-aee8-cd96f642d9a1",
       "name": "HTTP Request25",
@@ -6772,7 +8800,7 @@
       "typeVersion": 4.3,
       "position": [
         2512,
-        -1712
+        -2064
       ],
       "id": "0cb5a7da-9606-49de-8f78-79bb69a99baa",
       "name": "PRUEBA3",
@@ -6791,7 +8819,7 @@
       "typeVersion": 1.1,
       "position": [
         2048,
-        -1712
+        -2064
       ],
       "id": "890b6d56-a9c4-4a89-b360-6ae060959330",
       "name": "Wait13",
@@ -6807,7 +8835,7 @@
       "typeVersion": 1,
       "position": [
         1760,
-        -1824
+        -2176
       ],
       "id": "57f941b7-6f05-4c38-a9e2-1f94d66b2ec1",
       "name": "Sticky Note9"
@@ -6827,7 +8855,7 @@
       "typeVersion": 4.3,
       "position": [
         1824,
-        -2064
+        -1712
       ],
       "id": "cc29fb60-6525-47c2-8f41-9e24bfda5455",
       "name": "HTTP Request26",
@@ -6871,7 +8899,7 @@
       "typeVersion": 2.2,
       "position": [
         3152,
-        -2064
+        -1712
       ],
       "id": "f0773575-696a-4702-b300-c2990e55fe7b",
       "name": "If9"
@@ -6887,7 +8915,7 @@
       "typeVersion": 4.3,
       "position": [
         3344,
-        -2080
+        -1728
       ],
       "id": "f83bdb42-a69c-47f8-9c4d-98a437c4edd1",
       "name": "HTTP Request28",
@@ -6906,7 +8934,7 @@
       "typeVersion": 1.1,
       "position": [
         2944,
-        -2064
+        -1712
       ],
       "id": "29bed0e3-79f6-4c50-bc95-7336e324b172",
       "name": "Wait14",
@@ -6923,7 +8951,7 @@
       "typeVersion": 4.3,
       "position": [
         2736,
-        -2064
+        -1712
       ],
       "id": "2ec1d228-f94e-4627-89ea-84411412a6e8",
       "name": "HTTP Request29",
@@ -6949,7 +8977,7 @@
       "typeVersion": 4.3,
       "position": [
         2512,
-        -2064
+        -1712
       ],
       "id": "6065ce1f-ab40-4138-b4ad-3eadd47c0ace",
       "name": "PRUEBA4",
@@ -6968,7 +8996,7 @@
       "typeVersion": 1.1,
       "position": [
         2048,
-        -2064
+        -1712
       ],
       "id": "59b652c0-92ff-4245-9cc8-d262428f6ca1",
       "name": "Wait15",
@@ -6984,7 +9012,7 @@
       "typeVersion": 1,
       "position": [
         1760,
-        -2176
+        -1824
       ],
       "id": "23ffcfb3-0c3b-4eb4-beeb-aead3e3be711",
       "name": "Sticky Note10"
@@ -7000,7 +9028,7 @@
       "typeVersion": 4.3,
       "position": [
         2320,
-        -2064
+        -1712
       ],
       "id": "382a76ce-ed9b-4fee-9825-0b05cbb0392a",
       "name": "HTTP Request27",
@@ -7030,7 +9058,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        3792,
+        3952,
         -1376
       ],
       "id": "91bd9f34-7b2d-4cf0-8a12-5d9bdb044cba",
@@ -7125,6 +9153,29 @@
                 },
                 "conditions": [
                   {
+                    "id": "f099ddeb-2201-4565-99c5-e3b98a28eb96",
+                    "leftValue": "={{ $json.body[\"cuentas[]\"] }}",
+                    "rightValue": "Mesit",
+                    "operator": {
+                      "type": "array",
+                      "operation": "contains",
+                      "rightType": "any"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
                     "id": "8ee39b67-c5e2-4282-8b92-2997f13e881a",
                     "leftValue": "={{ $json.body[\"cuentas[]\"] }}",
                     "rightValue": "Snow Division",
@@ -7193,7 +9244,7 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        784,
+        560,
         -1296
       ],
       "id": "62ca3c0f-97aa-4a87-b870-9462260ce7ec",
@@ -7208,8 +9259,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        960,
-        -2048
+        928,
+        -2064
       ],
       "id": "03c0453e-afe7-451c-abdd-2c87037e9952",
       "name": "Crear Vista Rules",
@@ -7229,8 +9280,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        976,
-        -1664
+        928,
+        -1712
       ],
       "id": "dcb07497-45a0-4ced-bc73-93699c12a7c0",
       "name": "Crear Vista Surfin",
@@ -7250,7 +9301,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        992,
+        944,
         -1360
       ],
       "id": "38f98b06-61b2-4a3b-9ab2-fa20ef9f47d6",
@@ -7271,8 +9322,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        992,
-        -1072
+        944,
+        -304
       ],
       "id": "eb93f1c1-6aa4-4da7-9dc8-e1d51b81c614",
       "name": "Crear vista Skiroom",
@@ -7292,8 +9343,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        992,
-        -928
+        944,
+        48
       ],
       "id": "22f341dd-b73e-4314-9c54-c0deffe86d66",
       "name": "Crear vista Sierra Nevada VIP",
@@ -7313,8 +9364,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        992,
-        -1216
+        944,
+        -656
       ],
       "id": "ee54a7c0-c9f7-4a21-9814-8b76aa042e39",
       "name": "Crear Vista Snow Division",
@@ -7334,8 +9385,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        1376,
-        -2048
+        5040,
+        -2080
       ],
       "id": "1758b16a-ba56-41a9-a39f-c07d7c81e26c",
       "name": "Eliminar Vista Rules",
@@ -7355,8 +9406,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        1392,
-        -1664
+        4992,
+        -1744
       ],
       "id": "8939b807-10f4-4a93-975b-ce05f8896485",
       "name": "Eliminar Vista Surfin",
@@ -7386,8 +9437,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        1136,
-        -2048
+        1104,
+        -2064
       ],
       "id": "4ae29102-e3c2-4110-8a65-93bcef34f04f",
       "name": "Obtener Filas Rules",
@@ -7417,8 +9468,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        1152,
-        -1664
+        1104,
+        -1712
       ],
       "id": "7ad8c4e1-136f-40c4-a51a-e4df404d356b",
       "name": "Obtener Filas Surfin",
@@ -7448,7 +9499,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        1168,
+        1120,
         -1360
       ],
       "id": "79508500-6a9b-4ef5-b4fc-88cc540a172a",
@@ -7469,7 +9520,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        4864,
+        4992,
         -1392
       ],
       "id": "9c3dc3c7-e7e9-40f4-b2c9-22200e297c82",
@@ -7500,8 +9551,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        1168,
-        -1216
+        1120,
+        -656
       ],
       "id": "94a93178-5bd3-444b-83b3-4e60f53e4ddc",
       "name": "Obtener Filas Snow Division",
@@ -7521,60 +9572,11 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        1408,
-        -1216
+        4992,
+        -672
       ],
       "id": "84b8ba29-2801-4cf4-b527-ebfcd0876d61",
       "name": "Eliminar Vista Snow Division",
-      "credentials": {
-        "postgres": {
-          "id": "UPETCYNZNCReuZu8",
-          "name": "Postgres Supabase"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "amount": 1
-      },
-      "type": "n8n-nodes-base.wait",
-      "typeVersion": 1.1,
-      "position": [
-        1616,
-        -1360
-      ],
-      "id": "014c7832-2267-4f6d-ab65-22d7e76bb616",
-      "name": "Wait16",
-      "webhookId": "8cce73b4-0a6e-4db3-b503-1267489be04b",
-      "executeOnce": true
-    },
-    {
-      "parameters": {
-        "type": "random"
-      },
-      "type": "n8n-nodes-base.sort",
-      "typeVersion": 1,
-      "position": [
-        1424,
-        -1360
-      ],
-      "id": "e02cb370-e26b-4fe8-a358-24cd6426f6dc",
-      "name": "Sort1"
-    },
-    {
-      "parameters": {
-        "operation": "executeQuery",
-        "query": "DROP VIEW IF EXISTS temporal_rules;",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.postgres",
-      "typeVersion": 2.6,
-      "position": [
-        1408,
-        -1072
-      ],
-      "id": "3847abb4-da75-4c68-b61b-d062b187b6d2",
-      "name": "Eliminar Vista Rules1",
       "credentials": {
         "postgres": {
           "id": "UPETCYNZNCReuZu8",
@@ -7601,8 +9603,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        1168,
-        -1072
+        1120,
+        -304
       ],
       "id": "4b7701de-2a70-48fa-a8b8-c727befbb38c",
       "name": "Obtener Filas Skiroom",
@@ -7632,8 +9634,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        1168,
-        -928
+        1120,
+        48
       ],
       "id": "2fcb3278-2701-4f05-b122-9f3352fc0f96",
       "name": "Obtener Filas Sierra Nevada VIP",
@@ -7653,8 +9655,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        1408,
-        -928
+        4992,
+        32
       ],
       "id": "cac03bb3-ae0a-4b8a-ac28-3166ee627618",
       "name": "Eliminar Vista Sierra Nevada VIP",
@@ -7664,6 +9666,1150 @@
           "name": "Postgres Supabase"
         }
       }
+    },
+    {
+      "parameters": {
+        "httpRequestMethod": "POST",
+        "graphApiVersion": "v23.0",
+        "node": "17841470046184468",
+        "edge": "=media",
+        "options": {
+          "queryParametersJson": "={\n\"video_url\": \"{{ $json.job.urls[0] }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
+        }
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        3776,
+        48
+      ],
+      "id": "86c3b6f3-c278-4fbf-bcb6-b3747cc44778",
+      "name": "Facebook Graph API10",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "F7VbX8jWKCXdAM47",
+          "name": "Facebook Graph account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpRequestMethod": "POST",
+        "graphApiVersion": "v23.0",
+        "node": "17841470046184468",
+        "edge": "media_publish",
+        "options": {
+          "queryParametersJson": "={\n  \"creation_id\": \"{{$json.id}}\"\n}"
+        }
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        4464,
+        32
+      ],
+      "id": "787d4c1c-6c38-4fed-aa6f-5e12aa2c0177",
+      "name": "Facebook Graph API11",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "F7VbX8jWKCXdAM47",
+          "name": "Facebook Graph account"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "url": "=https://graph.facebook.com/v20.0/{{ $json.id }}?fields=status,status_code",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "facebookGraphApi",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "access_token",
+              "value": "EAF2z8nVLTA8BQVHL88vghg4RRZBH9svUgZCP93NSZAB9iSDKxTAMvz8DFby8KVqXp6DWFxfFDiSKOUXvXPVVrJcNxjFOmr0ZCXphOZBUUWRkP8sTZC9wwapmP8vlJQN4NHH2eW9zPRmg2SHrQ0AhjI3n2kx1vAa8nOtr6tbQMhcaP0X0eMtOComwFl3zR7zd7HowZDZD"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        3984,
+        48
+      ],
+      "id": "3f56ff68-eb0d-4bec-9852-5007fb143561",
+      "name": "HTTP Request31",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "F7VbX8jWKCXdAM47",
+          "name": "Facebook Graph account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        4128,
+        48
+      ],
+      "id": "77852db1-698e-48af-b5c5-c0e3b290d37c",
+      "name": "Wait",
+      "webhookId": "4e9e9bda-286b-4bd6-b112-9133762c2724"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "49c65dc4-2ebe-451b-9788-cd0999f268f1",
+              "leftValue": "={{ $json.status_code }}",
+              "rightValue": "FINISHED",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        4272,
+        48
+      ],
+      "id": "0af9b2cd-4e9f-446b-9d50-d5cd50d4faf7",
+      "name": "If10"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e5f15ada-1e3d-43a0-87d6-17cb5e1222ac",
+              "name": "ID DOCUMENTO",
+              "value": "={{ $('HTTP Request7').item.json.job.urls[0].match(/(DA[A-Za-z0-9-]+)/)[0] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        4624,
+        32
+      ],
+      "id": "8a6d8318-c5d1-4e34-a011-2c29fd339d91",
+      "name": "Edit Fields6"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.canva.com/rest/v1/folders/move",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"item_id\": \"{{ $json['ID DOCUMENTO'] }}\",\n  \"to_folder_id\": \"FAF-k76AhRE\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        4784,
+        32
+      ],
+      "id": "47d046da-0d54-4720-838b-553b7b24ec4b",
+      "name": "HTTP Request32",
+      "credentials": {
+        "canvaApi": {
+          "id": "tuy7V3JiiZVTJf5e",
+          "name": "Canva account"
+        },
+        "oAuth2Api": {
+          "id": "eHEbZK7oC3pW1LQr",
+          "name": "Canva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "SNOWDIVISION\n",
+        "height": 336,
+        "width": 1232,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3744,
+        -48
+      ],
+      "id": "dc975708-50be-4a7f-976f-009f7673e979",
+      "name": "Sticky Note11"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.canva.com/rest/v1/autofills",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"brand_template_id\": \"{{ $json.id_documento }}\",\n  \"export_name\": \"Historia dia hoy\",\n  \"data\": {\n    \"fecha\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $now.format('dd/LL/yyyy') }}\"\n    },\n    \"calidadnieve_general\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.calidad_nieve }}\"\n    },\n    \"estadogeneral\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.aspecto_cielo }}\"\n    },\n    \"visibilidadgeneral\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.visibilidad }}\"\n    },\n    \"temperaturaminima\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.temp_min }}\"\n    },\n    \"temperaturamaxima\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.temp_max }}\"\n    },\n    \"vientominimo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.viento_min }}\"\n    },\n    \"vientomaximo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.viento_max }}\"\n    },\n    \"espesorminimo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.espesor_min }}\"\n    },\n    \"espesormaximo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.espesor_max }}\"\n    },\n    \"remontes_abiertos\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.remontes_abiertos }}\"\n    },\n    \"km_esquiables\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.km_esquiables }}\"\n    },\n    \"pistasabiertas\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body['pistas_abiertas[]'] }}\" \n    },\n    \"numeropistas\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.numero_pistas }}\"\n    }\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        1824,
+        48
+      ],
+      "id": "0dbf7ac7-5332-4002-9069-7c75bf07c323",
+      "name": "HTTP Request33",
+      "retryOnFail": true,
+      "waitBetweenTries": 3000,
+      "executeOnce": false,
+      "alwaysOutputData": false,
+      "notesInFlow": false,
+      "credentials": {
+        "oAuth2Api": {
+          "id": "eHEbZK7oC3pW1LQr",
+          "name": "Canva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://api.canva.com/rest/v1/autofills/{{ $('HTTP Request33').item.json.job.id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        2320,
+        48
+      ],
+      "id": "b297c029-4e63-447d-9c5f-d4e17bd7a213",
+      "name": "HTTP Request34",
+      "credentials": {
+        "oAuth2Api": {
+          "id": "eHEbZK7oC3pW1LQr",
+          "name": "Canva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "b4f16a6d-f121-4b47-ab09-627eb7d39e74",
+              "leftValue": "={{ $json.job.status }}",
+              "rightValue": "success",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        3152,
+        48
+      ],
+      "id": "c3b69f9b-17e1-42fa-9e4f-98954f72f573",
+      "name": "If11"
+    },
+    {
+      "parameters": {
+        "url": "=https://api.canva.com/rest/v1/exports/{{ $json[\"job\"][\"id\"] }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        3344,
+        32
+      ],
+      "id": "1aca6225-3f7d-4383-a53d-ca3ecd6170eb",
+      "name": "HTTP Request35",
+      "credentials": {
+        "oAuth2Api": {
+          "id": "eHEbZK7oC3pW1LQr",
+          "name": "Canva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        2944,
+        48
+      ],
+      "id": "0a45c409-70b7-4e70-be79-19ed595c100a",
+      "name": "Wait17",
+      "webhookId": "82707f0f-e107-4b71-9887-ad1255db0d8d"
+    },
+    {
+      "parameters": {
+        "url": "=https://api.canva.com/rest/v1/exports/{{ $json[\"job\"][\"id\"] }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        2736,
+        48
+      ],
+      "id": "632365df-a3a8-45bc-9301-7cff3a3a2750",
+      "name": "HTTP Request36",
+      "credentials": {
+        "oAuth2Api": {
+          "id": "eHEbZK7oC3pW1LQr",
+          "name": "Canva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.canva.com/rest/v1/exports",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"design_id\": \"{{ $json.job.result.design.id }}\",\n  \"format\": {\n    \"type\": \"mp4\",\n    \"quality\": \"vertical_1080p\"\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        2512,
+        48
+      ],
+      "id": "5d3d0c42-966d-4721-b363-7ad888572f56",
+      "name": "PRUEBA5",
+      "credentials": {
+        "oAuth2Api": {
+          "id": "eHEbZK7oC3pW1LQr",
+          "name": "Canva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        2048,
+        48
+      ],
+      "id": "d19a0d44-ed88-4a28-9671-b7cdac5d4188",
+      "name": "Wait18",
+      "webhookId": "c4efde5f-05eb-4612-bdde-f217ed3f5fb1"
+    },
+    {
+      "parameters": {
+        "content": "SIERRA NEVADA VIP\n",
+        "height": 336,
+        "width": 1712
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1760,
+        -64
+      ],
+      "id": "b2c5f11f-a6a1-4359-8b03-51ed6795ae07",
+      "name": "Sticky Note12"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "DROP VIEW IF EXISTS temporal_mesit;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        4992,
+        -1040
+      ],
+      "id": "3847abb4-da75-4c68-b61b-d062b187b6d2",
+      "name": "Eliminar Vista Mesit",
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpRequestMethod": "POST",
+        "graphApiVersion": "v23.0",
+        "node": "17841470046184468",
+        "edge": "=media",
+        "options": {
+          "queryParametersJson": "={\n\"video_url\": \"{{ $json.job.urls[0] }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
+        }
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        3776,
+        -304
+      ],
+      "id": "11ed9595-588b-4c5f-9235-286f00b1f598",
+      "name": "Facebook Graph API12",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "F7VbX8jWKCXdAM47",
+          "name": "Facebook Graph account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpRequestMethod": "POST",
+        "graphApiVersion": "v23.0",
+        "node": "17841470046184468",
+        "edge": "media_publish",
+        "options": {
+          "queryParametersJson": "={\n  \"creation_id\": \"{{$json.id}}\"\n}"
+        }
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        4464,
+        -320
+      ],
+      "id": "1526fc34-53c0-45e1-b820-de38f5909d35",
+      "name": "Facebook Graph API13",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "F7VbX8jWKCXdAM47",
+          "name": "Facebook Graph account"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "url": "=https://graph.facebook.com/v20.0/{{ $json.id }}?fields=status,status_code",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "facebookGraphApi",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "access_token",
+              "value": "EAF2z8nVLTA8BQVHL88vghg4RRZBH9svUgZCP93NSZAB9iSDKxTAMvz8DFby8KVqXp6DWFxfFDiSKOUXvXPVVrJcNxjFOmr0ZCXphOZBUUWRkP8sTZC9wwapmP8vlJQN4NHH2eW9zPRmg2SHrQ0AhjI3n2kx1vAa8nOtr6tbQMhcaP0X0eMtOComwFl3zR7zd7HowZDZD"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        3984,
+        -304
+      ],
+      "id": "d2d10789-b18d-4f12-8bd2-f7d76e5907b4",
+      "name": "HTTP Request37",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "F7VbX8jWKCXdAM47",
+          "name": "Facebook Graph account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        4128,
+        -304
+      ],
+      "id": "f077bed8-6eaa-44d8-a4b2-ea4d4f88165c",
+      "name": "Wait19",
+      "webhookId": "4e9e9bda-286b-4bd6-b112-9133762c2724"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "49c65dc4-2ebe-451b-9788-cd0999f268f1",
+              "leftValue": "={{ $json.status_code }}",
+              "rightValue": "FINISHED",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        4272,
+        -304
+      ],
+      "id": "f49022fe-97b2-451a-91e1-18d249adc70b",
+      "name": "If12"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e5f15ada-1e3d-43a0-87d6-17cb5e1222ac",
+              "name": "ID DOCUMENTO",
+              "value": "={{ $('HTTP Request7').item.json.job.urls[0].match(/(DA[A-Za-z0-9-]+)/)[0] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        4624,
+        -320
+      ],
+      "id": "bc494770-50cd-4591-b0a5-7bbb9366efe2",
+      "name": "Edit Fields7"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.canva.com/rest/v1/folders/move",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"item_id\": \"{{ $json['ID DOCUMENTO'] }}\",\n  \"to_folder_id\": \"FAF-k76AhRE\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        4784,
+        -320
+      ],
+      "id": "571b798d-bf26-47f5-a523-796c1e70cb76",
+      "name": "HTTP Request38",
+      "credentials": {
+        "canvaApi": {
+          "id": "tuy7V3JiiZVTJf5e",
+          "name": "Canva account"
+        },
+        "oAuth2Api": {
+          "id": "eHEbZK7oC3pW1LQr",
+          "name": "Canva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "SKIROOM\n",
+        "height": 336,
+        "width": 1232,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3744,
+        -400
+      ],
+      "id": "9e6412dc-73d8-4257-b7fa-f70d7a3f4d80",
+      "name": "Sticky Note13"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.canva.com/rest/v1/autofills",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"brand_template_id\": \"{{ $json.id_documento }}\",\n  \"export_name\": \"Historia dia hoy\",\n  \"data\": {\n    \"fecha\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $now.format('dd/LL/yyyy') }}\"\n    },\n    \"calidadnieve_general\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.calidad_nieve }}\"\n    },\n    \"estadogeneral\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.aspecto_cielo }}\"\n    },\n    \"visibilidadgeneral\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.visibilidad }}\"\n    },\n    \"temperaturaminima\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.temp_min }}\"\n    },\n    \"temperaturamaxima\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.temp_max }}\"\n    },\n    \"vientominimo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.viento_min }}\"\n    },\n    \"vientomaximo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.viento_max }}\"\n    },\n    \"espesorminimo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.espesor_min }}\"\n    },\n    \"espesormaximo\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.espesor_max }}\"\n    },\n    \"remontes_abiertos\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.remontes_abiertos }}\"\n    },\n    \"km_esquiables\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.km_esquiables }}\"\n    },\n    \"pistasabiertas\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body['pistas_abiertas[]'] }}\" \n    },\n    \"numeropistas\": {\n      \"type\": \"text\",\n      \"text\": \"{{ $('Edit Fields3').item.json.body.numero_pistas }}\"\n    }\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        1824,
+        -304
+      ],
+      "id": "39bdf0c8-0600-4b02-a52d-afef1ca08b45",
+      "name": "HTTP Request39",
+      "retryOnFail": true,
+      "waitBetweenTries": 3000,
+      "executeOnce": false,
+      "alwaysOutputData": false,
+      "notesInFlow": false,
+      "credentials": {
+        "oAuth2Api": {
+          "id": "eHEbZK7oC3pW1LQr",
+          "name": "Canva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://api.canva.com/rest/v1/autofills/{{ $('HTTP Request39').item.json.job.id }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        2320,
+        -304
+      ],
+      "id": "c623a0f8-30e4-487f-b0e7-af8aa5234756",
+      "name": "HTTP Request40",
+      "credentials": {
+        "oAuth2Api": {
+          "id": "eHEbZK7oC3pW1LQr",
+          "name": "Canva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "b4f16a6d-f121-4b47-ab09-627eb7d39e74",
+              "leftValue": "={{ $json.job.status }}",
+              "rightValue": "success",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        3152,
+        -304
+      ],
+      "id": "89d85dde-9852-4f97-b683-1ef88ead1765",
+      "name": "If13"
+    },
+    {
+      "parameters": {
+        "url": "=https://api.canva.com/rest/v1/exports/{{ $json[\"job\"][\"id\"] }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        3344,
+        -320
+      ],
+      "id": "4c032b71-6d70-47cc-9651-c4cec18de41f",
+      "name": "HTTP Request41",
+      "credentials": {
+        "oAuth2Api": {
+          "id": "eHEbZK7oC3pW1LQr",
+          "name": "Canva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        2944,
+        -304
+      ],
+      "id": "d3feb345-7ccd-41cb-b89a-881049e287e8",
+      "name": "Wait20",
+      "webhookId": "82707f0f-e107-4b71-9887-ad1255db0d8d"
+    },
+    {
+      "parameters": {
+        "url": "=https://api.canva.com/rest/v1/exports/{{ $json[\"job\"][\"id\"] }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        2736,
+        -304
+      ],
+      "id": "82fb81b1-47f0-492d-9ff1-e8ad65ea679f",
+      "name": "HTTP Request42",
+      "credentials": {
+        "oAuth2Api": {
+          "id": "eHEbZK7oC3pW1LQr",
+          "name": "Canva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.canva.com/rest/v1/exports",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"design_id\": \"{{ $json.job.result.design.id }}\",\n  \"format\": {\n    \"type\": \"mp4\",\n    \"quality\": \"vertical_1080p\"\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        2512,
+        -304
+      ],
+      "id": "0140d16a-0fe2-4b1a-9f46-9f75506988ba",
+      "name": "PRUEBA6",
+      "credentials": {
+        "oAuth2Api": {
+          "id": "eHEbZK7oC3pW1LQr",
+          "name": "Canva"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        2048,
+        -304
+      ],
+      "id": "aceb5ceb-9b55-4a1f-95de-d06c7c84fcdd",
+      "name": "Wait21",
+      "webhookId": "c4efde5f-05eb-4612-bdde-f217ed3f5fb1"
+    },
+    {
+      "parameters": {
+        "content": "SKIROOM",
+        "height": 336,
+        "width": 1712
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1760,
+        -416
+      ],
+      "id": "340d5dc2-ebd1-4426-a94a-70fcdf5b683e",
+      "name": "Sticky Note14"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "DROP VIEW IF EXISTS temporal_skiroom;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        4992,
+        -320
+      ],
+      "id": "ef56b717-4c02-4107-a5aa-5cc0127927f1",
+      "name": "Eliminar Vista Skiroom",
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "CREATE OR REPLACE VIEW temporal_mesit AS\nSELECT \n    id_documento, \n    nombre, \n    cuenta\nFROM \n    \"Plantillas_Canva\"\nWHERE \n    cuenta = 'Mesit' \n    AND nombre = '{{ $json.body.aspecto_cielo }}';",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        944,
+        -1008
+      ],
+      "id": "8679ef63-fabc-4318-a851-4eb51cc878b1",
+      "name": "Crear Vista Mesit",
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "temporal_mesit",
+          "mode": "name"
+        },
+        "returnAll": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        1120,
+        -1008
+      ],
+      "id": "73b4a496-a36b-47f9-aa69-7ef87e91db56",
+      "name": "Obtener Filas Mesit",
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "type": "random"
+      },
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        1392,
+        -2064
+      ],
+      "id": "3fa9ee9f-8a7a-4166-b4ab-5db9e8dc2601",
+      "name": "Mezclar Rules"
+    },
+    {
+      "parameters": {
+        "amount": 1
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1584,
+        -2064
+      ],
+      "id": "e54de516-dd74-4762-9e88-7beda2367ab7",
+      "name": "Esperar Rules",
+      "webhookId": "8cce73b4-0a6e-4db3-b503-1267489be04b",
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "type": "random"
+      },
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        1392,
+        -1712
+      ],
+      "id": "e1ded1f7-7fe4-4153-b65e-e022cdec73f0",
+      "name": "Mezclar Surfin"
+    },
+    {
+      "parameters": {
+        "amount": 1
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1584,
+        -1712
+      ],
+      "id": "84628f75-dfce-4356-8ba1-378173dabeb4",
+      "name": "Esperar Surfin",
+      "webhookId": "8cce73b4-0a6e-4db3-b503-1267489be04b",
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "type": "random"
+      },
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        1392,
+        -1360
+      ],
+      "id": "e02cb370-e26b-4fe8-a358-24cd6426f6dc",
+      "name": "Mezclar SNG"
+    },
+    {
+      "parameters": {
+        "amount": 1
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1584,
+        -1360
+      ],
+      "id": "014c7832-2267-4f6d-ab65-22d7e76bb616",
+      "name": "Esperar SNG",
+      "webhookId": "8cce73b4-0a6e-4db3-b503-1267489be04b",
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "type": "random"
+      },
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        1392,
+        -1008
+      ],
+      "id": "54ac63b9-36f2-4a5f-9377-c7fe671ca7e6",
+      "name": "Mezclar Mesit"
+    },
+    {
+      "parameters": {
+        "amount": 1
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1584,
+        -1008
+      ],
+      "id": "12128430-62cc-44aa-95d9-21ac5f700db3",
+      "name": "Esperar Mesit",
+      "webhookId": "8cce73b4-0a6e-4db3-b503-1267489be04b",
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "type": "random"
+      },
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        1392,
+        -656
+      ],
+      "id": "d8831d6a-3b0e-4654-aeb4-d4bdce65e172",
+      "name": "Mezclar Snow Division"
+    },
+    {
+      "parameters": {
+        "amount": 1
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1584,
+        -656
+      ],
+      "id": "7f2f636f-7371-471d-9624-7ed216326ed2",
+      "name": "Esperar SnowDivision",
+      "webhookId": "8cce73b4-0a6e-4db3-b503-1267489be04b",
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "type": "random"
+      },
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        1392,
+        -304
+      ],
+      "id": "e1da3a11-ba46-4edd-bffe-e8adc0529b23",
+      "name": "Mezclar Skiroom"
+    },
+    {
+      "parameters": {
+        "amount": 1
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1584,
+        -304
+      ],
+      "id": "15465844-76e6-4875-9936-447cf84f7330",
+      "name": "Esperar Skiroom",
+      "webhookId": "8cce73b4-0a6e-4db3-b503-1267489be04b",
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "type": "random"
+      },
+      "type": "n8n-nodes-base.sort",
+      "typeVersion": 1,
+      "position": [
+        1392,
+        48
+      ],
+      "id": "468d00f2-0fe6-488c-8ca2-94c8586bb23e",
+      "name": "Mezclar Sierra Nevada VIP"
+    },
+    {
+      "parameters": {
+        "amount": 1
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1584,
+        48
+      ],
+      "id": "3d9bd948-ce04-4b58-a138-5c46368614ae",
+      "name": "Esperar Sierra Nevada VIP",
+      "webhookId": "8cce73b4-0a6e-4db3-b503-1267489be04b",
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "content": "",
+        "height": 2400,
+        "width": 150,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1232,
+        -2096
+      ],
+      "id": "650c318e-a391-46ad-a15e-9442f516f925",
+      "name": "Sticky Note15"
+    },
+    {
+      "parameters": {
+        "content": "**EXPLICACIÓN**\n\nEste límite marca que ramas están funcionando, conecta los nodos que miran la información en la base de datos con los que procesan la imagen de canva.\n\nSe deben conectar solamente las ramas de las cuentas que ya tengan como mínimo una plantilla para cada estado del cielo, ya que si no no funcionará esa rama.",
+        "height": 320,
+        "width": 320,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1168,
+        288
+      ],
+      "id": "c4dc5b9c-5161-4f10-874f-97918de5b264",
+      "name": "Sticky Note16"
+    },
+    {
+      "parameters": {
+        "content": "",
+        "height": 2576,
+        "width": 150,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3536,
+        -2176
+      ],
+      "id": "bf557425-f0c8-44fa-9546-b591e3c38dbb",
+      "name": "Sticky Note17"
+    },
+    {
+      "parameters": {
+        "content": "**EXPLICACIÓN**\n\nEste límite marca que imágenes procesadas se subirán a la historia.\n\nEste límite separa la parte de la rama que procesa la imagen en canva de la parte de la rama que sube esa misma imagen a instagram.\n\nSolamente se conectarán las ramas en las que ya se haya comprobado que todas las plantillas (para cada estado del cielo) se rellenen correctamente",
+        "height": 320,
+        "width": 320,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        3472,
+        320
+      ],
+      "id": "4037226b-d0d1-43ac-8313-cf9c86c989fb",
+      "name": "Sticky Note18"
     }
   ],
   "pinData": {},
@@ -7690,6 +10836,6 @@
   },
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2026-02-19T10:31:00.015Z",
-  "versionId": "6996d0f2-4221-4508-833c-e79d0f8c3e96"
+  "updatedAt": "2026-02-19T15:08:55.314Z",
+  "versionId": "9a5b0b4a-0f39-43e3-b223-b7fd642ca2c4"
 }
