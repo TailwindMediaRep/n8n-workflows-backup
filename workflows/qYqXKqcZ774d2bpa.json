@@ -1904,6 +1904,17 @@
           }
         ]
       ]
+    },
+    "Unir Todos los Pedidos": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-11-28T09:20:31.945Z",
@@ -2111,8 +2122,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -224,
-        704
+        -272,
+        752
       ],
       "id": "c53daf0e-4785-4887-8415-45a4af841923",
       "name": "juntar datos"
@@ -3316,8 +3327,8 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        -528,
-        1520
+        2784,
+        752
       ],
       "id": "63668f8b-ab19-4460-af4d-ba9850a9c519",
       "name": "GraphQL",
@@ -3335,8 +3346,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -704,
-        1520
+        2608,
+        752
       ],
       "id": "03578317-686d-4b3d-ad67-6d06e01c11c2",
       "name": "Code in JavaScript"
@@ -3363,8 +3374,8 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
       "position": [
-        -880,
-        1520
+        2432,
+        752
       ],
       "id": "ccb60fd6-673b-44bd-80f9-681b61a87e3f",
       "name": "Get row(s)"
@@ -3376,8 +3387,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -352,
-        1520
+        2960,
+        752
       ],
       "id": "931e8f54-6d9c-4926-9613-8947a71c7fba",
       "name": "Code in JavaScript1"
@@ -3392,8 +3403,8 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        64,
-        1520
+        3376,
+        752
       ],
       "id": "45cf7ed9-32f9-4b7e-9bb1-9ad908231c0f",
       "name": "GraphQL1",
@@ -3414,8 +3425,8 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        -128,
-        1520
+        3184,
+        752
       ],
       "id": "6000736b-1fd6-4b52-a75f-8f9dffb46b3e",
       "name": "GraphQL2",
@@ -3436,8 +3447,8 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        -128,
-        1696
+        3184,
+        928
       ],
       "id": "80e5c84a-d412-4849-b647-a31a87027f41",
       "name": "Send a message",
@@ -3458,8 +3469,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -1072,
-        1456
+        2240,
+        688
       ],
       "id": "a35052e5-9313-45d2-bd83-1635a0476047",
       "name": "Sticky Note3"
@@ -3530,8 +3541,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -592,
-        1072
+        -272,
+        1056
       ],
       "id": "a5e7501f-ad93-43b6-bb94-2dd14abcadc0",
       "name": "Unir Todos los Pedidos"
@@ -3644,7 +3655,16 @@
       "name": "Prep Shopify"
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "When clicking ‘Execute workflow’": [
+      {
+        "json": {},
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1"
   },
@@ -3665,6 +3685,6 @@
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-02-16T08:34:06.056Z",
-  "versionId": "dabcea7c-116a-4da1-8e29-b0d29a616c2f"
+  "updatedAt": "2026-02-19T14:14:25.703Z",
+  "versionId": "8be2fded-b1d1-4764-84fa-57e15ed36954"
 }
