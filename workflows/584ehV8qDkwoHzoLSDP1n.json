@@ -1825,11 +1825,6 @@
       "main": [
         [
           {
-            "node": "Get row(s)",
-            "type": "main",
-            "index": 0
-          },
-          {
             "node": "Loop Over Items",
             "type": "main",
             "index": 0
@@ -3303,6 +3298,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-02-03T13:37:11.442Z",
-  "versionId": "204d611a-24d9-4692-a652-28439c78bb44"
+  "updatedAt": "2026-02-19T10:58:18.410Z",
+  "versionId": "6b3db283-a62d-414c-9fed-4abb11ee1b81"
 }
