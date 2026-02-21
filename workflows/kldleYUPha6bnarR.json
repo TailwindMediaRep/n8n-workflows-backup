@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-02-19T15:08:56.000Z",
-    "createdAt": "2026-02-19T15:08:55.317Z",
-    "versionId": "9a5b0b4a-0f39-43e3-b223-b7fd642ca2c4",
+    "updatedAt": "2026-02-20T13:34:42.000Z",
+    "createdAt": "2026-02-20T13:34:40.078Z",
+    "versionId": "9dee22ab-6c9f-41da-b581-401a4e897351",
     "workflowId": "kldleYUPha6bnarR",
     "nodes": [
       {
@@ -20,7 +20,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          1824,
+          2256,
           -1360
         ],
         "id": "9654ecf1-32ab-4757-adb0-87b9f07315aa",
@@ -47,7 +47,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          2320,
+          2704,
           -1360
         ],
         "id": "6222d526-1ca0-4ae2-b996-d6ae44f671c0",
@@ -72,7 +72,7 @@
         "type": "n8n-nodes-base.facebookGraphApi",
         "typeVersion": 1,
         "position": [
-          3776,
+          4176,
           -1376
         ],
         "id": "7da66ccf-8fd7-48d5-8c6d-db816b75171b",
@@ -97,7 +97,7 @@
         "type": "n8n-nodes-base.facebookGraphApi",
         "typeVersion": 1,
         "position": [
-          4464,
+          4864,
           -1392
         ],
         "id": "3bb41e32-f010-4102-acc1-fd96e8892501",
@@ -137,7 +137,7 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          3152,
+          3584,
           -1360
         ],
         "id": "88a07af8-5d4d-4c7e-9a1f-4db66d843eef",
@@ -153,7 +153,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          3344,
+          3744,
           -1376
         ],
         "id": "7555d978-506b-45aa-bf1a-cdfafabbe297",
@@ -172,7 +172,7 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          2944,
+          3376,
           -1360
         ],
         "id": "5531d7ae-3e1e-4e70-a013-b7a468dfde34",
@@ -189,7 +189,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          2736,
+          3168,
           -1360
         ],
         "id": "87ba9b82-c2a0-491d-a90b-251cc2de0db3",
@@ -206,7 +206,7 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          4128,
+          4528,
           -1376
         ],
         "id": "475281c7-f520-4d18-8b3a-e8dc41dadfd9",
@@ -240,7 +240,7 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          4272,
+          4672,
           -1376
         ],
         "id": "c3ad2eff-8c1a-4047-ba71-69acd0745b05",
@@ -263,7 +263,7 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          4624,
+          5024,
           -1392
         ],
         "id": "7eae2c4f-9d5b-4c4d-8417-1d9d218cbffe",
@@ -283,7 +283,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          4784,
+          5184,
           -1392
         ],
         "id": "b3eeaaf6-1eca-4fe1-bc18-add61e7dfa6d",
@@ -302,14 +302,14 @@
       {
         "parameters": {
           "respondWith": "text",
-          "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Parte de Nieve - Sierra Nevada</title>\n    <style>\n        body {\n            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n            background-color: #121212;\n            color: #e0e0e0;\n            margin: 0;\n            padding: 20px;\n            display: flex;\n            justify-content: center;\n        }\n        .form-container {\n            background-color: #1e1e1e;\n            padding: 30px;\n            border-radius: 10px;\n            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);\n            max-width: 650px;\n            width: 100%;\n        }\n        h2 {\n            color: #ffffff;\n            text-align: center;\n            margin-top: 0;\n            margin-bottom: 25px;\n        }\n        .form-group {\n            margin-bottom: 15px;\n        }\n        .form-row {\n            display: flex;\n            gap: 15px;\n            margin-bottom: 15px;\n        }\n        .form-row .form-group {\n            flex: 1;\n            margin-bottom: 0;\n        }\n        label {\n            display: block;\n            font-weight: bold;\n            margin-bottom: 5px;\n            color: #b0bec5;\n            font-size: 13px;\n            text-transform: uppercase;\n            letter-spacing: 0.5px;\n        }\n        input[type=\"text\"],\n        select {\n            width: 100%;\n            padding: 10px;\n            background-color: #2c2c2c;\n            color: #ffffff;\n            border: 1px solid #555555;\n            border-radius: 5px;\n            box-sizing: border-box;\n            font-size: 15px;\n            transition: border-color 0.3s, box-shadow 0.3s;\n        }\n        input[type=\"text\"]::placeholder {\n            color: #757575;\n        }\n        input[type=\"text\"]:focus,\n        select:focus {\n            outline: none;\n            border-color: #4fc3f7;\n            box-shadow: 0 0 0 3px rgba(79, 195, 247, 0.2);\n        }\n        /* Color específico para las opciones del select en algunos navegadores */\n        select option {\n            background-color: #2c2c2c;\n            color: #ffffff;\n        }\n        .input-with-unit {\n            display: flex;\n            align-items: center;\n        }\n        .input-with-unit input {\n            border-top-right-radius: 0;\n            border-bottom-right-radius: 0;\n        }\n        .unit {\n            background-color: #333333;\n            border: 1px solid #555555;\n            border-left: none;\n            padding: 10px;\n            border-top-right-radius: 5px;\n            border-bottom-right-radius: 5px;\n            color: #b0bec5;\n            font-size: 14px;\n        }\n        \n        /* Estilos específicos para los Checkboxes */\n        .checkbox-group {\n            display: grid;\n            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));\n            gap: 10px;\n            margin-top: 8px;\n        }\n        .checkbox-label {\n            display: flex;\n            align-items: center;\n            font-weight: normal;\n            text-transform: none;\n            letter-spacing: normal;\n            color: #e0e0e0;\n            font-size: 14px;\n            cursor: pointer;\n            background-color: #2c2c2c;\n            padding: 10px 12px;\n            border-radius: 5px;\n            border: 1px solid #555555;\n            transition: background-color 0.2s, border-color 0.2s;\n            margin-bottom: 0;\n        }\n        .checkbox-label:hover {\n            background-color: #383838;\n            border-color: #4fc3f7;\n        }\n        .checkbox-label input[type=\"checkbox\"] {\n            margin-right: 10px;\n            accent-color: #0288d1;\n            width: 18px;\n            height: 18px;\n            cursor: pointer;\n        }\n\n        button {\n            width: 100%;\n            background-color: #0288d1;\n            color: white;\n            padding: 14px;\n            border: none;\n            border-radius: 5px;\n            font-size: 16px;\n            font-weight: bold;\n            cursor: pointer;\n            margin-top: 25px;\n            transition: background-color 0.3s;\n        }\n        button:hover {\n            background-color: #0277bd;\n        }\n        @media (max-width: 500px) {\n            .form-row {\n                flex-direction: column;\n                gap: 15px;\n            }\n            .checkbox-group {\n                grid-template-columns: 1fr 1fr;\n            }\n        }\n    </style>\n</head>\n<body>\n\n    <div class=\"form-container\">\n        <h2>❄️ Actualizar Parte de Nieve</h2>\n        \n        <form action=\"https://n8n.tailwind.es/webhook-test/recibirFormulario\" method=\"POST\">\n            \n            <div class=\"form-group\">\n                <label for=\"calidad_nieve\">Calidad Nieve</label>\n                <input type=\"text\" id=\"calidad_nieve\" name=\"calidad_nieve\" required placeholder=\"Ej. Polvo, Dura, Primavera...\">\n            </div>\n\n            <div class=\"form-group\">\n                <label for=\"aspecto_cielo\">Aspecto del Cielo</label>\n                <select id=\"aspecto_cielo\" name=\"aspecto_cielo\" required>\n                    <option value=\"\" disabled selected>Selecciona una opción</option>\n                    <option value=\"NUBOSO\">NUBOSO</option>\n                    <option value=\"DESPEJADO\">DESPEJADO</option>\n                    <option value=\"SOLEADO\">SOLEADO</option>\n                    <option value=\"NEVANDO\">NEVANDO</option>\n                </select>\n            </div>\n\n            <div class=\"form-group\">\n                <label for=\"visibilidad\">Visibilidad</label>\n                <input type=\"text\" id=\"visibilidad\" name=\"visibilidad\" required placeholder=\"Ej. Buena, Regular, Mala...\">\n            </div>\n\n            <div class=\"form-row\">\n                <div class=\"form-group\">\n                    <label for=\"temp_min\">Temperatura Mínima</label>\n                    <div class=\"input-with-unit\">\n                        <input type=\"text\" id=\"temp_min\" name=\"temp_min\" required placeholder=\"Ej. -5\">\n                        <span class=\"unit\">°C</span>\n                    </div>\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"temp_max\">Temperatura Máxima</label>\n                    <div class=\"input-with-unit\">\n                        <input type=\"text\" id=\"temp_max\" name=\"temp_max\" required placeholder=\"Ej. 2\">\n                        <span class=\"unit\">°C</span>\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"form-row\">\n                <div class=\"form-group\">\n                    <label for=\"viento_min\">Viento Mínimo</label>\n                    <div class=\"input-with-unit\">\n                        <input type=\"text\" id=\"viento_min\" name=\"viento_min\" required placeholder=\"Ej. 10\">\n                        <span class=\"unit\">km/h</span>\n                    </div>\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"viento_max\">Viento Máximo</label>\n                    <div class=\"input-with-unit\">\n                        <input type=\"text\" id=\"viento_max\" name=\"viento_max\" required placeholder=\"Ej. 45\">\n                        <span class=\"unit\">km/h</span>\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"form-row\">\n                <div class=\"form-group\">\n                    <label for=\"espesor_min\">Espesor Mínimo</label>\n                    <div class=\"input-with-unit\">\n                        <input type=\"text\" id=\"espesor_min\" name=\"espesor_min\" required placeholder=\"Ej. 40\">\n                        <span class=\"unit\">cm</span>\n                    </div>\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"espesor_max\">Espesor Máximo</label>\n                    <div class=\"input-with-unit\">\n                        <input type=\"text\" id=\"espesor_max\" name=\"espesor_max\" required placeholder=\"Ej. 120\">\n                        <span class=\"unit\">cm</span>\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"form-row\">\n                <div class=\"form-group\">\n                    <label for=\"remontes_abiertos\">Remontes Abiertos</label>\n                    <input type=\"text\" id=\"remontes_abiertos\" name=\"remontes_abiertos\" required placeholder=\"Ej. 14\">\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"km_esquiables\">Km Esquiables</label>\n                    <div class=\"input-with-unit\">\n                        <input type=\"text\" id=\"km_esquiables\" name=\"km_esquiables\" required placeholder=\"Ej. 55.5\">\n                        <span class=\"unit\">km</span>\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"form-group\">\n                <label for=\"numero_pistas\">Número de Pistas (Total)</label>\n                <input type=\"text\" id=\"numero_pistas\" name=\"numero_pistas\" required placeholder=\"Ej. 42\">\n            </div>\n\n            <div class=\"form-group\">\n                <label>Zonas / Pistas Abiertas</label>\n                <div class=\"checkbox-group\">\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Veleta\"> Veleta</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Laguna\"> Laguna</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Borreguiles\"> Borreguiles</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Pista del Mar\"> Pista del Mar</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Cauchiles Parador\"> Cauchiles Parador</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Loma Dílar\"> Loma Dílar</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Rio Monachil\"> Rio Monachil</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Parque Sulayr\"> Parque Sulayr</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Jardín Alpino\"> Jardín Alpino</label>\n                </div>\n            </div>\n\n            <div class=\"form-group\">\n                <label>Cuentas</label>\n                <div class=\"checkbox-group\">\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"cuentas[]\" value=\"Rules\"> Rules</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"cuentas[]\" value=\"Surfin\"> Surfin</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"cuentas[]\" value=\"Sierra Nevada Granada\"> Sierra Nevada Granada</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"cuentas[]\" value=\"Snow Division\"> Snow Division</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"cuentas[]\" value=\"Mesit\"> Mesit</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"cuentas[]\" value=\"Skiroom\"> Skiroom</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"cuentas[]\" value=\"Sierra Nevada VIP\"> Sierra Nevada VIP</label>\n                </div>\n            </div>\n\n            <button type=\"submit\">Enviar Parte de Nieve</button>\n        </form>\n    </div>\n\n</body>\n</html>",
+          "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Parte de Nieve - Sierra Nevada</title>\n    <style>\n        /* ... Pega aquí todo tu CSS, no cambia nada ... */\n        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #121212; color: #e0e0e0; margin: 0; padding: 20px; }\n        .main-wrapper { display: flex; justify-content: center; align-items: flex-start; gap: 20px; flex-wrap: wrap; }\n        .form-container, .verification-container { background-color: #1e1e1e; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); width: 100%; box-sizing: border-box; }\n        .form-container { max-width: 650px; }\n        .verification-container { max-width: 350px; }\n        h2 { color: #ffffff; text-align: center; margin-top: 0; margin-bottom: 25px; }\n        .verification-container h2 { font-size: 18px; margin-bottom: 15px; }\n        .form-group { margin-bottom: 15px; }\n        .form-row { display: flex; gap: 15px; margin-bottom: 15px; }\n        .form-row .form-group { flex: 1; margin-bottom: 0; }\n        label { display: block; font-weight: bold; margin-bottom: 5px; color: #b0bec5; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }\n        input[type=\"text\"], input[type=\"email\"], select { width: 100%; padding: 10px; background-color: #2c2c2c; color: #ffffff; border: 1px solid #555555; border-radius: 5px; box-sizing: border-box; font-size: 15px; transition: border-color 0.3s, box-shadow 0.3s; }\n        input[type=\"text\"]::placeholder, input[type=\"email\"]::placeholder { color: #757575; }\n        input[type=\"text\"]:focus, input[type=\"email\"]:focus, select:focus { outline: none; border-color: #4fc3f7; box-shadow: 0 0 0 3px rgba(79, 195, 247, 0.2); }\n        select option { background-color: #2c2c2c; color: #ffffff; }\n        .input-with-unit { display: flex; align-items: center; }\n        .input-with-unit input { border-top-right-radius: 0; border-bottom-right-radius: 0; }\n        .unit { background-color: #333333; border: 1px solid #555555; border-left: none; padding: 10px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; color: #b0bec5; font-size: 14px; }\n        .checkbox-group { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; margin-top: 8px; }\n        .checkbox-label { display: flex; align-items: center; font-weight: normal; text-transform: none; letter-spacing: normal; color: #e0e0e0; font-size: 14px; cursor: pointer; background-color: #2c2c2c; padding: 10px 12px; border-radius: 5px; border: 1px solid #555555; transition: background-color 0.2s, border-color 0.2s; margin-bottom: 0; }\n        .checkbox-label:hover { background-color: #383838; border-color: #4fc3f7; }\n        .checkbox-label input[type=\"checkbox\"] { margin-right: 10px; accent-color: #0288d1; width: 18px; height: 18px; cursor: pointer; }\n        button { width: 100%; background-color: #0288d1; color: white; padding: 14px; border: none; border-radius: 5px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 25px; transition: background-color 0.3s; }\n        button:hover { background-color: #0277bd; }\n        button:disabled { background-color: #555555; color: #888888; cursor: not-allowed; }\n        .btn-success { background-color: #2e7d32; }\n        .btn-success:hover { background-color: #1b5e20; }\n        hr { border: 0; border-top: 1px solid #333333; margin: 25px 0; }\n        .mensaje { font-size: 13px; margin-top: 10px; display: none; text-align: center; font-weight: bold; }\n        .error { color: #ef5350; }\n        .exito { color: #66bb6a; }\n        @media (max-width: 768px) { .form-row { flex-direction: column; gap: 15px; } .checkbox-group { grid-template-columns: 1fr 1fr; } .main-wrapper { flex-direction: column-reverse; align-items: center; } }\n    </style>\n</head>\n<body>\n\n    <div class=\"main-wrapper\">\n        \n        <div class=\"form-container\">\n            <h2>❄️ Actualizar Parte de Nieve</h2>\n            \n            <form action=\"https://n8n.tailwind.es/webhook/recibirFormulario\" method=\"POST\">\n                \n                <input type=\"hidden\" id=\"codigo_secreto\" name=\"codigo_verificado\" value=\"\">\n\n                <div class=\"form-group\">\n                    <label for=\"calidad_nieve\">Calidad Nieve</label>\n                    <input type=\"text\" id=\"calidad_nieve\" name=\"calidad_nieve\" required placeholder=\"Ej. Polvo, Dura, Primavera...\">\n                </div>\n\n                <div class=\"form-group\">\n                    <label for=\"aspecto_cielo\">Aspecto del Cielo</label>\n                    <select id=\"aspecto_cielo\" name=\"aspecto_cielo\" required>\n                        <option value=\"\" disabled selected>Selecciona una opción</option>\n                        <option value=\"NUBOSO\">NUBOSO</option>\n                        <option value=\"DESPEJADO\">DESPEJADO</option>\n                        <option value=\"SOLEADO\">SOLEADO</option>\n                        <option value=\"NEVANDO\">NEVANDO</option>\n                    </select>\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"visibilidad\">Visibilidad</label>\n                    <input type=\"text\" id=\"visibilidad\" name=\"visibilidad\" required placeholder=\"Ej. Buena, Regular, Mala...\">\n                </div>\n                <div class=\"form-row\">\n                    <div class=\"form-group\">\n                        <label for=\"temp_min\">Temperatura Mínima</label>\n                        <div class=\"input-with-unit\">\n                            <input type=\"text\" id=\"temp_min\" name=\"temp_min\" required placeholder=\"Ej. -5\">\n                            <span class=\"unit\">°C</span>\n                        </div>\n                    </div>\n                    <div class=\"form-group\">\n                        <label for=\"temp_max\">Temperatura Máxima</label>\n                        <div class=\"input-with-unit\">\n                            <input type=\"text\" id=\"temp_max\" name=\"temp_max\" required placeholder=\"Ej. 2\">\n                            <span class=\"unit\">°C</span>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"form-row\">\n                    <div class=\"form-group\">\n                        <label for=\"viento_min\">Viento Mínimo</label>\n                        <div class=\"input-with-unit\">\n                            <input type=\"text\" id=\"viento_min\" name=\"viento_min\" required placeholder=\"Ej. 10\">\n                            <span class=\"unit\">km/h</span>\n                        </div>\n                    </div>\n                    <div class=\"form-group\">\n                        <label for=\"viento_max\">Viento Máximo</label>\n                        <div class=\"input-with-unit\">\n                            <input type=\"text\" id=\"viento_max\" name=\"viento_max\" required placeholder=\"Ej. 45\">\n                            <span class=\"unit\">km/h</span>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"form-row\">\n                    <div class=\"form-group\">\n                        <label for=\"espesor_min\">Espesor Mínimo</label>\n                        <div class=\"input-with-unit\">\n                            <input type=\"text\" id=\"espesor_min\" name=\"espesor_min\" required placeholder=\"Ej. 40\">\n                            <span class=\"unit\">cm</span>\n                        </div>\n                    </div>\n                    <div class=\"form-group\">\n                        <label for=\"espesor_max\">Espesor Máximo</label>\n                        <div class=\"input-with-unit\">\n                            <input type=\"text\" id=\"espesor_max\" name=\"espesor_max\" required placeholder=\"Ej. 120\">\n                            <span class=\"unit\">cm</span>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"form-row\">\n                    <div class=\"form-group\">\n                        <label for=\"remontes_abiertos\">Remontes Abiertos</label>\n                        <input type=\"text\" id=\"remontes_abiertos\" name=\"remontes_abiertos\" required placeholder=\"Ej. 14\">\n                    </div>\n                    <div class=\"form-group\">\n                        <label for=\"km_esquiables\">Km Esquiables</label>\n                        <div class=\"input-with-unit\">\n                            <input type=\"text\" id=\"km_esquiables\" name=\"km_esquiables\" required placeholder=\"Ej. 55.5\">\n                            <span class=\"unit\">km</span>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"numero_pistas\">Número de Pistas (Total)</label>\n                    <input type=\"text\" id=\"numero_pistas\" name=\"numero_pistas\" required placeholder=\"Ej. 42\">\n                </div>\n                <div class=\"form-group\">\n                    <label>Zonas / Pistas Abiertas</label>\n                    <div class=\"checkbox-group\">\n                        <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Veleta\"> Veleta</label>\n                        <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Laguna\"> Laguna</label>\n                        <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Borreguiles\"> Borreguiles</label>\n                        <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Pista del Mar\"> Pista del Mar</label>\n                        <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Cauchiles Parador\"> Cauchiles Parador</label>\n                        <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Loma Dílar\"> Loma Dílar</label>\n                        <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Rio Monachil\"> Rio Monachil</label>\n                        <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Parque Sulayr\"> Parque Sulayr</label>\n                        <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Jardín Alpino\"> Jardín Alpino</label>\n                    </div>\n                </div>\n                <div class=\"form-group\">\n                    <label>Cuentas</label>\n                    <div class=\"checkbox-group\">\n                        <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"cuentas[]\" value=\"Rules\"> Rules</label>\n                        <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"cuentas[]\" value=\"Surfin\"> Surfin</label>\n                        <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"cuentas[]\" value=\"Sierra Nevada Granada\"> Sierra Nevada Granada</label>\n                        <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"cuentas[]\" value=\"Snow Division\"> Snow Division</label>\n                        <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"cuentas[]\" value=\"Mesit\"> Mesit</label>\n                        <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"cuentas[]\" value=\"Skiroom\"> Skiroom</label>\n                        <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"cuentas[]\" value=\"Sierra Nevada VIP\"> Sierra Nevada VIP</label>\n                    </div>\n                </div>\n\n                <button type=\"submit\" id=\"btnFinalSubmit\" disabled>Enviar Parte de Nieve (Requiere Verificación)</button>\n            </form>\n        </div>\n\n        <div class=\"verification-container\">\n            <div class=\"form-section\">\n                <h2>1. Solicita tu código</h2>\n                <form id=\"formCorreo\">\n                    <input type=\"email\" id=\"emailInput\" placeholder=\"tu@correo.com\" required>\n                    <button type=\"submit\" id=\"btnCorreo\">Enviar Código</button>\n                    <div id=\"msgCorreo\" class=\"mensaje\"></div>\n                </form>\n            </div>\n\n            <hr>\n\n            <div class=\"form-section\">\n                <h2>2. Introduce el código</h2>\n                <form id=\"formCodigo\">\n                    <input type=\"text\" id=\"codigoInput\" placeholder=\"Ej: 123456\" required style=\"letter-spacing: 2px; text-align: center;\">\n                    <button type=\"submit\" id=\"btnCodigo\" class=\"btn-success\">Verificar Código</button>\n                    <div id=\"msgCodigo\" class=\"mensaje\"></div>\n                </form>\n            </div>\n        </div>\n\n    </div>\n\n    <script>\n        const formCorreo = document.getElementById('formCorreo');\n        const formCodigo = document.getElementById('formCodigo');\n        const btnFinalSubmit = document.getElementById('btnFinalSubmit');\n        const codigoSecreto = document.getElementById('codigo_secreto');\n        \n        const mostrarMensaje = (elementoId, texto, esError) => {\n            const el = document.getElementById(elementoId);\n            el.textContent = texto;\n            el.style.display = 'block';\n            el.className = 'mensaje ' + (esError ? 'error' : 'exito');\n        };\n\n        formCorreo.addEventListener('submit', async (e) => {\n            e.preventDefault();\n            const email = document.getElementById('emailInput').value;\n            const btn = document.getElementById('btnCorreo');\n            \n            btn.disabled = true;\n            btn.innerText = 'Enviando...';\n            document.getElementById('msgCorreo').style.display = 'none';\n\n            try {\n                const response = await fetch('https://n8n.tailwind.es/webhook/verificar', {\n                    method: 'POST',\n                    headers: { 'Content-Type': 'application/json' },\n                    body: JSON.stringify({ email: email })\n                });\n\n                if (response.ok) {\n                    btn.innerText = '¡Enviado!';\n                    mostrarMensaje('msgCorreo', 'Revisa tu bandeja de entrada.', false);\n                } else {\n                    throw new Error('Error en el webhook');\n                }\n            } catch (error) {\n                btn.disabled = false;\n                btn.innerText = 'Enviar Código';\n                mostrarMensaje('msgCorreo', 'Error de conexión. Inténtalo de nuevo.', true);\n            }\n        });\n\n        formCodigo.addEventListener('submit', async (e) => {\n            e.preventDefault();\n            const codigo = document.getElementById('codigoInput').value;\n            const btn = document.getElementById('btnCodigo');\n            \n            btn.disabled = true;\n            btn.innerText = 'Verificando...';\n            document.getElementById('msgCodigo').style.display = 'none';\n\n            try {\n                const response = await fetch('https://n8n.tailwind.es/webhook/codigo-correcto', {\n                    method: 'POST',\n                    headers: { 'Content-Type': 'application/json' },\n                    body: JSON.stringify({ codigo: codigo })\n                });\n\n                if (response.ok) {\n                    btn.innerText = '¡Completado!';\n                    mostrarMensaje('msgCodigo', 'Código verificado. Ya puedes enviar el parte.', false);\n                    \n                    // AQUI ESTA LA MAGIA: Copiamos el código y activamos el botón principal\n                    codigoSecreto.value = codigo;\n                    btnFinalSubmit.disabled = false;\n                    btnFinalSubmit.innerText = 'Enviar Parte de Nieve';\n                    btnFinalSubmit.style.backgroundColor = '#2e7d32'; // Lo ponemos verde para que destaque\n\n                } else {\n                    throw new Error('Error en el webhook');\n                }\n            } catch (error) {\n                btn.disabled = false;\n                btn.innerText = 'Verificar Código';\n                mostrarMensaje('msgCodigo', 'Código incorrecto o caducado.', true);\n            }\n        });\n    </script>\n\n</body>\n</html>",
           "options": {}
         },
         "type": "n8n-nodes-base.respondToWebhook",
         "typeVersion": 1.5,
         "position": [
-          192,
-          -1440
+          -128,
+          -1424
         ],
         "id": "8974fa52-b64f-4a01-a41f-e97ac127e6a3",
         "name": "Respond to Webhook"
@@ -317,18 +317,25 @@
       {
         "parameters": {
           "path": "formulario",
+          "authentication": "basicAuth",
           "responseMode": "responseNode",
           "options": {}
         },
         "type": "n8n-nodes-base.webhook",
         "typeVersion": 2.1,
         "position": [
-          32,
-          -1440
+          -288,
+          -1424
         ],
         "id": "64cc4927-7ecd-4b78-bc9a-faf4e19927fa",
         "name": "Formulario",
-        "webhookId": "b94dffb5-c3b0-48e8-b5ed-ed9febc8752c"
+        "webhookId": "b94dffb5-c3b0-48e8-b5ed-ed9febc8752c",
+        "credentials": {
+          "httpBasicAuth": {
+            "id": "YNp74RlOBcOl8lFm",
+            "name": "Basic_Canva"
+          }
+        }
       },
       {
         "parameters": {
@@ -340,8 +347,8 @@
         "type": "n8n-nodes-base.webhook",
         "typeVersion": 2.1,
         "position": [
-          32,
-          -1232
+          -288,
+          -1216
         ],
         "id": "8af91482-0831-4c8c-90ed-ee5bdbfdf57c",
         "name": "RecibirFormulario",
@@ -432,7 +439,7 @@
               {
                 "id": "78f168c5-94b0-4b92-8811-d683a25cdd66",
                 "name": "body[\"cuentas[]\"]",
-                "value": "={{ $json.body[\"cuentas[]\"] ? (Array.isArray($json.body[\"cuentas[]\"]) ? $json.body[\"cuentas[]\"] : [$json.body[\"cuentas[]\"]]) : [] }}",
+                "value": "={{ $('RecibirFormulario').item.json.body[\"cuentas[]\"] ? (Array.isArray($('RecibirFormulario').item.json.body[\"cuentas[]\"]) ? $('RecibirFormulario').item.json.body[\"cuentas[]\"] : [$('RecibirFormulario').item.json.body[\"cuentas[]\"]]) : [] }}",
                 "type": "array"
               }
             ]
@@ -444,7 +451,7 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          400,
+          768,
           -1232
         ],
         "id": "fbf24bc9-0430-4a3a-88fd-136c70ba1b2a",
@@ -464,7 +471,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          2512,
+          2944,
           -1360
         ],
         "id": "c1aa6ddb-952c-4894-a11b-d3f37a039c68",
@@ -483,7 +490,7 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          2048,
+          2480,
           -1360
         ],
         "id": "be6d80b9-8838-469c-8bb1-5e9c75d77d71",
@@ -499,7 +506,7 @@
         "type": "n8n-nodes-base.respondToWebhook",
         "typeVersion": 1.5,
         "position": [
-          224,
+          320,
           -1232
         ],
         "id": "cd086d64-045c-4105-8f96-198fa0dae5cc",
@@ -515,8 +522,8 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          -16,
-          -1472
+          -336,
+          -1456
         ],
         "id": "7dcddf5d-7702-4438-9c1a-2439d282d272",
         "name": "Sticky Note"
@@ -530,7 +537,7 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          1760,
+          2176,
           -1472
         ],
         "id": "77eff92c-8d5d-4d64-ad56-038183791da4",
@@ -546,7 +553,7 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          3744,
+          4144,
           -1472
         ],
         "id": "bde44f7e-06f7-4d1b-adbf-fd7a0d237577",
@@ -565,7 +572,7 @@
         "type": "n8n-nodes-base.facebookGraphApi",
         "typeVersion": 1,
         "position": [
-          3776,
+          4192,
           -2080
         ],
         "id": "1649991c-daa3-4355-b549-f29a13970b09",
@@ -590,7 +597,7 @@
         "type": "n8n-nodes-base.facebookGraphApi",
         "typeVersion": 1,
         "position": [
-          4464,
+          4880,
           -2096
         ],
         "id": "b7a1439a-261e-4b7d-b768-cd8ac12059a8",
@@ -622,7 +629,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          3984,
+          4400,
           -2080
         ],
         "id": "e25f848f-45eb-455a-a125-7d69a992bd5c",
@@ -639,7 +646,7 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          4128,
+          4544,
           -2080
         ],
         "id": "94ea1db5-6e45-47f1-80d9-ada0e85ca6cc",
@@ -673,7 +680,7 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          4272,
+          4688,
           -2080
         ],
         "id": "079d857a-822b-4d2d-abb0-fdd8281762cd",
@@ -696,7 +703,7 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          4624,
+          5040,
           -2096
         ],
         "id": "16fb43a1-558d-40e8-b593-94a56f017429",
@@ -716,7 +723,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          4784,
+          5200,
           -2096
         ],
         "id": "028482b8-0845-4c66-be29-8c9ff57e3894",
@@ -742,7 +749,7 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          3744,
+          4144,
           -2176
         ],
         "id": "92455a60-6b64-4093-9b05-0b38c7d78bd8",
@@ -761,7 +768,7 @@
         "type": "n8n-nodes-base.facebookGraphApi",
         "typeVersion": 1,
         "position": [
-          3776,
+          4160,
           -1024
         ],
         "id": "bd5be653-2119-4ea4-a258-24e8452c846a",
@@ -786,7 +793,7 @@
         "type": "n8n-nodes-base.facebookGraphApi",
         "typeVersion": 1,
         "position": [
-          4464,
+          4848,
           -1040
         ],
         "id": "fa68e574-b091-4639-a8cd-97ef15710818",
@@ -818,7 +825,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          3984,
+          4368,
           -1024
         ],
         "id": "276ad99f-21d2-4e7b-a775-9489c8a0e0e0",
@@ -835,7 +842,7 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          4128,
+          4512,
           -1024
         ],
         "id": "fbd4ef1c-2d52-4a00-b4ba-1d317422e3f0",
@@ -869,7 +876,7 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          4272,
+          4656,
           -1024
         ],
         "id": "4db01e5f-01ba-4c02-b12b-79b497e91073",
@@ -892,7 +899,7 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          4624,
+          5008,
           -1040
         ],
         "id": "93f5b1be-3241-4298-98a9-a4ab4c543828",
@@ -912,7 +919,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          4784,
+          5184,
           -1040
         ],
         "id": "910f6db7-b74e-4707-a150-91e00d45cafe",
@@ -938,7 +945,7 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          3744,
+          4144,
           -1120
         ],
         "id": "a6bdaeaa-e921-4885-954e-50c33704d4f1",
@@ -957,7 +964,7 @@
         "type": "n8n-nodes-base.facebookGraphApi",
         "typeVersion": 1,
         "position": [
-          3776,
+          4192,
           -1728
         ],
         "id": "b2d37c3b-d837-43d0-8c60-b6b641f7c06f",
@@ -982,7 +989,7 @@
         "type": "n8n-nodes-base.facebookGraphApi",
         "typeVersion": 1,
         "position": [
-          4464,
+          4880,
           -1744
         ],
         "id": "488b66f7-fb64-43df-b350-d6821216c28c",
@@ -1014,7 +1021,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          3984,
+          4400,
           -1728
         ],
         "id": "1d73bcf6-f259-43fc-81ef-ca82cccdbe13",
@@ -1031,7 +1038,7 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          4128,
+          4544,
           -1728
         ],
         "id": "dab41c1d-42bb-4b6b-b13a-8d3c3dc89c8f",
@@ -1065,7 +1072,7 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          4272,
+          4688,
           -1728
         ],
         "id": "6abf9ba1-e69b-4feb-9486-6e3532a04457",
@@ -1088,7 +1095,7 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          4624,
+          5040,
           -1744
         ],
         "id": "6b2a4807-87bc-4fc2-9146-62edd7b14cf9",
@@ -1108,7 +1115,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          4784,
+          5200,
           -1744
         ],
         "id": "7533ece0-de3a-472e-a8e0-56d3045ff60a",
@@ -1134,7 +1141,7 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          3744,
+          4144,
           -1824
         ],
         "id": "db8cdce1-f555-447e-9d70-f2dca0e06cec",
@@ -1153,7 +1160,7 @@
         "type": "n8n-nodes-base.facebookGraphApi",
         "typeVersion": 1,
         "position": [
-          3776,
+          4176,
           -656
         ],
         "id": "782d8ce7-3c1d-49e2-8bab-775e52b16b6a",
@@ -1178,7 +1185,7 @@
         "type": "n8n-nodes-base.facebookGraphApi",
         "typeVersion": 1,
         "position": [
-          4464,
+          4864,
           -672
         ],
         "id": "2ca3f4f1-6c07-4fec-8fa1-ca022c7c2f46",
@@ -1210,7 +1217,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          3984,
+          4384,
           -656
         ],
         "id": "bb64dfd4-0bc2-499a-ae7d-59d4f6220904",
@@ -1227,7 +1234,7 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          4128,
+          4528,
           -656
         ],
         "id": "0f69dbd5-baed-4ed7-9df0-11dc6f0c0ea8",
@@ -1261,7 +1268,7 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          4272,
+          4672,
           -656
         ],
         "id": "0e371f48-eb71-41d8-a70f-8fd81427cb9f",
@@ -1284,7 +1291,7 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          4624,
+          5024,
           -672
         ],
         "id": "76f36a98-8681-431b-b8cc-520b0e65aff5",
@@ -1304,7 +1311,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          4784,
+          5184,
           -672
         ],
         "id": "12f5ca0b-59a6-4e3f-b18c-e785e7e17a6d",
@@ -1330,7 +1337,7 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          3744,
+          4144,
           -752
         ],
         "id": "b057cb59-8982-4a1d-96fc-570016176971",
@@ -1350,7 +1357,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          1824,
+          2256,
           -1008
         ],
         "id": "7d068ac4-49c4-478c-8b52-3bd6dfb3b2f7",
@@ -1377,7 +1384,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          2320,
+          2752,
           -1008
         ],
         "id": "bcb9fc1d-abaf-412e-9d7e-650000f09efb",
@@ -1416,7 +1423,7 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          3152,
+          3584,
           -1008
         ],
         "id": "3ec715de-7444-4977-9383-ccb80abf3cde",
@@ -1432,7 +1439,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          3344,
+          3776,
           -1024
         ],
         "id": "6b312cf3-0c5f-4c9e-bb30-f69714d8e3c4",
@@ -1451,7 +1458,7 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          2944,
+          3376,
           -1008
         ],
         "id": "853d58ce-00e4-4a8a-9723-90051208e1de",
@@ -1468,7 +1475,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          2736,
+          3168,
           -1008
         ],
         "id": "83671c11-ad49-4344-ad79-fcf276b0a50f",
@@ -1494,7 +1501,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          2512,
+          2944,
           -1008
         ],
         "id": "116cd519-9f44-4429-b136-dd56619e84b7",
@@ -1513,7 +1520,7 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          2048,
+          2480,
           -1008
         ],
         "id": "11ea1fc4-0857-4724-9d14-57d595ecd769",
@@ -1529,7 +1536,7 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          1760,
+          2176,
           -1120
         ],
         "id": "8f03d0d6-a686-4e0a-b47c-f0a9c42f04f4",
@@ -1549,7 +1556,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          1824,
+          2256,
           -656
         ],
         "id": "31861901-f40c-42fe-947e-a62612d4df81",
@@ -1576,7 +1583,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          2320,
+          2752,
           -656
         ],
         "id": "5a17abe4-67b3-4a2f-8d33-52d7e53be514",
@@ -1615,7 +1622,7 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          3152,
+          3584,
           -656
         ],
         "id": "979c6369-4ed1-4624-84f8-0c4e54758722",
@@ -1631,7 +1638,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          3344,
+          3776,
           -672
         ],
         "id": "e5aac2b1-f251-412d-8762-15fe48ae586a",
@@ -1650,7 +1657,7 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          2944,
+          3376,
           -656
         ],
         "id": "45df4e01-97ad-4a2c-bd1a-19f773bc5cc5",
@@ -1667,7 +1674,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          2736,
+          3168,
           -656
         ],
         "id": "79fbf1d1-4f53-4033-a434-23f39a696352",
@@ -1693,7 +1700,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          2512,
+          2944,
           -656
         ],
         "id": "a589a100-8364-4df5-abf5-a07cff91d164",
@@ -1712,7 +1719,7 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          2048,
+          2480,
           -656
         ],
         "id": "612110aa-7498-448c-a831-ddb421fd2993",
@@ -1728,7 +1735,7 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          1760,
+          2176,
           -768
         ],
         "id": "298991d2-24be-4a2a-a73a-8a129b1e0eca",
@@ -1748,7 +1755,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          1824,
+          2256,
           -2064
         ],
         "id": "a7892d56-ec2c-4102-aaa7-2bd0e6c3d623",
@@ -1775,7 +1782,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          2320,
+          2752,
           -2064
         ],
         "id": "6ad838f4-01d7-4bf6-acf6-102d65f9b4da",
@@ -1814,7 +1821,7 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          3152,
+          3584,
           -2064
         ],
         "id": "21fba3c1-c839-4dec-b1ab-a3dedff658b2",
@@ -1830,7 +1837,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          3344,
+          3776,
           -2080
         ],
         "id": "67182458-f4ca-4e0a-99d9-7aa4be20fd16",
@@ -1849,7 +1856,7 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          2944,
+          3376,
           -2064
         ],
         "id": "331571a2-3585-47db-8e32-1bec120b6271",
@@ -1866,7 +1873,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          2736,
+          3168,
           -2064
         ],
         "id": "e0a02df8-2058-4b46-aee8-cd96f642d9a1",
@@ -1892,7 +1899,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          2512,
+          2944,
           -2064
         ],
         "id": "0cb5a7da-9606-49de-8f78-79bb69a99baa",
@@ -1911,7 +1918,7 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          2048,
+          2480,
           -2064
         ],
         "id": "890b6d56-a9c4-4a89-b360-6ae060959330",
@@ -1927,7 +1934,7 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          1760,
+          2176,
           -2176
         ],
         "id": "57f941b7-6f05-4c38-a9e2-1f94d66b2ec1",
@@ -1947,7 +1954,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          1824,
+          2256,
           -1712
         ],
         "id": "cc29fb60-6525-47c2-8f41-9e24bfda5455",
@@ -1991,7 +1998,7 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          3152,
+          3584,
           -1712
         ],
         "id": "f0773575-696a-4702-b300-c2990e55fe7b",
@@ -2007,7 +2014,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          3344,
+          3776,
           -1728
         ],
         "id": "f83bdb42-a69c-47f8-9c4d-98a437c4edd1",
@@ -2026,7 +2033,7 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          2944,
+          3376,
           -1712
         ],
         "id": "29bed0e3-79f6-4c50-bc95-7336e324b172",
@@ -2043,7 +2050,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          2736,
+          3168,
           -1712
         ],
         "id": "2ec1d228-f94e-4627-89ea-84411412a6e8",
@@ -2069,7 +2076,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          2512,
+          2944,
           -1712
         ],
         "id": "6065ce1f-ab40-4138-b4ad-3eadd47c0ace",
@@ -2088,7 +2095,7 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          2048,
+          2480,
           -1712
         ],
         "id": "59b652c0-92ff-4245-9cc8-d262428f6ca1",
@@ -2104,7 +2111,7 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          1760,
+          2176,
           -1824
         ],
         "id": "23ffcfb3-0c3b-4eb4-beeb-aead3e3be711",
@@ -2120,7 +2127,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          2320,
+          2752,
           -1712
         ],
         "id": "382a76ce-ed9b-4fee-9825-0b05cbb0392a",
@@ -2151,7 +2158,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          3952,
+          4352,
           -1376
         ],
         "id": "91bd9f34-7b2d-4cf0-8a12-5d9bdb044cba",
@@ -2337,8 +2344,8 @@
         "type": "n8n-nodes-base.switch",
         "typeVersion": 3.4,
         "position": [
-          560,
-          -1296
+          976,
+          -1312
         ],
         "id": "62ca3c0f-97aa-4a87-b870-9462260ce7ec",
         "name": "Switch"
@@ -2352,7 +2359,7 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          928,
+          1344,
           -2064
         ],
         "id": "03c0453e-afe7-451c-abdd-2c87037e9952",
@@ -2373,7 +2380,7 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          928,
+          1344,
           -1712
         ],
         "id": "dcb07497-45a0-4ced-bc73-93699c12a7c0",
@@ -2394,7 +2401,7 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          944,
+          1360,
           -1360
         ],
         "id": "38f98b06-61b2-4a3b-9ab2-fa20ef9f47d6",
@@ -2415,7 +2422,7 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          944,
+          1360,
           -304
         ],
         "id": "eb93f1c1-6aa4-4da7-9dc8-e1d51b81c614",
@@ -2436,7 +2443,7 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          944,
+          1360,
           48
         ],
         "id": "22f341dd-b73e-4314-9c54-c0deffe86d66",
@@ -2457,7 +2464,7 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          944,
+          1360,
           -656
         ],
         "id": "ee54a7c0-c9f7-4a21-9814-8b76aa042e39",
@@ -2478,7 +2485,7 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          5040,
+          5456,
           -2080
         ],
         "id": "1758b16a-ba56-41a9-a39f-c07d7c81e26c",
@@ -2499,7 +2506,7 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          4992,
+          5408,
           -1744
         ],
         "id": "8939b807-10f4-4a93-975b-ce05f8896485",
@@ -2530,7 +2537,7 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          1104,
+          1520,
           -2064
         ],
         "id": "4ae29102-e3c2-4110-8a65-93bcef34f04f",
@@ -2561,7 +2568,7 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          1104,
+          1520,
           -1712
         ],
         "id": "7ad8c4e1-136f-40c4-a51a-e4df404d356b",
@@ -2592,7 +2599,7 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          1120,
+          1536,
           -1360
         ],
         "id": "79508500-6a9b-4ef5-b4fc-88cc540a172a",
@@ -2613,7 +2620,7 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          4992,
+          5392,
           -1392
         ],
         "id": "9c3dc3c7-e7e9-40f4-b2c9-22200e297c82",
@@ -2644,7 +2651,7 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          1120,
+          1536,
           -656
         ],
         "id": "94a93178-5bd3-444b-83b3-4e60f53e4ddc",
@@ -2665,7 +2672,7 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          4992,
+          5392,
           -672
         ],
         "id": "84b8ba29-2801-4cf4-b527-ebfcd0876d61",
@@ -2696,7 +2703,7 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          1120,
+          1536,
           -304
         ],
         "id": "4b7701de-2a70-48fa-a8b8-c727befbb38c",
@@ -2727,7 +2734,7 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          1120,
+          1536,
           48
         ],
         "id": "2fcb3278-2701-4f05-b122-9f3352fc0f96",
@@ -2748,7 +2755,7 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          4992,
+          5424,
           32
         ],
         "id": "cac03bb3-ae0a-4b8a-ac28-3166ee627618",
@@ -2773,7 +2780,7 @@
         "type": "n8n-nodes-base.facebookGraphApi",
         "typeVersion": 1,
         "position": [
-          3776,
+          4208,
           48
         ],
         "id": "86c3b6f3-c278-4fbf-bcb6-b3747cc44778",
@@ -2798,7 +2805,7 @@
         "type": "n8n-nodes-base.facebookGraphApi",
         "typeVersion": 1,
         "position": [
-          4464,
+          4896,
           32
         ],
         "id": "787d4c1c-6c38-4fed-aa6f-5e12aa2c0177",
@@ -2830,7 +2837,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          3984,
+          4416,
           48
         ],
         "id": "3f56ff68-eb0d-4bec-9852-5007fb143561",
@@ -2847,7 +2854,7 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          4128,
+          4560,
           48
         ],
         "id": "77852db1-698e-48af-b5c5-c0e3b290d37c",
@@ -2881,7 +2888,7 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          4272,
+          4704,
           48
         ],
         "id": "0af9b2cd-4e9f-446b-9d50-d5cd50d4faf7",
@@ -2904,7 +2911,7 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          4624,
+          5056,
           32
         ],
         "id": "8a6d8318-c5d1-4e34-a011-2c29fd339d91",
@@ -2924,7 +2931,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          4784,
+          5216,
           32
         ],
         "id": "47d046da-0d54-4720-838b-553b7b24ec4b",
@@ -2950,7 +2957,7 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          3744,
+          4160,
           -48
         ],
         "id": "dc975708-50be-4a7f-976f-009f7673e979",
@@ -2970,7 +2977,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          1824,
+          2256,
           48
         ],
         "id": "0dbf7ac7-5332-4002-9069-7c75bf07c323",
@@ -2997,7 +3004,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          2320,
+          2752,
           48
         ],
         "id": "b297c029-4e63-447d-9c5f-d4e17bd7a213",
@@ -3036,7 +3043,7 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          3152,
+          3584,
           48
         ],
         "id": "c3b69f9b-17e1-42fa-9e4f-98954f72f573",
@@ -3052,7 +3059,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          3344,
+          3776,
           32
         ],
         "id": "1aca6225-3f7d-4383-a53d-ca3ecd6170eb",
@@ -3071,7 +3078,7 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          2944,
+          3376,
           48
         ],
         "id": "0a45c409-70b7-4e70-be79-19ed595c100a",
@@ -3088,7 +3095,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          2736,
+          3168,
           48
         ],
         "id": "632365df-a3a8-45bc-9301-7cff3a3a2750",
@@ -3114,7 +3121,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          2512,
+          2944,
           48
         ],
         "id": "5d3d0c42-966d-4721-b363-7ad888572f56",
@@ -3133,7 +3140,7 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          2048,
+          2480,
           48
         ],
         "id": "d19a0d44-ed88-4a28-9671-b7cdac5d4188",
@@ -3149,7 +3156,7 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          1760,
+          2176,
           -64
         ],
         "id": "b2c5f11f-a6a1-4359-8b03-51ed6795ae07",
@@ -3164,7 +3171,7 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          4992,
+          5408,
           -1040
         ],
         "id": "3847abb4-da75-4c68-b61b-d062b187b6d2",
@@ -3189,7 +3196,7 @@
         "type": "n8n-nodes-base.facebookGraphApi",
         "typeVersion": 1,
         "position": [
-          3776,
+          4176,
           -304
         ],
         "id": "11ed9595-588b-4c5f-9235-286f00b1f598",
@@ -3214,7 +3221,7 @@
         "type": "n8n-nodes-base.facebookGraphApi",
         "typeVersion": 1,
         "position": [
-          4464,
+          4864,
           -320
         ],
         "id": "1526fc34-53c0-45e1-b820-de38f5909d35",
@@ -3246,7 +3253,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          3984,
+          4384,
           -304
         ],
         "id": "d2d10789-b18d-4f12-8bd2-f7d76e5907b4",
@@ -3263,7 +3270,7 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          4128,
+          4528,
           -304
         ],
         "id": "f077bed8-6eaa-44d8-a4b2-ea4d4f88165c",
@@ -3297,7 +3304,7 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          4272,
+          4672,
           -304
         ],
         "id": "f49022fe-97b2-451a-91e1-18d249adc70b",
@@ -3320,7 +3327,7 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          4624,
+          5024,
           -320
         ],
         "id": "bc494770-50cd-4591-b0a5-7bbb9366efe2",
@@ -3340,7 +3347,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          4784,
+          5184,
           -320
         ],
         "id": "571b798d-bf26-47f5-a523-796c1e70cb76",
@@ -3366,7 +3373,7 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          3744,
+          4144,
           -400
         ],
         "id": "9e6412dc-73d8-4257-b7fa-f70d7a3f4d80",
@@ -3386,7 +3393,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          1824,
+          2256,
           -304
         ],
         "id": "39bdf0c8-0600-4b02-a52d-afef1ca08b45",
@@ -3413,7 +3420,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          2320,
+          2752,
           -304
         ],
         "id": "c623a0f8-30e4-487f-b0e7-af8aa5234756",
@@ -3452,7 +3459,7 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          3152,
+          3584,
           -304
         ],
         "id": "89d85dde-9852-4f97-b683-1ef88ead1765",
@@ -3468,7 +3475,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          3344,
+          3776,
           -320
         ],
         "id": "4c032b71-6d70-47cc-9651-c4cec18de41f",
@@ -3487,7 +3494,7 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          2944,
+          3376,
           -304
         ],
         "id": "d3feb345-7ccd-41cb-b89a-881049e287e8",
@@ -3504,7 +3511,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          2736,
+          3168,
           -304
         ],
         "id": "82fb81b1-47f0-492d-9ff1-e8ad65ea679f",
@@ -3530,7 +3537,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          2512,
+          2944,
           -304
         ],
         "id": "0140d16a-0fe2-4b1a-9f46-9f75506988ba",
@@ -3549,7 +3556,7 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          2048,
+          2480,
           -304
         ],
         "id": "aceb5ceb-9b55-4a1f-95de-d06c7c84fcdd",
@@ -3565,7 +3572,7 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          1760,
+          2176,
           -416
         ],
         "id": "340d5dc2-ebd1-4426-a94a-70fcdf5b683e",
@@ -3580,7 +3587,7 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          4992,
+          5392,
           -320
         ],
         "id": "ef56b717-4c02-4107-a5aa-5cc0127927f1",
@@ -3601,7 +3608,7 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          944,
+          1360,
           -1008
         ],
         "id": "8679ef63-fabc-4318-a851-4eb51cc878b1",
@@ -3632,7 +3639,7 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          1120,
+          1536,
           -1008
         ],
         "id": "73b4a496-a36b-47f9-aa69-7ef87e91db56",
@@ -3651,7 +3658,7 @@
         "type": "n8n-nodes-base.sort",
         "typeVersion": 1,
         "position": [
-          1392,
+          1824,
           -2064
         ],
         "id": "3fa9ee9f-8a7a-4166-b4ab-5db9e8dc2601",
@@ -3664,7 +3671,7 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          1584,
+          2016,
           -2064
         ],
         "id": "e54de516-dd74-4762-9e88-7beda2367ab7",
@@ -3679,7 +3686,7 @@
         "type": "n8n-nodes-base.sort",
         "typeVersion": 1,
         "position": [
-          1392,
+          1824,
           -1712
         ],
         "id": "e1ded1f7-7fe4-4153-b65e-e022cdec73f0",
@@ -3692,7 +3699,7 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          1584,
+          2016,
           -1712
         ],
         "id": "84628f75-dfce-4356-8ba1-378173dabeb4",
@@ -3707,7 +3714,7 @@
         "type": "n8n-nodes-base.sort",
         "typeVersion": 1,
         "position": [
-          1392,
+          1840,
           -1360
         ],
         "id": "e02cb370-e26b-4fe8-a358-24cd6426f6dc",
@@ -3720,7 +3727,7 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          1584,
+          2000,
           -1360
         ],
         "id": "014c7832-2267-4f6d-ab65-22d7e76bb616",
@@ -3735,7 +3742,7 @@
         "type": "n8n-nodes-base.sort",
         "typeVersion": 1,
         "position": [
-          1392,
+          1824,
           -1008
         ],
         "id": "54ac63b9-36f2-4a5f-9377-c7fe671ca7e6",
@@ -3748,7 +3755,7 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          1584,
+          2016,
           -1008
         ],
         "id": "12128430-62cc-44aa-95d9-21ac5f700db3",
@@ -3763,7 +3770,7 @@
         "type": "n8n-nodes-base.sort",
         "typeVersion": 1,
         "position": [
-          1392,
+          1824,
           -656
         ],
         "id": "d8831d6a-3b0e-4654-aeb4-d4bdce65e172",
@@ -3776,7 +3783,7 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          1584,
+          2016,
           -656
         ],
         "id": "7f2f636f-7371-471d-9624-7ed216326ed2",
@@ -3791,7 +3798,7 @@
         "type": "n8n-nodes-base.sort",
         "typeVersion": 1,
         "position": [
-          1392,
+          1824,
           -304
         ],
         "id": "e1da3a11-ba46-4edd-bffe-e8adc0529b23",
@@ -3804,7 +3811,7 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          1584,
+          2016,
           -304
         ],
         "id": "15465844-76e6-4875-9936-447cf84f7330",
@@ -3819,7 +3826,7 @@
         "type": "n8n-nodes-base.sort",
         "typeVersion": 1,
         "position": [
-          1392,
+          1824,
           48
         ],
         "id": "468d00f2-0fe6-488c-8ca2-94c8586bb23e",
@@ -3832,7 +3839,7 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          1584,
+          2016,
           48
         ],
         "id": "3d9bd948-ce04-4b58-a138-5c46368614ae",
@@ -3850,7 +3857,7 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          1232,
+          1648,
           -2096
         ],
         "id": "650c318e-a391-46ad-a15e-9442f516f925",
@@ -3866,8 +3873,8 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          1168,
-          288
+          1552,
+          256
         ],
         "id": "c4dc5b9c-5161-4f10-874f-97918de5b264",
         "name": "Sticky Note16"
@@ -3882,7 +3889,7 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          3536,
+          3952,
           -2176
         ],
         "id": "bf557425-f0c8-44fa-9546-b591e3c38dbb",
@@ -3898,11 +3905,561 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          3472,
-          320
+          3856,
+          336
         ],
         "id": "4037226b-d0d1-43ac-8313-cf9c86c989fb",
         "name": "Sticky Note18"
+      },
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "verificar",
+          "responseMode": "responseNode",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -960,
+          -320
+        ],
+        "id": "2ac20cb8-454f-4987-bd4b-5c62b124a51f",
+        "name": "Verificar",
+        "webhookId": "bd4388b9-9b57-4c9a-8ea2-76bd7718a63c"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "26db6362-bf51-488d-8308-3cd0571d2002",
+                "name": "email",
+                "value": "={{ $json.body.email }}",
+                "type": "string"
+              },
+              {
+                "id": "2e447779-0270-414e-952e-d82f3e3c8ab7",
+                "name": "codigo",
+                "value": "={{ Math.floor(100000 + Math.random() * 900000) }}",
+                "type": "number"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          -768,
+          -320
+        ],
+        "id": "ed592eb6-110e-4dcb-9951-83b2fb1b5c44",
+        "name": "Datos Verificación"
+      },
+      {
+        "parameters": {
+          "operation": "upsert",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "Verificacion_Formulario",
+            "mode": "name"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "email": "={{ $('Datos Verificación').item.json.email }}",
+              "codigo": "={{ $('Datos Verificación').item.json.codigo }}",
+              "created_at": "={{ $now }}"
+            },
+            "matchingColumns": [
+              "codigo"
+            ],
+            "schema": [
+              {
+                "id": "codigo",
+                "displayName": "codigo",
+                "required": true,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "email",
+                "displayName": "email",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": false
+              },
+              {
+                "id": "created_at",
+                "displayName": "created_at",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "dateTime",
+                "canBeUsedToMatch": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          -160,
+          -400
+        ],
+        "id": "09da7c8d-b3b0-491a-948c-00a479a774be",
+        "name": "Insert or update rows in a table",
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "sendTo": "={{ $json.email }}",
+          "subject": "Verificación de formulario",
+          "message": "=Se requiere la verificación del formulario para la historia de instagram, el código es: {{ $json.codigo }}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.gmail",
+        "typeVersion": 2.2,
+        "position": [
+          16,
+          -400
+        ],
+        "id": "877019b1-e386-4d4b-95c4-45837795351b",
+        "name": "Send a message",
+        "webhookId": "0d379bb7-8a21-4b4b-b993-d790f26f03da",
+        "credentials": {
+          "gmailOAuth2": {
+            "id": "wR7U82S8bmDH4odC",
+            "name": "info@tailwind.es"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "select",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "Correos_Autorizados_Formulario",
+            "mode": "name"
+          },
+          "where": {
+            "values": [
+              {
+                "column": "Correo",
+                "value": "={{ $json.email }}"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          -560,
+          -320
+        ],
+        "id": "e8761aad-7a44-4444-a7fc-de8e3a18dc0f",
+        "name": "Select rows from a table",
+        "alwaysOutputData": true,
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "respondWith": "json",
+          "responseBody": "{\n  \"status\": \"error\",\n  \"message\": \"Este correo no está autorizado para modificar el parte de nieve.\"\n}",
+          "options": {
+            "responseCode": 200
+          }
+        },
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.5,
+        "position": [
+          -160,
+          -240
+        ],
+        "id": "cd8d2f44-4df6-4836-bf8f-fa09ee0ad103",
+        "name": "Correo Inválido"
+      },
+      {
+        "parameters": {
+          "respondWith": "json",
+          "responseBody": "{\n  \"status\": \"success\",\n  \"message\": \"Introduce el número de verificación\"\n}",
+          "options": {
+            "responseCode": 200
+          }
+        },
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.5,
+        "position": [
+          208,
+          -400
+        ],
+        "id": "7bc18dbb-1d97-412f-b699-1107c135ade8",
+        "name": "Correo Válido"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "31781615-a9f2-4c61-9aef-6d238e70c50d",
+                "leftValue": "={{ $('Datos Verificación').item.json.email }}",
+                "rightValue": "={{ $json.Correo }}",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          -384,
+          -320
+        ],
+        "id": "5a7c1151-d669-4274-b6ca-56a520609ecf",
+        "name": "If14"
+      },
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "codigo-correcto",
+          "responseMode": "responseNode",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -560,
+          -720
+        ],
+        "id": "13641b70-8b6a-4825-9a91-0d31edfa703e",
+        "name": "Código Correcto",
+        "webhookId": "50f1ce23-60d6-4a2c-8370-5faf4ff701cc"
+      },
+      {
+        "parameters": {
+          "operation": "select",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "Verificacion_Formulario",
+            "mode": "name"
+          },
+          "where": {
+            "values": [
+              {
+                "column": "codigo",
+                "value": "={{ $json.body.codigo }}"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          -352,
+          -720
+        ],
+        "id": "56904860-9d95-4ed2-ab13-3872611ac186",
+        "name": "Select rows from a table1",
+        "alwaysOutputData": true,
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "respondWith": "json",
+          "responseBody": "{\n  \"status\": \"error\",\n  \"message\": \"Código inválido\"\n}",
+          "options": {
+            "responseCode": 200
+          }
+        },
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.5,
+        "position": [
+          64,
+          -624
+        ],
+        "id": "8cd50408-81c1-445f-be01-f57022bc5dba",
+        "name": "Código Inválido"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "fff42cf4-1529-468c-87e3-6910c830165d",
+                "leftValue": "={{ $('Código Correcto').item.json.body.codigo }}",
+                "rightValue": "={{ $json.codigo }}",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          -144,
+          -720
+        ],
+        "id": "0d7238bd-cd50-4980-9021-5aa24a72cb3d",
+        "name": "If15"
+      },
+      {
+        "parameters": {
+          "respondWith": "json",
+          "responseBody": "{\n  \"status\": \"success\"\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.5,
+        "position": [
+          64,
+          -816
+        ],
+        "id": "16928f92-cc94-4963-a85a-bd010f5c7a23",
+        "name": "Respond to Webhook2"
+      },
+      {
+        "parameters": {
+          "operation": "select",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "Verificacion_Formulario",
+            "mode": "name"
+          },
+          "where": {
+            "values": [
+              {
+                "column": "codigo",
+                "value": "={{ $json.body.codigo_verificado }}"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          -112,
+          -1216
+        ],
+        "id": "4d933cb6-d2dc-4c2f-adbc-eff2e1ab9630",
+        "name": "Comprobar Código",
+        "alwaysOutputData": true,
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "41df6326-273a-4913-b920-d942e5a85254",
+                "leftValue": "={{ $('RecibirFormulario').item.json.body.codigo_verificado }}",
+                "rightValue": "={{ $json.codigo }}",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          96,
+          -1216
+        ],
+        "id": "679a841b-4f9a-4198-a4ea-ac52519f1121",
+        "name": "If16"
+      },
+      {
+        "parameters": {
+          "respondWith": "json",
+          "responseBody": "{\n  \"status\": \"Error\",\n  \"message\": \"Código Inválido\"\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.5,
+        "position": [
+          352,
+          -1072
+        ],
+        "id": "f89f066d-49de-440b-887d-e03d41507fb6",
+        "name": "Codigo No Válido"
+      },
+      {
+        "parameters": {
+          "unit": "minutes"
+        },
+        "type": "n8n-nodes-base.wait",
+        "typeVersion": 1.1,
+        "position": [
+          384,
+          -400
+        ],
+        "id": "816d529d-6883-48e2-8ca0-1ca626edcb46",
+        "name": "Esperar 5 minutos",
+        "webhookId": "724ad9f4-616e-4991-b9d8-f732c7fcdd98"
+      },
+      {
+        "parameters": {
+          "operation": "deleteTable",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "Verificacion_Formulario",
+            "mode": "list",
+            "cachedResultName": "Verificacion_Formulario"
+          },
+          "deleteCommand": "delete",
+          "where": {
+            "values": [
+              {
+                "column": "codigo",
+                "value": "={{ $('Datos Verificación').item.json.codigo }}"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          560,
+          -400
+        ],
+        "id": "361a3a7f-2d98-4224-81fa-4cc6deb37ec5",
+        "name": "Eliminar Codigo",
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "deleteTable",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "Verificacion_Formulario",
+            "mode": "list",
+            "cachedResultName": "Verificacion_Formulario"
+          },
+          "deleteCommand": "delete",
+          "where": {
+            "values": [
+              {
+                "column": "codigo",
+                "value": "={{ $json.codigo }}"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          560,
+          -1232
+        ],
+        "id": "b2d8b572-b4f1-4539-b84e-a7f70555c99f",
+        "name": "Delete table or rows",
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        }
       }
     ],
     "connections": {
@@ -3959,13 +4516,7 @@
       },
       "HTTP Request6": {
         "main": [
-          [
-            {
-              "node": "Facebook Graph API",
-              "type": "main",
-              "index": 0
-            }
-          ]
+          []
         ]
       },
       "Wait1": {
@@ -4067,7 +4618,7 @@
         "main": [
           [
             {
-              "node": "Respond to Webhook1",
+              "node": "Comprobar Código",
               "type": "main",
               "index": 0
             }
@@ -4111,7 +4662,7 @@
         "main": [
           [
             {
-              "node": "Edit Fields3",
+              "node": "Delete table or rows",
               "type": "main",
               "index": 0
             }
@@ -4839,7 +5390,13 @@
       },
       "Obtener Filas Surfin": {
         "main": [
-          []
+          [
+            {
+              "node": "Mezclar Surfin",
+              "type": "main",
+              "index": 0
+            }
+          ]
         ]
       },
       "Obtener Filas SNG": {
@@ -5400,14 +5957,189 @@
         "main": [
           []
         ]
+      },
+      "Verificar": {
+        "main": [
+          [
+            {
+              "node": "Datos Verificación",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Datos Verificación": {
+        "main": [
+          [
+            {
+              "node": "Select rows from a table",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Insert or update rows in a table": {
+        "main": [
+          [
+            {
+              "node": "Send a message",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Send a message": {
+        "main": [
+          [
+            {
+              "node": "Correo Válido",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Select rows from a table": {
+        "main": [
+          [
+            {
+              "node": "If14",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If14": {
+        "main": [
+          [
+            {
+              "node": "Insert or update rows in a table",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Correo Inválido",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Código Correcto": {
+        "main": [
+          [
+            {
+              "node": "Select rows from a table1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Select rows from a table1": {
+        "main": [
+          [
+            {
+              "node": "If15",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If15": {
+        "main": [
+          [
+            {
+              "node": "Respond to Webhook2",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Código Inválido",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Comprobar Código": {
+        "main": [
+          [
+            {
+              "node": "If16",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If16": {
+        "main": [
+          [
+            {
+              "node": "Respond to Webhook1",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Codigo No Válido",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Correo Válido": {
+        "main": [
+          [
+            {
+              "node": "Esperar 5 minutos",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Esperar 5 minutos": {
+        "main": [
+          [
+            {
+              "node": "Eliminar Codigo",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Delete table or rows": {
+        "main": [
+          [
+            {
+              "node": "Edit Fields3",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version 9a5b0b4a",
+    "name": "Version 9dee22ab",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "9a5b0b4a-0f39-43e3-b223-b7fd642ca2c4",
+  "activeVersionId": "9dee22ab-6c9f-41da-b581-401a4e897351",
   "connections": {
     "HTTP Request": {
       "main": [
@@ -5462,13 +6194,7 @@
     },
     "HTTP Request6": {
       "main": [
-        [
-          {
-            "node": "Facebook Graph API",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Wait1": {
@@ -5570,7 +6296,7 @@
       "main": [
         [
           {
-            "node": "Respond to Webhook1",
+            "node": "Comprobar Código",
             "type": "main",
             "index": 0
           }
@@ -5614,7 +6340,7 @@
       "main": [
         [
           {
-            "node": "Edit Fields3",
+            "node": "Delete table or rows",
             "type": "main",
             "index": 0
           }
@@ -6342,7 +7068,13 @@
     },
     "Obtener Filas Surfin": {
       "main": [
-        []
+        [
+          {
+            "node": "Mezclar Surfin",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Obtener Filas SNG": {
@@ -6903,6 +7635,181 @@
       "main": [
         []
       ]
+    },
+    "Verificar": {
+      "main": [
+        [
+          {
+            "node": "Datos Verificación",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Datos Verificación": {
+      "main": [
+        [
+          {
+            "node": "Select rows from a table",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insert or update rows in a table": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "Correo Válido",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Select rows from a table": {
+      "main": [
+        [
+          {
+            "node": "If14",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If14": {
+      "main": [
+        [
+          {
+            "node": "Insert or update rows in a table",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Correo Inválido",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Código Correcto": {
+      "main": [
+        [
+          {
+            "node": "Select rows from a table1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Select rows from a table1": {
+      "main": [
+        [
+          {
+            "node": "If15",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If15": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Código Inválido",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Comprobar Código": {
+      "main": [
+        [
+          {
+            "node": "If16",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If16": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Codigo No Válido",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Correo Válido": {
+      "main": [
+        [
+          {
+            "node": "Esperar 5 minutos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Esperar 5 minutos": {
+      "main": [
+        [
+          {
+            "node": "Eliminar Codigo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Delete table or rows": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-11-29T11:04:16.100Z",
@@ -6927,7 +7834,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1824,
+        2256,
         -1360
       ],
       "id": "9654ecf1-32ab-4757-adb0-87b9f07315aa",
@@ -6954,7 +7861,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2320,
+        2704,
         -1360
       ],
       "id": "6222d526-1ca0-4ae2-b996-d6ae44f671c0",
@@ -6979,7 +7886,7 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        3776,
+        4176,
         -1376
       ],
       "id": "7da66ccf-8fd7-48d5-8c6d-db816b75171b",
@@ -7004,7 +7911,7 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        4464,
+        4864,
         -1392
       ],
       "id": "3bb41e32-f010-4102-acc1-fd96e8892501",
@@ -7044,7 +7951,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        3152,
+        3584,
         -1360
       ],
       "id": "88a07af8-5d4d-4c7e-9a1f-4db66d843eef",
@@ -7060,7 +7967,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        3344,
+        3744,
         -1376
       ],
       "id": "7555d978-506b-45aa-bf1a-cdfafabbe297",
@@ -7079,7 +7986,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        2944,
+        3376,
         -1360
       ],
       "id": "5531d7ae-3e1e-4e70-a013-b7a468dfde34",
@@ -7096,7 +8003,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2736,
+        3168,
         -1360
       ],
       "id": "87ba9b82-c2a0-491d-a90b-251cc2de0db3",
@@ -7113,7 +8020,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        4128,
+        4528,
         -1376
       ],
       "id": "475281c7-f520-4d18-8b3a-e8dc41dadfd9",
@@ -7147,7 +8054,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        4272,
+        4672,
         -1376
       ],
       "id": "c3ad2eff-8c1a-4047-ba71-69acd0745b05",
@@ -7170,7 +8077,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        4624,
+        5024,
         -1392
       ],
       "id": "7eae2c4f-9d5b-4c4d-8417-1d9d218cbffe",
@@ -7190,7 +8097,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        4784,
+        5184,
         -1392
       ],
       "id": "b3eeaaf6-1eca-4fe1-bc18-add61e7dfa6d",
@@ -7209,14 +8116,14 @@
     {
       "parameters": {
         "respondWith": "text",
-        "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Parte de Nieve - Sierra Nevada</title>\n    <style>\n        body {\n            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n            background-color: #121212;\n            color: #e0e0e0;\n            margin: 0;\n            padding: 20px;\n            display: flex;\n            justify-content: center;\n        }\n        .form-container {\n            background-color: #1e1e1e;\n            padding: 30px;\n            border-radius: 10px;\n            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);\n            max-width: 650px;\n            width: 100%;\n        }\n        h2 {\n            color: #ffffff;\n            text-align: center;\n            margin-top: 0;\n            margin-bottom: 25px;\n        }\n        .form-group {\n            margin-bottom: 15px;\n        }\n        .form-row {\n            display: flex;\n            gap: 15px;\n            margin-bottom: 15px;\n        }\n        .form-row .form-group {\n            flex: 1;\n            margin-bottom: 0;\n        }\n        label {\n            display: block;\n            font-weight: bold;\n            margin-bottom: 5px;\n            color: #b0bec5;\n            font-size: 13px;\n            text-transform: uppercase;\n            letter-spacing: 0.5px;\n        }\n        input[type=\"text\"],\n        select {\n            width: 100%;\n            padding: 10px;\n            background-color: #2c2c2c;\n            color: #ffffff;\n            border: 1px solid #555555;\n            border-radius: 5px;\n            box-sizing: border-box;\n            font-size: 15px;\n            transition: border-color 0.3s, box-shadow 0.3s;\n        }\n        input[type=\"text\"]::placeholder {\n            color: #757575;\n        }\n        input[type=\"text\"]:focus,\n        select:focus {\n            outline: none;\n            border-color: #4fc3f7;\n            box-shadow: 0 0 0 3px rgba(79, 195, 247, 0.2);\n        }\n        /* Color específico para las opciones del select en algunos navegadores */\n        select option {\n            background-color: #2c2c2c;\n            color: #ffffff;\n        }\n        .input-with-unit {\n            display: flex;\n            align-items: center;\n        }\n        .input-with-unit input {\n            border-top-right-radius: 0;\n            border-bottom-right-radius: 0;\n        }\n        .unit {\n            background-color: #333333;\n            border: 1px solid #555555;\n            border-left: none;\n            padding: 10px;\n            border-top-right-radius: 5px;\n            border-bottom-right-radius: 5px;\n            color: #b0bec5;\n            font-size: 14px;\n        }\n        \n        /* Estilos específicos para los Checkboxes */\n        .checkbox-group {\n            display: grid;\n            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));\n            gap: 10px;\n            margin-top: 8px;\n        }\n        .checkbox-label {\n            display: flex;\n            align-items: center;\n            font-weight: normal;\n            text-transform: none;\n            letter-spacing: normal;\n            color: #e0e0e0;\n            font-size: 14px;\n            cursor: pointer;\n            background-color: #2c2c2c;\n            padding: 10px 12px;\n            border-radius: 5px;\n            border: 1px solid #555555;\n            transition: background-color 0.2s, border-color 0.2s;\n            margin-bottom: 0;\n        }\n        .checkbox-label:hover {\n            background-color: #383838;\n            border-color: #4fc3f7;\n        }\n        .checkbox-label input[type=\"checkbox\"] {\n            margin-right: 10px;\n            accent-color: #0288d1;\n            width: 18px;\n            height: 18px;\n            cursor: pointer;\n        }\n\n        button {\n            width: 100%;\n            background-color: #0288d1;\n            color: white;\n            padding: 14px;\n            border: none;\n            border-radius: 5px;\n            font-size: 16px;\n            font-weight: bold;\n            cursor: pointer;\n            margin-top: 25px;\n            transition: background-color 0.3s;\n        }\n        button:hover {\n            background-color: #0277bd;\n        }\n        @media (max-width: 500px) {\n            .form-row {\n                flex-direction: column;\n                gap: 15px;\n            }\n            .checkbox-group {\n                grid-template-columns: 1fr 1fr;\n            }\n        }\n    </style>\n</head>\n<body>\n\n    <div class=\"form-container\">\n        <h2>❄️ Actualizar Parte de Nieve</h2>\n        \n        <form action=\"https://n8n.tailwind.es/webhook-test/recibirFormulario\" method=\"POST\">\n            \n            <div class=\"form-group\">\n                <label for=\"calidad_nieve\">Calidad Nieve</label>\n                <input type=\"text\" id=\"calidad_nieve\" name=\"calidad_nieve\" required placeholder=\"Ej. Polvo, Dura, Primavera...\">\n            </div>\n\n            <div class=\"form-group\">\n                <label for=\"aspecto_cielo\">Aspecto del Cielo</label>\n                <select id=\"aspecto_cielo\" name=\"aspecto_cielo\" required>\n                    <option value=\"\" disabled selected>Selecciona una opción</option>\n                    <option value=\"NUBOSO\">NUBOSO</option>\n                    <option value=\"DESPEJADO\">DESPEJADO</option>\n                    <option value=\"SOLEADO\">SOLEADO</option>\n                    <option value=\"NEVANDO\">NEVANDO</option>\n                </select>\n            </div>\n\n            <div class=\"form-group\">\n                <label for=\"visibilidad\">Visibilidad</label>\n                <input type=\"text\" id=\"visibilidad\" name=\"visibilidad\" required placeholder=\"Ej. Buena, Regular, Mala...\">\n            </div>\n\n            <div class=\"form-row\">\n                <div class=\"form-group\">\n                    <label for=\"temp_min\">Temperatura Mínima</label>\n                    <div class=\"input-with-unit\">\n                        <input type=\"text\" id=\"temp_min\" name=\"temp_min\" required placeholder=\"Ej. -5\">\n                        <span class=\"unit\">°C</span>\n                    </div>\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"temp_max\">Temperatura Máxima</label>\n                    <div class=\"input-with-unit\">\n                        <input type=\"text\" id=\"temp_max\" name=\"temp_max\" required placeholder=\"Ej. 2\">\n                        <span class=\"unit\">°C</span>\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"form-row\">\n                <div class=\"form-group\">\n                    <label for=\"viento_min\">Viento Mínimo</label>\n                    <div class=\"input-with-unit\">\n                        <input type=\"text\" id=\"viento_min\" name=\"viento_min\" required placeholder=\"Ej. 10\">\n                        <span class=\"unit\">km/h</span>\n                    </div>\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"viento_max\">Viento Máximo</label>\n                    <div class=\"input-with-unit\">\n                        <input type=\"text\" id=\"viento_max\" name=\"viento_max\" required placeholder=\"Ej. 45\">\n                        <span class=\"unit\">km/h</span>\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"form-row\">\n                <div class=\"form-group\">\n                    <label for=\"espesor_min\">Espesor Mínimo</label>\n                    <div class=\"input-with-unit\">\n                        <input type=\"text\" id=\"espesor_min\" name=\"espesor_min\" required placeholder=\"Ej. 40\">\n                        <span class=\"unit\">cm</span>\n                    </div>\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"espesor_max\">Espesor Máximo</label>\n                    <div class=\"input-with-unit\">\n                        <input type=\"text\" id=\"espesor_max\" name=\"espesor_max\" required placeholder=\"Ej. 120\">\n                        <span class=\"unit\">cm</span>\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"form-row\">\n                <div class=\"form-group\">\n                    <label for=\"remontes_abiertos\">Remontes Abiertos</label>\n                    <input type=\"text\" id=\"remontes_abiertos\" name=\"remontes_abiertos\" required placeholder=\"Ej. 14\">\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"km_esquiables\">Km Esquiables</label>\n                    <div class=\"input-with-unit\">\n                        <input type=\"text\" id=\"km_esquiables\" name=\"km_esquiables\" required placeholder=\"Ej. 55.5\">\n                        <span class=\"unit\">km</span>\n                    </div>\n                </div>\n            </div>\n\n            <div class=\"form-group\">\n                <label for=\"numero_pistas\">Número de Pistas (Total)</label>\n                <input type=\"text\" id=\"numero_pistas\" name=\"numero_pistas\" required placeholder=\"Ej. 42\">\n            </div>\n\n            <div class=\"form-group\">\n                <label>Zonas / Pistas Abiertas</label>\n                <div class=\"checkbox-group\">\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Veleta\"> Veleta</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Laguna\"> Laguna</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Borreguiles\"> Borreguiles</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Pista del Mar\"> Pista del Mar</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Cauchiles Parador\"> Cauchiles Parador</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Loma Dílar\"> Loma Dílar</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Rio Monachil\"> Rio Monachil</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Parque Sulayr\"> Parque Sulayr</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Jardín Alpino\"> Jardín Alpino</label>\n                </div>\n            </div>\n\n            <div class=\"form-group\">\n                <label>Cuentas</label>\n                <div class=\"checkbox-group\">\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"cuentas[]\" value=\"Rules\"> Rules</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"cuentas[]\" value=\"Surfin\"> Surfin</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"cuentas[]\" value=\"Sierra Nevada Granada\"> Sierra Nevada Granada</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"cuentas[]\" value=\"Snow Division\"> Snow Division</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"cuentas[]\" value=\"Mesit\"> Mesit</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"cuentas[]\" value=\"Skiroom\"> Skiroom</label>\n                    <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"cuentas[]\" value=\"Sierra Nevada VIP\"> Sierra Nevada VIP</label>\n                </div>\n            </div>\n\n            <button type=\"submit\">Enviar Parte de Nieve</button>\n        </form>\n    </div>\n\n</body>\n</html>",
+        "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Parte de Nieve - Sierra Nevada</title>\n    <style>\n        /* ... Pega aquí todo tu CSS, no cambia nada ... */\n        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #121212; color: #e0e0e0; margin: 0; padding: 20px; }\n        .main-wrapper { display: flex; justify-content: center; align-items: flex-start; gap: 20px; flex-wrap: wrap; }\n        .form-container, .verification-container { background-color: #1e1e1e; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); width: 100%; box-sizing: border-box; }\n        .form-container { max-width: 650px; }\n        .verification-container { max-width: 350px; }\n        h2 { color: #ffffff; text-align: center; margin-top: 0; margin-bottom: 25px; }\n        .verification-container h2 { font-size: 18px; margin-bottom: 15px; }\n        .form-group { margin-bottom: 15px; }\n        .form-row { display: flex; gap: 15px; margin-bottom: 15px; }\n        .form-row .form-group { flex: 1; margin-bottom: 0; }\n        label { display: block; font-weight: bold; margin-bottom: 5px; color: #b0bec5; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }\n        input[type=\"text\"], input[type=\"email\"], select { width: 100%; padding: 10px; background-color: #2c2c2c; color: #ffffff; border: 1px solid #555555; border-radius: 5px; box-sizing: border-box; font-size: 15px; transition: border-color 0.3s, box-shadow 0.3s; }\n        input[type=\"text\"]::placeholder, input[type=\"email\"]::placeholder { color: #757575; }\n        input[type=\"text\"]:focus, input[type=\"email\"]:focus, select:focus { outline: none; border-color: #4fc3f7; box-shadow: 0 0 0 3px rgba(79, 195, 247, 0.2); }\n        select option { background-color: #2c2c2c; color: #ffffff; }\n        .input-with-unit { display: flex; align-items: center; }\n        .input-with-unit input { border-top-right-radius: 0; border-bottom-right-radius: 0; }\n        .unit { background-color: #333333; border: 1px solid #555555; border-left: none; padding: 10px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; color: #b0bec5; font-size: 14px; }\n        .checkbox-group { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; margin-top: 8px; }\n        .checkbox-label { display: flex; align-items: center; font-weight: normal; text-transform: none; letter-spacing: normal; color: #e0e0e0; font-size: 14px; cursor: pointer; background-color: #2c2c2c; padding: 10px 12px; border-radius: 5px; border: 1px solid #555555; transition: background-color 0.2s, border-color 0.2s; margin-bottom: 0; }\n        .checkbox-label:hover { background-color: #383838; border-color: #4fc3f7; }\n        .checkbox-label input[type=\"checkbox\"] { margin-right: 10px; accent-color: #0288d1; width: 18px; height: 18px; cursor: pointer; }\n        button { width: 100%; background-color: #0288d1; color: white; padding: 14px; border: none; border-radius: 5px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 25px; transition: background-color 0.3s; }\n        button:hover { background-color: #0277bd; }\n        button:disabled { background-color: #555555; color: #888888; cursor: not-allowed; }\n        .btn-success { background-color: #2e7d32; }\n        .btn-success:hover { background-color: #1b5e20; }\n        hr { border: 0; border-top: 1px solid #333333; margin: 25px 0; }\n        .mensaje { font-size: 13px; margin-top: 10px; display: none; text-align: center; font-weight: bold; }\n        .error { color: #ef5350; }\n        .exito { color: #66bb6a; }\n        @media (max-width: 768px) { .form-row { flex-direction: column; gap: 15px; } .checkbox-group { grid-template-columns: 1fr 1fr; } .main-wrapper { flex-direction: column-reverse; align-items: center; } }\n    </style>\n</head>\n<body>\n\n    <div class=\"main-wrapper\">\n        \n        <div class=\"form-container\">\n            <h2>❄️ Actualizar Parte de Nieve</h2>\n            \n            <form action=\"https://n8n.tailwind.es/webhook/recibirFormulario\" method=\"POST\">\n                \n                <input type=\"hidden\" id=\"codigo_secreto\" name=\"codigo_verificado\" value=\"\">\n\n                <div class=\"form-group\">\n                    <label for=\"calidad_nieve\">Calidad Nieve</label>\n                    <input type=\"text\" id=\"calidad_nieve\" name=\"calidad_nieve\" required placeholder=\"Ej. Polvo, Dura, Primavera...\">\n                </div>\n\n                <div class=\"form-group\">\n                    <label for=\"aspecto_cielo\">Aspecto del Cielo</label>\n                    <select id=\"aspecto_cielo\" name=\"aspecto_cielo\" required>\n                        <option value=\"\" disabled selected>Selecciona una opción</option>\n                        <option value=\"NUBOSO\">NUBOSO</option>\n                        <option value=\"DESPEJADO\">DESPEJADO</option>\n                        <option value=\"SOLEADO\">SOLEADO</option>\n                        <option value=\"NEVANDO\">NEVANDO</option>\n                    </select>\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"visibilidad\">Visibilidad</label>\n                    <input type=\"text\" id=\"visibilidad\" name=\"visibilidad\" required placeholder=\"Ej. Buena, Regular, Mala...\">\n                </div>\n                <div class=\"form-row\">\n                    <div class=\"form-group\">\n                        <label for=\"temp_min\">Temperatura Mínima</label>\n                        <div class=\"input-with-unit\">\n                            <input type=\"text\" id=\"temp_min\" name=\"temp_min\" required placeholder=\"Ej. -5\">\n                            <span class=\"unit\">°C</span>\n                        </div>\n                    </div>\n                    <div class=\"form-group\">\n                        <label for=\"temp_max\">Temperatura Máxima</label>\n                        <div class=\"input-with-unit\">\n                            <input type=\"text\" id=\"temp_max\" name=\"temp_max\" required placeholder=\"Ej. 2\">\n                            <span class=\"unit\">°C</span>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"form-row\">\n                    <div class=\"form-group\">\n                        <label for=\"viento_min\">Viento Mínimo</label>\n                        <div class=\"input-with-unit\">\n                            <input type=\"text\" id=\"viento_min\" name=\"viento_min\" required placeholder=\"Ej. 10\">\n                            <span class=\"unit\">km/h</span>\n                        </div>\n                    </div>\n                    <div class=\"form-group\">\n                        <label for=\"viento_max\">Viento Máximo</label>\n                        <div class=\"input-with-unit\">\n                            <input type=\"text\" id=\"viento_max\" name=\"viento_max\" required placeholder=\"Ej. 45\">\n                            <span class=\"unit\">km/h</span>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"form-row\">\n                    <div class=\"form-group\">\n                        <label for=\"espesor_min\">Espesor Mínimo</label>\n                        <div class=\"input-with-unit\">\n                            <input type=\"text\" id=\"espesor_min\" name=\"espesor_min\" required placeholder=\"Ej. 40\">\n                            <span class=\"unit\">cm</span>\n                        </div>\n                    </div>\n                    <div class=\"form-group\">\n                        <label for=\"espesor_max\">Espesor Máximo</label>\n                        <div class=\"input-with-unit\">\n                            <input type=\"text\" id=\"espesor_max\" name=\"espesor_max\" required placeholder=\"Ej. 120\">\n                            <span class=\"unit\">cm</span>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"form-row\">\n                    <div class=\"form-group\">\n                        <label for=\"remontes_abiertos\">Remontes Abiertos</label>\n                        <input type=\"text\" id=\"remontes_abiertos\" name=\"remontes_abiertos\" required placeholder=\"Ej. 14\">\n                    </div>\n                    <div class=\"form-group\">\n                        <label for=\"km_esquiables\">Km Esquiables</label>\n                        <div class=\"input-with-unit\">\n                            <input type=\"text\" id=\"km_esquiables\" name=\"km_esquiables\" required placeholder=\"Ej. 55.5\">\n                            <span class=\"unit\">km</span>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"numero_pistas\">Número de Pistas (Total)</label>\n                    <input type=\"text\" id=\"numero_pistas\" name=\"numero_pistas\" required placeholder=\"Ej. 42\">\n                </div>\n                <div class=\"form-group\">\n                    <label>Zonas / Pistas Abiertas</label>\n                    <div class=\"checkbox-group\">\n                        <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Veleta\"> Veleta</label>\n                        <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Laguna\"> Laguna</label>\n                        <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Borreguiles\"> Borreguiles</label>\n                        <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Pista del Mar\"> Pista del Mar</label>\n                        <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Cauchiles Parador\"> Cauchiles Parador</label>\n                        <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Loma Dílar\"> Loma Dílar</label>\n                        <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Rio Monachil\"> Rio Monachil</label>\n                        <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Parque Sulayr\"> Parque Sulayr</label>\n                        <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"pistas_abiertas[]\" value=\"Jardín Alpino\"> Jardín Alpino</label>\n                    </div>\n                </div>\n                <div class=\"form-group\">\n                    <label>Cuentas</label>\n                    <div class=\"checkbox-group\">\n                        <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"cuentas[]\" value=\"Rules\"> Rules</label>\n                        <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"cuentas[]\" value=\"Surfin\"> Surfin</label>\n                        <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"cuentas[]\" value=\"Sierra Nevada Granada\"> Sierra Nevada Granada</label>\n                        <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"cuentas[]\" value=\"Snow Division\"> Snow Division</label>\n                        <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"cuentas[]\" value=\"Mesit\"> Mesit</label>\n                        <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"cuentas[]\" value=\"Skiroom\"> Skiroom</label>\n                        <label class=\"checkbox-label\"><input type=\"checkbox\" name=\"cuentas[]\" value=\"Sierra Nevada VIP\"> Sierra Nevada VIP</label>\n                    </div>\n                </div>\n\n                <button type=\"submit\" id=\"btnFinalSubmit\" disabled>Enviar Parte de Nieve (Requiere Verificación)</button>\n            </form>\n        </div>\n\n        <div class=\"verification-container\">\n            <div class=\"form-section\">\n                <h2>1. Solicita tu código</h2>\n                <form id=\"formCorreo\">\n                    <input type=\"email\" id=\"emailInput\" placeholder=\"tu@correo.com\" required>\n                    <button type=\"submit\" id=\"btnCorreo\">Enviar Código</button>\n                    <div id=\"msgCorreo\" class=\"mensaje\"></div>\n                </form>\n            </div>\n\n            <hr>\n\n            <div class=\"form-section\">\n                <h2>2. Introduce el código</h2>\n                <form id=\"formCodigo\">\n                    <input type=\"text\" id=\"codigoInput\" placeholder=\"Ej: 123456\" required style=\"letter-spacing: 2px; text-align: center;\">\n                    <button type=\"submit\" id=\"btnCodigo\" class=\"btn-success\">Verificar Código</button>\n                    <div id=\"msgCodigo\" class=\"mensaje\"></div>\n                </form>\n            </div>\n        </div>\n\n    </div>\n\n    <script>\n        const formCorreo = document.getElementById('formCorreo');\n        const formCodigo = document.getElementById('formCodigo');\n        const btnFinalSubmit = document.getElementById('btnFinalSubmit');\n        const codigoSecreto = document.getElementById('codigo_secreto');\n        \n        const mostrarMensaje = (elementoId, texto, esError) => {\n            const el = document.getElementById(elementoId);\n            el.textContent = texto;\n            el.style.display = 'block';\n            el.className = 'mensaje ' + (esError ? 'error' : 'exito');\n        };\n\n        formCorreo.addEventListener('submit', async (e) => {\n            e.preventDefault();\n            const email = document.getElementById('emailInput').value;\n            const btn = document.getElementById('btnCorreo');\n            \n            btn.disabled = true;\n            btn.innerText = 'Enviando...';\n            document.getElementById('msgCorreo').style.display = 'none';\n\n            try {\n                const response = await fetch('https://n8n.tailwind.es/webhook/verificar', {\n                    method: 'POST',\n                    headers: { 'Content-Type': 'application/json' },\n                    body: JSON.stringify({ email: email })\n                });\n\n                if (response.ok) {\n                    btn.innerText = '¡Enviado!';\n                    mostrarMensaje('msgCorreo', 'Revisa tu bandeja de entrada.', false);\n                } else {\n                    throw new Error('Error en el webhook');\n                }\n            } catch (error) {\n                btn.disabled = false;\n                btn.innerText = 'Enviar Código';\n                mostrarMensaje('msgCorreo', 'Error de conexión. Inténtalo de nuevo.', true);\n            }\n        });\n\n        formCodigo.addEventListener('submit', async (e) => {\n            e.preventDefault();\n            const codigo = document.getElementById('codigoInput').value;\n            const btn = document.getElementById('btnCodigo');\n            \n            btn.disabled = true;\n            btn.innerText = 'Verificando...';\n            document.getElementById('msgCodigo').style.display = 'none';\n\n            try {\n                const response = await fetch('https://n8n.tailwind.es/webhook/codigo-correcto', {\n                    method: 'POST',\n                    headers: { 'Content-Type': 'application/json' },\n                    body: JSON.stringify({ codigo: codigo })\n                });\n\n                if (response.ok) {\n                    btn.innerText = '¡Completado!';\n                    mostrarMensaje('msgCodigo', 'Código verificado. Ya puedes enviar el parte.', false);\n                    \n                    // AQUI ESTA LA MAGIA: Copiamos el código y activamos el botón principal\n                    codigoSecreto.value = codigo;\n                    btnFinalSubmit.disabled = false;\n                    btnFinalSubmit.innerText = 'Enviar Parte de Nieve';\n                    btnFinalSubmit.style.backgroundColor = '#2e7d32'; // Lo ponemos verde para que destaque\n\n                } else {\n                    throw new Error('Error en el webhook');\n                }\n            } catch (error) {\n                btn.disabled = false;\n                btn.innerText = 'Verificar Código';\n                mostrarMensaje('msgCodigo', 'Código incorrecto o caducado.', true);\n            }\n        });\n    </script>\n\n</body>\n</html>",
         "options": {}
       },
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        192,
-        -1440
+        -128,
+        -1424
       ],
       "id": "8974fa52-b64f-4a01-a41f-e97ac127e6a3",
       "name": "Respond to Webhook"
@@ -7224,18 +8131,25 @@
     {
       "parameters": {
         "path": "formulario",
+        "authentication": "basicAuth",
         "responseMode": "responseNode",
         "options": {}
       },
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        32,
-        -1440
+        -288,
+        -1424
       ],
       "id": "64cc4927-7ecd-4b78-bc9a-faf4e19927fa",
       "name": "Formulario",
-      "webhookId": "b94dffb5-c3b0-48e8-b5ed-ed9febc8752c"
+      "webhookId": "b94dffb5-c3b0-48e8-b5ed-ed9febc8752c",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "YNp74RlOBcOl8lFm",
+          "name": "Basic_Canva"
+        }
+      }
     },
     {
       "parameters": {
@@ -7247,8 +8161,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        32,
-        -1232
+        -288,
+        -1216
       ],
       "id": "8af91482-0831-4c8c-90ed-ee5bdbfdf57c",
       "name": "RecibirFormulario",
@@ -7339,7 +8253,7 @@
             {
               "id": "78f168c5-94b0-4b92-8811-d683a25cdd66",
               "name": "body[\"cuentas[]\"]",
-              "value": "={{ $json.body[\"cuentas[]\"] ? (Array.isArray($json.body[\"cuentas[]\"]) ? $json.body[\"cuentas[]\"] : [$json.body[\"cuentas[]\"]]) : [] }}",
+              "value": "={{ $('RecibirFormulario').item.json.body[\"cuentas[]\"] ? (Array.isArray($('RecibirFormulario').item.json.body[\"cuentas[]\"]) ? $('RecibirFormulario').item.json.body[\"cuentas[]\"] : [$('RecibirFormulario').item.json.body[\"cuentas[]\"]]) : [] }}",
               "type": "array"
             }
           ]
@@ -7351,7 +8265,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        400,
+        768,
         -1232
       ],
       "id": "fbf24bc9-0430-4a3a-88fd-136c70ba1b2a",
@@ -7371,7 +8285,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2512,
+        2944,
         -1360
       ],
       "id": "c1aa6ddb-952c-4894-a11b-d3f37a039c68",
@@ -7390,7 +8304,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        2048,
+        2480,
         -1360
       ],
       "id": "be6d80b9-8838-469c-8bb1-5e9c75d77d71",
@@ -7406,7 +8320,7 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        224,
+        320,
         -1232
       ],
       "id": "cd086d64-045c-4105-8f96-198fa0dae5cc",
@@ -7422,8 +8336,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -16,
-        -1472
+        -336,
+        -1456
       ],
       "id": "7dcddf5d-7702-4438-9c1a-2439d282d272",
       "name": "Sticky Note"
@@ -7437,7 +8351,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1760,
+        2176,
         -1472
       ],
       "id": "77eff92c-8d5d-4d64-ad56-038183791da4",
@@ -7453,7 +8367,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        3744,
+        4144,
         -1472
       ],
       "id": "bde44f7e-06f7-4d1b-adbf-fd7a0d237577",
@@ -7472,7 +8386,7 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        3776,
+        4192,
         -2080
       ],
       "id": "1649991c-daa3-4355-b549-f29a13970b09",
@@ -7497,7 +8411,7 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        4464,
+        4880,
         -2096
       ],
       "id": "b7a1439a-261e-4b7d-b768-cd8ac12059a8",
@@ -7529,7 +8443,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        3984,
+        4400,
         -2080
       ],
       "id": "e25f848f-45eb-455a-a125-7d69a992bd5c",
@@ -7546,7 +8460,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        4128,
+        4544,
         -2080
       ],
       "id": "94ea1db5-6e45-47f1-80d9-ada0e85ca6cc",
@@ -7580,7 +8494,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        4272,
+        4688,
         -2080
       ],
       "id": "079d857a-822b-4d2d-abb0-fdd8281762cd",
@@ -7603,7 +8517,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        4624,
+        5040,
         -2096
       ],
       "id": "16fb43a1-558d-40e8-b593-94a56f017429",
@@ -7623,7 +8537,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        4784,
+        5200,
         -2096
       ],
       "id": "028482b8-0845-4c66-be29-8c9ff57e3894",
@@ -7649,7 +8563,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        3744,
+        4144,
         -2176
       ],
       "id": "92455a60-6b64-4093-9b05-0b38c7d78bd8",
@@ -7668,7 +8582,7 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        3776,
+        4160,
         -1024
       ],
       "id": "bd5be653-2119-4ea4-a258-24e8452c846a",
@@ -7693,7 +8607,7 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        4464,
+        4848,
         -1040
       ],
       "id": "fa68e574-b091-4639-a8cd-97ef15710818",
@@ -7725,7 +8639,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        3984,
+        4368,
         -1024
       ],
       "id": "276ad99f-21d2-4e7b-a775-9489c8a0e0e0",
@@ -7742,7 +8656,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        4128,
+        4512,
         -1024
       ],
       "id": "fbd4ef1c-2d52-4a00-b4ba-1d317422e3f0",
@@ -7776,7 +8690,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        4272,
+        4656,
         -1024
       ],
       "id": "4db01e5f-01ba-4c02-b12b-79b497e91073",
@@ -7799,7 +8713,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        4624,
+        5008,
         -1040
       ],
       "id": "93f5b1be-3241-4298-98a9-a4ab4c543828",
@@ -7819,7 +8733,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        4784,
+        5184,
         -1040
       ],
       "id": "910f6db7-b74e-4707-a150-91e00d45cafe",
@@ -7845,7 +8759,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        3744,
+        4144,
         -1120
       ],
       "id": "a6bdaeaa-e921-4885-954e-50c33704d4f1",
@@ -7864,7 +8778,7 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        3776,
+        4192,
         -1728
       ],
       "id": "b2d37c3b-d837-43d0-8c60-b6b641f7c06f",
@@ -7889,7 +8803,7 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        4464,
+        4880,
         -1744
       ],
       "id": "488b66f7-fb64-43df-b350-d6821216c28c",
@@ -7921,7 +8835,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        3984,
+        4400,
         -1728
       ],
       "id": "1d73bcf6-f259-43fc-81ef-ca82cccdbe13",
@@ -7938,7 +8852,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        4128,
+        4544,
         -1728
       ],
       "id": "dab41c1d-42bb-4b6b-b13a-8d3c3dc89c8f",
@@ -7972,7 +8886,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        4272,
+        4688,
         -1728
       ],
       "id": "6abf9ba1-e69b-4feb-9486-6e3532a04457",
@@ -7995,7 +8909,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        4624,
+        5040,
         -1744
       ],
       "id": "6b2a4807-87bc-4fc2-9146-62edd7b14cf9",
@@ -8015,7 +8929,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        4784,
+        5200,
         -1744
       ],
       "id": "7533ece0-de3a-472e-a8e0-56d3045ff60a",
@@ -8041,7 +8955,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        3744,
+        4144,
         -1824
       ],
       "id": "db8cdce1-f555-447e-9d70-f2dca0e06cec",
@@ -8060,7 +8974,7 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        3776,
+        4176,
         -656
       ],
       "id": "782d8ce7-3c1d-49e2-8bab-775e52b16b6a",
@@ -8085,7 +8999,7 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        4464,
+        4864,
         -672
       ],
       "id": "2ca3f4f1-6c07-4fec-8fa1-ca022c7c2f46",
@@ -8117,7 +9031,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        3984,
+        4384,
         -656
       ],
       "id": "bb64dfd4-0bc2-499a-ae7d-59d4f6220904",
@@ -8134,7 +9048,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        4128,
+        4528,
         -656
       ],
       "id": "0f69dbd5-baed-4ed7-9df0-11dc6f0c0ea8",
@@ -8168,7 +9082,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        4272,
+        4672,
         -656
       ],
       "id": "0e371f48-eb71-41d8-a70f-8fd81427cb9f",
@@ -8191,7 +9105,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        4624,
+        5024,
         -672
       ],
       "id": "76f36a98-8681-431b-b8cc-520b0e65aff5",
@@ -8211,7 +9125,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        4784,
+        5184,
         -672
       ],
       "id": "12f5ca0b-59a6-4e3f-b18c-e785e7e17a6d",
@@ -8237,7 +9151,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        3744,
+        4144,
         -752
       ],
       "id": "b057cb59-8982-4a1d-96fc-570016176971",
@@ -8257,7 +9171,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1824,
+        2256,
         -1008
       ],
       "id": "7d068ac4-49c4-478c-8b52-3bd6dfb3b2f7",
@@ -8284,7 +9198,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2320,
+        2752,
         -1008
       ],
       "id": "bcb9fc1d-abaf-412e-9d7e-650000f09efb",
@@ -8323,7 +9237,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        3152,
+        3584,
         -1008
       ],
       "id": "3ec715de-7444-4977-9383-ccb80abf3cde",
@@ -8339,7 +9253,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        3344,
+        3776,
         -1024
       ],
       "id": "6b312cf3-0c5f-4c9e-bb30-f69714d8e3c4",
@@ -8358,7 +9272,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        2944,
+        3376,
         -1008
       ],
       "id": "853d58ce-00e4-4a8a-9723-90051208e1de",
@@ -8375,7 +9289,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2736,
+        3168,
         -1008
       ],
       "id": "83671c11-ad49-4344-ad79-fcf276b0a50f",
@@ -8401,7 +9315,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2512,
+        2944,
         -1008
       ],
       "id": "116cd519-9f44-4429-b136-dd56619e84b7",
@@ -8420,7 +9334,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        2048,
+        2480,
         -1008
       ],
       "id": "11ea1fc4-0857-4724-9d14-57d595ecd769",
@@ -8436,7 +9350,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1760,
+        2176,
         -1120
       ],
       "id": "8f03d0d6-a686-4e0a-b47c-f0a9c42f04f4",
@@ -8456,7 +9370,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1824,
+        2256,
         -656
       ],
       "id": "31861901-f40c-42fe-947e-a62612d4df81",
@@ -8483,7 +9397,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2320,
+        2752,
         -656
       ],
       "id": "5a17abe4-67b3-4a2f-8d33-52d7e53be514",
@@ -8522,7 +9436,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        3152,
+        3584,
         -656
       ],
       "id": "979c6369-4ed1-4624-84f8-0c4e54758722",
@@ -8538,7 +9452,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        3344,
+        3776,
         -672
       ],
       "id": "e5aac2b1-f251-412d-8762-15fe48ae586a",
@@ -8557,7 +9471,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        2944,
+        3376,
         -656
       ],
       "id": "45df4e01-97ad-4a2c-bd1a-19f773bc5cc5",
@@ -8574,7 +9488,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2736,
+        3168,
         -656
       ],
       "id": "79fbf1d1-4f53-4033-a434-23f39a696352",
@@ -8600,7 +9514,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2512,
+        2944,
         -656
       ],
       "id": "a589a100-8364-4df5-abf5-a07cff91d164",
@@ -8619,7 +9533,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        2048,
+        2480,
         -656
       ],
       "id": "612110aa-7498-448c-a831-ddb421fd2993",
@@ -8635,7 +9549,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1760,
+        2176,
         -768
       ],
       "id": "298991d2-24be-4a2a-a73a-8a129b1e0eca",
@@ -8655,7 +9569,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1824,
+        2256,
         -2064
       ],
       "id": "a7892d56-ec2c-4102-aaa7-2bd0e6c3d623",
@@ -8682,7 +9596,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2320,
+        2752,
         -2064
       ],
       "id": "6ad838f4-01d7-4bf6-acf6-102d65f9b4da",
@@ -8721,7 +9635,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        3152,
+        3584,
         -2064
       ],
       "id": "21fba3c1-c839-4dec-b1ab-a3dedff658b2",
@@ -8737,7 +9651,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        3344,
+        3776,
         -2080
       ],
       "id": "67182458-f4ca-4e0a-99d9-7aa4be20fd16",
@@ -8756,7 +9670,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        2944,
+        3376,
         -2064
       ],
       "id": "331571a2-3585-47db-8e32-1bec120b6271",
@@ -8773,7 +9687,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2736,
+        3168,
         -2064
       ],
       "id": "e0a02df8-2058-4b46-aee8-cd96f642d9a1",
@@ -8799,7 +9713,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2512,
+        2944,
         -2064
       ],
       "id": "0cb5a7da-9606-49de-8f78-79bb69a99baa",
@@ -8818,7 +9732,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        2048,
+        2480,
         -2064
       ],
       "id": "890b6d56-a9c4-4a89-b360-6ae060959330",
@@ -8834,7 +9748,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1760,
+        2176,
         -2176
       ],
       "id": "57f941b7-6f05-4c38-a9e2-1f94d66b2ec1",
@@ -8854,7 +9768,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1824,
+        2256,
         -1712
       ],
       "id": "cc29fb60-6525-47c2-8f41-9e24bfda5455",
@@ -8898,7 +9812,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        3152,
+        3584,
         -1712
       ],
       "id": "f0773575-696a-4702-b300-c2990e55fe7b",
@@ -8914,7 +9828,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        3344,
+        3776,
         -1728
       ],
       "id": "f83bdb42-a69c-47f8-9c4d-98a437c4edd1",
@@ -8933,7 +9847,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        2944,
+        3376,
         -1712
       ],
       "id": "29bed0e3-79f6-4c50-bc95-7336e324b172",
@@ -8950,7 +9864,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2736,
+        3168,
         -1712
       ],
       "id": "2ec1d228-f94e-4627-89ea-84411412a6e8",
@@ -8976,7 +9890,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2512,
+        2944,
         -1712
       ],
       "id": "6065ce1f-ab40-4138-b4ad-3eadd47c0ace",
@@ -8995,7 +9909,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        2048,
+        2480,
         -1712
       ],
       "id": "59b652c0-92ff-4245-9cc8-d262428f6ca1",
@@ -9011,7 +9925,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1760,
+        2176,
         -1824
       ],
       "id": "23ffcfb3-0c3b-4eb4-beeb-aead3e3be711",
@@ -9027,7 +9941,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2320,
+        2752,
         -1712
       ],
       "id": "382a76ce-ed9b-4fee-9825-0b05cbb0392a",
@@ -9058,7 +9972,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        3952,
+        4352,
         -1376
       ],
       "id": "91bd9f34-7b2d-4cf0-8a12-5d9bdb044cba",
@@ -9244,8 +10158,8 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.4,
       "position": [
-        560,
-        -1296
+        976,
+        -1312
       ],
       "id": "62ca3c0f-97aa-4a87-b870-9462260ce7ec",
       "name": "Switch"
@@ -9259,7 +10173,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        928,
+        1344,
         -2064
       ],
       "id": "03c0453e-afe7-451c-abdd-2c87037e9952",
@@ -9280,7 +10194,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        928,
+        1344,
         -1712
       ],
       "id": "dcb07497-45a0-4ced-bc73-93699c12a7c0",
@@ -9301,7 +10215,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        944,
+        1360,
         -1360
       ],
       "id": "38f98b06-61b2-4a3b-9ab2-fa20ef9f47d6",
@@ -9322,7 +10236,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        944,
+        1360,
         -304
       ],
       "id": "eb93f1c1-6aa4-4da7-9dc8-e1d51b81c614",
@@ -9343,7 +10257,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        944,
+        1360,
         48
       ],
       "id": "22f341dd-b73e-4314-9c54-c0deffe86d66",
@@ -9364,7 +10278,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        944,
+        1360,
         -656
       ],
       "id": "ee54a7c0-c9f7-4a21-9814-8b76aa042e39",
@@ -9385,7 +10299,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        5040,
+        5456,
         -2080
       ],
       "id": "1758b16a-ba56-41a9-a39f-c07d7c81e26c",
@@ -9406,7 +10320,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        4992,
+        5408,
         -1744
       ],
       "id": "8939b807-10f4-4a93-975b-ce05f8896485",
@@ -9437,7 +10351,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        1104,
+        1520,
         -2064
       ],
       "id": "4ae29102-e3c2-4110-8a65-93bcef34f04f",
@@ -9468,7 +10382,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        1104,
+        1520,
         -1712
       ],
       "id": "7ad8c4e1-136f-40c4-a51a-e4df404d356b",
@@ -9499,7 +10413,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        1120,
+        1536,
         -1360
       ],
       "id": "79508500-6a9b-4ef5-b4fc-88cc540a172a",
@@ -9520,7 +10434,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        4992,
+        5392,
         -1392
       ],
       "id": "9c3dc3c7-e7e9-40f4-b2c9-22200e297c82",
@@ -9551,7 +10465,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        1120,
+        1536,
         -656
       ],
       "id": "94a93178-5bd3-444b-83b3-4e60f53e4ddc",
@@ -9572,7 +10486,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        4992,
+        5392,
         -672
       ],
       "id": "84b8ba29-2801-4cf4-b527-ebfcd0876d61",
@@ -9603,7 +10517,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        1120,
+        1536,
         -304
       ],
       "id": "4b7701de-2a70-48fa-a8b8-c727befbb38c",
@@ -9634,7 +10548,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        1120,
+        1536,
         48
       ],
       "id": "2fcb3278-2701-4f05-b122-9f3352fc0f96",
@@ -9655,7 +10569,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        4992,
+        5424,
         32
       ],
       "id": "cac03bb3-ae0a-4b8a-ac28-3166ee627618",
@@ -9680,7 +10594,7 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        3776,
+        4208,
         48
       ],
       "id": "86c3b6f3-c278-4fbf-bcb6-b3747cc44778",
@@ -9705,7 +10619,7 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        4464,
+        4896,
         32
       ],
       "id": "787d4c1c-6c38-4fed-aa6f-5e12aa2c0177",
@@ -9737,7 +10651,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        3984,
+        4416,
         48
       ],
       "id": "3f56ff68-eb0d-4bec-9852-5007fb143561",
@@ -9754,7 +10668,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        4128,
+        4560,
         48
       ],
       "id": "77852db1-698e-48af-b5c5-c0e3b290d37c",
@@ -9788,7 +10702,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        4272,
+        4704,
         48
       ],
       "id": "0af9b2cd-4e9f-446b-9d50-d5cd50d4faf7",
@@ -9811,7 +10725,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        4624,
+        5056,
         32
       ],
       "id": "8a6d8318-c5d1-4e34-a011-2c29fd339d91",
@@ -9831,7 +10745,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        4784,
+        5216,
         32
       ],
       "id": "47d046da-0d54-4720-838b-553b7b24ec4b",
@@ -9857,7 +10771,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        3744,
+        4160,
         -48
       ],
       "id": "dc975708-50be-4a7f-976f-009f7673e979",
@@ -9877,7 +10791,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1824,
+        2256,
         48
       ],
       "id": "0dbf7ac7-5332-4002-9069-7c75bf07c323",
@@ -9904,7 +10818,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2320,
+        2752,
         48
       ],
       "id": "b297c029-4e63-447d-9c5f-d4e17bd7a213",
@@ -9943,7 +10857,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        3152,
+        3584,
         48
       ],
       "id": "c3b69f9b-17e1-42fa-9e4f-98954f72f573",
@@ -9959,7 +10873,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        3344,
+        3776,
         32
       ],
       "id": "1aca6225-3f7d-4383-a53d-ca3ecd6170eb",
@@ -9978,7 +10892,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        2944,
+        3376,
         48
       ],
       "id": "0a45c409-70b7-4e70-be79-19ed595c100a",
@@ -9995,7 +10909,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2736,
+        3168,
         48
       ],
       "id": "632365df-a3a8-45bc-9301-7cff3a3a2750",
@@ -10021,7 +10935,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2512,
+        2944,
         48
       ],
       "id": "5d3d0c42-966d-4721-b363-7ad888572f56",
@@ -10040,7 +10954,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        2048,
+        2480,
         48
       ],
       "id": "d19a0d44-ed88-4a28-9671-b7cdac5d4188",
@@ -10056,7 +10970,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1760,
+        2176,
         -64
       ],
       "id": "b2c5f11f-a6a1-4359-8b03-51ed6795ae07",
@@ -10071,7 +10985,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        4992,
+        5408,
         -1040
       ],
       "id": "3847abb4-da75-4c68-b61b-d062b187b6d2",
@@ -10096,7 +11010,7 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        3776,
+        4176,
         -304
       ],
       "id": "11ed9595-588b-4c5f-9235-286f00b1f598",
@@ -10121,7 +11035,7 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        4464,
+        4864,
         -320
       ],
       "id": "1526fc34-53c0-45e1-b820-de38f5909d35",
@@ -10153,7 +11067,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        3984,
+        4384,
         -304
       ],
       "id": "d2d10789-b18d-4f12-8bd2-f7d76e5907b4",
@@ -10170,7 +11084,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        4128,
+        4528,
         -304
       ],
       "id": "f077bed8-6eaa-44d8-a4b2-ea4d4f88165c",
@@ -10204,7 +11118,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        4272,
+        4672,
         -304
       ],
       "id": "f49022fe-97b2-451a-91e1-18d249adc70b",
@@ -10227,7 +11141,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        4624,
+        5024,
         -320
       ],
       "id": "bc494770-50cd-4591-b0a5-7bbb9366efe2",
@@ -10247,7 +11161,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        4784,
+        5184,
         -320
       ],
       "id": "571b798d-bf26-47f5-a523-796c1e70cb76",
@@ -10273,7 +11187,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        3744,
+        4144,
         -400
       ],
       "id": "9e6412dc-73d8-4257-b7fa-f70d7a3f4d80",
@@ -10293,7 +11207,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        1824,
+        2256,
         -304
       ],
       "id": "39bdf0c8-0600-4b02-a52d-afef1ca08b45",
@@ -10320,7 +11234,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2320,
+        2752,
         -304
       ],
       "id": "c623a0f8-30e4-487f-b0e7-af8aa5234756",
@@ -10359,7 +11273,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        3152,
+        3584,
         -304
       ],
       "id": "89d85dde-9852-4f97-b683-1ef88ead1765",
@@ -10375,7 +11289,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        3344,
+        3776,
         -320
       ],
       "id": "4c032b71-6d70-47cc-9651-c4cec18de41f",
@@ -10394,7 +11308,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        2944,
+        3376,
         -304
       ],
       "id": "d3feb345-7ccd-41cb-b89a-881049e287e8",
@@ -10411,7 +11325,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2736,
+        3168,
         -304
       ],
       "id": "82fb81b1-47f0-492d-9ff1-e8ad65ea679f",
@@ -10437,7 +11351,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        2512,
+        2944,
         -304
       ],
       "id": "0140d16a-0fe2-4b1a-9f46-9f75506988ba",
@@ -10456,7 +11370,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        2048,
+        2480,
         -304
       ],
       "id": "aceb5ceb-9b55-4a1f-95de-d06c7c84fcdd",
@@ -10472,7 +11386,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1760,
+        2176,
         -416
       ],
       "id": "340d5dc2-ebd1-4426-a94a-70fcdf5b683e",
@@ -10487,7 +11401,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        4992,
+        5392,
         -320
       ],
       "id": "ef56b717-4c02-4107-a5aa-5cc0127927f1",
@@ -10508,7 +11422,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        944,
+        1360,
         -1008
       ],
       "id": "8679ef63-fabc-4318-a851-4eb51cc878b1",
@@ -10539,7 +11453,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        1120,
+        1536,
         -1008
       ],
       "id": "73b4a496-a36b-47f9-aa69-7ef87e91db56",
@@ -10558,7 +11472,7 @@
       "type": "n8n-nodes-base.sort",
       "typeVersion": 1,
       "position": [
-        1392,
+        1824,
         -2064
       ],
       "id": "3fa9ee9f-8a7a-4166-b4ab-5db9e8dc2601",
@@ -10571,7 +11485,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        1584,
+        2016,
         -2064
       ],
       "id": "e54de516-dd74-4762-9e88-7beda2367ab7",
@@ -10586,7 +11500,7 @@
       "type": "n8n-nodes-base.sort",
       "typeVersion": 1,
       "position": [
-        1392,
+        1824,
         -1712
       ],
       "id": "e1ded1f7-7fe4-4153-b65e-e022cdec73f0",
@@ -10599,7 +11513,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        1584,
+        2016,
         -1712
       ],
       "id": "84628f75-dfce-4356-8ba1-378173dabeb4",
@@ -10614,7 +11528,7 @@
       "type": "n8n-nodes-base.sort",
       "typeVersion": 1,
       "position": [
-        1392,
+        1840,
         -1360
       ],
       "id": "e02cb370-e26b-4fe8-a358-24cd6426f6dc",
@@ -10627,7 +11541,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        1584,
+        2000,
         -1360
       ],
       "id": "014c7832-2267-4f6d-ab65-22d7e76bb616",
@@ -10642,7 +11556,7 @@
       "type": "n8n-nodes-base.sort",
       "typeVersion": 1,
       "position": [
-        1392,
+        1824,
         -1008
       ],
       "id": "54ac63b9-36f2-4a5f-9377-c7fe671ca7e6",
@@ -10655,7 +11569,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        1584,
+        2016,
         -1008
       ],
       "id": "12128430-62cc-44aa-95d9-21ac5f700db3",
@@ -10670,7 +11584,7 @@
       "type": "n8n-nodes-base.sort",
       "typeVersion": 1,
       "position": [
-        1392,
+        1824,
         -656
       ],
       "id": "d8831d6a-3b0e-4654-aeb4-d4bdce65e172",
@@ -10683,7 +11597,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        1584,
+        2016,
         -656
       ],
       "id": "7f2f636f-7371-471d-9624-7ed216326ed2",
@@ -10698,7 +11612,7 @@
       "type": "n8n-nodes-base.sort",
       "typeVersion": 1,
       "position": [
-        1392,
+        1824,
         -304
       ],
       "id": "e1da3a11-ba46-4edd-bffe-e8adc0529b23",
@@ -10711,7 +11625,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        1584,
+        2016,
         -304
       ],
       "id": "15465844-76e6-4875-9936-447cf84f7330",
@@ -10726,7 +11640,7 @@
       "type": "n8n-nodes-base.sort",
       "typeVersion": 1,
       "position": [
-        1392,
+        1824,
         48
       ],
       "id": "468d00f2-0fe6-488c-8ca2-94c8586bb23e",
@@ -10739,7 +11653,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        1584,
+        2016,
         48
       ],
       "id": "3d9bd948-ce04-4b58-a138-5c46368614ae",
@@ -10757,7 +11671,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1232,
+        1648,
         -2096
       ],
       "id": "650c318e-a391-46ad-a15e-9442f516f925",
@@ -10773,8 +11687,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1168,
-        288
+        1552,
+        256
       ],
       "id": "c4dc5b9c-5161-4f10-874f-97918de5b264",
       "name": "Sticky Note16"
@@ -10789,7 +11703,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        3536,
+        3952,
         -2176
       ],
       "id": "bf557425-f0c8-44fa-9546-b591e3c38dbb",
@@ -10805,14 +11719,660 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        3472,
-        320
+        3856,
+        336
       ],
       "id": "4037226b-d0d1-43ac-8313-cf9c86c989fb",
       "name": "Sticky Note18"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "verificar",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -960,
+        -320
+      ],
+      "id": "2ac20cb8-454f-4987-bd4b-5c62b124a51f",
+      "name": "Verificar",
+      "webhookId": "bd4388b9-9b57-4c9a-8ea2-76bd7718a63c"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "26db6362-bf51-488d-8308-3cd0571d2002",
+              "name": "email",
+              "value": "={{ $json.body.email }}",
+              "type": "string"
+            },
+            {
+              "id": "2e447779-0270-414e-952e-d82f3e3c8ab7",
+              "name": "codigo",
+              "value": "={{ Math.floor(100000 + Math.random() * 900000) }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -768,
+        -320
+      ],
+      "id": "ed592eb6-110e-4dcb-9951-83b2fb1b5c44",
+      "name": "Datos Verificación"
+    },
+    {
+      "parameters": {
+        "operation": "upsert",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "Verificacion_Formulario",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "email": "={{ $('Datos Verificación').item.json.email }}",
+            "codigo": "={{ $('Datos Verificación').item.json.codigo }}",
+            "created_at": "={{ $now }}"
+          },
+          "matchingColumns": [
+            "codigo"
+          ],
+          "schema": [
+            {
+              "id": "codigo",
+              "displayName": "codigo",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -160,
+        -400
+      ],
+      "id": "09da7c8d-b3b0-491a-948c-00a479a774be",
+      "name": "Insert or update rows in a table",
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.email }}",
+        "subject": "Verificación de formulario",
+        "message": "=Se requiere la verificación del formulario para la historia de instagram, el código es: {{ $json.codigo }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        16,
+        -400
+      ],
+      "id": "877019b1-e386-4d4b-95c4-45837795351b",
+      "name": "Send a message",
+      "webhookId": "0d379bb7-8a21-4b4b-b993-d790f26f03da",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "wR7U82S8bmDH4odC",
+          "name": "info@tailwind.es"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "Correos_Autorizados_Formulario",
+          "mode": "name"
+        },
+        "where": {
+          "values": [
+            {
+              "column": "Correo",
+              "value": "={{ $json.email }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -560,
+        -320
+      ],
+      "id": "e8761aad-7a44-4444-a7fc-de8e3a18dc0f",
+      "name": "Select rows from a table",
+      "alwaysOutputData": true,
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"status\": \"error\",\n  \"message\": \"Este correo no está autorizado para modificar el parte de nieve.\"\n}",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        -160,
+        -240
+      ],
+      "id": "cd8d2f44-4df6-4836-bf8f-fa09ee0ad103",
+      "name": "Correo Inválido"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"status\": \"success\",\n  \"message\": \"Introduce el número de verificación\"\n}",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        208,
+        -400
+      ],
+      "id": "7bc18dbb-1d97-412f-b699-1107c135ade8",
+      "name": "Correo Válido"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "31781615-a9f2-4c61-9aef-6d238e70c50d",
+              "leftValue": "={{ $('Datos Verificación').item.json.email }}",
+              "rightValue": "={{ $json.Correo }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -384,
+        -320
+      ],
+      "id": "5a7c1151-d669-4274-b6ca-56a520609ecf",
+      "name": "If14"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "codigo-correcto",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -560,
+        -720
+      ],
+      "id": "13641b70-8b6a-4825-9a91-0d31edfa703e",
+      "name": "Código Correcto",
+      "webhookId": "50f1ce23-60d6-4a2c-8370-5faf4ff701cc"
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "Verificacion_Formulario",
+          "mode": "name"
+        },
+        "where": {
+          "values": [
+            {
+              "column": "codigo",
+              "value": "={{ $json.body.codigo }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -352,
+        -720
+      ],
+      "id": "56904860-9d95-4ed2-ab13-3872611ac186",
+      "name": "Select rows from a table1",
+      "alwaysOutputData": true,
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"status\": \"error\",\n  \"message\": \"Código inválido\"\n}",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        64,
+        -624
+      ],
+      "id": "8cd50408-81c1-445f-be01-f57022bc5dba",
+      "name": "Código Inválido"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "fff42cf4-1529-468c-87e3-6910c830165d",
+              "leftValue": "={{ $('Código Correcto').item.json.body.codigo }}",
+              "rightValue": "={{ $json.codigo }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -144,
+        -720
+      ],
+      "id": "0d7238bd-cd50-4980-9021-5aa24a72cb3d",
+      "name": "If15"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"status\": \"success\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        64,
+        -816
+      ],
+      "id": "16928f92-cc94-4963-a85a-bd010f5c7a23",
+      "name": "Respond to Webhook2"
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "Verificacion_Formulario",
+          "mode": "name"
+        },
+        "where": {
+          "values": [
+            {
+              "column": "codigo",
+              "value": "={{ $json.body.codigo_verificado }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -112,
+        -1216
+      ],
+      "id": "4d933cb6-d2dc-4c2f-adbc-eff2e1ab9630",
+      "name": "Comprobar Código",
+      "alwaysOutputData": true,
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "41df6326-273a-4913-b920-d942e5a85254",
+              "leftValue": "={{ $('RecibirFormulario').item.json.body.codigo_verificado }}",
+              "rightValue": "={{ $json.codigo }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        96,
+        -1216
+      ],
+      "id": "679a841b-4f9a-4198-a4ea-ac52519f1121",
+      "name": "If16"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"status\": \"Error\",\n  \"message\": \"Código Inválido\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        352,
+        -1072
+      ],
+      "id": "f89f066d-49de-440b-887d-e03d41507fb6",
+      "name": "Codigo No Válido"
+    },
+    {
+      "parameters": {
+        "unit": "minutes"
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        384,
+        -400
+      ],
+      "id": "816d529d-6883-48e2-8ca0-1ca626edcb46",
+      "name": "Esperar 5 minutos",
+      "webhookId": "724ad9f4-616e-4991-b9d8-f732c7fcdd98"
+    },
+    {
+      "parameters": {
+        "operation": "deleteTable",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "Verificacion_Formulario",
+          "mode": "list",
+          "cachedResultName": "Verificacion_Formulario"
+        },
+        "deleteCommand": "delete",
+        "where": {
+          "values": [
+            {
+              "column": "codigo",
+              "value": "={{ $('Datos Verificación').item.json.codigo }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        560,
+        -400
+      ],
+      "id": "361a3a7f-2d98-4224-81fa-4cc6deb37ec5",
+      "name": "Eliminar Codigo",
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "deleteTable",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "Verificacion_Formulario",
+          "mode": "list",
+          "cachedResultName": "Verificacion_Formulario"
+        },
+        "deleteCommand": "delete",
+        "where": {
+          "values": [
+            {
+              "column": "codigo",
+              "value": "={{ $json.codigo }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        560,
+        -1232
+      ],
+      "id": "b2d8b572-b4f1-4539-b84e-a7f70555c99f",
+      "name": "Delete table or rows",
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
+        }
+      }
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Verificar": [
+      {
+        "json": {
+          "headers": {
+            "connection": "upgrade",
+            "host": "n8n.tailwind.es",
+            "x-forwarded-for": "2.136.43.122",
+            "x-forwarded-proto": "https",
+            "content-length": "41",
+            "sec-ch-ua-platform": "\"Linux\"",
+            "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+            "sec-ch-ua": "\"Not(A:Brand\";v=\"8\", \"Chromium\";v=\"144\", \"Brave\";v=\"144\"",
+            "content-type": "application/json",
+            "sec-ch-ua-mobile": "?0",
+            "accept": "*/*",
+            "sec-gpc": "1",
+            "accept-language": "es-ES,es;q=0.8",
+            "origin": "null",
+            "sec-fetch-site": "cross-site",
+            "sec-fetch-mode": "cors",
+            "sec-fetch-dest": "empty",
+            "accept-encoding": "gzip, deflate, br, zstd"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "email": "adrianazorinsanchez@gmail.com"
+          },
+          "webhookUrl": "https://n8n.tailwind.es/webhook/verificar",
+          "executionMode": "production"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
+    "RecibirFormulario": [
+      {
+        "json": {
+          "headers": {
+            "connection": "upgrade",
+            "host": "n8n.tailwind.es",
+            "x-forwarded-for": "2.136.43.122",
+            "x-forwarded-proto": "https",
+            "content-length": "397",
+            "cache-control": "max-age=0",
+            "authorization": "Basic VGFpbHdpbmQ6c2VsdXJzaG9w",
+            "sec-ch-ua": "\"Not(A:Brand\";v=\"8\", \"Chromium\";v=\"144\", \"Brave\";v=\"144\"",
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": "\"Linux\"",
+            "origin": "null",
+            "content-type": "application/x-www-form-urlencoded",
+            "upgrade-insecure-requests": "1",
+            "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+            "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+            "sec-gpc": "1",
+            "accept-language": "es-ES,es;q=0.8",
+            "sec-fetch-site": "cross-site",
+            "sec-fetch-mode": "navigate",
+            "sec-fetch-user": "?1",
+            "sec-fetch-dest": "document",
+            "accept-encoding": "gzip, deflate, br, zstd"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "codigo_verificado": "995558",
+            "calidad_nieve": "polvo",
+            "aspecto_cielo": "NUBOSO",
+            "visibilidad": "Buena",
+            "temp_min": "1",
+            "temp_max": "5",
+            "viento_min": "10",
+            "viento_max": "30",
+            "espesor_min": "40",
+            "espesor_max": "50",
+            "remontes_abiertos": "34",
+            "km_esquiables": "300",
+            "numero_pistas": "123",
+            "pistas_abiertas[]": [
+              "Veleta",
+              "Borreguiles",
+              "Cauchiles Parador",
+              "Loma Dílar"
+            ],
+            "cuentas[]": "Sierra Nevada Granada"
+          },
+          "webhookUrl": "https://n8n.tailwind.es/webhook/recibirFormulario",
+          "executionMode": "production"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1",
     "timeSavedMode": "fixed",
@@ -10835,7 +12395,7 @@
     }
   },
   "tags": [],
-  "triggerCount": 2,
-  "updatedAt": "2026-02-19T15:08:55.314Z",
-  "versionId": "9a5b0b4a-0f39-43e3-b223-b7fd642ca2c4"
+  "triggerCount": 4,
+  "updatedAt": "2026-02-20T13:34:40.075Z",
+  "versionId": "9dee22ab-6c9f-41da-b581-401a4e897351"
 }
