@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-02-22T21:37:15.000Z",
-    "createdAt": "2026-02-22T21:37:13.373Z",
-    "versionId": "4c512790-d59f-42ca-bf51-6b842e376abe",
+    "updatedAt": "2026-02-23T19:26:58.000Z",
+    "createdAt": "2026-02-23T19:26:55.482Z",
+    "versionId": "1539db58-b94f-40e3-a7ba-40e43ee9ef44",
     "workflowId": "cnuDKnZrHmDy4QDh",
     "nodes": [
       {
@@ -273,25 +273,10 @@
       },
       {
         "parameters": {
-          "respondWith": "text",
-          "responseBody": "<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> <title>Enlace Caducado</title>\n</head>\n<body style=\"\n    margin: 0;\n    padding: 0;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;\n    background-color: #fef2f2;\n    height: 100vh;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n\">\n    <div style=\"\n        background: white;\n        padding: 30px 20px;\n        border-radius: 16px;\n        box-shadow: 0 10px 25px rgba(0,0,0,0.1);\n        width: 90%;\n        max-width: 400px;\n        text-align: center;\n        box-sizing: border-box;\n    \">\n        <div style=\"font-size: 48px; margin-bottom: 15px;\">⏳</div>\n        \n        <h1 style=\"color: #dc2626; margin: 0 0 15px 0; font-size: 24px;\">Tiempo Agotado</h1>\n        \n        <p style=\"color: #4b5563; font-size: 16px; line-height: 1.5; margin-bottom: 20px;\">\n            Este enlace de validación ha caducado porque han pasado más de 48 horas.\n        </p>\n        \n        <div style=\"background-color: #fee2e2; padding: 15px; border-radius: 8px; color: #991b1b; font-size: 14px; line-height: 1.4;\">\n            🔒 Por seguridad, los documentos ya no pueden ser procesados mediante este link.\n        </div>\n    </div>\n</body>\n</html>",
-          "options": {}
-        },
-        "type": "n8n-nodes-base.respondToWebhook",
-        "typeVersion": 1.5,
-        "position": [
-          80,
-          752
-        ],
-        "id": "201815e8-520f-4f99-a1dc-389365815099",
-        "name": "Respond to Webhook2"
-      },
-      {
-        "parameters": {
           "authentication": "headerAuth",
           "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
           "query": "query findCustomer($busqueda_shopify: String!) {\n  customers(first: 1, query: $busqueda_shopify) {\n    edges {\n      node {\n        id\n        tags\n        email\n        phone\n      }\n    }\n  }\n}",
-          "variables": "={\n  \"busqueda_shopify\": \"{{ [ $json['mi_email'] ? 'email:' + $json['mi_email'] : null, $json['mi_telefono'] ? 'phone:' + $json['mi_telefono'] : null ].filter(v => v).join(' OR ') }}\"\n}"
+          "variables": "={\n  \"busqueda_shopify\": \"{{ [ $json.mi_email ? 'email:\\\\\"' + $json.mi_email.trim() + '\\\\\"' : null, $json.mi_telefono ? 'phone:\\\\\"' + $json.mi_telefono.trim() + '\\\\\"' : null ].filter(v => v).join(' OR ') }}\"\n}"
         },
         "type": "n8n-nodes-base.graphql",
         "typeVersion": 1.1,
@@ -1084,6 +1069,29 @@
       },
       {
         "parameters": {
+          "sendTo": "={{ $('Webhook_Rechazo').item.json.query.email }}",
+          "subject": "📄 Actualización sobre tu solicitud: Cuenta Profesional Rules Shop",
+          "message": "=<div style=\"background-color: #f3f4f6; padding: 40px 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333333;\">     <div style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05);\">                  <div style=\"background-color: #000000; padding: 20px; text-align: center;\">             <h1 style=\"color: #ffffff; margin: 0; font-size: 24px;\">Rules Shop PRO 🏂</h1>         </div>          <div style=\"padding: 40px 30px;\">             <p style=\"font-size: 18px; line-height: 1.6;\">Hola <strong>{{ $('Webhook_Rechazo').item.json.query.nombre }} {{ $('Webhook_Rechazo').item.json.query.apellido }}</strong>,</p>                          <p style=\"font-size: 16px; line-height: 1.6; color: #4b5563;\">                 Gracias por tu interés en formar parte del programa de profesionales de Rules Shop y por enviarnos tu documentación.             </p>                          <p style=\"font-size: 16px; line-height: 1.6; color: #4b5563;\">                 Nuestro equipo ha revisado tu solicitud detalladamente. En esta ocasión, <strong>no hemos podido validar tu perfil</strong> para acceder a las tarifas especiales del programa PRO.             </p>              <div style=\"background-color: #fef2f2; border: 1px solid #fecaca; border-radius: 6px; padding: 20px; margin: 25px 0; text-align: center;\">                 <p style=\"margin: 0; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: #991b1b;\">Estado de la solicitud</p>                 <div style=\"font-size: 24px; font-weight: bold; color: #dc2626; margin: 10px 0;\">NO APROBADA ✋</div>                 <p style=\"font-size: 14px; color: #7f1d1d; margin: 0;\">La documentación aportada no cumple con los requisitos actuales.</p>             </div>              <div style=\"background-color: #f9fafb; padding: 20px; border-radius: 6px; font-size: 13px; color: #6b7280; border-left: 4px solid #9ca3af;\">                 <h3 style=\"margin-top: 0; color: #374151; font-size: 14px;\">¿Crees que es un error?</h3>                 <p style=\"margin: 0; line-height: 1.5;\">                     Si consideras que ha habido una equivocación o dispones de documentación actualizada (Título vigente o Vida laboral reciente), te invitamos a responder a este correo adjuntando los nuevos archivos para una segunda revisión.                 </p>             </div>              <p style=\"margin-top: 30px; font-size: 16px;\">                 Sigues siendo bienvenido en nuestra tienda y comunidad. ¡Esperamos verte pronto disfrutando de la temporada!             </p>                          <p style=\"margin-top: 30px; font-size: 16px;\">Un saludo,</p>             <p style=\"font-style: italic; color: #6b7280;\">El equipo de Rules Shop.</p>         </div>                  <div style=\"background-color: #f3f4f6; padding: 20px; text-align: center; font-size: 12px; color: #9ca3af;\">             <p style=\"margin: 0;\">&copy; Rules Shop. Sierra Nevada.</p>         </div>     </div> </div>",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.gmail",
+        "typeVersion": 2.2,
+        "position": [
+          -176,
+          224
+        ],
+        "id": "c9912fa2-cc18-4db1-9231-145065f20e91",
+        "name": "no_aprobado1",
+        "webhookId": "a8ec28c0-85f5-441d-9bcd-a3152df9be95",
+        "credentials": {
+          "gmailOAuth2": {
+            "id": "2piqh63wCF24vapD",
+            "name": "profesionales@rules-shop.es"
+          }
+        }
+      },
+      {
+        "parameters": {
           "sendTo": "={{ $json.query.email }}",
           "subject": "📄 Actualización sobre tu solicitud: Cuenta Profesional Rules Shop",
           "message": "=<div style=\"background-color: #f3f4f6; padding: 40px 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333333;\">     <div style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05);\">                  <div style=\"background-color: #000000; padding: 20px; text-align: center;\">             <h1 style=\"color: #ffffff; margin: 0; font-size: 24px;\">Rules Shop PRO 🏂</h1>         </div>          <div style=\"padding: 40px 30px;\">             <p style=\"font-size: 18px; line-height: 1.6;\">Hola <strong>{{ $json.query.nombre }} {{ $json.query.apellido }}</strong>,</p>                          <p style=\"font-size: 16px; line-height: 1.6; color: #4b5563;\">                 Gracias por tu interés en formar parte del programa de profesionales de Rules Shop y por enviarnos tu documentación.             </p>                          <p style=\"font-size: 16px; line-height: 1.6; color: #4b5563;\">                 Nuestro equipo ha revisado tu solicitud detalladamente. En esta ocasión, <strong>no hemos podido validar tu perfil</strong> para acceder a las tarifas especiales del programa PRO.             </p>              <div style=\"background-color: #fef2f2; border: 1px solid #fecaca; border-radius: 6px; padding: 20px; margin: 25px 0; text-align: center;\">                 <p style=\"margin: 0; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: #991b1b;\">Estado de la solicitud</p>                 <div style=\"font-size: 24px; font-weight: bold; color: #dc2626; margin: 10px 0;\">NO APROBADA ✋</div>                 <p style=\"font-size: 14px; color: #7f1d1d; margin: 0;\">La documentación aportada no cumple con los requisitos actuales.</p>             </div>              <div style=\"background-color: #f9fafb; padding: 20px; border-radius: 6px; font-size: 13px; color: #6b7280; border-left: 4px solid #9ca3af;\">                 <h3 style=\"margin-top: 0; color: #374151; font-size: 14px;\">¿Crees que es un error?</h3>                 <p style=\"margin: 0; line-height: 1.5;\">                     Si consideras que ha habido una equivocación o dispones de documentación actualizada (Título vigente o Vida laboral reciente), te invitamos a responder a este correo adjuntando los nuevos archivos para una segunda revisión.                 </p>             </div>              <p style=\"margin-top: 30px; font-size: 16px;\">                 Sigues siendo bienvenido en nuestra tienda y comunidad. ¡Esperamos verte pronto disfrutando de la temporada!             </p>                          <p style=\"margin-top: 30px; font-size: 16px;\">Un saludo,</p>             <p style=\"font-style: italic; color: #6b7280;\">El equipo de Rules Shop.</p>         </div>                  <div style=\"background-color: #f3f4f6; padding: 20px; text-align: center; font-size: 12px; color: #9ca3af;\">             <p style=\"margin: 0;\">&copy; Rules Shop. Sierra Nevada.</p>         </div>     </div> </div>",
@@ -1107,26 +1115,18 @@
       },
       {
         "parameters": {
-          "sendTo": "={{ $('Webhook_Rechazo').item.json.query.email }}",
-          "subject": "📄 Actualización sobre tu solicitud: Cuenta Profesional Rules Shop",
-          "message": "=<div style=\"background-color: #f3f4f6; padding: 40px 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333333;\">     <div style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05);\">                  <div style=\"background-color: #000000; padding: 20px; text-align: center;\">             <h1 style=\"color: #ffffff; margin: 0; font-size: 24px;\">Rules Shop PRO 🏂</h1>         </div>          <div style=\"padding: 40px 30px;\">             <p style=\"font-size: 18px; line-height: 1.6;\">Hola <strong>{{ $('Webhook_Rechazo').item.json.query.nombre }} {{ $('Webhook_Rechazo').item.json.query.apellido }}</strong>,</p>                          <p style=\"font-size: 16px; line-height: 1.6; color: #4b5563;\">                 Gracias por tu interés en formar parte del programa de profesionales de Rules Shop y por enviarnos tu documentación.             </p>                          <p style=\"font-size: 16px; line-height: 1.6; color: #4b5563;\">                 Nuestro equipo ha revisado tu solicitud detalladamente. En esta ocasión, <strong>no hemos podido validar tu perfil</strong> para acceder a las tarifas especiales del programa PRO.             </p>              <div style=\"background-color: #fef2f2; border: 1px solid #fecaca; border-radius: 6px; padding: 20px; margin: 25px 0; text-align: center;\">                 <p style=\"margin: 0; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: #991b1b;\">Estado de la solicitud</p>                 <div style=\"font-size: 24px; font-weight: bold; color: #dc2626; margin: 10px 0;\">NO APROBADA ✋</div>                 <p style=\"font-size: 14px; color: #7f1d1d; margin: 0;\">La documentación aportada no cumple con los requisitos actuales.</p>             </div>              <div style=\"background-color: #f9fafb; padding: 20px; border-radius: 6px; font-size: 13px; color: #6b7280; border-left: 4px solid #9ca3af;\">                 <h3 style=\"margin-top: 0; color: #374151; font-size: 14px;\">¿Crees que es un error?</h3>                 <p style=\"margin: 0; line-height: 1.5;\">                     Si consideras que ha habido una equivocación o dispones de documentación actualizada (Título vigente o Vida laboral reciente), te invitamos a responder a este correo adjuntando los nuevos archivos para una segunda revisión.                 </p>             </div>              <p style=\"margin-top: 30px; font-size: 16px;\">                 Sigues siendo bienvenido en nuestra tienda y comunidad. ¡Esperamos verte pronto disfrutando de la temporada!             </p>                          <p style=\"margin-top: 30px; font-size: 16px;\">Un saludo,</p>             <p style=\"font-style: italic; color: #6b7280;\">El equipo de Rules Shop.</p>         </div>                  <div style=\"background-color: #f3f4f6; padding: 20px; text-align: center; font-size: 12px; color: #9ca3af;\">             <p style=\"margin: 0;\">&copy; Rules Shop. Sierra Nevada.</p>         </div>     </div> </div>",
+          "respondWith": "text",
+          "responseBody": "<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> <title>Enlace Caducado</title>\n</head>\n<body style=\"\n    margin: 0;\n    padding: 0;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;\n    background-color: #fef2f2;\n    height: 100vh;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n\">\n    <div style=\"\n        background: white;\n        padding: 30px 20px;\n        border-radius: 16px;\n        box-shadow: 0 10px 25px rgba(0,0,0,0.1);\n        width: 90%;\n        max-width: 400px;\n        text-align: center;\n        box-sizing: border-box;\n    \">\n        <div style=\"font-size: 48px; margin-bottom: 15px;\">⏳</div>\n        \n        <h1 style=\"color: #dc2626; margin: 0 0 15px 0; font-size: 24px;\">Tiempo Agotado</h1>\n        \n        <p style=\"color: #4b5563; font-size: 16px; line-height: 1.5; margin-bottom: 20px;\">\n            Este enlace de validación ha caducado porque han pasado más de 48 horas.\n        </p>\n        \n        <div style=\"background-color: #fee2e2; padding: 15px; border-radius: 8px; color: #991b1b; font-size: 14px; line-height: 1.4;\">\n            🔒 Por seguridad, los documentos ya no pueden ser procesados mediante este link.\n        </div>\n    </div>\n</body>\n</html>",
           "options": {}
         },
-        "type": "n8n-nodes-base.gmail",
-        "typeVersion": 2.2,
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.5,
         "position": [
-          -176,
-          224
+          80,
+          752
         ],
-        "id": "c9912fa2-cc18-4db1-9231-145065f20e91",
-        "name": "no_aprobado1",
-        "webhookId": "a8ec28c0-85f5-441d-9bcd-a3152df9be95",
-        "credentials": {
-          "gmailOAuth2": {
-            "id": "2piqh63wCF24vapD",
-            "name": "profesionales@rules-shop.es"
-          }
-        }
+        "id": "201815e8-520f-4f99-a1dc-389365815099",
+        "name": "Respond to Webhook2"
       }
     ],
     "connections": {
@@ -1365,17 +1365,6 @@
           ]
         ]
       },
-      "no_aprobado": {
-        "main": [
-          [
-            {
-              "node": "Respond to Webhook2",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
       "no_aprobado1": {
         "main": [
           [
@@ -1386,14 +1375,25 @@
             }
           ]
         ]
+      },
+      "no_aprobado": {
+        "main": [
+          [
+            {
+              "node": "Respond to Webhook2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version 4c512790",
+    "name": "Version 1539db58",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "4c512790-d59f-42ca-bf51-6b842e376abe",
+  "activeVersionId": "1539db58-b94f-40e3-a7ba-40e43ee9ef44",
   "connections": {
     "Google Sheets Trigger": {
       "main": [
@@ -1630,22 +1630,22 @@
         ]
       ]
     },
-    "no_aprobado": {
+    "no_aprobado1": {
       "main": [
         [
           {
-            "node": "Respond to Webhook2",
+            "node": "Respond to Webhook5",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "no_aprobado1": {
+    "no_aprobado": {
       "main": [
         [
           {
-            "node": "Respond to Webhook5",
+            "node": "Respond to Webhook2",
             "type": "main",
             "index": 0
           }
@@ -1928,25 +1928,10 @@
     },
     {
       "parameters": {
-        "respondWith": "text",
-        "responseBody": "<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> <title>Enlace Caducado</title>\n</head>\n<body style=\"\n    margin: 0;\n    padding: 0;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;\n    background-color: #fef2f2;\n    height: 100vh;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n\">\n    <div style=\"\n        background: white;\n        padding: 30px 20px;\n        border-radius: 16px;\n        box-shadow: 0 10px 25px rgba(0,0,0,0.1);\n        width: 90%;\n        max-width: 400px;\n        text-align: center;\n        box-sizing: border-box;\n    \">\n        <div style=\"font-size: 48px; margin-bottom: 15px;\">⏳</div>\n        \n        <h1 style=\"color: #dc2626; margin: 0 0 15px 0; font-size: 24px;\">Tiempo Agotado</h1>\n        \n        <p style=\"color: #4b5563; font-size: 16px; line-height: 1.5; margin-bottom: 20px;\">\n            Este enlace de validación ha caducado porque han pasado más de 48 horas.\n        </p>\n        \n        <div style=\"background-color: #fee2e2; padding: 15px; border-radius: 8px; color: #991b1b; font-size: 14px; line-height: 1.4;\">\n            🔒 Por seguridad, los documentos ya no pueden ser procesados mediante este link.\n        </div>\n    </div>\n</body>\n</html>",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.respondToWebhook",
-      "typeVersion": 1.5,
-      "position": [
-        80,
-        752
-      ],
-      "id": "201815e8-520f-4f99-a1dc-389365815099",
-      "name": "Respond to Webhook2"
-    },
-    {
-      "parameters": {
         "authentication": "headerAuth",
         "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
         "query": "query findCustomer($busqueda_shopify: String!) {\n  customers(first: 1, query: $busqueda_shopify) {\n    edges {\n      node {\n        id\n        tags\n        email\n        phone\n      }\n    }\n  }\n}",
-        "variables": "={\n  \"busqueda_shopify\": \"{{ [ $json['mi_email'] ? 'email:' + $json['mi_email'] : null, $json['mi_telefono'] ? 'phone:' + $json['mi_telefono'] : null ].filter(v => v).join(' OR ') }}\"\n}"
+        "variables": "={\n  \"busqueda_shopify\": \"{{ [ $json.mi_email ? 'email:\\\\\"' + $json.mi_email.trim() + '\\\\\"' : null, $json.mi_telefono ? 'phone:\\\\\"' + $json.mi_telefono.trim() + '\\\\\"' : null ].filter(v => v).join(' OR ') }}\"\n}"
       },
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
@@ -2739,6 +2724,29 @@
     },
     {
       "parameters": {
+        "sendTo": "={{ $('Webhook_Rechazo').item.json.query.email }}",
+        "subject": "📄 Actualización sobre tu solicitud: Cuenta Profesional Rules Shop",
+        "message": "=<div style=\"background-color: #f3f4f6; padding: 40px 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333333;\">     <div style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05);\">                  <div style=\"background-color: #000000; padding: 20px; text-align: center;\">             <h1 style=\"color: #ffffff; margin: 0; font-size: 24px;\">Rules Shop PRO 🏂</h1>         </div>          <div style=\"padding: 40px 30px;\">             <p style=\"font-size: 18px; line-height: 1.6;\">Hola <strong>{{ $('Webhook_Rechazo').item.json.query.nombre }} {{ $('Webhook_Rechazo').item.json.query.apellido }}</strong>,</p>                          <p style=\"font-size: 16px; line-height: 1.6; color: #4b5563;\">                 Gracias por tu interés en formar parte del programa de profesionales de Rules Shop y por enviarnos tu documentación.             </p>                          <p style=\"font-size: 16px; line-height: 1.6; color: #4b5563;\">                 Nuestro equipo ha revisado tu solicitud detalladamente. En esta ocasión, <strong>no hemos podido validar tu perfil</strong> para acceder a las tarifas especiales del programa PRO.             </p>              <div style=\"background-color: #fef2f2; border: 1px solid #fecaca; border-radius: 6px; padding: 20px; margin: 25px 0; text-align: center;\">                 <p style=\"margin: 0; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: #991b1b;\">Estado de la solicitud</p>                 <div style=\"font-size: 24px; font-weight: bold; color: #dc2626; margin: 10px 0;\">NO APROBADA ✋</div>                 <p style=\"font-size: 14px; color: #7f1d1d; margin: 0;\">La documentación aportada no cumple con los requisitos actuales.</p>             </div>              <div style=\"background-color: #f9fafb; padding: 20px; border-radius: 6px; font-size: 13px; color: #6b7280; border-left: 4px solid #9ca3af;\">                 <h3 style=\"margin-top: 0; color: #374151; font-size: 14px;\">¿Crees que es un error?</h3>                 <p style=\"margin: 0; line-height: 1.5;\">                     Si consideras que ha habido una equivocación o dispones de documentación actualizada (Título vigente o Vida laboral reciente), te invitamos a responder a este correo adjuntando los nuevos archivos para una segunda revisión.                 </p>             </div>              <p style=\"margin-top: 30px; font-size: 16px;\">                 Sigues siendo bienvenido en nuestra tienda y comunidad. ¡Esperamos verte pronto disfrutando de la temporada!             </p>                          <p style=\"margin-top: 30px; font-size: 16px;\">Un saludo,</p>             <p style=\"font-style: italic; color: #6b7280;\">El equipo de Rules Shop.</p>         </div>                  <div style=\"background-color: #f3f4f6; padding: 20px; text-align: center; font-size: 12px; color: #9ca3af;\">             <p style=\"margin: 0;\">&copy; Rules Shop. Sierra Nevada.</p>         </div>     </div> </div>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -176,
+        224
+      ],
+      "id": "c9912fa2-cc18-4db1-9231-145065f20e91",
+      "name": "no_aprobado1",
+      "webhookId": "a8ec28c0-85f5-441d-9bcd-a3152df9be95",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "2piqh63wCF24vapD",
+          "name": "profesionales@rules-shop.es"
+        }
+      }
+    },
+    {
+      "parameters": {
         "sendTo": "={{ $json.query.email }}",
         "subject": "📄 Actualización sobre tu solicitud: Cuenta Profesional Rules Shop",
         "message": "=<div style=\"background-color: #f3f4f6; padding: 40px 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333333;\">     <div style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05);\">                  <div style=\"background-color: #000000; padding: 20px; text-align: center;\">             <h1 style=\"color: #ffffff; margin: 0; font-size: 24px;\">Rules Shop PRO 🏂</h1>         </div>          <div style=\"padding: 40px 30px;\">             <p style=\"font-size: 18px; line-height: 1.6;\">Hola <strong>{{ $json.query.nombre }} {{ $json.query.apellido }}</strong>,</p>                          <p style=\"font-size: 16px; line-height: 1.6; color: #4b5563;\">                 Gracias por tu interés en formar parte del programa de profesionales de Rules Shop y por enviarnos tu documentación.             </p>                          <p style=\"font-size: 16px; line-height: 1.6; color: #4b5563;\">                 Nuestro equipo ha revisado tu solicitud detalladamente. En esta ocasión, <strong>no hemos podido validar tu perfil</strong> para acceder a las tarifas especiales del programa PRO.             </p>              <div style=\"background-color: #fef2f2; border: 1px solid #fecaca; border-radius: 6px; padding: 20px; margin: 25px 0; text-align: center;\">                 <p style=\"margin: 0; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: #991b1b;\">Estado de la solicitud</p>                 <div style=\"font-size: 24px; font-weight: bold; color: #dc2626; margin: 10px 0;\">NO APROBADA ✋</div>                 <p style=\"font-size: 14px; color: #7f1d1d; margin: 0;\">La documentación aportada no cumple con los requisitos actuales.</p>             </div>              <div style=\"background-color: #f9fafb; padding: 20px; border-radius: 6px; font-size: 13px; color: #6b7280; border-left: 4px solid #9ca3af;\">                 <h3 style=\"margin-top: 0; color: #374151; font-size: 14px;\">¿Crees que es un error?</h3>                 <p style=\"margin: 0; line-height: 1.5;\">                     Si consideras que ha habido una equivocación o dispones de documentación actualizada (Título vigente o Vida laboral reciente), te invitamos a responder a este correo adjuntando los nuevos archivos para una segunda revisión.                 </p>             </div>              <p style=\"margin-top: 30px; font-size: 16px;\">                 Sigues siendo bienvenido en nuestra tienda y comunidad. ¡Esperamos verte pronto disfrutando de la temporada!             </p>                          <p style=\"margin-top: 30px; font-size: 16px;\">Un saludo,</p>             <p style=\"font-style: italic; color: #6b7280;\">El equipo de Rules Shop.</p>         </div>                  <div style=\"background-color: #f3f4f6; padding: 20px; text-align: center; font-size: 12px; color: #9ca3af;\">             <p style=\"margin: 0;\">&copy; Rules Shop. Sierra Nevada.</p>         </div>     </div> </div>",
@@ -2762,29 +2770,57 @@
     },
     {
       "parameters": {
-        "sendTo": "={{ $('Webhook_Rechazo').item.json.query.email }}",
-        "subject": "📄 Actualización sobre tu solicitud: Cuenta Profesional Rules Shop",
-        "message": "=<div style=\"background-color: #f3f4f6; padding: 40px 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333333;\">     <div style=\"max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05);\">                  <div style=\"background-color: #000000; padding: 20px; text-align: center;\">             <h1 style=\"color: #ffffff; margin: 0; font-size: 24px;\">Rules Shop PRO 🏂</h1>         </div>          <div style=\"padding: 40px 30px;\">             <p style=\"font-size: 18px; line-height: 1.6;\">Hola <strong>{{ $('Webhook_Rechazo').item.json.query.nombre }} {{ $('Webhook_Rechazo').item.json.query.apellido }}</strong>,</p>                          <p style=\"font-size: 16px; line-height: 1.6; color: #4b5563;\">                 Gracias por tu interés en formar parte del programa de profesionales de Rules Shop y por enviarnos tu documentación.             </p>                          <p style=\"font-size: 16px; line-height: 1.6; color: #4b5563;\">                 Nuestro equipo ha revisado tu solicitud detalladamente. En esta ocasión, <strong>no hemos podido validar tu perfil</strong> para acceder a las tarifas especiales del programa PRO.             </p>              <div style=\"background-color: #fef2f2; border: 1px solid #fecaca; border-radius: 6px; padding: 20px; margin: 25px 0; text-align: center;\">                 <p style=\"margin: 0; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: #991b1b;\">Estado de la solicitud</p>                 <div style=\"font-size: 24px; font-weight: bold; color: #dc2626; margin: 10px 0;\">NO APROBADA ✋</div>                 <p style=\"font-size: 14px; color: #7f1d1d; margin: 0;\">La documentación aportada no cumple con los requisitos actuales.</p>             </div>              <div style=\"background-color: #f9fafb; padding: 20px; border-radius: 6px; font-size: 13px; color: #6b7280; border-left: 4px solid #9ca3af;\">                 <h3 style=\"margin-top: 0; color: #374151; font-size: 14px;\">¿Crees que es un error?</h3>                 <p style=\"margin: 0; line-height: 1.5;\">                     Si consideras que ha habido una equivocación o dispones de documentación actualizada (Título vigente o Vida laboral reciente), te invitamos a responder a este correo adjuntando los nuevos archivos para una segunda revisión.                 </p>             </div>              <p style=\"margin-top: 30px; font-size: 16px;\">                 Sigues siendo bienvenido en nuestra tienda y comunidad. ¡Esperamos verte pronto disfrutando de la temporada!             </p>                          <p style=\"margin-top: 30px; font-size: 16px;\">Un saludo,</p>             <p style=\"font-style: italic; color: #6b7280;\">El equipo de Rules Shop.</p>         </div>                  <div style=\"background-color: #f3f4f6; padding: 20px; text-align: center; font-size: 12px; color: #9ca3af;\">             <p style=\"margin: 0;\">&copy; Rules Shop. Sierra Nevada.</p>         </div>     </div> </div>",
+        "respondWith": "text",
+        "responseBody": "<!DOCTYPE html>\n<html>\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"> <title>Enlace Caducado</title>\n</head>\n<body style=\"\n    margin: 0;\n    padding: 0;\n    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;\n    background-color: #fef2f2;\n    height: 100vh;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n\">\n    <div style=\"\n        background: white;\n        padding: 30px 20px;\n        border-radius: 16px;\n        box-shadow: 0 10px 25px rgba(0,0,0,0.1);\n        width: 90%;\n        max-width: 400px;\n        text-align: center;\n        box-sizing: border-box;\n    \">\n        <div style=\"font-size: 48px; margin-bottom: 15px;\">⏳</div>\n        \n        <h1 style=\"color: #dc2626; margin: 0 0 15px 0; font-size: 24px;\">Tiempo Agotado</h1>\n        \n        <p style=\"color: #4b5563; font-size: 16px; line-height: 1.5; margin-bottom: 20px;\">\n            Este enlace de validación ha caducado porque han pasado más de 48 horas.\n        </p>\n        \n        <div style=\"background-color: #fee2e2; padding: 15px; border-radius: 8px; color: #991b1b; font-size: 14px; line-height: 1.4;\">\n            🔒 Por seguridad, los documentos ya no pueden ser procesados mediante este link.\n        </div>\n    </div>\n</body>\n</html>",
         "options": {}
       },
-      "type": "n8n-nodes-base.gmail",
-      "typeVersion": 2.2,
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
       "position": [
-        -176,
-        224
+        80,
+        752
       ],
-      "id": "c9912fa2-cc18-4db1-9231-145065f20e91",
-      "name": "no_aprobado1",
-      "webhookId": "a8ec28c0-85f5-441d-9bcd-a3152df9be95",
-      "credentials": {
-        "gmailOAuth2": {
-          "id": "2piqh63wCF24vapD",
-          "name": "profesionales@rules-shop.es"
-        }
-      }
+      "id": "201815e8-520f-4f99-a1dc-389365815099",
+      "name": "Respond to Webhook2"
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Webhook_Aprobado": [
+      {
+        "json": {
+          "headers": {
+            "connection": "upgrade",
+            "host": "n8n.tailwind.es",
+            "x-forwarded-for": "37.10.133.8",
+            "x-forwarded-proto": "https",
+            "sec-fetch-dest": "document",
+            "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.3 Mobile/15E148 Safari/604.1",
+            "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+            "referer": "https://n8n.tailwind.es/webhook/gestion-profesor?email=ernesto@coentorno.com&nombre=Ernesto&apellido=Perez%20G%C3%B3mez&telefono=%2B34625388494&expiracion=1772045138235",
+            "sec-fetch-site": "cross-site",
+            "sec-fetch-mode": "navigate",
+            "accept-language": "es-ES,es;q=0.9",
+            "priority": "u=0, i",
+            "accept-encoding": "gzip, deflate, br, zstd"
+          },
+          "params": {},
+          "query": {
+            "email": "ernesto@coentorno.com",
+            "nombre": "Ernesto",
+            "apellido": "Perez Gómez",
+            "telefono": " 34625388494",
+            "expiracion": "1772045138235"
+          },
+          "body": {},
+          "webhookUrl": "https://n8n.tailwind.es/webhook/aprobar-profesor",
+          "executionMode": "production"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1",
     "timeSavedMode": "fixed",
@@ -2810,11 +2846,11 @@
     "node:Google Sheets Trigger": {
       "documentId": "16auxC5pQ4ydDh1LxCKiPC5ClQ1WCN3R5ogY1Smmbm4c",
       "sheetId": 512939465,
-      "lastIndexChecked": 15
+      "lastIndexChecked": 16
     }
   },
   "tags": [],
   "triggerCount": 4,
-  "updatedAt": "2026-02-22T21:37:13.372Z",
-  "versionId": "4c512790-d59f-42ca-bf51-6b842e376abe"
+  "updatedAt": "2026-02-23T19:26:55.480Z",
+  "versionId": "1539db58-b94f-40e3-a7ba-40e43ee9ef44"
 }
