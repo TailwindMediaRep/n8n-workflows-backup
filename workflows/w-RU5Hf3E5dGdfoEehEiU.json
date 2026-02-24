@@ -1,15 +1,15 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-02-20T11:32:15.000Z",
-    "createdAt": "2026-02-20T11:32:06.124Z",
-    "versionId": "5f81594e-1701-4ff7-922e-260bd6b19c8a",
+    "updatedAt": "2026-02-23T09:17:47.000Z",
+    "createdAt": "2026-02-23T09:17:45.607Z",
+    "versionId": "3c6505d5-eef4-4e37-930a-86ae5aaa1fd5",
     "workflowId": "w-RU5Hf3E5dGdfoEehEiU",
     "nodes": [
       {
         "parameters": {
           "httpMethod": "POST",
-          "path": "venta-descuento-10",
+          "path": "10descuento",
           "options": {}
         },
         "type": "n8n-nodes-base.webhook",
@@ -153,8 +153,7 @@
       },
       {
         "parameters": {
-          "httpMethod": "POST",
-          "path": "comprobar-descuento",
+          "path": "validar-qr",
           "responseMode": "responseNode",
           "options": {}
         },
@@ -172,7 +171,16 @@
         "parameters": {
           "respondWith": "text",
           "responseBody": "<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Validar Descuento</title>\n    <style>\n        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; background-color: #f4f6f8; }\n        button { display: block; width: 80%; margin: 10px auto; padding: 15px; font-size: 18px; border-radius: 8px; border: none; background-color: #000; color: white; cursor: pointer; }\n        .success { color: #28a745; font-size: 40px; font-weight: bold; }\n        .error { color: #dc3545; font-size: 40px; font-weight: bold; }\n    </style>\n</head>\n<body>\n\n    <div id=\"setup\" style=\"display:none;\">\n        <h3>Configuración Inicial (Solo 1 vez)</h3>\n        <p>¿Qué sucursal es esta tablet?</p>\n        <button onclick=\"guardarSucursal('sucursal_rules-shop-oakley')\">Oakley</button>\n        <button onclick=\"guardarSucursal('sucursal_rules-shop-thenorthface')\">The North Face</button>\n        <button onclick=\"guardarSucursal('sucursal_rules-shop')\">Rules Shop</button>\n        <button onclick=\"guardarSucursal('sucursal_surfin')\">Surfin</button>\n        <button onclick=\"guardarSucursal('sucursal_nuance')\">Nuance</button>\n        <button onclick=\"guardarSucursal('sucursal_nuance-lodge')\">Nuance Lodge</button>\n        <button onclick=\"guardarSucursal('sucursal_melia')\">Melia</button>\n    </div>\n\n    <div id=\"loading\"><h2>Validando...</h2></div>\n    <div id=\"result\"></div>\n\n    <script>\n        const urlParams = new URLSearchParams(window.location.search);\n        const orden = urlParams.get('orden');\n        let sucursalGuardada = localStorage.getItem('mi_sucursal');\n\n        if (!sucursalGuardada) {\n            document.getElementById('setup').style.display = 'block';\n            document.getElementById('loading').style.display = 'none';\n        } else {\n            enviarValidacion(orden, sucursalGuardada);\n        }\n\n        function guardarSucursal(nombreSucursal) {\n            localStorage.setItem('mi_sucursal', nombreSucursal);\n            document.getElementById('setup').style.display = 'none';\n            document.getElementById('loading').style.display = 'block';\n            enviarValidacion(orden, nombreSucursal);\n        }\n\n        function enviarValidacion(ordenId, sucursalId) {\n            // REEMPLAZA ESTA URL POR LA DE TU WEBHOOK 2 (comprobar-descuento)\n            fetch('https://n8n.tailwind.es/webhook/comprobar-descuento', {\n                method: 'POST',\n                headers: { 'Content-Type': 'application/json' },\n                body: JSON.stringify({ orden: ordenId, sucursal: sucursalId })\n            })\n            .then(res => res.json())\n            .then(data => {\n                document.getElementById('loading').style.display = 'none';\n                let div = document.getElementById('result');\n                if(data.status === 'VALIDO') {\n                    div.innerHTML = '<div class=\"success\">✅ VÁLIDO</div><p>Aplica 10% en caja.</p>';\n                } else {\n                    div.innerHTML = '<div class=\"error\">❌ INVÁLIDO</div><p>Este cliente ya usó la promoción aquí o el código no existe.</p>';\n                }\n            })\n            .catch(err => alert(\"Error de conexión.\"));\n        }\n    </script>\n</body>\n</html>",
-          "options": {}
+          "options": {
+            "responseHeaders": {
+              "entries": [
+                {
+                  "name": "Content-Type",
+                  "value": "text/html"
+                }
+              ]
+            }
+          }
         },
         "type": "n8n-nodes-base.respondToWebhook",
         "typeVersion": 1.5,
@@ -210,8 +218,8 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          -16,
-          160
+          -224,
+          352
         ],
         "id": "1ba7c7bc-32e5-45d2-a48c-b74170389604",
         "name": "Select rows from a table",
@@ -221,6 +229,82 @@
             "name": "Postgres Supabase"
           }
         }
+      },
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "comprobar-descuento",
+          "responseMode": "responseNode",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -432,
+          352
+        ],
+        "id": "a170fc5f-c398-4822-bfb5-f9bcbc86ce02",
+        "name": "Webhook2",
+        "webhookId": "4a20f085-ab2e-4984-8709-54906870232e"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "81a7c4d8-a46a-4a9c-9f09-bf051092296b",
+                "leftValue": "={{ $json[$('Webhook2').item.json.body.sucursal] }}",
+                "rightValue": false,
+                "operator": {
+                  "type": "boolean",
+                  "operation": "equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          -16,
+          352
+        ],
+        "id": "335e3747-ad7d-41f9-be8e-796a274414f1",
+        "name": "If"
+      },
+      {
+        "parameters": {
+          "options": {}
+        },
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.5,
+        "position": [
+          192,
+          256
+        ],
+        "id": "78f21ef0-01bd-4e72-87cb-60b6d6f0aa5c",
+        "name": "Respond to Webhook1"
+      },
+      {
+        "parameters": {
+          "options": {}
+        },
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.5,
+        "position": [
+          192,
+          448
+        ],
+        "id": "4913396c-c831-42d9-bdf6-bc5bca87e31e",
+        "name": "Respond to Webhook2"
       }
     ],
     "connections": {
@@ -253,6 +337,11 @@
       },
       "Respond to Webhook": {
         "main": [
+          []
+        ]
+      },
+      "Webhook2": {
+        "main": [
           [
             {
               "node": "Select rows from a table",
@@ -261,14 +350,43 @@
             }
           ]
         ]
+      },
+      "Select rows from a table": {
+        "main": [
+          [
+            {
+              "node": "If",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If": {
+        "main": [
+          [
+            {
+              "node": "Respond to Webhook1",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Respond to Webhook2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version 5f81594e",
+    "name": "Version 3c6505d5",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "5f81594e-1701-4ff7-922e-260bd6b19c8a",
+  "activeVersionId": "3c6505d5-eef4-4e37-930a-86ae5aaa1fd5",
   "connections": {
     "Webhook": {
       "main": [
@@ -354,7 +472,7 @@
     {
       "parameters": {
         "httpMethod": "POST",
-        "path": "venta-descuento-10",
+        "path": "10descuento",
         "options": {}
       },
       "type": "n8n-nodes-base.webhook",
@@ -668,7 +786,7 @@
   ],
   "staticData": null,
   "tags": [],
-  "triggerCount": 2,
-  "updatedAt": "2026-02-20T11:45:47.360Z",
-  "versionId": "060f0f85-187e-4ab8-a06e-d5b9c35259e2"
+  "triggerCount": 3,
+  "updatedAt": "2026-02-23T09:17:45.605Z",
+  "versionId": "3c6505d5-eef4-4e37-930a-86ae5aaa1fd5"
 }
