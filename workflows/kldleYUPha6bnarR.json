@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-02-20T13:34:42.000Z",
-    "createdAt": "2026-02-20T13:34:40.078Z",
-    "versionId": "9dee22ab-6c9f-41da-b581-401a4e897351",
+    "updatedAt": "2026-02-23T12:02:12.000Z",
+    "createdAt": "2026-02-23T12:02:09.486Z",
+    "versionId": "99d24c0d-e770-4f29-9e0b-814ff949e678",
     "workflowId": "kldleYUPha6bnarR",
     "nodes": [
       {
@@ -63,32 +63,7 @@
         "parameters": {
           "httpRequestMethod": "POST",
           "graphApiVersion": "v23.0",
-          "node": "17841470046184468",
-          "edge": "=media",
-          "options": {
-            "queryParametersJson": "={\n\"video_url\": \"{{ $json.job.urls[0] }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
-          }
-        },
-        "type": "n8n-nodes-base.facebookGraphApi",
-        "typeVersion": 1,
-        "position": [
-          4176,
-          -1376
-        ],
-        "id": "7da66ccf-8fd7-48d5-8c6d-db816b75171b",
-        "name": "Facebook Graph API",
-        "credentials": {
-          "facebookGraphApi": {
-            "id": "F7VbX8jWKCXdAM47",
-            "name": "Facebook Graph account"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "httpRequestMethod": "POST",
-          "graphApiVersion": "v23.0",
-          "node": "17841470046184468",
+          "node": "17841407565799162",
           "edge": "media_publish",
           "options": {
             "queryParametersJson": "={\n  \"creation_id\": \"{{$json.id}}\"\n}"
@@ -104,8 +79,8 @@
         "name": "Facebook Graph API1",
         "credentials": {
           "facebookGraphApi": {
-            "id": "F7VbX8jWKCXdAM47",
-            "name": "Facebook Graph account"
+            "id": "ECltAi3Up7NKSRvi",
+            "name": "Facebook Graph SNG"
           }
         },
         "onError": "continueRegularOutput"
@@ -153,7 +128,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          3744,
+          3776,
           -1376
         ],
         "id": "7555d978-506b-45aa-bf1a-cdfafabbe297",
@@ -564,31 +539,6 @@
           "httpRequestMethod": "POST",
           "graphApiVersion": "v23.0",
           "node": "17841470046184468",
-          "edge": "=media",
-          "options": {
-            "queryParametersJson": "={\n\"video_url\": \"{{ $json.job.urls[0] }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
-          }
-        },
-        "type": "n8n-nodes-base.facebookGraphApi",
-        "typeVersion": 1,
-        "position": [
-          4192,
-          -2080
-        ],
-        "id": "1649991c-daa3-4355-b549-f29a13970b09",
-        "name": "Facebook Graph API2",
-        "credentials": {
-          "facebookGraphApi": {
-            "id": "F7VbX8jWKCXdAM47",
-            "name": "Facebook Graph account"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "httpRequestMethod": "POST",
-          "graphApiVersion": "v23.0",
-          "node": "17841470046184468",
           "edge": "media_publish",
           "options": {
             "queryParametersJson": "={\n  \"creation_id\": \"{{$json.id}}\"\n}"
@@ -759,32 +709,7 @@
         "parameters": {
           "httpRequestMethod": "POST",
           "graphApiVersion": "v23.0",
-          "node": "17841470046184468",
-          "edge": "=media",
-          "options": {
-            "queryParametersJson": "={\n\"video_url\": \"{{ $json.job.urls[0] }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
-          }
-        },
-        "type": "n8n-nodes-base.facebookGraphApi",
-        "typeVersion": 1,
-        "position": [
-          4160,
-          -1024
-        ],
-        "id": "bd5be653-2119-4ea4-a258-24e8452c846a",
-        "name": "Facebook Graph API4",
-        "credentials": {
-          "facebookGraphApi": {
-            "id": "F7VbX8jWKCXdAM47",
-            "name": "Facebook Graph account"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "httpRequestMethod": "POST",
-          "graphApiVersion": "v23.0",
-          "node": "17841470046184468",
+          "node": "17841456680819227",
           "edge": "media_publish",
           "options": {
             "queryParametersJson": "={\n  \"creation_id\": \"{{$json.id}}\"\n}"
@@ -800,8 +725,8 @@
         "name": "Facebook Graph API5",
         "credentials": {
           "facebookGraphApi": {
-            "id": "F7VbX8jWKCXdAM47",
-            "name": "Facebook Graph account"
+            "id": "pXCz0GAA9fNAtK3V",
+            "name": "Facebook Graph MESIT"
           }
         },
         "onError": "continueRegularOutput"
@@ -816,7 +741,7 @@
             "parameters": [
               {
                 "name": "access_token",
-                "value": "EAF2z8nVLTA8BQVHL88vghg4RRZBH9svUgZCP93NSZAB9iSDKxTAMvz8DFby8KVqXp6DWFxfFDiSKOUXvXPVVrJcNxjFOmr0ZCXphOZBUUWRkP8sTZC9wwapmP8vlJQN4NHH2eW9zPRmg2SHrQ0AhjI3n2kx1vAa8nOtr6tbQMhcaP0X0eMtOComwFl3zR7zd7HowZDZD"
+                "value": "EAAW8gm2KRB4BQwQQh2kF89ZB0RZC8Tj0eZAc8PwdMCHt4UxQYz2XZAW1kS4jiUXIQArMASw746PKQNW5qCFGgHcu0WSZA9EldmX92fuDBP6jvnTuRnZAlOAHW9wZAxiEvhUO6GvM5C76SVb4GKwG3Mfugc0CFmQjx6XHz5QVf6NiI3zoOD49ZAqdhjNXJIEUzr1HxHg74DXckz7rq45ZAUD7YYrnDyj6gOZAnlMEDChfcSWN1rRvFiic7KTvlpwWtfk4fublk1hdtJebX55vZAA7qYbslvpVQZDZD"
               }
             ]
           },
@@ -832,8 +757,8 @@
         "name": "HTTP Request9",
         "credentials": {
           "facebookGraphApi": {
-            "id": "F7VbX8jWKCXdAM47",
-            "name": "Facebook Graph account"
+            "id": "pXCz0GAA9fNAtK3V",
+            "name": "Facebook Graph MESIT"
           }
         }
       },
@@ -955,32 +880,7 @@
         "parameters": {
           "httpRequestMethod": "POST",
           "graphApiVersion": "v23.0",
-          "node": "17841470046184468",
-          "edge": "=media",
-          "options": {
-            "queryParametersJson": "={\n\"video_url\": \"{{ $json.job.urls[0] }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
-          }
-        },
-        "type": "n8n-nodes-base.facebookGraphApi",
-        "typeVersion": 1,
-        "position": [
-          4192,
-          -1728
-        ],
-        "id": "b2d37c3b-d837-43d0-8c60-b6b641f7c06f",
-        "name": "Facebook Graph API6",
-        "credentials": {
-          "facebookGraphApi": {
-            "id": "F7VbX8jWKCXdAM47",
-            "name": "Facebook Graph account"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "httpRequestMethod": "POST",
-          "graphApiVersion": "v23.0",
-          "node": "17841470046184468",
+          "node": "17841404130661720",
           "edge": "media_publish",
           "options": {
             "queryParametersJson": "={\n  \"creation_id\": \"{{$json.id}}\"\n}"
@@ -996,8 +896,8 @@
         "name": "Facebook Graph API7",
         "credentials": {
           "facebookGraphApi": {
-            "id": "F7VbX8jWKCXdAM47",
-            "name": "Facebook Graph account"
+            "id": "Z1x6RxjS2YnfIheO",
+            "name": "Facebook Graph SURFIN"
           }
         },
         "onError": "continueRegularOutput"
@@ -1012,7 +912,7 @@
             "parameters": [
               {
                 "name": "access_token",
-                "value": "EAF2z8nVLTA8BQVHL88vghg4RRZBH9svUgZCP93NSZAB9iSDKxTAMvz8DFby8KVqXp6DWFxfFDiSKOUXvXPVVrJcNxjFOmr0ZCXphOZBUUWRkP8sTZC9wwapmP8vlJQN4NHH2eW9zPRmg2SHrQ0AhjI3n2kx1vAa8nOtr6tbQMhcaP0X0eMtOComwFl3zR7zd7HowZDZD"
+                "value": "EAARkjZBDLTJ8BQ40jdI1jhKQwNCaF4hnDklW8pNZBq0JW7NDh14JRDIZA1d21iMtVwXtfbZBDbwkIgBI0Yt9e8BbnPzpssaA1dsKUCXCtC7so1r6iNQJ1MJNic5WW5fWZCZBep4zlR5Mj7Ju9biFGS95lsxbJ2TTLh5tSEtGf50CAsvah78cibk4JLN12aAbBiLgZDZD"
               }
             ]
           },
@@ -1028,8 +928,8 @@
         "name": "HTTP Request11",
         "credentials": {
           "facebookGraphApi": {
-            "id": "F7VbX8jWKCXdAM47",
-            "name": "Facebook Graph account"
+            "id": "Z1x6RxjS2YnfIheO",
+            "name": "Facebook Graph SURFIN"
           }
         }
       },
@@ -1146,31 +1046,6 @@
         ],
         "id": "db8cdce1-f555-447e-9d70-f2dca0e06cec",
         "name": "Sticky Note5"
-      },
-      {
-        "parameters": {
-          "httpRequestMethod": "POST",
-          "graphApiVersion": "v23.0",
-          "node": "17841470046184468",
-          "edge": "=media",
-          "options": {
-            "queryParametersJson": "={\n\"video_url\": \"{{ $json.job.urls[0] }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
-          }
-        },
-        "type": "n8n-nodes-base.facebookGraphApi",
-        "typeVersion": 1,
-        "position": [
-          4176,
-          -656
-        ],
-        "id": "782d8ce7-3c1d-49e2-8bab-775e52b16b6a",
-        "name": "Facebook Graph API8",
-        "credentials": {
-          "facebookGraphApi": {
-            "id": "F7VbX8jWKCXdAM47",
-            "name": "Facebook Graph account"
-          }
-        }
       },
       {
         "parameters": {
@@ -2149,7 +2024,7 @@
             "parameters": [
               {
                 "name": "access_token",
-                "value": "EAF2z8nVLTA8BQVHL88vghg4RRZBH9svUgZCP93NSZAB9iSDKxTAMvz8DFby8KVqXp6DWFxfFDiSKOUXvXPVVrJcNxjFOmr0ZCXphOZBUUWRkP8sTZC9wwapmP8vlJQN4NHH2eW9zPRmg2SHrQ0AhjI3n2kx1vAa8nOtr6tbQMhcaP0X0eMtOComwFl3zR7zd7HowZDZD"
+                "value": "EAF2z8nVLTA8BQc4ZAZCmcGyEhLLt9YSqOIgkudIfrH5BcCafquEj8f1ngwPxHVZAMZBCS5051IuvX9w20rVcjAzIrt5rjT7RKSmwITVBYsQ0A5IRr9FAPPNiPxWgaoE5ecZCasfAaWPcl5ZCblu9GjXO4iVLxbq8864aibQpGkcDVXh7gbsOngeEpUzsQZCnBN89LFIbZA1JuliwZAyuKJL9hhmE3iwZBvMhpn4CoxawLzMbbamJQrn1ZC4zZAdgNZCCkTFJGBJZCemMyj5Pmz2fZC2O0YlK1oniAZDZD"
               }
             ]
           },
@@ -2165,8 +2040,8 @@
         "name": "HTTP Request30",
         "credentials": {
           "facebookGraphApi": {
-            "id": "F7VbX8jWKCXdAM47",
-            "name": "Facebook Graph account"
+            "id": "ECltAi3Up7NKSRvi",
+            "name": "Facebook Graph SNG"
           }
         }
       },
@@ -2485,7 +2360,7 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          5456,
+          5408,
           -2080
         ],
         "id": "1758b16a-ba56-41a9-a39f-c07d7c81e26c",
@@ -2755,7 +2630,7 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          5424,
+          5408,
           32
         ],
         "id": "cac03bb3-ae0a-4b8a-ac28-3166ee627618",
@@ -2772,31 +2647,6 @@
           "httpRequestMethod": "POST",
           "graphApiVersion": "v23.0",
           "node": "17841470046184468",
-          "edge": "=media",
-          "options": {
-            "queryParametersJson": "={\n\"video_url\": \"{{ $json.job.urls[0] }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
-          }
-        },
-        "type": "n8n-nodes-base.facebookGraphApi",
-        "typeVersion": 1,
-        "position": [
-          4208,
-          48
-        ],
-        "id": "86c3b6f3-c278-4fbf-bcb6-b3747cc44778",
-        "name": "Facebook Graph API10",
-        "credentials": {
-          "facebookGraphApi": {
-            "id": "F7VbX8jWKCXdAM47",
-            "name": "Facebook Graph account"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "httpRequestMethod": "POST",
-          "graphApiVersion": "v23.0",
-          "node": "17841470046184468",
           "edge": "media_publish",
           "options": {
             "queryParametersJson": "={\n  \"creation_id\": \"{{$json.id}}\"\n}"
@@ -2805,7 +2655,7 @@
         "type": "n8n-nodes-base.facebookGraphApi",
         "typeVersion": 1,
         "position": [
-          4896,
+          4880,
           32
         ],
         "id": "787d4c1c-6c38-4fed-aa6f-5e12aa2c0177",
@@ -2837,7 +2687,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          4416,
+          4400,
           48
         ],
         "id": "3f56ff68-eb0d-4bec-9852-5007fb143561",
@@ -2854,7 +2704,7 @@
         "type": "n8n-nodes-base.wait",
         "typeVersion": 1.1,
         "position": [
-          4560,
+          4544,
           48
         ],
         "id": "77852db1-698e-48af-b5c5-c0e3b290d37c",
@@ -2888,7 +2738,7 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.2,
         "position": [
-          4704,
+          4688,
           48
         ],
         "id": "0af9b2cd-4e9f-446b-9d50-d5cd50d4faf7",
@@ -2911,7 +2761,7 @@
         "type": "n8n-nodes-base.set",
         "typeVersion": 3.4,
         "position": [
-          5056,
+          5040,
           32
         ],
         "id": "8a6d8318-c5d1-4e34-a011-2c29fd339d91",
@@ -2931,7 +2781,7 @@
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          5216,
+          5200,
           32
         ],
         "id": "47d046da-0d54-4720-838b-553b7b24ec4b",
@@ -2949,7 +2799,7 @@
       },
       {
         "parameters": {
-          "content": "SNOWDIVISION\n",
+          "content": "SIERRA NEVADA VIP",
           "height": 336,
           "width": 1232,
           "color": 6
@@ -2957,7 +2807,7 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          4160,
+          4144,
           -48
         ],
         "id": "dc975708-50be-4a7f-976f-009f7673e979",
@@ -3187,32 +3037,7 @@
         "parameters": {
           "httpRequestMethod": "POST",
           "graphApiVersion": "v23.0",
-          "node": "17841470046184468",
-          "edge": "=media",
-          "options": {
-            "queryParametersJson": "={\n\"video_url\": \"{{ $json.job.urls[0] }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
-          }
-        },
-        "type": "n8n-nodes-base.facebookGraphApi",
-        "typeVersion": 1,
-        "position": [
-          4176,
-          -304
-        ],
-        "id": "11ed9595-588b-4c5f-9235-286f00b1f598",
-        "name": "Facebook Graph API12",
-        "credentials": {
-          "facebookGraphApi": {
-            "id": "F7VbX8jWKCXdAM47",
-            "name": "Facebook Graph account"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "httpRequestMethod": "POST",
-          "graphApiVersion": "v23.0",
-          "node": "17841470046184468",
+          "node": "17841464708088425",
           "edge": "media_publish",
           "options": {
             "queryParametersJson": "={\n  \"creation_id\": \"{{$json.id}}\"\n}"
@@ -3222,14 +3047,14 @@
         "typeVersion": 1,
         "position": [
           4864,
-          -320
+          -336
         ],
         "id": "1526fc34-53c0-45e1-b820-de38f5909d35",
         "name": "Facebook Graph API13",
         "credentials": {
           "facebookGraphApi": {
-            "id": "F7VbX8jWKCXdAM47",
-            "name": "Facebook Graph account"
+            "id": "6w6O46QMsWL6zOsx",
+            "name": "Facebook Graph THESKIROOM"
           }
         },
         "onError": "continueRegularOutput"
@@ -3244,7 +3069,7 @@
             "parameters": [
               {
                 "name": "access_token",
-                "value": "EAF2z8nVLTA8BQVHL88vghg4RRZBH9svUgZCP93NSZAB9iSDKxTAMvz8DFby8KVqXp6DWFxfFDiSKOUXvXPVVrJcNxjFOmr0ZCXphOZBUUWRkP8sTZC9wwapmP8vlJQN4NHH2eW9zPRmg2SHrQ0AhjI3n2kx1vAa8nOtr6tbQMhcaP0X0eMtOComwFl3zR7zd7HowZDZD"
+                "value": "EAAUV15jzbAYBQ2eOOVKr3Cpg4V7N6olBrIs2XqnEaP8rPteR8ZCsLCsMDLh9RZAqxupbOOS2hAo9Ijtln5eXOzcL9bMxpZCAF0AzEi0lA3LevqbE0hyGaLFHTB4lrY28eP4SWJwarf8IAXzKQJdKhDbjlFzIM9ZBEufZAi8OwPRVXB2rgRtg6pJZCQzRe8706ZCygZDZD"
               }
             ]
           },
@@ -3254,14 +3079,14 @@
         "typeVersion": 4.3,
         "position": [
           4384,
-          -304
+          -320
         ],
         "id": "d2d10789-b18d-4f12-8bd2-f7d76e5907b4",
         "name": "HTTP Request37",
         "credentials": {
           "facebookGraphApi": {
-            "id": "F7VbX8jWKCXdAM47",
-            "name": "Facebook Graph account"
+            "id": "6w6O46QMsWL6zOsx",
+            "name": "Facebook Graph THESKIROOM"
           }
         }
       },
@@ -3271,7 +3096,7 @@
         "typeVersion": 1.1,
         "position": [
           4528,
-          -304
+          -320
         ],
         "id": "f077bed8-6eaa-44d8-a4b2-ea4d4f88165c",
         "name": "Wait19",
@@ -3305,7 +3130,7 @@
         "typeVersion": 2.2,
         "position": [
           4672,
-          -304
+          -320
         ],
         "id": "f49022fe-97b2-451a-91e1-18d249adc70b",
         "name": "If12"
@@ -3328,7 +3153,7 @@
         "typeVersion": 3.4,
         "position": [
           5024,
-          -320
+          -336
         ],
         "id": "bc494770-50cd-4591-b0a5-7bbb9366efe2",
         "name": "Edit Fields7"
@@ -3348,7 +3173,7 @@
         "typeVersion": 4.3,
         "position": [
           5184,
-          -320
+          -336
         ],
         "id": "571b798d-bf26-47f5-a523-796c1e70cb76",
         "name": "HTTP Request38",
@@ -3365,7 +3190,7 @@
       },
       {
         "parameters": {
-          "content": "SKIROOM\n",
+          "content": "THESKIROOM\n",
           "height": 336,
           "width": 1232,
           "color": 6
@@ -3565,7 +3390,7 @@
       },
       {
         "parameters": {
-          "content": "SKIROOM",
+          "content": "THESKIROOM",
           "height": 336,
           "width": 1712
         },
@@ -3588,7 +3413,7 @@
         "typeVersion": 2.6,
         "position": [
           5392,
-          -320
+          -336
         ],
         "id": "ef56b717-4c02-4107-a5aa-5cc0127927f1",
         "name": "Eliminar Vista Skiroom",
@@ -3857,7 +3682,7 @@
         "type": "n8n-nodes-base.stickyNote",
         "typeVersion": 1,
         "position": [
-          1648,
+          1680,
           -2096
         ],
         "id": "650c318e-a391-46ad-a15e-9442f516f925",
@@ -4460,6 +4285,181 @@
             "name": "Postgres Supabase"
           }
         }
+      },
+      {
+        "parameters": {
+          "httpRequestMethod": "POST",
+          "graphApiVersion": "v23.0",
+          "node": "17841456680819227",
+          "edge": "=media",
+          "options": {
+            "queryParametersJson": "={\n\"video_url\": \"{{ $json.job.urls[0] }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
+          }
+        },
+        "type": "n8n-nodes-base.facebookGraphApi",
+        "typeVersion": 1,
+        "position": [
+          4160,
+          -1024
+        ],
+        "id": "bd5be653-2119-4ea4-a258-24e8452c846a",
+        "name": "Facebook Graph MESIT",
+        "credentials": {
+          "facebookGraphApi": {
+            "id": "pXCz0GAA9fNAtK3V",
+            "name": "Facebook Graph MESIT"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "httpRequestMethod": "POST",
+          "graphApiVersion": "v23.0",
+          "node": "17841407565799162",
+          "edge": "=media",
+          "options": {
+            "queryParametersJson": "={\n\"video_url\": \"{{ $json.job.urls[0] }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
+          }
+        },
+        "type": "n8n-nodes-base.facebookGraphApi",
+        "typeVersion": 1,
+        "position": [
+          4176,
+          -1376
+        ],
+        "id": "7da66ccf-8fd7-48d5-8c6d-db816b75171b",
+        "name": "Facebook Graph SNG",
+        "credentials": {
+          "facebookGraphApi": {
+            "id": "ECltAi3Up7NKSRvi",
+            "name": "Facebook Graph SNG"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "httpRequestMethod": "POST",
+          "graphApiVersion": "v23.0",
+          "node": "17841404130661720",
+          "edge": "=media",
+          "options": {
+            "queryParametersJson": "={\n\"video_url\": \"{{ $json.job.urls[0] }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
+          }
+        },
+        "type": "n8n-nodes-base.facebookGraphApi",
+        "typeVersion": 1,
+        "position": [
+          4176,
+          -1728
+        ],
+        "id": "b2d37c3b-d837-43d0-8c60-b6b641f7c06f",
+        "name": "Facebook Graph SURFIN",
+        "credentials": {
+          "facebookGraphApi": {
+            "id": "Z1x6RxjS2YnfIheO",
+            "name": "Facebook Graph SURFIN"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "httpRequestMethod": "POST",
+          "graphApiVersion": "v23.0",
+          "node": "17841470046184468",
+          "edge": "=media",
+          "options": {
+            "queryParametersJson": "={\n\"video_url\": \"{{ $json.job.urls[0] }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
+          }
+        },
+        "type": "n8n-nodes-base.facebookGraphApi",
+        "typeVersion": 1,
+        "position": [
+          4192,
+          -2080
+        ],
+        "id": "1649991c-daa3-4355-b549-f29a13970b09",
+        "name": "Facebook Graph RULES",
+        "credentials": {
+          "facebookGraphApi": {
+            "id": "F7VbX8jWKCXdAM47",
+            "name": "Facebook Graph account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "httpRequestMethod": "POST",
+          "graphApiVersion": "v23.0",
+          "node": "17841470046184468",
+          "edge": "=media",
+          "options": {
+            "queryParametersJson": "={\n\"video_url\": \"{{ $json.job.urls[0] }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
+          }
+        },
+        "type": "n8n-nodes-base.facebookGraphApi",
+        "typeVersion": 1,
+        "position": [
+          4176,
+          -656
+        ],
+        "id": "782d8ce7-3c1d-49e2-8bab-775e52b16b6a",
+        "name": "Facebook Graph SNOWDIVISION",
+        "credentials": {
+          "facebookGraphApi": {
+            "id": "F7VbX8jWKCXdAM47",
+            "name": "Facebook Graph account"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "httpRequestMethod": "POST",
+          "graphApiVersion": "v23.0",
+          "node": "17841464708088425",
+          "edge": "=media",
+          "options": {
+            "queryParametersJson": "={\n\"video_url\": \"{{ $json.job.urls[0] }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
+          }
+        },
+        "type": "n8n-nodes-base.facebookGraphApi",
+        "typeVersion": 1,
+        "position": [
+          4176,
+          -320
+        ],
+        "id": "11ed9595-588b-4c5f-9235-286f00b1f598",
+        "name": "Facebook Graph THESKIROOM",
+        "credentials": {
+          "facebookGraphApi": {
+            "id": "6w6O46QMsWL6zOsx",
+            "name": "Facebook Graph THESKIROOM"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "httpRequestMethod": "POST",
+          "graphApiVersion": "v23.0",
+          "node": "17841470046184468",
+          "edge": "=media",
+          "options": {
+            "queryParametersJson": "={\n\"video_url\": \"{{ $json.job.urls[0] }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
+          }
+        },
+        "type": "n8n-nodes-base.facebookGraphApi",
+        "typeVersion": 1,
+        "position": [
+          4192,
+          48
+        ],
+        "id": "86c3b6f3-c278-4fbf-bcb6-b3747cc44778",
+        "name": "Facebook Graph SIERRA NEVADA VIP",
+        "credentials": {
+          "facebookGraphApi": {
+            "id": "F7VbX8jWKCXdAM47",
+            "name": "Facebook Graph account"
+          }
+        }
       }
     ],
     "connections": {
@@ -4479,17 +4479,6 @@
           [
             {
               "node": "PRUEBA",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Facebook Graph API": {
-        "main": [
-          [
-            {
-              "node": "HTTP Request30",
               "type": "main",
               "index": 0
             }
@@ -4516,7 +4505,13 @@
       },
       "HTTP Request6": {
         "main": [
-          []
+          [
+            {
+              "node": "Facebook Graph SNG",
+              "type": "main",
+              "index": 0
+            }
+          ]
         ]
       },
       "Wait1": {
@@ -4669,17 +4664,6 @@
           ]
         ]
       },
-      "Facebook Graph API2": {
-        "main": [
-          [
-            {
-              "node": "HTTP Request5",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
       "Facebook Graph API3": {
         "main": [
           [
@@ -4736,17 +4720,6 @@
           [
             {
               "node": "HTTP Request8",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Facebook Graph API4": {
-        "main": [
-          [
-            {
-              "node": "HTTP Request9",
               "type": "main",
               "index": 0
             }
@@ -4815,17 +4788,6 @@
           ]
         ]
       },
-      "Facebook Graph API6": {
-        "main": [
-          [
-            {
-              "node": "HTTP Request11",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
       "Facebook Graph API7": {
         "main": [
           [
@@ -4882,17 +4844,6 @@
           [
             {
               "node": "HTTP Request12",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Facebook Graph API8": {
-        "main": [
-          [
-            {
-              "node": "HTTP Request13",
               "type": "main",
               "index": 0
             }
@@ -5385,7 +5336,13 @@
       },
       "Obtener Filas Rules": {
         "main": [
-          []
+          [
+            {
+              "node": "Mezclar Rules",
+              "type": "main",
+              "index": 0
+            }
+          ]
         ]
       },
       "Obtener Filas Surfin": {
@@ -5412,7 +5369,13 @@
       },
       "Obtener Filas Snow Division": {
         "main": [
-          []
+          [
+            {
+              "node": "Mezclar Snow Division",
+              "type": "main",
+              "index": 0
+            }
+          ]
         ]
       },
       "Crear Vista SNG": {
@@ -5450,19 +5413,20 @@
       },
       "Obtener Filas Skiroom": {
         "main": [
-          []
+          [
+            {
+              "node": "Mezclar Skiroom",
+              "type": "main",
+              "index": 0
+            }
+          ]
         ]
       },
       "Obtener Filas Sierra Nevada VIP": {
         "main": [
-          []
-        ]
-      },
-      "Facebook Graph API10": {
-        "main": [
           [
             {
-              "node": "HTTP Request31",
+              "node": "Mezclar Sierra Nevada VIP",
               "type": "main",
               "index": 0
             }
@@ -5609,17 +5573,6 @@
           [
             {
               "node": "HTTP Request34",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Facebook Graph API12": {
-        "main": [
-          [
-            {
-              "node": "HTTP Request37",
               "type": "main",
               "index": 0
             }
@@ -5955,7 +5908,13 @@
       },
       "HTTP Request28": {
         "main": [
-          []
+          [
+            {
+              "node": "Facebook Graph SURFIN",
+              "type": "main",
+              "index": 0
+            }
+          ]
         ]
       },
       "Verificar": {
@@ -6132,14 +6091,117 @@
             }
           ]
         ]
+      },
+      "HTTP Request16": {
+        "main": [
+          []
+        ]
+      },
+      "Facebook Graph MESIT": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request9",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Facebook Graph SNG": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request30",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Facebook Graph SURFIN": {
+        "main": [
+          []
+        ]
+      },
+      "Facebook Graph RULES": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request5",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Facebook Graph SNOWDIVISION": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request13",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Facebook Graph THESKIROOM": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request37",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Facebook Graph SIERRA NEVADA VIP": {
+        "main": [
+          [
+            {
+              "node": "HTTP Request31",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Obtener Filas Mesit": {
+        "main": [
+          [
+            {
+              "node": "Mezclar Mesit",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "HTTP Request41": {
+        "main": [
+          []
+        ]
+      },
+      "HTTP Request12": {
+        "main": [
+          [
+            {
+              "node": "Eliminar Vista Surfin",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version 9dee22ab",
+    "name": "Version 99d24c0d",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "9dee22ab-6c9f-41da-b581-401a4e897351",
+  "activeVersionId": "99d24c0d-e770-4f29-9e0b-814ff949e678",
   "connections": {
     "HTTP Request": {
       "main": [
@@ -6157,17 +6219,6 @@
         [
           {
             "node": "PRUEBA",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Facebook Graph API": {
-      "main": [
-        [
-          {
-            "node": "HTTP Request30",
             "type": "main",
             "index": 0
           }
@@ -6194,7 +6245,13 @@
     },
     "HTTP Request6": {
       "main": [
-        []
+        [
+          {
+            "node": "Facebook Graph SNG",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Wait1": {
@@ -6347,17 +6404,6 @@
         ]
       ]
     },
-    "Facebook Graph API2": {
-      "main": [
-        [
-          {
-            "node": "HTTP Request5",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Facebook Graph API3": {
       "main": [
         [
@@ -6414,17 +6460,6 @@
         [
           {
             "node": "HTTP Request8",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Facebook Graph API4": {
-      "main": [
-        [
-          {
-            "node": "HTTP Request9",
             "type": "main",
             "index": 0
           }
@@ -6493,17 +6528,6 @@
         ]
       ]
     },
-    "Facebook Graph API6": {
-      "main": [
-        [
-          {
-            "node": "HTTP Request11",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Facebook Graph API7": {
       "main": [
         [
@@ -6560,17 +6584,6 @@
         [
           {
             "node": "HTTP Request12",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Facebook Graph API8": {
-      "main": [
-        [
-          {
-            "node": "HTTP Request13",
             "type": "main",
             "index": 0
           }
@@ -7063,7 +7076,13 @@
     },
     "Obtener Filas Rules": {
       "main": [
-        []
+        [
+          {
+            "node": "Mezclar Rules",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Obtener Filas Surfin": {
@@ -7090,7 +7109,13 @@
     },
     "Obtener Filas Snow Division": {
       "main": [
-        []
+        [
+          {
+            "node": "Mezclar Snow Division",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Crear Vista SNG": {
@@ -7128,19 +7153,20 @@
     },
     "Obtener Filas Skiroom": {
       "main": [
-        []
+        [
+          {
+            "node": "Mezclar Skiroom",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Obtener Filas Sierra Nevada VIP": {
       "main": [
-        []
-      ]
-    },
-    "Facebook Graph API10": {
-      "main": [
         [
           {
-            "node": "HTTP Request31",
+            "node": "Mezclar Sierra Nevada VIP",
             "type": "main",
             "index": 0
           }
@@ -7287,17 +7313,6 @@
         [
           {
             "node": "HTTP Request34",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Facebook Graph API12": {
-      "main": [
-        [
-          {
-            "node": "HTTP Request37",
             "type": "main",
             "index": 0
           }
@@ -7633,7 +7648,13 @@
     },
     "HTTP Request28": {
       "main": [
-        []
+        [
+          {
+            "node": "Facebook Graph SURFIN",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Verificar": {
@@ -7810,6 +7831,109 @@
           }
         ]
       ]
+    },
+    "HTTP Request16": {
+      "main": [
+        []
+      ]
+    },
+    "Facebook Graph MESIT": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request9",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Facebook Graph SNG": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request30",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Facebook Graph SURFIN": {
+      "main": [
+        []
+      ]
+    },
+    "Facebook Graph RULES": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Facebook Graph SNOWDIVISION": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request13",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Facebook Graph THESKIROOM": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request37",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Facebook Graph SIERRA NEVADA VIP": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request31",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Obtener Filas Mesit": {
+      "main": [
+        [
+          {
+            "node": "Mezclar Mesit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request41": {
+      "main": [
+        []
+      ]
+    },
+    "HTTP Request12": {
+      "main": [
+        [
+          {
+            "node": "Eliminar Vista Surfin",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-11-29T11:04:16.100Z",
@@ -7877,32 +8001,7 @@
       "parameters": {
         "httpRequestMethod": "POST",
         "graphApiVersion": "v23.0",
-        "node": "17841470046184468",
-        "edge": "=media",
-        "options": {
-          "queryParametersJson": "={\n\"video_url\": \"{{ $json.job.urls[0] }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
-        }
-      },
-      "type": "n8n-nodes-base.facebookGraphApi",
-      "typeVersion": 1,
-      "position": [
-        4176,
-        -1376
-      ],
-      "id": "7da66ccf-8fd7-48d5-8c6d-db816b75171b",
-      "name": "Facebook Graph API",
-      "credentials": {
-        "facebookGraphApi": {
-          "id": "F7VbX8jWKCXdAM47",
-          "name": "Facebook Graph account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "httpRequestMethod": "POST",
-        "graphApiVersion": "v23.0",
-        "node": "17841470046184468",
+        "node": "17841407565799162",
         "edge": "media_publish",
         "options": {
           "queryParametersJson": "={\n  \"creation_id\": \"{{$json.id}}\"\n}"
@@ -7918,8 +8017,8 @@
       "name": "Facebook Graph API1",
       "credentials": {
         "facebookGraphApi": {
-          "id": "F7VbX8jWKCXdAM47",
-          "name": "Facebook Graph account"
+          "id": "ECltAi3Up7NKSRvi",
+          "name": "Facebook Graph SNG"
         }
       },
       "onError": "continueRegularOutput"
@@ -7967,7 +8066,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        3744,
+        3776,
         -1376
       ],
       "id": "7555d978-506b-45aa-bf1a-cdfafabbe297",
@@ -8378,31 +8477,6 @@
         "httpRequestMethod": "POST",
         "graphApiVersion": "v23.0",
         "node": "17841470046184468",
-        "edge": "=media",
-        "options": {
-          "queryParametersJson": "={\n\"video_url\": \"{{ $json.job.urls[0] }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
-        }
-      },
-      "type": "n8n-nodes-base.facebookGraphApi",
-      "typeVersion": 1,
-      "position": [
-        4192,
-        -2080
-      ],
-      "id": "1649991c-daa3-4355-b549-f29a13970b09",
-      "name": "Facebook Graph API2",
-      "credentials": {
-        "facebookGraphApi": {
-          "id": "F7VbX8jWKCXdAM47",
-          "name": "Facebook Graph account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "httpRequestMethod": "POST",
-        "graphApiVersion": "v23.0",
-        "node": "17841470046184468",
         "edge": "media_publish",
         "options": {
           "queryParametersJson": "={\n  \"creation_id\": \"{{$json.id}}\"\n}"
@@ -8573,32 +8647,7 @@
       "parameters": {
         "httpRequestMethod": "POST",
         "graphApiVersion": "v23.0",
-        "node": "17841470046184468",
-        "edge": "=media",
-        "options": {
-          "queryParametersJson": "={\n\"video_url\": \"{{ $json.job.urls[0] }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
-        }
-      },
-      "type": "n8n-nodes-base.facebookGraphApi",
-      "typeVersion": 1,
-      "position": [
-        4160,
-        -1024
-      ],
-      "id": "bd5be653-2119-4ea4-a258-24e8452c846a",
-      "name": "Facebook Graph API4",
-      "credentials": {
-        "facebookGraphApi": {
-          "id": "F7VbX8jWKCXdAM47",
-          "name": "Facebook Graph account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "httpRequestMethod": "POST",
-        "graphApiVersion": "v23.0",
-        "node": "17841470046184468",
+        "node": "17841456680819227",
         "edge": "media_publish",
         "options": {
           "queryParametersJson": "={\n  \"creation_id\": \"{{$json.id}}\"\n}"
@@ -8614,8 +8663,8 @@
       "name": "Facebook Graph API5",
       "credentials": {
         "facebookGraphApi": {
-          "id": "F7VbX8jWKCXdAM47",
-          "name": "Facebook Graph account"
+          "id": "pXCz0GAA9fNAtK3V",
+          "name": "Facebook Graph MESIT"
         }
       },
       "onError": "continueRegularOutput"
@@ -8630,7 +8679,7 @@
           "parameters": [
             {
               "name": "access_token",
-              "value": "EAF2z8nVLTA8BQVHL88vghg4RRZBH9svUgZCP93NSZAB9iSDKxTAMvz8DFby8KVqXp6DWFxfFDiSKOUXvXPVVrJcNxjFOmr0ZCXphOZBUUWRkP8sTZC9wwapmP8vlJQN4NHH2eW9zPRmg2SHrQ0AhjI3n2kx1vAa8nOtr6tbQMhcaP0X0eMtOComwFl3zR7zd7HowZDZD"
+              "value": "EAAW8gm2KRB4BQwQQh2kF89ZB0RZC8Tj0eZAc8PwdMCHt4UxQYz2XZAW1kS4jiUXIQArMASw746PKQNW5qCFGgHcu0WSZA9EldmX92fuDBP6jvnTuRnZAlOAHW9wZAxiEvhUO6GvM5C76SVb4GKwG3Mfugc0CFmQjx6XHz5QVf6NiI3zoOD49ZAqdhjNXJIEUzr1HxHg74DXckz7rq45ZAUD7YYrnDyj6gOZAnlMEDChfcSWN1rRvFiic7KTvlpwWtfk4fublk1hdtJebX55vZAA7qYbslvpVQZDZD"
             }
           ]
         },
@@ -8646,8 +8695,8 @@
       "name": "HTTP Request9",
       "credentials": {
         "facebookGraphApi": {
-          "id": "F7VbX8jWKCXdAM47",
-          "name": "Facebook Graph account"
+          "id": "pXCz0GAA9fNAtK3V",
+          "name": "Facebook Graph MESIT"
         }
       }
     },
@@ -8769,32 +8818,7 @@
       "parameters": {
         "httpRequestMethod": "POST",
         "graphApiVersion": "v23.0",
-        "node": "17841470046184468",
-        "edge": "=media",
-        "options": {
-          "queryParametersJson": "={\n\"video_url\": \"{{ $json.job.urls[0] }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
-        }
-      },
-      "type": "n8n-nodes-base.facebookGraphApi",
-      "typeVersion": 1,
-      "position": [
-        4192,
-        -1728
-      ],
-      "id": "b2d37c3b-d837-43d0-8c60-b6b641f7c06f",
-      "name": "Facebook Graph API6",
-      "credentials": {
-        "facebookGraphApi": {
-          "id": "F7VbX8jWKCXdAM47",
-          "name": "Facebook Graph account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "httpRequestMethod": "POST",
-        "graphApiVersion": "v23.0",
-        "node": "17841470046184468",
+        "node": "17841404130661720",
         "edge": "media_publish",
         "options": {
           "queryParametersJson": "={\n  \"creation_id\": \"{{$json.id}}\"\n}"
@@ -8810,8 +8834,8 @@
       "name": "Facebook Graph API7",
       "credentials": {
         "facebookGraphApi": {
-          "id": "F7VbX8jWKCXdAM47",
-          "name": "Facebook Graph account"
+          "id": "Z1x6RxjS2YnfIheO",
+          "name": "Facebook Graph SURFIN"
         }
       },
       "onError": "continueRegularOutput"
@@ -8826,7 +8850,7 @@
           "parameters": [
             {
               "name": "access_token",
-              "value": "EAF2z8nVLTA8BQVHL88vghg4RRZBH9svUgZCP93NSZAB9iSDKxTAMvz8DFby8KVqXp6DWFxfFDiSKOUXvXPVVrJcNxjFOmr0ZCXphOZBUUWRkP8sTZC9wwapmP8vlJQN4NHH2eW9zPRmg2SHrQ0AhjI3n2kx1vAa8nOtr6tbQMhcaP0X0eMtOComwFl3zR7zd7HowZDZD"
+              "value": "EAARkjZBDLTJ8BQ40jdI1jhKQwNCaF4hnDklW8pNZBq0JW7NDh14JRDIZA1d21iMtVwXtfbZBDbwkIgBI0Yt9e8BbnPzpssaA1dsKUCXCtC7so1r6iNQJ1MJNic5WW5fWZCZBep4zlR5Mj7Ju9biFGS95lsxbJ2TTLh5tSEtGf50CAsvah78cibk4JLN12aAbBiLgZDZD"
             }
           ]
         },
@@ -8842,8 +8866,8 @@
       "name": "HTTP Request11",
       "credentials": {
         "facebookGraphApi": {
-          "id": "F7VbX8jWKCXdAM47",
-          "name": "Facebook Graph account"
+          "id": "Z1x6RxjS2YnfIheO",
+          "name": "Facebook Graph SURFIN"
         }
       }
     },
@@ -8960,31 +8984,6 @@
       ],
       "id": "db8cdce1-f555-447e-9d70-f2dca0e06cec",
       "name": "Sticky Note5"
-    },
-    {
-      "parameters": {
-        "httpRequestMethod": "POST",
-        "graphApiVersion": "v23.0",
-        "node": "17841470046184468",
-        "edge": "=media",
-        "options": {
-          "queryParametersJson": "={\n\"video_url\": \"{{ $json.job.urls[0] }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
-        }
-      },
-      "type": "n8n-nodes-base.facebookGraphApi",
-      "typeVersion": 1,
-      "position": [
-        4176,
-        -656
-      ],
-      "id": "782d8ce7-3c1d-49e2-8bab-775e52b16b6a",
-      "name": "Facebook Graph API8",
-      "credentials": {
-        "facebookGraphApi": {
-          "id": "F7VbX8jWKCXdAM47",
-          "name": "Facebook Graph account"
-        }
-      }
     },
     {
       "parameters": {
@@ -9963,7 +9962,7 @@
           "parameters": [
             {
               "name": "access_token",
-              "value": "EAF2z8nVLTA8BQVHL88vghg4RRZBH9svUgZCP93NSZAB9iSDKxTAMvz8DFby8KVqXp6DWFxfFDiSKOUXvXPVVrJcNxjFOmr0ZCXphOZBUUWRkP8sTZC9wwapmP8vlJQN4NHH2eW9zPRmg2SHrQ0AhjI3n2kx1vAa8nOtr6tbQMhcaP0X0eMtOComwFl3zR7zd7HowZDZD"
+              "value": "EAF2z8nVLTA8BQc4ZAZCmcGyEhLLt9YSqOIgkudIfrH5BcCafquEj8f1ngwPxHVZAMZBCS5051IuvX9w20rVcjAzIrt5rjT7RKSmwITVBYsQ0A5IRr9FAPPNiPxWgaoE5ecZCasfAaWPcl5ZCblu9GjXO4iVLxbq8864aibQpGkcDVXh7gbsOngeEpUzsQZCnBN89LFIbZA1JuliwZAyuKJL9hhmE3iwZBvMhpn4CoxawLzMbbamJQrn1ZC4zZAdgNZCCkTFJGBJZCemMyj5Pmz2fZC2O0YlK1oniAZDZD"
             }
           ]
         },
@@ -9979,8 +9978,8 @@
       "name": "HTTP Request30",
       "credentials": {
         "facebookGraphApi": {
-          "id": "F7VbX8jWKCXdAM47",
-          "name": "Facebook Graph account"
+          "id": "ECltAi3Up7NKSRvi",
+          "name": "Facebook Graph SNG"
         }
       }
     },
@@ -10299,7 +10298,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        5456,
+        5408,
         -2080
       ],
       "id": "1758b16a-ba56-41a9-a39f-c07d7c81e26c",
@@ -10569,7 +10568,7 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        5424,
+        5408,
         32
       ],
       "id": "cac03bb3-ae0a-4b8a-ac28-3166ee627618",
@@ -10586,31 +10585,6 @@
         "httpRequestMethod": "POST",
         "graphApiVersion": "v23.0",
         "node": "17841470046184468",
-        "edge": "=media",
-        "options": {
-          "queryParametersJson": "={\n\"video_url\": \"{{ $json.job.urls[0] }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
-        }
-      },
-      "type": "n8n-nodes-base.facebookGraphApi",
-      "typeVersion": 1,
-      "position": [
-        4208,
-        48
-      ],
-      "id": "86c3b6f3-c278-4fbf-bcb6-b3747cc44778",
-      "name": "Facebook Graph API10",
-      "credentials": {
-        "facebookGraphApi": {
-          "id": "F7VbX8jWKCXdAM47",
-          "name": "Facebook Graph account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "httpRequestMethod": "POST",
-        "graphApiVersion": "v23.0",
-        "node": "17841470046184468",
         "edge": "media_publish",
         "options": {
           "queryParametersJson": "={\n  \"creation_id\": \"{{$json.id}}\"\n}"
@@ -10619,7 +10593,7 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        4896,
+        4880,
         32
       ],
       "id": "787d4c1c-6c38-4fed-aa6f-5e12aa2c0177",
@@ -10651,7 +10625,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        4416,
+        4400,
         48
       ],
       "id": "3f56ff68-eb0d-4bec-9852-5007fb143561",
@@ -10668,7 +10642,7 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        4560,
+        4544,
         48
       ],
       "id": "77852db1-698e-48af-b5c5-c0e3b290d37c",
@@ -10702,7 +10676,7 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        4704,
+        4688,
         48
       ],
       "id": "0af9b2cd-4e9f-446b-9d50-d5cd50d4faf7",
@@ -10725,7 +10699,7 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        5056,
+        5040,
         32
       ],
       "id": "8a6d8318-c5d1-4e34-a011-2c29fd339d91",
@@ -10745,7 +10719,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        5216,
+        5200,
         32
       ],
       "id": "47d046da-0d54-4720-838b-553b7b24ec4b",
@@ -10763,7 +10737,7 @@
     },
     {
       "parameters": {
-        "content": "SNOWDIVISION\n",
+        "content": "SIERRA NEVADA VIP",
         "height": 336,
         "width": 1232,
         "color": 6
@@ -10771,7 +10745,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        4160,
+        4144,
         -48
       ],
       "id": "dc975708-50be-4a7f-976f-009f7673e979",
@@ -11001,32 +10975,7 @@
       "parameters": {
         "httpRequestMethod": "POST",
         "graphApiVersion": "v23.0",
-        "node": "17841470046184468",
-        "edge": "=media",
-        "options": {
-          "queryParametersJson": "={\n\"video_url\": \"{{ $json.job.urls[0] }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
-        }
-      },
-      "type": "n8n-nodes-base.facebookGraphApi",
-      "typeVersion": 1,
-      "position": [
-        4176,
-        -304
-      ],
-      "id": "11ed9595-588b-4c5f-9235-286f00b1f598",
-      "name": "Facebook Graph API12",
-      "credentials": {
-        "facebookGraphApi": {
-          "id": "F7VbX8jWKCXdAM47",
-          "name": "Facebook Graph account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "httpRequestMethod": "POST",
-        "graphApiVersion": "v23.0",
-        "node": "17841470046184468",
+        "node": "17841464708088425",
         "edge": "media_publish",
         "options": {
           "queryParametersJson": "={\n  \"creation_id\": \"{{$json.id}}\"\n}"
@@ -11036,14 +10985,14 @@
       "typeVersion": 1,
       "position": [
         4864,
-        -320
+        -336
       ],
       "id": "1526fc34-53c0-45e1-b820-de38f5909d35",
       "name": "Facebook Graph API13",
       "credentials": {
         "facebookGraphApi": {
-          "id": "F7VbX8jWKCXdAM47",
-          "name": "Facebook Graph account"
+          "id": "6w6O46QMsWL6zOsx",
+          "name": "Facebook Graph THESKIROOM"
         }
       },
       "onError": "continueRegularOutput"
@@ -11058,7 +11007,7 @@
           "parameters": [
             {
               "name": "access_token",
-              "value": "EAF2z8nVLTA8BQVHL88vghg4RRZBH9svUgZCP93NSZAB9iSDKxTAMvz8DFby8KVqXp6DWFxfFDiSKOUXvXPVVrJcNxjFOmr0ZCXphOZBUUWRkP8sTZC9wwapmP8vlJQN4NHH2eW9zPRmg2SHrQ0AhjI3n2kx1vAa8nOtr6tbQMhcaP0X0eMtOComwFl3zR7zd7HowZDZD"
+              "value": "EAAUV15jzbAYBQ2eOOVKr3Cpg4V7N6olBrIs2XqnEaP8rPteR8ZCsLCsMDLh9RZAqxupbOOS2hAo9Ijtln5eXOzcL9bMxpZCAF0AzEi0lA3LevqbE0hyGaLFHTB4lrY28eP4SWJwarf8IAXzKQJdKhDbjlFzIM9ZBEufZAi8OwPRVXB2rgRtg6pJZCQzRe8706ZCygZDZD"
             }
           ]
         },
@@ -11068,14 +11017,14 @@
       "typeVersion": 4.3,
       "position": [
         4384,
-        -304
+        -320
       ],
       "id": "d2d10789-b18d-4f12-8bd2-f7d76e5907b4",
       "name": "HTTP Request37",
       "credentials": {
         "facebookGraphApi": {
-          "id": "F7VbX8jWKCXdAM47",
-          "name": "Facebook Graph account"
+          "id": "6w6O46QMsWL6zOsx",
+          "name": "Facebook Graph THESKIROOM"
         }
       }
     },
@@ -11085,7 +11034,7 @@
       "typeVersion": 1.1,
       "position": [
         4528,
-        -304
+        -320
       ],
       "id": "f077bed8-6eaa-44d8-a4b2-ea4d4f88165c",
       "name": "Wait19",
@@ -11119,7 +11068,7 @@
       "typeVersion": 2.2,
       "position": [
         4672,
-        -304
+        -320
       ],
       "id": "f49022fe-97b2-451a-91e1-18d249adc70b",
       "name": "If12"
@@ -11142,7 +11091,7 @@
       "typeVersion": 3.4,
       "position": [
         5024,
-        -320
+        -336
       ],
       "id": "bc494770-50cd-4591-b0a5-7bbb9366efe2",
       "name": "Edit Fields7"
@@ -11162,7 +11111,7 @@
       "typeVersion": 4.3,
       "position": [
         5184,
-        -320
+        -336
       ],
       "id": "571b798d-bf26-47f5-a523-796c1e70cb76",
       "name": "HTTP Request38",
@@ -11179,7 +11128,7 @@
     },
     {
       "parameters": {
-        "content": "SKIROOM\n",
+        "content": "THESKIROOM\n",
         "height": 336,
         "width": 1232,
         "color": 6
@@ -11379,7 +11328,7 @@
     },
     {
       "parameters": {
-        "content": "SKIROOM",
+        "content": "THESKIROOM",
         "height": 336,
         "width": 1712
       },
@@ -11402,7 +11351,7 @@
       "typeVersion": 2.6,
       "position": [
         5392,
-        -320
+        -336
       ],
       "id": "ef56b717-4c02-4107-a5aa-5cc0127927f1",
       "name": "Eliminar Vista Skiroom",
@@ -11671,7 +11620,7 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1648,
+        1680,
         -2096
       ],
       "id": "650c318e-a391-46ad-a15e-9442f516f925",
@@ -12274,6 +12223,181 @@
           "name": "Postgres Supabase"
         }
       }
+    },
+    {
+      "parameters": {
+        "httpRequestMethod": "POST",
+        "graphApiVersion": "v23.0",
+        "node": "17841456680819227",
+        "edge": "=media",
+        "options": {
+          "queryParametersJson": "={\n\"video_url\": \"{{ $json.job.urls[0] }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
+        }
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        4160,
+        -1024
+      ],
+      "id": "bd5be653-2119-4ea4-a258-24e8452c846a",
+      "name": "Facebook Graph MESIT",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "pXCz0GAA9fNAtK3V",
+          "name": "Facebook Graph MESIT"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpRequestMethod": "POST",
+        "graphApiVersion": "v23.0",
+        "node": "17841407565799162",
+        "edge": "=media",
+        "options": {
+          "queryParametersJson": "={\n\"video_url\": \"{{ $json.job.urls[0] }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
+        }
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        4176,
+        -1376
+      ],
+      "id": "7da66ccf-8fd7-48d5-8c6d-db816b75171b",
+      "name": "Facebook Graph SNG",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "ECltAi3Up7NKSRvi",
+          "name": "Facebook Graph SNG"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpRequestMethod": "POST",
+        "graphApiVersion": "v23.0",
+        "node": "17841404130661720",
+        "edge": "=media",
+        "options": {
+          "queryParametersJson": "={\n\"video_url\": \"{{ $json.job.urls[0] }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
+        }
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        4176,
+        -1728
+      ],
+      "id": "b2d37c3b-d837-43d0-8c60-b6b641f7c06f",
+      "name": "Facebook Graph SURFIN",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "Z1x6RxjS2YnfIheO",
+          "name": "Facebook Graph SURFIN"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpRequestMethod": "POST",
+        "graphApiVersion": "v23.0",
+        "node": "17841470046184468",
+        "edge": "=media",
+        "options": {
+          "queryParametersJson": "={\n\"video_url\": \"{{ $json.job.urls[0] }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
+        }
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        4192,
+        -2080
+      ],
+      "id": "1649991c-daa3-4355-b549-f29a13970b09",
+      "name": "Facebook Graph RULES",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "F7VbX8jWKCXdAM47",
+          "name": "Facebook Graph account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpRequestMethod": "POST",
+        "graphApiVersion": "v23.0",
+        "node": "17841470046184468",
+        "edge": "=media",
+        "options": {
+          "queryParametersJson": "={\n\"video_url\": \"{{ $json.job.urls[0] }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
+        }
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        4176,
+        -656
+      ],
+      "id": "782d8ce7-3c1d-49e2-8bab-775e52b16b6a",
+      "name": "Facebook Graph SNOWDIVISION",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "F7VbX8jWKCXdAM47",
+          "name": "Facebook Graph account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpRequestMethod": "POST",
+        "graphApiVersion": "v23.0",
+        "node": "17841464708088425",
+        "edge": "=media",
+        "options": {
+          "queryParametersJson": "={\n\"video_url\": \"{{ $json.job.urls[0] }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
+        }
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        4176,
+        -320
+      ],
+      "id": "11ed9595-588b-4c5f-9235-286f00b1f598",
+      "name": "Facebook Graph THESKIROOM",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "6w6O46QMsWL6zOsx",
+          "name": "Facebook Graph THESKIROOM"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpRequestMethod": "POST",
+        "graphApiVersion": "v23.0",
+        "node": "17841470046184468",
+        "edge": "=media",
+        "options": {
+          "queryParametersJson": "={\n\"video_url\": \"{{ $json.job.urls[0] }}\",\n\"media_type\": \"STORIES\",\n\"is_story\": true\n}"
+        }
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        4192,
+        48
+      ],
+      "id": "86c3b6f3-c278-4fbf-bcb6-b3747cc44778",
+      "name": "Facebook Graph SIERRA NEVADA VIP",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "F7VbX8jWKCXdAM47",
+          "name": "Facebook Graph account"
+        }
+      }
     }
   ],
   "pinData": {
@@ -12321,7 +12445,7 @@
             "host": "n8n.tailwind.es",
             "x-forwarded-for": "2.136.43.122",
             "x-forwarded-proto": "https",
-            "content-length": "397",
+            "content-length": "379",
             "cache-control": "max-age=0",
             "authorization": "Basic VGFpbHdpbmQ6c2VsdXJzaG9w",
             "sec-ch-ua": "\"Not(A:Brand\";v=\"8\", \"Chromium\";v=\"144\", \"Brave\";v=\"144\"",
@@ -12333,7 +12457,7 @@
             "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
             "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
             "sec-gpc": "1",
-            "accept-language": "es-ES,es;q=0.8",
+            "accept-language": "es-ES,es;q=0.6",
             "sec-fetch-site": "cross-site",
             "sec-fetch-mode": "navigate",
             "sec-fetch-user": "?1",
@@ -12343,26 +12467,26 @@
           "params": {},
           "query": {},
           "body": {
-            "codigo_verificado": "995558",
-            "calidad_nieve": "polvo",
+            "codigo_verificado": "528374",
+            "calidad_nieve": "Polvo dura",
             "aspecto_cielo": "NUBOSO",
-            "visibilidad": "Buena",
-            "temp_min": "1",
-            "temp_max": "5",
-            "viento_min": "10",
-            "viento_max": "30",
-            "espesor_min": "40",
-            "espesor_max": "50",
-            "remontes_abiertos": "34",
-            "km_esquiables": "300",
-            "numero_pistas": "123",
+            "visibilidad": "total",
+            "temp_min": "-7",
+            "temp_max": "6",
+            "viento_min": "20",
+            "viento_max": "60",
+            "espesor_min": "80",
+            "espesor_max": "400",
+            "remontes_abiertos": "17",
+            "km_esquiables": "86",
+            "numero_pistas": "89",
             "pistas_abiertas[]": [
               "Veleta",
-              "Borreguiles",
+              "Laguna",
               "Cauchiles Parador",
-              "Loma Dílar"
+              "Parque Sulayr"
             ],
-            "cuentas[]": "Sierra Nevada Granada"
+            "cuentas[]": "Mesit"
           },
           "webhookUrl": "https://n8n.tailwind.es/webhook/recibirFormulario",
           "executionMode": "production"
@@ -12378,7 +12502,8 @@
     "timeSavedMode": "fixed",
     "timezone": "Europe/Madrid",
     "callerPolicy": "workflowsFromSameOwner",
-    "availableInMCP": false
+    "availableInMCP": false,
+    "errorWorkflow": "e80tfOpD4TdBh8EF"
   },
   "shared": [
     {
@@ -12396,6 +12521,6 @@
   },
   "tags": [],
   "triggerCount": 4,
-  "updatedAt": "2026-02-20T13:34:40.075Z",
-  "versionId": "9dee22ab-6c9f-41da-b581-401a4e897351"
+  "updatedAt": "2026-02-23T12:04:17.600Z",
+  "versionId": "99d24c0d-e770-4f29-9e0b-814ff949e678"
 }
