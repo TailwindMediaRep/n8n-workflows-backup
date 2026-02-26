@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-02-03T13:37:12.000Z",
-    "createdAt": "2026-02-03T13:37:11.443Z",
-    "versionId": "204d611a-24d9-4692-a652-28439c78bb44",
+    "updatedAt": "2026-02-26T08:10:25.000Z",
+    "createdAt": "2026-02-26T08:10:23.558Z",
+    "versionId": "82227b37-02b0-4721-af7d-9d3d06bb63b8",
     "workflowId": "584ehV8qDkwoHzoLSDP1n",
     "nodes": [
       {
@@ -1274,6 +1274,86 @@
         ],
         "id": "0a689d39-3746-4b8b-b67c-5405bd28b17b",
         "name": "Sticky Note14"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.manualTrigger",
+        "typeVersion": 1,
+        "position": [
+          -576,
+          1424
+        ],
+        "id": "e7eac3e2-c113-4b04-8227-f68faa037ffa",
+        "name": "When clicking ‘Execute workflow’"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "71732cc5-623e-4095-afd7-83bca8eb9ddf",
+                "leftValue": "={{ $json.data.orders.pageInfo.hasNextPage }}",
+                "rightValue": false,
+                "operator": {
+                  "type": "boolean",
+                  "operation": "true",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          0,
+          1424
+        ],
+        "id": "f8c5618e-e2fb-4fd3-9e15-50f8de104e23",
+        "name": "If"
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-01/graphql.json",
+          "query": "=query GetMonthlyOrders($queryFilter: String!, $cursor: String) {\n  orders(first: 250, query: $queryFilter, after: $cursor) {\n    pageInfo {\n      hasNextPage\n      endCursor\n    }\n    edges {\n      node {\n        name\n        createdAt\n        totalPriceSet {\n          shopMoney {\n            amount\n            currencyCode\n          }\n        }\n        user {\n          name\n        }\n        physicalLocation {\n          name\n        }\n        app {\n          name\n        }\n      }\n    }\n  }\n}",
+          "variables": "={{\n  {\n    \"queryFilter\": \"created_at:>='2026-01-01' AND created_at:<='2026-01-31'\",\n    \"cursor\": $json.data?.orders?.pageInfo?.endCursor || null\n  }\n}}"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          -208,
+          1424
+        ],
+        "id": "65fc1562-9c62-48d8-a6ff-d80e501033cd",
+        "name": "consultar shopify",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "THkhgrtze1uBo6Ft",
+            "name": "Token Informes Shopify"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "let todosLosPedidos = [];\nlet runIndex = 0;\n\n// Bucle while para revisar el historial del nodo GraphQL vuelta por vuelta\nwhile (true) {\n  try {\n    // all(branchIndex, runIndex) saca los datos de la salida principal (0) en la iteración que toque (runIndex)\n    const itemsDeEstaEjecucion = $('consultar shopify').all(0, runIndex);\n    \n    // Si nos devuelve vacío, significa que hemos llegado al final del historial del bucle y ya no hay más páginas\n    if (!itemsDeEstaEjecucion || itemsDeEstaEjecucion.length === 0) {\n      break;\n    }\n\n    // Por cada item en esta vuelta (la respuesta de GraphQL de esa página concreta)\n    for (const item of itemsDeEstaEjecucion) {\n      // Extraemos el array de pedidos (\"edges\") y si viene vacío ponemos [] para que no dé error\n      const pedidosDeEstaPagina = item.json?.data?.orders?.edges || [];\n      // Acumulamos los pedidos de esta página en nuestra lista maestra\n      todosLosPedidos.push(...pedidosDeEstaPagina);\n    }\n    \n    // Sumamos 1 para mirar la siguiente página/vuelta en el historial\n    runIndex++;\n  } catch (error) {\n    // Si n8n lanza un error al buscar un índice que no existe, salimos del bucle\n    break; \n  }\n}\n\n// Ahora calculamos el dinero total de toooodos los pedidos juntos\nlet dineroTotal = 0;\nfor (const pedido of todosLosPedidos) {\n  // Buscamos el precio. Si por algún motivo no existe, ponemos \"0\"\n  const amountStr = pedido.node?.totalPriceSet?.shopMoney?.amount || \"0\";\n  dineroTotal += parseFloat(amountStr);\n}\n\n// Preparamos la salida para el siguiente nodo (tu informe)\nreturn [{\n  json: {\n    total_pedidos: todosLosPedidos.length,\n    ingresos_totales: dineroTotal,\n    // Extraemos la moneda del primer pedido de la lista para tener el dato\n    moneda: todosLosPedidos[0]?.node?.totalPriceSet?.shopMoney?.currencyCode || \"EUR\",\n    lista_completa_pedidos: todosLosPedidos\n  }\n}];"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          224,
+          1440
+        ],
+        "id": "1f425bb9-1909-410a-941f-85119cbf904f",
+        "name": "agrupar todo"
       }
     ],
     "connections": {
@@ -1456,11 +1536,6 @@
         "main": [
           [
             {
-              "node": "Get row(s)",
-              "type": "main",
-              "index": 0
-            },
-            {
               "node": "Loop Over Items",
               "type": "main",
               "index": 0
@@ -1637,14 +1712,54 @@
             }
           ]
         ]
+      },
+      "When clicking ‘Execute workflow’": {
+        "main": [
+          [
+            {
+              "node": "consultar shopify",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If": {
+        "main": [
+          [
+            {
+              "node": "consultar shopify",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "agrupar todo",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "consultar shopify": {
+        "main": [
+          [
+            {
+              "node": "If",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version 204d611a",
+    "name": "Version 82227b37",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "204d611a-24d9-4692-a652-28439c78bb44",
+  "activeVersionId": "82227b37-02b0-4721-af7d-9d3d06bb63b8",
   "connections": {
     "Inicio de Mes (Día 1)": {
       "main": [
@@ -1996,6 +2111,46 @@
         [
           {
             "node": "Bucle: Uno a Uno",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "consultar shopify",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "consultar shopify",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "agrupar todo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "consultar shopify": {
+      "main": [
+        [
+          {
+            "node": "If",
             "type": "main",
             "index": 0
           }
@@ -3279,6 +3434,86 @@
       ],
       "id": "0a689d39-3746-4b8b-b67c-5405bd28b17b",
       "name": "Sticky Note14"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -576,
+        1424
+      ],
+      "id": "e7eac3e2-c113-4b04-8227-f68faa037ffa",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "71732cc5-623e-4095-afd7-83bca8eb9ddf",
+              "leftValue": "={{ $json.data.orders.pageInfo.hasNextPage }}",
+              "rightValue": false,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        0,
+        1424
+      ],
+      "id": "f8c5618e-e2fb-4fd3-9e15-50f8de104e23",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+        "query": "=query GetMonthlyOrders($queryFilter: String!, $cursor: String) {\n  orders(first: 250, query: $queryFilter, after: $cursor) {\n    pageInfo {\n      hasNextPage\n      endCursor\n    }\n    edges {\n      node {\n        name\n        createdAt\n        totalPriceSet {\n          shopMoney {\n            amount\n            currencyCode\n          }\n        }\n        staffMember {\n          name\n        }\n        physicalLocation {\n          name\n        }\n        app {\n          name\n        }\n      }\n    }\n  }\n}",
+        "variables": "={{\n  {\n    \"queryFilter\": \"created_at:>='2026-01-01' AND created_at:<='2026-01-31'\",\n    \"cursor\": $json.data?.orders?.pageInfo?.endCursor || null\n  }\n}}"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        -208,
+        1424
+      ],
+      "id": "65fc1562-9c62-48d8-a6ff-d80e501033cd",
+      "name": "consultar shopify",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THkhgrtze1uBo6Ft",
+          "name": "Token Informes Shopify"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "let todosLosPedidos = [];\nlet runIndex = 0;\n\n// Bucle while para revisar el historial del nodo GraphQL vuelta por vuelta\nwhile (true) {\n  try {\n    // all(branchIndex, runIndex) saca los datos de la salida principal (0) en la iteración que toque (runIndex)\n    const itemsDeEstaEjecucion = $('consultar shopify').all(0, runIndex);\n    \n    // Si nos devuelve vacío, significa que hemos llegado al final del historial del bucle y ya no hay más páginas\n    if (!itemsDeEstaEjecucion || itemsDeEstaEjecucion.length === 0) {\n      break;\n    }\n\n    // Por cada item en esta vuelta (la respuesta de GraphQL de esa página concreta)\n    for (const item of itemsDeEstaEjecucion) {\n      // Extraemos el array de pedidos (\"edges\") y si viene vacío ponemos [] para que no dé error\n      const pedidosDeEstaPagina = item.json?.data?.orders?.edges || [];\n      // Acumulamos los pedidos de esta página en nuestra lista maestra\n      todosLosPedidos.push(...pedidosDeEstaPagina);\n    }\n    \n    // Sumamos 1 para mirar la siguiente página/vuelta en el historial\n    runIndex++;\n  } catch (error) {\n    // Si n8n lanza un error al buscar un índice que no existe, salimos del bucle\n    break; \n  }\n}\n\n// Ahora calculamos el dinero total de toooodos los pedidos juntos\nlet dineroTotal = 0;\nfor (const pedido of todosLosPedidos) {\n  // Buscamos el precio. Si por algún motivo no existe, ponemos \"0\"\n  const amountStr = pedido.node?.totalPriceSet?.shopMoney?.amount || \"0\";\n  dineroTotal += parseFloat(amountStr);\n}\n\n// Preparamos la salida para el siguiente nodo (tu informe)\nreturn [{\n  json: {\n    total_pedidos: todosLosPedidos.length,\n    ingresos_totales: dineroTotal,\n    // Extraemos la moneda del primer pedido de la lista para tener el dato\n    moneda: todosLosPedidos[0]?.node?.totalPriceSet?.shopMoney?.currencyCode || \"EUR\",\n    lista_completa_pedidos: todosLosPedidos\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        224,
+        1440
+      ],
+      "id": "1f425bb9-1909-410a-941f-85119cbf904f",
+      "name": "agrupar todo"
     }
   ],
   "pinData": {},
@@ -3298,6 +3533,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-02-19T10:58:18.410Z",
-  "versionId": "6b3db283-a62d-414c-9fed-4abb11ee1b81"
+  "updatedAt": "2026-02-26T08:55:09.149Z",
+  "versionId": "44b6cbe7-444e-4b02-987f-ea1c10275660"
 }
