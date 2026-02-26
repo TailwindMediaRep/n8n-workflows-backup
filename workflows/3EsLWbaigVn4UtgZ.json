@@ -1,7 +1,2523 @@
 {
-  "active": false,
-  "activeVersion": null,
-  "activeVersionId": null,
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-02-25T10:47:50.000Z",
+    "createdAt": "2026-02-25T10:47:48.740Z",
+    "versionId": "28946e03-1fab-4f94-bc51-e3063d6ac6c9",
+    "workflowId": "3EsLWbaigVn4UtgZ",
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "venta-descuento-10",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -256,
+          -656
+        ],
+        "id": "c7a0c58a-8754-4239-9c22-da42447ffdbc",
+        "name": "Webhook",
+        "webhookId": "7bb61142-4257-48c7-b86e-f8751080012e"
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+          "query": "query getCustomerMetafields($customerId: ID!) {\n  customer(id: $customerId) {\n    id\n    firstName\n    lastName\n    email\n    phone\n    metafields(first: 10) {\n      edges {\n        node {\n          id\n          namespace\n          key\n          value\n          type\n        }\n      }\n    }\n  }\n}",
+          "variables": "={\n  \"customerId\": \"{{ $json.body.customer.admin_graphql_api_id }}\"\n}"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          432,
+          -160
+        ],
+        "id": "29b8c95c-1feb-4b70-ae06-9788cb88b619",
+        "name": "Obtener datos cliente",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "THkhgrtze1uBo6Ft",
+            "name": "Token Informes Shopify"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "const cleanData = [];\n\nfor (const item of $input.all()) {\n  const customer = item.json?.data?.customer;\n  if (!customer) continue;\n\n  const rawId = customer.id || \"\";\n  const extractedNumericId = rawId ? rawId.split('/').pop() : null;\n\n  const cleanItem = {\n    customerId: rawId || null,\n    numericId: extractedNumericId,\n    firstName: customer.firstName || \"\",\n    lastName: customer.lastName || \"\",\n    metafields: {},\n    hasDiscountOf10: false, // Empezamos asumiendo que es falso\n    totalAmount: null // Preparamos un espacio para el monto total\n  };\n\n  const edges = customer.metafields?.edges || [];\n  \n  for (const edge of edges) {\n    const node = edge?.node;\n    \n    if (node && node.key && node.value !== null && node.value !== undefined) {\n      \n      // Manejamos los descuentos (number_integer)\n      if (node.type === \"number_integer\") {\n        const discountValue = parseInt(node.value, 10);\n        cleanItem.metafields[node.key] = discountValue;\n        \n        // Si encontramos UN descuento que sea exactamente 10, lo marcamos como true\n        if (discountValue === 10) {\n          cleanItem.hasDiscountOf10 = true;\n        }\n      } \n      // Manejamos el nuevo campo de dinero (money)\n      else if (node.type === \"money\" && node.key === \"monto_total\") {\n        try {\n          const moneyData = JSON.parse(node.value);\n          cleanItem.totalAmount = parseFloat(moneyData.amount);\n        } catch (e) {\n          // Si el JSON falla, no rompemos el código\n          cleanItem.totalAmount = null; \n        }\n      }\n    }\n  }\n\n  cleanData.push({ json: cleanItem });\n}\n\nreturn cleanData;"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          608,
+          -160
+        ],
+        "id": "a8ad481f-8078-4bcf-8e86-66d8899a3ada",
+        "name": "Limpiar Datos"
+      },
+      {
+        "parameters": {
+          "operation": "select",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "Descuentos_Omnicanal",
+            "mode": "list",
+            "cachedResultName": "Descuentos_Omnicanal"
+          },
+          "where": {
+            "values": [
+              {
+                "column": "id_cliente",
+                "value": "={{ $json.numericId }}"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          976,
+          -400
+        ],
+        "id": "d00ef68a-1776-4e68-afc6-1b99f546aa11",
+        "name": "Obtener Datos Supabase",
+        "alwaysOutputData": true,
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          432,
+          32
+        ],
+        "id": "f88d1129-33b8-4d5a-98f3-a3ef12a701d0",
+        "name": "No Operation, do nothing"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "99d01e4c-a02f-4c7c-b184-ff08551b12ea",
+                "leftValue": "={{ $json.body.discount_codes[0].code }}",
+                "rightValue": "GRACIAS10",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          -32,
+          -656
+        ],
+        "id": "5d45aaa9-d5c7-4064-93b5-9b95d14dea03",
+        "name": "Si Usa Descuento"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "99d01e4c-a02f-4c7c-b184-ff08551b12ea",
+                "leftValue": "={{ $json.body.contact_email }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "string",
+                  "operation": "notEmpty",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          240,
+          -64
+        ],
+        "id": "ee879842-3340-4ba0-adb6-b0507747f9d2",
+        "name": "Si usa correo"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "9de76f66-78f3-460b-a48b-2d9d75440555",
+                "leftValue": "={{ $json.hasDiscountOf10 }}",
+                "rightValue": "false",
+                "operator": {
+                  "type": "boolean",
+                  "operation": "false",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          768,
+          -160
+        ],
+        "id": "4da891d3-c1ee-4c1f-b192-c86087fdbe45",
+        "name": "Si no tiene los descuentos activos"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "38def29d-b85b-4c27-822d-421036a309f2",
+                "leftValue": "={{ $json.id_cliente }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "string",
+                  "operation": "exists",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          1152,
+          -400
+        ],
+        "id": "e43b75b1-5fd7-43fe-bb12-8cdf5cee9886",
+        "name": "Si Está en la Base de Datos"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          1360,
+          -496
+        ],
+        "id": "b97951cf-bf32-481f-b1b0-9d920643013d",
+        "name": "No Operation, do nothing1"
+      },
+      {
+        "parameters": {
+          "operation": "upsert",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "Descuentos_Omnicanal",
+            "mode": "list",
+            "cachedResultName": "Descuentos_Omnicanal"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "id_cliente": "={{ $('Limpiar Datos').item.json.numericId }}",
+              "sucursal_rules": 10,
+              "sucursal_oakley": 10,
+              "sucursal_thenorthface": 10,
+              "sucursal_surfin": 10,
+              "sucursal_nuance": 10,
+              "sucursal_nuancelodge": 10,
+              "sucursal_melia": 10,
+              "correo": "={{ $('Obtener datos cliente').item.json.data.customer.email }}",
+              "Nombre": "={{ $('Obtener datos cliente').item.json.data.customer.firstName }} {{ $('Obtener datos cliente').item.json.data.customer.lastName }}",
+              "Teléfono": "={{ $('Obtener datos cliente').item.json.data.customer.phone }}"
+            },
+            "matchingColumns": [
+              "id_cliente"
+            ],
+            "schema": [
+              {
+                "id": "correo",
+                "displayName": "correo",
+                "required": true,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": false,
+                "removed": false
+              },
+              {
+                "id": "sucursal_rules",
+                "displayName": "sucursal_rules",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": false
+              },
+              {
+                "id": "sucursal_oakley",
+                "displayName": "sucursal_oakley",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": false
+              },
+              {
+                "id": "sucursal_thenorthface",
+                "displayName": "sucursal_thenorthface",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": false
+              },
+              {
+                "id": "sucursal_surfin",
+                "displayName": "sucursal_surfin",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": false
+              },
+              {
+                "id": "sucursal_nuance",
+                "displayName": "sucursal_nuance",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": false
+              },
+              {
+                "id": "sucursal_nuancelodge",
+                "displayName": "sucursal_nuancelodge",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": false
+              },
+              {
+                "id": "sucursal_melia",
+                "displayName": "sucursal_melia",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": false
+              },
+              {
+                "id": "id_cliente",
+                "displayName": "id_cliente",
+                "required": true,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "Nombre",
+                "displayName": "Nombre",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": false,
+                "removed": false
+              },
+              {
+                "id": "Teléfono",
+                "displayName": "Teléfono",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": false,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          1360,
+          -304
+        ],
+        "id": "0fe723f3-9430-4710-a3f1-0862ad5039c4",
+        "name": "Crear Cliente en la Base de Datos",
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "select",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "Descuentos_Omnicanal",
+            "mode": "list",
+            "cachedResultName": "Descuentos_Omnicanal"
+          },
+          "where": {
+            "values": [
+              {
+                "column": "id_cliente",
+                "value": "={{ $json.numericId }}"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          976,
+          96
+        ],
+        "id": "7350b2f2-99fc-460c-9e53-239d60f226e1",
+        "name": "Obtener Datos Supabase1",
+        "alwaysOutputData": true,
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "38def29d-b85b-4c27-822d-421036a309f2",
+                "leftValue": "={{ $json.id_cliente }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "string",
+                  "operation": "exists",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          1152,
+          96
+        ],
+        "id": "f6eb175f-a4a1-4add-b7c8-3ebe7028e726",
+        "name": "Si Está en la Base de Datos1"
+      },
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.noOp",
+        "typeVersion": 1,
+        "position": [
+          1360,
+          0
+        ],
+        "id": "f4fcad3f-882d-450c-bcb3-91844eca2516",
+        "name": "No Operation, do nothing2"
+      },
+      {
+        "parameters": {
+          "operation": "upsert",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "Descuentos_Omnicanal",
+            "mode": "list",
+            "cachedResultName": "Descuentos_Omnicanal"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "id_cliente": "={{ $('Limpiar Datos').item.json.numericId }}",
+              "sucursal_rules": 10,
+              "sucursal_oakley": 10,
+              "sucursal_thenorthface": 10,
+              "sucursal_surfin": 10,
+              "sucursal_nuance": 10,
+              "sucursal_nuancelodge": 10,
+              "sucursal_melia": 10,
+              "Nombre": "={{ $('Obtener datos cliente').item.json.data.customer.firstName }} {{ $('Obtener datos cliente').item.json.data.customer.lastName }}",
+              "correo": "={{ $('Obtener datos cliente').item.json.data.customer.email }}",
+              "Teléfono": "={{ $('Obtener datos cliente').item.json.data.customer.phone }}"
+            },
+            "matchingColumns": [
+              "id_cliente"
+            ],
+            "schema": [
+              {
+                "id": "correo",
+                "displayName": "correo",
+                "required": true,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": false,
+                "removed": false
+              },
+              {
+                "id": "sucursal_rules",
+                "displayName": "sucursal_rules",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": false
+              },
+              {
+                "id": "sucursal_oakley",
+                "displayName": "sucursal_oakley",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": false
+              },
+              {
+                "id": "sucursal_thenorthface",
+                "displayName": "sucursal_thenorthface",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": false
+              },
+              {
+                "id": "sucursal_surfin",
+                "displayName": "sucursal_surfin",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": false
+              },
+              {
+                "id": "sucursal_nuance",
+                "displayName": "sucursal_nuance",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": false
+              },
+              {
+                "id": "sucursal_nuancelodge",
+                "displayName": "sucursal_nuancelodge",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": false
+              },
+              {
+                "id": "sucursal_melia",
+                "displayName": "sucursal_melia",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": false
+              },
+              {
+                "id": "id_cliente",
+                "displayName": "id_cliente",
+                "required": true,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "Nombre",
+                "displayName": "Nombre",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": false,
+                "removed": false
+              },
+              {
+                "id": "Teléfono",
+                "displayName": "Teléfono",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": false,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          1360,
+          192
+        ],
+        "id": "52472a3c-c7de-4ade-b1bc-d562e82f6810",
+        "name": "Crear Cliente en la Base de Datos1",
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "select",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "Descuentos_Omnicanal",
+            "mode": "list",
+            "cachedResultName": "Descuentos_Omnicanal"
+          },
+          "where": {
+            "values": [
+              {
+                "column": "correo",
+                "value": "={{ $json.body.contact_email }}"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          208,
+          -1104
+        ],
+        "id": "ce745342-7c3c-4cef-8db3-9981c1069c22",
+        "name": "Obtener Datos Supabase2",
+        "alwaysOutputData": true,
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "38def29d-b85b-4c27-822d-421036a309f2",
+                "leftValue": "={{ $json.id_cliente }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "string",
+                  "operation": "exists",
+                  "singleValue": true
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          416,
+          -1104
+        ],
+        "id": "ef142d16-3fee-4d20-8d9b-b699edb1445e",
+        "name": "Si Está en la Base de Datos2"
+      },
+      {
+        "parameters": {
+          "sendTo": "emiliano@tailwind.es",
+          "subject": "ERROR EN LA BASE DE DATOS DE SUPABASE",
+          "message": "=Se ha producido una situación imposible, el cliente {{ $('Webhook').item.json.body.customer.first_name || \"Nombre\"}} {{ $('Webhook').item.json.body.customer.last_name }} ha utilizado el código de descuento de la promoción (10%) pero no está en la base de datos.",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.gmail",
+        "typeVersion": 2.2,
+        "position": [
+          592,
+          -880
+        ],
+        "id": "8e84baa3-9b4c-4777-8ad5-82f7c02f4246",
+        "name": "Send a message",
+        "webhookId": "5e37c03c-e87e-4feb-98dd-d5a7fd89c8ce",
+        "credentials": {
+          "gmailOAuth2": {
+            "id": "wR7U82S8bmDH4odC",
+            "name": "info@tailwind.es"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "rules": {
+            "values": [
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "leftValue": "={{ $('Webhook').item.json.body.location_id }}",
+                      "rightValue": 99759620443,
+                      "operator": {
+                        "type": "number",
+                        "operation": "equals"
+                      },
+                      "id": "f7bd3a7d-d6a7-4e37-9340-9a9ac7b605f1"
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "a12b5903-dd55-4cea-a0ff-9607f476687f",
+                      "leftValue": "={{ $('Webhook').item.json.body.location_id }}",
+                      "rightValue": 99018441051,
+                      "operator": {
+                        "type": "number",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "827ce9e5-d118-4026-b8f9-c7c0cd2c73fb",
+                      "leftValue": "={{ $('Webhook').item.json.body.location_id }}",
+                      "rightValue": 108915917147,
+                      "operator": {
+                        "type": "number",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "62e9eed5-3337-49ac-a6cb-9de8c99cc989",
+                      "leftValue": "={{ $('Webhook').item.json.body.location_id }}",
+                      "rightValue": 108790317403,
+                      "operator": {
+                        "type": "number",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "6194b202-f053-444c-a009-724559da04c3",
+                      "leftValue": "={{ $('Webhook').item.json.body.location_id }}",
+                      "rightValue": 108916146523,
+                      "operator": {
+                        "type": "number",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "7a9fecf7-5d91-441e-8fc1-4d8352810087",
+                      "leftValue": "={{ $('Webhook').item.json.body.location_id }}",
+                      "rightValue": 108916244827,
+                      "operator": {
+                        "type": "number",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              },
+              {
+                "conditions": {
+                  "options": {
+                    "caseSensitive": true,
+                    "leftValue": "",
+                    "typeValidation": "strict",
+                    "version": 3
+                  },
+                  "conditions": [
+                    {
+                      "id": "8542fd23-7401-44b4-b227-85d81ae7b43d",
+                      "leftValue": "={{ $('Webhook').item.json.body.location_id }}",
+                      "rightValue": 110334542171,
+                      "operator": {
+                        "type": "number",
+                        "operation": "equals"
+                      }
+                    }
+                  ],
+                  "combinator": "and"
+                }
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.switch",
+        "typeVersion": 3.4,
+        "position": [
+          592,
+          -1200
+        ],
+        "id": "17702954-7e6e-4700-9b63-26f121b5bc7c",
+        "name": "Switch"
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "Descuentos_Omnicanal",
+            "mode": "list",
+            "cachedResultName": "Descuentos_Omnicanal"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "sucursal_rules": 0,
+              "correo": "={{ $('Webhook').item.json.body.customer.email }}"
+            },
+            "matchingColumns": [
+              "correo"
+            ],
+            "schema": [
+              {
+                "id": "correo",
+                "displayName": "correo",
+                "required": true,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "sucursal_rules",
+                "displayName": "sucursal_rules",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "sucursal_oakley",
+                "displayName": "sucursal_oakley",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "sucursal_thenorthface",
+                "displayName": "sucursal_thenorthface",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "sucursal_surfin",
+                "displayName": "sucursal_surfin",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "sucursal_nuance",
+                "displayName": "sucursal_nuance",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "sucursal_nuancelodge",
+                "displayName": "sucursal_nuancelodge",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "sucursal_melia",
+                "displayName": "sucursal_melia",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "id_cliente",
+                "displayName": "id_cliente",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          864,
+          -1552
+        ],
+        "id": "702019b7-b389-46f0-963d-923a278efcaa",
+        "name": "Actualizar Rules",
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "Descuentos_Omnicanal",
+            "mode": "list",
+            "cachedResultName": "Descuentos_Omnicanal"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "sucursal_oakley": 0,
+              "correo": "={{ $json.body.contact_email }}"
+            },
+            "matchingColumns": [
+              "correo"
+            ],
+            "schema": [
+              {
+                "id": "correo",
+                "displayName": "correo",
+                "required": true,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "sucursal_rules",
+                "displayName": "sucursal_rules",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "sucursal_oakley",
+                "displayName": "sucursal_oakley",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "sucursal_thenorthface",
+                "displayName": "sucursal_thenorthface",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "sucursal_surfin",
+                "displayName": "sucursal_surfin",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "sucursal_nuance",
+                "displayName": "sucursal_nuance",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "sucursal_nuancelodge",
+                "displayName": "sucursal_nuancelodge",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "sucursal_melia",
+                "displayName": "sucursal_melia",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "id_cliente",
+                "displayName": "id_cliente",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          864,
+          -1408
+        ],
+        "id": "5af642bf-a804-4d61-b7e0-4f977001f358",
+        "name": "Actualizar Oakley",
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "Descuentos_Omnicanal",
+            "mode": "list",
+            "cachedResultName": "Descuentos_Omnicanal"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "sucursal_thenorthface": 0,
+              "correo": "={{ $json.body.contact_email }}"
+            },
+            "matchingColumns": [
+              "correo"
+            ],
+            "schema": [
+              {
+                "id": "correo",
+                "displayName": "correo",
+                "required": true,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "sucursal_rules",
+                "displayName": "sucursal_rules",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "sucursal_oakley",
+                "displayName": "sucursal_oakley",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "sucursal_thenorthface",
+                "displayName": "sucursal_thenorthface",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "sucursal_surfin",
+                "displayName": "sucursal_surfin",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "sucursal_nuance",
+                "displayName": "sucursal_nuance",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "sucursal_nuancelodge",
+                "displayName": "sucursal_nuancelodge",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "sucursal_melia",
+                "displayName": "sucursal_melia",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "id_cliente",
+                "displayName": "id_cliente",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          864,
+          -1264
+        ],
+        "id": "48414727-d4cc-46a3-9a7a-0379c1397e7f",
+        "name": "Actualizar North Face",
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "Descuentos_Omnicanal",
+            "mode": "list",
+            "cachedResultName": "Descuentos_Omnicanal"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "sucursal_surfin": 0,
+              "correo": "={{ $json.body.contact_email }}"
+            },
+            "matchingColumns": [
+              "correo"
+            ],
+            "schema": [
+              {
+                "id": "correo",
+                "displayName": "correo",
+                "required": true,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "sucursal_rules",
+                "displayName": "sucursal_rules",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "sucursal_oakley",
+                "displayName": "sucursal_oakley",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "sucursal_thenorthface",
+                "displayName": "sucursal_thenorthface",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "sucursal_surfin",
+                "displayName": "sucursal_surfin",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "sucursal_nuance",
+                "displayName": "sucursal_nuance",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "sucursal_nuancelodge",
+                "displayName": "sucursal_nuancelodge",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "sucursal_melia",
+                "displayName": "sucursal_melia",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "id_cliente",
+                "displayName": "id_cliente",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          864,
+          -1120
+        ],
+        "id": "d31eb78d-0c84-4428-939e-350a1d512f82",
+        "name": "Actualizar Surfin",
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "Descuentos_Omnicanal",
+            "mode": "list",
+            "cachedResultName": "Descuentos_Omnicanal"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "sucursal_nuance": 0,
+              "correo": "={{ $json.body.contact_email }}"
+            },
+            "matchingColumns": [
+              "correo"
+            ],
+            "schema": [
+              {
+                "id": "correo",
+                "displayName": "correo",
+                "required": true,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "sucursal_rules",
+                "displayName": "sucursal_rules",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "sucursal_oakley",
+                "displayName": "sucursal_oakley",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "sucursal_thenorthface",
+                "displayName": "sucursal_thenorthface",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "sucursal_surfin",
+                "displayName": "sucursal_surfin",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "sucursal_nuance",
+                "displayName": "sucursal_nuance",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "sucursal_nuancelodge",
+                "displayName": "sucursal_nuancelodge",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "sucursal_melia",
+                "displayName": "sucursal_melia",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "id_cliente",
+                "displayName": "id_cliente",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          864,
+          -976
+        ],
+        "id": "12f13519-82d7-46d5-8ab1-1d4b1e0fa73f",
+        "name": "Actualizar Nuance",
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "Descuentos_Omnicanal",
+            "mode": "list",
+            "cachedResultName": "Descuentos_Omnicanal"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "sucursal_nuancelodge": 0,
+              "correo": "={{ $json.body.contact_email }}"
+            },
+            "matchingColumns": [
+              "correo"
+            ],
+            "schema": [
+              {
+                "id": "correo",
+                "displayName": "correo",
+                "required": true,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "sucursal_rules",
+                "displayName": "sucursal_rules",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "sucursal_oakley",
+                "displayName": "sucursal_oakley",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "sucursal_thenorthface",
+                "displayName": "sucursal_thenorthface",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "sucursal_surfin",
+                "displayName": "sucursal_surfin",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "sucursal_nuance",
+                "displayName": "sucursal_nuance",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "sucursal_nuancelodge",
+                "displayName": "sucursal_nuancelodge",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "sucursal_melia",
+                "displayName": "sucursal_melia",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "id_cliente",
+                "displayName": "id_cliente",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          864,
+          -832
+        ],
+        "id": "0587274a-3836-4777-8f64-8a49be7ac4c2",
+        "name": "Actualizar Lodge",
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "operation": "update",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "Descuentos_Omnicanal",
+            "mode": "list",
+            "cachedResultName": "Descuentos_Omnicanal"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "sucursal_melia": 0,
+              "correo": "={{ $json.body.contact_email }}"
+            },
+            "matchingColumns": [
+              "correo"
+            ],
+            "schema": [
+              {
+                "id": "correo",
+                "displayName": "correo",
+                "required": true,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "sucursal_rules",
+                "displayName": "sucursal_rules",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "sucursal_oakley",
+                "displayName": "sucursal_oakley",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "sucursal_thenorthface",
+                "displayName": "sucursal_thenorthface",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "sucursal_surfin",
+                "displayName": "sucursal_surfin",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "sucursal_nuance",
+                "displayName": "sucursal_nuance",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "sucursal_nuancelodge",
+                "displayName": "sucursal_nuancelodge",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "sucursal_melia",
+                "displayName": "sucursal_melia",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "id_cliente",
+                "displayName": "id_cliente",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          864,
+          -688
+        ],
+        "id": "10669ced-64d0-43dc-b86e-75bcf772e087",
+        "name": "Actualizar Melia",
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+          "query": "mutation metafieldsSet($metafields: [MetafieldsSetInput!]!) {\n  metafieldsSet(metafields: $metafields) {\n    metafields {\n      id\n      namespace\n      key\n      value\n      type\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
+          "variables": "={\n  \"metafields\": [\n    {\n      \"ownerId\": \"gid://shopify/Customer/{{ $json.id_cliente }}\",\n      \"namespace\": \"custom\",\n      \"key\": \"descuento_rules\",\n      \"value\": \"{{ $json.sucursal_rules }}\",\n      \"type\": \"number_integer\"\n    },\n    {\n      \"ownerId\": \"gid://shopify/Customer/{{ $json.id_cliente }}\",\n      \"namespace\": \"custom\",\n      \"key\": \"descuento_oakley\",\n      \"value\": \"{{ $json.sucursal_oakley }}\",\n      \"type\": \"number_integer\"\n    },\n    {\n      \"ownerId\": \"gid://shopify/Customer/{{ $json.id_cliente }}\",\n      \"namespace\": \"custom\",\n      \"key\": \"descuento_thenorthface\",\n      \"value\": \"{{ $json.sucursal_thenorthface }}\",\n      \"type\": \"number_integer\"\n    },\n    {\n      \"ownerId\": \"gid://shopify/Customer/{{ $json.id_cliente }}\",\n      \"namespace\": \"custom\",\n      \"key\": \"descuento_surfin\",\n      \"value\": \"{{ $json.sucursal_surfin }}\",\n      \"type\": \"number_integer\"\n    },\n    {\n      \"ownerId\": \"gid://shopify/Customer/{{ $json.id_cliente }}\",\n      \"namespace\": \"custom\",\n      \"key\": \"descuento_nuance\",\n      \"value\": \"{{ $json.sucursal_nuance }}\",\n      \"type\": \"number_integer\"\n    },\n    {\n      \"ownerId\": \"gid://shopify/Customer/{{ $json.id_cliente }}\",\n      \"namespace\": \"custom\",\n      \"key\": \"descuento_nuancelodge\",\n      \"value\": \"{{ $json.sucursal_nuancelodge }}\",\n      \"type\": \"number_integer\"\n    },\n    {\n      \"ownerId\": \"gid://shopify/Customer/{{ $json.id_cliente }}\",\n      \"namespace\": \"custom\",\n      \"key\": \"descuento_melia\",\n      \"value\": \"{{ $json.sucursal_melia }}\",\n      \"type\": \"number_integer\"\n    }\n  ]\n}"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          1648,
+          -64
+        ],
+        "id": "bf5b2cb5-4c02-4957-b2ef-22301a1be761",
+        "name": "Crear Cliente",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "THkhgrtze1uBo6Ft",
+            "name": "Token Informes Shopify"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-01/graphql.json",
+          "query": "mutation metafieldsSet($metafields: [MetafieldsSetInput!]!) {\n  metafieldsSet(metafields: $metafields) {\n    metafields {\n      id\n      namespace\n      key\n      value\n      type\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
+          "variables": "={\n  \"metafields\": [\n    {\n      \"ownerId\": \"{{ $('Webhook').item.json.body.customer.admin_graphql_api_id }}\",\n      \"namespace\": \"custom\",\n      \"key\": \"descuento_rules\",\n      \"value\": \"0\",\n      \"type\": \"number_integer\"\n    }\n  ]\n}"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          1056,
+          -1552
+        ],
+        "id": "ea9d5966-051b-42e8-93b3-70a8a4eb8f55",
+        "name": "Graph Rules",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "THkhgrtze1uBo6Ft",
+            "name": "Token Informes Shopify"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-01/graphql.json",
+          "query": "mutation metafieldsSet($metafields: [MetafieldsSetInput!]!) {\n  metafieldsSet(metafields: $metafields) {\n    metafields {\n      id\n      namespace\n      key\n      value\n      type\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
+          "variables": "={\n  \"metafields\": [\n    {\n      \"ownerId\": \"{{ $('Webhook').item.json.body.customer.admin_graphql_api_id }}\",\n      \"namespace\": \"custom\",\n      \"key\": \"descuento_oakley\",\n      \"value\": \"0\",\n      \"type\": \"number_integer\"\n    }\n  ]\n}"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          1056,
+          -1408
+        ],
+        "id": "773e824e-cfb8-4e2d-bff6-8c485924904c",
+        "name": "Graph Oakley"
+      },
+      {
+        "parameters": {
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-01/graphql.json",
+          "query": "mutation metafieldsSet($metafields: [MetafieldsSetInput!]!) {\n  metafieldsSet(metafields: $metafields) {\n    metafields {\n      id\n      namespace\n      key\n      value\n      type\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
+          "variables": "={\n  \"metafields\": [\n    {\n      \"ownerId\": \"{{ $('Webhook').item.json.body.customer.admin_graphql_api_id }}\",\n      \"namespace\": \"custom\",\n      \"key\": \"descuento_thenorthface\",\n      \"value\": \"0\",\n      \"type\": \"number_integer\"\n    }\n  ]\n}"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          1056,
+          -1264
+        ],
+        "id": "7d197ec2-e509-4ee9-9ae2-4cac17408065",
+        "name": "Graph North Face"
+      },
+      {
+        "parameters": {
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-01/graphql.json",
+          "query": "mutation metafieldsSet($metafields: [MetafieldsSetInput!]!) {\n  metafieldsSet(metafields: $metafields) {\n    metafields {\n      id\n      namespace\n      key\n      value\n      type\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
+          "variables": "={\n  \"metafields\": [\n    {\n      \"ownerId\": \"{{ $('Webhook').item.json.body.customer.admin_graphql_api_id }}\",\n      \"namespace\": \"custom\",\n      \"key\": \"descuento_surfin\",\n      \"value\": \"0\",\n      \"type\": \"number_integer\"\n    }\n  ]\n}"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          1056,
+          -1120
+        ],
+        "id": "46e7165f-39ec-4860-be56-da244eed5c78",
+        "name": "Graph Surfin"
+      },
+      {
+        "parameters": {
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-01/graphql.json",
+          "query": "mutation metafieldsSet($metafields: [MetafieldsSetInput!]!) {\n  metafieldsSet(metafields: $metafields) {\n    metafields {\n      id\n      namespace\n      key\n      value\n      type\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
+          "variables": "={\n  \"metafields\": [\n    {\n      \"ownerId\": \"{{ $('Webhook').item.json.body.customer.admin_graphql_api_id }}\",\n      \"namespace\": \"custom\",\n      \"key\": \"descuento_nuance\",\n      \"value\": \"0\",\n      \"type\": \"number_integer\"\n    }\n  ]\n}"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          1056,
+          -976
+        ],
+        "id": "9e13b40f-4bc4-4b2c-ad94-d15a6a5a93d4",
+        "name": "Graph Nuance"
+      },
+      {
+        "parameters": {
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-01/graphql.json",
+          "query": "mutation metafieldsSet($metafields: [MetafieldsSetInput!]!) {\n  metafieldsSet(metafields: $metafields) {\n    metafields {\n      id\n      namespace\n      key\n      value\n      type\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
+          "variables": "={\n  \"metafields\": [\n    {\n      \"ownerId\": \"{{ $('Webhook').item.json.body.customer.admin_graphql_api_id }}\",\n      \"namespace\": \"custom\",\n      \"key\": \"descuento_nuancelodge\",\n      \"value\": \"0\",\n      \"type\": \"number_integer\"\n    }\n  ]\n}"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          1056,
+          -832
+        ],
+        "id": "15e3e8f9-de34-4aae-8eeb-53d56c6072e7",
+        "name": "Graph Lodge"
+      },
+      {
+        "parameters": {
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-01/graphql.json",
+          "query": "mutation metafieldsSet($metafields: [MetafieldsSetInput!]!) {\n  metafieldsSet(metafields: $metafields) {\n    metafields {\n      id\n      namespace\n      key\n      value\n      type\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
+          "variables": "={\n  \"metafields\": [\n    {\n      \"ownerId\": \"{{ $('Webhook').item.json.body.customer.admin_graphql_api_id }}\",\n      \"namespace\": \"custom\",\n      \"key\": \"descuento_melia\",\n      \"value\": \"0\",\n      \"type\": \"number_integer\"\n    }\n  ]\n}"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          1056,
+          -688
+        ],
+        "id": "e7a454c0-112c-4cbc-a2d5-72071acdf555",
+        "name": "Graph Melia"
+      },
+      {
+        "parameters": {
+          "path": "leerqr",
+          "responseMode": "responseNode",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          2304,
+          -768
+        ],
+        "id": "50d47124-56fb-448c-95b1-1aff6feb6b2f",
+        "name": "Leerqr",
+        "webhookId": "b9dc3bb5-70bc-4d91-b08a-192f8a1bf4eb"
+      },
+      {
+        "parameters": {
+          "respondWith": "text",
+          "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Tus Descuentos</title>\n  <style>\n    body { \n      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; \n      padding: 20px; \n      max-width: 600px; /* Lo he ampliado un poco para que quepa bien la nueva columna */\n      margin: 0 auto; \n      color: #333;\n    }\n    .header { text-align: center; margin-bottom: 30px; }\n    h2 { color: #000; margin-bottom: 5px; }\n    p { color: #555; }\n    table { \n      width: 100%; \n      border-collapse: collapse; \n      margin-top: 20px; \n      box-shadow: 0 1px 3px rgba(0,0,0,0.1);\n      border-radius: 8px;\n      overflow: hidden;\n    }\n    th, td { \n      padding: 14px 15px; \n      text-align: left; \n      border-bottom: 1px solid #eee; \n      vertical-align: middle;\n    }\n    th { \n      background-color: #f4f6f8; \n      font-weight: 600; \n      color: #333;\n    }\n    tr:last-child td { border-bottom: none; }\n    tr:hover { background-color: #f9f9f9; }\n    .discount-badge { \n      background-color: #000; \n      color: #fff; \n      padding: 4px 10px; \n      border-radius: 20px; \n      font-weight: bold; \n      font-size: 14px;\n    }\n    .no-data { text-align: center; padding: 30px; color: #666; background: #f9f9f9; border-radius: 8px; }\n    \n    /* ESTILOS NUEVOS PARA EL BOTÓN DEL MAPA */\n    .map-btn {\n      display: inline-block;\n      background-color: #f4f6f8;\n      color: #333;\n      padding: 6px 12px;\n      border-radius: 6px;\n      text-decoration: none;\n      font-size: 13px;\n      font-weight: 600;\n      border: 1px solid #ddd;\n      transition: all 0.2s;\n    }\n    .map-btn:hover {\n      background-color: #e2e6ea;\n      color: #000;\n      border-color: #ccc;\n    }\n  </style>\n</head>\n<body>\n\n  {{ \n    (() => {\n      const items = $input.all();\n      if (items.length === 0) {\n        return `\n          <div class=\"header\">\n            <h2>¡Hola!</h2>\n          </div>\n          <div class=\"no-data\">\n            <p>No hemos encontrado tu perfil en nuestra base de datos o hubo un error al leer el QR.</p>\n          </div>\n        `;\n      }\n\n      const data = items[0].json;\n      \n      // 3. AÑADIDA LA PROPIEDAD \"url\" A CADA SUCURSAL (Sustituye estos enlaces por los tuyos reales)\n      const sucursales = [\n        { key: 'sucursal_rules', name: 'Rules Outlet', url: 'https://maps.app.goo.gl/2zcHYJzYi4mku9Bw5' },\n        { key: 'sucursal_oakley', name: 'Rules Oakley', url: 'https://maps.app.goo.gl/T81E6eXNTRWc86nj9' },\n        { key: 'sucursal_thenorthface', name: 'Rules The North Face', url: 'https://maps.app.goo.gl/T81E6eXNTRWc86nj9' },\n        { key: 'sucursal_surfin', name: 'Surfin', url: 'https://maps.app.goo.gl/18GNbRyLLukuo4m57' },\n        { key: 'sucursal_nuance', name: 'Nuance', url: 'https://maps.app.goo.gl/Farx9QjYyZX294pe7' },\n        { key: 'sucursal_nuancelodge', name: 'Nuance Lodge', url: 'https://maps.app.goo.gl/ND7hyiUQMVSpJ2G96' },\n        { key: 'sucursal_melia', name: 'Meliá Sierra Nevada', url: 'https://maps.app.goo.gl/Cf146WRdUBgxN8KT8' }\n      ];\n\n      const descuentosActivos = sucursales.filter(s => parseInt(data[s.key] || 0) > 0);\n\n      let html = `\n        <div class=\"header\">\n          <h2>¡Hola, ${data.Nombre}!</h2>\n          <p>Aquí tienes tus descuentos activos en nuestras sucursales:</p>\n        </div>\n      `;\n\n      if (descuentosActivos.length === 0) {\n        html += '<div class=\"no-data\"><p>Actualmente no tienes descuentos activos. ¡Sigue comprando para acumular más!</p></div>';\n      } else {\n        // AÑADIDA LA CABECERA \"Ubicación\"\n        html += '<table><thead><tr><th>Sucursal</th><th>Descuento</th><th>Ubicación</th></tr></thead><tbody>';\n        \n        descuentosActivos.forEach(s => {\n          html += `\n            <tr>\n              <td><strong>${s.name}</strong></td>\n              <td><span class=\"discount-badge\">${data[s.key]}%</span></td>\n              <td><a href=\"${s.url}\" target=\"_top\" rel=\"noopener noreferrer\" class=\"map-btn\">📍 Ver mapa</a></td>\n            </tr>\n          `;\n        });\n        \n        html += '</tbody></table>';\n      }\n\n      return html;\n    })()\n  }}\n\n</body>\n</html>",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.5,
+        "position": [
+          2928,
+          -896
+        ],
+        "id": "ba3dd16e-f146-4321-8ca0-9d6e1903c0d4",
+        "name": "Respond to Webhook"
+      },
+      {
+        "parameters": {
+          "operation": "select",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "Descuentos_Omnicanal",
+            "mode": "list",
+            "cachedResultName": "Descuentos_Omnicanal"
+          },
+          "where": {
+            "values": [
+              {
+                "column": "correo",
+                "value": "={{ $json.query.cliente_id }}"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          2496,
+          -768
+        ],
+        "id": "854c91f8-93f3-46f5-a1de-ec03fa9b4a3e",
+        "name": "Select rows from a table",
+        "alwaysOutputData": true,
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "f21ae0da-a295-4cd1-8995-371cea53875c",
+                "leftValue": "={{ $json.correo }}",
+                "rightValue": "={{ $('Leerqr').item.json.query.cliente_id }}",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals"
+                }
+              },
+              {
+                "id": "a290fb24-def7-44a8-92a0-4e4e45aab496",
+                "leftValue": "={{ $json.id_cliente }}",
+                "rightValue": "={{ $('Leerqr').item.json.query.shop_id }}",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          2656,
+          -768
+        ],
+        "id": "ceec1aba-9719-4440-b3ec-a563293b9876",
+        "name": "If"
+      },
+      {
+        "parameters": {
+          "respondWith": "text",
+          "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Tus Descuentos</title>\n  <style>\n    body { \n      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; \n      padding: 20px; \n      max-width: 500px; \n      margin: 0 auto; \n      color: #333;\n    }\n    .header { text-align: center; margin-bottom: 30px; }\n    h2 { color: #000; margin-bottom: 5px; }\n    p { color: #555; }\n    .no-data { \n      text-align: center; \n      padding: 30px; \n      color: #666; \n      background: #f9f9f9; \n      border-radius: 8px; \n      line-height: 1.5;\n    }\n  </style>\n</head>\n<body>\n\n  <div class=\"header\">\n    <h2>¡Hola!</h2>\n  </div>\n  \n  <div class=\"no-data\">\n    <p><strong>No tienes cuenta de cliente.</strong></p>\n    <p>Puedes crearla haciendo una compra en una de nuestras sucursales y facilitando tu correo electrónico al empleado.</p>\n  </div>\n\n</body>\n</html>",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.5,
+        "position": [
+          2928,
+          -672
+        ],
+        "id": "f38e9265-197e-4c46-9dff-bcc9cd8b5d68",
+        "name": "Respond to Webhook1"
+      },
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "verificar-telefono",
+          "responseMode": "responseNode",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          1792,
+          -496
+        ],
+        "id": "d79d1eb9-0d64-4eb2-8c2a-39aa49419fe7",
+        "name": "Verificar Teléfono",
+        "webhookId": "29870e65-cb57-4b87-afd5-a8729ec506f3"
+      }
+    ],
+    "connections": {
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "Si Usa Descuento",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Obtener datos cliente": {
+        "main": [
+          [
+            {
+              "node": "Limpiar Datos",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Limpiar Datos": {
+        "main": [
+          [
+            {
+              "node": "Si no tiene los descuentos activos",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Obtener Datos Supabase": {
+        "main": [
+          [
+            {
+              "node": "Si Está en la Base de Datos",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Si Usa Descuento": {
+        "main": [
+          [
+            {
+              "node": "Obtener Datos Supabase2",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Si usa correo",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Si usa correo": {
+        "main": [
+          [
+            {
+              "node": "Obtener datos cliente",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "No Operation, do nothing",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Si no tiene los descuentos activos": {
+        "main": [
+          [
+            {
+              "node": "Obtener Datos Supabase",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Obtener Datos Supabase1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Si Está en la Base de Datos": {
+        "main": [
+          [
+            {
+              "node": "No Operation, do nothing1",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Crear Cliente en la Base de Datos",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Obtener Datos Supabase1": {
+        "main": [
+          [
+            {
+              "node": "Si Está en la Base de Datos1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Si Está en la Base de Datos1": {
+        "main": [
+          [
+            {
+              "node": "No Operation, do nothing2",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Crear Cliente en la Base de Datos1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Obtener Datos Supabase2": {
+        "main": [
+          [
+            {
+              "node": "Si Está en la Base de Datos2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Si Está en la Base de Datos2": {
+        "main": [
+          [
+            {
+              "node": "Switch",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Send a message",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Switch": {
+        "main": [
+          [
+            {
+              "node": "Actualizar Rules",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Actualizar Oakley",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Actualizar North Face",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Actualizar Surfin",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Actualizar Nuance",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Actualizar Lodge",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Actualizar Melia",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Crear Cliente en la Base de Datos": {
+        "main": [
+          [
+            {
+              "node": "Crear Cliente",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Actualizar Rules": {
+        "main": [
+          [
+            {
+              "node": "Graph Rules",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Actualizar Oakley": {
+        "main": [
+          [
+            {
+              "node": "Graph Oakley",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Actualizar North Face": {
+        "main": [
+          [
+            {
+              "node": "Graph North Face",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Actualizar Surfin": {
+        "main": [
+          [
+            {
+              "node": "Graph Surfin",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Actualizar Nuance": {
+        "main": [
+          [
+            {
+              "node": "Graph Nuance",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Actualizar Lodge": {
+        "main": [
+          [
+            {
+              "node": "Graph Lodge",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Actualizar Melia": {
+        "main": [
+          [
+            {
+              "node": "Graph Melia",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Crear Cliente en la Base de Datos1": {
+        "main": [
+          [
+            {
+              "node": "Crear Cliente",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Leerqr": {
+        "main": [
+          [
+            {
+              "node": "Select rows from a table",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Select rows from a table": {
+        "main": [
+          [
+            {
+              "node": "If",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "If": {
+        "main": [
+          [
+            {
+              "node": "Respond to Webhook",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Respond to Webhook1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Verificar Teléfono": {
+        "main": [
+          []
+        ]
+      }
+    },
+    "authors": "Tailwind Media",
+    "name": "Version 28946e03",
+    "description": "",
+    "autosaved": false
+  },
+  "activeVersionId": "28946e03-1fab-4f94-bc51-e3063d6ac6c9",
   "connections": {
     "Webhook": {
       "main": [
@@ -344,11 +2860,34 @@
       "main": [
         [
           {
-            "node": "Respond to Webhook",
+            "node": "If",
             "type": "main",
             "index": 0
           }
         ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond to Webhook1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verificar Teléfono": {
+      "main": [
+        []
       ]
     }
   },
@@ -380,7 +2919,7 @@
       "parameters": {
         "authentication": "headerAuth",
         "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
-        "query": "query getCustomerMetafields($customerId: ID!) {\n  customer(id: $customerId) {\n    id\n    firstName\n    lastName\n    email\n    metafields(first: 10) {\n      edges {\n        node {\n          id\n          namespace\n          key\n          value\n          type\n        }\n      }\n    }\n  }\n}",
+        "query": "query getCustomerMetafields($customerId: ID!) {\n  customer(id: $customerId) {\n    id\n    firstName\n    lastName\n    email\n    phone\n    metafields(first: 10) {\n      edges {\n        node {\n          id\n          namespace\n          key\n          value\n          type\n        }\n      }\n    }\n  }\n}",
         "variables": "={\n  \"customerId\": \"{{ $json.body.customer.admin_graphql_api_id }}\"\n}"
       },
       "type": "n8n-nodes-base.graphql",
@@ -634,7 +3173,8 @@
             "sucursal_nuancelodge": 10,
             "sucursal_melia": 10,
             "correo": "={{ $('Obtener datos cliente').item.json.data.customer.email }}",
-            "Nombre": "={{ $('Obtener datos cliente').item.json.data.customer.firstName }} {{ $('Obtener datos cliente').item.json.data.customer.lastName }}"
+            "Nombre": "={{ $('Obtener datos cliente').item.json.data.customer.firstName }} {{ $('Obtener datos cliente').item.json.data.customer.lastName }}",
+            "Teléfono": "={{ $('Obtener datos cliente').item.json.data.customer.phone }}"
           },
           "matchingColumns": [
             "id_cliente"
@@ -726,6 +3266,16 @@
             {
               "id": "Nombre",
               "displayName": "Nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false,
+              "removed": false
+            },
+            {
+              "id": "Teléfono",
+              "displayName": "Teléfono",
               "required": false,
               "defaultMatch": false,
               "display": true,
@@ -865,7 +3415,8 @@
             "sucursal_nuancelodge": 10,
             "sucursal_melia": 10,
             "Nombre": "={{ $('Obtener datos cliente').item.json.data.customer.firstName }} {{ $('Obtener datos cliente').item.json.data.customer.lastName }}",
-            "correo": "={{ $('Obtener datos cliente').item.json.data.customer.email }}"
+            "correo": "={{ $('Obtener datos cliente').item.json.data.customer.email }}",
+            "Teléfono": "={{ $('Obtener datos cliente').item.json.data.customer.phone }}"
           },
           "matchingColumns": [
             "id_cliente"
@@ -957,6 +3508,16 @@
             {
               "id": "Nombre",
               "displayName": "Nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false,
+              "removed": false
+            },
+            {
+              "id": "Teléfono",
+              "displayName": "Teléfono",
               "required": false,
               "defaultMatch": false,
               "display": true,
@@ -1063,7 +3624,7 @@
       "parameters": {
         "sendTo": "emiliano@tailwind.es",
         "subject": "ERROR EN LA BASE DE DATOS DE SUPABASE",
-        "message": "=Se ha producido una situación imposible, el cliente  {{ $('Webhook').item.json.body.billing_address.first_name || \"Nombre\" }} {{ $('Webhook').item.json.body.billing_address.last_name || \"Apellido\"}} ha utilizado el código de descuento de la promoción (10%) pero no está en la base de datos.",
+        "message": "=Se ha producido una situación imposible, el cliente {{ $('Webhook').item.json.body.customer.first_name || \"Nombre\"}} {{ $('Webhook').item.json.body.customer.last_name }} ha utilizado el código de descuento de la promoción (10%) pero no está en la base de datos.",
         "options": {}
       },
       "type": "n8n-nodes-base.gmail",
@@ -1077,8 +3638,8 @@
       "webhookId": "5e37c03c-e87e-4feb-98dd-d5a7fd89c8ce",
       "credentials": {
         "gmailOAuth2": {
-          "id": "fha7KwAzrDSA7OXO",
-          "name": "ventas@sierranevadagranada.com"
+          "id": "wR7U82S8bmDH4odC",
+          "name": "info@tailwind.es"
         }
       }
     },
@@ -2343,15 +4904,15 @@
     },
     {
       "parameters": {
-        "respondWith": "redirect",
-        "redirectURL": "https://",
+        "respondWith": "text",
+        "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Tus Descuentos</title>\n  <style>\n    body { \n      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; \n      padding: 20px; \n      max-width: 600px; /* Lo he ampliado un poco para que quepa bien la nueva columna */\n      margin: 0 auto; \n      color: #333;\n    }\n    .header { text-align: center; margin-bottom: 30px; }\n    h2 { color: #000; margin-bottom: 5px; }\n    p { color: #555; }\n    table { \n      width: 100%; \n      border-collapse: collapse; \n      margin-top: 20px; \n      box-shadow: 0 1px 3px rgba(0,0,0,0.1);\n      border-radius: 8px;\n      overflow: hidden;\n    }\n    th, td { \n      padding: 14px 15px; \n      text-align: left; \n      border-bottom: 1px solid #eee; \n      vertical-align: middle;\n    }\n    th { \n      background-color: #f4f6f8; \n      font-weight: 600; \n      color: #333;\n    }\n    tr:last-child td { border-bottom: none; }\n    tr:hover { background-color: #f9f9f9; }\n    .discount-badge { \n      background-color: #000; \n      color: #fff; \n      padding: 4px 10px; \n      border-radius: 20px; \n      font-weight: bold; \n      font-size: 14px;\n    }\n    .no-data { text-align: center; padding: 30px; color: #666; background: #f9f9f9; border-radius: 8px; }\n    \n    /* ESTILOS NUEVOS PARA EL BOTÓN DEL MAPA */\n    .map-btn {\n      display: inline-block;\n      background-color: #f4f6f8;\n      color: #333;\n      padding: 6px 12px;\n      border-radius: 6px;\n      text-decoration: none;\n      font-size: 13px;\n      font-weight: 600;\n      border: 1px solid #ddd;\n      transition: all 0.2s;\n    }\n    .map-btn:hover {\n      background-color: #e2e6ea;\n      color: #000;\n      border-color: #ccc;\n    }\n  </style>\n</head>\n<body>\n\n  {{ \n    (() => {\n      const items = $input.all();\n      if (items.length === 0) {\n        return `\n          <div class=\"header\">\n            <h2>¡Hola!</h2>\n          </div>\n          <div class=\"no-data\">\n            <p>No hemos encontrado tu perfil en nuestra base de datos o hubo un error al leer el QR.</p>\n          </div>\n        `;\n      }\n\n      const data = items[0].json;\n      \n      // 3. AÑADIDA LA PROPIEDAD \"url\" A CADA SUCURSAL (Sustituye estos enlaces por los tuyos reales)\n      const sucursales = [\n        { key: 'sucursal_rules', name: 'Rules Outlet', url: 'https://maps.app.goo.gl/2zcHYJzYi4mku9Bw5' },\n        { key: 'sucursal_oakley', name: 'Rules Oakley', url: 'https://maps.app.goo.gl/T81E6eXNTRWc86nj9' },\n        { key: 'sucursal_thenorthface', name: 'Rules The North Face', url: 'https://maps.app.goo.gl/T81E6eXNTRWc86nj9' },\n        { key: 'sucursal_surfin', name: 'Surfin', url: 'https://maps.app.goo.gl/18GNbRyLLukuo4m57' },\n        { key: 'sucursal_nuance', name: 'Nuance', url: 'https://maps.app.goo.gl/Farx9QjYyZX294pe7' },\n        { key: 'sucursal_nuancelodge', name: 'Nuance Lodge', url: 'https://maps.app.goo.gl/ND7hyiUQMVSpJ2G96' },\n        { key: 'sucursal_melia', name: 'Meliá Sierra Nevada', url: 'https://maps.app.goo.gl/Cf146WRdUBgxN8KT8' }\n      ];\n\n      const descuentosActivos = sucursales.filter(s => parseInt(data[s.key] || 0) > 0);\n\n      let html = `\n        <div class=\"header\">\n          <h2>¡Hola, ${data.Nombre}!</h2>\n          <p>Aquí tienes tus descuentos activos en nuestras sucursales:</p>\n        </div>\n      `;\n\n      if (descuentosActivos.length === 0) {\n        html += '<div class=\"no-data\"><p>Actualmente no tienes descuentos activos. ¡Sigue comprando para acumular más!</p></div>';\n      } else {\n        // AÑADIDA LA CABECERA \"Ubicación\"\n        html += '<table><thead><tr><th>Sucursal</th><th>Descuento</th><th>Ubicación</th></tr></thead><tbody>';\n        \n        descuentosActivos.forEach(s => {\n          html += `\n            <tr>\n              <td><strong>${s.name}</strong></td>\n              <td><span class=\"discount-badge\">${data[s.key]}%</span></td>\n              <td><a href=\"${s.url}\" target=\"_top\" rel=\"noopener noreferrer\" class=\"map-btn\">📍 Ver mapa</a></td>\n            </tr>\n          `;\n        });\n        \n        html += '</tbody></table>';\n      }\n\n      return html;\n    })()\n  }}\n\n</body>\n</html>",
         "options": {}
       },
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        2736,
-        -768
+        2928,
+        -896
       ],
       "id": "ba3dd16e-f146-4321-8ca0-9d6e1903c0d4",
       "name": "Respond to Webhook"
@@ -2383,70 +4944,222 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        2512,
+        2496,
         -768
       ],
       "id": "854c91f8-93f3-46f5-a1de-ec03fa9b4a3e",
       "name": "Select rows from a table",
+      "alwaysOutputData": true,
       "credentials": {
         "postgres": {
           "id": "UPETCYNZNCReuZu8",
           "name": "Postgres Supabase"
         }
       }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "f21ae0da-a295-4cd1-8995-371cea53875c",
+              "leftValue": "={{ $json.correo }}",
+              "rightValue": "={{ $('Leerqr').item.json.query.cliente_id }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "a290fb24-def7-44a8-92a0-4e4e45aab496",
+              "leftValue": "={{ $json.id_cliente }}",
+              "rightValue": "={{ $('Leerqr').item.json.query.shop_id }}",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        2656,
+        -768
+      ],
+      "id": "ceec1aba-9719-4440-b3ec-a563293b9876",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Tus Descuentos</title>\n  <style>\n    body { \n      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; \n      padding: 20px; \n      max-width: 500px; \n      margin: 0 auto; \n      color: #333;\n    }\n    .header { text-align: center; margin-bottom: 30px; }\n    h2 { color: #000; margin-bottom: 5px; }\n    p { color: #555; }\n    .no-data { \n      text-align: center; \n      padding: 30px; \n      color: #666; \n      background: #f9f9f9; \n      border-radius: 8px; \n      line-height: 1.5;\n    }\n  </style>\n</head>\n<body>\n\n  <div class=\"header\">\n    <h2>¡Hola!</h2>\n  </div>\n  \n  <div class=\"no-data\">\n    <p><strong>No tienes cuenta de cliente.</strong></p>\n    <p>Puedes crearla haciendo una compra en una de nuestras sucursales y facilitando tu correo electrónico al empleado.</p>\n  </div>\n\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        2928,
+        -672
+      ],
+      "id": "f38e9265-197e-4c46-9dff-bcc9cd8b5d68",
+      "name": "Respond to Webhook1"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "verificar-telefono",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        1792,
+        -496
+      ],
+      "id": "d79d1eb9-0d64-4eb2-8c2a-39aa49419fe7",
+      "name": "Verificar Teléfono",
+      "webhookId": "29870e65-cb57-4b87-afd5-a8729ec506f3"
     }
   ],
   "pinData": {
+    "Verificar Teléfono": [
+      {
+        "json": {
+          "headers": {
+            "connection": "upgrade",
+            "host": "n8n.tailwind.es",
+            "x-forwarded-for": "2.136.43.122",
+            "x-forwarded-proto": "https",
+            "content-length": "44",
+            "cache-control": "max-age=0",
+            "sec-ch-ua": "\"Not(A:Brand\";v=\"8\", \"Chromium\";v=\"144\", \"Brave\";v=\"144\"",
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": "\"Linux\"",
+            "upgrade-insecure-requests": "1",
+            "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+            "origin": "null",
+            "content-type": "application/x-www-form-urlencoded",
+            "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+            "sec-gpc": "1",
+            "accept-language": "es-ES,es;q=0.8",
+            "sec-fetch-site": "cross-site",
+            "sec-fetch-mode": "navigate",
+            "sec-fetch-user": "?1",
+            "sec-fetch-dest": "document",
+            "accept-encoding": "gzip, deflate, br, zstd"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "email": "prueba@prueba.com",
+            "telefono": "666665566"
+          },
+          "webhookUrl": "https://n8n.tailwind.es/webhook/verificar-telefono",
+          "executionMode": "production"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
+    "Leerqr": [
+      {
+        "json": {
+          "headers": {
+            "connection": "upgrade",
+            "host": "n8n.tailwind.es",
+            "x-forwarded-for": "2.136.43.122",
+            "x-forwarded-proto": "https",
+            "upgrade-insecure-requests": "1",
+            "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+            "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+            "sec-ch-ua": "\"Not(A:Brand\";v=\"8\", \"Chromium\";v=\"144\", \"Brave\";v=\"144\"",
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": "\"Linux\"",
+            "sec-gpc": "1",
+            "accept-language": "es-ES,es;q=0.8",
+            "sec-fetch-site": "none",
+            "sec-fetch-mode": "navigate",
+            "sec-fetch-user": "?1",
+            "sec-fetch-dest": "document",
+            "accept-encoding": "gzip, deflate, br, zstd",
+            "cookie": "rl_page_init_referrer=RudderEncrypt%3AU2FsdGVkX1%2BV9ocwrf5sZKAZ84sclnSKoaVf7etXsrg%3D; rl_page_init_referring_domain=RudderEncrypt%3AU2FsdGVkX1%2B6nug6a8u7blNBcZ1adVwerK%2FtQl6fPIc%3D; rl_anonymous_id=RudderEncrypt%3AU2FsdGVkX19LBO%2FDVizAFG4ADsfdxTqJXho3lw%2ByncEgye5GJJkWTW8f9eQiKgBxAXYTVn5c%2B2MK3IEQ7ezNLQ%3D%3D; rl_user_id=RudderEncrypt%3AU2FsdGVkX19dvAkEVmn0yOIM4Wg6okrz%2B4BpIkD6x4JKN73ZzLXedScZ9zrdFo67wV5xmmI707y0PY4cMnEXHK4xuO66uBY1uGSsyT4dJ1wW59jwMRZ7oGHTF%2BZUPxv%2FY5hk5BqkWstjG90F%2BB2qpId0CkS6B4t6Z7n%2FPhnEO%2BI%3D; rl_trait=RudderEncrypt%3AU2FsdGVkX19X%2BUc%2BS%2FDHxR438OQAG7jI5QY5Q%2Brkc8xdYfoaCfQob6wDTyuf91O%2FXXH219gV8Vx6VgYp4wz4OZ08BXK0%2Bv0Xp8PDpFvKGwX7F7onwCGZOr9IVpSSY3G0qFmXbHH%2FPPyrxf4Y%2FoUNFm5obJr2jqUBpmkSSEWijEo%3D; rl_session=RudderEncrypt%3AU2FsdGVkX1%2FLBF1vRSQny7FG8928Gmjdybyb5eujJxci2HlSxyopyjFkVhQt1VeMEBvmO3CwFGJGQhpogOMSHj4rTUlLsHDwvvLuqgDDF6WX889yrNPW7pwzRFo8FkpHyfM04qWiylOXAwrRBC4XnA%3D%3D; ph_phc_4URIAm1uYfJO7j8kWSe0J8lc8IqnstRLS7Jx8NcakHo_posthog=%7B%22%24device_id%22%3A%22019c6590-a8c0-7936-9706-9d6324646ac4%22%2C%22distinct_id%22%3A%220f6825be298b3a005d52154ed2c929ac7758de54b6ab4a8d7eb7a8e83f623918%2308853e58-b9e7-4eaa-a226-f2a3e30187ec%22%2C%22%24sesid%22%3A%5B1772008993165%2C%22019c93b6-e20b-7795-91a3-cb170a61ce9e%22%2C1772004762114%5D%2C%22%24epp%22%3Atrue%2C%22%24initial_person_info%22%3A%7B%22r%22%3A%22%24direct%22%2C%22u%22%3A%22https%3A%2F%2Fn8n.tailwind.es%2F%22%7D%7D"
+          },
+          "params": {},
+          "query": {
+            "cliente_id": "prueba@prueba.com",
+            "shop_id": "9488191390043"
+          },
+          "body": {},
+          "webhookUrl": "https://n8n.tailwind.es/webhook/leerqr",
+          "executionMode": "production"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
     "Webhook": [
       {
         "json": {
           "headers": {
             "connection": "upgrade",
             "host": "n8n.tailwind.es",
-            "x-forwarded-for": "34.38.110.42",
+            "x-forwarded-for": "34.34.152.237",
             "x-forwarded-proto": "https",
-            "content-length": "9139",
+            "content-length": "14842",
             "user-agent": "Shopify-Captain-Hook",
             "accept": "*/*",
             "accept-encoding": "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
             "content-type": "application/json",
             "x-shopify-api-version": "2026-01",
-            "x-shopify-event-id": "87c8e9c6-f9b7-459d-ac00-554565f463c0",
-            "x-shopify-hmac-sha256": "//mfqFjfeqrTGsD9YoiaHR2S4Mp8HmYK2e/ZZk9BE/g=",
-            "x-shopify-order-id": "7725905477979",
+            "x-shopify-event-id": "8755f6fa-7316-44a3-95b3-471ef366f9ef",
+            "x-shopify-hmac-sha256": "HvP4AQnwKs0DfKAZnCpv4RoKiHXTqNHpzawsW95jrrs=",
+            "x-shopify-order-id": "7728502931803",
             "x-shopify-shop-domain": "surfin-store-spain.myshopify.com",
             "x-shopify-test": "false",
             "x-shopify-topic": "orders/create",
-            "x-shopify-triggered-at": "2026-02-23T19:13:24.801313144Z",
-            "x-shopify-webhook-id": "8cdac345-ec89-595f-911d-6bdb058b9f99"
+            "x-shopify-triggered-at": "2026-02-24T18:37:51.347991186Z",
+            "x-shopify-webhook-id": "5762349f-0534-5267-ad16-68cb43cbe091"
           },
           "params": {},
           "query": {},
           "body": {
-            "id": 7725905477979,
-            "admin_graphql_api_id": "gid://shopify/Order/7725905477979",
+            "id": 7728502931803,
+            "admin_graphql_api_id": "gid://shopify/Order/7728502931803",
             "app_id": 129785,
-            "browser_ip": "81.38.165.70",
-            "buyer_accepts_marketing": false,
+            "browser_ip": "2.136.43.55",
+            "buyer_accepts_marketing": true,
             "cancel_reason": null,
             "cancelled_at": null,
             "cart_token": null,
-            "checkout_id": 48432596844891,
-            "checkout_token": "a0609cf0-b9e7-4f57-9d71-01dc0183637e",
+            "checkout_id": 48438242443611,
+            "checkout_token": "d033927e-f352-43b0-b966-1eeec77f70f1",
             "client_details": {
               "accept_language": null,
               "browser_height": null,
-              "browser_ip": "81.38.165.70",
+              "browser_ip": "2.136.43.55",
               "browser_width": null,
               "session_hash": null,
-              "user_agent": "Shopify POS/10.15.2/Android/15/Redmi/25040RP0AE/production"
+              "user_agent": "Shopify POS/10.20.1/Android/15/samsung/SM-X210R/production"
             },
-            "closed_at": "2026-02-23T20:13:25+01:00",
+            "closed_at": "2026-02-24T19:37:51+01:00",
             "company": null,
-            "confirmation_number": "CVEVE8KFD",
+            "confirmation_number": "Z0E9UDGQZ",
             "confirmed": true,
-            "contact_email": "vcn@bcs.pt",
-            "created_at": "2026-02-23T20:13:23+01:00",
+            "contact_email": "sendtocj@gmail.com",
+            "created_at": "2026-02-24T19:37:50+01:00",
             "currency": "EUR",
             "current_shipping_price_set": {
               "shop_money": {
@@ -2458,14 +5171,14 @@
                 "currency_code": "EUR"
               }
             },
-            "current_subtotal_price": "156.00",
+            "current_subtotal_price": "269.00",
             "current_subtotal_price_set": {
               "shop_money": {
-                "amount": "156.00",
+                "amount": "269.00",
                 "currency_code": "EUR"
               },
               "presentment_money": {
-                "amount": "156.00",
+                "amount": "269.00",
                 "currency_code": "EUR"
               }
             },
@@ -2482,14 +5195,14 @@
               }
             },
             "current_total_duties_set": null,
-            "current_total_price": "156.00",
+            "current_total_price": "269.00",
             "current_total_price_set": {
               "shop_money": {
-                "amount": "156.00",
+                "amount": "269.00",
                 "currency_code": "EUR"
               },
               "presentment_money": {
-                "amount": "156.00",
+                "amount": "269.00",
                 "currency_code": "EUR"
               }
             },
@@ -2505,46 +5218,46 @@
               }
             },
             "customer_locale": "es",
-            "device_id": 20,
+            "device_id": 12,
             "discount_codes": [],
             "duties_included": false,
-            "email": "vcn@bcs.pt",
+            "email": "sendtocj@gmail.com",
             "estimated_taxes": false,
             "financial_status": "paid",
             "fulfillment_status": "fulfilled",
             "landing_site": null,
             "landing_site_ref": null,
-            "location_id": 108915917147,
+            "location_id": 108790317403,
             "merchant_business_entity_id": "MTg3OTg3NjUwOTA3",
             "merchant_of_record_app_id": null,
-            "name": "#73065",
+            "name": "#73138",
             "note": null,
             "note_attributes": [],
-            "number": 72065,
-            "order_number": 73065,
-            "order_status_url": "https://nuance-store.com/87987650907/orders/8b7f184ac243479748438d4adc32ab70/authenticate?key=778454e402331dda50ba71b7ed2b919c",
+            "number": 72138,
+            "order_number": 73138,
+            "order_status_url": "https://nuance-store.com/87987650907/orders/bd8c370f2575f948bbd4d44a25697f3e/authenticate?key=ea6ef839eb7519ae92fa38309deca041",
             "original_total_additional_fees_set": null,
             "original_total_duties_set": null,
             "payment_gateway_names": [
               "Tarjeta"
             ],
-            "phone": null,
+            "phone": "+34692946752",
             "po_number": null,
             "presentment_currency": "EUR",
-            "processed_at": "2026-02-23T20:13:22+01:00",
+            "processed_at": "2026-02-24T19:37:49+01:00",
             "reference": null,
             "referring_site": null,
-            "source_identifier": "108915917147-20-1290",
+            "source_identifier": "108790317403-12-2746",
             "source_name": "pos",
             "source_url": null,
-            "subtotal_price": "156.00",
+            "subtotal_price": "269.00",
             "subtotal_price_set": {
               "shop_money": {
-                "amount": "156.00",
+                "amount": "269.00",
                 "currency_code": "EUR"
               },
               "presentment_money": {
-                "amount": "156.00",
+                "amount": "269.00",
                 "currency_code": "EUR"
               }
             },
@@ -2553,7 +5266,7 @@
             "tax_lines": [],
             "taxes_included": true,
             "test": false,
-            "token": "8b7f184ac243479748438d4adc32ab70",
+            "token": "bd8c370f2575f948bbd4d44a25697f3e",
             "total_cash_rounding_payment_adjustment_set": {
               "shop_money": {
                 "amount": "0.00",
@@ -2585,26 +5298,26 @@
                 "currency_code": "EUR"
               }
             },
-            "total_line_items_price": "156.00",
+            "total_line_items_price": "269.00",
             "total_line_items_price_set": {
               "shop_money": {
-                "amount": "156.00",
+                "amount": "269.00",
                 "currency_code": "EUR"
               },
               "presentment_money": {
-                "amount": "156.00",
+                "amount": "269.00",
                 "currency_code": "EUR"
               }
             },
             "total_outstanding": "0.00",
-            "total_price": "156.00",
+            "total_price": "269.00",
             "total_price_set": {
               "shop_money": {
-                "amount": "156.00",
+                "amount": "269.00",
                 "currency_code": "EUR"
               },
               "presentment_money": {
-                "amount": "156.00",
+                "amount": "269.00",
                 "currency_code": "EUR"
               }
             },
@@ -2631,35 +5344,35 @@
             },
             "total_tip_received": "0.00",
             "total_weight": 0,
-            "updated_at": "2026-02-23T20:13:25+01:00",
-            "user_id": 127346573659,
+            "updated_at": "2026-02-24T19:37:51+01:00",
+            "user_id": 126766121307,
             "billing_address": null,
             "customer": {
-              "id": 10242520514907,
-              "created_at": "2026-02-23T20:13:11+01:00",
-              "updated_at": "2026-02-23T20:13:24+01:00",
-              "first_name": "Vítor",
-              "last_name": "Nunes",
+              "id": 10245404688731,
+              "created_at": "2026-02-24T19:37:26+01:00",
+              "updated_at": "2026-02-24T19:37:50+01:00",
+              "first_name": "Sergey",
+              "last_name": "Sigal",
               "state": "disabled",
               "note": "",
               "verified_email": true,
               "multipass_identifier": null,
               "tax_exempt": false,
-              "email": "vcn@bcs.pt",
-              "phone": null,
+              "email": "sendtocj@gmail.com",
+              "phone": "+34692946752",
               "currency": "EUR",
               "tax_exemptions": [],
-              "admin_graphql_api_id": "gid://shopify/Customer/10242520514907"
+              "admin_graphql_api_id": "gid://shopify/Customer/10245404688731"
             },
             "discount_applications": [],
             "fulfillments": [
               {
-                "id": 6759083671899,
-                "admin_graphql_api_id": "gid://shopify/Fulfillment/6759083671899",
-                "created_at": "2026-02-23T20:13:24+01:00",
-                "location_id": 108915917147,
-                "name": "#73065.1",
-                "order_id": 7725905477979,
+                "id": 6762521919835,
+                "admin_graphql_api_id": "gid://shopify/Fulfillment/6762521919835",
+                "created_at": "2026-02-24T19:37:51+01:00",
+                "location_id": 108790317403,
+                "name": "#73138.1",
+                "order_id": 7728502931803,
                 "origin_address": {},
                 "receipt": {},
                 "service": "manual",
@@ -2670,11 +5383,11 @@
                 "tracking_numbers": [],
                 "tracking_url": null,
                 "tracking_urls": [],
-                "updated_at": "2026-02-23T20:13:24+01:00",
+                "updated_at": "2026-02-24T19:37:51+01:00",
                 "line_items": [
                   {
-                    "id": 18563300557147,
-                    "admin_graphql_api_id": "gid://shopify/LineItem/18563300557147",
+                    "id": 18568595046747,
+                    "admin_graphql_api_id": "gid://shopify/LineItem/18568595046747",
                     "attributed_staffs": [],
                     "current_quantity": 1,
                     "fulfillable_quantity": 0,
@@ -2682,26 +5395,26 @@
                     "fulfillment_status": "fulfilled",
                     "gift_card": false,
                     "grams": 0,
-                    "name": "The North Face Crest FZ Forro Polar - TNF Black / XL",
-                    "price": "100.00",
+                    "name": "Prosurf Back Protector D30 Chaleco Dorsal - Black / XL",
+                    "price": "105.00",
                     "price_set": {
                       "shop_money": {
-                        "amount": "100.00",
+                        "amount": "105.00",
                         "currency_code": "EUR"
                       },
                       "presentment_money": {
-                        "amount": "100.00",
+                        "amount": "105.00",
                         "currency_code": "EUR"
                       }
                     },
                     "product_exists": true,
-                    "product_id": 10256010051931,
+                    "product_id": 10299428667739,
                     "properties": [],
                     "quantity": 1,
                     "requires_shipping": true,
-                    "sku": "51907462365531",
+                    "sku": "52087825006939",
                     "taxable": true,
-                    "title": "The North Face Crest FZ Forro Polar",
+                    "title": "Prosurf Back Protector D30 Chaleco Dorsal",
                     "total_discount": "0.00",
                     "total_discount_set": {
                       "shop_money": {
@@ -2713,44 +5426,44 @@
                         "currency_code": "EUR"
                       }
                     },
-                    "variant_id": 51907462365531,
+                    "variant_id": 52087825006939,
                     "variant_inventory_management": "shopify",
-                    "variant_title": "TNF Black / XL",
-                    "vendor": "The North Face",
+                    "variant_title": "Black / XL",
+                    "vendor": "Prosurf",
                     "tax_lines": [],
                     "duties": [],
                     "discount_allocations": []
                   },
                   {
-                    "id": 18563300589915,
-                    "admin_graphql_api_id": "gid://shopify/LineItem/18563300589915",
+                    "id": 18568595079515,
+                    "admin_graphql_api_id": "gid://shopify/LineItem/18568595079515",
                     "attributed_staffs": [],
-                    "current_quantity": 2,
+                    "current_quantity": 1,
                     "fulfillable_quantity": 0,
                     "fulfillment_service": "manual",
                     "fulfillment_status": "fulfilled",
                     "gift_card": false,
                     "grams": 0,
-                    "name": "The North Face Base Gaiter Cuello - TNF Black / OS",
-                    "price": "28.00",
+                    "name": "Deathgrip Ghoul Manoplas - Black / XL",
+                    "price": "80.00",
                     "price_set": {
                       "shop_money": {
-                        "amount": "28.00",
+                        "amount": "80.00",
                         "currency_code": "EUR"
                       },
                       "presentment_money": {
-                        "amount": "28.00",
+                        "amount": "80.00",
                         "currency_code": "EUR"
                       }
                     },
                     "product_exists": true,
-                    "product_id": 10269673718107,
+                    "product_id": 10215353647451,
                     "properties": [],
-                    "quantity": 2,
+                    "quantity": 1,
                     "requires_shipping": true,
-                    "sku": "51966340956507",
+                    "sku": "51765562671451",
                     "taxable": true,
-                    "title": "The North Face Base Gaiter Cuello",
+                    "title": "Deathgrip Ghoul Manoplas",
                     "total_discount": "0.00",
                     "total_discount_set": {
                       "shop_money": {
@@ -2762,10 +5475,157 @@
                         "currency_code": "EUR"
                       }
                     },
-                    "variant_id": 51966340956507,
+                    "variant_id": 51765562671451,
                     "variant_inventory_management": "shopify",
-                    "variant_title": "TNF Black / OS",
-                    "vendor": "The North Face",
+                    "variant_title": "Black / XL",
+                    "vendor": "Deathgrip",
+                    "tax_lines": [],
+                    "duties": [],
+                    "discount_allocations": []
+                  },
+                  {
+                    "id": 18568595112283,
+                    "admin_graphql_api_id": "gid://shopify/LineItem/18568595112283",
+                    "attributed_staffs": [],
+                    "current_quantity": 1,
+                    "fulfillable_quantity": 0,
+                    "fulfillment_service": "manual",
+                    "fulfillment_status": "fulfilled",
+                    "gift_card": false,
+                    "grams": 0,
+                    "name": "Arcade x Recco Cinturón - Black / U",
+                    "price": "50.00",
+                    "price_set": {
+                      "shop_money": {
+                        "amount": "50.00",
+                        "currency_code": "EUR"
+                      },
+                      "presentment_money": {
+                        "amount": "50.00",
+                        "currency_code": "EUR"
+                      }
+                    },
+                    "product_exists": true,
+                    "product_id": 10097128898907,
+                    "properties": [],
+                    "quantity": 1,
+                    "requires_shipping": true,
+                    "sku": "51348924760411",
+                    "taxable": true,
+                    "title": "Arcade x Recco Cinturón",
+                    "total_discount": "0.00",
+                    "total_discount_set": {
+                      "shop_money": {
+                        "amount": "0.00",
+                        "currency_code": "EUR"
+                      },
+                      "presentment_money": {
+                        "amount": "0.00",
+                        "currency_code": "EUR"
+                      }
+                    },
+                    "variant_id": 51348924760411,
+                    "variant_inventory_management": "shopify",
+                    "variant_title": "Black / U",
+                    "vendor": "Arcade",
+                    "tax_lines": [],
+                    "duties": [],
+                    "discount_allocations": []
+                  },
+                  {
+                    "id": 18568595145051,
+                    "admin_graphql_api_id": "gid://shopify/LineItem/18568595145051",
+                    "attributed_staffs": [],
+                    "current_quantity": 1,
+                    "fulfillable_quantity": 0,
+                    "fulfillment_service": "manual",
+                    "fulfillment_status": "fulfilled",
+                    "gift_card": false,
+                    "grams": 0,
+                    "name": "Dakine Shaka Stomp - Green / U",
+                    "price": "16.00",
+                    "price_set": {
+                      "shop_money": {
+                        "amount": "16.00",
+                        "currency_code": "EUR"
+                      },
+                      "presentment_money": {
+                        "amount": "16.00",
+                        "currency_code": "EUR"
+                      }
+                    },
+                    "product_exists": true,
+                    "product_id": 10056593047899,
+                    "properties": [],
+                    "quantity": 1,
+                    "requires_shipping": true,
+                    "sku": "2100000680498",
+                    "taxable": true,
+                    "title": "Dakine Shaka Stomp",
+                    "total_discount": "0.00",
+                    "total_discount_set": {
+                      "shop_money": {
+                        "amount": "0.00",
+                        "currency_code": "EUR"
+                      },
+                      "presentment_money": {
+                        "amount": "0.00",
+                        "currency_code": "EUR"
+                      }
+                    },
+                    "variant_id": 51195985396059,
+                    "variant_inventory_management": "shopify",
+                    "variant_title": "Green / U",
+                    "vendor": "Dakine",
+                    "tax_lines": [],
+                    "duties": [],
+                    "discount_allocations": []
+                  },
+                  {
+                    "id": 18568595177819,
+                    "admin_graphql_api_id": "gid://shopify/LineItem/18568595177819",
+                    "attributed_staffs": [],
+                    "current_quantity": 1,
+                    "fulfillable_quantity": 0,
+                    "fulfillment_service": "manual",
+                    "fulfillment_status": "fulfilled",
+                    "gift_card": false,
+                    "grams": 0,
+                    "name": "Burton Split Stomp Mat - Clear",
+                    "price": "18.00",
+                    "price_set": {
+                      "shop_money": {
+                        "amount": "18.00",
+                        "currency_code": "EUR"
+                      },
+                      "presentment_money": {
+                        "amount": "18.00",
+                        "currency_code": "EUR"
+                      }
+                    },
+                    "product_exists": true,
+                    "product_id": 10054862471515,
+                    "properties": [],
+                    "quantity": 1,
+                    "requires_shipping": true,
+                    "sku": "51187610255707",
+                    "taxable": true,
+                    "title": "Burton Split Stomp Mat",
+                    "total_discount": "0.00",
+                    "total_discount_set": {
+                      "shop_money": {
+                        "amount": "0.00",
+                        "currency_code": "EUR"
+                      },
+                      "presentment_money": {
+                        "amount": "0.00",
+                        "currency_code": "EUR"
+                      }
+                    },
+                    "variant_id": 51187610255707,
+                    "variant_inventory_management": "shopify",
+                    "variant_title": "Clear",
+                    "vendor": "Burton",
                     "tax_lines": [],
                     "duties": [],
                     "discount_allocations": []
@@ -2775,8 +5635,8 @@
             ],
             "line_items": [
               {
-                "id": 18563300557147,
-                "admin_graphql_api_id": "gid://shopify/LineItem/18563300557147",
+                "id": 18568595046747,
+                "admin_graphql_api_id": "gid://shopify/LineItem/18568595046747",
                 "attributed_staffs": [],
                 "current_quantity": 1,
                 "fulfillable_quantity": 0,
@@ -2784,27 +5644,27 @@
                 "fulfillment_status": "fulfilled",
                 "gift_card": false,
                 "grams": 0,
-                "name": "The North Face Crest FZ Forro Polar - TNF Black / XL",
-                "price": "100.00",
+                "name": "Prosurf Back Protector D30 Chaleco Dorsal - Black / XL",
+                "price": "105.00",
                 "price_set": {
                   "shop_money": {
-                    "amount": "100.00",
+                    "amount": "105.00",
                     "currency_code": "EUR"
                   },
                   "presentment_money": {
-                    "amount": "100.00",
+                    "amount": "105.00",
                     "currency_code": "EUR"
                   }
                 },
                 "product_exists": true,
-                "product_id": 10256010051931,
+                "product_id": 10299428667739,
                 "properties": [],
                 "quantity": 1,
                 "requires_shipping": true,
                 "sales_line_item_group_id": null,
-                "sku": "51907462365531",
+                "sku": "52087825006939",
                 "taxable": true,
-                "title": "The North Face Crest FZ Forro Polar",
+                "title": "Prosurf Back Protector D30 Chaleco Dorsal",
                 "total_discount": "0.00",
                 "total_discount_set": {
                   "shop_money": {
@@ -2816,45 +5676,45 @@
                     "currency_code": "EUR"
                   }
                 },
-                "variant_id": 51907462365531,
+                "variant_id": 52087825006939,
                 "variant_inventory_management": "shopify",
-                "variant_title": "TNF Black / XL",
-                "vendor": "The North Face",
+                "variant_title": "Black / XL",
+                "vendor": "Prosurf",
                 "tax_lines": [],
                 "duties": [],
                 "discount_allocations": []
               },
               {
-                "id": 18563300589915,
-                "admin_graphql_api_id": "gid://shopify/LineItem/18563300589915",
+                "id": 18568595079515,
+                "admin_graphql_api_id": "gid://shopify/LineItem/18568595079515",
                 "attributed_staffs": [],
-                "current_quantity": 2,
+                "current_quantity": 1,
                 "fulfillable_quantity": 0,
                 "fulfillment_service": "manual",
                 "fulfillment_status": "fulfilled",
                 "gift_card": false,
                 "grams": 0,
-                "name": "The North Face Base Gaiter Cuello - TNF Black / OS",
-                "price": "28.00",
+                "name": "Deathgrip Ghoul Manoplas - Black / XL",
+                "price": "80.00",
                 "price_set": {
                   "shop_money": {
-                    "amount": "28.00",
+                    "amount": "80.00",
                     "currency_code": "EUR"
                   },
                   "presentment_money": {
-                    "amount": "28.00",
+                    "amount": "80.00",
                     "currency_code": "EUR"
                   }
                 },
                 "product_exists": true,
-                "product_id": 10269673718107,
+                "product_id": 10215353647451,
                 "properties": [],
-                "quantity": 2,
+                "quantity": 1,
                 "requires_shipping": true,
                 "sales_line_item_group_id": null,
-                "sku": "51966340956507",
+                "sku": "51765562671451",
                 "taxable": true,
-                "title": "The North Face Base Gaiter Cuello",
+                "title": "Deathgrip Ghoul Manoplas",
                 "total_discount": "0.00",
                 "total_discount_set": {
                   "shop_money": {
@@ -2866,10 +5726,160 @@
                     "currency_code": "EUR"
                   }
                 },
-                "variant_id": 51966340956507,
+                "variant_id": 51765562671451,
                 "variant_inventory_management": "shopify",
-                "variant_title": "TNF Black / OS",
-                "vendor": "The North Face",
+                "variant_title": "Black / XL",
+                "vendor": "Deathgrip",
+                "tax_lines": [],
+                "duties": [],
+                "discount_allocations": []
+              },
+              {
+                "id": 18568595112283,
+                "admin_graphql_api_id": "gid://shopify/LineItem/18568595112283",
+                "attributed_staffs": [],
+                "current_quantity": 1,
+                "fulfillable_quantity": 0,
+                "fulfillment_service": "manual",
+                "fulfillment_status": "fulfilled",
+                "gift_card": false,
+                "grams": 0,
+                "name": "Arcade x Recco Cinturón - Black / U",
+                "price": "50.00",
+                "price_set": {
+                  "shop_money": {
+                    "amount": "50.00",
+                    "currency_code": "EUR"
+                  },
+                  "presentment_money": {
+                    "amount": "50.00",
+                    "currency_code": "EUR"
+                  }
+                },
+                "product_exists": true,
+                "product_id": 10097128898907,
+                "properties": [],
+                "quantity": 1,
+                "requires_shipping": true,
+                "sales_line_item_group_id": null,
+                "sku": "51348924760411",
+                "taxable": true,
+                "title": "Arcade x Recco Cinturón",
+                "total_discount": "0.00",
+                "total_discount_set": {
+                  "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "EUR"
+                  },
+                  "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "EUR"
+                  }
+                },
+                "variant_id": 51348924760411,
+                "variant_inventory_management": "shopify",
+                "variant_title": "Black / U",
+                "vendor": "Arcade",
+                "tax_lines": [],
+                "duties": [],
+                "discount_allocations": []
+              },
+              {
+                "id": 18568595145051,
+                "admin_graphql_api_id": "gid://shopify/LineItem/18568595145051",
+                "attributed_staffs": [],
+                "current_quantity": 1,
+                "fulfillable_quantity": 0,
+                "fulfillment_service": "manual",
+                "fulfillment_status": "fulfilled",
+                "gift_card": false,
+                "grams": 0,
+                "name": "Dakine Shaka Stomp - Green / U",
+                "price": "16.00",
+                "price_set": {
+                  "shop_money": {
+                    "amount": "16.00",
+                    "currency_code": "EUR"
+                  },
+                  "presentment_money": {
+                    "amount": "16.00",
+                    "currency_code": "EUR"
+                  }
+                },
+                "product_exists": true,
+                "product_id": 10056593047899,
+                "properties": [],
+                "quantity": 1,
+                "requires_shipping": true,
+                "sales_line_item_group_id": null,
+                "sku": "2100000680498",
+                "taxable": true,
+                "title": "Dakine Shaka Stomp",
+                "total_discount": "0.00",
+                "total_discount_set": {
+                  "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "EUR"
+                  },
+                  "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "EUR"
+                  }
+                },
+                "variant_id": 51195985396059,
+                "variant_inventory_management": "shopify",
+                "variant_title": "Green / U",
+                "vendor": "Dakine",
+                "tax_lines": [],
+                "duties": [],
+                "discount_allocations": []
+              },
+              {
+                "id": 18568595177819,
+                "admin_graphql_api_id": "gid://shopify/LineItem/18568595177819",
+                "attributed_staffs": [],
+                "current_quantity": 1,
+                "fulfillable_quantity": 0,
+                "fulfillment_service": "manual",
+                "fulfillment_status": "fulfilled",
+                "gift_card": false,
+                "grams": 0,
+                "name": "Burton Split Stomp Mat - Clear",
+                "price": "18.00",
+                "price_set": {
+                  "shop_money": {
+                    "amount": "18.00",
+                    "currency_code": "EUR"
+                  },
+                  "presentment_money": {
+                    "amount": "18.00",
+                    "currency_code": "EUR"
+                  }
+                },
+                "product_exists": true,
+                "product_id": 10054862471515,
+                "properties": [],
+                "quantity": 1,
+                "requires_shipping": true,
+                "sales_line_item_group_id": null,
+                "sku": "51187610255707",
+                "taxable": true,
+                "title": "Burton Split Stomp Mat",
+                "total_discount": "0.00",
+                "total_discount_set": {
+                  "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "EUR"
+                  },
+                  "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "EUR"
+                  }
+                },
+                "variant_id": 51187610255707,
+                "variant_inventory_management": "shopify",
+                "variant_title": "Clear",
+                "vendor": "Burton",
                 "tax_lines": [],
                 "duties": [],
                 "discount_allocations": []
@@ -2913,7 +5923,7 @@
     }
   },
   "tags": [],
-  "triggerCount": 2,
-  "updatedAt": "2026-02-24T13:05:24.530Z",
-  "versionId": "9d7b2247-5c63-4c8b-b815-bdb897547333"
+  "triggerCount": 3,
+  "updatedAt": "2026-02-25T10:53:49.524Z",
+  "versionId": "28946e03-1fab-4f94-bc51-e3063d6ac6c9"
 }
