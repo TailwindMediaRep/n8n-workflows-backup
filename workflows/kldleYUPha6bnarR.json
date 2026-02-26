@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-02-24T08:26:56.000Z",
-    "createdAt": "2026-02-24T08:26:54.507Z",
-    "versionId": "f077991f-4cea-43e5-b919-e8c385a22239",
+    "updatedAt": "2026-02-25T07:37:41.000Z",
+    "createdAt": "2026-02-25T07:37:39.477Z",
+    "versionId": "87f59015-9f3d-4b1a-b00d-a51d406cd825",
     "workflowId": "kldleYUPha6bnarR",
     "nodes": [
       {
@@ -4505,7 +4505,13 @@
       },
       "HTTP Request6": {
         "main": [
-          []
+          [
+            {
+              "node": "Facebook Graph SNG",
+              "type": "main",
+              "index": 0
+            }
+          ]
         ]
       },
       "Wait1": {
@@ -5902,7 +5908,13 @@
       },
       "HTTP Request28": {
         "main": [
-          []
+          [
+            {
+              "node": "Facebook Graph SURFIN",
+              "type": "main",
+              "index": 0
+            }
+          ]
         ]
       },
       "Verificar": {
@@ -6191,11 +6203,11 @@
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version f077991f",
+    "name": "Version 87f59015",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "f077991f-4cea-43e5-b919-e8c385a22239",
+  "activeVersionId": "87f59015-9f3d-4b1a-b00d-a51d406cd825",
   "connections": {
     "HTTP Request": {
       "main": [
@@ -6239,7 +6251,13 @@
     },
     "HTTP Request6": {
       "main": [
-        []
+        [
+          {
+            "node": "Facebook Graph SNG",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Wait1": {
@@ -7636,7 +7654,13 @@
     },
     "HTTP Request28": {
       "main": [
-        []
+        [
+          {
+            "node": "Facebook Graph SURFIN",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Verificar": {
@@ -12511,6 +12535,6 @@
   },
   "tags": [],
   "triggerCount": 4,
-  "updatedAt": "2026-02-24T09:48:19.244Z",
-  "versionId": "f077991f-4cea-43e5-b919-e8c385a22239"
+  "updatedAt": "2026-02-25T07:37:39.474Z",
+  "versionId": "87f59015-9f3d-4b1a-b00d-a51d406cd825"
 }
