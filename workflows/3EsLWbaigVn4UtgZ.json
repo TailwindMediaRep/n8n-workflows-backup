@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-02-25T10:47:50.000Z",
-    "createdAt": "2026-02-25T10:47:48.740Z",
-    "versionId": "28946e03-1fab-4f94-bc51-e3063d6ac6c9",
+    "updatedAt": "2026-02-26T14:42:39.000Z",
+    "createdAt": "2026-02-26T14:42:37.775Z",
+    "versionId": "5d411736-f00e-487d-9f26-1ca4b9753032",
     "workflowId": "3EsLWbaigVn4UtgZ",
     "nodes": [
       {
@@ -939,7 +939,8 @@
             "mappingMode": "defineBelow",
             "value": {
               "sucursal_rules": 0,
-              "correo": "={{ $('Webhook').item.json.body.customer.email }}"
+              "pedido_rules": "={{ $('Webhook').item.json.body.id }}",
+              "correo": "={{ $json.correo }}"
             },
             "matchingColumns": [
               "correo"
@@ -1027,10 +1028,109 @@
               {
                 "id": "id_cliente",
                 "displayName": "id_cliente",
+                "required": true,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "Nombre",
+                "displayName": "Nombre",
                 "required": false,
                 "defaultMatch": false,
                 "display": true,
                 "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "Teléfono",
+                "displayName": "Teléfono",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "created_at",
+                "displayName": "created_at",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "dateTime",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pedido_rules",
+                "displayName": "pedido_rules",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "pedido_oakley",
+                "displayName": "pedido_oakley",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pedido_thenorthface",
+                "displayName": "pedido_thenorthface",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pedido_surfin",
+                "displayName": "pedido_surfin",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pedido_nuance",
+                "displayName": "pedido_nuance",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pedido_nuancelodge",
+                "displayName": "pedido_nuancelodge",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pedido_melia",
+                "displayName": "pedido_melia",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
                 "canBeUsedToMatch": true,
                 "removed": true
               }
@@ -1073,7 +1173,8 @@
             "mappingMode": "defineBelow",
             "value": {
               "sucursal_oakley": 0,
-              "correo": "={{ $json.body.contact_email }}"
+              "correo": "={{ $json.body.contact_email }}",
+              "pedido_oakley": "={{ $('Webhook').item.json.body.id }}"
             },
             "matchingColumns": [
               "correo"
@@ -1161,10 +1262,110 @@
               {
                 "id": "id_cliente",
                 "displayName": "id_cliente",
+                "required": true,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "Nombre",
+                "displayName": "Nombre",
                 "required": false,
                 "defaultMatch": false,
                 "display": true,
                 "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "Teléfono",
+                "displayName": "Teléfono",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "created_at",
+                "displayName": "created_at",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "dateTime",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pedido_rules",
+                "displayName": "pedido_rules",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pedido_oakley",
+                "displayName": "pedido_oakley",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "pedido_thenorthface",
+                "displayName": "pedido_thenorthface",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pedido_surfin",
+                "displayName": "pedido_surfin",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pedido_nuance",
+                "displayName": "pedido_nuance",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pedido_nuancelodge",
+                "displayName": "pedido_nuancelodge",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pedido_melia",
+                "displayName": "pedido_melia",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
                 "canBeUsedToMatch": true,
                 "removed": true
               }
@@ -1207,7 +1408,8 @@
             "mappingMode": "defineBelow",
             "value": {
               "sucursal_thenorthface": 0,
-              "correo": "={{ $json.body.contact_email }}"
+              "correo": "={{ $json.body.contact_email }}",
+              "pedido_thenorthface": "={{ $('Webhook').item.json.body.id }}"
             },
             "matchingColumns": [
               "correo"
@@ -1295,10 +1497,110 @@
               {
                 "id": "id_cliente",
                 "displayName": "id_cliente",
+                "required": true,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "Nombre",
+                "displayName": "Nombre",
                 "required": false,
                 "defaultMatch": false,
                 "display": true,
                 "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "Teléfono",
+                "displayName": "Teléfono",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "created_at",
+                "displayName": "created_at",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "dateTime",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pedido_rules",
+                "displayName": "pedido_rules",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pedido_oakley",
+                "displayName": "pedido_oakley",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pedido_thenorthface",
+                "displayName": "pedido_thenorthface",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "pedido_surfin",
+                "displayName": "pedido_surfin",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pedido_nuance",
+                "displayName": "pedido_nuance",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pedido_nuancelodge",
+                "displayName": "pedido_nuancelodge",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pedido_melia",
+                "displayName": "pedido_melia",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
                 "canBeUsedToMatch": true,
                 "removed": true
               }
@@ -1341,7 +1643,8 @@
             "mappingMode": "defineBelow",
             "value": {
               "sucursal_surfin": 0,
-              "correo": "={{ $json.body.contact_email }}"
+              "correo": "={{ $json.body.contact_email }}",
+              "pedido_surfin": "={{ $('Webhook').item.json.body.id }}"
             },
             "matchingColumns": [
               "correo"
@@ -1429,10 +1732,110 @@
               {
                 "id": "id_cliente",
                 "displayName": "id_cliente",
+                "required": true,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "Nombre",
+                "displayName": "Nombre",
                 "required": false,
                 "defaultMatch": false,
                 "display": true,
                 "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "Teléfono",
+                "displayName": "Teléfono",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "created_at",
+                "displayName": "created_at",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "dateTime",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pedido_rules",
+                "displayName": "pedido_rules",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pedido_oakley",
+                "displayName": "pedido_oakley",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pedido_thenorthface",
+                "displayName": "pedido_thenorthface",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pedido_surfin",
+                "displayName": "pedido_surfin",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "pedido_nuance",
+                "displayName": "pedido_nuance",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pedido_nuancelodge",
+                "displayName": "pedido_nuancelodge",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pedido_melia",
+                "displayName": "pedido_melia",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
                 "canBeUsedToMatch": true,
                 "removed": true
               }
@@ -1475,7 +1878,8 @@
             "mappingMode": "defineBelow",
             "value": {
               "sucursal_nuance": 0,
-              "correo": "={{ $json.body.contact_email }}"
+              "correo": "={{ $json.body.contact_email }}",
+              "pedido_nuance": "={{ $('Webhook').item.json.body.id }}"
             },
             "matchingColumns": [
               "correo"
@@ -1563,10 +1967,110 @@
               {
                 "id": "id_cliente",
                 "displayName": "id_cliente",
+                "required": true,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "Nombre",
+                "displayName": "Nombre",
                 "required": false,
                 "defaultMatch": false,
                 "display": true,
                 "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "Teléfono",
+                "displayName": "Teléfono",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "created_at",
+                "displayName": "created_at",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "dateTime",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pedido_rules",
+                "displayName": "pedido_rules",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pedido_oakley",
+                "displayName": "pedido_oakley",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pedido_thenorthface",
+                "displayName": "pedido_thenorthface",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pedido_surfin",
+                "displayName": "pedido_surfin",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pedido_nuance",
+                "displayName": "pedido_nuance",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "pedido_nuancelodge",
+                "displayName": "pedido_nuancelodge",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pedido_melia",
+                "displayName": "pedido_melia",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
                 "canBeUsedToMatch": true,
                 "removed": true
               }
@@ -1609,7 +2113,8 @@
             "mappingMode": "defineBelow",
             "value": {
               "sucursal_nuancelodge": 0,
-              "correo": "={{ $json.body.contact_email }}"
+              "correo": "={{ $json.body.contact_email }}",
+              "pedido_nuancelodge": "={{ $('Webhook').item.json.body.id }}"
             },
             "matchingColumns": [
               "correo"
@@ -1697,10 +2202,110 @@
               {
                 "id": "id_cliente",
                 "displayName": "id_cliente",
+                "required": true,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "Nombre",
+                "displayName": "Nombre",
                 "required": false,
                 "defaultMatch": false,
                 "display": true,
                 "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "Teléfono",
+                "displayName": "Teléfono",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "created_at",
+                "displayName": "created_at",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "dateTime",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pedido_rules",
+                "displayName": "pedido_rules",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pedido_oakley",
+                "displayName": "pedido_oakley",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pedido_thenorthface",
+                "displayName": "pedido_thenorthface",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pedido_surfin",
+                "displayName": "pedido_surfin",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pedido_nuance",
+                "displayName": "pedido_nuance",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pedido_nuancelodge",
+                "displayName": "pedido_nuancelodge",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "pedido_melia",
+                "displayName": "pedido_melia",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
                 "canBeUsedToMatch": true,
                 "removed": true
               }
@@ -1743,7 +2348,8 @@
             "mappingMode": "defineBelow",
             "value": {
               "sucursal_melia": 0,
-              "correo": "={{ $json.body.contact_email }}"
+              "correo": "={{ $json.body.contact_email }}",
+              "pedido_melia": "={{ $('Webhook').item.json.body.id }}"
             },
             "matchingColumns": [
               "correo"
@@ -1831,12 +2437,112 @@
               {
                 "id": "id_cliente",
                 "displayName": "id_cliente",
+                "required": true,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "Nombre",
+                "displayName": "Nombre",
                 "required": false,
                 "defaultMatch": false,
                 "display": true,
                 "type": "string",
                 "canBeUsedToMatch": true,
                 "removed": true
+              },
+              {
+                "id": "Teléfono",
+                "displayName": "Teléfono",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "created_at",
+                "displayName": "created_at",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "dateTime",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pedido_rules",
+                "displayName": "pedido_rules",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pedido_oakley",
+                "displayName": "pedido_oakley",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pedido_thenorthface",
+                "displayName": "pedido_thenorthface",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pedido_surfin",
+                "displayName": "pedido_surfin",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pedido_nuance",
+                "displayName": "pedido_nuance",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pedido_nuancelodge",
+                "displayName": "pedido_nuancelodge",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "pedido_melia",
+                "displayName": "pedido_melia",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": false
               }
             ],
             "attemptToConvertTypes": false,
@@ -2002,8 +2708,8 @@
         "type": "n8n-nodes-base.webhook",
         "typeVersion": 2.1,
         "position": [
-          2304,
-          -768
+          2512,
+          -752
         ],
         "id": "50d47124-56fb-448c-95b1-1aff6feb6b2f",
         "name": "Leerqr",
@@ -2012,14 +2718,14 @@
       {
         "parameters": {
           "respondWith": "text",
-          "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Tus Descuentos</title>\n  <style>\n    body { \n      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; \n      padding: 20px; \n      max-width: 600px; /* Lo he ampliado un poco para que quepa bien la nueva columna */\n      margin: 0 auto; \n      color: #333;\n    }\n    .header { text-align: center; margin-bottom: 30px; }\n    h2 { color: #000; margin-bottom: 5px; }\n    p { color: #555; }\n    table { \n      width: 100%; \n      border-collapse: collapse; \n      margin-top: 20px; \n      box-shadow: 0 1px 3px rgba(0,0,0,0.1);\n      border-radius: 8px;\n      overflow: hidden;\n    }\n    th, td { \n      padding: 14px 15px; \n      text-align: left; \n      border-bottom: 1px solid #eee; \n      vertical-align: middle;\n    }\n    th { \n      background-color: #f4f6f8; \n      font-weight: 600; \n      color: #333;\n    }\n    tr:last-child td { border-bottom: none; }\n    tr:hover { background-color: #f9f9f9; }\n    .discount-badge { \n      background-color: #000; \n      color: #fff; \n      padding: 4px 10px; \n      border-radius: 20px; \n      font-weight: bold; \n      font-size: 14px;\n    }\n    .no-data { text-align: center; padding: 30px; color: #666; background: #f9f9f9; border-radius: 8px; }\n    \n    /* ESTILOS NUEVOS PARA EL BOTÓN DEL MAPA */\n    .map-btn {\n      display: inline-block;\n      background-color: #f4f6f8;\n      color: #333;\n      padding: 6px 12px;\n      border-radius: 6px;\n      text-decoration: none;\n      font-size: 13px;\n      font-weight: 600;\n      border: 1px solid #ddd;\n      transition: all 0.2s;\n    }\n    .map-btn:hover {\n      background-color: #e2e6ea;\n      color: #000;\n      border-color: #ccc;\n    }\n  </style>\n</head>\n<body>\n\n  {{ \n    (() => {\n      const items = $input.all();\n      if (items.length === 0) {\n        return `\n          <div class=\"header\">\n            <h2>¡Hola!</h2>\n          </div>\n          <div class=\"no-data\">\n            <p>No hemos encontrado tu perfil en nuestra base de datos o hubo un error al leer el QR.</p>\n          </div>\n        `;\n      }\n\n      const data = items[0].json;\n      \n      // 3. AÑADIDA LA PROPIEDAD \"url\" A CADA SUCURSAL (Sustituye estos enlaces por los tuyos reales)\n      const sucursales = [\n        { key: 'sucursal_rules', name: 'Rules Outlet', url: 'https://maps.app.goo.gl/2zcHYJzYi4mku9Bw5' },\n        { key: 'sucursal_oakley', name: 'Rules Oakley', url: 'https://maps.app.goo.gl/T81E6eXNTRWc86nj9' },\n        { key: 'sucursal_thenorthface', name: 'Rules The North Face', url: 'https://maps.app.goo.gl/T81E6eXNTRWc86nj9' },\n        { key: 'sucursal_surfin', name: 'Surfin', url: 'https://maps.app.goo.gl/18GNbRyLLukuo4m57' },\n        { key: 'sucursal_nuance', name: 'Nuance', url: 'https://maps.app.goo.gl/Farx9QjYyZX294pe7' },\n        { key: 'sucursal_nuancelodge', name: 'Nuance Lodge', url: 'https://maps.app.goo.gl/ND7hyiUQMVSpJ2G96' },\n        { key: 'sucursal_melia', name: 'Meliá Sierra Nevada', url: 'https://maps.app.goo.gl/Cf146WRdUBgxN8KT8' }\n      ];\n\n      const descuentosActivos = sucursales.filter(s => parseInt(data[s.key] || 0) > 0);\n\n      let html = `\n        <div class=\"header\">\n          <h2>¡Hola, ${data.Nombre}!</h2>\n          <p>Aquí tienes tus descuentos activos en nuestras sucursales:</p>\n        </div>\n      `;\n\n      if (descuentosActivos.length === 0) {\n        html += '<div class=\"no-data\"><p>Actualmente no tienes descuentos activos. ¡Sigue comprando para acumular más!</p></div>';\n      } else {\n        // AÑADIDA LA CABECERA \"Ubicación\"\n        html += '<table><thead><tr><th>Sucursal</th><th>Descuento</th><th>Ubicación</th></tr></thead><tbody>';\n        \n        descuentosActivos.forEach(s => {\n          html += `\n            <tr>\n              <td><strong>${s.name}</strong></td>\n              <td><span class=\"discount-badge\">${data[s.key]}%</span></td>\n              <td><a href=\"${s.url}\" target=\"_top\" rel=\"noopener noreferrer\" class=\"map-btn\">📍 Ver mapa</a></td>\n            </tr>\n          `;\n        });\n        \n        html += '</tbody></table>';\n      }\n\n      return html;\n    })()\n  }}\n\n</body>\n</html>",
+          "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Tus Descuentos</title>\n  <style>\n    body { \n      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; \n      padding: 20px; \n      max-width: 1000px; \n      margin: 0 auto; \n      color: #333;\n      background-color: #fcfcfc;\n    }\n    .main-header { text-align: center; margin-bottom: 40px; }\n    h2 { color: #000; margin-bottom: 5px; font-size: 2rem; }\n    p { color: #555; }\n    \n    /* Layout de dos columnas */\n    .container {\n      display: flex;\n      flex-wrap: wrap;\n      gap: 40px;\n    }\n    .column {\n      flex: 1;\n      min-width: 320px;\n      background: #fff;\n      padding: 25px;\n      border-radius: 12px;\n      box-shadow: 0 4px 6px rgba(0,0,0,0.05);\n    }\n    .section-title {\n      margin-top: 0;\n      padding-bottom: 10px;\n      border-bottom: 2px solid #eee;\n      font-size: 1.3rem;\n      color: #000;\n    }\n\n    table { \n      width: 100%; \n      border-collapse: collapse; \n      margin-top: 15px; \n      border-radius: 8px;\n      overflow: hidden;\n      border: 1px solid #f0f0f0;\n    }\n    th, td { \n      padding: 12px 15px; \n      text-align: left; \n      border-bottom: 1px solid #f0f0f0; \n      vertical-align: middle;\n      font-size: 14px;\n    }\n    th { \n      background-color: #f8f9fa; \n      font-weight: 600; \n      color: #333;\n    }\n    tr:last-child td { border-bottom: none; }\n    \n    .discount-badge { \n      background-color: #000; \n      color: #fff; \n      padding: 4px 10px; \n      border-radius: 20px; \n      font-weight: bold; \n      font-size: 13px;\n    }\n    .no-data { text-align: center; padding: 30px; color: #666; background: #f9f9f9; border-radius: 8px; font-size: 14px;}\n    \n    .map-btn {\n      display: inline-block;\n      background-color: #f4f6f8;\n      color: #333;\n      padding: 6px 12px;\n      border-radius: 6px;\n      text-decoration: none;\n      font-size: 12px;\n      font-weight: 600;\n      border: 1px solid #ddd;\n      transition: all 0.2s;\n    }\n    .map-btn:hover { background-color: #e2e6ea; color: #000; border-color: #ccc; }\n\n    /* Estilos específicos compras e imágenes */\n    .sucursal-name {\n      margin-top: 25px;\n      margin-bottom: 5px;\n      font-size: 1.1rem;\n      color: #222;\n    }\n    .price-original { text-decoration: line-through; color: #999; font-size: 0.9em; }\n    .price-discount { color: #27ae60; font-weight: bold; font-size: 1.1em; }\n    .savings-text { display: block; font-size: 0.8em; color: #27ae60; margin-top: 2px; }\n    \n    .product-cell {\n      display: flex;\n      align-items: center;\n      gap: 15px;\n    }\n    .product-img {\n      width: 45px;\n      height: 45px;\n      object-fit: cover;\n      border-radius: 6px;\n      border: 1px solid #eaeaea;\n      background-color: #fff;\n    }\n\n    /* NUEVO ESTILO: Nota legal al pie de página */\n    .footer-note {\n      text-align: center;\n      margin-top: 50px;\n      padding-top: 20px;\n      font-size: 12px;\n      color: #888;\n      border-top: 1px solid #eaeaea;\n    }\n  </style>\n</head>\n<body>\n\n  {{ \n    (() => {\n      const supabaseData = $node[\"If\"].json; \n      \n      if (!supabaseData) {\n        return `\n          <div class=\"main-header\"><h2>¡Hola!</h2></div>\n          <div class=\"no-data\"><p>No hemos encontrado tu perfil o hubo un error al leer el QR.</p></div>\n        `;\n      }\n\n      const sucursales = [\n        { key: 'sucursal_rules', orderKey: 'pedido_rules', name: 'Rules Outlet', url: 'https://maps.app.goo.gl/2zcHYJzYi4mku9Bw5' },\n        { key: 'sucursal_oakley', orderKey: 'pedido_oakley', name: 'Rules Oakley', url: 'https://maps.app.goo.gl/T81E6eXNTRWc86nj9' },\n        { key: 'sucursal_thenorthface', orderKey: 'pedido_thenorthface', name: 'Rules The North Face', url: 'https://maps.app.goo.gl/T81E6eXNTRWc86nj9' },\n        { key: 'sucursal_surfin', orderKey: 'pedido_surfin', name: 'Surfin', url: 'https://maps.app.goo.gl/18GNbRyLLukuo4m57' },\n        { key: 'sucursal_nuance', orderKey: 'pedido_nuance', name: 'Nuance', url: 'https://maps.app.goo.gl/Farx9QjYyZX294pe7' },\n        { key: 'sucursal_nuancelodge', orderKey: 'pedido_nuancelodge', name: 'Nuance Lodge', url: 'https://maps.app.goo.gl/ND7hyiUQMVSpJ2G96' },\n        { key: 'sucursal_melia', orderKey: 'pedido_melia', name: 'Meliá Sierra Nevada', url: 'https://maps.app.goo.gl/Cf146WRdUBgxN8KT8' }\n      ];\n\n      // --- COLUMNA IZQUIERDA ---\n      const descuentosActivos = sucursales.filter(s => parseInt(supabaseData[s.key] || 0) > 0);\n      \n      let leftColumn = '<div class=\"column\"><h3 class=\"section-title\">Tus descuentos activos</h3>';\n      if (descuentosActivos.length === 0) {\n        leftColumn += '<div class=\"no-data\"><p>Actualmente no tienes descuentos activos. ¡Sigue comprando para acumular más!</p></div>';\n      } else {\n        leftColumn += '<table><thead><tr><th>Sucursal</th><th>Descuento</th><th>Ubicación</th></tr></thead><tbody>';\n        descuentosActivos.forEach(s => {\n          leftColumn += `\n            <tr>\n              <td><strong>${s.name}</strong></td>\n              <td><span class=\"discount-badge\">${supabaseData[s.key]}%</span></td>\n              <td><a href=\"${s.url}\" target=\"_top\" rel=\"noopener noreferrer\" class=\"map-btn\">📍 Ver mapa</a></td>\n            </tr>\n          `;\n        });\n        leftColumn += '</tbody></table>';\n      }\n      leftColumn += '</div>';\n\n      // --- COLUMNA DERECHA ---\n      let rightColumn = '<div class=\"column\"><h3 class=\"section-title\">Descuentos utilizados</h3>';\n      let hasUsedDiscounts = false;\n\n      try {\n        const orders = $node[\"GraphQL1\"].json.data.nodes;\n        \n        if (orders && orders.length > 0) {\n          \n          const orderToSucursal = {};\n          sucursales.forEach(s => {\n            if (supabaseData[s.orderKey]) {\n               orderToSucursal[\"gid://shopify/Order/\" + supabaseData[s.orderKey]] = s.name;\n            }\n          });\n\n          orders.forEach(order => {\n            if (!order) return; \n            \n            const sucursalName = orderToSucursal[order.id] || 'Tienda';\n            const items = order.lineItems.edges;\n\n            if (items.length > 0) {\n              hasUsedDiscounts = true;\n              rightColumn += `\n                <h4 class=\"sucursal-name\">${sucursalName} <span style=\"font-size:12px; color:#888; font-weight:normal;\">(${order.name})</span></h4>\n                <table>\n                  <thead>\n                    <tr>\n                      <th>Producto</th>\n                      <th>Precio Original</th>\n                      <th>Tu Precio</th>\n                    </tr>\n                  </thead>\n                  <tbody>\n              `;\n\n              items.forEach(item => {\n                const node = item.node;\n                const originalPrice = parseFloat(node.originalTotalSet.shopMoney.amount);\n                const discountedPrice = parseFloat(node.discountedTotalSet.shopMoney.amount);\n                const savings = (originalPrice - discountedPrice).toFixed(2);\n\n                const imageUrl = node.image && node.image.url ? node.image.url : 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';\n\n                let originalHtml = '-';\n                let savingsHtml = '';\n                \n                if (originalPrice > discountedPrice) {\n                   originalHtml = `<span class=\"price-original\">${originalPrice.toFixed(2)}€</span>`;\n                   savingsHtml = `<span class=\"savings-text\">Ahorraste ${savings}€</span>`;\n                }\n\n                rightColumn += `\n                  <tr>\n                    <td>\n                      <div class=\"product-cell\">\n                        <img src=\"${imageUrl}\" alt=\"${node.title}\" class=\"product-img\" onerror=\"this.style.display='none'\">\n                        <div>\n                          <strong>${node.title}</strong><br>\n                          <span style=\"font-size: 0.85em; color: #666;\">Cant: ${node.quantity}</span>\n                        </div>\n                      </div>\n                    </td>\n                    <td>${originalHtml}</td>\n                    <td>\n                      <span class=\"price-discount\">${discountedPrice.toFixed(2)}€</span>\n                      ${savingsHtml}\n                    </td>\n                  </tr>\n                `;\n              });\n              rightColumn += `</tbody></table>`;\n            }\n          });\n        }\n      } catch (error) {\n        console.log(\"Error leyendo pedidos GraphQL: \", error);\n      }\n\n      if (!hasUsedDiscounts) {\n         rightColumn += '<div class=\"no-data\" style=\"margin-top:15px;\"><p>Aún no has utilizado ningún descuento en tus compras.</p></div>';\n      }\n      \n      rightColumn += '</div>';\n\n      // --- UNIMOS TODO (Aquí he añadido la clase .footer-note al final) ---\n      const finalHtml = `\n        <div class=\"main-header\">\n          <h2>¡Hola, ${supabaseData.Nombre || 'Cliente'}!</h2>\n          <p>Bienvenido a tu área personal.</p>\n        </div>\n        <div class=\"container\">\n          ${leftColumn}\n          ${rightColumn}\n        </div>\n        <p class=\"footer-note\">El descuento solo se aplicará a artículos que no tengan descuento de antemano.</p>\n      `;\n\n      return finalHtml;\n    })()\n  }}\n\n</body>\n</html>",
           "options": {}
         },
         "type": "n8n-nodes-base.respondToWebhook",
         "typeVersion": 1.5,
         "position": [
-          2928,
-          -896
+          3632,
+          -848
         ],
         "id": "ba3dd16e-f146-4321-8ca0-9d6e1903c0d4",
         "name": "Respond to Webhook"
@@ -2041,8 +2747,8 @@
           "where": {
             "values": [
               {
-                "column": "correo",
-                "value": "={{ $json.query.cliente_id }}"
+                "column": "id_cliente",
+                "value": "={{ $json.data.order.customer.id.split('/').pop() }}"
               }
             ]
           },
@@ -2051,8 +2757,8 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          2496,
-          -768
+          2928,
+          -752
         ],
         "id": "854c91f8-93f3-46f5-a1de-ec03fa9b4a3e",
         "name": "Select rows from a table",
@@ -2082,15 +2788,6 @@
                   "type": "string",
                   "operation": "equals"
                 }
-              },
-              {
-                "id": "a290fb24-def7-44a8-92a0-4e4e45aab496",
-                "leftValue": "={{ $json.id_cliente }}",
-                "rightValue": "={{ $('Leerqr').item.json.query.shop_id }}",
-                "operator": {
-                  "type": "string",
-                  "operation": "equals"
-                }
               }
             ],
             "combinator": "and"
@@ -2100,8 +2797,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          2656,
-          -768
+          3184,
+          -752
         ],
         "id": "ceec1aba-9719-4440-b3ec-a563293b9876",
         "name": "If"
@@ -2115,28 +2812,55 @@
         "type": "n8n-nodes-base.respondToWebhook",
         "typeVersion": 1.5,
         "position": [
-          2928,
-          -672
+          3392,
+          -656
         ],
         "id": "f38e9265-197e-4c46-9dff-bcc9cd8b5d68",
         "name": "Respond to Webhook1"
       },
       {
         "parameters": {
-          "httpMethod": "POST",
-          "path": "verificar-telefono",
-          "responseMode": "responseNode",
-          "options": {}
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-01/graphql.json",
+          "query": "query getOrder($orderId: ID!) {\n  order(id: $orderId) {\n    name\n    email\n    customer {\n      id\n      email\n    }\n  }\n}",
+          "variables": "={\n  \"orderId\": \"gid://shopify/Order/{{ $json.query.shop_id }}\"\n}"
         },
-        "type": "n8n-nodes-base.webhook",
-        "typeVersion": 2.1,
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
         "position": [
-          1792,
-          -496
+          2720,
+          -752
         ],
-        "id": "d79d1eb9-0d64-4eb2-8c2a-39aa49419fe7",
-        "name": "Verificar Teléfono",
-        "webhookId": "29870e65-cb57-4b87-afd5-a8729ec506f3"
+        "id": "df362df3-7061-458d-9633-a1eb66b89be1",
+        "name": "GraphQL",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-01/graphql.json",
+          "query": "query getMultipleOrders($orderIds: [ID!]!) {\n  nodes(ids: $orderIds) {\n    ... on Order {\n      id\n      name\n      lineItems(first: 10) {\n        edges {\n          node {\n            title\n            quantity\n            image {\n              url\n            }\n            originalTotalSet { shopMoney { amount } }\n            discountedTotalSet { shopMoney { amount } }\n          }\n        }\n      }\n    }\n  }\n}",
+          "variables": "={{\n  {\n    \"orderIds\": [\n      $json.pedido_rules,\n      $json.pedido_oakley,\n      $json.pedido_thenorthface,\n      $json.pedido_surfin,\n      $json.pedido_nuance,\n      $json.pedido_nuancelodge,\n      $json.pedido_melia\n    ].filter(id => id != null && id != \"\").map(id => \"gid://shopify/Order/\" + id)\n  }\n}}"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          3392,
+          -848
+        ],
+        "id": "8f06d485-00b0-4ce8-9588-856fc96b7742",
+        "name": "GraphQL1",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "THkhgrtze1uBo6Ft",
+            "name": "Token Informes Shopify"
+          }
+        }
       }
     ],
     "connections": {
@@ -2470,7 +3194,7 @@
         "main": [
           [
             {
-              "node": "Select rows from a table",
+              "node": "GraphQL",
               "type": "main",
               "index": 0
             }
@@ -2492,7 +3216,7 @@
         "main": [
           [
             {
-              "node": "Respond to Webhook",
+              "node": "GraphQL1",
               "type": "main",
               "index": 0
             }
@@ -2506,18 +3230,35 @@
           ]
         ]
       },
-      "Verificar Teléfono": {
+      "GraphQL": {
         "main": [
-          []
+          [
+            {
+              "node": "Select rows from a table",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "GraphQL1": {
+        "main": [
+          [
+            {
+              "node": "Respond to Webhook",
+              "type": "main",
+              "index": 0
+            }
+          ]
         ]
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version 28946e03",
+    "name": "Version 5d411736",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "28946e03-1fab-4f94-bc51-e3063d6ac6c9",
+  "activeVersionId": "5d411736-f00e-487d-9f26-1ca4b9753032",
   "connections": {
     "Webhook": {
       "main": [
@@ -2849,7 +3590,7 @@
       "main": [
         [
           {
-            "node": "Select rows from a table",
+            "node": "GraphQL",
             "type": "main",
             "index": 0
           }
@@ -2871,7 +3612,7 @@
       "main": [
         [
           {
-            "node": "Respond to Webhook",
+            "node": "GraphQL1",
             "type": "main",
             "index": 0
           }
@@ -2885,9 +3626,26 @@
         ]
       ]
     },
-    "Verificar Teléfono": {
+    "GraphQL": {
       "main": [
-        []
+        [
+          {
+            "node": "Select rows from a table",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GraphQL1": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
   },
@@ -3832,7 +4590,8 @@
           "mappingMode": "defineBelow",
           "value": {
             "sucursal_rules": 0,
-            "correo": "={{ $('Webhook').item.json.body.customer.email }}"
+            "pedido_rules": "={{ $('Webhook').item.json.body.id }}",
+            "correo": "={{ $json.correo }}"
           },
           "matchingColumns": [
             "correo"
@@ -3920,10 +4679,109 @@
             {
               "id": "id_cliente",
               "displayName": "id_cliente",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Nombre",
+              "displayName": "Nombre",
               "required": false,
               "defaultMatch": false,
               "display": true,
               "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Teléfono",
+              "displayName": "Teléfono",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pedido_rules",
+              "displayName": "pedido_rules",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "pedido_oakley",
+              "displayName": "pedido_oakley",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pedido_thenorthface",
+              "displayName": "pedido_thenorthface",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pedido_surfin",
+              "displayName": "pedido_surfin",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pedido_nuance",
+              "displayName": "pedido_nuance",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pedido_nuancelodge",
+              "displayName": "pedido_nuancelodge",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pedido_melia",
+              "displayName": "pedido_melia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
               "canBeUsedToMatch": true,
               "removed": true
             }
@@ -3966,7 +4824,8 @@
           "mappingMode": "defineBelow",
           "value": {
             "sucursal_oakley": 0,
-            "correo": "={{ $json.body.contact_email }}"
+            "correo": "={{ $json.body.contact_email }}",
+            "pedido_oakley": "={{ $('Webhook').item.json.body.id }}"
           },
           "matchingColumns": [
             "correo"
@@ -4054,10 +4913,110 @@
             {
               "id": "id_cliente",
               "displayName": "id_cliente",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Nombre",
+              "displayName": "Nombre",
               "required": false,
               "defaultMatch": false,
               "display": true,
               "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Teléfono",
+              "displayName": "Teléfono",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pedido_rules",
+              "displayName": "pedido_rules",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pedido_oakley",
+              "displayName": "pedido_oakley",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "pedido_thenorthface",
+              "displayName": "pedido_thenorthface",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pedido_surfin",
+              "displayName": "pedido_surfin",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pedido_nuance",
+              "displayName": "pedido_nuance",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pedido_nuancelodge",
+              "displayName": "pedido_nuancelodge",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pedido_melia",
+              "displayName": "pedido_melia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
               "canBeUsedToMatch": true,
               "removed": true
             }
@@ -4100,7 +5059,8 @@
           "mappingMode": "defineBelow",
           "value": {
             "sucursal_thenorthface": 0,
-            "correo": "={{ $json.body.contact_email }}"
+            "correo": "={{ $json.body.contact_email }}",
+            "pedido_thenorthface": "={{ $('Webhook').item.json.body.id }}"
           },
           "matchingColumns": [
             "correo"
@@ -4188,10 +5148,110 @@
             {
               "id": "id_cliente",
               "displayName": "id_cliente",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Nombre",
+              "displayName": "Nombre",
               "required": false,
               "defaultMatch": false,
               "display": true,
               "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Teléfono",
+              "displayName": "Teléfono",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pedido_rules",
+              "displayName": "pedido_rules",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pedido_oakley",
+              "displayName": "pedido_oakley",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pedido_thenorthface",
+              "displayName": "pedido_thenorthface",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "pedido_surfin",
+              "displayName": "pedido_surfin",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pedido_nuance",
+              "displayName": "pedido_nuance",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pedido_nuancelodge",
+              "displayName": "pedido_nuancelodge",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pedido_melia",
+              "displayName": "pedido_melia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
               "canBeUsedToMatch": true,
               "removed": true
             }
@@ -4234,7 +5294,8 @@
           "mappingMode": "defineBelow",
           "value": {
             "sucursal_surfin": 0,
-            "correo": "={{ $json.body.contact_email }}"
+            "correo": "={{ $json.body.contact_email }}",
+            "pedido_surfin": "={{ $('Webhook').item.json.body.id }}"
           },
           "matchingColumns": [
             "correo"
@@ -4322,10 +5383,110 @@
             {
               "id": "id_cliente",
               "displayName": "id_cliente",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Nombre",
+              "displayName": "Nombre",
               "required": false,
               "defaultMatch": false,
               "display": true,
               "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Teléfono",
+              "displayName": "Teléfono",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pedido_rules",
+              "displayName": "pedido_rules",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pedido_oakley",
+              "displayName": "pedido_oakley",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pedido_thenorthface",
+              "displayName": "pedido_thenorthface",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pedido_surfin",
+              "displayName": "pedido_surfin",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "pedido_nuance",
+              "displayName": "pedido_nuance",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pedido_nuancelodge",
+              "displayName": "pedido_nuancelodge",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pedido_melia",
+              "displayName": "pedido_melia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
               "canBeUsedToMatch": true,
               "removed": true
             }
@@ -4368,7 +5529,8 @@
           "mappingMode": "defineBelow",
           "value": {
             "sucursal_nuance": 0,
-            "correo": "={{ $json.body.contact_email }}"
+            "correo": "={{ $json.body.contact_email }}",
+            "pedido_nuance": "={{ $('Webhook').item.json.body.id }}"
           },
           "matchingColumns": [
             "correo"
@@ -4456,10 +5618,110 @@
             {
               "id": "id_cliente",
               "displayName": "id_cliente",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Nombre",
+              "displayName": "Nombre",
               "required": false,
               "defaultMatch": false,
               "display": true,
               "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Teléfono",
+              "displayName": "Teléfono",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pedido_rules",
+              "displayName": "pedido_rules",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pedido_oakley",
+              "displayName": "pedido_oakley",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pedido_thenorthface",
+              "displayName": "pedido_thenorthface",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pedido_surfin",
+              "displayName": "pedido_surfin",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pedido_nuance",
+              "displayName": "pedido_nuance",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "pedido_nuancelodge",
+              "displayName": "pedido_nuancelodge",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pedido_melia",
+              "displayName": "pedido_melia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
               "canBeUsedToMatch": true,
               "removed": true
             }
@@ -4502,7 +5764,8 @@
           "mappingMode": "defineBelow",
           "value": {
             "sucursal_nuancelodge": 0,
-            "correo": "={{ $json.body.contact_email }}"
+            "correo": "={{ $json.body.contact_email }}",
+            "pedido_nuancelodge": "={{ $('Webhook').item.json.body.id }}"
           },
           "matchingColumns": [
             "correo"
@@ -4590,10 +5853,110 @@
             {
               "id": "id_cliente",
               "displayName": "id_cliente",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Nombre",
+              "displayName": "Nombre",
               "required": false,
               "defaultMatch": false,
               "display": true,
               "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Teléfono",
+              "displayName": "Teléfono",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pedido_rules",
+              "displayName": "pedido_rules",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pedido_oakley",
+              "displayName": "pedido_oakley",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pedido_thenorthface",
+              "displayName": "pedido_thenorthface",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pedido_surfin",
+              "displayName": "pedido_surfin",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pedido_nuance",
+              "displayName": "pedido_nuance",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pedido_nuancelodge",
+              "displayName": "pedido_nuancelodge",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "pedido_melia",
+              "displayName": "pedido_melia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
               "canBeUsedToMatch": true,
               "removed": true
             }
@@ -4636,7 +5999,8 @@
           "mappingMode": "defineBelow",
           "value": {
             "sucursal_melia": 0,
-            "correo": "={{ $json.body.contact_email }}"
+            "correo": "={{ $json.body.contact_email }}",
+            "pedido_melia": "={{ $('Webhook').item.json.body.id }}"
           },
           "matchingColumns": [
             "correo"
@@ -4724,12 +6088,112 @@
             {
               "id": "id_cliente",
               "displayName": "id_cliente",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Nombre",
+              "displayName": "Nombre",
               "required": false,
               "defaultMatch": false,
               "display": true,
               "type": "string",
               "canBeUsedToMatch": true,
               "removed": true
+            },
+            {
+              "id": "Teléfono",
+              "displayName": "Teléfono",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pedido_rules",
+              "displayName": "pedido_rules",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pedido_oakley",
+              "displayName": "pedido_oakley",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pedido_thenorthface",
+              "displayName": "pedido_thenorthface",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pedido_surfin",
+              "displayName": "pedido_surfin",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pedido_nuance",
+              "displayName": "pedido_nuance",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pedido_nuancelodge",
+              "displayName": "pedido_nuancelodge",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "pedido_melia",
+              "displayName": "pedido_melia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": false
             }
           ],
           "attemptToConvertTypes": false,
@@ -4895,8 +6359,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        2304,
-        -768
+        2512,
+        -752
       ],
       "id": "50d47124-56fb-448c-95b1-1aff6feb6b2f",
       "name": "Leerqr",
@@ -4905,14 +6369,14 @@
     {
       "parameters": {
         "respondWith": "text",
-        "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Tus Descuentos</title>\n  <style>\n    body { \n      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; \n      padding: 20px; \n      max-width: 600px; /* Lo he ampliado un poco para que quepa bien la nueva columna */\n      margin: 0 auto; \n      color: #333;\n    }\n    .header { text-align: center; margin-bottom: 30px; }\n    h2 { color: #000; margin-bottom: 5px; }\n    p { color: #555; }\n    table { \n      width: 100%; \n      border-collapse: collapse; \n      margin-top: 20px; \n      box-shadow: 0 1px 3px rgba(0,0,0,0.1);\n      border-radius: 8px;\n      overflow: hidden;\n    }\n    th, td { \n      padding: 14px 15px; \n      text-align: left; \n      border-bottom: 1px solid #eee; \n      vertical-align: middle;\n    }\n    th { \n      background-color: #f4f6f8; \n      font-weight: 600; \n      color: #333;\n    }\n    tr:last-child td { border-bottom: none; }\n    tr:hover { background-color: #f9f9f9; }\n    .discount-badge { \n      background-color: #000; \n      color: #fff; \n      padding: 4px 10px; \n      border-radius: 20px; \n      font-weight: bold; \n      font-size: 14px;\n    }\n    .no-data { text-align: center; padding: 30px; color: #666; background: #f9f9f9; border-radius: 8px; }\n    \n    /* ESTILOS NUEVOS PARA EL BOTÓN DEL MAPA */\n    .map-btn {\n      display: inline-block;\n      background-color: #f4f6f8;\n      color: #333;\n      padding: 6px 12px;\n      border-radius: 6px;\n      text-decoration: none;\n      font-size: 13px;\n      font-weight: 600;\n      border: 1px solid #ddd;\n      transition: all 0.2s;\n    }\n    .map-btn:hover {\n      background-color: #e2e6ea;\n      color: #000;\n      border-color: #ccc;\n    }\n  </style>\n</head>\n<body>\n\n  {{ \n    (() => {\n      const items = $input.all();\n      if (items.length === 0) {\n        return `\n          <div class=\"header\">\n            <h2>¡Hola!</h2>\n          </div>\n          <div class=\"no-data\">\n            <p>No hemos encontrado tu perfil en nuestra base de datos o hubo un error al leer el QR.</p>\n          </div>\n        `;\n      }\n\n      const data = items[0].json;\n      \n      // 3. AÑADIDA LA PROPIEDAD \"url\" A CADA SUCURSAL (Sustituye estos enlaces por los tuyos reales)\n      const sucursales = [\n        { key: 'sucursal_rules', name: 'Rules Outlet', url: 'https://maps.app.goo.gl/2zcHYJzYi4mku9Bw5' },\n        { key: 'sucursal_oakley', name: 'Rules Oakley', url: 'https://maps.app.goo.gl/T81E6eXNTRWc86nj9' },\n        { key: 'sucursal_thenorthface', name: 'Rules The North Face', url: 'https://maps.app.goo.gl/T81E6eXNTRWc86nj9' },\n        { key: 'sucursal_surfin', name: 'Surfin', url: 'https://maps.app.goo.gl/18GNbRyLLukuo4m57' },\n        { key: 'sucursal_nuance', name: 'Nuance', url: 'https://maps.app.goo.gl/Farx9QjYyZX294pe7' },\n        { key: 'sucursal_nuancelodge', name: 'Nuance Lodge', url: 'https://maps.app.goo.gl/ND7hyiUQMVSpJ2G96' },\n        { key: 'sucursal_melia', name: 'Meliá Sierra Nevada', url: 'https://maps.app.goo.gl/Cf146WRdUBgxN8KT8' }\n      ];\n\n      const descuentosActivos = sucursales.filter(s => parseInt(data[s.key] || 0) > 0);\n\n      let html = `\n        <div class=\"header\">\n          <h2>¡Hola, ${data.Nombre}!</h2>\n          <p>Aquí tienes tus descuentos activos en nuestras sucursales:</p>\n        </div>\n      `;\n\n      if (descuentosActivos.length === 0) {\n        html += '<div class=\"no-data\"><p>Actualmente no tienes descuentos activos. ¡Sigue comprando para acumular más!</p></div>';\n      } else {\n        // AÑADIDA LA CABECERA \"Ubicación\"\n        html += '<table><thead><tr><th>Sucursal</th><th>Descuento</th><th>Ubicación</th></tr></thead><tbody>';\n        \n        descuentosActivos.forEach(s => {\n          html += `\n            <tr>\n              <td><strong>${s.name}</strong></td>\n              <td><span class=\"discount-badge\">${data[s.key]}%</span></td>\n              <td><a href=\"${s.url}\" target=\"_top\" rel=\"noopener noreferrer\" class=\"map-btn\">📍 Ver mapa</a></td>\n            </tr>\n          `;\n        });\n        \n        html += '</tbody></table>';\n      }\n\n      return html;\n    })()\n  }}\n\n</body>\n</html>",
+        "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Tus Descuentos</title>\n  <style>\n    body { \n      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; \n      padding: 20px; \n      max-width: 1000px; \n      margin: 0 auto; \n      color: #333;\n      background-color: #fcfcfc;\n    }\n    .main-header { text-align: center; margin-bottom: 40px; }\n    h2 { color: #000; margin-bottom: 5px; font-size: 2rem; }\n    p { color: #555; }\n    \n    /* Layout de dos columnas */\n    .container {\n      display: flex;\n      flex-wrap: wrap;\n      gap: 40px;\n    }\n    .column {\n      flex: 1;\n      min-width: 320px;\n      background: #fff;\n      padding: 25px;\n      border-radius: 12px;\n      box-shadow: 0 4px 6px rgba(0,0,0,0.05);\n    }\n    .section-title {\n      margin-top: 0;\n      padding-bottom: 10px;\n      border-bottom: 2px solid #eee;\n      font-size: 1.3rem;\n      color: #000;\n    }\n\n    table { \n      width: 100%; \n      border-collapse: collapse; \n      margin-top: 15px; \n      border-radius: 8px;\n      overflow: hidden;\n      border: 1px solid #f0f0f0;\n    }\n    th, td { \n      padding: 12px 15px; \n      text-align: left; \n      border-bottom: 1px solid #f0f0f0; \n      vertical-align: middle;\n      font-size: 14px;\n    }\n    th { \n      background-color: #f8f9fa; \n      font-weight: 600; \n      color: #333;\n    }\n    tr:last-child td { border-bottom: none; }\n    \n    .discount-badge { \n      background-color: #000; \n      color: #fff; \n      padding: 4px 10px; \n      border-radius: 20px; \n      font-weight: bold; \n      font-size: 13px;\n    }\n    .no-data { text-align: center; padding: 30px; color: #666; background: #f9f9f9; border-radius: 8px; font-size: 14px;}\n    \n    .map-btn {\n      display: inline-block;\n      background-color: #f4f6f8;\n      color: #333;\n      padding: 6px 12px;\n      border-radius: 6px;\n      text-decoration: none;\n      font-size: 12px;\n      font-weight: 600;\n      border: 1px solid #ddd;\n      transition: all 0.2s;\n    }\n    .map-btn:hover { background-color: #e2e6ea; color: #000; border-color: #ccc; }\n\n    /* Estilos específicos compras e imágenes */\n    .sucursal-name {\n      margin-top: 25px;\n      margin-bottom: 5px;\n      font-size: 1.1rem;\n      color: #222;\n    }\n    .price-original { text-decoration: line-through; color: #999; font-size: 0.9em; }\n    .price-discount { color: #27ae60; font-weight: bold; font-size: 1.1em; }\n    .savings-text { display: block; font-size: 0.8em; color: #27ae60; margin-top: 2px; }\n    \n    .product-cell {\n      display: flex;\n      align-items: center;\n      gap: 15px;\n    }\n    .product-img {\n      width: 45px;\n      height: 45px;\n      object-fit: cover;\n      border-radius: 6px;\n      border: 1px solid #eaeaea;\n      background-color: #fff;\n    }\n\n    /* NUEVO ESTILO: Nota legal al pie de página */\n    .footer-note {\n      text-align: center;\n      margin-top: 50px;\n      padding-top: 20px;\n      font-size: 12px;\n      color: #888;\n      border-top: 1px solid #eaeaea;\n    }\n  </style>\n</head>\n<body>\n\n  {{ \n    (() => {\n      const supabaseData = $node[\"If\"].json; \n      \n      if (!supabaseData) {\n        return `\n          <div class=\"main-header\"><h2>¡Hola!</h2></div>\n          <div class=\"no-data\"><p>No hemos encontrado tu perfil o hubo un error al leer el QR.</p></div>\n        `;\n      }\n\n      const sucursales = [\n        { key: 'sucursal_rules', orderKey: 'pedido_rules', name: 'Rules Outlet', url: 'https://maps.app.goo.gl/2zcHYJzYi4mku9Bw5' },\n        { key: 'sucursal_oakley', orderKey: 'pedido_oakley', name: 'Rules Oakley', url: 'https://maps.app.goo.gl/T81E6eXNTRWc86nj9' },\n        { key: 'sucursal_thenorthface', orderKey: 'pedido_thenorthface', name: 'Rules The North Face', url: 'https://maps.app.goo.gl/T81E6eXNTRWc86nj9' },\n        { key: 'sucursal_surfin', orderKey: 'pedido_surfin', name: 'Surfin', url: 'https://maps.app.goo.gl/18GNbRyLLukuo4m57' },\n        { key: 'sucursal_nuance', orderKey: 'pedido_nuance', name: 'Nuance', url: 'https://maps.app.goo.gl/Farx9QjYyZX294pe7' },\n        { key: 'sucursal_nuancelodge', orderKey: 'pedido_nuancelodge', name: 'Nuance Lodge', url: 'https://maps.app.goo.gl/ND7hyiUQMVSpJ2G96' },\n        { key: 'sucursal_melia', orderKey: 'pedido_melia', name: 'Meliá Sierra Nevada', url: 'https://maps.app.goo.gl/Cf146WRdUBgxN8KT8' }\n      ];\n\n      // --- COLUMNA IZQUIERDA ---\n      const descuentosActivos = sucursales.filter(s => parseInt(supabaseData[s.key] || 0) > 0);\n      \n      let leftColumn = '<div class=\"column\"><h3 class=\"section-title\">Tus descuentos activos</h3>';\n      if (descuentosActivos.length === 0) {\n        leftColumn += '<div class=\"no-data\"><p>Actualmente no tienes descuentos activos. ¡Sigue comprando para acumular más!</p></div>';\n      } else {\n        leftColumn += '<table><thead><tr><th>Sucursal</th><th>Descuento</th><th>Ubicación</th></tr></thead><tbody>';\n        descuentosActivos.forEach(s => {\n          leftColumn += `\n            <tr>\n              <td><strong>${s.name}</strong></td>\n              <td><span class=\"discount-badge\">${supabaseData[s.key]}%</span></td>\n              <td><a href=\"${s.url}\" target=\"_top\" rel=\"noopener noreferrer\" class=\"map-btn\">📍 Ver mapa</a></td>\n            </tr>\n          `;\n        });\n        leftColumn += '</tbody></table>';\n      }\n      leftColumn += '</div>';\n\n      // --- COLUMNA DERECHA ---\n      let rightColumn = '<div class=\"column\"><h3 class=\"section-title\">Descuentos utilizados</h3>';\n      let hasUsedDiscounts = false;\n\n      try {\n        const orders = $node[\"GraphQL1\"].json.data.nodes;\n        \n        if (orders && orders.length > 0) {\n          \n          const orderToSucursal = {};\n          sucursales.forEach(s => {\n            if (supabaseData[s.orderKey]) {\n               orderToSucursal[\"gid://shopify/Order/\" + supabaseData[s.orderKey]] = s.name;\n            }\n          });\n\n          orders.forEach(order => {\n            if (!order) return; \n            \n            const sucursalName = orderToSucursal[order.id] || 'Tienda';\n            const items = order.lineItems.edges;\n\n            if (items.length > 0) {\n              hasUsedDiscounts = true;\n              rightColumn += `\n                <h4 class=\"sucursal-name\">${sucursalName} <span style=\"font-size:12px; color:#888; font-weight:normal;\">(${order.name})</span></h4>\n                <table>\n                  <thead>\n                    <tr>\n                      <th>Producto</th>\n                      <th>Precio Original</th>\n                      <th>Tu Precio</th>\n                    </tr>\n                  </thead>\n                  <tbody>\n              `;\n\n              items.forEach(item => {\n                const node = item.node;\n                const originalPrice = parseFloat(node.originalTotalSet.shopMoney.amount);\n                const discountedPrice = parseFloat(node.discountedTotalSet.shopMoney.amount);\n                const savings = (originalPrice - discountedPrice).toFixed(2);\n\n                const imageUrl = node.image && node.image.url ? node.image.url : 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';\n\n                let originalHtml = '-';\n                let savingsHtml = '';\n                \n                if (originalPrice > discountedPrice) {\n                   originalHtml = `<span class=\"price-original\">${originalPrice.toFixed(2)}€</span>`;\n                   savingsHtml = `<span class=\"savings-text\">Ahorraste ${savings}€</span>`;\n                }\n\n                rightColumn += `\n                  <tr>\n                    <td>\n                      <div class=\"product-cell\">\n                        <img src=\"${imageUrl}\" alt=\"${node.title}\" class=\"product-img\" onerror=\"this.style.display='none'\">\n                        <div>\n                          <strong>${node.title}</strong><br>\n                          <span style=\"font-size: 0.85em; color: #666;\">Cant: ${node.quantity}</span>\n                        </div>\n                      </div>\n                    </td>\n                    <td>${originalHtml}</td>\n                    <td>\n                      <span class=\"price-discount\">${discountedPrice.toFixed(2)}€</span>\n                      ${savingsHtml}\n                    </td>\n                  </tr>\n                `;\n              });\n              rightColumn += `</tbody></table>`;\n            }\n          });\n        }\n      } catch (error) {\n        console.log(\"Error leyendo pedidos GraphQL: \", error);\n      }\n\n      if (!hasUsedDiscounts) {\n         rightColumn += '<div class=\"no-data\" style=\"margin-top:15px;\"><p>Aún no has utilizado ningún descuento en tus compras.</p></div>';\n      }\n      \n      rightColumn += '</div>';\n\n      // --- UNIMOS TODO (Aquí he añadido la clase .footer-note al final) ---\n      const finalHtml = `\n        <div class=\"main-header\">\n          <h2>¡Hola, ${supabaseData.Nombre || 'Cliente'}!</h2>\n          <p>Bienvenido a tu área personal.</p>\n        </div>\n        <div class=\"container\">\n          ${leftColumn}\n          ${rightColumn}\n        </div>\n        <p class=\"footer-note\">El descuento solo se aplicará a artículos que no tengan descuento de antemano.</p>\n      `;\n\n      return finalHtml;\n    })()\n  }}\n\n</body>\n</html>",
         "options": {}
       },
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        2928,
-        -896
+        3632,
+        -848
       ],
       "id": "ba3dd16e-f146-4321-8ca0-9d6e1903c0d4",
       "name": "Respond to Webhook"
@@ -4934,8 +6398,8 @@
         "where": {
           "values": [
             {
-              "column": "correo",
-              "value": "={{ $json.query.cliente_id }}"
+              "column": "id_cliente",
+              "value": "={{ $json.data.order.customer.id.split('/').pop() }}"
             }
           ]
         },
@@ -4944,8 +6408,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        2496,
-        -768
+        2928,
+        -752
       ],
       "id": "854c91f8-93f3-46f5-a1de-ec03fa9b4a3e",
       "name": "Select rows from a table",
@@ -4975,15 +6439,6 @@
                 "type": "string",
                 "operation": "equals"
               }
-            },
-            {
-              "id": "a290fb24-def7-44a8-92a0-4e4e45aab496",
-              "leftValue": "={{ $json.id_cliente }}",
-              "rightValue": "={{ $('Leerqr').item.json.query.shop_id }}",
-              "operator": {
-                "type": "string",
-                "operation": "equals"
-              }
             }
           ],
           "combinator": "and"
@@ -4993,8 +6448,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        2656,
-        -768
+        3184,
+        -752
       ],
       "id": "ceec1aba-9719-4440-b3ec-a563293b9876",
       "name": "If"
@@ -5008,158 +6463,108 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        2928,
-        -672
+        3392,
+        -656
       ],
       "id": "f38e9265-197e-4c46-9dff-bcc9cd8b5d68",
       "name": "Respond to Webhook1"
     },
     {
       "parameters": {
-        "httpMethod": "POST",
-        "path": "verificar-telefono",
-        "responseMode": "responseNode",
-        "options": {}
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-01/graphql.json",
+        "query": "query getOrder($orderId: ID!) {\n  order(id: $orderId) {\n    name\n    email\n    customer {\n      id\n      email\n    }\n  }\n}",
+        "variables": "={\n  \"orderId\": \"gid://shopify/Order/{{ $json.query.shop_id }}\"\n}"
       },
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2.1,
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
       "position": [
-        1792,
-        -496
+        2720,
+        -752
       ],
-      "id": "d79d1eb9-0d64-4eb2-8c2a-39aa49419fe7",
-      "name": "Verificar Teléfono",
-      "webhookId": "29870e65-cb57-4b87-afd5-a8729ec506f3"
+      "id": "df362df3-7061-458d-9633-a1eb66b89be1",
+      "name": "GraphQL",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-01/graphql.json",
+        "query": "query getMultipleOrders($orderIds: [ID!]!) {\n  nodes(ids: $orderIds) {\n    ... on Order {\n      id\n      name\n      lineItems(first: 10) {\n        edges {\n          node {\n            title\n            quantity\n            image {\n              url\n            }\n            originalTotalSet { shopMoney { amount } }\n            discountedTotalSet { shopMoney { amount } }\n          }\n        }\n      }\n    }\n  }\n}",
+        "variables": "={{\n  {\n    \"orderIds\": [\n      $json.pedido_rules,\n      $json.pedido_oakley,\n      $json.pedido_thenorthface,\n      $json.pedido_surfin,\n      $json.pedido_nuance,\n      $json.pedido_nuancelodge,\n      $json.pedido_melia\n    ].filter(id => id != null && id != \"\").map(id => \"gid://shopify/Order/\" + id)\n  }\n}}"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        3392,
+        -848
+      ],
+      "id": "8f06d485-00b0-4ce8-9588-856fc96b7742",
+      "name": "GraphQL1",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THkhgrtze1uBo6Ft",
+          "name": "Token Informes Shopify"
+        }
+      }
     }
   ],
   "pinData": {
-    "Verificar Teléfono": [
-      {
-        "json": {
-          "headers": {
-            "connection": "upgrade",
-            "host": "n8n.tailwind.es",
-            "x-forwarded-for": "2.136.43.122",
-            "x-forwarded-proto": "https",
-            "content-length": "44",
-            "cache-control": "max-age=0",
-            "sec-ch-ua": "\"Not(A:Brand\";v=\"8\", \"Chromium\";v=\"144\", \"Brave\";v=\"144\"",
-            "sec-ch-ua-mobile": "?0",
-            "sec-ch-ua-platform": "\"Linux\"",
-            "upgrade-insecure-requests": "1",
-            "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
-            "origin": "null",
-            "content-type": "application/x-www-form-urlencoded",
-            "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
-            "sec-gpc": "1",
-            "accept-language": "es-ES,es;q=0.8",
-            "sec-fetch-site": "cross-site",
-            "sec-fetch-mode": "navigate",
-            "sec-fetch-user": "?1",
-            "sec-fetch-dest": "document",
-            "accept-encoding": "gzip, deflate, br, zstd"
-          },
-          "params": {},
-          "query": {},
-          "body": {
-            "email": "prueba@prueba.com",
-            "telefono": "666665566"
-          },
-          "webhookUrl": "https://n8n.tailwind.es/webhook/verificar-telefono",
-          "executionMode": "production"
-        },
-        "pairedItem": {
-          "item": 0
-        }
-      }
-    ],
-    "Leerqr": [
-      {
-        "json": {
-          "headers": {
-            "connection": "upgrade",
-            "host": "n8n.tailwind.es",
-            "x-forwarded-for": "2.136.43.122",
-            "x-forwarded-proto": "https",
-            "upgrade-insecure-requests": "1",
-            "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
-            "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
-            "sec-ch-ua": "\"Not(A:Brand\";v=\"8\", \"Chromium\";v=\"144\", \"Brave\";v=\"144\"",
-            "sec-ch-ua-mobile": "?0",
-            "sec-ch-ua-platform": "\"Linux\"",
-            "sec-gpc": "1",
-            "accept-language": "es-ES,es;q=0.8",
-            "sec-fetch-site": "none",
-            "sec-fetch-mode": "navigate",
-            "sec-fetch-user": "?1",
-            "sec-fetch-dest": "document",
-            "accept-encoding": "gzip, deflate, br, zstd",
-            "cookie": "rl_page_init_referrer=RudderEncrypt%3AU2FsdGVkX1%2BV9ocwrf5sZKAZ84sclnSKoaVf7etXsrg%3D; rl_page_init_referring_domain=RudderEncrypt%3AU2FsdGVkX1%2B6nug6a8u7blNBcZ1adVwerK%2FtQl6fPIc%3D; rl_anonymous_id=RudderEncrypt%3AU2FsdGVkX19LBO%2FDVizAFG4ADsfdxTqJXho3lw%2ByncEgye5GJJkWTW8f9eQiKgBxAXYTVn5c%2B2MK3IEQ7ezNLQ%3D%3D; rl_user_id=RudderEncrypt%3AU2FsdGVkX19dvAkEVmn0yOIM4Wg6okrz%2B4BpIkD6x4JKN73ZzLXedScZ9zrdFo67wV5xmmI707y0PY4cMnEXHK4xuO66uBY1uGSsyT4dJ1wW59jwMRZ7oGHTF%2BZUPxv%2FY5hk5BqkWstjG90F%2BB2qpId0CkS6B4t6Z7n%2FPhnEO%2BI%3D; rl_trait=RudderEncrypt%3AU2FsdGVkX19X%2BUc%2BS%2FDHxR438OQAG7jI5QY5Q%2Brkc8xdYfoaCfQob6wDTyuf91O%2FXXH219gV8Vx6VgYp4wz4OZ08BXK0%2Bv0Xp8PDpFvKGwX7F7onwCGZOr9IVpSSY3G0qFmXbHH%2FPPyrxf4Y%2FoUNFm5obJr2jqUBpmkSSEWijEo%3D; rl_session=RudderEncrypt%3AU2FsdGVkX1%2FLBF1vRSQny7FG8928Gmjdybyb5eujJxci2HlSxyopyjFkVhQt1VeMEBvmO3CwFGJGQhpogOMSHj4rTUlLsHDwvvLuqgDDF6WX889yrNPW7pwzRFo8FkpHyfM04qWiylOXAwrRBC4XnA%3D%3D; ph_phc_4URIAm1uYfJO7j8kWSe0J8lc8IqnstRLS7Jx8NcakHo_posthog=%7B%22%24device_id%22%3A%22019c6590-a8c0-7936-9706-9d6324646ac4%22%2C%22distinct_id%22%3A%220f6825be298b3a005d52154ed2c929ac7758de54b6ab4a8d7eb7a8e83f623918%2308853e58-b9e7-4eaa-a226-f2a3e30187ec%22%2C%22%24sesid%22%3A%5B1772008993165%2C%22019c93b6-e20b-7795-91a3-cb170a61ce9e%22%2C1772004762114%5D%2C%22%24epp%22%3Atrue%2C%22%24initial_person_info%22%3A%7B%22r%22%3A%22%24direct%22%2C%22u%22%3A%22https%3A%2F%2Fn8n.tailwind.es%2F%22%7D%7D"
-          },
-          "params": {},
-          "query": {
-            "cliente_id": "prueba@prueba.com",
-            "shop_id": "9488191390043"
-          },
-          "body": {},
-          "webhookUrl": "https://n8n.tailwind.es/webhook/leerqr",
-          "executionMode": "production"
-        },
-        "pairedItem": {
-          "item": 0
-        }
-      }
-    ],
     "Webhook": [
       {
         "json": {
           "headers": {
             "connection": "upgrade",
             "host": "n8n.tailwind.es",
-            "x-forwarded-for": "34.34.152.237",
+            "x-forwarded-for": "34.77.148.162",
             "x-forwarded-proto": "https",
-            "content-length": "14842",
+            "content-length": "7969",
             "user-agent": "Shopify-Captain-Hook",
             "accept": "*/*",
             "accept-encoding": "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
             "content-type": "application/json",
             "x-shopify-api-version": "2026-01",
-            "x-shopify-event-id": "8755f6fa-7316-44a3-95b3-471ef366f9ef",
-            "x-shopify-hmac-sha256": "HvP4AQnwKs0DfKAZnCpv4RoKiHXTqNHpzawsW95jrrs=",
-            "x-shopify-order-id": "7728502931803",
+            "x-shopify-event-id": "3cc78615-4dab-4163-ba5b-75c9524ce963",
+            "x-shopify-hmac-sha256": "2qp22RtCUFon/orHi0hLZrKFegPOTmOpVhUnc1Z1ntY=",
+            "x-shopify-order-id": "7732659847515",
             "x-shopify-shop-domain": "surfin-store-spain.myshopify.com",
             "x-shopify-test": "false",
             "x-shopify-topic": "orders/create",
-            "x-shopify-triggered-at": "2026-02-24T18:37:51.347991186Z",
-            "x-shopify-webhook-id": "5762349f-0534-5267-ad16-68cb43cbe091"
+            "x-shopify-triggered-at": "2026-02-26T12:08:08.638675224Z",
+            "x-shopify-webhook-id": "89e27a0a-83ae-52c8-8520-4bb7a317aa9a"
           },
           "params": {},
           "query": {},
           "body": {
-            "id": 7728502931803,
-            "admin_graphql_api_id": "gid://shopify/Order/7728502931803",
+            "id": 7732659847515,
+            "admin_graphql_api_id": "gid://shopify/Order/7732659847515",
             "app_id": 129785,
-            "browser_ip": "2.136.43.55",
-            "buyer_accepts_marketing": true,
+            "browser_ip": "2.136.43.122",
+            "buyer_accepts_marketing": false,
             "cancel_reason": null,
             "cancelled_at": null,
             "cart_token": null,
-            "checkout_id": 48438242443611,
-            "checkout_token": "d033927e-f352-43b0-b966-1eeec77f70f1",
+            "checkout_id": 48447535579483,
+            "checkout_token": "45330b36-f1b2-4214-a4aa-7870a4b640e0",
             "client_details": {
               "accept_language": null,
               "browser_height": null,
-              "browser_ip": "2.136.43.55",
+              "browser_ip": "2.136.43.122",
               "browser_width": null,
               "session_hash": null,
-              "user_agent": "Shopify POS/10.20.1/Android/15/samsung/SM-X210R/production"
+              "user_agent": "Shopify POS/11.0.1/Android/16/samsung/SM-X626B/production"
             },
-            "closed_at": "2026-02-24T19:37:51+01:00",
+            "closed_at": "2026-02-26T13:08:08+01:00",
             "company": null,
-            "confirmation_number": "Z0E9UDGQZ",
+            "confirmation_number": "FJ65PER5J",
             "confirmed": true,
-            "contact_email": "sendtocj@gmail.com",
-            "created_at": "2026-02-24T19:37:50+01:00",
+            "contact_email": "prueba@prueba.com",
+            "created_at": "2026-02-26T13:08:07+01:00",
             "currency": "EUR",
             "current_shipping_price_set": {
               "shop_money": {
@@ -5171,38 +6576,38 @@
                 "currency_code": "EUR"
               }
             },
-            "current_subtotal_price": "269.00",
+            "current_subtotal_price": "11.61",
             "current_subtotal_price_set": {
               "shop_money": {
-                "amount": "269.00",
+                "amount": "11.61",
                 "currency_code": "EUR"
               },
               "presentment_money": {
-                "amount": "269.00",
+                "amount": "11.61",
                 "currency_code": "EUR"
               }
             },
             "current_total_additional_fees_set": null,
-            "current_total_discounts": "0.00",
+            "current_total_discounts": "1.29",
             "current_total_discounts_set": {
               "shop_money": {
-                "amount": "0.00",
+                "amount": "1.29",
                 "currency_code": "EUR"
               },
               "presentment_money": {
-                "amount": "0.00",
+                "amount": "1.29",
                 "currency_code": "EUR"
               }
             },
             "current_total_duties_set": null,
-            "current_total_price": "269.00",
+            "current_total_price": "11.61",
             "current_total_price_set": {
               "shop_money": {
-                "amount": "269.00",
+                "amount": "11.61",
                 "currency_code": "EUR"
               },
               "presentment_money": {
-                "amount": "269.00",
+                "amount": "11.61",
                 "currency_code": "EUR"
               }
             },
@@ -5218,46 +6623,52 @@
               }
             },
             "customer_locale": "es",
-            "device_id": 12,
-            "discount_codes": [],
+            "device_id": 2,
+            "discount_codes": [
+              {
+                "code": "GRACIAS10",
+                "amount": "1.29",
+                "type": "percentage"
+              }
+            ],
             "duties_included": false,
-            "email": "sendtocj@gmail.com",
+            "email": "prueba@prueba.com",
             "estimated_taxes": false,
             "financial_status": "paid",
             "fulfillment_status": "fulfilled",
             "landing_site": null,
             "landing_site_ref": null,
-            "location_id": 108790317403,
+            "location_id": 99759620443,
             "merchant_business_entity_id": "MTg3OTg3NjUwOTA3",
             "merchant_of_record_app_id": null,
-            "name": "#73138",
+            "name": "#73222",
             "note": null,
             "note_attributes": [],
-            "number": 72138,
-            "order_number": 73138,
-            "order_status_url": "https://nuance-store.com/87987650907/orders/bd8c370f2575f948bbd4d44a25697f3e/authenticate?key=ea6ef839eb7519ae92fa38309deca041",
+            "number": 72222,
+            "order_number": 73222,
+            "order_status_url": "https://nuance-store.com/87987650907/orders/f33f7e6c4e3d5949ed9d38f4e16062ba/authenticate?key=94080182b32a87029290dac282fb6c58",
             "original_total_additional_fees_set": null,
             "original_total_duties_set": null,
             "payment_gateway_names": [
-              "Tarjeta"
+              "Venta Web"
             ],
-            "phone": "+34692946752",
+            "phone": "+34666555666",
             "po_number": null,
             "presentment_currency": "EUR",
-            "processed_at": "2026-02-24T19:37:49+01:00",
+            "processed_at": "2026-02-26T13:08:06+01:00",
             "reference": null,
             "referring_site": null,
-            "source_identifier": "108790317403-12-2746",
+            "source_identifier": "99759620443-2-2304",
             "source_name": "pos",
             "source_url": null,
-            "subtotal_price": "269.00",
+            "subtotal_price": "11.61",
             "subtotal_price_set": {
               "shop_money": {
-                "amount": "269.00",
+                "amount": "11.61",
                 "currency_code": "EUR"
               },
               "presentment_money": {
-                "amount": "269.00",
+                "amount": "11.61",
                 "currency_code": "EUR"
               }
             },
@@ -5266,7 +6677,7 @@
             "tax_lines": [],
             "taxes_included": true,
             "test": false,
-            "token": "bd8c370f2575f948bbd4d44a25697f3e",
+            "token": "f33f7e6c4e3d5949ed9d38f4e16062ba",
             "total_cash_rounding_payment_adjustment_set": {
               "shop_money": {
                 "amount": "0.00",
@@ -5287,37 +6698,37 @@
                 "currency_code": "EUR"
               }
             },
-            "total_discounts": "0.00",
+            "total_discounts": "1.29",
             "total_discounts_set": {
               "shop_money": {
-                "amount": "0.00",
+                "amount": "1.29",
                 "currency_code": "EUR"
               },
               "presentment_money": {
-                "amount": "0.00",
+                "amount": "1.29",
                 "currency_code": "EUR"
               }
             },
-            "total_line_items_price": "269.00",
+            "total_line_items_price": "12.90",
             "total_line_items_price_set": {
               "shop_money": {
-                "amount": "269.00",
+                "amount": "12.90",
                 "currency_code": "EUR"
               },
               "presentment_money": {
-                "amount": "269.00",
+                "amount": "12.90",
                 "currency_code": "EUR"
               }
             },
             "total_outstanding": "0.00",
-            "total_price": "269.00",
+            "total_price": "11.61",
             "total_price_set": {
               "shop_money": {
-                "amount": "269.00",
+                "amount": "11.61",
                 "currency_code": "EUR"
               },
               "presentment_money": {
-                "amount": "269.00",
+                "amount": "11.61",
                 "currency_code": "EUR"
               }
             },
@@ -5344,35 +6755,64 @@
             },
             "total_tip_received": "0.00",
             "total_weight": 0,
-            "updated_at": "2026-02-24T19:37:51+01:00",
-            "user_id": 126766121307,
+            "updated_at": "2026-02-26T13:08:08+01:00",
+            "user_id": 127472533851,
             "billing_address": null,
             "customer": {
-              "id": 10245404688731,
-              "created_at": "2026-02-24T19:37:26+01:00",
-              "updated_at": "2026-02-24T19:37:50+01:00",
-              "first_name": "Sergey",
-              "last_name": "Sigal",
-              "state": "disabled",
+              "id": 9488191390043,
+              "created_at": "2025-08-19T13:00:56+02:00",
+              "updated_at": "2026-02-26T13:08:08+01:00",
+              "first_name": "aaa",
+              "last_name": "aaa",
+              "state": "enabled",
               "note": "",
               "verified_email": true,
               "multipass_identifier": null,
               "tax_exempt": false,
-              "email": "sendtocj@gmail.com",
-              "phone": "+34692946752",
+              "email": "prueba@prueba.com",
+              "phone": "+34666555666",
               "currency": "EUR",
               "tax_exemptions": [],
-              "admin_graphql_api_id": "gid://shopify/Customer/10245404688731"
+              "admin_graphql_api_id": "gid://shopify/Customer/9488191390043",
+              "default_address": {
+                "id": 12959882903899,
+                "customer_id": 9488191390043,
+                "first_name": "aaa",
+                "last_name": "aaa",
+                "company": "",
+                "address1": "Calle Ruiz, 7\nCalle Ruiz, 7",
+                "address2": "",
+                "city": "Madrid",
+                "province": "Murcia",
+                "country": "Spain",
+                "zip": "28004",
+                "phone": "666555666",
+                "name": "aaa aaa",
+                "province_code": "MU",
+                "country_code": "ES",
+                "country_name": "Spain",
+                "default": true
+              }
             },
-            "discount_applications": [],
+            "discount_applications": [
+              {
+                "target_type": "line_item",
+                "type": "discount_code",
+                "value": "10.0",
+                "value_type": "percentage",
+                "allocation_method": "across",
+                "target_selection": "all",
+                "code": "GRACIAS10"
+              }
+            ],
             "fulfillments": [
               {
-                "id": 6762521919835,
-                "admin_graphql_api_id": "gid://shopify/Fulfillment/6762521919835",
-                "created_at": "2026-02-24T19:37:51+01:00",
-                "location_id": 108790317403,
-                "name": "#73138.1",
-                "order_id": 7728502931803,
+                "id": 6767128183131,
+                "admin_graphql_api_id": "gid://shopify/Fulfillment/6767128183131",
+                "created_at": "2026-02-26T13:08:08+01:00",
+                "location_id": 99759620443,
+                "name": "#73222.1",
+                "order_id": 7732659847515,
                 "origin_address": {},
                 "receipt": {},
                 "service": "manual",
@@ -5383,11 +6823,11 @@
                 "tracking_numbers": [],
                 "tracking_url": null,
                 "tracking_urls": [],
-                "updated_at": "2026-02-24T19:37:51+01:00",
+                "updated_at": "2026-02-26T13:08:08+01:00",
                 "line_items": [
                   {
-                    "id": 18568595046747,
-                    "admin_graphql_api_id": "gid://shopify/LineItem/18568595046747",
+                    "id": 18577214636379,
+                    "admin_graphql_api_id": "gid://shopify/LineItem/18577214636379",
                     "attributed_staffs": [],
                     "current_quantity": 1,
                     "fulfillable_quantity": 0,
@@ -5395,26 +6835,26 @@
                     "fulfillment_status": "fulfilled",
                     "gift_card": false,
                     "grams": 0,
-                    "name": "Prosurf Back Protector D30 Chaleco Dorsal - Black / XL",
-                    "price": "105.00",
+                    "name": "Reell Trunks Boxer - Olive / S",
+                    "price": "12.90",
                     "price_set": {
                       "shop_money": {
-                        "amount": "105.00",
+                        "amount": "12.90",
                         "currency_code": "EUR"
                       },
                       "presentment_money": {
-                        "amount": "105.00",
+                        "amount": "12.90",
                         "currency_code": "EUR"
                       }
                     },
                     "product_exists": true,
-                    "product_id": 10299428667739,
+                    "product_id": 10054401425755,
                     "properties": [],
                     "quantity": 1,
                     "requires_shipping": true,
-                    "sku": "52087825006939",
+                    "sku": "2100000264957",
                     "taxable": true,
-                    "title": "Prosurf Back Protector D30 Chaleco Dorsal",
+                    "title": "Reell Trunks Boxer",
                     "total_discount": "0.00",
                     "total_discount_set": {
                       "shop_money": {
@@ -5426,217 +6866,36 @@
                         "currency_code": "EUR"
                       }
                     },
-                    "variant_id": 52087825006939,
+                    "variant_id": 51185481122139,
                     "variant_inventory_management": "shopify",
-                    "variant_title": "Black / XL",
-                    "vendor": "Prosurf",
+                    "variant_title": "Olive / S",
+                    "vendor": "Reell",
                     "tax_lines": [],
                     "duties": [],
-                    "discount_allocations": []
-                  },
-                  {
-                    "id": 18568595079515,
-                    "admin_graphql_api_id": "gid://shopify/LineItem/18568595079515",
-                    "attributed_staffs": [],
-                    "current_quantity": 1,
-                    "fulfillable_quantity": 0,
-                    "fulfillment_service": "manual",
-                    "fulfillment_status": "fulfilled",
-                    "gift_card": false,
-                    "grams": 0,
-                    "name": "Deathgrip Ghoul Manoplas - Black / XL",
-                    "price": "80.00",
-                    "price_set": {
-                      "shop_money": {
-                        "amount": "80.00",
-                        "currency_code": "EUR"
-                      },
-                      "presentment_money": {
-                        "amount": "80.00",
-                        "currency_code": "EUR"
+                    "discount_allocations": [
+                      {
+                        "amount": "1.29",
+                        "amount_set": {
+                          "shop_money": {
+                            "amount": "1.29",
+                            "currency_code": "EUR"
+                          },
+                          "presentment_money": {
+                            "amount": "1.29",
+                            "currency_code": "EUR"
+                          }
+                        },
+                        "discount_application_index": 0
                       }
-                    },
-                    "product_exists": true,
-                    "product_id": 10215353647451,
-                    "properties": [],
-                    "quantity": 1,
-                    "requires_shipping": true,
-                    "sku": "51765562671451",
-                    "taxable": true,
-                    "title": "Deathgrip Ghoul Manoplas",
-                    "total_discount": "0.00",
-                    "total_discount_set": {
-                      "shop_money": {
-                        "amount": "0.00",
-                        "currency_code": "EUR"
-                      },
-                      "presentment_money": {
-                        "amount": "0.00",
-                        "currency_code": "EUR"
-                      }
-                    },
-                    "variant_id": 51765562671451,
-                    "variant_inventory_management": "shopify",
-                    "variant_title": "Black / XL",
-                    "vendor": "Deathgrip",
-                    "tax_lines": [],
-                    "duties": [],
-                    "discount_allocations": []
-                  },
-                  {
-                    "id": 18568595112283,
-                    "admin_graphql_api_id": "gid://shopify/LineItem/18568595112283",
-                    "attributed_staffs": [],
-                    "current_quantity": 1,
-                    "fulfillable_quantity": 0,
-                    "fulfillment_service": "manual",
-                    "fulfillment_status": "fulfilled",
-                    "gift_card": false,
-                    "grams": 0,
-                    "name": "Arcade x Recco Cinturón - Black / U",
-                    "price": "50.00",
-                    "price_set": {
-                      "shop_money": {
-                        "amount": "50.00",
-                        "currency_code": "EUR"
-                      },
-                      "presentment_money": {
-                        "amount": "50.00",
-                        "currency_code": "EUR"
-                      }
-                    },
-                    "product_exists": true,
-                    "product_id": 10097128898907,
-                    "properties": [],
-                    "quantity": 1,
-                    "requires_shipping": true,
-                    "sku": "51348924760411",
-                    "taxable": true,
-                    "title": "Arcade x Recco Cinturón",
-                    "total_discount": "0.00",
-                    "total_discount_set": {
-                      "shop_money": {
-                        "amount": "0.00",
-                        "currency_code": "EUR"
-                      },
-                      "presentment_money": {
-                        "amount": "0.00",
-                        "currency_code": "EUR"
-                      }
-                    },
-                    "variant_id": 51348924760411,
-                    "variant_inventory_management": "shopify",
-                    "variant_title": "Black / U",
-                    "vendor": "Arcade",
-                    "tax_lines": [],
-                    "duties": [],
-                    "discount_allocations": []
-                  },
-                  {
-                    "id": 18568595145051,
-                    "admin_graphql_api_id": "gid://shopify/LineItem/18568595145051",
-                    "attributed_staffs": [],
-                    "current_quantity": 1,
-                    "fulfillable_quantity": 0,
-                    "fulfillment_service": "manual",
-                    "fulfillment_status": "fulfilled",
-                    "gift_card": false,
-                    "grams": 0,
-                    "name": "Dakine Shaka Stomp - Green / U",
-                    "price": "16.00",
-                    "price_set": {
-                      "shop_money": {
-                        "amount": "16.00",
-                        "currency_code": "EUR"
-                      },
-                      "presentment_money": {
-                        "amount": "16.00",
-                        "currency_code": "EUR"
-                      }
-                    },
-                    "product_exists": true,
-                    "product_id": 10056593047899,
-                    "properties": [],
-                    "quantity": 1,
-                    "requires_shipping": true,
-                    "sku": "2100000680498",
-                    "taxable": true,
-                    "title": "Dakine Shaka Stomp",
-                    "total_discount": "0.00",
-                    "total_discount_set": {
-                      "shop_money": {
-                        "amount": "0.00",
-                        "currency_code": "EUR"
-                      },
-                      "presentment_money": {
-                        "amount": "0.00",
-                        "currency_code": "EUR"
-                      }
-                    },
-                    "variant_id": 51195985396059,
-                    "variant_inventory_management": "shopify",
-                    "variant_title": "Green / U",
-                    "vendor": "Dakine",
-                    "tax_lines": [],
-                    "duties": [],
-                    "discount_allocations": []
-                  },
-                  {
-                    "id": 18568595177819,
-                    "admin_graphql_api_id": "gid://shopify/LineItem/18568595177819",
-                    "attributed_staffs": [],
-                    "current_quantity": 1,
-                    "fulfillable_quantity": 0,
-                    "fulfillment_service": "manual",
-                    "fulfillment_status": "fulfilled",
-                    "gift_card": false,
-                    "grams": 0,
-                    "name": "Burton Split Stomp Mat - Clear",
-                    "price": "18.00",
-                    "price_set": {
-                      "shop_money": {
-                        "amount": "18.00",
-                        "currency_code": "EUR"
-                      },
-                      "presentment_money": {
-                        "amount": "18.00",
-                        "currency_code": "EUR"
-                      }
-                    },
-                    "product_exists": true,
-                    "product_id": 10054862471515,
-                    "properties": [],
-                    "quantity": 1,
-                    "requires_shipping": true,
-                    "sku": "51187610255707",
-                    "taxable": true,
-                    "title": "Burton Split Stomp Mat",
-                    "total_discount": "0.00",
-                    "total_discount_set": {
-                      "shop_money": {
-                        "amount": "0.00",
-                        "currency_code": "EUR"
-                      },
-                      "presentment_money": {
-                        "amount": "0.00",
-                        "currency_code": "EUR"
-                      }
-                    },
-                    "variant_id": 51187610255707,
-                    "variant_inventory_management": "shopify",
-                    "variant_title": "Clear",
-                    "vendor": "Burton",
-                    "tax_lines": [],
-                    "duties": [],
-                    "discount_allocations": []
+                    ]
                   }
                 ]
               }
             ],
             "line_items": [
               {
-                "id": 18568595046747,
-                "admin_graphql_api_id": "gid://shopify/LineItem/18568595046747",
+                "id": 18577214636379,
+                "admin_graphql_api_id": "gid://shopify/LineItem/18577214636379",
                 "attributed_staffs": [],
                 "current_quantity": 1,
                 "fulfillable_quantity": 0,
@@ -5644,27 +6903,27 @@
                 "fulfillment_status": "fulfilled",
                 "gift_card": false,
                 "grams": 0,
-                "name": "Prosurf Back Protector D30 Chaleco Dorsal - Black / XL",
-                "price": "105.00",
+                "name": "Reell Trunks Boxer - Olive / S",
+                "price": "12.90",
                 "price_set": {
                   "shop_money": {
-                    "amount": "105.00",
+                    "amount": "12.90",
                     "currency_code": "EUR"
                   },
                   "presentment_money": {
-                    "amount": "105.00",
+                    "amount": "12.90",
                     "currency_code": "EUR"
                   }
                 },
                 "product_exists": true,
-                "product_id": 10299428667739,
+                "product_id": 10054401425755,
                 "properties": [],
                 "quantity": 1,
                 "requires_shipping": true,
                 "sales_line_item_group_id": null,
-                "sku": "52087825006939",
+                "sku": "2100000264957",
                 "taxable": true,
-                "title": "Prosurf Back Protector D30 Chaleco Dorsal",
+                "title": "Reell Trunks Boxer",
                 "total_discount": "0.00",
                 "total_discount_set": {
                   "shop_money": {
@@ -5676,213 +6935,28 @@
                     "currency_code": "EUR"
                   }
                 },
-                "variant_id": 52087825006939,
+                "variant_id": 51185481122139,
                 "variant_inventory_management": "shopify",
-                "variant_title": "Black / XL",
-                "vendor": "Prosurf",
+                "variant_title": "Olive / S",
+                "vendor": "Reell",
                 "tax_lines": [],
                 "duties": [],
-                "discount_allocations": []
-              },
-              {
-                "id": 18568595079515,
-                "admin_graphql_api_id": "gid://shopify/LineItem/18568595079515",
-                "attributed_staffs": [],
-                "current_quantity": 1,
-                "fulfillable_quantity": 0,
-                "fulfillment_service": "manual",
-                "fulfillment_status": "fulfilled",
-                "gift_card": false,
-                "grams": 0,
-                "name": "Deathgrip Ghoul Manoplas - Black / XL",
-                "price": "80.00",
-                "price_set": {
-                  "shop_money": {
-                    "amount": "80.00",
-                    "currency_code": "EUR"
-                  },
-                  "presentment_money": {
-                    "amount": "80.00",
-                    "currency_code": "EUR"
+                "discount_allocations": [
+                  {
+                    "amount": "1.29",
+                    "amount_set": {
+                      "shop_money": {
+                        "amount": "1.29",
+                        "currency_code": "EUR"
+                      },
+                      "presentment_money": {
+                        "amount": "1.29",
+                        "currency_code": "EUR"
+                      }
+                    },
+                    "discount_application_index": 0
                   }
-                },
-                "product_exists": true,
-                "product_id": 10215353647451,
-                "properties": [],
-                "quantity": 1,
-                "requires_shipping": true,
-                "sales_line_item_group_id": null,
-                "sku": "51765562671451",
-                "taxable": true,
-                "title": "Deathgrip Ghoul Manoplas",
-                "total_discount": "0.00",
-                "total_discount_set": {
-                  "shop_money": {
-                    "amount": "0.00",
-                    "currency_code": "EUR"
-                  },
-                  "presentment_money": {
-                    "amount": "0.00",
-                    "currency_code": "EUR"
-                  }
-                },
-                "variant_id": 51765562671451,
-                "variant_inventory_management": "shopify",
-                "variant_title": "Black / XL",
-                "vendor": "Deathgrip",
-                "tax_lines": [],
-                "duties": [],
-                "discount_allocations": []
-              },
-              {
-                "id": 18568595112283,
-                "admin_graphql_api_id": "gid://shopify/LineItem/18568595112283",
-                "attributed_staffs": [],
-                "current_quantity": 1,
-                "fulfillable_quantity": 0,
-                "fulfillment_service": "manual",
-                "fulfillment_status": "fulfilled",
-                "gift_card": false,
-                "grams": 0,
-                "name": "Arcade x Recco Cinturón - Black / U",
-                "price": "50.00",
-                "price_set": {
-                  "shop_money": {
-                    "amount": "50.00",
-                    "currency_code": "EUR"
-                  },
-                  "presentment_money": {
-                    "amount": "50.00",
-                    "currency_code": "EUR"
-                  }
-                },
-                "product_exists": true,
-                "product_id": 10097128898907,
-                "properties": [],
-                "quantity": 1,
-                "requires_shipping": true,
-                "sales_line_item_group_id": null,
-                "sku": "51348924760411",
-                "taxable": true,
-                "title": "Arcade x Recco Cinturón",
-                "total_discount": "0.00",
-                "total_discount_set": {
-                  "shop_money": {
-                    "amount": "0.00",
-                    "currency_code": "EUR"
-                  },
-                  "presentment_money": {
-                    "amount": "0.00",
-                    "currency_code": "EUR"
-                  }
-                },
-                "variant_id": 51348924760411,
-                "variant_inventory_management": "shopify",
-                "variant_title": "Black / U",
-                "vendor": "Arcade",
-                "tax_lines": [],
-                "duties": [],
-                "discount_allocations": []
-              },
-              {
-                "id": 18568595145051,
-                "admin_graphql_api_id": "gid://shopify/LineItem/18568595145051",
-                "attributed_staffs": [],
-                "current_quantity": 1,
-                "fulfillable_quantity": 0,
-                "fulfillment_service": "manual",
-                "fulfillment_status": "fulfilled",
-                "gift_card": false,
-                "grams": 0,
-                "name": "Dakine Shaka Stomp - Green / U",
-                "price": "16.00",
-                "price_set": {
-                  "shop_money": {
-                    "amount": "16.00",
-                    "currency_code": "EUR"
-                  },
-                  "presentment_money": {
-                    "amount": "16.00",
-                    "currency_code": "EUR"
-                  }
-                },
-                "product_exists": true,
-                "product_id": 10056593047899,
-                "properties": [],
-                "quantity": 1,
-                "requires_shipping": true,
-                "sales_line_item_group_id": null,
-                "sku": "2100000680498",
-                "taxable": true,
-                "title": "Dakine Shaka Stomp",
-                "total_discount": "0.00",
-                "total_discount_set": {
-                  "shop_money": {
-                    "amount": "0.00",
-                    "currency_code": "EUR"
-                  },
-                  "presentment_money": {
-                    "amount": "0.00",
-                    "currency_code": "EUR"
-                  }
-                },
-                "variant_id": 51195985396059,
-                "variant_inventory_management": "shopify",
-                "variant_title": "Green / U",
-                "vendor": "Dakine",
-                "tax_lines": [],
-                "duties": [],
-                "discount_allocations": []
-              },
-              {
-                "id": 18568595177819,
-                "admin_graphql_api_id": "gid://shopify/LineItem/18568595177819",
-                "attributed_staffs": [],
-                "current_quantity": 1,
-                "fulfillable_quantity": 0,
-                "fulfillment_service": "manual",
-                "fulfillment_status": "fulfilled",
-                "gift_card": false,
-                "grams": 0,
-                "name": "Burton Split Stomp Mat - Clear",
-                "price": "18.00",
-                "price_set": {
-                  "shop_money": {
-                    "amount": "18.00",
-                    "currency_code": "EUR"
-                  },
-                  "presentment_money": {
-                    "amount": "18.00",
-                    "currency_code": "EUR"
-                  }
-                },
-                "product_exists": true,
-                "product_id": 10054862471515,
-                "properties": [],
-                "quantity": 1,
-                "requires_shipping": true,
-                "sales_line_item_group_id": null,
-                "sku": "51187610255707",
-                "taxable": true,
-                "title": "Burton Split Stomp Mat",
-                "total_discount": "0.00",
-                "total_discount_set": {
-                  "shop_money": {
-                    "amount": "0.00",
-                    "currency_code": "EUR"
-                  },
-                  "presentment_money": {
-                    "amount": "0.00",
-                    "currency_code": "EUR"
-                  }
-                },
-                "variant_id": 51187610255707,
-                "variant_inventory_management": "shopify",
-                "variant_title": "Clear",
-                "vendor": "Burton",
-                "tax_lines": [],
-                "duties": [],
-                "discount_allocations": []
+                ]
               }
             ],
             "payment_terms": null,
@@ -5893,6 +6967,44 @@
             "line_item_groups": []
           },
           "webhookUrl": "https://n8n.tailwind.es/webhook/venta-descuento-10",
+          "executionMode": "production"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
+    "Leerqr": [
+      {
+        "json": {
+          "headers": {
+            "connection": "upgrade",
+            "host": "n8n.tailwind.es",
+            "x-forwarded-for": "2.136.43.122",
+            "x-forwarded-proto": "https",
+            "sec-ch-ua": "\"Not(A:Brand\";v=\"8\", \"Chromium\";v=\"144\", \"Brave\";v=\"144\"",
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": "\"Linux\"",
+            "upgrade-insecure-requests": "1",
+            "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
+            "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+            "sec-gpc": "1",
+            "accept-language": "es-ES,es;q=0.8",
+            "sec-fetch-site": "same-site",
+            "sec-fetch-mode": "navigate",
+            "sec-fetch-dest": "iframe",
+            "referer": "https://clientarea.tailwind.es/",
+            "accept-encoding": "gzip, deflate, br, zstd",
+            "cookie": "rl_page_init_referrer=RudderEncrypt%3AU2FsdGVkX1%2BV9ocwrf5sZKAZ84sclnSKoaVf7etXsrg%3D; rl_page_init_referring_domain=RudderEncrypt%3AU2FsdGVkX1%2B6nug6a8u7blNBcZ1adVwerK%2FtQl6fPIc%3D; rl_anonymous_id=RudderEncrypt%3AU2FsdGVkX1%2BVIG36b5XIv7js8b1cK5QssjHuy5qwkFIhvwII1uEdkB1dWxRSuSzWhzTYIW%2BPs%2FgMy%2Fa22%2FkaKA%3D%3D; rl_user_id=RudderEncrypt%3AU2FsdGVkX1%2BQ5%2Bl8vPX4zCSsZK5MtgVOTH0POe4SGhLqLVoNgr0JIfRSlAR%2Fi%2FKDhtBW1z5T4BULeO8ZP6tvLg3EJhJAb5RJkp1%2FfFUiMr%2BsuRo8ijabdJ9rVicf5Mr3dGvUgb%2FMlW3TyvjSbrl3EnbCRAt3A4gARr8z8ONjxs0%3D; rl_trait=RudderEncrypt%3AU2FsdGVkX1%2BRCieWPTOD5vn8ogQKH4ibSpJcnUYHUn0eqOzfYpvWhTs4ayj5T%2FVWyD5MRqhP51X0oPXrfGNytbF9TJpVj9RdmnZkSnnKbJzor51TpIEaYSuZPr5cCUSU7Y%2Bv%2BmyjCLJ97XAgwhWe1CY4dFgWqhurdgclssF%2FY48%3D; rl_session=RudderEncrypt%3AU2FsdGVkX1%2B1o3fObVIMFgQPEnVUTTRGQaVTJ9vIdDNjsUQNzgx4T8nk3I6Efx2f29sbjBEqbHd73Z7YmtWPLcBMtxrz9q86nyh3T38ERVOA7Ifxvibu6Dnx0ElDNmiWuypqMUagp9V2TePICrgjtw%3D%3D; ph_phc_4URIAm1uYfJO7j8kWSe0J8lc8IqnstRLS7Jx8NcakHo_posthog=%7B%22%24device_id%22%3A%22019c6590-a8c0-7936-9706-9d6324646ac4%22%2C%22distinct_id%22%3A%220f6825be298b3a005d52154ed2c929ac7758de54b6ab4a8d7eb7a8e83f623918%2308853e58-b9e7-4eaa-a226-f2a3e30187ec%22%2C%22%24sesid%22%3A%5B1772110215810%2C%22019c99ce-beeb-762c-9cd7-7b9fa814e621%22%2C1772106989291%5D%2C%22%24epp%22%3Atrue%2C%22%24initial_person_info%22%3A%7B%22r%22%3A%22%24direct%22%2C%22u%22%3A%22https%3A%2F%2Fn8n.tailwind.es%2F%22%7D%2C%22%24user_state%22%3A%22identified%22%7D",
+            "if-none-match": "W/\"f98-1WxCZvkt4HgxbDl0j07p9cKWW00\""
+          },
+          "params": {},
+          "query": {
+            "cliente_id": "prueba@prueba.com",
+            "shop_id": "7732477854043"
+          },
+          "body": {},
+          "webhookUrl": "https://n8n.tailwind.es/webhook/leerqr",
           "executionMode": "production"
         },
         "pairedItem": {
@@ -5923,7 +7035,7 @@
     }
   },
   "tags": [],
-  "triggerCount": 3,
-  "updatedAt": "2026-02-25T10:53:49.524Z",
-  "versionId": "28946e03-1fab-4f94-bc51-e3063d6ac6c9"
+  "triggerCount": 2,
+  "updatedAt": "2026-02-26T14:42:37.773Z",
+  "versionId": "5d411736-f00e-487d-9f26-1ca4b9753032"
 }
