@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-02-23T19:26:58.000Z",
-    "createdAt": "2026-02-23T19:26:55.482Z",
-    "versionId": "1539db58-b94f-40e3-a7ba-40e43ee9ef44",
+    "updatedAt": "2026-02-26T13:32:35.000Z",
+    "createdAt": "2026-02-26T13:32:31.255Z",
+    "versionId": "891c5339-d9b3-4377-a367-7ce239c7eb3c",
     "workflowId": "cnuDKnZrHmDy4QDh",
     "nodes": [
       {
@@ -42,6 +42,7 @@
         ],
         "id": "7ad34ec0-9110-48cf-90b6-691ccbf01cbd",
         "name": "Google Sheets Trigger",
+        "retryOnFail": true,
         "credentials": {
           "googleSheetsTriggerOAuth2Api": {
             "id": "4HkdJcbjLdqN2Ie3",
@@ -1389,11 +1390,11 @@
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version 1539db58",
+    "name": "Version 891c5339",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "1539db58-b94f-40e3-a7ba-40e43ee9ef44",
+  "activeVersionId": "891c5339-d9b3-4377-a367-7ce239c7eb3c",
   "connections": {
     "Google Sheets Trigger": {
       "main": [
@@ -1697,6 +1698,7 @@
       ],
       "id": "7ad34ec0-9110-48cf-90b6-691ccbf01cbd",
       "name": "Google Sheets Trigger",
+      "retryOnFail": true,
       "credentials": {
         "googleSheetsTriggerOAuth2Api": {
           "id": "4HkdJcbjLdqN2Ie3",
@@ -2851,6 +2853,6 @@
   },
   "tags": [],
   "triggerCount": 4,
-  "updatedAt": "2026-02-23T19:26:55.480Z",
-  "versionId": "1539db58-b94f-40e3-a7ba-40e43ee9ef44"
+  "updatedAt": "2026-02-26T13:32:31.254Z",
+  "versionId": "891c5339-d9b3-4377-a367-7ce239c7eb3c"
 }
