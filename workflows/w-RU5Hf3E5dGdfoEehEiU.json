@@ -1,133 +1,82 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-02-23T09:17:47.000Z",
-    "createdAt": "2026-02-23T09:17:45.607Z",
-    "versionId": "3c6505d5-eef4-4e37-930a-86ae5aaa1fd5",
+    "updatedAt": "2026-02-27T13:27:44.000Z",
+    "createdAt": "2026-02-27T13:04:23.688Z",
+    "versionId": "77df26bb-19e2-423f-915d-e6863e4ad3a5",
     "workflowId": "w-RU5Hf3E5dGdfoEehEiU",
     "nodes": [
       {
         "parameters": {
-          "httpMethod": "POST",
-          "path": "10descuento",
+          "path": "pruebas",
           "options": {}
         },
         "type": "n8n-nodes-base.webhook",
         "typeVersion": 2.1,
         "position": [
-          -432,
-          -32
+          -720,
+          32
         ],
-        "id": "5e6bf4fa-d61a-4e4d-aef1-a030e4f0b44b",
+        "id": "1cafc3e4-f45c-4070-9c57-c27ca8c010b6",
         "name": "Webhook",
-        "webhookId": "fc370335-6590-4a3d-b62b-0852762ee699"
+        "webhookId": "c8c64e21-2835-4f94-811e-c0ed5a4a732a"
       },
       {
         "parameters": {
-          "schema": {
+          "type": "SHA256",
+          "value": "={{ $json.query.dato }}"
+        },
+        "type": "n8n-nodes-base.crypto",
+        "typeVersion": 1,
+        "position": [
+          -512,
+          32
+        ],
+        "id": "5043d2aa-e9db-4996-8861-eafad0135307",
+        "name": "Crypto"
+      },
+      {
+        "parameters": {
+          "operation": "appendOrUpdate",
+          "documentId": {
             "__rl": true,
-            "mode": "list",
-            "value": "public"
+            "value": "1h2dWdwrYNPVp3rCbez_W0NHr2jYOKOkdFr3LQLnfOkI",
+            "mode": "id"
           },
-          "table": {
+          "sheetName": {
             "__rl": true,
-            "value": "Descuetos_Omnicanal",
+            "value": "gid=0",
             "mode": "list",
-            "cachedResultName": "Descuetos_Omnicanal"
+            "cachedResultName": "Hoja 1",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1h2dWdwrYNPVp3rCbez_W0NHr2jYOKOkdFr3LQLnfOkI/edit#gid=0"
           },
           "columns": {
             "mappingMode": "defineBelow",
             "value": {
-              "sucursal_rules-shop-oakley": false,
-              "sucursal_rules-shop-thenorthface": false,
-              "sucursal_rules-shop": false,
-              "sucursal_surfin": false,
-              "sucursal_nuance": false,
-              "sucursal_nuance-lodge": false,
-              "sucursal_melia": false,
-              "order_id": "={{ $json.body.id }}"
+              "CORREO": "={{ $json.query.dato }}",
+              "VALOR": "={{ $json.data }}"
             },
-            "matchingColumns": [],
+            "matchingColumns": [
+              "CORREO"
+            ],
             "schema": [
               {
-                "id": "order_id",
-                "displayName": "order_id",
-                "required": true,
+                "id": "CORREO",
+                "displayName": "CORREO",
+                "required": false,
                 "defaultMatch": false,
                 "display": true,
                 "type": "string",
-                "canBeUsedToMatch": true
+                "canBeUsedToMatch": true,
+                "removed": false
               },
               {
-                "id": "sucursal_rules-shop-oakley",
-                "displayName": "sucursal_rules-shop-oakley",
+                "id": "VALOR",
+                "displayName": "VALOR",
                 "required": false,
                 "defaultMatch": false,
                 "display": true,
-                "type": "boolean",
-                "canBeUsedToMatch": true
-              },
-              {
-                "id": "sucursal_rules-shop-thenorthface",
-                "displayName": "sucursal_rules-shop-thenorthface",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "boolean",
-                "canBeUsedToMatch": true
-              },
-              {
-                "id": "sucursal_rules-shop",
-                "displayName": "sucursal_rules-shop",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "boolean",
-                "canBeUsedToMatch": true
-              },
-              {
-                "id": "sucursal_surfin",
-                "displayName": "sucursal_surfin",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "boolean",
-                "canBeUsedToMatch": true
-              },
-              {
-                "id": "sucursal_nuance",
-                "displayName": "sucursal_nuance",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "boolean",
-                "canBeUsedToMatch": true
-              },
-              {
-                "id": "sucursal_nuance-lodge",
-                "displayName": "sucursal_nuance-lodge",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "boolean",
-                "canBeUsedToMatch": true
-              },
-              {
-                "id": "sucursal_melia",
-                "displayName": "sucursal_melia",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "boolean",
-                "canBeUsedToMatch": true
-              },
-              {
-                "id": "create_at",
-                "displayName": "create_at",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "dateTime",
+                "type": "string",
                 "canBeUsedToMatch": true
               }
             ],
@@ -136,175 +85,20 @@
           },
           "options": {}
         },
-        "type": "n8n-nodes-base.postgres",
-        "typeVersion": 2.6,
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
         "position": [
-          -224,
-          -32
+          -304,
+          32
         ],
-        "id": "75715a48-671b-448f-a854-836635ebba23",
-        "name": "Insert rows in a table",
+        "id": "4ac6b8b3-9ada-41bb-a28b-abe07a382ace",
+        "name": "Append or update row in sheet",
         "credentials": {
-          "postgres": {
-            "id": "UPETCYNZNCReuZu8",
-            "name": "Postgres Supabase"
+          "googleSheetsOAuth2Api": {
+            "id": "RCuKUCifcA4jENcY",
+            "name": "Google Sheets account"
           }
         }
-      },
-      {
-        "parameters": {
-          "path": "validar-qr",
-          "responseMode": "responseNode",
-          "options": {}
-        },
-        "type": "n8n-nodes-base.webhook",
-        "typeVersion": 2.1,
-        "position": [
-          -432,
-          160
-        ],
-        "id": "d8f19087-dc88-4a20-bde8-69ace6eddd48",
-        "name": "Webhook1",
-        "webhookId": "50c188b1-6932-4318-819d-6a619e098c8d"
-      },
-      {
-        "parameters": {
-          "respondWith": "text",
-          "responseBody": "<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Validar Descuento</title>\n    <style>\n        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; background-color: #f4f6f8; }\n        button { display: block; width: 80%; margin: 10px auto; padding: 15px; font-size: 18px; border-radius: 8px; border: none; background-color: #000; color: white; cursor: pointer; }\n        .success { color: #28a745; font-size: 40px; font-weight: bold; }\n        .error { color: #dc3545; font-size: 40px; font-weight: bold; }\n    </style>\n</head>\n<body>\n\n    <div id=\"setup\" style=\"display:none;\">\n        <h3>Configuración Inicial (Solo 1 vez)</h3>\n        <p>¿Qué sucursal es esta tablet?</p>\n        <button onclick=\"guardarSucursal('sucursal_rules-shop-oakley')\">Oakley</button>\n        <button onclick=\"guardarSucursal('sucursal_rules-shop-thenorthface')\">The North Face</button>\n        <button onclick=\"guardarSucursal('sucursal_rules-shop')\">Rules Shop</button>\n        <button onclick=\"guardarSucursal('sucursal_surfin')\">Surfin</button>\n        <button onclick=\"guardarSucursal('sucursal_nuance')\">Nuance</button>\n        <button onclick=\"guardarSucursal('sucursal_nuance-lodge')\">Nuance Lodge</button>\n        <button onclick=\"guardarSucursal('sucursal_melia')\">Melia</button>\n    </div>\n\n    <div id=\"loading\"><h2>Validando...</h2></div>\n    <div id=\"result\"></div>\n\n    <script>\n        const urlParams = new URLSearchParams(window.location.search);\n        const orden = urlParams.get('orden');\n        let sucursalGuardada = localStorage.getItem('mi_sucursal');\n\n        if (!sucursalGuardada) {\n            document.getElementById('setup').style.display = 'block';\n            document.getElementById('loading').style.display = 'none';\n        } else {\n            enviarValidacion(orden, sucursalGuardada);\n        }\n\n        function guardarSucursal(nombreSucursal) {\n            localStorage.setItem('mi_sucursal', nombreSucursal);\n            document.getElementById('setup').style.display = 'none';\n            document.getElementById('loading').style.display = 'block';\n            enviarValidacion(orden, nombreSucursal);\n        }\n\n        function enviarValidacion(ordenId, sucursalId) {\n            // REEMPLAZA ESTA URL POR LA DE TU WEBHOOK 2 (comprobar-descuento)\n            fetch('https://n8n.tailwind.es/webhook/comprobar-descuento', {\n                method: 'POST',\n                headers: { 'Content-Type': 'application/json' },\n                body: JSON.stringify({ orden: ordenId, sucursal: sucursalId })\n            })\n            .then(res => res.json())\n            .then(data => {\n                document.getElementById('loading').style.display = 'none';\n                let div = document.getElementById('result');\n                if(data.status === 'VALIDO') {\n                    div.innerHTML = '<div class=\"success\">✅ VÁLIDO</div><p>Aplica 10% en caja.</p>';\n                } else {\n                    div.innerHTML = '<div class=\"error\">❌ INVÁLIDO</div><p>Este cliente ya usó la promoción aquí o el código no existe.</p>';\n                }\n            })\n            .catch(err => alert(\"Error de conexión.\"));\n        }\n    </script>\n</body>\n</html>",
-          "options": {
-            "responseHeaders": {
-              "entries": [
-                {
-                  "name": "Content-Type",
-                  "value": "text/html"
-                }
-              ]
-            }
-          }
-        },
-        "type": "n8n-nodes-base.respondToWebhook",
-        "typeVersion": 1.5,
-        "position": [
-          -224,
-          160
-        ],
-        "id": "5e116370-621e-4035-8c7e-629eb74332a1",
-        "name": "Respond to Webhook"
-      },
-      {
-        "parameters": {
-          "operation": "select",
-          "schema": {
-            "__rl": true,
-            "mode": "list",
-            "value": "public"
-          },
-          "table": {
-            "__rl": true,
-            "value": "Descuetos_Omnicanal",
-            "mode": "list",
-            "cachedResultName": "Descuetos_Omnicanal"
-          },
-          "where": {
-            "values": [
-              {
-                "column": "order_id",
-                "value": "={{ $json.body.orden }}"
-              }
-            ]
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.postgres",
-        "typeVersion": 2.6,
-        "position": [
-          -224,
-          352
-        ],
-        "id": "1ba7c7bc-32e5-45d2-a48c-b74170389604",
-        "name": "Select rows from a table",
-        "credentials": {
-          "postgres": {
-            "id": "UPETCYNZNCReuZu8",
-            "name": "Postgres Supabase"
-          }
-        }
-      },
-      {
-        "parameters": {
-          "httpMethod": "POST",
-          "path": "comprobar-descuento",
-          "responseMode": "responseNode",
-          "options": {}
-        },
-        "type": "n8n-nodes-base.webhook",
-        "typeVersion": 2.1,
-        "position": [
-          -432,
-          352
-        ],
-        "id": "a170fc5f-c398-4822-bfb5-f9bcbc86ce02",
-        "name": "Webhook2",
-        "webhookId": "4a20f085-ab2e-4984-8709-54906870232e"
-      },
-      {
-        "parameters": {
-          "conditions": {
-            "options": {
-              "caseSensitive": true,
-              "leftValue": "",
-              "typeValidation": "strict",
-              "version": 3
-            },
-            "conditions": [
-              {
-                "id": "81a7c4d8-a46a-4a9c-9f09-bf051092296b",
-                "leftValue": "={{ $json[$('Webhook2').item.json.body.sucursal] }}",
-                "rightValue": false,
-                "operator": {
-                  "type": "boolean",
-                  "operation": "equals"
-                }
-              }
-            ],
-            "combinator": "and"
-          },
-          "options": {}
-        },
-        "type": "n8n-nodes-base.if",
-        "typeVersion": 2.3,
-        "position": [
-          -16,
-          352
-        ],
-        "id": "335e3747-ad7d-41f9-be8e-796a274414f1",
-        "name": "If"
-      },
-      {
-        "parameters": {
-          "options": {}
-        },
-        "type": "n8n-nodes-base.respondToWebhook",
-        "typeVersion": 1.5,
-        "position": [
-          192,
-          256
-        ],
-        "id": "78f21ef0-01bd-4e72-87cb-60b6d6f0aa5c",
-        "name": "Respond to Webhook1"
-      },
-      {
-        "parameters": {
-          "options": {}
-        },
-        "type": "n8n-nodes-base.respondToWebhook",
-        "typeVersion": 1.5,
-        "position": [
-          192,
-          448
-        ],
-        "id": "4913396c-c831-42d9-bdf6-bc5bca87e31e",
-        "name": "Respond to Webhook2"
       }
     ],
     "connections": {
@@ -312,68 +106,18 @@
         "main": [
           [
             {
-              "node": "Insert rows in a table",
+              "node": "Crypto",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "Insert rows in a table": {
-        "main": [
-          []
-        ]
-      },
-      "Webhook1": {
+      "Crypto": {
         "main": [
           [
             {
-              "node": "Respond to Webhook",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Respond to Webhook": {
-        "main": [
-          []
-        ]
-      },
-      "Webhook2": {
-        "main": [
-          [
-            {
-              "node": "Select rows from a table",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "Select rows from a table": {
-        "main": [
-          [
-            {
-              "node": "If",
-              "type": "main",
-              "index": 0
-            }
-          ]
-        ]
-      },
-      "If": {
-        "main": [
-          [
-            {
-              "node": "Respond to Webhook1",
-              "type": "main",
-              "index": 0
-            }
-          ],
-          [
-            {
-              "node": "Respond to Webhook2",
+              "node": "Append or update row in sheet",
               "type": "main",
               "index": 0
             }
@@ -382,17 +126,28 @@
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version 3c6505d5",
+    "name": "Version 77df26bb",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "3c6505d5-eef4-4e37-930a-86ae5aaa1fd5",
+  "activeVersionId": "77df26bb-19e2-423f-915d-e6863e4ad3a5",
   "connections": {
-    "When clicking ‘Execute workflow’": {
+    "Webhook": {
       "main": [
         [
           {
-            "node": "GraphQL",
+            "node": "Crypto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Crypto": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
             "type": "main",
             "index": 0
           }
@@ -410,44 +165,97 @@
   "nodes": [
     {
       "parameters": {
-        "authentication": "headerAuth",
-        "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-07/graphql.json",
-        "query": "query getOrder($id: ID!) {\n  order(id: $id) {\n    id\n    name\n    physicalLocation {\n      name\n      address {\n        address1\n        city\n        province\n        country\n        zip\n      }\n    }\n    createdAt\n    email\n    totalPriceSet {\n      shopMoney {\n        amount\n        currencyCode\n      }\n    }\n    lineItems(first: 10) {\n      edges {\n        node {\n          title\n          quantity\n          originalUnitPriceSet {\n            shopMoney {\n              amount\n              currencyCode\n            }\n          }\n        }\n      }\n    }\n    fulfillments {\n      id\n      location {\n        name\n        address {\n          address1\n          city\n          province\n          country\n          zip\n        }\n      }\n    }\n    transactions(first: 5) {\n      formattedGateway\n      kind\n      status\n    }\n    customer {\n      firstName\n      lastName\n      email\n    }\n  }\n}",
-        "variables": "={\n  \"id\": \"gid://shopify/Order/7726972338523\"\n}",
-        "headerParametersUi": {
-          "parameter": [
-            {
-              "name": "Content-Type",
-              "value": "application/json"
-            }
-          ]
-        }
+        "path": "pruebas",
+        "options": {}
       },
-      "type": "n8n-nodes-base.graphql",
-      "typeVersion": 1.1,
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
       "position": [
-        -288,
+        -720,
         32
       ],
-      "id": "3624cb80-fcf8-4085-984a-9c28979eae71",
-      "name": "GraphQL",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "OPt2Cl0dnwcU4qRk",
-          "name": "ShopifyInformes"
-        }
-      }
+      "id": "1cafc3e4-f45c-4070-9c57-c27ca8c010b6",
+      "name": "Webhook",
+      "webhookId": "c8c64e21-2835-4f94-811e-c0ed5a4a732a"
     },
     {
-      "parameters": {},
-      "type": "n8n-nodes-base.manualTrigger",
+      "parameters": {
+        "type": "SHA256",
+        "value": "={{ $json.query.dato }}"
+      },
+      "type": "n8n-nodes-base.crypto",
       "typeVersion": 1,
       "position": [
-        -464,
+        -512,
         32
       ],
-      "id": "f5ecc713-f540-4480-b648-852d5de6f37d",
-      "name": "When clicking ‘Execute workflow’"
+      "id": "5043d2aa-e9db-4996-8861-eafad0135307",
+      "name": "Crypto"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1h2dWdwrYNPVp3rCbez_W0NHr2jYOKOkdFr3LQLnfOkI",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1h2dWdwrYNPVp3rCbez_W0NHr2jYOKOkdFr3LQLnfOkI/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "CORREO": "={{ $json.query.dato }}",
+            "VALOR": "={{ $json.data }}"
+          },
+          "matchingColumns": [
+            "CORREO"
+          ],
+          "schema": [
+            {
+              "id": "CORREO",
+              "displayName": "CORREO",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "VALOR",
+              "displayName": "VALOR",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -304,
+        32
+      ],
+      "id": "4ac6b8b3-9ada-41bb-a28b-abe07a382ace",
+      "name": "Append or update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "RCuKUCifcA4jENcY",
+          "name": "Google Sheets account"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -466,7 +274,7 @@
   ],
   "staticData": null,
   "tags": [],
-  "triggerCount": 3,
-  "updatedAt": "2026-02-24T10:44:14.512Z",
-  "versionId": "5d369603-1af9-4e83-b09b-df9871aa96bb"
+  "triggerCount": 1,
+  "updatedAt": "2026-02-27T13:04:23.687Z",
+  "versionId": "77df26bb-19e2-423f-915d-e6863e4ad3a5"
 }
