@@ -2,15 +2,367 @@
   "active": false,
   "activeVersion": null,
   "activeVersionId": null,
-  "connections": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get row(s)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s)": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "BONO 90€",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "BONO 120€",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "BONO 150€",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "BONO 200€",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "BONO NO OBTENIDO",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
   "createdAt": "2026-02-19T07:42:00.128Z",
   "id": "V8cPhTOqE-KfxqneMdBUP",
   "isArchived": false,
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "vacio",
-  "nodes": [],
+  "name": "Envio manual BONOS EMPLEADOS",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## FUNCIONAMIENTO BONO\n\">=\" 18k -> 90€\n\">=\" 22k -> 120€\n\">=\" 26k -> 150€\n\">=\" 30k -> 200€",
+        "height": 144,
+        "width": 320
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -864,
+        -144
+      ],
+      "id": "b47a4fd5-31a1-4a44-8dd1-718da12e5ff5",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.Correo }}",
+        "subject": "=¡Tienes {{ $json.BONO }}€ de saldo disponible en tienda! 🎁",
+        "message": "=<!DOCTYPE html>\n<html>\n<head>\n<style>\n  body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }\n  .email-container { max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 40px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }\n  .header { text-align: center; padding-bottom: 20px; border-bottom: 1px solid #eeeeee; }\n  .header h1 { color: #333333; margin: 0; font-size: 24px; }\n  .content { padding: 30px 0; color: #555555; line-height: 1.6; }\n  .credit-box { background-color: #e6fffa; border: 1px solid #38b2ac; color: #234e52; padding: 15px; text-align: center; border-radius: 6px; margin: 20px 0; font-size: 18px; font-weight: bold; }\n  .info-text { font-size: 14px; color: #666; text-align: center; margin-top: -10px; margin-bottom: 20px; font-style: italic; }\n  .warning-box { background-color: #fffaf0; border-left: 4px solid #ed8936; padding: 15px; margin: 20px 0; font-size: 14px; color: #744210; }\n  .footer { text-align: center; font-size: 12px; color: #999999; margin-top: 30px; border-top: 1px solid #eeeeee; padding-top: 20px; }\n</style>\n</head>\n<body>\n\n<div class=\"email-container\">\n  <div class=\"header\">\n    <h1>¡Enhorabuena! Has desbloqueado tu bono 🎉</h1>\n  </div>\n\n  <div class=\"content\">\n    <p>Hola,</p>\n    \n    <p>Nos complace informarte de que hemos actualizado tu cuenta de cliente, ya que has cumplido con los requisitos mínimos de venta establecidos para acceder a nuestro bono.</p>\n\n    <p>Como resultado, ya tienes disponible el siguiente importe en tu cuenta:</p>\n\n    <div class=\"credit-box\">\n      Bono concedido: {{ $json.BONO }}€\n    </div>\n\n    <div class=\"info-text\">\n      *Si ya disponías de saldo anterior en tu cuenta, este importe <strong>se ha sumado automáticamente</strong> a tu total actual.\n    </div>\n\n    <p>Puedes utilizar este crédito para adquirir cualquier producto en <strong>todas nuestras tiendas</strong>.</p>\n\n    <div class=\"warning-box\">\n      <strong>⚠️ Información importante:</strong><br>\n      Si decides pagar utilizando tu crédito de tienda, el sistema <u>no permitirá aplicar otros códigos de descuento</u> o cupones promocionales en ese mismo pedido.\n    </div>\n  </div>\n\n  <div class=\"footer\">\n    <p>Gracias por tu esfuerzo y confianza.<br><strong>El Equipo de Tailwind</strong></p>\n    <p>Si tienes alguna duda sobre tu saldo total o las condiciones del bono, no dudes en responder a este correo.</p>\n  </div>\n</div>\n\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -208,
+        -240
+      ],
+      "id": "ec7fc8a8-e24f-4a8f-b8bf-098f40256ed7",
+      "name": "BONO 90€",
+      "webhookId": "be4f23ca-9b66-47d1-b271-a799d1868e55",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "wR7U82S8bmDH4odC",
+          "name": "info@tailwind.es"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.Correo }}",
+        "subject": "=¡Tienes {{ $json.BONO }}€ de saldo disponible en tienda! 🎁",
+        "message": "=<!DOCTYPE html>\n<html>\n<head>\n<style>\n  body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }\n  .email-container { max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 40px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }\n  .header { text-align: center; padding-bottom: 20px; border-bottom: 1px solid #eeeeee; }\n  .header h1 { color: #333333; margin: 0; font-size: 24px; }\n  .content { padding: 30px 0; color: #555555; line-height: 1.6; }\n  .credit-box { background-color: #e6fffa; border: 1px solid #38b2ac; color: #234e52; padding: 15px; text-align: center; border-radius: 6px; margin: 20px 0; font-size: 18px; font-weight: bold; }\n  .info-text { font-size: 14px; color: #666; text-align: center; margin-top: -10px; margin-bottom: 20px; font-style: italic; }\n  .warning-box { background-color: #fffaf0; border-left: 4px solid #ed8936; padding: 15px; margin: 20px 0; font-size: 14px; color: #744210; }\n  .footer { text-align: center; font-size: 12px; color: #999999; margin-top: 30px; border-top: 1px solid #eeeeee; padding-top: 20px; }\n</style>\n</head>\n<body>\n\n<div class=\"email-container\">\n  <div class=\"header\">\n    <h1>¡Enhorabuena! Has desbloqueado tu bono 🎉</h1>\n  </div>\n\n  <div class=\"content\">\n    <p>Hola,</p>\n    \n    <p>Nos complace informarte de que hemos actualizado tu cuenta de cliente, ya que has cumplido con los requisitos mínimos de venta establecidos para acceder a nuestro bono.</p>\n\n    <p>Como resultado, ya tienes disponible el siguiente importe en tu cuenta:</p>\n\n    <div class=\"credit-box\">\n      Bono concedido: {{ $json.BONO }}€\n    </div>\n\n    <div class=\"info-text\">\n      *Si ya disponías de saldo anterior en tu cuenta, este importe <strong>se ha sumado automáticamente</strong> a tu total actual.\n    </div>\n\n    <p>Puedes utilizar este crédito para adquirir cualquier producto en <strong>todas nuestras tiendas</strong>.</p>\n\n    <div class=\"warning-box\">\n      <strong>⚠️ Información importante:</strong><br>\n      Si decides pagar utilizando tu crédito de tienda, el sistema <u>no permitirá aplicar otros códigos de descuento</u> o cupones promocionales en ese mismo pedido.\n    </div>\n  </div>\n\n  <div class=\"footer\">\n    <p>Gracias por tu esfuerzo y confianza.<br><strong>El Equipo de Tailwind</strong></p>\n    <p>Si tienes alguna duda sobre tu saldo total o las condiciones del bono, no dudes en responder a este correo.</p>\n  </div>\n</div>\n\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -208,
+        -80
+      ],
+      "id": "0367effa-37ae-4ebc-a2dd-522fa7117a10",
+      "name": "BONO 120€",
+      "webhookId": "be4f23ca-9b66-47d1-b271-a799d1868e55",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "wR7U82S8bmDH4odC",
+          "name": "info@tailwind.es"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.Correo }}",
+        "subject": "=¡Tienes {{ $json.BONO }}€ de saldo disponible en tienda! 🎁",
+        "message": "=<!DOCTYPE html>\n<html>\n<head>\n<style>\n  body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }\n  .email-container { max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 40px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }\n  .header { text-align: center; padding-bottom: 20px; border-bottom: 1px solid #eeeeee; }\n  .header h1 { color: #333333; margin: 0; font-size: 24px; }\n  .content { padding: 30px 0; color: #555555; line-height: 1.6; }\n  .credit-box { background-color: #e6fffa; border: 1px solid #38b2ac; color: #234e52; padding: 15px; text-align: center; border-radius: 6px; margin: 20px 0; font-size: 18px; font-weight: bold; }\n  .info-text { font-size: 14px; color: #666; text-align: center; margin-top: -10px; margin-bottom: 20px; font-style: italic; }\n  .warning-box { background-color: #fffaf0; border-left: 4px solid #ed8936; padding: 15px; margin: 20px 0; font-size: 14px; color: #744210; }\n  .footer { text-align: center; font-size: 12px; color: #999999; margin-top: 30px; border-top: 1px solid #eeeeee; padding-top: 20px; }\n</style>\n</head>\n<body>\n\n<div class=\"email-container\">\n  <div class=\"header\">\n    <h1>¡Enhorabuena! Has desbloqueado tu bono 🎉</h1>\n  </div>\n\n  <div class=\"content\">\n    <p>Hola,</p>\n    \n    <p>Nos complace informarte de que hemos actualizado tu cuenta de cliente, ya que has cumplido con los requisitos mínimos de venta establecidos para acceder a nuestro bono.</p>\n\n    <p>Como resultado, ya tienes disponible el siguiente importe en tu cuenta:</p>\n\n    <div class=\"credit-box\">\n      Bono concedido: {{ $json.BONO }}€\n    </div>\n\n    <div class=\"info-text\">\n      *Si ya disponías de saldo anterior en tu cuenta, este importe <strong>se ha sumado automáticamente</strong> a tu total actual.\n    </div>\n\n    <p>Puedes utilizar este crédito para adquirir cualquier producto en <strong>todas nuestras tiendas</strong>.</p>\n\n    <div class=\"warning-box\">\n      <strong>⚠️ Información importante:</strong><br>\n      Si decides pagar utilizando tu crédito de tienda, el sistema <u>no permitirá aplicar otros códigos de descuento</u> o cupones promocionales en ese mismo pedido.\n    </div>\n  </div>\n\n  <div class=\"footer\">\n    <p>Gracias por tu esfuerzo y confianza.<br><strong>El Equipo de Tailwind</strong></p>\n    <p>Si tienes alguna duda sobre tu saldo total o las condiciones del bono, no dudes en responder a este correo.</p>\n  </div>\n</div>\n\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -208,
+        272
+      ],
+      "id": "bbcbaddf-20ff-4e1b-8dc5-3da7a092e248",
+      "name": "BONO 200€",
+      "webhookId": "be4f23ca-9b66-47d1-b271-a799d1868e55",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "wR7U82S8bmDH4odC",
+          "name": "info@tailwind.es"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.Correo }}",
+        "subject": "Revisión de objetivos – Bono no alcanzado",
+        "message": "<!DOCTYPE html> <html> <head> <style>   body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }   .email-container { max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 40px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }   .header { text-align: center; padding-bottom: 20px; border-bottom: 1px solid #eeeeee; }   .header h1 { color: #333333; margin: 0; font-size: 24px; }   .content { padding: 30px 0; color: #555555; line-height: 1.6; }   .status-box { background-color: #fff5f5; border: 1px solid #f56565; color: #742a2a; padding: 15px; text-align: center; border-radius: 6px; margin: 20px 0; font-size: 18px; font-weight: bold; }   .info-box { background-color: #f0fff4; border-left: 4px solid #38a169; padding: 15px; margin: 20px 0; font-size: 14px; color: #22543d; }   .footer { text-align: center; font-size: 12px; color: #999999; margin-top: 30px; border-top: 1px solid #eeeeee; padding-top: 20px; } </style> </head> <body>  <div class=\"email-container\">   <div class=\"header\">     <h1>Actualización sobre tu bono</h1>   </div>    <div class=\"content\">     <p>Hola,</p>          <p>Queremos informarte sobre el estado actual del bono correspondiente a este periodo.</p>      <div class=\"status-box\">       En esta ocasión no se ha alcanzado el mínimo de ventas requerido para obtener el bono.     </div>      <p>Sabemos que cada periodo puede ser diferente y valoramos el esfuerzo realizado.</p>      <div class=\"info-box\">       💡 <strong>Recuerda:</strong> Si alcanzas el objetivo mínimo de ventas en el próximo periodo, tu cuenta se actualizará automáticamente y recibirás el bono correspondiente.     </div>      <p>Si tienes cualquier duda sobre tus cifras actuales o los requisitos del bono, puedes responder a este correo y estaremos encantados de ayudarte.</p>   </div>    <div class=\"footer\">     <p>Gracias por tu trabajo y compromiso.<br><strong>El Equipo de Tailwind</strong></p>   </div> </div>  </body> </html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -208,
+        448
+      ],
+      "id": "bbe6fef0-5faa-4684-89ce-02bfb625c0e7",
+      "name": "BONO NO OBTENIDO",
+      "webhookId": "be4f23ca-9b66-47d1-b271-a799d1868e55",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "wR7U82S8bmDH4odC",
+          "name": "info@tailwind.es"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -848,
+        32
+      ],
+      "id": "cd4c9818-fa0c-4b82-a16e-dd329b920959",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "m14tPVcEZzewnVMX",
+          "mode": "list",
+          "cachedResultName": "empleados",
+          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/m14tPVcEZzewnVMX"
+        },
+        "matchType": "allConditions"
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        -656,
+        32
+      ],
+      "id": "c286f01b-52ad-4b98-80aa-465ff8c97afa",
+      "name": "Get row(s)"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.BONO }}",
+                    "rightValue": 90,
+                    "operator": {
+                      "type": "number",
+                      "operation": "equals"
+                    },
+                    "id": "e32c6c6d-842b-4e85-a589-22aae79124c4"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "1710db48-f98e-4f00-905d-45abd9156406",
+                    "leftValue": "={{ $json.BONO }}",
+                    "rightValue": 120,
+                    "operator": {
+                      "type": "number",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "c00108d8-e2a3-49d4-a902-276e7045d6a4",
+                    "leftValue": "={{ $json.BONO }}",
+                    "rightValue": 150,
+                    "operator": {
+                      "type": "number",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "df1cfad3-4f17-4732-a89a-d776de2e3e53",
+                    "leftValue": "={{ $json.BONO }}",
+                    "rightValue": 200,
+                    "operator": {
+                      "type": "number",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "3a2c64b2-a99d-4b65-8632-30ea0a97d9a6",
+                    "leftValue": "={{ $json.BONO }}",
+                    "rightValue": 0,
+                    "operator": {
+                      "type": "number",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -464,
+        -32
+      ],
+      "id": "4a43ab07-dae5-4771-903a-1963259b894d",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.Correo }}",
+        "subject": "=¡Tienes {{ $json.BONO }}€ de saldo disponible en tienda! 🎁",
+        "message": "=<!DOCTYPE html>\n<html>\n<head>\n<style>\n  body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }\n  .email-container { max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 40px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }\n  .header { text-align: center; padding-bottom: 20px; border-bottom: 1px solid #eeeeee; }\n  .header h1 { color: #333333; margin: 0; font-size: 24px; }\n  .content { padding: 30px 0; color: #555555; line-height: 1.6; }\n  .credit-box { background-color: #e6fffa; border: 1px solid #38b2ac; color: #234e52; padding: 15px; text-align: center; border-radius: 6px; margin: 20px 0; font-size: 18px; font-weight: bold; }\n  .info-text { font-size: 14px; color: #666; text-align: center; margin-top: -10px; margin-bottom: 20px; font-style: italic; }\n  .warning-box { background-color: #fffaf0; border-left: 4px solid #ed8936; padding: 15px; margin: 20px 0; font-size: 14px; color: #744210; }\n  .footer { text-align: center; font-size: 12px; color: #999999; margin-top: 30px; border-top: 1px solid #eeeeee; padding-top: 20px; }\n</style>\n</head>\n<body>\n\n<div class=\"email-container\">\n  <div class=\"header\">\n    <h1>¡Enhorabuena! Has desbloqueado tu bono 🎉</h1>\n  </div>\n\n  <div class=\"content\">\n    <p>Hola,</p>\n    \n    <p>Nos complace informarte de que hemos actualizado tu cuenta de cliente, ya que has cumplido con los requisitos mínimos de venta establecidos para acceder a nuestro bono.</p>\n\n    <p>Como resultado, ya tienes disponible el siguiente importe en tu cuenta:</p>\n\n    <div class=\"credit-box\">\n      Bono concedido: {{ $json.BONO }}€\n    </div>\n\n    <div class=\"info-text\">\n      *Si ya disponías de saldo anterior en tu cuenta, este importe <strong>se ha sumado automáticamente</strong> a tu total actual.\n    </div>\n\n    <p>Puedes utilizar este crédito para adquirir cualquier producto en <strong>todas nuestras tiendas</strong>.</p>\n\n    <div class=\"warning-box\">\n      <strong>⚠️ Información importante:</strong><br>\n      Si decides pagar utilizando tu crédito de tienda, el sistema <u>no permitirá aplicar otros códigos de descuento</u> o cupones promocionales en ese mismo pedido.\n    </div>\n  </div>\n\n  <div class=\"footer\">\n    <p>Gracias por tu esfuerzo y confianza.<br><strong>El Equipo de Tailwind</strong></p>\n    <p>Si tienes alguna duda sobre tu saldo total o las condiciones del bono, no dudes en responder a este correo.</p>\n  </div>\n</div>\n\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -208,
+        96
+      ],
+      "id": "64f2c245-d2ee-4182-92bf-ec69f4780ef5",
+      "name": "BONO 150€",
+      "webhookId": "be4f23ca-9b66-47d1-b271-a799d1868e55",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "wR7U82S8bmDH4odC",
+          "name": "info@tailwind.es"
+        }
+      }
+    }
+  ],
   "pinData": {},
   "settings": {
     "executionOrder": "v1",
@@ -28,6 +380,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 3,
-  "updatedAt": "2026-02-20T11:18:29.680Z",
-  "versionId": "856afed8-cb8f-47d9-898f-b6b4ea1744ae"
+  "updatedAt": "2026-03-01T12:09:03.831Z",
+  "versionId": "aa6f5e68-36af-40d8-af4c-54f611c6cbf1"
 }
