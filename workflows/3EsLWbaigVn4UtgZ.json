@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-02-27T10:26:56.000Z",
-    "createdAt": "2026-02-27T10:26:54.578Z",
-    "versionId": "bfa96638-fd60-45ac-a5ae-515d60924e88",
+    "updatedAt": "2026-03-02T08:08:53.000Z",
+    "createdAt": "2026-03-02T08:08:52.405Z",
+    "versionId": "b5422b8f-390b-4719-909c-a5d9a5be50ab",
     "workflowId": "3EsLWbaigVn4UtgZ",
     "nodes": [
       {
@@ -3029,13 +3029,7 @@
               "index": 0
             }
           ],
-          [
-            {
-              "node": "Send a message",
-              "type": "main",
-              "index": 0
-            }
-          ]
+          []
         ]
       },
       "Switch": {
@@ -3254,11 +3248,11 @@
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version bfa96638",
+    "name": "Version b5422b8f",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "bfa96638-fd60-45ac-a5ae-515d60924e88",
+  "activeVersionId": "b5422b8f-390b-4719-909c-a5d9a5be50ab",
   "connections": {
     "Webhook": {
       "main": [
@@ -3425,13 +3419,7 @@
             "index": 0
           }
         ],
-        [
-          {
-            "node": "Send a message",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Switch": {
@@ -7036,6 +7024,6 @@
   },
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2026-02-27T10:26:54.576Z",
-  "versionId": "bfa96638-fd60-45ac-a5ae-515d60924e88"
+  "updatedAt": "2026-03-02T08:08:52.403Z",
+  "versionId": "b5422b8f-390b-4719-909c-a5d9a5be50ab"
 }
