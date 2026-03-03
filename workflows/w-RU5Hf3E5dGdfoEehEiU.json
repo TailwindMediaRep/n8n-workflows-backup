@@ -1,104 +1,351 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-02-27T13:27:44.000Z",
-    "createdAt": "2026-02-27T13:04:23.688Z",
-    "versionId": "77df26bb-19e2-423f-915d-e6863e4ad3a5",
+    "updatedAt": "2026-03-02T12:39:57.000Z",
+    "createdAt": "2026-03-02T12:39:56.380Z",
+    "versionId": "39b47922-b7bc-450f-9537-c5c2161a858c",
     "workflowId": "w-RU5Hf3E5dGdfoEehEiU",
     "nodes": [
       {
         "parameters": {
-          "path": "pruebas",
+          "httpMethod": "POST",
+          "path": "recibirGroupon",
           "options": {}
         },
         "type": "n8n-nodes-base.webhook",
         "typeVersion": 2.1,
         "position": [
-          -720,
-          32
+          0,
+          0
         ],
-        "id": "1cafc3e4-f45c-4070-9c57-c27ca8c010b6",
+        "id": "6d9bd2bc-3430-4032-aed2-9397dce1834a",
         "name": "Webhook",
-        "webhookId": "c8c64e21-2835-4f94-811e-c0ed5a4a732a"
+        "webhookId": "dfe139cb-fd6d-4809-88a1-02c8d4ef1526"
       },
       {
         "parameters": {
-          "type": "SHA256",
-          "value": "={{ $json.query.dato }}"
-        },
-        "type": "n8n-nodes-base.crypto",
-        "typeVersion": 1,
-        "position": [
-          -512,
-          32
-        ],
-        "id": "5043d2aa-e9db-4996-8861-eafad0135307",
-        "name": "Crypto"
-      },
-      {
-        "parameters": {
-          "operation": "appendOrUpdate",
-          "documentId": {
-            "__rl": true,
-            "value": "1h2dWdwrYNPVp3rCbez_W0NHr2jYOKOkdFr3LQLnfOkI",
-            "mode": "id"
-          },
-          "sheetName": {
-            "__rl": true,
-            "value": "gid=0",
-            "mode": "list",
-            "cachedResultName": "Hoja 1",
-            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1h2dWdwrYNPVp3rCbez_W0NHr2jYOKOkdFr3LQLnfOkI/edit#gid=0"
-          },
-          "columns": {
-            "mappingMode": "defineBelow",
-            "value": {
-              "CORREO": "={{ $json.query.dato }}",
-              "VALOR": "={{ $json.data }}"
-            },
-            "matchingColumns": [
-              "CORREO"
-            ],
-            "schema": [
+          "assignments": {
+            "assignments": [
               {
-                "id": "CORREO",
-                "displayName": "CORREO",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true,
-                "removed": false
+                "id": "cd028f6b-fe06-4f88-995b-a57548178ef5",
+                "name": "=Nombre",
+                "value": "={{ $json.body['Nombre Completo'].normalize('NFD').replace(/[\\u0300-\\u036f]/g, '').toUpperCase().trim() }}",
+                "type": "string"
               },
               {
-                "id": "VALOR",
-                "displayName": "VALOR",
-                "required": false,
-                "defaultMatch": false,
-                "display": true,
-                "type": "string",
-                "canBeUsedToMatch": true
+                "id": "1c546f36-0b3f-49aa-a7c2-1006ceca6714",
+                "name": "Documento",
+                "value": "={{ $json.body['Documento de Identidad (NIF/NIE)'].toUpperCase().trim() }}",
+                "type": "string"
+              },
+              {
+                "id": "76a9cf06-ffa6-44e3-b991-b0a123994551",
+                "name": "NumeroPersonas",
+                "value": "={{ $json.body[\"Número de personas\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "619d75bf-2286-4396-a138-99af65aa5a11",
+                "name": "=Correo",
+                "value": "={{ $json.body['Correo electrónico'].toLowerCase().trim() }}",
+                "type": "string"
+              },
+              {
+                "id": "f93c022e-caa3-4bce-bed5-9705b3e19c83",
+                "name": "=Telefono",
+                "value": "={{ $json.body['Teléfono de contacto'].replace(/\\s+/g, '') }}",
+                "type": "string"
+              },
+              {
+                "id": "fed92ede-9e9a-4f9f-9ce6-f864deb6fc23",
+                "name": "FechaInicio",
+                "value": "={{ $json.body[\"Fecha de inicio\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "7da2a10b-4ab6-4086-b47e-5448d50716d4",
+                "name": "FechaFin",
+                "value": "={{ $json.body[\"Fecha de fin\"] }}",
+                "type": "string"
+              },
+              {
+                "id": "1d18cf7f-aafe-4b71-8c02-f49704fea98c",
+                "name": "=Actividad",
+                "value": "={{ $json.body['Actividad'].normalize('NFD').replace(/[\\u0300-\\u036f]/g, '').toUpperCase().trim() }}",
+                "type": "string"
+              },
+              {
+                "id": "c27325d2-ffc8-40c2-8c8c-47717643da1a",
+                "name": "Nivel",
+                "value": "={{ $json.body.Nivel }}",
+                "type": "string"
+              },
+              {
+                "id": "c57c2210-660a-4655-a04d-9acdc4b5f83a",
+                "name": "Imagen",
+                "value": "={{ $json.body[\"Código QR\"][0] }}",
+                "type": "string"
               }
-            ],
-            "attemptToConvertTypes": false,
-            "convertFieldsToString": false
+            ]
           },
           "options": {}
         },
-        "type": "n8n-nodes-base.googleSheets",
-        "typeVersion": 4.7,
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
         "position": [
-          -304,
-          32
+          208,
+          0
         ],
-        "id": "4ac6b8b3-9ada-41bb-a28b-abe07a382ace",
-        "name": "Append or update row in sheet",
+        "id": "101e62fb-b219-440f-b397-f1a64a9ca3b4",
+        "name": "Limpiar Datos"
+      },
+      {
+        "parameters": {
+          "operation": "download",
+          "fileId": {
+            "__rl": true,
+            "value": "={{ $json.Imagen }}",
+            "mode": "id"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleDrive",
+        "typeVersion": 3,
+        "position": [
+          400,
+          0
+        ],
+        "id": "bd813b2d-027b-4b13-9ff5-9d8a0ebc5b72",
+        "name": "Download file",
         "credentials": {
-          "googleSheetsOAuth2Api": {
-            "id": "RCuKUCifcA4jENcY",
-            "name": "Google Sheets account"
+          "googleDriveOAuth2Api": {
+            "id": "N7JXWgOiVoyCTaVL",
+            "name": "Google Drive account"
           }
         }
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://api.qrserver.com/v1/read-qr-code/",
+          "sendBody": true,
+          "contentType": "multipart-form-data",
+          "bodyParameters": {
+            "parameters": [
+              {
+                "parameterType": "formBinaryData",
+                "name": "file",
+                "inputDataFieldName": "data"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          608,
+          -112
+        ],
+        "id": "545b6921-2183-4485-8d93-6c4223cafb44",
+        "name": "Leer qr"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://api.ocr.space/parse/image",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "apikey",
+                "value": "helloworld"
+              }
+            ]
+          },
+          "sendBody": true,
+          "contentType": "multipart-form-data",
+          "bodyParameters": {
+            "parameters": [
+              {
+                "parameterType": "formBinaryData",
+                "name": "file",
+                "inputDataFieldName": "data"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          608,
+          112
+        ],
+        "id": "3227099e-4724-4537-b3b7-b058ed676a4c",
+        "name": "Leer texto"
+      },
+      {
+        "parameters": {
+          "mode": "combine",
+          "combineBy": "combineByPosition",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.merge",
+        "typeVersion": 3.2,
+        "position": [
+          992,
+          0
+        ],
+        "id": "33676138-12a6-46ff-9770-08554e9ee5d7",
+        "name": "Merge"
+      },
+      {
+        "parameters": {
+          "jsCode": "for (const item of $input.all()) {\n  try {\n    // 1. Verificamos que el QR se haya leído y tenga un enlace\n    const qrData = item.json.symbol[0];\n    \n    if (qrData && qrData.data) {\n      const url = qrData.data;\n      \n      // 2. Nos quedamos solo con la parte final de la URL (después de la última \"/\")\n      const codigoCodificado = url.split('/').pop();\n      \n      // 3. Traducimos ese trozo de Base64 a texto normal\n      const codigoSeguridad = Buffer.from(codigoCodificado, 'base64').toString('utf-8');\n      \n      // 4. Guardamos el resultado limpio\n      item.json.Codigo_Seguridad_Limpio = codigoSeguridad;\n    } else {\n      // Si no hay datos legibles en el QR\n      item.json.Codigo_Seguridad_Limpio = null;\n    }\n  } catch (error) {\n    // Si la imagen no tenía QR y la API devuelve algo inesperado\n    item.json.Codigo_Seguridad_Limpio = null;\n  }\n}\n\nreturn $input.all();"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          816,
+          -112
+        ],
+        "id": "9fc2b3de-75f5-45f7-baeb-92f31903050e",
+        "name": "Limpiar QR"
+      },
+      {
+        "parameters": {
+          "jsCode": "for (const item of $input.all()) {\n  try {\n    // 1. Extraemos el texto completo del JSON que nos ha devuelto OCR.space\n    const fullText = item.json.ParsedResults[0].ParsedText;\n\n    // 2. Buscamos la palabra \"seguridad\" seguida de espacios/saltos de línea y capturamos el código\n    const regexSeguridad = /seguridad[\\s\\r\\n]+([A-Z0-9]+)/i;\n    const matchSeguridad = fullText.match(regexSeguridad);\n    \n    // 3. Buscamos la palabra \"cupón\" (incluso si la lee como cupön) y capturamos el código con guiones\n    const regexCupon = /cup[óöo]n[\\s\\r\\n]+([A-Z0-9\\-]+)/i;\n    const matchCupon = fullText.match(regexCupon);\n\n    // 4. Guardamos los resultados limpios\n    item.json.Codigo_Seguridad_OCR = matchSeguridad ? matchSeguridad[1].trim() : null;\n    item.json.Codigo_Cupon_OCR = matchCupon ? matchCupon[1].trim() : null;\n    \n    // Opcional: Borramos el texto largo para que tu salida quede más limpia\n    delete item.json.ParsedResults;\n    delete item.json.OCRExitCode;\n    \n  } catch (error) {\n    // Por si alguna vez la imagen está borrosa y falla, que el workflow no se rompa\n    item.json.Codigo_Seguridad_OCR = null;\n    item.json.Codigo_Cupon_OCR = null;\n  }\n}\n\nreturn $input.all();"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          816,
+          112
+        ],
+        "id": "c2a3eab5-3818-4863-a6e9-519ab8fe314e",
+        "name": "Limpiar Texto"
+      },
+      {
+        "parameters": {
+          "content": "OBTENER Y PROCESAR DATOS",
+          "height": 480,
+          "width": 1440,
+          "color": 3
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -48,
+          -176
+        ],
+        "id": "2d1e9153-23db-464f-ba54-071b45d81234",
+        "name": "Sticky Note"
+      },
+      {
+        "parameters": {
+          "content": "**EXPLICACIÓN**\n\nEsta parte del workflow es la que capta los datos desde el formulario (por medio del webhook), y después se limpian los datos del formulario, se lee la imagen del qr y se limpian los datos del qr, en el último nodo deben de estar todos los datos, tanto los del cliente como los del cupón",
+          "height": 240,
+          "width": 272,
+          "color": 3
+        },
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -48,
+          -432
+        ],
+        "id": "4c1eaf23-ce66-495f-8311-59e35c21a9e5",
+        "name": "Sticky Note1"
+      },
+      {
+        "parameters": {
+          "assignments": {
+            "assignments": [
+              {
+                "id": "2a24b43e-bc53-4d59-a08e-8fad3ef0654a",
+                "name": "Nombre",
+                "value": "={{ $('Limpiar Datos').item.json.Nombre }}",
+                "type": "string"
+              },
+              {
+                "id": "20ea1bd6-eae8-4e66-b25a-498ae5121d29",
+                "name": "Documento",
+                "value": "={{ $('Limpiar Datos').item.json.Documento }}",
+                "type": "string"
+              },
+              {
+                "id": "4312532f-7c46-48c7-b27d-9fed1800f11c",
+                "name": "Numero_Personas",
+                "value": "={{ $('Limpiar Datos').item.json.NumeroPersonas }}",
+                "type": "string"
+              },
+              {
+                "id": "9708ab23-f63c-479c-a78b-5bbb904ce646",
+                "name": "Correo",
+                "value": "={{ $('Limpiar Datos').item.json.Correo }}",
+                "type": "string"
+              },
+              {
+                "id": "ed3f4bdf-fd1d-408c-a86c-8e81439ec9b8",
+                "name": "Telefono",
+                "value": "={{ $('Limpiar Datos').item.json.Telefono }}",
+                "type": "string"
+              },
+              {
+                "id": "6d982338-985a-4858-af39-c995adef9429",
+                "name": "Fecha_Inicio",
+                "value": "={{ $('Limpiar Datos').item.json.FechaInicio }}",
+                "type": "string"
+              },
+              {
+                "id": "3087988d-623d-45d9-88bf-abc36cde6c8c",
+                "name": "Fecha_Fin",
+                "value": "={{ $('Limpiar Datos').item.json.FechaFin }}",
+                "type": "string"
+              },
+              {
+                "id": "259a96b7-1448-4f39-8dbe-8edf68984a55",
+                "name": "Actividad",
+                "value": "={{ $('Limpiar Datos').item.json.Actividad }}",
+                "type": "string"
+              },
+              {
+                "id": "8297fa51-78f6-4d5d-953a-a8f0f6a83fa6",
+                "name": "Nivel",
+                "value": "={{ $('Limpiar Datos').item.json.Nivel }}",
+                "type": "string"
+              },
+              {
+                "id": "385fd897-7f1c-4155-bb63-2a028a27a41e",
+                "name": "Contenido_QR",
+                "value": "={{ $json.symbol[0].data || \"Sin qr\"}}",
+                "type": "string"
+              },
+              {
+                "id": "b8cc2d2b-d6cb-4ca8-a3c8-b322af47ef16",
+                "name": "Codigo_Seguridad",
+                "value": "={{ $json.Codigo_Seguridad_Limpio || $json.Codigo_Seguridad_OCR || \"Sin Código\"}}",
+                "type": "string"
+              },
+              {
+                "id": "4c128587-96d5-4639-8d43-a1a3792faad6",
+                "name": "Codigo_Cupon",
+                "value": "={{ $json.Codigo_Cupon_OCR || \"Sin Código\"}}",
+                "type": "string"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.set",
+        "typeVersion": 3.4,
+        "position": [
+          1168,
+          0
+        ],
+        "id": "8d6f0486-b597-4839-bb0d-41da083e3839",
+        "name": "Datos Finales"
       }
     ],
     "connections": {
@@ -106,50 +353,192 @@
         "main": [
           [
             {
-              "node": "Crypto",
+              "node": "Limpiar Datos",
               "type": "main",
               "index": 0
             }
           ]
         ]
       },
-      "Crypto": {
+      "Limpiar Datos": {
         "main": [
           [
             {
-              "node": "Append or update row in sheet",
+              "node": "Download file",
               "type": "main",
               "index": 0
+            }
+          ]
+        ]
+      },
+      "Download file": {
+        "main": [
+          [
+            {
+              "node": "Leer qr",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Leer texto",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Leer texto": {
+        "main": [
+          [
+            {
+              "node": "Limpiar Texto",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Leer qr": {
+        "main": [
+          [
+            {
+              "node": "Limpiar QR",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Merge": {
+        "main": [
+          [
+            {
+              "node": "Datos Finales",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Limpiar QR": {
+        "main": [
+          [
+            {
+              "node": "Merge",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Limpiar Texto": {
+        "main": [
+          [
+            {
+              "node": "Merge",
+              "type": "main",
+              "index": 1
             }
           ]
         ]
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version 77df26bb",
+    "name": "Version 39b47922",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "77df26bb-19e2-423f-915d-e6863e4ad3a5",
+  "activeVersionId": "39b47922-b7bc-450f-9537-c5c2161a858c",
   "connections": {
     "Webhook": {
       "main": [
         [
           {
-            "node": "Crypto",
+            "node": "Limpiar Datos",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Crypto": {
+    "Limpiar Datos": {
       "main": [
         [
           {
-            "node": "Append or update row in sheet",
+            "node": "Download file",
             "type": "main",
             "index": 0
+          }
+        ]
+      ]
+    },
+    "Download file": {
+      "main": [
+        [
+          {
+            "node": "Leer qr",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Leer texto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer texto": {
+      "main": [
+        [
+          {
+            "node": "Limpiar Texto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer qr": {
+      "main": [
+        [
+          {
+            "node": "Limpiar QR",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Datos Finales",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limpiar QR": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limpiar Texto": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
           }
         ]
       ]
@@ -161,101 +550,348 @@
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "My workflow",
+  "name": "formularioGroupon",
   "nodes": [
     {
       "parameters": {
-        "path": "pruebas",
+        "httpMethod": "POST",
+        "path": "recibirGroupon",
         "options": {}
       },
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -720,
-        32
+        0,
+        0
       ],
-      "id": "1cafc3e4-f45c-4070-9c57-c27ca8c010b6",
+      "id": "6d9bd2bc-3430-4032-aed2-9397dce1834a",
       "name": "Webhook",
-      "webhookId": "c8c64e21-2835-4f94-811e-c0ed5a4a732a"
+      "webhookId": "dfe139cb-fd6d-4809-88a1-02c8d4ef1526"
     },
     {
       "parameters": {
-        "type": "SHA256",
-        "value": "={{ $json.query.dato }}"
-      },
-      "type": "n8n-nodes-base.crypto",
-      "typeVersion": 1,
-      "position": [
-        -512,
-        32
-      ],
-      "id": "5043d2aa-e9db-4996-8861-eafad0135307",
-      "name": "Crypto"
-    },
-    {
-      "parameters": {
-        "operation": "appendOrUpdate",
-        "documentId": {
-          "__rl": true,
-          "value": "1h2dWdwrYNPVp3rCbez_W0NHr2jYOKOkdFr3LQLnfOkI",
-          "mode": "id"
-        },
-        "sheetName": {
-          "__rl": true,
-          "value": "gid=0",
-          "mode": "list",
-          "cachedResultName": "Hoja 1",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1h2dWdwrYNPVp3rCbez_W0NHr2jYOKOkdFr3LQLnfOkI/edit#gid=0"
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "CORREO": "={{ $json.query.dato }}",
-            "VALOR": "={{ $json.data }}"
-          },
-          "matchingColumns": [
-            "CORREO"
-          ],
-          "schema": [
+        "assignments": {
+          "assignments": [
             {
-              "id": "CORREO",
-              "displayName": "CORREO",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true,
-              "removed": false
+              "id": "cd028f6b-fe06-4f88-995b-a57548178ef5",
+              "name": "=Nombre",
+              "value": "={{ $json.body['Nombre Completo'].normalize('NFD').replace(/[\\u0300-\\u036f]/g, '').toUpperCase().trim() }}",
+              "type": "string"
             },
             {
-              "id": "VALOR",
-              "displayName": "VALOR",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "canBeUsedToMatch": true
+              "id": "1c546f36-0b3f-49aa-a7c2-1006ceca6714",
+              "name": "Documento",
+              "value": "={{ $json.body['Documento de Identidad (NIF/NIE)'].toUpperCase().trim() }}",
+              "type": "string"
+            },
+            {
+              "id": "76a9cf06-ffa6-44e3-b991-b0a123994551",
+              "name": "NumeroPersonas",
+              "value": "={{ $json.body[\"Número de personas\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "619d75bf-2286-4396-a138-99af65aa5a11",
+              "name": "=Correo",
+              "value": "={{ $json.body['Correo electrónico'].toLowerCase().trim() }}",
+              "type": "string"
+            },
+            {
+              "id": "f93c022e-caa3-4bce-bed5-9705b3e19c83",
+              "name": "=Telefono",
+              "value": "={{ $json.body['Teléfono de contacto'].replace(/\\s+/g, '') }}",
+              "type": "string"
+            },
+            {
+              "id": "fed92ede-9e9a-4f9f-9ce6-f864deb6fc23",
+              "name": "FechaInicio",
+              "value": "={{ $json.body[\"Fecha de inicio\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "7da2a10b-4ab6-4086-b47e-5448d50716d4",
+              "name": "FechaFin",
+              "value": "={{ $json.body[\"Fecha de fin\"] }}",
+              "type": "string"
+            },
+            {
+              "id": "1d18cf7f-aafe-4b71-8c02-f49704fea98c",
+              "name": "=Actividad",
+              "value": "={{ $json.body['Actividad'].normalize('NFD').replace(/[\\u0300-\\u036f]/g, '').toUpperCase().trim() }}",
+              "type": "string"
+            },
+            {
+              "id": "c27325d2-ffc8-40c2-8c8c-47717643da1a",
+              "name": "Nivel",
+              "value": "={{ $json.body.Nivel }}",
+              "type": "string"
+            },
+            {
+              "id": "c57c2210-660a-4655-a04d-9acdc4b5f83a",
+              "name": "Imagen",
+              "value": "={{ $json.body[\"Código QR\"][0] }}",
+              "type": "string"
             }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
+          ]
         },
         "options": {}
       },
-      "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4.7,
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
       "position": [
-        -304,
-        32
+        208,
+        0
       ],
-      "id": "4ac6b8b3-9ada-41bb-a28b-abe07a382ace",
-      "name": "Append or update row in sheet",
+      "id": "101e62fb-b219-440f-b397-f1a64a9ca3b4",
+      "name": "Limpiar Datos"
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.Imagen }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        400,
+        0
+      ],
+      "id": "bd813b2d-027b-4b13-9ff5-9d8a0ebc5b72",
+      "name": "Download file",
       "credentials": {
-        "googleSheetsOAuth2Api": {
-          "id": "RCuKUCifcA4jENcY",
-          "name": "Google Sheets account"
+        "googleDriveOAuth2Api": {
+          "id": "N7JXWgOiVoyCTaVL",
+          "name": "Google Drive account"
         }
       }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.qrserver.com/v1/read-qr-code/",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "file",
+              "inputDataFieldName": "data"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        608,
+        -112
+      ],
+      "id": "545b6921-2183-4485-8d93-6c4223cafb44",
+      "name": "Leer qr"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.ocr.space/parse/image",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "helloworld"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "file",
+              "inputDataFieldName": "data"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        608,
+        112
+      ],
+      "id": "3227099e-4724-4537-b3b7-b058ed676a4c",
+      "name": "Leer texto"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        992,
+        0
+      ],
+      "id": "33676138-12a6-46ff-9770-08554e9ee5d7",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "jsCode": "for (const item of $input.all()) {\n  try {\n    // 1. Verificamos que el QR se haya leído y tenga un enlace\n    const qrData = item.json.symbol[0];\n    \n    if (qrData && qrData.data) {\n      const url = qrData.data;\n      \n      // 2. Nos quedamos solo con la parte final de la URL (después de la última \"/\")\n      const codigoCodificado = url.split('/').pop();\n      \n      // 3. Traducimos ese trozo de Base64 a texto normal\n      const codigoSeguridad = Buffer.from(codigoCodificado, 'base64').toString('utf-8');\n      \n      // 4. Guardamos el resultado limpio\n      item.json.Codigo_Seguridad_Limpio = codigoSeguridad;\n    } else {\n      // Si no hay datos legibles en el QR\n      item.json.Codigo_Seguridad_Limpio = null;\n    }\n  } catch (error) {\n    // Si la imagen no tenía QR y la API devuelve algo inesperado\n    item.json.Codigo_Seguridad_Limpio = null;\n  }\n}\n\nreturn $input.all();"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        816,
+        -112
+      ],
+      "id": "9fc2b3de-75f5-45f7-baeb-92f31903050e",
+      "name": "Limpiar QR"
+    },
+    {
+      "parameters": {
+        "jsCode": "for (const item of $input.all()) {\n  try {\n    // 1. Extraemos el texto completo del JSON que nos ha devuelto OCR.space\n    const fullText = item.json.ParsedResults[0].ParsedText;\n\n    // 2. Buscamos la palabra \"seguridad\" seguida de espacios/saltos de línea y capturamos el código\n    const regexSeguridad = /seguridad[\\s\\r\\n]+([A-Z0-9]+)/i;\n    const matchSeguridad = fullText.match(regexSeguridad);\n    \n    // 3. Buscamos la palabra \"cupón\" (incluso si la lee como cupön) y capturamos el código con guiones\n    const regexCupon = /cup[óöo]n[\\s\\r\\n]+([A-Z0-9\\-]+)/i;\n    const matchCupon = fullText.match(regexCupon);\n\n    // 4. Guardamos los resultados limpios\n    item.json.Codigo_Seguridad_OCR = matchSeguridad ? matchSeguridad[1].trim() : null;\n    item.json.Codigo_Cupon_OCR = matchCupon ? matchCupon[1].trim() : null;\n    \n    // Opcional: Borramos el texto largo para que tu salida quede más limpia\n    delete item.json.ParsedResults;\n    delete item.json.OCRExitCode;\n    \n  } catch (error) {\n    // Por si alguna vez la imagen está borrosa y falla, que el workflow no se rompa\n    item.json.Codigo_Seguridad_OCR = null;\n    item.json.Codigo_Cupon_OCR = null;\n  }\n}\n\nreturn $input.all();"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        816,
+        112
+      ],
+      "id": "c2a3eab5-3818-4863-a6e9-519ab8fe314e",
+      "name": "Limpiar Texto"
+    },
+    {
+      "parameters": {
+        "content": "OBTENER Y PROCESAR DATOS",
+        "height": 480,
+        "width": 1440,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -48,
+        -176
+      ],
+      "id": "2d1e9153-23db-464f-ba54-071b45d81234",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "**EXPLICACIÓN**\n\nEsta parte del workflow es la que capta los datos desde el formulario (por medio del webhook), y después se limpian los datos del formulario, se lee la imagen del qr y se limpian los datos del qr, en el último nodo deben de estar todos los datos, tanto los del cliente como los del cupón",
+        "height": 240,
+        "width": 272,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -48,
+        -432
+      ],
+      "id": "4c1eaf23-ce66-495f-8311-59e35c21a9e5",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2a24b43e-bc53-4d59-a08e-8fad3ef0654a",
+              "name": "Nombre",
+              "value": "={{ $('Limpiar Datos').item.json.Nombre }}",
+              "type": "string"
+            },
+            {
+              "id": "20ea1bd6-eae8-4e66-b25a-498ae5121d29",
+              "name": "Documento",
+              "value": "={{ $('Limpiar Datos').item.json.Documento }}",
+              "type": "string"
+            },
+            {
+              "id": "4312532f-7c46-48c7-b27d-9fed1800f11c",
+              "name": "Numero_Personas",
+              "value": "={{ $('Limpiar Datos').item.json.NumeroPersonas }}",
+              "type": "string"
+            },
+            {
+              "id": "9708ab23-f63c-479c-a78b-5bbb904ce646",
+              "name": "Correo",
+              "value": "={{ $('Limpiar Datos').item.json.Correo }}",
+              "type": "string"
+            },
+            {
+              "id": "ed3f4bdf-fd1d-408c-a86c-8e81439ec9b8",
+              "name": "Telefono",
+              "value": "={{ $('Limpiar Datos').item.json.Telefono }}",
+              "type": "string"
+            },
+            {
+              "id": "6d982338-985a-4858-af39-c995adef9429",
+              "name": "Fecha_Inicio",
+              "value": "={{ $('Limpiar Datos').item.json.FechaInicio }}",
+              "type": "string"
+            },
+            {
+              "id": "3087988d-623d-45d9-88bf-abc36cde6c8c",
+              "name": "Fecha_Fin",
+              "value": "={{ $('Limpiar Datos').item.json.FechaFin }}",
+              "type": "string"
+            },
+            {
+              "id": "259a96b7-1448-4f39-8dbe-8edf68984a55",
+              "name": "Actividad",
+              "value": "={{ $('Limpiar Datos').item.json.Actividad }}",
+              "type": "string"
+            },
+            {
+              "id": "8297fa51-78f6-4d5d-953a-a8f0f6a83fa6",
+              "name": "Nivel",
+              "value": "={{ $('Limpiar Datos').item.json.Nivel }}",
+              "type": "string"
+            },
+            {
+              "id": "385fd897-7f1c-4155-bb63-2a028a27a41e",
+              "name": "Contenido_QR",
+              "value": "={{ $json.symbol[0].data || \"Sin qr\"}}",
+              "type": "string"
+            },
+            {
+              "id": "b8cc2d2b-d6cb-4ca8-a3c8-b322af47ef16",
+              "name": "Codigo_Seguridad",
+              "value": "={{ $json.Codigo_Seguridad_Limpio || $json.Codigo_Seguridad_OCR || \"Sin Código\"}}",
+              "type": "string"
+            },
+            {
+              "id": "4c128587-96d5-4639-8d43-a1a3792faad6",
+              "name": "Codigo_Cupon",
+              "value": "={{ $json.Codigo_Cupon_OCR || \"Sin Código\"}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1168,
+        0
+      ],
+      "id": "8d6f0486-b597-4839-bb0d-41da083e3839",
+      "name": "Datos Finales"
     }
   ],
   "pinData": {},
@@ -275,6 +911,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-02-27T13:04:23.687Z",
-  "versionId": "77df26bb-19e2-423f-915d-e6863e4ad3a5"
+  "updatedAt": "2026-03-02T12:49:10.098Z",
+  "versionId": "39b47922-b7bc-450f-9537-c5c2161a858c"
 }
