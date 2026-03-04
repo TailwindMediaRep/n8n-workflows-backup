@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-03-02T08:08:53.000Z",
-    "createdAt": "2026-03-02T08:08:52.405Z",
-    "versionId": "b5422b8f-390b-4719-909c-a5d9a5be50ab",
+    "updatedAt": "2026-03-03T13:09:38.000Z",
+    "createdAt": "2026-03-03T13:09:37.125Z",
+    "versionId": "7e81a3c4-a3fb-4b61-a878-2a4a57f34057",
     "workflowId": "3EsLWbaigVn4UtgZ",
     "nodes": [
       {
@@ -940,7 +940,7 @@
             "value": {
               "sucursal_rules": 0,
               "pedido_rules": "={{ $('Webhook').item.json.body.id }}",
-              "correo": "={{ $json.correo }}"
+              "correo": "={{ $('Webhook').item.json.body.contact_email }}"
             },
             "matchingColumns": [
               "correo"
@@ -1173,7 +1173,7 @@
             "mappingMode": "defineBelow",
             "value": {
               "sucursal_oakley": 0,
-              "correo": "={{ $json.body.contact_email }}",
+              "correo": "={{ $('Webhook').item.json.body.contact_email }}",
               "pedido_oakley": "={{ $('Webhook').item.json.body.id }}"
             },
             "matchingColumns": [
@@ -1408,7 +1408,7 @@
             "mappingMode": "defineBelow",
             "value": {
               "sucursal_thenorthface": 0,
-              "correo": "={{ $json.body.contact_email }}",
+              "correo": "={{ $('Webhook').item.json.body.contact_email }}",
               "pedido_thenorthface": "={{ $('Webhook').item.json.body.id }}"
             },
             "matchingColumns": [
@@ -1643,7 +1643,7 @@
             "mappingMode": "defineBelow",
             "value": {
               "sucursal_surfin": 0,
-              "correo": "={{ $json.body.contact_email }}",
+              "correo": "={{ $('Webhook').item.json.body.contact_email }}",
               "pedido_surfin": "={{ $('Webhook').item.json.body.id }}"
             },
             "matchingColumns": [
@@ -1878,7 +1878,7 @@
             "mappingMode": "defineBelow",
             "value": {
               "sucursal_nuance": 0,
-              "correo": "={{ $json.body.contact_email }}",
+              "correo": "={{ $('Webhook').item.json.body.contact_email }}",
               "pedido_nuance": "={{ $('Webhook').item.json.body.id }}"
             },
             "matchingColumns": [
@@ -2113,7 +2113,7 @@
             "mappingMode": "defineBelow",
             "value": {
               "sucursal_nuancelodge": 0,
-              "correo": "={{ $json.body.contact_email }}",
+              "correo": "={{ $('Webhook').item.json.body.contact_email }}",
               "pedido_nuancelodge": "={{ $('Webhook').item.json.body.id }}"
             },
             "matchingColumns": [
@@ -2348,7 +2348,7 @@
             "mappingMode": "defineBelow",
             "value": {
               "sucursal_melia": 0,
-              "correo": "={{ $json.body.contact_email }}",
+              "correo": "={{ $('Webhook').item.json.body.contact_email }}",
               "pedido_melia": "={{ $('Webhook').item.json.body.id }}"
             },
             "matchingColumns": [
@@ -2611,6 +2611,7 @@
       },
       {
         "parameters": {
+          "authentication": "headerAuth",
           "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-01/graphql.json",
           "query": "mutation metafieldsSet($metafields: [MetafieldsSetInput!]!) {\n  metafieldsSet(metafields: $metafields) {\n    metafields {\n      id\n      namespace\n      key\n      value\n      type\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
           "variables": "={\n  \"metafields\": [\n    {\n      \"ownerId\": \"{{ $('Webhook').item.json.body.customer.admin_graphql_api_id }}\",\n      \"namespace\": \"custom\",\n      \"key\": \"descuento_oakley\",\n      \"value\": \"0\",\n      \"type\": \"number_integer\"\n    }\n  ]\n}"
@@ -2622,10 +2623,17 @@
           -1408
         ],
         "id": "773e824e-cfb8-4e2d-bff6-8c485924904c",
-        "name": "Graph Oakley"
+        "name": "Graph Oakley",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "THkhgrtze1uBo6Ft",
+            "name": "Token Informes Shopify"
+          }
+        }
       },
       {
         "parameters": {
+          "authentication": "headerAuth",
           "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-01/graphql.json",
           "query": "mutation metafieldsSet($metafields: [MetafieldsSetInput!]!) {\n  metafieldsSet(metafields: $metafields) {\n    metafields {\n      id\n      namespace\n      key\n      value\n      type\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
           "variables": "={\n  \"metafields\": [\n    {\n      \"ownerId\": \"{{ $('Webhook').item.json.body.customer.admin_graphql_api_id }}\",\n      \"namespace\": \"custom\",\n      \"key\": \"descuento_thenorthface\",\n      \"value\": \"0\",\n      \"type\": \"number_integer\"\n    }\n  ]\n}"
@@ -2637,10 +2645,17 @@
           -1264
         ],
         "id": "7d197ec2-e509-4ee9-9ae2-4cac17408065",
-        "name": "Graph North Face"
+        "name": "Graph North Face",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "THkhgrtze1uBo6Ft",
+            "name": "Token Informes Shopify"
+          }
+        }
       },
       {
         "parameters": {
+          "authentication": "headerAuth",
           "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-01/graphql.json",
           "query": "mutation metafieldsSet($metafields: [MetafieldsSetInput!]!) {\n  metafieldsSet(metafields: $metafields) {\n    metafields {\n      id\n      namespace\n      key\n      value\n      type\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
           "variables": "={\n  \"metafields\": [\n    {\n      \"ownerId\": \"{{ $('Webhook').item.json.body.customer.admin_graphql_api_id }}\",\n      \"namespace\": \"custom\",\n      \"key\": \"descuento_surfin\",\n      \"value\": \"0\",\n      \"type\": \"number_integer\"\n    }\n  ]\n}"
@@ -2652,10 +2667,17 @@
           -1120
         ],
         "id": "46e7165f-39ec-4860-be56-da244eed5c78",
-        "name": "Graph Surfin"
+        "name": "Graph Surfin",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "THkhgrtze1uBo6Ft",
+            "name": "Token Informes Shopify"
+          }
+        }
       },
       {
         "parameters": {
+          "authentication": "headerAuth",
           "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-01/graphql.json",
           "query": "mutation metafieldsSet($metafields: [MetafieldsSetInput!]!) {\n  metafieldsSet(metafields: $metafields) {\n    metafields {\n      id\n      namespace\n      key\n      value\n      type\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
           "variables": "={\n  \"metafields\": [\n    {\n      \"ownerId\": \"{{ $('Webhook').item.json.body.customer.admin_graphql_api_id }}\",\n      \"namespace\": \"custom\",\n      \"key\": \"descuento_nuance\",\n      \"value\": \"0\",\n      \"type\": \"number_integer\"\n    }\n  ]\n}"
@@ -2667,10 +2689,17 @@
           -976
         ],
         "id": "9e13b40f-4bc4-4b2c-ad94-d15a6a5a93d4",
-        "name": "Graph Nuance"
+        "name": "Graph Nuance",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "THkhgrtze1uBo6Ft",
+            "name": "Token Informes Shopify"
+          }
+        }
       },
       {
         "parameters": {
+          "authentication": "headerAuth",
           "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-01/graphql.json",
           "query": "mutation metafieldsSet($metafields: [MetafieldsSetInput!]!) {\n  metafieldsSet(metafields: $metafields) {\n    metafields {\n      id\n      namespace\n      key\n      value\n      type\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
           "variables": "={\n  \"metafields\": [\n    {\n      \"ownerId\": \"{{ $('Webhook').item.json.body.customer.admin_graphql_api_id }}\",\n      \"namespace\": \"custom\",\n      \"key\": \"descuento_nuancelodge\",\n      \"value\": \"0\",\n      \"type\": \"number_integer\"\n    }\n  ]\n}"
@@ -2682,10 +2711,17 @@
           -832
         ],
         "id": "15e3e8f9-de34-4aae-8eeb-53d56c6072e7",
-        "name": "Graph Lodge"
+        "name": "Graph Lodge",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "THkhgrtze1uBo6Ft",
+            "name": "Token Informes Shopify"
+          }
+        }
       },
       {
         "parameters": {
+          "authentication": "headerAuth",
           "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-01/graphql.json",
           "query": "mutation metafieldsSet($metafields: [MetafieldsSetInput!]!) {\n  metafieldsSet(metafields: $metafields) {\n    metafields {\n      id\n      namespace\n      key\n      value\n      type\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
           "variables": "={\n  \"metafields\": [\n    {\n      \"ownerId\": \"{{ $('Webhook').item.json.body.customer.admin_graphql_api_id }}\",\n      \"namespace\": \"custom\",\n      \"key\": \"descuento_melia\",\n      \"value\": \"0\",\n      \"type\": \"number_integer\"\n    }\n  ]\n}"
@@ -2697,7 +2733,13 @@
           -688
         ],
         "id": "e7a454c0-112c-4cbc-a2d5-72071acdf555",
-        "name": "Graph Melia"
+        "name": "Graph Melia",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "THkhgrtze1uBo6Ft",
+            "name": "Token Informes Shopify"
+          }
+        }
       },
       {
         "parameters": {
@@ -3248,11 +3290,11 @@
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version b5422b8f",
+    "name": "Version 7e81a3c4",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "b5422b8f-390b-4719-909c-a5d9a5be50ab",
+  "activeVersionId": "7e81a3c4-a3fb-4b61-a878-2a4a57f34057",
   "connections": {
     "Webhook": {
       "main": [
@@ -4579,7 +4621,7 @@
           "value": {
             "sucursal_rules": 0,
             "pedido_rules": "={{ $('Webhook').item.json.body.id }}",
-            "correo": "={{ $json.correo }}"
+            "correo": "={{ $('Webhook').item.json.body.contact_email }}"
           },
           "matchingColumns": [
             "correo"
@@ -4812,7 +4854,7 @@
           "mappingMode": "defineBelow",
           "value": {
             "sucursal_oakley": 0,
-            "correo": "={{ $json.body.contact_email }}",
+            "correo": "={{ $('Webhook').item.json.body.contact_email }}",
             "pedido_oakley": "={{ $('Webhook').item.json.body.id }}"
           },
           "matchingColumns": [
@@ -5047,7 +5089,7 @@
           "mappingMode": "defineBelow",
           "value": {
             "sucursal_thenorthface": 0,
-            "correo": "={{ $json.body.contact_email }}",
+            "correo": "={{ $('Webhook').item.json.body.contact_email }}",
             "pedido_thenorthface": "={{ $('Webhook').item.json.body.id }}"
           },
           "matchingColumns": [
@@ -5282,7 +5324,7 @@
           "mappingMode": "defineBelow",
           "value": {
             "sucursal_surfin": 0,
-            "correo": "={{ $json.body.contact_email }}",
+            "correo": "={{ $('Webhook').item.json.body.contact_email }}",
             "pedido_surfin": "={{ $('Webhook').item.json.body.id }}"
           },
           "matchingColumns": [
@@ -5517,7 +5559,7 @@
           "mappingMode": "defineBelow",
           "value": {
             "sucursal_nuance": 0,
-            "correo": "={{ $json.body.contact_email }}",
+            "correo": "={{ $('Webhook').item.json.body.contact_email }}",
             "pedido_nuance": "={{ $('Webhook').item.json.body.id }}"
           },
           "matchingColumns": [
@@ -5752,7 +5794,7 @@
           "mappingMode": "defineBelow",
           "value": {
             "sucursal_nuancelodge": 0,
-            "correo": "={{ $json.body.contact_email }}",
+            "correo": "={{ $('Webhook').item.json.body.contact_email }}",
             "pedido_nuancelodge": "={{ $('Webhook').item.json.body.id }}"
           },
           "matchingColumns": [
@@ -5987,7 +6029,7 @@
           "mappingMode": "defineBelow",
           "value": {
             "sucursal_melia": 0,
-            "correo": "={{ $json.body.contact_email }}",
+            "correo": "={{ $('Webhook').item.json.body.contact_email }}",
             "pedido_melia": "={{ $('Webhook').item.json.body.id }}"
           },
           "matchingColumns": [
@@ -6250,6 +6292,7 @@
     },
     {
       "parameters": {
+        "authentication": "headerAuth",
         "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-01/graphql.json",
         "query": "mutation metafieldsSet($metafields: [MetafieldsSetInput!]!) {\n  metafieldsSet(metafields: $metafields) {\n    metafields {\n      id\n      namespace\n      key\n      value\n      type\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
         "variables": "={\n  \"metafields\": [\n    {\n      \"ownerId\": \"{{ $('Webhook').item.json.body.customer.admin_graphql_api_id }}\",\n      \"namespace\": \"custom\",\n      \"key\": \"descuento_oakley\",\n      \"value\": \"0\",\n      \"type\": \"number_integer\"\n    }\n  ]\n}"
@@ -6261,10 +6304,17 @@
         -1408
       ],
       "id": "773e824e-cfb8-4e2d-bff6-8c485924904c",
-      "name": "Graph Oakley"
+      "name": "Graph Oakley",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THkhgrtze1uBo6Ft",
+          "name": "Token Informes Shopify"
+        }
+      }
     },
     {
       "parameters": {
+        "authentication": "headerAuth",
         "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-01/graphql.json",
         "query": "mutation metafieldsSet($metafields: [MetafieldsSetInput!]!) {\n  metafieldsSet(metafields: $metafields) {\n    metafields {\n      id\n      namespace\n      key\n      value\n      type\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
         "variables": "={\n  \"metafields\": [\n    {\n      \"ownerId\": \"{{ $('Webhook').item.json.body.customer.admin_graphql_api_id }}\",\n      \"namespace\": \"custom\",\n      \"key\": \"descuento_thenorthface\",\n      \"value\": \"0\",\n      \"type\": \"number_integer\"\n    }\n  ]\n}"
@@ -6276,10 +6326,17 @@
         -1264
       ],
       "id": "7d197ec2-e509-4ee9-9ae2-4cac17408065",
-      "name": "Graph North Face"
+      "name": "Graph North Face",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THkhgrtze1uBo6Ft",
+          "name": "Token Informes Shopify"
+        }
+      }
     },
     {
       "parameters": {
+        "authentication": "headerAuth",
         "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-01/graphql.json",
         "query": "mutation metafieldsSet($metafields: [MetafieldsSetInput!]!) {\n  metafieldsSet(metafields: $metafields) {\n    metafields {\n      id\n      namespace\n      key\n      value\n      type\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
         "variables": "={\n  \"metafields\": [\n    {\n      \"ownerId\": \"{{ $('Webhook').item.json.body.customer.admin_graphql_api_id }}\",\n      \"namespace\": \"custom\",\n      \"key\": \"descuento_surfin\",\n      \"value\": \"0\",\n      \"type\": \"number_integer\"\n    }\n  ]\n}"
@@ -6291,10 +6348,17 @@
         -1120
       ],
       "id": "46e7165f-39ec-4860-be56-da244eed5c78",
-      "name": "Graph Surfin"
+      "name": "Graph Surfin",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THkhgrtze1uBo6Ft",
+          "name": "Token Informes Shopify"
+        }
+      }
     },
     {
       "parameters": {
+        "authentication": "headerAuth",
         "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-01/graphql.json",
         "query": "mutation metafieldsSet($metafields: [MetafieldsSetInput!]!) {\n  metafieldsSet(metafields: $metafields) {\n    metafields {\n      id\n      namespace\n      key\n      value\n      type\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
         "variables": "={\n  \"metafields\": [\n    {\n      \"ownerId\": \"{{ $('Webhook').item.json.body.customer.admin_graphql_api_id }}\",\n      \"namespace\": \"custom\",\n      \"key\": \"descuento_nuance\",\n      \"value\": \"0\",\n      \"type\": \"number_integer\"\n    }\n  ]\n}"
@@ -6306,10 +6370,17 @@
         -976
       ],
       "id": "9e13b40f-4bc4-4b2c-ad94-d15a6a5a93d4",
-      "name": "Graph Nuance"
+      "name": "Graph Nuance",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THkhgrtze1uBo6Ft",
+          "name": "Token Informes Shopify"
+        }
+      }
     },
     {
       "parameters": {
+        "authentication": "headerAuth",
         "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-01/graphql.json",
         "query": "mutation metafieldsSet($metafields: [MetafieldsSetInput!]!) {\n  metafieldsSet(metafields: $metafields) {\n    metafields {\n      id\n      namespace\n      key\n      value\n      type\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
         "variables": "={\n  \"metafields\": [\n    {\n      \"ownerId\": \"{{ $('Webhook').item.json.body.customer.admin_graphql_api_id }}\",\n      \"namespace\": \"custom\",\n      \"key\": \"descuento_nuancelodge\",\n      \"value\": \"0\",\n      \"type\": \"number_integer\"\n    }\n  ]\n}"
@@ -6321,10 +6392,17 @@
         -832
       ],
       "id": "15e3e8f9-de34-4aae-8eeb-53d56c6072e7",
-      "name": "Graph Lodge"
+      "name": "Graph Lodge",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THkhgrtze1uBo6Ft",
+          "name": "Token Informes Shopify"
+        }
+      }
     },
     {
       "parameters": {
+        "authentication": "headerAuth",
         "endpoint": "https://rulesshop.myshopify.com/admin/api/2024-01/graphql.json",
         "query": "mutation metafieldsSet($metafields: [MetafieldsSetInput!]!) {\n  metafieldsSet(metafields: $metafields) {\n    metafields {\n      id\n      namespace\n      key\n      value\n      type\n    }\n    userErrors {\n      field\n      message\n    }\n  }\n}",
         "variables": "={\n  \"metafields\": [\n    {\n      \"ownerId\": \"{{ $('Webhook').item.json.body.customer.admin_graphql_api_id }}\",\n      \"namespace\": \"custom\",\n      \"key\": \"descuento_melia\",\n      \"value\": \"0\",\n      \"type\": \"number_integer\"\n    }\n  ]\n}"
@@ -6336,7 +6414,13 @@
         -688
       ],
       "id": "e7a454c0-112c-4cbc-a2d5-72071acdf555",
-      "name": "Graph Melia"
+      "name": "Graph Melia",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THkhgrtze1uBo6Ft",
+          "name": "Token Informes Shopify"
+        }
+      }
     },
     {
       "parameters": {
@@ -6503,465 +6587,6 @@
     }
   ],
   "pinData": {
-    "Webhook": [
-      {
-        "json": {
-          "headers": {
-            "connection": "upgrade",
-            "host": "n8n.tailwind.es",
-            "x-forwarded-for": "34.77.148.162",
-            "x-forwarded-proto": "https",
-            "content-length": "7969",
-            "user-agent": "Shopify-Captain-Hook",
-            "accept": "*/*",
-            "accept-encoding": "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
-            "content-type": "application/json",
-            "x-shopify-api-version": "2026-01",
-            "x-shopify-event-id": "3cc78615-4dab-4163-ba5b-75c9524ce963",
-            "x-shopify-hmac-sha256": "2qp22RtCUFon/orHi0hLZrKFegPOTmOpVhUnc1Z1ntY=",
-            "x-shopify-order-id": "7732659847515",
-            "x-shopify-shop-domain": "surfin-store-spain.myshopify.com",
-            "x-shopify-test": "false",
-            "x-shopify-topic": "orders/create",
-            "x-shopify-triggered-at": "2026-02-26T12:08:08.638675224Z",
-            "x-shopify-webhook-id": "89e27a0a-83ae-52c8-8520-4bb7a317aa9a"
-          },
-          "params": {},
-          "query": {},
-          "body": {
-            "id": 7732659847515,
-            "admin_graphql_api_id": "gid://shopify/Order/7732659847515",
-            "app_id": 129785,
-            "browser_ip": "2.136.43.122",
-            "buyer_accepts_marketing": false,
-            "cancel_reason": null,
-            "cancelled_at": null,
-            "cart_token": null,
-            "checkout_id": 48447535579483,
-            "checkout_token": "45330b36-f1b2-4214-a4aa-7870a4b640e0",
-            "client_details": {
-              "accept_language": null,
-              "browser_height": null,
-              "browser_ip": "2.136.43.122",
-              "browser_width": null,
-              "session_hash": null,
-              "user_agent": "Shopify POS/11.0.1/Android/16/samsung/SM-X626B/production"
-            },
-            "closed_at": "2026-02-26T13:08:08+01:00",
-            "company": null,
-            "confirmation_number": "FJ65PER5J",
-            "confirmed": true,
-            "contact_email": "prueba@prueba.com",
-            "created_at": "2026-02-26T13:08:07+01:00",
-            "currency": "EUR",
-            "current_shipping_price_set": {
-              "shop_money": {
-                "amount": "0.00",
-                "currency_code": "EUR"
-              },
-              "presentment_money": {
-                "amount": "0.00",
-                "currency_code": "EUR"
-              }
-            },
-            "current_subtotal_price": "11.61",
-            "current_subtotal_price_set": {
-              "shop_money": {
-                "amount": "11.61",
-                "currency_code": "EUR"
-              },
-              "presentment_money": {
-                "amount": "11.61",
-                "currency_code": "EUR"
-              }
-            },
-            "current_total_additional_fees_set": null,
-            "current_total_discounts": "1.29",
-            "current_total_discounts_set": {
-              "shop_money": {
-                "amount": "1.29",
-                "currency_code": "EUR"
-              },
-              "presentment_money": {
-                "amount": "1.29",
-                "currency_code": "EUR"
-              }
-            },
-            "current_total_duties_set": null,
-            "current_total_price": "11.61",
-            "current_total_price_set": {
-              "shop_money": {
-                "amount": "11.61",
-                "currency_code": "EUR"
-              },
-              "presentment_money": {
-                "amount": "11.61",
-                "currency_code": "EUR"
-              }
-            },
-            "current_total_tax": "0.00",
-            "current_total_tax_set": {
-              "shop_money": {
-                "amount": "0.00",
-                "currency_code": "EUR"
-              },
-              "presentment_money": {
-                "amount": "0.00",
-                "currency_code": "EUR"
-              }
-            },
-            "customer_locale": "es",
-            "device_id": 2,
-            "discount_codes": [
-              {
-                "code": "GRACIAS10",
-                "amount": "1.29",
-                "type": "percentage"
-              }
-            ],
-            "duties_included": false,
-            "email": "prueba@prueba.com",
-            "estimated_taxes": false,
-            "financial_status": "paid",
-            "fulfillment_status": "fulfilled",
-            "landing_site": null,
-            "landing_site_ref": null,
-            "location_id": 99759620443,
-            "merchant_business_entity_id": "MTg3OTg3NjUwOTA3",
-            "merchant_of_record_app_id": null,
-            "name": "#73222",
-            "note": null,
-            "note_attributes": [],
-            "number": 72222,
-            "order_number": 73222,
-            "order_status_url": "https://nuance-store.com/87987650907/orders/f33f7e6c4e3d5949ed9d38f4e16062ba/authenticate?key=94080182b32a87029290dac282fb6c58",
-            "original_total_additional_fees_set": null,
-            "original_total_duties_set": null,
-            "payment_gateway_names": [
-              "Venta Web"
-            ],
-            "phone": "+34666555666",
-            "po_number": null,
-            "presentment_currency": "EUR",
-            "processed_at": "2026-02-26T13:08:06+01:00",
-            "reference": null,
-            "referring_site": null,
-            "source_identifier": "99759620443-2-2304",
-            "source_name": "pos",
-            "source_url": null,
-            "subtotal_price": "11.61",
-            "subtotal_price_set": {
-              "shop_money": {
-                "amount": "11.61",
-                "currency_code": "EUR"
-              },
-              "presentment_money": {
-                "amount": "11.61",
-                "currency_code": "EUR"
-              }
-            },
-            "tags": "",
-            "tax_exempt": false,
-            "tax_lines": [],
-            "taxes_included": true,
-            "test": false,
-            "token": "f33f7e6c4e3d5949ed9d38f4e16062ba",
-            "total_cash_rounding_payment_adjustment_set": {
-              "shop_money": {
-                "amount": "0.00",
-                "currency_code": "EUR"
-              },
-              "presentment_money": {
-                "amount": "0.00",
-                "currency_code": "EUR"
-              }
-            },
-            "total_cash_rounding_refund_adjustment_set": {
-              "shop_money": {
-                "amount": "0.00",
-                "currency_code": "EUR"
-              },
-              "presentment_money": {
-                "amount": "0.00",
-                "currency_code": "EUR"
-              }
-            },
-            "total_discounts": "1.29",
-            "total_discounts_set": {
-              "shop_money": {
-                "amount": "1.29",
-                "currency_code": "EUR"
-              },
-              "presentment_money": {
-                "amount": "1.29",
-                "currency_code": "EUR"
-              }
-            },
-            "total_line_items_price": "12.90",
-            "total_line_items_price_set": {
-              "shop_money": {
-                "amount": "12.90",
-                "currency_code": "EUR"
-              },
-              "presentment_money": {
-                "amount": "12.90",
-                "currency_code": "EUR"
-              }
-            },
-            "total_outstanding": "0.00",
-            "total_price": "11.61",
-            "total_price_set": {
-              "shop_money": {
-                "amount": "11.61",
-                "currency_code": "EUR"
-              },
-              "presentment_money": {
-                "amount": "11.61",
-                "currency_code": "EUR"
-              }
-            },
-            "total_shipping_price_set": {
-              "shop_money": {
-                "amount": "0.00",
-                "currency_code": "EUR"
-              },
-              "presentment_money": {
-                "amount": "0.00",
-                "currency_code": "EUR"
-              }
-            },
-            "total_tax": "0.00",
-            "total_tax_set": {
-              "shop_money": {
-                "amount": "0.00",
-                "currency_code": "EUR"
-              },
-              "presentment_money": {
-                "amount": "0.00",
-                "currency_code": "EUR"
-              }
-            },
-            "total_tip_received": "0.00",
-            "total_weight": 0,
-            "updated_at": "2026-02-26T13:08:08+01:00",
-            "user_id": 127472533851,
-            "billing_address": null,
-            "customer": {
-              "id": 9488191390043,
-              "created_at": "2025-08-19T13:00:56+02:00",
-              "updated_at": "2026-02-26T13:08:08+01:00",
-              "first_name": "aaa",
-              "last_name": "aaa",
-              "state": "enabled",
-              "note": "",
-              "verified_email": true,
-              "multipass_identifier": null,
-              "tax_exempt": false,
-              "email": "prueba@prueba.com",
-              "phone": "+34666555666",
-              "currency": "EUR",
-              "tax_exemptions": [],
-              "admin_graphql_api_id": "gid://shopify/Customer/9488191390043",
-              "default_address": {
-                "id": 12959882903899,
-                "customer_id": 9488191390043,
-                "first_name": "aaa",
-                "last_name": "aaa",
-                "company": "",
-                "address1": "Calle Ruiz, 7\nCalle Ruiz, 7",
-                "address2": "",
-                "city": "Madrid",
-                "province": "Murcia",
-                "country": "Spain",
-                "zip": "28004",
-                "phone": "666555666",
-                "name": "aaa aaa",
-                "province_code": "MU",
-                "country_code": "ES",
-                "country_name": "Spain",
-                "default": true
-              }
-            },
-            "discount_applications": [
-              {
-                "target_type": "line_item",
-                "type": "discount_code",
-                "value": "10.0",
-                "value_type": "percentage",
-                "allocation_method": "across",
-                "target_selection": "all",
-                "code": "GRACIAS10"
-              }
-            ],
-            "fulfillments": [
-              {
-                "id": 6767128183131,
-                "admin_graphql_api_id": "gid://shopify/Fulfillment/6767128183131",
-                "created_at": "2026-02-26T13:08:08+01:00",
-                "location_id": 99759620443,
-                "name": "#73222.1",
-                "order_id": 7732659847515,
-                "origin_address": {},
-                "receipt": {},
-                "service": "manual",
-                "shipment_status": null,
-                "status": "success",
-                "tracking_company": null,
-                "tracking_number": null,
-                "tracking_numbers": [],
-                "tracking_url": null,
-                "tracking_urls": [],
-                "updated_at": "2026-02-26T13:08:08+01:00",
-                "line_items": [
-                  {
-                    "id": 18577214636379,
-                    "admin_graphql_api_id": "gid://shopify/LineItem/18577214636379",
-                    "attributed_staffs": [],
-                    "current_quantity": 1,
-                    "fulfillable_quantity": 0,
-                    "fulfillment_service": "manual",
-                    "fulfillment_status": "fulfilled",
-                    "gift_card": false,
-                    "grams": 0,
-                    "name": "Reell Trunks Boxer - Olive / S",
-                    "price": "12.90",
-                    "price_set": {
-                      "shop_money": {
-                        "amount": "12.90",
-                        "currency_code": "EUR"
-                      },
-                      "presentment_money": {
-                        "amount": "12.90",
-                        "currency_code": "EUR"
-                      }
-                    },
-                    "product_exists": true,
-                    "product_id": 10054401425755,
-                    "properties": [],
-                    "quantity": 1,
-                    "requires_shipping": true,
-                    "sku": "2100000264957",
-                    "taxable": true,
-                    "title": "Reell Trunks Boxer",
-                    "total_discount": "0.00",
-                    "total_discount_set": {
-                      "shop_money": {
-                        "amount": "0.00",
-                        "currency_code": "EUR"
-                      },
-                      "presentment_money": {
-                        "amount": "0.00",
-                        "currency_code": "EUR"
-                      }
-                    },
-                    "variant_id": 51185481122139,
-                    "variant_inventory_management": "shopify",
-                    "variant_title": "Olive / S",
-                    "vendor": "Reell",
-                    "tax_lines": [],
-                    "duties": [],
-                    "discount_allocations": [
-                      {
-                        "amount": "1.29",
-                        "amount_set": {
-                          "shop_money": {
-                            "amount": "1.29",
-                            "currency_code": "EUR"
-                          },
-                          "presentment_money": {
-                            "amount": "1.29",
-                            "currency_code": "EUR"
-                          }
-                        },
-                        "discount_application_index": 0
-                      }
-                    ]
-                  }
-                ]
-              }
-            ],
-            "line_items": [
-              {
-                "id": 18577214636379,
-                "admin_graphql_api_id": "gid://shopify/LineItem/18577214636379",
-                "attributed_staffs": [],
-                "current_quantity": 1,
-                "fulfillable_quantity": 0,
-                "fulfillment_service": "manual",
-                "fulfillment_status": "fulfilled",
-                "gift_card": false,
-                "grams": 0,
-                "name": "Reell Trunks Boxer - Olive / S",
-                "price": "12.90",
-                "price_set": {
-                  "shop_money": {
-                    "amount": "12.90",
-                    "currency_code": "EUR"
-                  },
-                  "presentment_money": {
-                    "amount": "12.90",
-                    "currency_code": "EUR"
-                  }
-                },
-                "product_exists": true,
-                "product_id": 10054401425755,
-                "properties": [],
-                "quantity": 1,
-                "requires_shipping": true,
-                "sales_line_item_group_id": null,
-                "sku": "2100000264957",
-                "taxable": true,
-                "title": "Reell Trunks Boxer",
-                "total_discount": "0.00",
-                "total_discount_set": {
-                  "shop_money": {
-                    "amount": "0.00",
-                    "currency_code": "EUR"
-                  },
-                  "presentment_money": {
-                    "amount": "0.00",
-                    "currency_code": "EUR"
-                  }
-                },
-                "variant_id": 51185481122139,
-                "variant_inventory_management": "shopify",
-                "variant_title": "Olive / S",
-                "vendor": "Reell",
-                "tax_lines": [],
-                "duties": [],
-                "discount_allocations": [
-                  {
-                    "amount": "1.29",
-                    "amount_set": {
-                      "shop_money": {
-                        "amount": "1.29",
-                        "currency_code": "EUR"
-                      },
-                      "presentment_money": {
-                        "amount": "1.29",
-                        "currency_code": "EUR"
-                      }
-                    },
-                    "discount_application_index": 0
-                  }
-                ]
-              }
-            ],
-            "payment_terms": null,
-            "refunds": [],
-            "shipping_address": null,
-            "shipping_lines": [],
-            "returns": [],
-            "line_item_groups": []
-          },
-          "webhookUrl": "https://n8n.tailwind.es/webhook/venta-descuento-10",
-          "executionMode": "production"
-        },
-        "pairedItem": {
-          "item": 0
-        }
-      }
-    ],
     "Leerqr": [
       {
         "json": {
@@ -6999,6 +6624,446 @@
           "item": 0
         }
       }
+    ],
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "connection": "upgrade",
+            "host": "n8n.tailwind.es",
+            "x-forwarded-for": "34.38.39.3",
+            "x-forwarded-proto": "https",
+            "content-length": "7847",
+            "user-agent": "Shopify-Captain-Hook",
+            "accept": "*/*",
+            "accept-encoding": "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
+            "content-type": "application/json",
+            "x-shopify-api-version": "2026-01",
+            "x-shopify-event-id": "e451c30e-4e5b-427c-9afa-0d3fd127984f",
+            "x-shopify-hmac-sha256": "mC3Z1cZECldESzdgSTJIOtJAyw/yq3cUGLJMubkk2UI=",
+            "x-shopify-order-id": "7745283326299",
+            "x-shopify-shop-domain": "surfin-store-spain.myshopify.com",
+            "x-shopify-test": "false",
+            "x-shopify-topic": "orders/create",
+            "x-shopify-triggered-at": "2026-03-02T19:03:36.801180397Z",
+            "x-shopify-webhook-id": "2eecde6e-3431-5d7a-9e69-368fad6e3b36"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "id": 7745283326299,
+            "admin_graphql_api_id": "gid://shopify/Order/7745283326299",
+            "app_id": 129785,
+            "browser_ip": "83.60.113.27",
+            "buyer_accepts_marketing": false,
+            "cancel_reason": null,
+            "cancelled_at": null,
+            "cart_token": null,
+            "checkout_id": 48474358579547,
+            "checkout_token": "637e468b-ef93-4cbe-a326-203ace64c2c3",
+            "client_details": {
+              "accept_language": null,
+              "browser_height": null,
+              "browser_ip": "83.60.113.27",
+              "browser_width": null,
+              "session_hash": null,
+              "user_agent": "Shopify POS/10.15.2/Android/15/Redmi/25040RP0AE/production"
+            },
+            "closed_at": "2026-03-02T20:03:37+01:00",
+            "company": null,
+            "confirmation_number": "J0LVCJC3A",
+            "confirmed": true,
+            "contact_email": "fredericoduarte101@icloud.com",
+            "created_at": "2026-03-02T20:03:35+01:00",
+            "currency": "EUR",
+            "current_shipping_price_set": {
+              "shop_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              }
+            },
+            "current_subtotal_price": "81.00",
+            "current_subtotal_price_set": {
+              "shop_money": {
+                "amount": "81.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "81.00",
+                "currency_code": "EUR"
+              }
+            },
+            "current_total_additional_fees_set": null,
+            "current_total_discounts": "9.00",
+            "current_total_discounts_set": {
+              "shop_money": {
+                "amount": "9.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "9.00",
+                "currency_code": "EUR"
+              }
+            },
+            "current_total_duties_set": null,
+            "current_total_price": "81.00",
+            "current_total_price_set": {
+              "shop_money": {
+                "amount": "81.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "81.00",
+                "currency_code": "EUR"
+              }
+            },
+            "current_total_tax": "0.00",
+            "current_total_tax_set": {
+              "shop_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              }
+            },
+            "customer_locale": "es",
+            "device_id": 20,
+            "discount_codes": [
+              {
+                "code": "GRACIAS10",
+                "amount": "9.00",
+                "type": "percentage"
+              }
+            ],
+            "duties_included": false,
+            "email": "fredericoduarte101@icloud.com",
+            "estimated_taxes": false,
+            "financial_status": "paid",
+            "fulfillment_status": "fulfilled",
+            "landing_site": null,
+            "landing_site_ref": null,
+            "location_id": 108915917147,
+            "merchant_business_entity_id": "MTg3OTg3NjUwOTA3",
+            "merchant_of_record_app_id": null,
+            "name": "#73529",
+            "note": null,
+            "note_attributes": [],
+            "number": 72529,
+            "order_number": 73529,
+            "order_status_url": "https://nuance-store.com/87987650907/orders/107b304bcc2268a63059fbc5f7ac2b75/authenticate?key=6cf71a07ed1e5a6ccf5a7d42758dcdde",
+            "original_total_additional_fees_set": null,
+            "original_total_duties_set": null,
+            "payment_gateway_names": [
+              "Tarjeta"
+            ],
+            "phone": null,
+            "po_number": null,
+            "presentment_currency": "EUR",
+            "processed_at": "2026-03-02T20:03:35+01:00",
+            "reference": null,
+            "referring_site": null,
+            "source_identifier": "108915917147-20-1335",
+            "source_name": "pos",
+            "source_url": null,
+            "subtotal_price": "81.00",
+            "subtotal_price_set": {
+              "shop_money": {
+                "amount": "81.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "81.00",
+                "currency_code": "EUR"
+              }
+            },
+            "tags": "",
+            "tax_exempt": false,
+            "tax_lines": [],
+            "taxes_included": true,
+            "test": false,
+            "token": "107b304bcc2268a63059fbc5f7ac2b75",
+            "total_cash_rounding_payment_adjustment_set": {
+              "shop_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              }
+            },
+            "total_cash_rounding_refund_adjustment_set": {
+              "shop_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              }
+            },
+            "total_discounts": "9.00",
+            "total_discounts_set": {
+              "shop_money": {
+                "amount": "9.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "9.00",
+                "currency_code": "EUR"
+              }
+            },
+            "total_line_items_price": "90.00",
+            "total_line_items_price_set": {
+              "shop_money": {
+                "amount": "90.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "90.00",
+                "currency_code": "EUR"
+              }
+            },
+            "total_outstanding": "0.00",
+            "total_price": "81.00",
+            "total_price_set": {
+              "shop_money": {
+                "amount": "81.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "81.00",
+                "currency_code": "EUR"
+              }
+            },
+            "total_shipping_price_set": {
+              "shop_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              }
+            },
+            "total_tax": "0.00",
+            "total_tax_set": {
+              "shop_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              }
+            },
+            "total_tip_received": "0.00",
+            "total_weight": 0,
+            "updated_at": "2026-03-02T20:03:37+01:00",
+            "user_id": 127346573659,
+            "billing_address": null,
+            "customer": {
+              "id": 10271233507675,
+              "created_at": "2026-03-02T09:34:45+01:00",
+              "updated_at": "2026-03-02T20:03:36+01:00",
+              "first_name": "Frederico",
+              "last_name": "Duarte",
+              "state": "disabled",
+              "note": "",
+              "verified_email": true,
+              "multipass_identifier": null,
+              "tax_exempt": false,
+              "email": "fredericoduarte101@icloud.com",
+              "phone": null,
+              "currency": "EUR",
+              "tax_exemptions": [],
+              "admin_graphql_api_id": "gid://shopify/Customer/10271233507675"
+            },
+            "discount_applications": [
+              {
+                "target_type": "line_item",
+                "type": "discount_code",
+                "value": "10.0",
+                "value_type": "percentage",
+                "allocation_method": "across",
+                "target_selection": "all",
+                "code": "GRACIAS10"
+              }
+            ],
+            "fulfillments": [
+              {
+                "id": 6777032704347,
+                "admin_graphql_api_id": "gid://shopify/Fulfillment/6777032704347",
+                "created_at": "2026-03-02T20:03:36+01:00",
+                "location_id": 108915917147,
+                "name": "#73529.1",
+                "order_id": 7745283326299,
+                "origin_address": {},
+                "receipt": {},
+                "service": "manual",
+                "shipment_status": null,
+                "status": "success",
+                "tracking_company": null,
+                "tracking_number": null,
+                "tracking_numbers": [],
+                "tracking_url": null,
+                "tracking_urls": [],
+                "updated_at": "2026-03-02T20:03:36+01:00",
+                "line_items": [
+                  {
+                    "id": 18604984271195,
+                    "admin_graphql_api_id": "gid://shopify/LineItem/18604984271195",
+                    "attributed_staffs": [],
+                    "current_quantity": 1,
+                    "fulfillable_quantity": 0,
+                    "fulfillment_service": "manual",
+                    "fulfillment_status": "fulfilled",
+                    "gift_card": false,
+                    "grams": 0,
+                    "name": "The North Face Jester Mochila - TNF Black Light Refractions/TNF Black / 28L",
+                    "price": "90.00",
+                    "price_set": {
+                      "shop_money": {
+                        "amount": "90.00",
+                        "currency_code": "EUR"
+                      },
+                      "presentment_money": {
+                        "amount": "90.00",
+                        "currency_code": "EUR"
+                      }
+                    },
+                    "product_exists": true,
+                    "product_id": 10258297684315,
+                    "properties": [],
+                    "quantity": 1,
+                    "requires_shipping": true,
+                    "sku": "51951567307099",
+                    "taxable": true,
+                    "title": "The North Face Jester Mochila",
+                    "total_discount": "0.00",
+                    "total_discount_set": {
+                      "shop_money": {
+                        "amount": "0.00",
+                        "currency_code": "EUR"
+                      },
+                      "presentment_money": {
+                        "amount": "0.00",
+                        "currency_code": "EUR"
+                      }
+                    },
+                    "variant_id": 51951567307099,
+                    "variant_inventory_management": "shopify",
+                    "variant_title": "TNF Black Light Refractions/TNF Black / 28L",
+                    "vendor": "The North Face",
+                    "tax_lines": [],
+                    "duties": [],
+                    "discount_allocations": [
+                      {
+                        "amount": "9.00",
+                        "amount_set": {
+                          "shop_money": {
+                            "amount": "9.00",
+                            "currency_code": "EUR"
+                          },
+                          "presentment_money": {
+                            "amount": "9.00",
+                            "currency_code": "EUR"
+                          }
+                        },
+                        "discount_application_index": 0
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "line_items": [
+              {
+                "id": 18604984271195,
+                "admin_graphql_api_id": "gid://shopify/LineItem/18604984271195",
+                "attributed_staffs": [],
+                "current_quantity": 1,
+                "fulfillable_quantity": 0,
+                "fulfillment_service": "manual",
+                "fulfillment_status": "fulfilled",
+                "gift_card": false,
+                "grams": 0,
+                "name": "The North Face Jester Mochila - TNF Black Light Refractions/TNF Black / 28L",
+                "price": "90.00",
+                "price_set": {
+                  "shop_money": {
+                    "amount": "90.00",
+                    "currency_code": "EUR"
+                  },
+                  "presentment_money": {
+                    "amount": "90.00",
+                    "currency_code": "EUR"
+                  }
+                },
+                "product_exists": true,
+                "product_id": 10258297684315,
+                "properties": [],
+                "quantity": 1,
+                "requires_shipping": true,
+                "sales_line_item_group_id": null,
+                "sku": "51951567307099",
+                "taxable": true,
+                "title": "The North Face Jester Mochila",
+                "total_discount": "0.00",
+                "total_discount_set": {
+                  "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "EUR"
+                  },
+                  "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "EUR"
+                  }
+                },
+                "variant_id": 51951567307099,
+                "variant_inventory_management": "shopify",
+                "variant_title": "TNF Black Light Refractions/TNF Black / 28L",
+                "vendor": "The North Face",
+                "tax_lines": [],
+                "duties": [],
+                "discount_allocations": [
+                  {
+                    "amount": "9.00",
+                    "amount_set": {
+                      "shop_money": {
+                        "amount": "9.00",
+                        "currency_code": "EUR"
+                      },
+                      "presentment_money": {
+                        "amount": "9.00",
+                        "currency_code": "EUR"
+                      }
+                    },
+                    "discount_application_index": 0
+                  }
+                ]
+              }
+            ],
+            "payment_terms": null,
+            "refunds": [],
+            "shipping_address": null,
+            "shipping_lines": [],
+            "returns": [],
+            "line_item_groups": []
+          },
+          "webhookUrl": "https://n8n.tailwind.es/webhook/venta-descuento-10",
+          "executionMode": "production"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
     ]
   },
   "settings": {
@@ -7024,6 +7089,6 @@
   },
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2026-03-02T08:08:52.403Z",
-  "versionId": "b5422b8f-390b-4719-909c-a5d9a5be50ab"
+  "updatedAt": "2026-03-03T13:09:37.123Z",
+  "versionId": "7e81a3c4-a3fb-4b61-a878-2a4a57f34057"
 }
