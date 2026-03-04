@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-02-06T08:04:53.000Z",
-    "createdAt": "2026-02-06T08:04:51.269Z",
-    "versionId": "cdcfd770-0ae3-4428-91b1-f4593515aadd",
+    "updatedAt": "2026-03-03T08:40:26.000Z",
+    "createdAt": "2026-03-03T08:40:25.387Z",
+    "versionId": "03eca91b-3767-4517-9a07-26c59d358957",
     "workflowId": "8zLv7DpNHO5BT9ay",
     "nodes": [
       {
@@ -112,6 +112,7 @@
           1376
         ],
         "id": "4961ca21-970f-492d-b305-b2610d3336a4",
+        "retryOnFail": true,
         "credentials": {
           "httpHeaderAuth": {
             "id": "OPt2Cl0dnwcU4qRk",
@@ -423,11 +424,11 @@
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version cdcfd770",
+    "name": "Version 03eca91b",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "cdcfd770-0ae3-4428-91b1-f4593515aadd",
+  "activeVersionId": "03eca91b-3767-4517-9a07-26c59d358957",
   "connections": {
     "Webhook2": {
       "main": [
@@ -664,6 +665,7 @@
         1376
       ],
       "id": "4961ca21-970f-492d-b305-b2610d3336a4",
+      "retryOnFail": true,
       "credentials": {
         "httpHeaderAuth": {
           "id": "OPt2Cl0dnwcU4qRk",
@@ -859,50 +861,50 @@
           "headers": {
             "connection": "upgrade",
             "host": "n8n.tailwind.es",
-            "x-forwarded-for": "35.241.181.198",
+            "x-forwarded-for": "34.38.110.42",
             "x-forwarded-proto": "https",
-            "content-length": "9932",
+            "content-length": "7662",
             "user-agent": "Shopify-Captain-Hook",
             "accept": "*/*",
             "accept-encoding": "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
             "content-type": "application/json",
             "x-shopify-api-version": "2026-01",
-            "x-shopify-event-id": "21a4959c-583b-4b77-b058-dfafdc6fc1cb",
-            "x-shopify-hmac-sha256": "o4RxoYKjkECuvHvCdWBMFxbkICDYrB5YPq3biMjqpJ4=",
-            "x-shopify-order-id": "7528126775643",
+            "x-shopify-event-id": "ac0a6126-2975-4908-9910-14b39f19cd24",
+            "x-shopify-hmac-sha256": "y2c9MWi4zUImJwl1uLv7U6PqdTflF4g7Vgi2mRLTzBI=",
+            "x-shopify-order-id": "7746329936219",
             "x-shopify-shop-domain": "surfin-store-spain.myshopify.com",
             "x-shopify-test": "false",
             "x-shopify-topic": "orders/create",
-            "x-shopify-triggered-at": "2026-02-06T12:08:24.625494162Z",
-            "x-shopify-webhook-id": "61fbc6ca-692b-5c10-b00e-b0a7a98173bf"
+            "x-shopify-triggered-at": "2026-03-03T08:36:03.384266000Z",
+            "x-shopify-webhook-id": "45ffa934-e88a-57ed-9b4a-b3260c9ed644"
           },
           "params": {},
           "query": {},
           "body": {
-            "id": 7528126775643,
-            "admin_graphql_api_id": "gid://shopify/Order/7528126775643",
+            "id": 7746329936219,
+            "admin_graphql_api_id": "gid://shopify/Order/7746329936219",
             "app_id": 129785,
-            "browser_ip": "2.136.43.78",
+            "browser_ip": "84.125.109.164",
             "buyer_accepts_marketing": false,
             "cancel_reason": null,
             "cancelled_at": null,
             "cart_token": null,
-            "checkout_id": 48334208827739,
-            "checkout_token": "e148561b-872c-4f0a-98d2-dc0d28069602",
+            "checkout_id": 48441048039771,
+            "checkout_token": "3D34A780-3463-4AD3-B67A-6CAF0147FFB3",
             "client_details": {
-              "accept_language": null,
+              "accept_language": "es-ES,es;q=0.9",
               "browser_height": null,
-              "browser_ip": "2.136.43.78",
+              "browser_ip": "84.125.109.164",
               "browser_width": null,
               "session_hash": null,
-              "user_agent": "Shopify POS/10.15.2/Android/15/Redmi/25040RP0AE/production"
+              "user_agent": "Shopify POS/11.0.3/iOS/26.3/Apple/iPhone14,5/production"
             },
-            "closed_at": "2026-02-06T13:08:25+01:00",
+            "closed_at": "2026-03-03T09:36:03+01:00",
             "company": null,
-            "confirmation_number": "XVG5KN5V2",
+            "confirmation_number": "5MA91Y8HZ",
             "confirmed": true,
             "contact_email": null,
-            "created_at": "2026-02-06T13:08:23+01:00",
+            "created_at": "2026-03-03T09:36:02+01:00",
             "currency": "EUR",
             "current_shipping_price_set": {
               "shop_money": {
@@ -914,38 +916,38 @@
                 "currency_code": "EUR"
               }
             },
-            "current_subtotal_price": "153.00",
+            "current_subtotal_price": "405.93",
             "current_subtotal_price_set": {
               "shop_money": {
-                "amount": "153.00",
+                "amount": "405.93",
                 "currency_code": "EUR"
               },
               "presentment_money": {
-                "amount": "153.00",
+                "amount": "405.93",
                 "currency_code": "EUR"
               }
             },
             "current_total_additional_fees_set": null,
-            "current_total_discounts": "102.00",
+            "current_total_discounts": "173.97",
             "current_total_discounts_set": {
               "shop_money": {
-                "amount": "102.00",
+                "amount": "173.97",
                 "currency_code": "EUR"
               },
               "presentment_money": {
-                "amount": "102.00",
+                "amount": "173.97",
                 "currency_code": "EUR"
               }
             },
             "current_total_duties_set": null,
-            "current_total_price": "153.00",
+            "current_total_price": "405.93",
             "current_total_price_set": {
               "shop_money": {
-                "amount": "153.00",
+                "amount": "405.93",
                 "currency_code": "EUR"
               },
               "presentment_money": {
-                "amount": "153.00",
+                "amount": "405.93",
                 "currency_code": "EUR"
               }
             },
@@ -961,14 +963,8 @@
               }
             },
             "customer_locale": "es",
-            "device_id": 20,
-            "discount_codes": [
-              {
-                "code": "Autorizado por Gerardo",
-                "amount": "102.00",
-                "type": "percentage"
-              }
-            ],
+            "device_id": 1,
+            "discount_codes": [],
             "duties_included": false,
             "email": "",
             "estimated_taxes": false,
@@ -976,37 +972,37 @@
             "fulfillment_status": "fulfilled",
             "landing_site": null,
             "landing_site_ref": null,
-            "location_id": 108915917147,
+            "location_id": 99759620443,
             "merchant_business_entity_id": "MTg3OTg3NjUwOTA3",
             "merchant_of_record_app_id": null,
-            "name": "#71906",
+            "name": "#73537",
             "note": null,
             "note_attributes": [],
-            "number": 70906,
-            "order_number": 71906,
-            "order_status_url": "https://nuance-store.com/87987650907/orders/b232d991f567527dffad3b8f60ab5365/authenticate?key=f94848f6d3bfc5215dd15fe3c62006ac",
+            "number": 72537,
+            "order_number": 73537,
+            "order_status_url": "https://nuance-store.com/87987650907/orders/84c6a5f280988184effd36fe7b37aacd/authenticate?key=22b27b932447311bdff9bedcf6122f81",
             "original_total_additional_fees_set": null,
             "original_total_duties_set": null,
             "payment_gateway_names": [
-              "cash"
+              "Venta Web"
             ],
             "phone": null,
             "po_number": null,
             "presentment_currency": "EUR",
-            "processed_at": "2026-02-06T13:08:22+01:00",
+            "processed_at": "2026-03-03T09:36:01+01:00",
             "reference": null,
             "referring_site": null,
-            "source_identifier": "108915917147-20-1166",
+            "source_identifier": "99018441051-1-1018",
             "source_name": "pos",
             "source_url": null,
-            "subtotal_price": "153.00",
+            "subtotal_price": "405.93",
             "subtotal_price_set": {
               "shop_money": {
-                "amount": "153.00",
+                "amount": "405.93",
                 "currency_code": "EUR"
               },
               "presentment_money": {
-                "amount": "153.00",
+                "amount": "405.93",
                 "currency_code": "EUR"
               }
             },
@@ -1015,7 +1011,7 @@
             "tax_lines": [],
             "taxes_included": true,
             "test": false,
-            "token": "b232d991f567527dffad3b8f60ab5365",
+            "token": "84c6a5f280988184effd36fe7b37aacd",
             "total_cash_rounding_payment_adjustment_set": {
               "shop_money": {
                 "amount": "0.00",
@@ -1036,37 +1032,37 @@
                 "currency_code": "EUR"
               }
             },
-            "total_discounts": "102.00",
+            "total_discounts": "173.97",
             "total_discounts_set": {
               "shop_money": {
-                "amount": "102.00",
+                "amount": "173.97",
                 "currency_code": "EUR"
               },
               "presentment_money": {
-                "amount": "102.00",
+                "amount": "173.97",
                 "currency_code": "EUR"
               }
             },
-            "total_line_items_price": "255.00",
+            "total_line_items_price": "579.90",
             "total_line_items_price_set": {
               "shop_money": {
-                "amount": "255.00",
+                "amount": "579.90",
                 "currency_code": "EUR"
               },
               "presentment_money": {
-                "amount": "255.00",
+                "amount": "579.90",
                 "currency_code": "EUR"
               }
             },
             "total_outstanding": "0.00",
-            "total_price": "153.00",
+            "total_price": "405.93",
             "total_price_set": {
               "shop_money": {
-                "amount": "153.00",
+                "amount": "405.93",
                 "currency_code": "EUR"
               },
               "presentment_money": {
-                "amount": "153.00",
+                "amount": "405.93",
                 "currency_code": "EUR"
               }
             },
@@ -1093,30 +1089,46 @@
             },
             "total_tip_received": "0.00",
             "total_weight": 0,
-            "updated_at": "2026-02-06T13:08:25+01:00",
-            "user_id": 127346606427,
+            "updated_at": "2026-03-03T09:36:03+01:00",
+            "user_id": 123965866331,
             "billing_address": null,
-            "customer": null,
+            "customer": {
+              "id": 10274310685019,
+              "created_at": "2026-03-03T09:35:51+01:00",
+              "updated_at": "2026-03-03T09:36:02+01:00",
+              "first_name": "Daniele",
+              "last_name": "M Wallapop",
+              "state": "disabled",
+              "note": null,
+              "verified_email": true,
+              "multipass_identifier": null,
+              "tax_exempt": false,
+              "email": null,
+              "phone": null,
+              "currency": "EUR",
+              "tax_exemptions": [],
+              "admin_graphql_api_id": "gid://shopify/Customer/10274310685019"
+            },
             "discount_applications": [
               {
                 "target_type": "line_item",
                 "type": "manual",
-                "value": "40.0",
+                "value": "30.0",
                 "value_type": "percentage",
                 "allocation_method": "across",
-                "target_selection": "all",
-                "title": "Autorizado por Gerardo",
+                "target_selection": "explicit",
+                "title": "Wallapop",
                 "description": null
               }
             ],
             "fulfillments": [
               {
-                "id": 6713964167515,
-                "admin_graphql_api_id": "gid://shopify/Fulfillment/6713964167515",
-                "created_at": "2026-02-06T13:08:24+01:00",
-                "location_id": 108915917147,
-                "name": "#71906.1",
-                "order_id": 7528126775643,
+                "id": 6778340639067,
+                "admin_graphql_api_id": "gid://shopify/Fulfillment/6778340639067",
+                "created_at": "2026-03-03T09:36:02+01:00",
+                "location_id": 99759620443,
+                "name": "#73537.1",
+                "order_id": 7746329936219,
                 "origin_address": {},
                 "receipt": {},
                 "service": "manual",
@@ -1127,11 +1139,11 @@
                 "tracking_numbers": [],
                 "tracking_url": null,
                 "tracking_urls": [],
-                "updated_at": "2026-02-06T13:08:24+01:00",
+                "updated_at": "2026-03-03T09:36:02+01:00",
                 "line_items": [
                   {
-                    "id": 18428674933083,
-                    "admin_graphql_api_id": "gid://shopify/LineItem/18428674933083",
+                    "id": 18607112028507,
+                    "admin_graphql_api_id": "gid://shopify/LineItem/18607112028507",
                     "attributed_staffs": [],
                     "current_quantity": 1,
                     "fulfillable_quantity": 0,
@@ -1139,117 +1151,53 @@
                     "fulfillment_status": "fulfilled",
                     "gift_card": false,
                     "grams": 0,
-                    "name": "The North Face Mns Extreme Pile 2 Fz Forro Polar - White Dune / S",
-                    "price": "170.00",
+                    "name": "Burton Deep Thinker Snowboard - 154 / none / .",
+                    "price": "579.90",
                     "price_set": {
                       "shop_money": {
-                        "amount": "170.00",
+                        "amount": "579.90",
                         "currency_code": "EUR"
                       },
                       "presentment_money": {
-                        "amount": "170.00",
+                        "amount": "579.90",
                         "currency_code": "EUR"
                       }
                     },
                     "product_exists": true,
-                    "product_id": 10267874754907,
+                    "product_id": 10053880643931,
                     "properties": [],
                     "quantity": 1,
                     "requires_shipping": true,
-                    "sku": "51959726735707",
+                    "sku": "2100000171637",
                     "taxable": true,
-                    "title": "The North Face Mns Extreme Pile 2 Fz Forro Polar",
-                    "total_discount": "0.00",
+                    "title": "Burton Deep Thinker Snowboard",
+                    "total_discount": "173.97",
                     "total_discount_set": {
                       "shop_money": {
-                        "amount": "0.00",
+                        "amount": "173.97",
                         "currency_code": "EUR"
                       },
                       "presentment_money": {
-                        "amount": "0.00",
+                        "amount": "173.97",
                         "currency_code": "EUR"
                       }
                     },
-                    "variant_id": 51959726735707,
+                    "variant_id": 51183650865499,
                     "variant_inventory_management": "shopify",
-                    "variant_title": "White Dune / S",
-                    "vendor": "The North Face",
+                    "variant_title": "154 / none / .",
+                    "vendor": "Burton",
                     "tax_lines": [],
                     "duties": [],
                     "discount_allocations": [
                       {
-                        "amount": "68.00",
+                        "amount": "173.97",
                         "amount_set": {
                           "shop_money": {
-                            "amount": "68.00",
+                            "amount": "173.97",
                             "currency_code": "EUR"
                           },
                           "presentment_money": {
-                            "amount": "68.00",
-                            "currency_code": "EUR"
-                          }
-                        },
-                        "discount_application_index": 0
-                      }
-                    ]
-                  },
-                  {
-                    "id": 18428674965851,
-                    "admin_graphql_api_id": "gid://shopify/LineItem/18428674965851",
-                    "attributed_staffs": [],
-                    "current_quantity": 1,
-                    "fulfillable_quantity": 0,
-                    "fulfillment_service": "manual",
-                    "fulfillment_status": "fulfilled",
-                    "gift_card": false,
-                    "grams": 0,
-                    "name": "The North Face Yumiori 1/4 Zip Forro Polar - TNF Black/Asphalt Grey/Monument Grey / M",
-                    "price": "85.00",
-                    "price_set": {
-                      "shop_money": {
-                        "amount": "85.00",
-                        "currency_code": "EUR"
-                      },
-                      "presentment_money": {
-                        "amount": "85.00",
-                        "currency_code": "EUR"
-                      }
-                    },
-                    "product_exists": true,
-                    "product_id": 10254930542939,
-                    "properties": [],
-                    "quantity": 1,
-                    "requires_shipping": true,
-                    "sku": "51905154023771",
-                    "taxable": true,
-                    "title": "The North Face Yumiori 1/4 Zip Forro Polar",
-                    "total_discount": "0.00",
-                    "total_discount_set": {
-                      "shop_money": {
-                        "amount": "0.00",
-                        "currency_code": "EUR"
-                      },
-                      "presentment_money": {
-                        "amount": "0.00",
-                        "currency_code": "EUR"
-                      }
-                    },
-                    "variant_id": 51905154023771,
-                    "variant_inventory_management": "shopify",
-                    "variant_title": "TNF Black/Asphalt Grey/Monument Grey / M",
-                    "vendor": "The North Face",
-                    "tax_lines": [],
-                    "duties": [],
-                    "discount_allocations": [
-                      {
-                        "amount": "34.00",
-                        "amount_set": {
-                          "shop_money": {
-                            "amount": "34.00",
-                            "currency_code": "EUR"
-                          },
-                          "presentment_money": {
-                            "amount": "34.00",
+                            "amount": "173.97",
                             "currency_code": "EUR"
                           }
                         },
@@ -1262,8 +1210,8 @@
             ],
             "line_items": [
               {
-                "id": 18428674933083,
-                "admin_graphql_api_id": "gid://shopify/LineItem/18428674933083",
+                "id": 18607112028507,
+                "admin_graphql_api_id": "gid://shopify/LineItem/18607112028507",
                 "attributed_staffs": [],
                 "current_quantity": 1,
                 "fulfillable_quantity": 0,
@@ -1271,119 +1219,54 @@
                 "fulfillment_status": "fulfilled",
                 "gift_card": false,
                 "grams": 0,
-                "name": "The North Face Mns Extreme Pile 2 Fz Forro Polar - White Dune / S",
-                "price": "170.00",
+                "name": "Burton Deep Thinker Snowboard - 154 / none / .",
+                "price": "579.90",
                 "price_set": {
                   "shop_money": {
-                    "amount": "170.00",
+                    "amount": "579.90",
                     "currency_code": "EUR"
                   },
                   "presentment_money": {
-                    "amount": "170.00",
+                    "amount": "579.90",
                     "currency_code": "EUR"
                   }
                 },
                 "product_exists": true,
-                "product_id": 10267874754907,
+                "product_id": 10053880643931,
                 "properties": [],
                 "quantity": 1,
                 "requires_shipping": true,
                 "sales_line_item_group_id": null,
-                "sku": "51959726735707",
+                "sku": "2100000171637",
                 "taxable": true,
-                "title": "The North Face Mns Extreme Pile 2 Fz Forro Polar",
-                "total_discount": "0.00",
+                "title": "Burton Deep Thinker Snowboard",
+                "total_discount": "173.97",
                 "total_discount_set": {
                   "shop_money": {
-                    "amount": "0.00",
+                    "amount": "173.97",
                     "currency_code": "EUR"
                   },
                   "presentment_money": {
-                    "amount": "0.00",
+                    "amount": "173.97",
                     "currency_code": "EUR"
                   }
                 },
-                "variant_id": 51959726735707,
+                "variant_id": 51183650865499,
                 "variant_inventory_management": "shopify",
-                "variant_title": "White Dune / S",
-                "vendor": "The North Face",
+                "variant_title": "154 / none / .",
+                "vendor": "Burton",
                 "tax_lines": [],
                 "duties": [],
                 "discount_allocations": [
                   {
-                    "amount": "68.00",
+                    "amount": "173.97",
                     "amount_set": {
                       "shop_money": {
-                        "amount": "68.00",
+                        "amount": "173.97",
                         "currency_code": "EUR"
                       },
                       "presentment_money": {
-                        "amount": "68.00",
-                        "currency_code": "EUR"
-                      }
-                    },
-                    "discount_application_index": 0
-                  }
-                ]
-              },
-              {
-                "id": 18428674965851,
-                "admin_graphql_api_id": "gid://shopify/LineItem/18428674965851",
-                "attributed_staffs": [],
-                "current_quantity": 1,
-                "fulfillable_quantity": 0,
-                "fulfillment_service": "manual",
-                "fulfillment_status": "fulfilled",
-                "gift_card": false,
-                "grams": 0,
-                "name": "The North Face Yumiori 1/4 Zip Forro Polar - TNF Black/Asphalt Grey/Monument Grey / M",
-                "price": "85.00",
-                "price_set": {
-                  "shop_money": {
-                    "amount": "85.00",
-                    "currency_code": "EUR"
-                  },
-                  "presentment_money": {
-                    "amount": "85.00",
-                    "currency_code": "EUR"
-                  }
-                },
-                "product_exists": true,
-                "product_id": 10254930542939,
-                "properties": [],
-                "quantity": 1,
-                "requires_shipping": true,
-                "sales_line_item_group_id": null,
-                "sku": "51905154023771",
-                "taxable": true,
-                "title": "The North Face Yumiori 1/4 Zip Forro Polar",
-                "total_discount": "0.00",
-                "total_discount_set": {
-                  "shop_money": {
-                    "amount": "0.00",
-                    "currency_code": "EUR"
-                  },
-                  "presentment_money": {
-                    "amount": "0.00",
-                    "currency_code": "EUR"
-                  }
-                },
-                "variant_id": 51905154023771,
-                "variant_inventory_management": "shopify",
-                "variant_title": "TNF Black/Asphalt Grey/Monument Grey / M",
-                "vendor": "The North Face",
-                "tax_lines": [],
-                "duties": [],
-                "discount_allocations": [
-                  {
-                    "amount": "34.00",
-                    "amount_set": {
-                      "shop_money": {
-                        "amount": "34.00",
-                        "currency_code": "EUR"
-                      },
-                      "presentment_money": {
-                        "amount": "34.00",
+                        "amount": "173.97",
                         "currency_code": "EUR"
                       }
                     },
@@ -1427,6 +1310,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-02-13T09:57:46.074Z",
-  "versionId": "cdcfd770-0ae3-4428-91b1-f4593515aadd"
+  "updatedAt": "2026-03-03T08:40:25.386Z",
+  "versionId": "03eca91b-3767-4517-9a07-26c59d358957"
 }
