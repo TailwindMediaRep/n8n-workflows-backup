@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-03-02T12:39:57.000Z",
-    "createdAt": "2026-03-02T12:39:56.380Z",
-    "versionId": "39b47922-b7bc-450f-9537-c5c2161a858c",
+    "updatedAt": "2026-03-03T08:44:17.000Z",
+    "createdAt": "2026-03-03T08:44:16.595Z",
+    "versionId": "33e6ec25-8091-4412-b7a5-e5f75b55f27b",
     "workflowId": "w-RU5Hf3E5dGdfoEehEiU",
     "nodes": [
       {
@@ -85,6 +85,18 @@
                 "name": "Imagen",
                 "value": "={{ $json.body[\"Código QR\"][0] }}",
                 "type": "string"
+              },
+              {
+                "id": "dacea3e3-2f02-4cb9-a830-5988b2c4d0bc",
+                "name": "Forfait",
+                "value": "={{ $json.body.Forfait }}",
+                "type": "string"
+              },
+              {
+                "id": "191a9f4d-32be-41c2-bbab-a088284bdad8",
+                "name": "Equipacion",
+                "value": "={{ $json.body['Equipación adicional'] }}",
+                "type": "array"
               }
             ]
           },
@@ -333,6 +345,24 @@
                 "name": "Codigo_Cupon",
                 "value": "={{ $json.Codigo_Cupon_OCR || \"Sin Código\"}}",
                 "type": "string"
+              },
+              {
+                "id": "234b1410-a853-4083-a038-b319d39df128",
+                "name": "Forfait",
+                "value": "={{ $('Limpiar Datos').item.json.Forfait }}",
+                "type": "string"
+              },
+              {
+                "id": "6c05b66a-4c1f-4323-9499-e1b970b0fa7e",
+                "name": "Equipacion",
+                "value": "={{ $('Limpiar Datos').item.json.Equipacion }}",
+                "type": "array"
+              },
+              {
+                "id": "6a477679-47b4-407a-b0a4-dd38c719efe9",
+                "name": "Fecha",
+                "value": "={{ $now.setZone(\"Europe/Madrid\").format(\"dd/LL/yyyy HH:mm\")}}",
+                "type": "string"
               }
             ]
           },
@@ -346,6 +376,49 @@
         ],
         "id": "8d6f0486-b597-4839-bb0d-41da083e3839",
         "name": "Datos Finales"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 3
+            },
+            "conditions": [
+              {
+                "id": "6f65ee2e-76a3-4768-af2d-a3ec646f382b",
+                "leftValue": "={{ $json.Forfait }}",
+                "rightValue": "Ya tengo",
+                "operator": {
+                  "type": "string",
+                  "operation": "equals"
+                }
+              },
+              {
+                "id": "977dd27a-01f3-49fb-88b9-06d42a1c123d",
+                "leftValue": "={{ $json.Equipacion }}",
+                "rightValue": "No necesito nada",
+                "operator": {
+                  "type": "array",
+                  "operation": "contains",
+                  "rightType": "any"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2.3,
+        "position": [
+          1424,
+          0
+        ],
+        "id": "86ce481d-b70b-414d-950b-4c4bc7f2bfb7",
+        "name": "1 Link o 2"
       }
     ],
     "connections": {
@@ -441,14 +514,25 @@
             }
           ]
         ]
+      },
+      "Datos Finales": {
+        "main": [
+          [
+            {
+              "node": "1 Link o 2",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version 39b47922",
+    "name": "Version 33e6ec25",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "39b47922-b7bc-450f-9537-c5c2161a858c",
+  "activeVersionId": "33e6ec25-8091-4412-b7a5-e5f75b55f27b",
   "connections": {
     "Webhook": {
       "main": [
@@ -542,6 +626,17 @@
           }
         ]
       ]
+    },
+    "Datos Finales": {
+      "main": [
+        [
+          {
+            "node": "1 Link o 2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2026-02-20T09:50:48.555Z",
@@ -631,6 +726,18 @@
               "name": "Imagen",
               "value": "={{ $json.body[\"Código QR\"][0] }}",
               "type": "string"
+            },
+            {
+              "id": "dacea3e3-2f02-4cb9-a830-5988b2c4d0bc",
+              "name": "Forfait",
+              "value": "={{ $json.body.Forfait }}",
+              "type": "string"
+            },
+            {
+              "id": "191a9f4d-32be-41c2-bbab-a088284bdad8",
+              "name": "Equipacion",
+              "value": "={{ $json.body['Equipación adicional'] }}",
+              "type": "array"
             }
           ]
         },
@@ -879,6 +986,24 @@
               "name": "Codigo_Cupon",
               "value": "={{ $json.Codigo_Cupon_OCR || \"Sin Código\"}}",
               "type": "string"
+            },
+            {
+              "id": "234b1410-a853-4083-a038-b319d39df128",
+              "name": "Forfait",
+              "value": "={{ $('Limpiar Datos').item.json.Forfait }}",
+              "type": "string"
+            },
+            {
+              "id": "6c05b66a-4c1f-4323-9499-e1b970b0fa7e",
+              "name": "Equipacion",
+              "value": "={{ $('Limpiar Datos').item.json.Equipacion }}",
+              "type": "array"
+            },
+            {
+              "id": "6a477679-47b4-407a-b0a4-dd38c719efe9",
+              "name": "Fecha",
+              "value": "={{ $now.setZone(\"Europe/Madrid\").format(\"dd/LL/yyyy HH:mm\")}}",
+              "type": "string"
             }
           ]
         },
@@ -892,6 +1017,49 @@
       ],
       "id": "8d6f0486-b597-4839-bb0d-41da083e3839",
       "name": "Datos Finales"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "6f65ee2e-76a3-4768-af2d-a3ec646f382b",
+              "leftValue": "={{ $json.Forfait }}",
+              "rightValue": "Ya tengo",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "977dd27a-01f3-49fb-88b9-06d42a1c123d",
+              "leftValue": "={{ $json.Equipacion }}",
+              "rightValue": "No necesito nada",
+              "operator": {
+                "type": "array",
+                "operation": "contains",
+                "rightType": "any"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1424,
+        0
+      ],
+      "id": "86ce481d-b70b-414d-950b-4c4bc7f2bfb7",
+      "name": "1 Link o 2"
     }
   ],
   "pinData": {},
@@ -911,6 +1079,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-03-02T12:49:10.098Z",
-  "versionId": "39b47922-b7bc-450f-9537-c5c2161a858c"
+  "updatedAt": "2026-03-03T08:44:16.594Z",
+  "versionId": "33e6ec25-8091-4412-b7a5-e5f75b55f27b"
 }
