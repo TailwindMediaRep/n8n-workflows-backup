@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-02-25T07:37:41.000Z",
-    "createdAt": "2026-02-25T07:37:39.477Z",
-    "versionId": "87f59015-9f3d-4b1a-b00d-a51d406cd825",
+    "updatedAt": "2026-03-03T13:20:06.000Z",
+    "createdAt": "2026-03-03T13:20:04.816Z",
+    "versionId": "21b27712-700d-4608-8f51-2d0e30f0970a",
     "workflowId": "kldleYUPha6bnarR",
     "nodes": [
       {
@@ -643,7 +643,7 @@
               {
                 "id": "e5f15ada-1e3d-43a0-87d6-17cb5e1222ac",
                 "name": "ID DOCUMENTO",
-                "value": "={{ $('HTTP Request7').item.json.job.urls[0].match(/(DA[A-Za-z0-9-]+)/)[0] }}",
+                "value": "={{ $('HTTP Request25').item.json.job.urls[0].match(/(DA[A-Za-z0-9-]+)/)[0] }}",
                 "type": "string"
               }
             ]
@@ -814,7 +814,7 @@
               {
                 "id": "e5f15ada-1e3d-43a0-87d6-17cb5e1222ac",
                 "name": "ID DOCUMENTO",
-                "value": "={{ $('HTTP Request7').item.json.job.urls[0].match(/(DA[A-Za-z0-9-]+)/)[0] }}",
+                "value": "={{ $('HTTP Request17').item.json.job.urls[0].match(/(DA[A-Za-z0-9-]+)/)[0] }}",
                 "type": "string"
               }
             ]
@@ -985,7 +985,7 @@
               {
                 "id": "e5f15ada-1e3d-43a0-87d6-17cb5e1222ac",
                 "name": "ID DOCUMENTO",
-                "value": "={{ $('HTTP Request7').item.json.job.urls[0].match(/(DA[A-Za-z0-9-]+)/)[0] }}",
+                "value": "={{ $('HTTP Request29').item.json.job.urls[0].match(/(DA[A-Za-z0-9-]+)/)[0] }}",
                 "type": "string"
               }
             ]
@@ -999,7 +999,8 @@
           -1744
         ],
         "id": "6b2a4807-87bc-4fc2-9146-62edd7b14cf9",
-        "name": "Edit Fields4"
+        "name": "Edit Fields4",
+        "onError": "continueRegularOutput"
       },
       {
         "parameters": {
@@ -1029,7 +1030,8 @@
             "id": "eHEbZK7oC3pW1LQr",
             "name": "Canva"
           }
-        }
+        },
+        "onError": "continueRegularOutput"
       },
       {
         "parameters": {
@@ -1156,7 +1158,7 @@
               {
                 "id": "e5f15ada-1e3d-43a0-87d6-17cb5e1222ac",
                 "name": "ID DOCUMENTO",
-                "value": "={{ $('HTTP Request7').item.json.job.urls[0].match(/(DA[A-Za-z0-9-]+)/)[0] }}",
+                "value": "={{ $('HTTP Request21').item.json.job.urls[0].match(/(DA[A-Za-z0-9-]+)/)[0] }}",
                 "type": "string"
               }
             ]
@@ -2391,7 +2393,8 @@
             "id": "UPETCYNZNCReuZu8",
             "name": "Postgres Supabase"
           }
-        }
+        },
+        "onError": "continueRegularOutput"
       },
       {
         "parameters": {
@@ -2751,7 +2754,7 @@
               {
                 "id": "e5f15ada-1e3d-43a0-87d6-17cb5e1222ac",
                 "name": "ID DOCUMENTO",
-                "value": "={{ $('HTTP Request7').item.json.job.urls[0].match(/(DA[A-Za-z0-9-]+)/)[0] }}",
+                "value": "={{ $('HTTP Request36').item.json.job.urls[0].match(/(DA[A-Za-z0-9-]+)/)[0] }}",
                 "type": "string"
               }
             ]
@@ -3142,7 +3145,7 @@
               {
                 "id": "e5f15ada-1e3d-43a0-87d6-17cb5e1222ac",
                 "name": "ID DOCUMENTO",
-                "value": "={{ $('HTTP Request7').item.json.job.urls[0].match(/(DA[A-Za-z0-9-]+)/)[0] }}",
+                "value": "={{ $('HTTP Request42').item.json.job.urls[0].match(/(DA[A-Za-z0-9-]+)/)[0] }}",
                 "type": "string"
               }
             ]
@@ -6203,11 +6206,11 @@
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version 87f59015",
+    "name": "Version 21b27712",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "87f59015-9f3d-4b1a-b00d-a51d406cd825",
+  "activeVersionId": "21b27712-700d-4608-8f51-2d0e30f0970a",
   "connections": {
     "HTTP Request": {
       "main": [
@@ -8593,7 +8596,7 @@
             {
               "id": "e5f15ada-1e3d-43a0-87d6-17cb5e1222ac",
               "name": "ID DOCUMENTO",
-              "value": "={{ $('HTTP Request7').item.json.job.urls[0].match(/(DA[A-Za-z0-9-]+)/)[0] }}",
+              "value": "={{ $('HTTP Request25').item.json.job.urls[0].match(/(DA[A-Za-z0-9-]+)/)[0] }}",
               "type": "string"
             }
           ]
@@ -8764,7 +8767,7 @@
             {
               "id": "e5f15ada-1e3d-43a0-87d6-17cb5e1222ac",
               "name": "ID DOCUMENTO",
-              "value": "={{ $('HTTP Request7').item.json.job.urls[0].match(/(DA[A-Za-z0-9-]+)/)[0] }}",
+              "value": "={{ $('HTTP Request17').item.json.job.urls[0].match(/(DA[A-Za-z0-9-]+)/)[0] }}",
               "type": "string"
             }
           ]
@@ -8935,7 +8938,7 @@
             {
               "id": "e5f15ada-1e3d-43a0-87d6-17cb5e1222ac",
               "name": "ID DOCUMENTO",
-              "value": "={{ $('HTTP Request7').item.json.job.urls[0].match(/(DA[A-Za-z0-9-]+)/)[0] }}",
+              "value": "={{ $('HTTP Request29').item.json.job.urls[0].match(/(DA[A-Za-z0-9-]+)/)[0] }}",
               "type": "string"
             }
           ]
@@ -8949,7 +8952,8 @@
         -1744
       ],
       "id": "6b2a4807-87bc-4fc2-9146-62edd7b14cf9",
-      "name": "Edit Fields4"
+      "name": "Edit Fields4",
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
@@ -8979,7 +8983,8 @@
           "id": "eHEbZK7oC3pW1LQr",
           "name": "Canva"
         }
-      }
+      },
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
@@ -9106,7 +9111,7 @@
             {
               "id": "e5f15ada-1e3d-43a0-87d6-17cb5e1222ac",
               "name": "ID DOCUMENTO",
-              "value": "={{ $('HTTP Request7').item.json.job.urls[0].match(/(DA[A-Za-z0-9-]+)/)[0] }}",
+              "value": "={{ $('HTTP Request21').item.json.job.urls[0].match(/(DA[A-Za-z0-9-]+)/)[0] }}",
               "type": "string"
             }
           ]
@@ -10341,7 +10346,8 @@
           "id": "UPETCYNZNCReuZu8",
           "name": "Postgres Supabase"
         }
-      }
+      },
+      "onError": "continueRegularOutput"
     },
     {
       "parameters": {
@@ -10701,7 +10707,7 @@
             {
               "id": "e5f15ada-1e3d-43a0-87d6-17cb5e1222ac",
               "name": "ID DOCUMENTO",
-              "value": "={{ $('HTTP Request7').item.json.job.urls[0].match(/(DA[A-Za-z0-9-]+)/)[0] }}",
+              "value": "={{ $('HTTP Request36').item.json.job.urls[0].match(/(DA[A-Za-z0-9-]+)/)[0] }}",
               "type": "string"
             }
           ]
@@ -11092,7 +11098,7 @@
             {
               "id": "e5f15ada-1e3d-43a0-87d6-17cb5e1222ac",
               "name": "ID DOCUMENTO",
-              "value": "={{ $('HTTP Request7').item.json.job.urls[0].match(/(DA[A-Za-z0-9-]+)/)[0] }}",
+              "value": "={{ $('HTTP Request42').item.json.job.urls[0].match(/(DA[A-Za-z0-9-]+)/)[0] }}",
               "type": "string"
             }
           ]
@@ -12455,51 +12461,47 @@
           "headers": {
             "connection": "upgrade",
             "host": "n8n.tailwind.es",
-            "x-forwarded-for": "2.136.43.122",
+            "x-forwarded-for": "62.87.103.13",
             "x-forwarded-proto": "https",
-            "content-length": "355",
-            "cache-control": "max-age=0",
-            "authorization": "Basic VGFpbHdpbmQ6c2VsdXJzaG9w",
-            "sec-ch-ua": "\"Not(A:Brand\";v=\"8\", \"Chromium\";v=\"144\", \"Brave\";v=\"144\"",
-            "sec-ch-ua-mobile": "?0",
-            "sec-ch-ua-platform": "\"Linux\"",
-            "origin": "null",
+            "content-length": "433",
+            "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
             "content-type": "application/x-www-form-urlencoded",
-            "upgrade-insecure-requests": "1",
-            "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36",
-            "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
-            "sec-gpc": "1",
-            "accept-language": "es-ES,es;q=0.8",
             "sec-fetch-site": "cross-site",
+            "origin": "null",
             "sec-fetch-mode": "navigate",
-            "sec-fetch-user": "?1",
+            "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.2 Mobile/15E148 Safari/604.1",
+            "referer": "https://n8n.tailwind.es/webhook/formulario",
             "sec-fetch-dest": "document",
-            "accept-encoding": "gzip, deflate, br, zstd"
+            "authorization": "Basic VGFpbHdpbmQ6c2VsdXJzaG9w",
+            "accept-language": "es-ES,es;q=0.9",
+            "priority": "u=0, i",
+            "accept-encoding": "gzip, deflate, br"
           },
           "params": {},
           "query": {},
           "body": {
-            "codigo_verificado": "376812",
-            "calidad_nieve": "polvo",
-            "aspecto_cielo": "CUBIERTO",
-            "visibilidad": "Buena",
-            "temp_min": "1",
-            "temp_max": "5",
-            "viento_min": "10",
-            "viento_max": "30",
-            "espesor_min": "40",
-            "espesor_max": "50",
-            "remontes_abiertos": "34",
-            "km_esquiables": "300",
-            "numero_pistas": "123",
+            "codigo_verificado": "588932",
+            "calidad_nieve": "Polvo-dura",
+            "aspecto_cielo": "DESPEJADO",
+            "visibilidad": "Total",
+            "temp_min": "-5",
+            "temp_max": "4",
+            "viento_min": "20",
+            "viento_max": "60",
+            "espesor_min": "60",
+            "espesor_max": "400",
+            "remontes_abiertos": "17",
+            "km_esquiables": "76",
+            "numero_pistas": "100",
             "pistas_abiertas[]": [
-              "Veleta",
-              "Laguna",
-              "Borreguiles"
+              "Borreguiles",
+              "Cauchiles Parador",
+              "Loma Dílar",
+              "Rio Monachil"
             ],
             "cuentas[]": [
               "Surfin",
-              "Mesit"
+              "Sierra Nevada Granada"
             ]
           },
           "webhookUrl": "https://n8n.tailwind.es/webhook/recibirFormulario",
@@ -12535,6 +12537,6 @@
   },
   "tags": [],
   "triggerCount": 4,
-  "updatedAt": "2026-02-25T07:37:39.474Z",
-  "versionId": "87f59015-9f3d-4b1a-b00d-a51d406cd825"
+  "updatedAt": "2026-03-03T13:20:04.813Z",
+  "versionId": "21b27712-700d-4608-8f51-2d0e30f0970a"
 }
