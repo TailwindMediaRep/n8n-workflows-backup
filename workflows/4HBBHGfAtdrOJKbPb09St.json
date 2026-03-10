@@ -1,0 +1,298 @@
+{
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-03-09T10:34:30.000Z",
+    "createdAt": "2026-03-09T10:34:29.461Z",
+    "versionId": "1f3e61f9-c96b-415f-ac9a-6e9352266fea",
+    "workflowId": "4HBBHGfAtdrOJKbPb09St",
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "asignar-etiquetas",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -1152,
+          -1008
+        ],
+        "id": "9d5e1b50-6243-47bd-9abb-6ecc0e466774",
+        "name": "Webhook",
+        "webhookId": "94a058d3-1765-48d2-ab0c-68823e15508a"
+      },
+      {
+        "parameters": {
+          "jsCode": "// 1. Obtenemos el texto de la columna exacta del Excel\nlet rawCollections = $json[\"Aparece en las Colecciones\"] || \"\";\n\n// 2. Separamos las colecciones por el símbolo |\nlet splitTags = rawCollections.split('|');\n\n// 3. Limpieza profunda\nlet cleanedTags = splitTags.map(tag => {\n  return tag\n    .replace(/\\b(Hombre|Mujer|Niño|Niña|Niños|Niñas)\\b/gi, '') // Elimina géneros según tu regla\n    .trim()                                                    // Elimina espacios extras\n    .toLowerCase();                                            // Todo a minúsculas\n});\n\n// 4. Eliminar duplicados y evitar etiquetas vacías\nlet tagsToApply = [...new Set(cleanedTags)].filter(t => t !== \"\");\n\n// 5. Retornamos los datos y mantenemos el ID del producto para el GraphQL\nreturn {\n  tagsToApply: tagsToApply,\n  productId: $node[\"Webhook\"].json.body.admin_graphql_api_id\n};"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          -720,
+          -1008
+        ],
+        "id": "ebf65859-297e-49b1-819d-7c74021890e7",
+        "name": "Procesar Etiquetas"
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+          "query": "mutation tagsAdd($id: ID!, $tags: [String!]!) {\n  tagsAdd(id: $id, tags: $tags) {\n    node {\n      id\n    }\n    userErrors {\n      message\n    }\n  }\n}",
+          "variables": "={\n  \"id\": \"{{ $json.productId }}\",\n  \"tags\": {{ JSON.stringify($json.tagsToApply || []) }}\n}"
+        },
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          -496,
+          -1008
+        ],
+        "id": "72482c9d-a19a-42d6-af91-24a3c30ab0a0",
+        "name": "GraphQL1",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "OPt2Cl0dnwcU4qRk",
+            "name": "ShopifyInformes"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "documentId": {
+            "__rl": true,
+            "value": "1K-Yh9Vge0Nxd11Je2xTyu7DNmrG4IQG7Pi1zGKJN6a4",
+            "mode": "list",
+            "cachedResultName": "COLECCIONES NUEVAS PARA NUANCE",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1K-Yh9Vge0Nxd11Je2xTyu7DNmrG4IQG7Pi1zGKJN6a4/edit?usp=drivesdk"
+          },
+          "sheetName": {
+            "__rl": true,
+            "value": 1912077756,
+            "mode": "list",
+            "cachedResultName": "COLECCIONES DE CADA TIPO DE PRODUCTO",
+            "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1K-Yh9Vge0Nxd11Je2xTyu7DNmrG4IQG7Pi1zGKJN6a4/edit#gid=1912077756"
+          },
+          "filtersUI": {
+            "values": [
+              {
+                "lookupColumn": "Tipo de Producto",
+                "lookupValue": "=abrigo"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleSheets",
+        "typeVersion": 4.7,
+        "position": [
+          -944,
+          -1008
+        ],
+        "id": "b1a1e168-acad-408b-b7ac-21bfc46adeb2",
+        "name": "Get row(s) in sheet",
+        "credentials": {
+          "googleSheetsOAuth2Api": {
+            "id": "RCuKUCifcA4jENcY",
+            "name": "Google Sheets info@tailwind.es"
+          }
+        }
+      }
+    ],
+    "connections": {
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "Get row(s) in sheet",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Procesar Etiquetas": {
+        "main": [
+          [
+            {
+              "node": "GraphQL1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Get row(s) in sheet": {
+        "main": [
+          [
+            {
+              "node": "Procesar Etiquetas",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Tailwind Media",
+    "name": "Version 1f3e61f9",
+    "description": "",
+    "autosaved": false
+  },
+  "activeVersionId": "1f3e61f9-c96b-415f-ac9a-6e9352266fea",
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Procesar Etiquetas": {
+      "main": [
+        [
+          {
+            "node": "GraphQL1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Procesar Etiquetas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-03-09T09:58:40.330Z",
+  "id": "4HBBHGfAtdrOJKbPb09St",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "asignar_etiquetas_productos_para_colecciones",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "asignar-etiquetas",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1152,
+        -1008
+      ],
+      "id": "9d5e1b50-6243-47bd-9abb-6ecc0e466774",
+      "name": "Webhook",
+      "webhookId": "94a058d3-1765-48d2-ab0c-68823e15508a"
+    },
+    {
+      "parameters": {
+        "jsCode": "// 1. Obtenemos el texto de la columna exacta del Excel\nlet rawCollections = $json[\"Aparece en las Colecciones\"] || \"\";\n\n// 2. Separamos las colecciones por el símbolo |\nlet splitTags = rawCollections.split('|');\n\n// 3. Limpieza profunda\nlet cleanedTags = splitTags.map(tag => {\n  return tag\n    .replace(/\\b(Hombre|Mujer|Niño|Niña|Niños|Niñas)\\b/gi, '') // Elimina géneros según tu regla\n    .trim()                                                    // Elimina espacios extras\n    .toLowerCase();                                            // Todo a minúsculas\n});\n\n// 4. Eliminar duplicados y evitar etiquetas vacías\nlet tagsToApply = [...new Set(cleanedTags)].filter(t => t !== \"\");\n\n// 5. Retornamos los datos y mantenemos el ID del producto para el GraphQL\nreturn {\n  tagsToApply: tagsToApply,\n  productId: $node[\"Webhook\"].json.body.admin_graphql_api_id\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -720,
+        -1008
+      ],
+      "id": "ebf65859-297e-49b1-819d-7c74021890e7",
+      "name": "Procesar Etiquetas"
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+        "query": "mutation tagsAdd($id: ID!, $tags: [String!]!) {\n  tagsAdd(id: $id, tags: $tags) {\n    node {\n      id\n    }\n    userErrors {\n      message\n    }\n  }\n}",
+        "variables": "={\n  \"id\": \"{{ $json.productId }}\",\n  \"tags\": {{ JSON.stringify($json.tagsToApply || []) }}\n}"
+      },
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        -496,
+        -1008
+      ],
+      "id": "72482c9d-a19a-42d6-af91-24a3c30ab0a0",
+      "name": "GraphQL1",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OPt2Cl0dnwcU4qRk",
+          "name": "ShopifyInformes"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1K-Yh9Vge0Nxd11Je2xTyu7DNmrG4IQG7Pi1zGKJN6a4",
+          "mode": "list",
+          "cachedResultName": "COLECCIONES NUEVAS PARA NUANCE",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1K-Yh9Vge0Nxd11Je2xTyu7DNmrG4IQG7Pi1zGKJN6a4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1912077756,
+          "mode": "list",
+          "cachedResultName": "COLECCIONES DE CADA TIPO DE PRODUCTO",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1K-Yh9Vge0Nxd11Je2xTyu7DNmrG4IQG7Pi1zGKJN6a4/edit#gid=1912077756"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Tipo de Producto",
+              "lookupValue": "=abrigo"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -944,
+        -1008
+      ],
+      "id": "b1a1e168-acad-408b-b7ac-21bfc46adeb2",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "RCuKUCifcA4jENcY",
+          "name": "Google Sheets info@tailwind.es"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-03-09T09:58:40.335Z",
+      "createdAt": "2026-03-09T09:58:40.335Z",
+      "role": "workflow:owner",
+      "workflowId": "4HBBHGfAtdrOJKbPb09St",
+      "projectId": "x5UZcmGQw2OWHuXb"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2026-03-09T10:34:29.460Z",
+  "versionId": "1f3e61f9-c96b-415f-ac9a-6e9352266fea"
+}
