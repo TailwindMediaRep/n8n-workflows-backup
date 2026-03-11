@@ -2058,7 +2058,432 @@
       "name": "Sticky Note27"
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "connection": "upgrade",
+            "host": "n8n.tailwind.es",
+            "x-forwarded-for": "35.190.200.207",
+            "x-forwarded-proto": "https",
+            "content-length": "7336",
+            "user-agent": "Shopify-Captain-Hook",
+            "accept": "*/*",
+            "accept-encoding": "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
+            "content-type": "application/json",
+            "x-shopify-api-version": "2025-10",
+            "x-shopify-event-id": "56fa83ab-7437-44b9-83db-69be6fc4a4d9",
+            "x-shopify-hmac-sha256": "xpzIcfWnT3L02xfg+on13yOKjaqKZr9mPKr2r6eDeu0=",
+            "x-shopify-order-id": "7764022133083",
+            "x-shopify-shop-domain": "surfin-store-spain.myshopify.com",
+            "x-shopify-test": "false",
+            "x-shopify-topic": "orders/create",
+            "x-shopify-triggered-at": "2026-03-10T08:40:37.209718677Z",
+            "x-shopify-webhook-id": "49d0bf51-7aea-5c85-881f-479ab4fac065"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "id": 7764022133083,
+            "admin_graphql_api_id": "gid://shopify/Order/7764022133083",
+            "app_id": 129785,
+            "browser_ip": "2.136.43.55",
+            "buyer_accepts_marketing": false,
+            "cancel_reason": null,
+            "cancelled_at": null,
+            "cart_token": null,
+            "checkout_id": 48525470630235,
+            "checkout_token": "c8988227-ad8d-455f-9c26-048bb7187dc6",
+            "client_details": {
+              "accept_language": null,
+              "browser_height": null,
+              "browser_ip": "2.136.43.55",
+              "browser_width": null,
+              "session_hash": null,
+              "user_agent": "Shopify POS/11.0.3/Android/15/samsung/SM-X210R/production"
+            },
+            "closed_at": "2026-03-10T09:40:37+01:00",
+            "company": null,
+            "confirmation_number": "W8T265DXE",
+            "confirmed": true,
+            "contact_email": null,
+            "created_at": "2026-03-10T09:40:36+01:00",
+            "currency": "EUR",
+            "current_shipping_price_set": {
+              "shop_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              }
+            },
+            "current_subtotal_price": "215.91",
+            "current_subtotal_price_set": {
+              "shop_money": {
+                "amount": "215.91",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "215.91",
+                "currency_code": "EUR"
+              }
+            },
+            "current_total_additional_fees_set": null,
+            "current_total_discounts": "23.99",
+            "current_total_discounts_set": {
+              "shop_money": {
+                "amount": "23.99",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "23.99",
+                "currency_code": "EUR"
+              }
+            },
+            "current_total_duties_set": null,
+            "current_total_price": "215.91",
+            "current_total_price_set": {
+              "shop_money": {
+                "amount": "215.91",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "215.91",
+                "currency_code": "EUR"
+              }
+            },
+            "current_total_tax": "0.00",
+            "current_total_tax_set": {
+              "shop_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              }
+            },
+            "customer_locale": "es",
+            "device_id": 12,
+            "discount_codes": [
+              {
+                "code": "GRACIAS10",
+                "amount": "23.99",
+                "type": "percentage"
+              }
+            ],
+            "duties_included": false,
+            "email": "",
+            "estimated_taxes": false,
+            "financial_status": "paid",
+            "fulfillment_status": "fulfilled",
+            "landing_site": null,
+            "landing_site_ref": null,
+            "location_id": 108790317403,
+            "merchant_business_entity_id": "MTg3OTg3NjUwOTA3",
+            "merchant_of_record_app_id": null,
+            "name": "#73931",
+            "note": null,
+            "note_attributes": [],
+            "number": 72931,
+            "order_number": 73931,
+            "order_status_url": "https://nuance-store.com/87987650907/orders/9911f37b12fef09f50ebaebabd557a2b/authenticate?key=08060e22525bbdb75eba44c51acf5c7f",
+            "original_total_additional_fees_set": null,
+            "original_total_duties_set": null,
+            "payment_gateway_names": [
+              "Tarjeta"
+            ],
+            "phone": null,
+            "po_number": null,
+            "presentment_currency": "EUR",
+            "processed_at": "2026-03-10T09:40:35+01:00",
+            "reference": null,
+            "referring_site": null,
+            "source_identifier": "108790317403-12-3007",
+            "source_name": "pos",
+            "source_url": null,
+            "subtotal_price": "215.91",
+            "subtotal_price_set": {
+              "shop_money": {
+                "amount": "215.91",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "215.91",
+                "currency_code": "EUR"
+              }
+            },
+            "tags": "",
+            "tax_exempt": false,
+            "tax_lines": [],
+            "taxes_included": true,
+            "test": false,
+            "token": "9911f37b12fef09f50ebaebabd557a2b",
+            "total_cash_rounding_payment_adjustment_set": {
+              "shop_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              }
+            },
+            "total_cash_rounding_refund_adjustment_set": {
+              "shop_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              }
+            },
+            "total_discounts": "23.99",
+            "total_discounts_set": {
+              "shop_money": {
+                "amount": "23.99",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "23.99",
+                "currency_code": "EUR"
+              }
+            },
+            "total_line_items_price": "239.90",
+            "total_line_items_price_set": {
+              "shop_money": {
+                "amount": "239.90",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "239.90",
+                "currency_code": "EUR"
+              }
+            },
+            "total_outstanding": "0.00",
+            "total_price": "215.91",
+            "total_price_set": {
+              "shop_money": {
+                "amount": "215.91",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "215.91",
+                "currency_code": "EUR"
+              }
+            },
+            "total_shipping_price_set": {
+              "shop_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              }
+            },
+            "total_tax": "0.00",
+            "total_tax_set": {
+              "shop_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              },
+              "presentment_money": {
+                "amount": "0.00",
+                "currency_code": "EUR"
+              }
+            },
+            "total_tip_received": "0.00",
+            "total_weight": 0,
+            "updated_at": "2026-03-10T09:40:37+01:00",
+            "user_id": 126759141723,
+            "billing_address": null,
+            "customer": null,
+            "discount_applications": [
+              {
+                "target_type": "line_item",
+                "type": "discount_code",
+                "value": "10.0",
+                "value_type": "percentage",
+                "allocation_method": "across",
+                "target_selection": "all",
+                "code": "GRACIAS10"
+              }
+            ],
+            "fulfillments": [
+              {
+                "id": 6795805458779,
+                "admin_graphql_api_id": "gid://shopify/Fulfillment/6795805458779",
+                "created_at": "2026-03-10T09:40:37+01:00",
+                "location_id": 108790317403,
+                "name": "#73931.1",
+                "order_id": 7764022133083,
+                "origin_address": {},
+                "receipt": {},
+                "service": "manual",
+                "shipment_status": null,
+                "status": "success",
+                "tracking_company": null,
+                "tracking_number": null,
+                "tracking_numbers": [],
+                "tracking_url": null,
+                "tracking_urls": [],
+                "updated_at": "2026-03-10T09:40:37+01:00",
+                "line_items": [
+                  {
+                    "id": 18644292927835,
+                    "admin_graphql_api_id": "gid://shopify/LineItem/18644292927835",
+                    "attributed_staffs": [],
+                    "current_quantity": 1,
+                    "fulfillable_quantity": 0,
+                    "fulfillment_service": "manual",
+                    "fulfillment_status": "fulfilled",
+                    "gift_card": false,
+                    "grams": 0,
+                    "name": "Burton M AK BK Lite Insulator Chaqueta - Russet/Orange / M",
+                    "price": "239.90",
+                    "price_set": {
+                      "shop_money": {
+                        "amount": "239.90",
+                        "currency_code": "EUR"
+                      },
+                      "presentment_money": {
+                        "amount": "239.90",
+                        "currency_code": "EUR"
+                      }
+                    },
+                    "product_exists": true,
+                    "product_id": 10054408372571,
+                    "properties": [],
+                    "quantity": 1,
+                    "requires_shipping": true,
+                    "sku": "2100000348459",
+                    "taxable": true,
+                    "title": "Burton M AK BK Lite Insulator Chaqueta",
+                    "total_discount": "0.00",
+                    "total_discount_set": {
+                      "shop_money": {
+                        "amount": "0.00",
+                        "currency_code": "EUR"
+                      },
+                      "presentment_money": {
+                        "amount": "0.00",
+                        "currency_code": "EUR"
+                      }
+                    },
+                    "variant_id": 51185506386267,
+                    "variant_inventory_management": "shopify",
+                    "variant_title": "Russet/Orange / M",
+                    "vendor": "Burton",
+                    "tax_lines": [],
+                    "duties": [],
+                    "discount_allocations": [
+                      {
+                        "amount": "23.99",
+                        "amount_set": {
+                          "shop_money": {
+                            "amount": "23.99",
+                            "currency_code": "EUR"
+                          },
+                          "presentment_money": {
+                            "amount": "23.99",
+                            "currency_code": "EUR"
+                          }
+                        },
+                        "discount_application_index": 0
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "line_items": [
+              {
+                "id": 18644292927835,
+                "admin_graphql_api_id": "gid://shopify/LineItem/18644292927835",
+                "attributed_staffs": [],
+                "current_quantity": 1,
+                "fulfillable_quantity": 0,
+                "fulfillment_service": "manual",
+                "fulfillment_status": "fulfilled",
+                "gift_card": false,
+                "grams": 0,
+                "name": "Burton M AK BK Lite Insulator Chaqueta - Russet/Orange / M",
+                "price": "239.90",
+                "price_set": {
+                  "shop_money": {
+                    "amount": "239.90",
+                    "currency_code": "EUR"
+                  },
+                  "presentment_money": {
+                    "amount": "239.90",
+                    "currency_code": "EUR"
+                  }
+                },
+                "product_exists": true,
+                "product_id": 10054408372571,
+                "properties": [],
+                "quantity": 1,
+                "requires_shipping": true,
+                "sales_line_item_group_id": null,
+                "sku": "2100000348459",
+                "taxable": true,
+                "title": "Burton M AK BK Lite Insulator Chaqueta",
+                "total_discount": "0.00",
+                "total_discount_set": {
+                  "shop_money": {
+                    "amount": "0.00",
+                    "currency_code": "EUR"
+                  },
+                  "presentment_money": {
+                    "amount": "0.00",
+                    "currency_code": "EUR"
+                  }
+                },
+                "variant_id": 51185506386267,
+                "variant_inventory_management": "shopify",
+                "variant_title": "Russet/Orange / M",
+                "vendor": "Burton",
+                "tax_lines": [],
+                "duties": [],
+                "discount_allocations": [
+                  {
+                    "amount": "23.99",
+                    "amount_set": {
+                      "shop_money": {
+                        "amount": "23.99",
+                        "currency_code": "EUR"
+                      },
+                      "presentment_money": {
+                        "amount": "23.99",
+                        "currency_code": "EUR"
+                      }
+                    },
+                    "discount_application_index": 0
+                  }
+                ]
+              }
+            ],
+            "payment_terms": null,
+            "refunds": [],
+            "shipping_address": null,
+            "shipping_lines": [],
+            "returns": [],
+            "line_item_groups": []
+          },
+          "webhookUrl": "https://n8n.tailwind.es/webhook/transferencia",
+          "executionMode": "production"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1",
     "availableInMCP": false
@@ -2075,6 +2500,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-01-15T08:00:45.091Z",
+  "updatedAt": "2026-03-10T08:43:47.977Z",
   "versionId": "c8f3c11a-43af-4def-b39a-4b076f0c1251"
 }
