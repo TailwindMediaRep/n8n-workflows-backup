@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-03-09T10:34:30.000Z",
-    "createdAt": "2026-03-09T10:34:29.461Z",
-    "versionId": "1f3e61f9-c96b-415f-ac9a-6e9352266fea",
+    "updatedAt": "2026-03-10T07:43:12.000Z",
+    "createdAt": "2026-03-10T07:43:11.322Z",
+    "versionId": "06c3e22f-5f11-4c99-a361-e248d90186db",
     "workflowId": "4HBBHGfAtdrOJKbPb09St",
     "nodes": [
       {
@@ -24,7 +24,7 @@
       },
       {
         "parameters": {
-          "jsCode": "// 1. Obtenemos el texto de la columna exacta del Excel\nlet rawCollections = $json[\"Aparece en las Colecciones\"] || \"\";\n\n// 2. Separamos las colecciones por el símbolo |\nlet splitTags = rawCollections.split('|');\n\n// 3. Limpieza profunda\nlet cleanedTags = splitTags.map(tag => {\n  return tag\n    .replace(/\\b(Hombre|Mujer|Niño|Niña|Niños|Niñas)\\b/gi, '') // Elimina géneros según tu regla\n    .trim()                                                    // Elimina espacios extras\n    .toLowerCase();                                            // Todo a minúsculas\n});\n\n// 4. Eliminar duplicados y evitar etiquetas vacías\nlet tagsToApply = [...new Set(cleanedTags)].filter(t => t !== \"\");\n\n// 5. Retornamos los datos y mantenemos el ID del producto para el GraphQL\nreturn {\n  tagsToApply: tagsToApply,\n  productId: $node[\"Webhook\"].json.body.admin_graphql_api_id\n};"
+          "jsCode": "// 1. Obtenemos el contenido de las dos columnas del Excel\nlet colecciones = $json[\"Aparece en las Colecciones\"] || \"\";\nlet generales = $json[\"Aparece en las Colecciones Generales\"] || \"\";\n\n// 2. Combinamos ambos textos en uno solo separado por el símbolo |\nlet textoCompleto = colecciones + \" | \" + generales;\n\n// 3. Dividimos el texto en etiquetas individuales usando el separador |\nlet listaCruda = textoCompleto.split('|');\n\n// 4. Aplicamos las reglas de limpieza:\nlet etiquetasLimpias = listaCruda.map(tag => {\n  return tag\n    .replace(/\\b(Hombre|Mujer|Niño|Niña|Niños|Niñas)\\b/gi, '') // 1. Quita Hombre, Mujer, etc.\n    .trim()                                                    // 2. Borra espacios al principio y final\n    .toLowerCase();                                            // 3. Todo a minúsculas\n});\n\n// 5. Eliminamos duplicados (ej: si \"Bolsos\" aparecía en ambas columnas) y etiquetas vacías\nlet resultadoFinal = [...new Set(etiquetasLimpias)].filter(t => t !== \"\");\n\n// 6. Enviamos el resultado al siguiente nodo incluyendo el ID del producto de Shopify\nreturn {\n  tagsToApply: resultadoFinal,\n  productId: $node[\"Webhook\"].json.body.admin_graphql_api_id\n};"
         },
         "type": "n8n-nodes-base.code",
         "typeVersion": 2,
@@ -77,7 +77,7 @@
             "values": [
               {
                 "lookupColumn": "Tipo de Producto",
-                "lookupValue": "=abrigo"
+                "lookupValue": "={{ $json.body.product_type }}"
               }
             ]
           },
@@ -135,11 +135,11 @@
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version 1f3e61f9",
+    "name": "Version 06c3e22f",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "1f3e61f9-c96b-415f-ac9a-6e9352266fea",
+  "activeVersionId": "06c3e22f-5f11-4c99-a361-e248d90186db",
   "connections": {
     "Webhook": {
       "main": [
@@ -201,7 +201,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// 1. Obtenemos el texto de la columna exacta del Excel\nlet rawCollections = $json[\"Aparece en las Colecciones\"] || \"\";\n\n// 2. Separamos las colecciones por el símbolo |\nlet splitTags = rawCollections.split('|');\n\n// 3. Limpieza profunda\nlet cleanedTags = splitTags.map(tag => {\n  return tag\n    .replace(/\\b(Hombre|Mujer|Niño|Niña|Niños|Niñas)\\b/gi, '') // Elimina géneros según tu regla\n    .trim()                                                    // Elimina espacios extras\n    .toLowerCase();                                            // Todo a minúsculas\n});\n\n// 4. Eliminar duplicados y evitar etiquetas vacías\nlet tagsToApply = [...new Set(cleanedTags)].filter(t => t !== \"\");\n\n// 5. Retornamos los datos y mantenemos el ID del producto para el GraphQL\nreturn {\n  tagsToApply: tagsToApply,\n  productId: $node[\"Webhook\"].json.body.admin_graphql_api_id\n};"
+        "jsCode": "// 1. Obtenemos el contenido de las dos columnas del Excel\nlet colecciones = $json[\"Aparece en las Colecciones\"] || \"\";\nlet generales = $json[\"Aparece en las Colecciones Generales\"] || \"\";\n\n// 2. Combinamos ambos textos en uno solo separado por el símbolo |\nlet textoCompleto = colecciones + \" | \" + generales;\n\n// 3. Dividimos el texto en etiquetas individuales usando el separador |\nlet listaCruda = textoCompleto.split('|');\n\n// 4. Aplicamos las reglas de limpieza:\nlet etiquetasLimpias = listaCruda.map(tag => {\n  return tag\n    .replace(/\\b(Hombre|Mujer|Niño|Niña|Niños|Niñas)\\b/gi, '') // 1. Quita Hombre, Mujer, etc.\n    .trim()                                                    // 2. Borra espacios al principio y final\n    .toLowerCase();                                            // 3. Todo a minúsculas\n});\n\n// 5. Eliminamos duplicados (ej: si \"Bolsos\" aparecía en ambas columnas) y etiquetas vacías\nlet resultadoFinal = [...new Set(etiquetasLimpias)].filter(t => t !== \"\");\n\n// 6. Enviamos el resultado al siguiente nodo incluyendo el ID del producto de Shopify\nreturn {\n  tagsToApply: resultadoFinal,\n  productId: $node[\"Webhook\"].json.body.admin_graphql_api_id\n};"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -254,7 +254,7 @@
           "values": [
             {
               "lookupColumn": "Tipo de Producto",
-              "lookupValue": "=abrigo"
+              "lookupValue": "={{ $json.body.product_type }}"
             }
           ]
         },
@@ -279,7 +279,10 @@
   "pinData": {},
   "settings": {
     "executionOrder": "v1",
-    "availableInMCP": false
+    "availableInMCP": false,
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "e80tfOpD4TdBh8EF"
   },
   "shared": [
     {
@@ -293,6 +296,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-03-09T10:34:29.460Z",
-  "versionId": "1f3e61f9-c96b-415f-ac9a-6e9352266fea"
+  "updatedAt": "2026-03-10T07:44:00.446Z",
+  "versionId": "06c3e22f-5f11-4c99-a361-e248d90186db"
 }
