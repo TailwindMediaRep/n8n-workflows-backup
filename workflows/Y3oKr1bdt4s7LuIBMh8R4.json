@@ -1,13 +1,314 @@
 {
-  "active": false,
-  "activeVersion": null,
-  "activeVersionId": null,
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-03-17T11:59:43.000Z",
+    "createdAt": "2026-03-17T11:59:40.342Z",
+    "versionId": "6720d8c6-bd4a-4a20-aa2f-ea699ec7accc",
+    "workflowId": "Y3oKr1bdt4s7LuIBMh8R4",
+    "nodes": [
+      {
+        "parameters": {
+          "rule": {
+            "interval": [
+              {
+                "field": "weeks",
+                "triggerAtHour": 23,
+                "triggerAtMinute": 59
+              }
+            ]
+          }
+        },
+        "type": "n8n-nodes-base.scheduleTrigger",
+        "typeVersion": 1.3,
+        "position": [
+          -336,
+          32
+        ],
+        "id": "7d585396-28c2-4570-af2c-609055fbc33d",
+        "name": "Schedule Trigger"
+      },
+      {
+        "parameters": {
+          "jsCode": "return [\n  {\n    \"accountName\": \"Mesit Sierra Nevada\",\n    \"locationId\": \"6M5au385jIgilXNq5CzH\",\n    \"apiKey\": \"pit-99721840-ffdf-42ac-b465-056c4f810ae5\",\n    \"id_folder\": \"1tmqJ2w5jPkvZZNeRdwJVVftD2dxsVqix\"\n  },\n  {\n    \"accountName\": \"Surfin Academy\",\n    \"locationId\": \"Mzc11LSCRrjBDJbxT1YK\",\n    \"apiKey\": \"pit-7a04221a-ae27-428e-9a83-7114e3ecaded\",\n    \"id_folder\": \"11AZmJGuc_CjXeu7ffw0zNcLQDO3vsHaf\"\n\n  },\n  {\n    \"accountName\": \"Surfin Sierra Nevada\",\n    \"locationId\": \"xwkMCX7Ghr8nYc23iQmA\",\n    \"apiKey\": \"pit-b8f45782-8513-4e14-a3ac-30df6154b444\",\n    \"id_folder\": \"1l7ZFgjY7Xla-i85h3P9W2AD8U0dyzjuO\"\n  },\n  {\n    \"accountName\": \"Nuance Sierra Nevada\",\n    \"locationId\": \"HyOB1VVom39WVbRMaYIT\",\n    \"apiKey\": \"pit-fffb2807-88f5-4aca-9d4e-fee79da1d080\",\n    \"id_folder\": \"1Yd-YlZA-SHuoRSD6zdv-W1ZRKjuAUFxc\"\n  },\n  {\n    \"accountName\": \"The Ski Room\",\n    \"locationId\": \"Vy6aApkdDXswMXDmi8bc\",\n    \"apiKey\": \"pit-b59afcb2-01ee-42f2-ad45-72645f5adfb1\",\n    \"id_folder\": \"1N6j0K2taAjqBRBExXoaWP5TSQqx9X5jp\"\n  },\n  {\n    \"accountName\": \"Groupon\",\n    \"locationId\": \"5qKyiuN6uyrx7qt9ECGy\",\n    \"apiKey\": \"pit-84bf9945-7110-4c77-8045-d8d37e73dfb6\",\n    \"id_folder\": \"1TpvAzw9AZh7_2CfMhd9VHRb7kzm3ktKM\"\n  },\n  {\n    \"accountName\": \"Sierra Nevada Granada\",\n    \"locationId\": \"AGEZQ6XUpVYEJES5vdbt\",\n    \"apiKey\": \"pit-12cae6d4-e885-48db-8403-46eb545682fd\",\n    \"id_folder\": \"1lBIGNVD6Us1bQvLvdN8IP6JmH4GntlJJ\"\n  },\n  {\n    \"accountName\": \"Rules Sierra Nevada\",\n    \"locationId\": \"YPHpX29ZkVWwiXlmUq8C\",\n    \"apiKey\": \"pit-6021df4c-7c59-43b2-b371-41f96b265b30\",\n    \"id_folder\": \"1FNNgJuw3N3fjmUHIrlP0IMsVeSXWjA8u\"\n  },\n  {\n    \"accountName\": \"Rules Shop Outlet\",\n    \"locationId\": \"50G0wYa58T0KnxpEocxd\",\n    \"apiKey\": \"pit-02b21369-0cbf-419c-ab3d-f401e9ee3519\",\n    \"id_folder\": \"17WHHaAKorUACpOzh-GJflCDOXJZH2zc-\"\n  },\n  {\n    \"accountName\": \"Snow Division\",\n    \"locationId\": \"8T36JibPH6FBTSG1IgIi\",\n    \"apiKey\": \"pit-5dc5cdd5-78a4-4354-8a22-14d2f76c1382\",\n    \"id_folder\": \"1T4XZbyC8RMUTYdMsEiHUy8KWfwcgJeBR\"\n  },\n  {\n    \"accountName\": \"Snow Ink Sierra Nevada SL\",\n    \"locationId\": \"FmIP7sRalek7L3KDL4Rj\",\n    \"apiKey\": \"pit-579dd916-28d0-4c89-9883-11c7945ec2e0\",\n    \"id_folder\": \"1SuWsTcQsO7ARGJB0WbckZZXYJO1YglI2\"\n  },\n  {\n    \"accountName\": \"Parque Nacional de Sierra Nevada\",\n    \"locationId\": \"bLYuuO3ueqC1166rU4PL\",\n    \"apiKey\": \"pit-cae3b634-c440-4426-b5f8-94287f799c23\",\n    \"id_folder\": \"1VoJsLIg_Gh_Z0IGflPtEIZKna5RAi72G\"\n  },\n  {\n    \"accountName\": \"Ruta de los Cahorros\",\n    \"locationId\": \"fxgMDIIrUN5ZjW4rtzer\",\n    \"apiKey\": \"pit-8328c13b-0676-491b-b799-ce12a7f99d54\",\n    \"id_folder\": \"13VDk23vimKv8S7hAWzcfLCUdUbprpZbu\"\n  },\n  {\n    \"accountName\": \"Sierra Nevada VIP\",\n    \"locationId\": \"slNZS9SWrjyo9Iw0pDKB\",\n    \"apiKey\": \"pit-8b2e3ecc-aac4-4647-8614-eb26d0a1e39f\",\n    \"id_folder\": \"1wloIyGdDU6zlErAWXKCXjXeDDrwGQk4j\"\n  },\n  {\n    \"accountName\": \"Asociación de Vecinos de Sierra Nevada\",\n    \"locationId\": \"X4wRSBcgwiPOAcu1Gjgr\",\n    \"apiKey\": \"pit-d613057d-2f72-4146-a049-6a950b8c8887\",\n    \"id_folder\": \"1fPzUeFz7Vbi8kOau0KM4usYUuwOthque\"\n  },\n  // Añade las otras 13 cuentas siguiendo el mismo formato...\n];"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          -112,
+          32
+        ],
+        "id": "5c091cea-10af-4511-bcd4-6de08e1cc7c4",
+        "name": "Code in JavaScript"
+      },
+      {
+        "parameters": {
+          "options": {}
+        },
+        "type": "n8n-nodes-base.splitInBatches",
+        "typeVersion": 3,
+        "position": [
+          112,
+          32
+        ],
+        "id": "171d61c3-56ca-4228-bab6-6710f8cb9fdf",
+        "name": "Loop Over Items"
+      },
+      {
+        "parameters": {
+          "url": "=https://services.leadconnectorhq.com/contacts/?locationId={{ $json.locationId }}&limit=100",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "Version",
+                "value": "2021-07-28"
+              },
+              {
+                "name": "Authorization",
+                "value": "=Bearer {{ $json.apiKey }}"
+              }
+            ]
+          },
+          "options": {
+            "pagination": {
+              "pagination": {
+                "paginationMode": "responseContainsNextURL",
+                "nextURL": "={{ $response.body.meta.nextPageUrl }}",
+                "paginationCompleteWhen": "other",
+                "completeExpression": "={{ $response.body.meta.nextPageUrl == null }}",
+                "limitPagesFetched": true,
+                "maxRequests": 1000,
+                "requestInterval": 500
+              }
+            }
+          }
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          336,
+          -48
+        ],
+        "id": "d7a60c64-bbd7-4291-a947-86453cd8e7c0",
+        "name": "HTTP Request"
+      },
+      {
+        "parameters": {
+          "fieldToSplitOut": "contacts",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.splitOut",
+        "typeVersion": 1,
+        "position": [
+          560,
+          -48
+        ],
+        "id": "0ca5b328-4cb3-45d3-bb69-679f5d8e65b2",
+        "name": "Split Out"
+      },
+      {
+        "parameters": {
+          "options": {}
+        },
+        "type": "n8n-nodes-base.convertToFile",
+        "typeVersion": 1.1,
+        "position": [
+          784,
+          -48
+        ],
+        "id": "d61fe2d9-4b06-4268-9a5d-082e2a0c881a",
+        "name": "Convert to File"
+      },
+      {
+        "parameters": {
+          "name": "=Backup_{{ $('Loop Over Items').item.json.accountName }}_{{ $now.setZone('Europe/Madrid').toFormat('yyyy-MM-dd') }}.csv",
+          "driveId": {
+            "__rl": true,
+            "mode": "list",
+            "value": "My Drive"
+          },
+          "folderId": {
+            "__rl": true,
+            "value": "={{ $('Loop Over Items').item.json.id_folder }}",
+            "mode": "id"
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.googleDrive",
+        "typeVersion": 3,
+        "position": [
+          1008,
+          32
+        ],
+        "id": "55cef4ea-4187-41a3-b664-504e8851ea27",
+        "name": "Upload file",
+        "credentials": {
+          "googleDriveOAuth2Api": {
+            "id": "N7JXWgOiVoyCTaVL",
+            "name": "Google Drive info@tailwind.es"
+          }
+        }
+      }
+    ],
+    "connections": {
+      "Schedule Trigger": {
+        "main": [
+          [
+            {
+              "node": "Code in JavaScript",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code in JavaScript": {
+        "main": [
+          [
+            {
+              "node": "Loop Over Items",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Loop Over Items": {
+        "main": [
+          [],
+          [
+            {
+              "node": "HTTP Request",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "HTTP Request": {
+        "main": [
+          [
+            {
+              "node": "Split Out",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Split Out": {
+        "main": [
+          [
+            {
+              "node": "Convert to File",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Convert to File": {
+        "main": [
+          [
+            {
+              "node": "Upload file",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Upload file": {
+        "main": [
+          [
+            {
+              "node": "Loop Over Items",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Tailwind Media",
+    "name": "Version 6720d8c6",
+    "description": "",
+    "autosaved": false
+  },
+  "activeVersionId": "6720d8c6-bd4a-4a20-aa2f-ea699ec7accc",
   "connections": {
     "Schedule Trigger": {
       "main": [
         [
           {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
             "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File": {
+      "main": [
+        [
+          {
+            "node": "Upload file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload file": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
             "type": "main",
             "index": 0
           }
@@ -18,7 +319,9 @@
   "createdAt": "2026-03-16T18:25:58.156Z",
   "id": "Y3oKr1bdt4s7LuIBMh8R4",
   "isArchived": false,
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "backup_contantos_crm",
   "nodes": [
     {
@@ -26,7 +329,9 @@
         "rule": {
           "interval": [
             {
-              "triggerAtHour": 2
+              "field": "weeks",
+              "triggerAtHour": 23,
+              "triggerAtMinute": 59
             }
           ]
         }
@@ -34,31 +339,131 @@
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.3,
       "position": [
-        0,
-        0
+        -336,
+        32
       ],
       "id": "7d585396-28c2-4570-af2c-609055fbc33d",
       "name": "Schedule Trigger"
     },
     {
       "parameters": {
-        "url": "https://services.leadconnectorhq.com/contacts/",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpHeaderAuth",
+        "jsCode": "return [\n  {\n    \"accountName\": \"Mesit Sierra Nevada\",\n    \"locationId\": \"6M5au385jIgilXNq5CzH\",\n    \"apiKey\": \"pit-99721840-ffdf-42ac-b465-056c4f810ae5\",\n    \"id_folder\": \"1tmqJ2w5jPkvZZNeRdwJVVftD2dxsVqix\"\n  },\n  {\n    \"accountName\": \"Surfin Academy\",\n    \"locationId\": \"Mzc11LSCRrjBDJbxT1YK\",\n    \"apiKey\": \"pit-7a04221a-ae27-428e-9a83-7114e3ecaded\",\n    \"id_folder\": \"11AZmJGuc_CjXeu7ffw0zNcLQDO3vsHaf\"\n\n  },\n  {\n    \"accountName\": \"Surfin Sierra Nevada\",\n    \"locationId\": \"xwkMCX7Ghr8nYc23iQmA\",\n    \"apiKey\": \"pit-b8f45782-8513-4e14-a3ac-30df6154b444\",\n    \"id_folder\": \"1l7ZFgjY7Xla-i85h3P9W2AD8U0dyzjuO\"\n  },\n  {\n    \"accountName\": \"Nuance Sierra Nevada\",\n    \"locationId\": \"HyOB1VVom39WVbRMaYIT\",\n    \"apiKey\": \"pit-fffb2807-88f5-4aca-9d4e-fee79da1d080\",\n    \"id_folder\": \"1Yd-YlZA-SHuoRSD6zdv-W1ZRKjuAUFxc\"\n  },\n  {\n    \"accountName\": \"The Ski Room\",\n    \"locationId\": \"Vy6aApkdDXswMXDmi8bc\",\n    \"apiKey\": \"pit-b59afcb2-01ee-42f2-ad45-72645f5adfb1\",\n    \"id_folder\": \"1N6j0K2taAjqBRBExXoaWP5TSQqx9X5jp\"\n  },\n  {\n    \"accountName\": \"Groupon\",\n    \"locationId\": \"5qKyiuN6uyrx7qt9ECGy\",\n    \"apiKey\": \"pit-84bf9945-7110-4c77-8045-d8d37e73dfb6\",\n    \"id_folder\": \"1TpvAzw9AZh7_2CfMhd9VHRb7kzm3ktKM\"\n  },\n  {\n    \"accountName\": \"Sierra Nevada Granada\",\n    \"locationId\": \"AGEZQ6XUpVYEJES5vdbt\",\n    \"apiKey\": \"pit-12cae6d4-e885-48db-8403-46eb545682fd\",\n    \"id_folder\": \"1lBIGNVD6Us1bQvLvdN8IP6JmH4GntlJJ\"\n  },\n  {\n    \"accountName\": \"Rules Sierra Nevada\",\n    \"locationId\": \"YPHpX29ZkVWwiXlmUq8C\",\n    \"apiKey\": \"pit-6021df4c-7c59-43b2-b371-41f96b265b30\",\n    \"id_folder\": \"1FNNgJuw3N3fjmUHIrlP0IMsVeSXWjA8u\"\n  },\n  {\n    \"accountName\": \"Rules Shop Outlet\",\n    \"locationId\": \"50G0wYa58T0KnxpEocxd\",\n    \"apiKey\": \"pit-02b21369-0cbf-419c-ab3d-f401e9ee3519\",\n    \"id_folder\": \"17WHHaAKorUACpOzh-GJflCDOXJZH2zc-\"\n  },\n  {\n    \"accountName\": \"Snow Division\",\n    \"locationId\": \"8T36JibPH6FBTSG1IgIi\",\n    \"apiKey\": \"pit-5dc5cdd5-78a4-4354-8a22-14d2f76c1382\",\n    \"id_folder\": \"1T4XZbyC8RMUTYdMsEiHUy8KWfwcgJeBR\"\n  },\n  {\n    \"accountName\": \"Snow Ink Sierra Nevada SL\",\n    \"locationId\": \"FmIP7sRalek7L3KDL4Rj\",\n    \"apiKey\": \"pit-579dd916-28d0-4c89-9883-11c7945ec2e0\",\n    \"id_folder\": \"1SuWsTcQsO7ARGJB0WbckZZXYJO1YglI2\"\n  },\n  {\n    \"accountName\": \"Parque Nacional de Sierra Nevada\",\n    \"locationId\": \"bLYuuO3ueqC1166rU4PL\",\n    \"apiKey\": \"pit-cae3b634-c440-4426-b5f8-94287f799c23\",\n    \"id_folder\": \"1VoJsLIg_Gh_Z0IGflPtEIZKna5RAi72G\"\n  },\n  {\n    \"accountName\": \"Ruta de los Cahorros\",\n    \"locationId\": \"fxgMDIIrUN5ZjW4rtzer\",\n    \"apiKey\": \"pit-8328c13b-0676-491b-b799-ce12a7f99d54\",\n    \"id_folder\": \"13VDk23vimKv8S7hAWzcfLCUdUbprpZbu\"\n  },\n  {\n    \"accountName\": \"Sierra Nevada VIP\",\n    \"locationId\": \"slNZS9SWrjyo9Iw0pDKB\",\n    \"apiKey\": \"pit-8b2e3ecc-aac4-4647-8614-eb26d0a1e39f\",\n    \"id_folder\": \"1wloIyGdDU6zlErAWXKCXjXeDDrwGQk4j\"\n  },\n  {\n    \"accountName\": \"Asociación de Vecinos de Sierra Nevada\",\n    \"locationId\": \"X4wRSBcgwiPOAcu1Gjgr\",\n    \"apiKey\": \"pit-d613057d-2f72-4146-a049-6a950b8c8887\",\n    \"id_folder\": \"1fPzUeFz7Vbi8kOau0KM4usYUuwOthque\"\n  },\n  // Añade las otras 13 cuentas siguiendo el mismo formato...\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -112,
+        32
+      ],
+      "id": "5c091cea-10af-4511-bcd4-6de08e1cc7c4",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
         "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        112,
+        32
+      ],
+      "id": "171d61c3-56ca-4228-bab6-6710f8cb9fdf",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "url": "=https://services.leadconnectorhq.com/contacts/?locationId={{ $json.locationId }}&limit=100",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $json.apiKey }}"
+            }
+          ]
+        },
+        "options": {
+          "pagination": {
+            "pagination": {
+              "paginationMode": "responseContainsNextURL",
+              "nextURL": "={{ $response.body.meta.nextPageUrl }}",
+              "paginationCompleteWhen": "other",
+              "completeExpression": "={{ $response.body.meta.nextPageUrl == null }}",
+              "limitPagesFetched": true,
+              "maxRequests": 1000,
+              "requestInterval": 500
+            }
+          }
+        }
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        208,
-        0
+        336,
+        -48
       ],
-      "id": "aa173883-3e76-45d2-b4aa-e54e667d9bbc",
-      "name": "HTTP Request",
+      "id": "d7a60c64-bbd7-4291-a947-86453cd8e7c0",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "contacts",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        560,
+        -48
+      ],
+      "id": "0ca5b328-4cb3-45d3-bb69-679f5d8e65b2",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        784,
+        -48
+      ],
+      "id": "d61fe2d9-4b06-4268-9a5d-082e2a0c881a",
+      "name": "Convert to File"
+    },
+    {
+      "parameters": {
+        "name": "=Backup_{{ $('Loop Over Items').item.json.accountName }}_{{ $now.setZone('Europe/Madrid').toFormat('yyyy-MM-dd') }}.csv",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "={{ $('Loop Over Items').item.json.id_folder }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1008,
+        32
+      ],
+      "id": "55cef4ea-4187-41a3-b664-504e8851ea27",
+      "name": "Upload file",
       "credentials": {
-        "httpHeaderAuth": {
-          "id": "THkhgrtze1uBo6Ft",
-          "name": "Token Informes Shopify"
+        "googleDriveOAuth2Api": {
+          "id": "N7JXWgOiVoyCTaVL",
+          "name": "Google Drive info@tailwind.es"
         }
       }
     }
@@ -66,7 +471,10 @@
   "pinData": {},
   "settings": {
     "executionOrder": "v1",
-    "availableInMCP": false
+    "availableInMCP": false,
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner",
+    "errorWorkflow": "e80tfOpD4TdBh8EF"
   },
   "shared": [
     {
@@ -79,7 +487,7 @@
   ],
   "staticData": null,
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2026-03-16T19:08:05.297Z",
-  "versionId": "ec6458af-f12e-4c73-a6fb-af4033f93725"
+  "triggerCount": 1,
+  "updatedAt": "2026-03-17T11:59:48.480Z",
+  "versionId": "6720d8c6-bd4a-4a20-aa2f-ea699ec7accc"
 }
