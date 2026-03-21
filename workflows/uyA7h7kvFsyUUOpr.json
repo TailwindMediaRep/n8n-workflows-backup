@@ -1,0 +1,35 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {},
+  "createdAt": "2026-03-20T12:32:58.348Z",
+  "id": "uyA7h7kvFsyUUOpr",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "vacio",
+  "nodes": [],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false,
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-03-20T12:32:58.352Z",
+      "createdAt": "2026-03-20T12:32:58.352Z",
+      "role": "workflow:owner",
+      "workflowId": "uyA7h7kvFsyUUOpr",
+      "projectId": "x5UZcmGQw2OWHuXb"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 3,
+  "updatedAt": "2026-03-20T15:09:02.689Z",
+  "versionId": "dc962475-4ea2-430f-b321-9f1983cecdf1"
+}
