@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-03-16T09:23:23.000Z",
-    "createdAt": "2026-03-16T09:23:20.965Z",
-    "versionId": "dedbb337-c38b-4c0d-8e88-d653bf2f921b",
+    "updatedAt": "2026-03-20T18:21:44.000Z",
+    "createdAt": "2026-03-20T18:21:42.266Z",
+    "versionId": "16059e09-7efc-44f0-a404-d05344b1206a",
     "workflowId": "4HBBHGfAtdrOJKbPb09St",
     "nodes": [
       {
@@ -50,6 +50,7 @@
         ],
         "id": "72482c9d-a19a-42d6-af91-24a3c30ab0a0",
         "name": "GraphQL1",
+        "retryOnFail": true,
         "credentials": {
           "httpHeaderAuth": {
             "id": "OPt2Cl0dnwcU4qRk",
@@ -91,6 +92,9 @@
         ],
         "id": "b1a1e168-acad-408b-b7ac-21bfc46adeb2",
         "name": "Get row(s) in sheet",
+        "retryOnFail": true,
+        "maxTries": 3,
+        "waitBetweenTries": 1000,
         "credentials": {
           "googleSheetsOAuth2Api": {
             "id": "RCuKUCifcA4jENcY",
@@ -113,6 +117,8 @@
         ],
         "id": "30ebb9e9-173e-417d-9ee2-27141165b453",
         "name": "GraphQL",
+        "retryOnFail": true,
+        "maxTries": 3,
         "credentials": {
           "httpHeaderAuth": {
             "id": "THkhgrtze1uBo6Ft",
@@ -177,6 +183,7 @@
         ],
         "id": "2746be40-c3f1-4f2a-807f-fb33c2a53f8c",
         "name": "GraphQL2",
+        "retryOnFail": true,
         "credentials": {
           "httpHeaderAuth": {
             "id": "THkhgrtze1uBo6Ft",
@@ -248,11 +255,11 @@
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version dedbb337",
+    "name": "Version 16059e09",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "dedbb337-c38b-4c0d-8e88-d653bf2f921b",
+  "activeVersionId": "16059e09-7efc-44f0-a404-d05344b1206a",
   "connections": {
     "Webhook": {
       "main": [
@@ -367,6 +374,7 @@
       ],
       "id": "72482c9d-a19a-42d6-af91-24a3c30ab0a0",
       "name": "GraphQL1",
+      "retryOnFail": true,
       "credentials": {
         "httpHeaderAuth": {
           "id": "OPt2Cl0dnwcU4qRk",
@@ -408,6 +416,9 @@
       ],
       "id": "b1a1e168-acad-408b-b7ac-21bfc46adeb2",
       "name": "Get row(s) in sheet",
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 1000,
       "credentials": {
         "googleSheetsOAuth2Api": {
           "id": "RCuKUCifcA4jENcY",
@@ -430,6 +441,8 @@
       ],
       "id": "30ebb9e9-173e-417d-9ee2-27141165b453",
       "name": "GraphQL",
+      "retryOnFail": true,
+      "maxTries": 3,
       "credentials": {
         "httpHeaderAuth": {
           "id": "THkhgrtze1uBo6Ft",
@@ -494,6 +507,7 @@
       ],
       "id": "2746be40-c3f1-4f2a-807f-fb33c2a53f8c",
       "name": "GraphQL2",
+      "retryOnFail": true,
       "credentials": {
         "httpHeaderAuth": {
           "id": "THkhgrtze1uBo6Ft",
@@ -621,6 +635,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2026-03-16T09:23:20.964Z",
-  "versionId": "dedbb337-c38b-4c0d-8e88-d653bf2f921b"
+  "updatedAt": "2026-03-20T18:21:42.265Z",
+  "versionId": "16059e09-7efc-44f0-a404-d05344b1206a"
 }
