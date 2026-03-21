@@ -1,0 +1,82 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-03-20T15:18:49.435Z",
+  "id": "JvpEd7ithKXh2u1OBix0o",
+  "isArchived": false,
+  "meta": null,
+  "name": "Embeding",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -208,
+        -112
+      ],
+      "id": "5cfbb482-a860-411e-a458-e0f187e3fe61",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "url": "https://niucsjoaufrzpquicens.supabase.co/storage/v1/object/list/markdown-docs",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5pdWNzam9hdWZyenBxdWljZW5zIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MDIwMzk3NywiZXhwIjoyMDg1Nzc5OTc3fQ.O47K6zqyHxQVKWffIKW6GggqJ_YHpBw0YH3c-Cc5pCk"
+            },
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5pdWNzam9hdWZyenBxdWljZW5zIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MDIwMzk3NywiZXhwIjoyMDg1Nzc5OTc3fQ.O47K6zqyHxQVKWffIKW6GggqJ_YHpBw0YH3c-Cc5pCk"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        0,
+        -112
+      ],
+      "id": "9f3307f0-58f5-42a6-8399-069267e3182e",
+      "name": "HTTP Request"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-03-20T15:18:49.441Z",
+      "createdAt": "2026-03-20T15:18:49.441Z",
+      "role": "workflow:owner",
+      "workflowId": "JvpEd7ithKXh2u1OBix0o",
+      "projectId": "x5UZcmGQw2OWHuXb"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2026-03-20T15:26:13.681Z",
+  "versionId": "44409a45-8fc6-4264-8650-eff06a92bcb2"
+}
