@@ -7,7 +7,96 @@
       "main": [
         [
           {
-            "node": "HTTP Request",
+            "node": "Lista archivos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lista archivos": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ver contenido": {
+      "main": [
+        [
+          {
+            "node": "dividir en chunks de 500",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Ver contenido",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "dividir en chunks de 500": {
+      "main": [
+        [
+          {
+            "node": "embeding",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "embeding": {
+      "main": [
+        [
+          {
+            "node": "mantener referencia",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "mantener referencia": {
+      "main": [
+        [
+          {
+            "node": "insertar en supabase",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "insertar en supabase": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
             "type": "main",
             "index": 0
           }
@@ -34,7 +123,38 @@
     },
     {
       "parameters": {
+        "method": "POST",
         "url": "https://niucsjoaufrzpquicens.supabase.co/storage/v1/object/list/markdown-docs",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5pdWNzam9hdWZyenBxdWljZW5zIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MDIwMzk3NywiZXhwIjoyMDg1Nzc5OTc3fQ.O47K6zqyHxQVKWffIKW6GggqJ_YHpBw0YH3c-Cc5pCk"
+            },
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5pdWNzam9hdWZyenBxdWljZW5zIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MDIwMzk3NywiZXhwIjoyMDg1Nzc5OTc3fQ.O47K6zqyHxQVKWffIKW6GggqJ_YHpBw0YH3c-Cc5pCk"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"limit\": 1000,\n  \"offset\": 0,\n  \"prefix\": \"\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        0,
+        -112
+      ],
+      "id": "9f3307f0-58f5-42a6-8399-069267e3182e",
+      "name": "Lista archivos"
+    },
+    {
+      "parameters": {
+        "url": "=https://niucsjoaufrzpquicens.supabase.co/storage/v1/object/markdown-docs/{{ $json.name }}",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
@@ -53,11 +173,134 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        0,
+        464,
+        16
+      ],
+      "id": "fc1e6d46-d033-4e06-9ae9-e5fee274016f",
+      "name": "Ver contenido"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        224,
         -112
       ],
-      "id": "9f3307f0-58f5-42a6-8399-069267e3182e",
-      "name": "HTTP Request"
+      "id": "6ebd72dc-7610-4522-9ab3-0d75c230bc9c",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "jsCode": "const text = $input.first().json.data || '';\nconst filename = $input.first().json.name || 'unknown';\nconst chunkSize = 500;\nconst overlap = 50;\nconst chunks = [];\n\nfor (let i = 0; i < text.length; i += chunkSize - overlap) {\n  const chunk = text.slice(i, i + chunkSize);\n  if (chunk.trim().length > 0) {\n    chunks.push({\n      content: chunk,\n      metadata: {\n        source: filename,\n        chunk_index: chunks.length\n      }\n    });\n  }\n}\n\nreturn chunks.map(c => ({ json: c }));"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        672,
+        16
+      ],
+      "id": "b7626bf7-9ea4-43be-94a9-84f9e53b7ee9",
+      "name": "dividir en chunks de 500"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.cohere.com/v2/embed",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer MOsdB9z63Xkfql0o65WTjhIdv7RGmpYT4OlPOWpW"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ \"model\": \"embed-multilingual-light-v3.0\", \"texts\": [$json.content], \"input_type\": \"search_document\", \"embedding_types\": [\"float\"] }) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        880,
+        16
+      ],
+      "id": "c7c33e3d-cba0-4031-bf73-a96596843c25",
+      "name": "embeding"
+    },
+    {
+      "parameters": {
+        "jsCode": "const cohereOutput = $input.first().json;\nconst embedding = cohereOutput.embeddings.float[0];\n\nconst chunkData = $('dividir en chunks de 500').item.json;\n\n// Pausa de 2 segundos\nawait new Promise(resolve => setTimeout(resolve, 3000));\n\nreturn [{\n  json: {\n    content: chunkData.content,\n    metadata: chunkData.metadata,\n    embedding: embedding\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1072,
+        16
+      ],
+      "id": "5a934f2c-4278-4152-beda-68cc1097be69",
+      "name": "mantener referencia"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://niucsjoaufrzpquicens.supabase.co/rest/v1/documents",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5pdWNzam9hdWZyenBxdWljZW5zIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MDIwMzk3NywiZXhwIjoyMDg1Nzc5OTc3fQ.O47K6zqyHxQVKWffIKW6GggqJ_YHpBw0YH3c-Cc5pCk"
+            },
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5pdWNzam9hdWZyenBxdWljZW5zIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MDIwMzk3NywiZXhwIjoyMDg1Nzc5OTc3fQ.O47K6zqyHxQVKWffIKW6GggqJ_YHpBw0YH3c-Cc5pCk"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Prefer",
+              "value": "return=minimal"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ \"content\": $json.content, \"metadata\": $json.metadata, \"embedding\": $json.embedding }) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        1280,
+        16
+      ],
+      "id": "c59098a9-2c41-456f-8d2f-a5f947124936",
+      "name": "insertar en supabase"
+    },
+    {
+      "parameters": {
+        "amount": 2
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1488,
+        16
+      ],
+      "id": "e66fffbd-5e8a-4257-a132-85d7a3288bfe",
+      "name": "Wait",
+      "webhookId": "ef843216-6031-4b86-b5c5-0a3fd2cf22ba"
     }
   ],
   "pinData": {},
@@ -77,6 +320,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2026-03-20T15:26:13.681Z",
-  "versionId": "44409a45-8fc6-4264-8650-eff06a92bcb2"
+  "updatedAt": "2026-03-23T09:50:45.202Z",
+  "versionId": "8915d5a8-9b80-4266-a623-b2ac99dd5aec"
 }
