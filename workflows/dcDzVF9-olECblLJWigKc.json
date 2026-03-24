@@ -1,0 +1,150 @@
+{
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-03-23T15:09:03.000Z",
+    "createdAt": "2026-03-23T15:09:02.531Z",
+    "versionId": "4343d51c-2cb4-48aa-bf61-fb63d8108fe9",
+    "workflowId": "dcDzVF9-olECblLJWigKc",
+    "nodes": [
+      {
+        "parameters": {
+          "path": "video",
+          "responseMode": "responseNode",
+          "options": {}
+        },
+        "id": "7cfb5e18-957b-4df3-bd87-bcee59c8fc99",
+        "name": "Webhook - Entrada",
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2,
+        "position": [
+          -176,
+          -80
+        ],
+        "webhookId": "video-entry"
+      },
+      {
+        "parameters": {
+          "respondWith": "text",
+          "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0\">\n  <title>Escuela Surfin — Bienvenido a tu mejor experiencia en la nieve</title>\n  <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n  <link href=\"https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap\" rel=\"stylesheet\">\n  <style>\n    * { box-sizing: border-box; margin: 0; padding: 0; }\n    body { background: #0d0d0d; display: flex; justify-content: center; }\n    #app { font-family: 'Inter', sans-serif; background: #0d0d0d; color: #f0ede8; max-width: 390px; width: 100%; min-height: 100vh; }\n    .top-bar { padding: 22px 20px 0; display: flex; align-items: center; justify-content: space-between; }\n    .logo { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 5px; color: #f0ede8; }\n    .logo span { color: #FF5500; }\n    .years-tag { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: #555; border: 1px solid #2a2a2a; padding: 4px 9px; border-radius: 20px; text-align: right; line-height: 1.4; }\n    .hero { padding: 28px 20px 28px; }\n    .hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: 38px; line-height: 1.0; letter-spacing: 1px; color: #f0ede8; margin-bottom: 6px; }\n    .hero h1 em { color: #FF5500; font-style: normal; }\n    .hero-sub { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #555; margin-bottom: 20px; }\n    .divider { width: 36px; height: 2px; background: #FF5500; margin-bottom: 20px; }\n    .hero-body { font-size: 13px; color: #888; line-height: 1.75; }\n    .hero-body strong { color: #f0ede8; font-weight: 600; }\n    .sec-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: #FF5500; display: block; padding: 0 20px; margin-bottom: 14px; }\n    .video-wrap { padding: 0 20px; margin-bottom: 32px; }\n    .video-container { width: 100%; border-radius: 10px; overflow: hidden; border: 1px solid #222; background: #111; }\n    .video-container video { width: 100%; display: block; max-height: 70vh; background: #111; }\n    .sep { margin: 8px 20px 28px; border: none; border-top: 1px solid #1e1e1e; }\n    .descuento-block { margin: 0 20px 32px; background: #181818; border: 1px solid #2a2a2a; border-radius: 12px; overflow: hidden; }\n    .descuento-header { background: #FF5500; padding: 14px 18px; display: flex; align-items: center; gap: 10px; }\n    .descuento-header .pct { font-family: 'Bebas Neue', sans-serif; font-size: 42px; color: #fff; line-height: 1; }\n    .descuento-header .desc-text h3 { font-size: 13px; font-weight: 600; color: #fff; line-height: 1.3; }\n    .descuento-header .desc-text p { font-size: 11px; color: rgba(255,255,255,0.75); margin-top: 2px; }\n    .marcas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: #2a2a2a; }\n    .marca-item { background: #181818; padding: 14px 16px; display: flex; align-items: center; gap: 8px; }\n    .marca-dot { width: 6px; height: 6px; border-radius: 50%; background: #FF5500; flex-shrink: 0; }\n    .marca-item span { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 2px; color: #f0ede8; }\n    .descuento-cta { padding: 16px 18px; }\n    .btn-orange { display: block; width: 100%; background: #FF5500; color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 2px; padding: 14px; border: none; border-radius: 8px; cursor: pointer; text-align: center; }\n    .evaluar-block { margin: 0 20px 32px; background: #181818; border: 1px solid #2a2a2a; border-radius: 12px; padding: 22px 18px; text-align: center; }\n    .evaluar-icon { font-size: 32px; margin-bottom: 10px; }\n    .evaluar-block h3 { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 1px; color: #f0ede8; margin-bottom: 8px; }\n    .evaluar-block p { font-size: 12px; color: #666; line-height: 1.65; margin-bottom: 18px; }\n    .contacto-block { margin: 0 20px 40px; background: #131313; border: 1px solid #1e1e1e; border-radius: 12px; padding: 20px 18px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }\n    .contacto-block .c-left h4 { font-size: 13px; font-weight: 600; color: #f0ede8; margin-bottom: 4px; }\n    .contacto-block .c-left p { font-size: 11px; color: #555; }\n    .tel-btn { background: #1e1e1e; border: 1px solid #2a2a2a; border-radius: 8px; padding: 10px 14px; display: flex; align-items: center; gap: 7px; cursor: pointer; text-decoration: none; flex-shrink: 0; }\n    .tel-btn span { font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 1px; color: #FF5500; }\n    .tel-btn svg { width: 14px; height: 14px; }\n    .footer { padding: 24px 20px 36px; text-align: center; border-top: 1px solid #1a1a1a; }\n    .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 5px; color: #2a2a2a; }\n    .footer-logo span { color: #FF5500; opacity: 0.4; }\n    .footer p { font-size: 11px; color: #333; margin-top: 8px; }\n  </style>\n</head>\n<body>\n<div id=\"app\">\n\n  <div class=\"top-bar\">\n    <div class=\"logo\">SURF<span>IN</span></div>\n    <div class=\"years-tag\">+25 años<br>Sierra Nevada</div>\n  </div>\n\n  <div class=\"hero\">\n    <h1>Bienvenido a tu<br>mejor experiencia<br>en la <em>nieve</em></h1>\n    <div class=\"hero-sub\">Escuela Surfin · Sierra Nevada, Granada</div>\n    <div class=\"divider\"></div>\n    <p class=\"hero-body\">\n      Para comenzar sin problemas, es importante que estés a la <strong>hora indicada en el club En Pistas</strong>.<br><br>\n      Te compartimos este video con las indicaciones de cómo llegar. Te recomendamos llegar unos minutos antes para empezar puntualmente y disfrutar al máximo de tus clases.<br><br>\n      ¡Nos vemos en pistas! ⛷️\n    </p>\n  </div>\n\n  <span class=\"sec-label\">▶ Cómo llegar a tus clases</span>\n  <div class=\"video-wrap\">\n    <div class=\"video-container\">\n      <video controls playsinline>\n        <source src=\"https://cdn.shopify.com/videos/c/o/v/ccd6b4873c5d4151b29b98e0d0b35be2.mp4\" type=\"video/mp4\">\n      </video>\n    </div>\n  </div>\n\n  <hr class=\"sep\">\n\n  <span class=\"sec-label\">▶ Tu beneficio como cliente</span>\n  <div class=\"descuento-block\">\n    <div class=\"descuento-header\">\n      <div class=\"pct\">10%</div>\n      <div class=\"desc-text\">\n        <h3>Descuento exclusivo<br>en marcas afiliadas</h3>\n        <p>Solo por ser alumno de Escuela Surfin</p>\n      </div>\n    </div>\n    <div class=\"marcas-grid\">\n      <div class=\"marca-item\"><div class=\"marca-dot\"></div><span>Mesit</span></div>\n      <div class=\"marca-item\"><div class=\"marca-dot\"></div><span>Surfin</span></div>\n      <div class=\"marca-item\"><div class=\"marca-dot\"></div><span>Oakley</span></div>\n      <div class=\"marca-item\"><div class=\"marca-dot\"></div><span>The North Face</span></div>\n    </div>\n    <div class=\"descuento-cta\">\n      <button class=\"btn-orange\">Ver cómo canjear mi descuento</button>\n    </div>\n  </div>\n\n  <hr class=\"sep\">\n\n  <span class=\"sec-label\">▶ Una vez finalizada la clase</span>\n  <div class=\"evaluar-block\">\n    <div class=\"evaluar-icon\">⭐</div>\n    <h3>Evalúa a tu instructor</h3>\n    <p>Tu opinión nos ayuda a mejorar y a reconocer el trabajo de nuestro equipo. Solo te lleva 1 minuto.</p>\n    <a href=\"https://forms.gle/z4SRTPgkucy2dkNj7\" target=\"_blank\" class=\"btn-orange\">Evaluar ahora</a>\n  </div>\n\n  <hr class=\"sep\">\n\n  <span class=\"sec-label\">▶ ¿Tienes dudas?</span>\n  <div class=\"contacto-block\">\n    <div class=\"c-left\">\n      <h4>Estamos aquí para ayudarte</h4>\n      <p>Llámanos o escríbenos por WhatsApp</p>\n    </div>\n    <a class=\"tel-btn\" href=\"tel:638877288\">\n      <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#FF5500\" stroke-width=\"2\"><path d=\"M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.1 2.18 2 2 0 012.1 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92v2z\"/></svg>\n      <span>638 877 288</span>\n    </a>\n  </div>\n\n  <div class=\"footer\">\n    <div class=\"footer-logo\">SURF<span>IN</span></div>\n    <p>Escuela Surfin · Sierra Nevada, Granada · +25 años</p>\n  </div>\n\n</div>\n</body>\n</html>",
+          "options": {
+            "responseHeaders": {
+              "entries": [
+                {
+                  "name": "Content-Type",
+                  "value": "text/html; charset=utf-8"
+                }
+              ]
+            }
+          }
+        },
+        "id": "f3ccfe9c-e255-4f99-a9b4-3044100b8f63",
+        "name": "Respond - Vídeo (con consent)",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1,
+        "position": [
+          96,
+          -80
+        ]
+      }
+    ],
+    "connections": {
+      "Webhook - Entrada": {
+        "main": [
+          [
+            {
+              "node": "Respond - Vídeo (con consent)",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Tailwind Media",
+    "name": "Version 4343d51c",
+    "description": "",
+    "autosaved": false
+  },
+  "activeVersionId": "4343d51c-2cb4-48aa-bf61-fb63d8108fe9",
+  "connections": {
+    "Webhook - Entrada": {
+      "main": [
+        [
+          {
+            "node": "Respond - Vídeo (con consent)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-03-23T11:29:24.109Z",
+  "id": "dcDzVF9-olECblLJWigKc",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Video con Consentimiento RGPD",
+  "nodes": [
+    {
+      "parameters": {
+        "path": "video",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "7cfb5e18-957b-4df3-bd87-bcee59c8fc99",
+      "name": "Webhook - Entrada",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -176,
+        -80
+      ],
+      "webhookId": "video-entry"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0\">\n  <title>Escuela Surfin — Bienvenido a tu mejor experiencia en la nieve</title>\n  <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n  <link href=\"https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap\" rel=\"stylesheet\">\n  <style>\n    * { box-sizing: border-box; margin: 0; padding: 0; }\n    body { background: #0d0d0d; display: flex; justify-content: center; }\n    #app { font-family: 'Inter', sans-serif; background: #0d0d0d; color: #f0ede8; max-width: 390px; width: 100%; min-height: 100vh; }\n    .top-bar { padding: 22px 20px 0; display: flex; align-items: center; justify-content: space-between; }\n    .logo { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 5px; color: #f0ede8; }\n    .logo span { color: #FF5500; }\n    .years-tag { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: #555; border: 1px solid #2a2a2a; padding: 4px 9px; border-radius: 20px; text-align: right; line-height: 1.4; }\n    .hero { padding: 28px 20px 28px; }\n    .hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: 38px; line-height: 1.0; letter-spacing: 1px; color: #f0ede8; margin-bottom: 6px; }\n    .hero h1 em { color: #FF5500; font-style: normal; }\n    .hero-sub { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #555; margin-bottom: 20px; }\n    .divider { width: 36px; height: 2px; background: #FF5500; margin-bottom: 20px; }\n    .hero-body { font-size: 13px; color: #888; line-height: 1.75; }\n    .hero-body strong { color: #f0ede8; font-weight: 600; }\n    .sec-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: #FF5500; display: block; padding: 0 20px; margin-bottom: 14px; }\n    .video-wrap { padding: 0 20px; margin-bottom: 32px; }\n    .video-container { width: 100%; border-radius: 10px; overflow: hidden; border: 1px solid #222; background: #111; }\n    .video-container video { width: 100%; display: block; max-height: 70vh; background: #111; }\n    .sep { margin: 8px 20px 28px; border: none; border-top: 1px solid #1e1e1e; }\n    .descuento-block { margin: 0 20px 32px; background: #181818; border: 1px solid #2a2a2a; border-radius: 12px; overflow: hidden; }\n    .descuento-header { background: #FF5500; padding: 14px 18px; display: flex; align-items: center; gap: 10px; }\n    .descuento-header .pct { font-family: 'Bebas Neue', sans-serif; font-size: 42px; color: #fff; line-height: 1; }\n    .descuento-header .desc-text h3 { font-size: 13px; font-weight: 600; color: #fff; line-height: 1.3; }\n    .descuento-header .desc-text p { font-size: 11px; color: rgba(255,255,255,0.75); margin-top: 2px; }\n    .marcas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: #2a2a2a; }\n    .marca-item { background: #181818; padding: 14px 16px; display: flex; align-items: center; gap: 8px; }\n    .marca-dot { width: 6px; height: 6px; border-radius: 50%; background: #FF5500; flex-shrink: 0; }\n    .marca-item span { font-family: 'Bebas Neue', sans-serif; font-size: 16px; letter-spacing: 2px; color: #f0ede8; }\n    .descuento-cta { padding: 16px 18px; }\n    .btn-orange { display: block; width: 100%; background: #FF5500; color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 2px; padding: 14px; border: none; border-radius: 8px; cursor: pointer; text-align: center; }\n    .evaluar-block { margin: 0 20px 32px; background: #181818; border: 1px solid #2a2a2a; border-radius: 12px; padding: 22px 18px; text-align: center; }\n    .evaluar-icon { font-size: 32px; margin-bottom: 10px; }\n    .evaluar-block h3 { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 1px; color: #f0ede8; margin-bottom: 8px; }\n    .evaluar-block p { font-size: 12px; color: #666; line-height: 1.65; margin-bottom: 18px; }\n    .contacto-block { margin: 0 20px 40px; background: #131313; border: 1px solid #1e1e1e; border-radius: 12px; padding: 20px 18px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }\n    .contacto-block .c-left h4 { font-size: 13px; font-weight: 600; color: #f0ede8; margin-bottom: 4px; }\n    .contacto-block .c-left p { font-size: 11px; color: #555; }\n    .tel-btn { background: #1e1e1e; border: 1px solid #2a2a2a; border-radius: 8px; padding: 10px 14px; display: flex; align-items: center; gap: 7px; cursor: pointer; text-decoration: none; flex-shrink: 0; }\n    .tel-btn span { font-family: 'Bebas Neue', sans-serif; font-size: 15px; letter-spacing: 1px; color: #FF5500; }\n    .tel-btn svg { width: 14px; height: 14px; }\n    .footer { padding: 24px 20px 36px; text-align: center; border-top: 1px solid #1a1a1a; }\n    .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 5px; color: #2a2a2a; }\n    .footer-logo span { color: #FF5500; opacity: 0.4; }\n    .footer p { font-size: 11px; color: #333; margin-top: 8px; }\n  </style>\n</head>\n<body>\n<div id=\"app\">\n\n  <div class=\"top-bar\">\n    <div class=\"logo\">SURF<span>IN</span></div>\n    <div class=\"years-tag\">+25 años<br>Sierra Nevada</div>\n  </div>\n\n  <div class=\"hero\">\n    <h1>Bienvenido a tu<br>mejor experiencia<br>en la <em>nieve</em></h1>\n    <div class=\"hero-sub\">Escuela Surfin · Sierra Nevada, Granada</div>\n    <div class=\"divider\"></div>\n    <p class=\"hero-body\">\n      Para comenzar sin problemas, es importante que estés a la <strong>hora indicada en el club En Pistas</strong>.<br><br>\n      Te compartimos este video con las indicaciones de cómo llegar. Te recomendamos llegar unos minutos antes para empezar puntualmente y disfrutar al máximo de tus clases.<br><br>\n      ¡Nos vemos en pistas! ⛷️\n    </p>\n  </div>\n\n  <span class=\"sec-label\">▶ Cómo llegar a tus clases</span>\n  <div class=\"video-wrap\">\n    <div class=\"video-container\">\n      <video controls playsinline>\n        <source src=\"https://cdn.shopify.com/videos/c/o/v/ccd6b4873c5d4151b29b98e0d0b35be2.mp4\" type=\"video/mp4\">\n      </video>\n    </div>\n  </div>\n\n  <hr class=\"sep\">\n\n  <span class=\"sec-label\">▶ Tu beneficio como cliente</span>\n  <div class=\"descuento-block\">\n    <div class=\"descuento-header\">\n      <div class=\"pct\">10%</div>\n      <div class=\"desc-text\">\n        <h3>Descuento exclusivo<br>en marcas afiliadas</h3>\n        <p>Solo por ser alumno de Escuela Surfin</p>\n      </div>\n    </div>\n    <div class=\"marcas-grid\">\n      <div class=\"marca-item\"><div class=\"marca-dot\"></div><span>Mesit</span></div>\n      <div class=\"marca-item\"><div class=\"marca-dot\"></div><span>Surfin</span></div>\n      <div class=\"marca-item\"><div class=\"marca-dot\"></div><span>Oakley</span></div>\n      <div class=\"marca-item\"><div class=\"marca-dot\"></div><span>The North Face</span></div>\n    </div>\n    <div class=\"descuento-cta\">\n      <button class=\"btn-orange\">Ver cómo canjear mi descuento</button>\n    </div>\n  </div>\n\n  <hr class=\"sep\">\n\n  <span class=\"sec-label\">▶ Una vez finalizada la clase</span>\n  <div class=\"evaluar-block\">\n    <div class=\"evaluar-icon\">⭐</div>\n    <h3>Evalúa a tu instructor</h3>\n    <p>Tu opinión nos ayuda a mejorar y a reconocer el trabajo de nuestro equipo. Solo te lleva 1 minuto.</p>\n    <a href=\"https://forms.gle/z4SRTPgkucy2dkNj7\" target=\"_blank\" class=\"btn-orange\">Evaluar ahora</a>\n  </div>\n\n  <hr class=\"sep\">\n\n  <span class=\"sec-label\">▶ ¿Tienes dudas?</span>\n  <div class=\"contacto-block\">\n    <div class=\"c-left\">\n      <h4>Estamos aquí para ayudarte</h4>\n      <p>Llámanos o escríbenos por WhatsApp</p>\n    </div>\n    <a class=\"tel-btn\" href=\"tel:638877288\">\n      <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#FF5500\" stroke-width=\"2\"><path d=\"M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.1 2.18 2 2 0 012.1 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92v2z\"/></svg>\n      <span>638 877 288</span>\n    </a>\n  </div>\n\n  <div class=\"footer\">\n    <div class=\"footer-logo\">SURF<span>IN</span></div>\n    <p>Escuela Surfin · Sierra Nevada, Granada · +25 años</p>\n  </div>\n\n</div>\n</body>\n</html>",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/html; charset=utf-8"
+              }
+            ]
+          }
+        }
+      },
+      "id": "f3ccfe9c-e255-4f99-a9b4-3044100b8f63",
+      "name": "Respond - Vídeo (con consent)",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        96,
+        -80
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-03-23T11:29:24.114Z",
+      "createdAt": "2026-03-23T11:29:24.114Z",
+      "role": "workflow:owner",
+      "workflowId": "dcDzVF9-olECblLJWigKc",
+      "projectId": "x5UZcmGQw2OWHuXb"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2026-03-23T15:09:02.527Z",
+  "versionId": "4343d51c-2cb4-48aa-bf61-fb63d8108fe9"
+}
