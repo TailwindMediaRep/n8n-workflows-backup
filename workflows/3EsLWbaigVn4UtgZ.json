@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-03-03T13:09:38.000Z",
-    "createdAt": "2026-03-03T13:09:37.125Z",
-    "versionId": "7e81a3c4-a3fb-4b61-a878-2a4a57f34057",
+    "updatedAt": "2026-03-26T16:32:02.000Z",
+    "createdAt": "2026-03-26T16:32:00.784Z",
+    "versionId": "353723e8-3698-40ce-bd93-5d67e2d525dc",
     "workflowId": "3EsLWbaigVn4UtgZ",
     "nodes": [
       {
@@ -2750,8 +2750,8 @@
         "type": "n8n-nodes-base.webhook",
         "typeVersion": 2.1,
         "position": [
-          2512,
-          -752
+          1696,
+          -1216
         ],
         "id": "50d47124-56fb-448c-95b1-1aff6feb6b2f",
         "name": "Leerqr",
@@ -2759,15 +2759,13 @@
       },
       {
         "parameters": {
-          "respondWith": "text",
-          "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Tus Descuentos</title>\n  <style>\n    /* FIX MÓVIL: Evita que los paddings ensanchen la pantalla */\n    * { \n      box-sizing: border-box; \n    }\n\n    body { \n      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; \n      padding: 20px; \n      max-width: 1000px; \n      margin: 0 auto; \n      color: #333;\n      background-color: #fcfcfc;\n      /* FIX MÓVIL: Bloquea el deslizamiento horizontal de toda la página */\n      overflow-x: hidden; \n    }\n    \n    .main-header { text-align: center; margin-bottom: 40px; }\n    h2 { color: #000; margin-bottom: 5px; font-size: 2rem; }\n    p { color: #555; }\n    \n    /* Layout de dos columnas */\n    .container {\n      display: flex;\n      flex-wrap: wrap;\n      gap: 20px; /* Reducido un poco para que respire mejor en móvil */\n    }\n    .column {\n      flex: 1 1 300px; /* FIX MÓVIL: Permite que se adapte mejor a pantallas pequeñas */\n      min-width: 0; /* FIX MÓVIL: Evita que el contenedor rompa el flexbox */\n      background: #fff;\n      padding: 25px;\n      border-radius: 12px;\n      box-shadow: 0 4px 6px rgba(0,0,0,0.05);\n      /* FIX MÓVIL: Si la tabla es muy ancha, se desliza por dentro del recuadro */\n      overflow-x: auto; \n    }\n    .section-title {\n      margin-top: 0;\n      padding-bottom: 10px;\n      border-bottom: 2px solid #eee;\n      font-size: 1.3rem;\n      color: #000;\n    }\n\n    table { \n      width: 100%; \n      border-collapse: collapse; \n      margin-top: 15px; \n      border-radius: 8px;\n      border: 1px solid #f0f0f0;\n      /* FIX MÓVIL: Asegura que la tabla no encoja demasiado sus textos */\n      min-width: 350px; \n    }\n    th, td { \n      padding: 12px 15px; \n      text-align: left; \n      border-bottom: 1px solid #f0f0f0; \n      vertical-align: middle;\n      font-size: 14px;\n    }\n    th { \n      background-color: #f8f9fa; \n      font-weight: 600; \n      color: #333;\n    }\n    tr:last-child td { border-bottom: none; }\n    \n    .discount-badge { \n      background-color: #000; \n      color: #fff; \n      padding: 4px 10px; \n      border-radius: 20px; \n      font-weight: bold; \n      font-size: 13px;\n      white-space: nowrap; /* Evita que el \"%\" se vaya a otra línea */\n    }\n    .no-data { text-align: center; padding: 30px; color: #666; background: #f9f9f9; border-radius: 8px; font-size: 14px;}\n    \n    .map-btn {\n      display: inline-block;\n      background-color: #f4f6f8;\n      color: #333;\n      padding: 6px 12px;\n      border-radius: 6px;\n      text-decoration: none;\n      font-size: 12px;\n      font-weight: 600;\n      border: 1px solid #ddd;\n      transition: all 0.2s;\n      white-space: nowrap;\n    }\n    .map-btn:hover { background-color: #e2e6ea; color: #000; border-color: #ccc; }\n\n    /* Estilos específicos compras e imágenes */\n    .sucursal-name {\n      margin-top: 25px;\n      margin-bottom: 5px;\n      font-size: 1.1rem;\n      color: #222;\n    }\n    .price-original { text-decoration: line-through; color: #999; font-size: 0.9em; }\n    .price-discount { color: #27ae60; font-weight: bold; font-size: 1.1em; }\n    .savings-text { display: block; font-size: 0.8em; color: #27ae60; margin-top: 2px; }\n    \n    .product-cell {\n      display: flex;\n      align-items: center;\n      gap: 15px;\n    }\n    .product-img {\n      width: 45px;\n      height: 45px;\n      object-fit: cover;\n      border-radius: 6px;\n      border: 1px solid #eaeaea;\n      background-color: #fff;\n    }\n\n    /* Nota legal al pie de página */\n    .footer-note {\n      text-align: center;\n      margin-top: 50px;\n      padding-top: 20px;\n      font-size: 12px;\n      color: #888;\n      border-top: 1px solid #eaeaea;\n    }\n\n    /* FIX MÓVIL: Ajustes finales para pantallas muy pequeñas */\n    @media (max-width: 600px) {\n      body { padding: 10px; }\n      .column { padding: 15px; }\n      h2 { font-size: 1.6rem; }\n      th, td { padding: 10px; font-size: 13px; }\n    }\n  </style>\n</head>\n<body>\n\n  {{ \n    (() => {\n      const supabaseData = $node[\"If\"].json; \n      \n      if (!supabaseData) {\n        return `\n          <div class=\"main-header\"><h2>¡Hola!</h2></div>\n          <div class=\"no-data\"><p>No hemos encontrado tu perfil o hubo un error al leer el QR.</p></div>\n        `;\n      }\n\n      const sucursales = [\n        { key: 'sucursal_rules', orderKey: 'pedido_rules', name: 'Rules Outlet', url: 'https://maps.app.goo.gl/2zcHYJzYi4mku9Bw5' },\n        { key: 'sucursal_oakley', orderKey: 'pedido_oakley', name: 'Rules Oakley', url: 'https://maps.app.goo.gl/T81E6eXNTRWc86nj9' },\n        { key: 'sucursal_thenorthface', orderKey: 'pedido_thenorthface', name: 'Rules The North Face', url: 'https://maps.app.goo.gl/T81E6eXNTRWc86nj9' },\n        { key: 'sucursal_surfin', orderKey: 'pedido_surfin', name: 'Surfin', url: 'https://maps.app.goo.gl/18GNbRyLLukuo4m57' },\n        { key: 'sucursal_nuance', orderKey: 'pedido_nuance', name: 'Nuance', url: 'https://maps.app.goo.gl/Farx9QjYyZX294pe7' },\n        { key: 'sucursal_nuancelodge', orderKey: 'pedido_nuancelodge', name: 'Nuance Lodge', url: 'https://maps.app.goo.gl/ND7hyiUQMVSpJ2G96' },\n        { key: 'sucursal_melia', orderKey: 'pedido_melia', name: 'Meliá Sierra Nevada', url: 'https://maps.app.goo.gl/Cf146WRdUBgxN8KT8' }\n      ];\n\n      // --- COLUMNA IZQUIERDA ---\n      const descuentosActivos = sucursales.filter(s => parseInt(supabaseData[s.key] || 0) > 0);\n      \n      let leftColumn = '<div class=\"column\"><h3 class=\"section-title\">Tus descuentos activos</h3>';\n      if (descuentosActivos.length === 0) {\n        leftColumn += '<div class=\"no-data\"><p>Actualmente no tienes descuentos activos. ¡Sigue comprando para acumular más!</p></div>';\n      } else {\n        leftColumn += '<table><thead><tr><th>Sucursal</th><th>Descuento</th><th>Ubicación</th></tr></thead><tbody>';\n        descuentosActivos.forEach(s => {\n          leftColumn += `\n            <tr>\n              <td><strong>${s.name}</strong></td>\n              <td><span class=\"discount-badge\">${supabaseData[s.key]}%</span></td>\n              <td><a href=\"${s.url}\" target=\"_top\" rel=\"noopener noreferrer\" class=\"map-btn\">📍 Ver mapa</a></td>\n            </tr>\n          `;\n        });\n        leftColumn += '</tbody></table>';\n      }\n      leftColumn += '</div>';\n\n      // --- COLUMNA DERECHA ---\n      let rightColumn = '<div class=\"column\"><h3 class=\"section-title\">Descuentos utilizados</h3>';\n      let hasUsedDiscounts = false;\n\n      try {\n        const orders = $node[\"GraphQL1\"].json.data.nodes;\n        \n        if (orders && orders.length > 0) {\n          \n          const orderToSucursal = {};\n          sucursales.forEach(s => {\n            if (supabaseData[s.orderKey]) {\n               orderToSucursal[\"gid://shopify/Order/\" + supabaseData[s.orderKey]] = s.name;\n            }\n          });\n\n          orders.forEach(order => {\n            if (!order) return; \n            \n            const sucursalName = orderToSucursal[order.id] || 'Tienda';\n            const items = order.lineItems.edges;\n\n            if (items.length > 0) {\n              hasUsedDiscounts = true;\n              rightColumn += `\n                <h4 class=\"sucursal-name\">${sucursalName} <span style=\"font-size:12px; color:#888; font-weight:normal;\">(${order.name})</span></h4>\n                <table>\n                  <thead>\n                    <tr>\n                      <th>Producto</th>\n                      <th>Precio Original</th>\n                      <th>Tu Precio</th>\n                    </tr>\n                  </thead>\n                  <tbody>\n              `;\n\n              items.forEach(item => {\n                const node = item.node;\n                const originalPrice = parseFloat(node.originalTotalSet.shopMoney.amount);\n                const discountedPrice = parseFloat(node.discountedTotalSet.shopMoney.amount);\n                const savings = (originalPrice - discountedPrice).toFixed(2);\n\n                const imageUrl = node.image && node.image.url ? node.image.url : 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';\n\n                let originalHtml = '-';\n                let savingsHtml = '';\n                \n                if (originalPrice > discountedPrice) {\n                   originalHtml = `<span class=\"price-original\">${originalPrice.toFixed(2)}€</span>`;\n                   savingsHtml = `<span class=\"savings-text\">Ahorraste ${savings}€</span>`;\n                }\n\n                rightColumn += `\n                  <tr>\n                    <td>\n                      <div class=\"product-cell\">\n                        <img src=\"${imageUrl}\" alt=\"${node.title}\" class=\"product-img\" onerror=\"this.style.display='none'\">\n                        <div>\n                          <strong>${node.title}</strong><br>\n                          <span style=\"font-size: 0.85em; color: #666;\">Cant: ${node.quantity}</span>\n                        </div>\n                      </div>\n                    </td>\n                    <td>${originalHtml}</td>\n                    <td>\n                      <span class=\"price-discount\">${discountedPrice.toFixed(2)}€</span>\n                      ${savingsHtml}\n                    </td>\n                  </tr>\n                `;\n              });\n              rightColumn += `</tbody></table>`;\n            }\n          });\n        }\n      } catch (error) {\n        console.log(\"Error leyendo pedidos GraphQL: \", error);\n      }\n\n      if (!hasUsedDiscounts) {\n         rightColumn += '<div class=\"no-data\" style=\"margin-top:15px;\"><p>Aún no has utilizado ningún descuento en tus compras.</p></div>';\n      }\n      \n      rightColumn += '</div>';\n\n      // --- UNIMOS TODO ---\n      const finalHtml = `\n        <div class=\"main-header\">\n          <h2>¡Hola, ${supabaseData.Nombre || 'Cliente'}!</h2>\n          <p>Bienvenido a tu área personal.</p>\n        </div>\n        <div class=\"container\">\n          ${leftColumn}\n          ${rightColumn}\n        </div>\n        <p class=\"footer-note\">El descuento solo se aplicará a artículos que no tengan descuento de antemano.</p>\n      `;\n\n      return finalHtml;\n    })()\n  }}\n\n</body>\n</html>",
           "options": {}
         },
         "type": "n8n-nodes-base.respondToWebhook",
         "typeVersion": 1.5,
         "position": [
-          3632,
-          -848
+          3024,
+          -1312
         ],
         "id": "ba3dd16e-f146-4321-8ca0-9d6e1903c0d4",
         "name": "Respond to Webhook"
@@ -2799,8 +2797,8 @@
         "type": "n8n-nodes-base.postgres",
         "typeVersion": 2.6,
         "position": [
-          2928,
-          -752
+          2112,
+          -1216
         ],
         "id": "854c91f8-93f3-46f5-a1de-ec03fa9b4a3e",
         "name": "Select rows from a table",
@@ -2839,8 +2837,8 @@
         "type": "n8n-nodes-base.if",
         "typeVersion": 2.3,
         "position": [
-          3184,
-          -752
+          2368,
+          -1216
         ],
         "id": "ceec1aba-9719-4440-b3ec-a563293b9876",
         "name": "If"
@@ -2854,8 +2852,8 @@
         "type": "n8n-nodes-base.respondToWebhook",
         "typeVersion": 1.5,
         "position": [
-          3392,
-          -656
+          2576,
+          -1120
         ],
         "id": "f38e9265-197e-4c46-9dff-bcc9cd8b5d68",
         "name": "Respond to Webhook1"
@@ -2870,8 +2868,8 @@
         "type": "n8n-nodes-base.graphql",
         "typeVersion": 1.1,
         "position": [
-          2720,
-          -752
+          1904,
+          -1216
         ],
         "id": "df362df3-7061-458d-9633-a1eb66b89be1",
         "name": "GraphQL",
@@ -2892,8 +2890,8 @@
         "type": "n8n-nodes-base.graphql",
         "typeVersion": 1.1,
         "position": [
-          3392,
-          -848
+          2576,
+          -1312
         ],
         "id": "8f06d485-00b0-4ce8-9588-856fc96b7742",
         "name": "GraphQL1",
@@ -2903,6 +2901,19 @@
             "name": "Token Informes Shopify"
           }
         }
+      },
+      {
+        "parameters": {
+          "jsCode": "const supabase = $('Select rows from a table').item.json;\n\n// Mapeo pedido → nombre de sucursal\nconst SUCURSALES = {\n  pedido_rules:        'Rules Outlet',\n  pedido_oakley:       'Rules Oakley',\n  pedido_thenorthface: 'Rules The North Face',\n  pedido_surfin:       'Surfin',\n  pedido_nuance:       'Nuance',\n  pedido_nuancelodge:  'Nuance Lodge',\n  pedido_melia:        'Meliá Sierra Nevada'\n};\n\n// Construir mapa: GID de pedido → nombre de sucursal\nconst orderMap = {};\nfor (const [key, nombre] of Object.entries(SUCURSALES)) {\n  if (supabase[key]) {\n    orderMap['gid://shopify/Order/' + supabase[key]] = nombre;\n  }\n}\n\n// Procesar pedidos de GraphQL1\nconst rawOrders = $('GraphQL1').item.json?.data?.nodes || [];\nconst pedidos = rawOrders\n  .filter(o => o !== null)\n  .map(order => {\n    const sucursal = orderMap[order.id] || 'Tienda';\n    const items = (order.lineItems?.edges || []).map(({ node: p }) => {\n      const orig = parseFloat(p.originalTotalSet?.shopMoney?.amount || 0);\n      const disc = parseFloat(p.discountedTotalSet?.shopMoney?.amount || 0);\n      return {\n        titulo:    p.title,\n        cantidad:  p.quantity,\n        imagen:    p.image?.url || null,\n        precio_original:   orig,\n        precio_descuento:  disc,\n        ahorro:            parseFloat((orig - disc).toFixed(2))\n      };\n    });\n    const totalAhorro = items.reduce((acc, i) => acc + i.ahorro, 0);\n    return {\n      id:       order.id,\n      nombre:   order.name,\n      sucursal: sucursal,\n      items:    items,\n      totalAhorro: parseFloat(totalAhorro.toFixed(2))\n    };\n  })\n  .filter(o => o.items.length > 0);\n\nconst totalAhorroGlobal = pedidos.reduce((acc, p) => acc + p.totalAhorro, 0);\n\nreturn [{\n  json: {\n    Nombre:               supabase.Nombre || '',\n    correo:               supabase.correo || '',\n    sucursal_rules:       parseInt(supabase.sucursal_rules || 0),\n    sucursal_oakley:      parseInt(supabase.sucursal_oakley || 0),\n    sucursal_thenorthface:parseInt(supabase.sucursal_thenorthface || 0),\n    sucursal_surfin:      parseInt(supabase.sucursal_surfin || 0),\n    sucursal_nuance:      parseInt(supabase.sucursal_nuance || 0),\n    sucursal_nuancelodge: parseInt(supabase.sucursal_nuancelodge || 0),\n    sucursal_melia:       parseInt(supabase.sucursal_melia || 0),\n    pedido_rules:         supabase.pedido_rules || null,\n    pedido_oakley:        supabase.pedido_oakley || null,\n    pedido_thenorthface:  supabase.pedido_thenorthface || null,\n    pedido_surfin:        supabase.pedido_surfin || null,\n    pedido_nuance:        supabase.pedido_nuance || null,\n    pedido_nuancelodge:   supabase.pedido_nuancelodge || null,\n    pedido_melia:         supabase.pedido_melia || null,\n    pedidos:              pedidos,\n    totalAhorroGlobal:    parseFloat(totalAhorroGlobal.toFixed(2))\n  }\n}];"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          2800,
+          -1312
+        ],
+        "id": "12b4c9ff-3cef-4830-900b-b69993672c79",
+        "name": "Code in JavaScript"
       }
     ],
     "connections": {
@@ -3281,6 +3292,17 @@
         "main": [
           [
             {
+              "node": "Code in JavaScript",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Code in JavaScript": {
+        "main": [
+          [
+            {
               "node": "Respond to Webhook",
               "type": "main",
               "index": 0
@@ -3290,11 +3312,11 @@
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version 7e81a3c4",
+    "name": "Version 353723e8",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "7e81a3c4-a3fb-4b61-a878-2a4a57f34057",
+  "activeVersionId": "353723e8-3698-40ce-bd93-5d67e2d525dc",
   "connections": {
     "Webhook": {
       "main": [
@@ -3668,6 +3690,17 @@
       ]
     },
     "GraphQL1": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
       "main": [
         [
           {
@@ -6431,8 +6464,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        2512,
-        -752
+        1696,
+        -1216
       ],
       "id": "50d47124-56fb-448c-95b1-1aff6feb6b2f",
       "name": "Leerqr",
@@ -6440,15 +6473,13 @@
     },
     {
       "parameters": {
-        "respondWith": "text",
-        "responseBody": "=<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Tus Descuentos</title>\n  <style>\n    /* FIX MÓVIL: Evita que los paddings ensanchen la pantalla */\n    * { \n      box-sizing: border-box; \n    }\n\n    body { \n      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; \n      padding: 20px; \n      max-width: 1000px; \n      margin: 0 auto; \n      color: #333;\n      background-color: #fcfcfc;\n      /* FIX MÓVIL: Bloquea el deslizamiento horizontal de toda la página */\n      overflow-x: hidden; \n    }\n    \n    .main-header { text-align: center; margin-bottom: 40px; }\n    h2 { color: #000; margin-bottom: 5px; font-size: 2rem; }\n    p { color: #555; }\n    \n    /* Layout de dos columnas */\n    .container {\n      display: flex;\n      flex-wrap: wrap;\n      gap: 20px; /* Reducido un poco para que respire mejor en móvil */\n    }\n    .column {\n      flex: 1 1 300px; /* FIX MÓVIL: Permite que se adapte mejor a pantallas pequeñas */\n      min-width: 0; /* FIX MÓVIL: Evita que el contenedor rompa el flexbox */\n      background: #fff;\n      padding: 25px;\n      border-radius: 12px;\n      box-shadow: 0 4px 6px rgba(0,0,0,0.05);\n      /* FIX MÓVIL: Si la tabla es muy ancha, se desliza por dentro del recuadro */\n      overflow-x: auto; \n    }\n    .section-title {\n      margin-top: 0;\n      padding-bottom: 10px;\n      border-bottom: 2px solid #eee;\n      font-size: 1.3rem;\n      color: #000;\n    }\n\n    table { \n      width: 100%; \n      border-collapse: collapse; \n      margin-top: 15px; \n      border-radius: 8px;\n      border: 1px solid #f0f0f0;\n      /* FIX MÓVIL: Asegura que la tabla no encoja demasiado sus textos */\n      min-width: 350px; \n    }\n    th, td { \n      padding: 12px 15px; \n      text-align: left; \n      border-bottom: 1px solid #f0f0f0; \n      vertical-align: middle;\n      font-size: 14px;\n    }\n    th { \n      background-color: #f8f9fa; \n      font-weight: 600; \n      color: #333;\n    }\n    tr:last-child td { border-bottom: none; }\n    \n    .discount-badge { \n      background-color: #000; \n      color: #fff; \n      padding: 4px 10px; \n      border-radius: 20px; \n      font-weight: bold; \n      font-size: 13px;\n      white-space: nowrap; /* Evita que el \"%\" se vaya a otra línea */\n    }\n    .no-data { text-align: center; padding: 30px; color: #666; background: #f9f9f9; border-radius: 8px; font-size: 14px;}\n    \n    .map-btn {\n      display: inline-block;\n      background-color: #f4f6f8;\n      color: #333;\n      padding: 6px 12px;\n      border-radius: 6px;\n      text-decoration: none;\n      font-size: 12px;\n      font-weight: 600;\n      border: 1px solid #ddd;\n      transition: all 0.2s;\n      white-space: nowrap;\n    }\n    .map-btn:hover { background-color: #e2e6ea; color: #000; border-color: #ccc; }\n\n    /* Estilos específicos compras e imágenes */\n    .sucursal-name {\n      margin-top: 25px;\n      margin-bottom: 5px;\n      font-size: 1.1rem;\n      color: #222;\n    }\n    .price-original { text-decoration: line-through; color: #999; font-size: 0.9em; }\n    .price-discount { color: #27ae60; font-weight: bold; font-size: 1.1em; }\n    .savings-text { display: block; font-size: 0.8em; color: #27ae60; margin-top: 2px; }\n    \n    .product-cell {\n      display: flex;\n      align-items: center;\n      gap: 15px;\n    }\n    .product-img {\n      width: 45px;\n      height: 45px;\n      object-fit: cover;\n      border-radius: 6px;\n      border: 1px solid #eaeaea;\n      background-color: #fff;\n    }\n\n    /* Nota legal al pie de página */\n    .footer-note {\n      text-align: center;\n      margin-top: 50px;\n      padding-top: 20px;\n      font-size: 12px;\n      color: #888;\n      border-top: 1px solid #eaeaea;\n    }\n\n    /* FIX MÓVIL: Ajustes finales para pantallas muy pequeñas */\n    @media (max-width: 600px) {\n      body { padding: 10px; }\n      .column { padding: 15px; }\n      h2 { font-size: 1.6rem; }\n      th, td { padding: 10px; font-size: 13px; }\n    }\n  </style>\n</head>\n<body>\n\n  {{ \n    (() => {\n      const supabaseData = $node[\"If\"].json; \n      \n      if (!supabaseData) {\n        return `\n          <div class=\"main-header\"><h2>¡Hola!</h2></div>\n          <div class=\"no-data\"><p>No hemos encontrado tu perfil o hubo un error al leer el QR.</p></div>\n        `;\n      }\n\n      const sucursales = [\n        { key: 'sucursal_rules', orderKey: 'pedido_rules', name: 'Rules Outlet', url: 'https://maps.app.goo.gl/2zcHYJzYi4mku9Bw5' },\n        { key: 'sucursal_oakley', orderKey: 'pedido_oakley', name: 'Rules Oakley', url: 'https://maps.app.goo.gl/T81E6eXNTRWc86nj9' },\n        { key: 'sucursal_thenorthface', orderKey: 'pedido_thenorthface', name: 'Rules The North Face', url: 'https://maps.app.goo.gl/T81E6eXNTRWc86nj9' },\n        { key: 'sucursal_surfin', orderKey: 'pedido_surfin', name: 'Surfin', url: 'https://maps.app.goo.gl/18GNbRyLLukuo4m57' },\n        { key: 'sucursal_nuance', orderKey: 'pedido_nuance', name: 'Nuance', url: 'https://maps.app.goo.gl/Farx9QjYyZX294pe7' },\n        { key: 'sucursal_nuancelodge', orderKey: 'pedido_nuancelodge', name: 'Nuance Lodge', url: 'https://maps.app.goo.gl/ND7hyiUQMVSpJ2G96' },\n        { key: 'sucursal_melia', orderKey: 'pedido_melia', name: 'Meliá Sierra Nevada', url: 'https://maps.app.goo.gl/Cf146WRdUBgxN8KT8' }\n      ];\n\n      // --- COLUMNA IZQUIERDA ---\n      const descuentosActivos = sucursales.filter(s => parseInt(supabaseData[s.key] || 0) > 0);\n      \n      let leftColumn = '<div class=\"column\"><h3 class=\"section-title\">Tus descuentos activos</h3>';\n      if (descuentosActivos.length === 0) {\n        leftColumn += '<div class=\"no-data\"><p>Actualmente no tienes descuentos activos. ¡Sigue comprando para acumular más!</p></div>';\n      } else {\n        leftColumn += '<table><thead><tr><th>Sucursal</th><th>Descuento</th><th>Ubicación</th></tr></thead><tbody>';\n        descuentosActivos.forEach(s => {\n          leftColumn += `\n            <tr>\n              <td><strong>${s.name}</strong></td>\n              <td><span class=\"discount-badge\">${supabaseData[s.key]}%</span></td>\n              <td><a href=\"${s.url}\" target=\"_top\" rel=\"noopener noreferrer\" class=\"map-btn\">📍 Ver mapa</a></td>\n            </tr>\n          `;\n        });\n        leftColumn += '</tbody></table>';\n      }\n      leftColumn += '</div>';\n\n      // --- COLUMNA DERECHA ---\n      let rightColumn = '<div class=\"column\"><h3 class=\"section-title\">Descuentos utilizados</h3>';\n      let hasUsedDiscounts = false;\n\n      try {\n        const orders = $node[\"GraphQL1\"].json.data.nodes;\n        \n        if (orders && orders.length > 0) {\n          \n          const orderToSucursal = {};\n          sucursales.forEach(s => {\n            if (supabaseData[s.orderKey]) {\n               orderToSucursal[\"gid://shopify/Order/\" + supabaseData[s.orderKey]] = s.name;\n            }\n          });\n\n          orders.forEach(order => {\n            if (!order) return; \n            \n            const sucursalName = orderToSucursal[order.id] || 'Tienda';\n            const items = order.lineItems.edges;\n\n            if (items.length > 0) {\n              hasUsedDiscounts = true;\n              rightColumn += `\n                <h4 class=\"sucursal-name\">${sucursalName} <span style=\"font-size:12px; color:#888; font-weight:normal;\">(${order.name})</span></h4>\n                <table>\n                  <thead>\n                    <tr>\n                      <th>Producto</th>\n                      <th>Precio Original</th>\n                      <th>Tu Precio</th>\n                    </tr>\n                  </thead>\n                  <tbody>\n              `;\n\n              items.forEach(item => {\n                const node = item.node;\n                const originalPrice = parseFloat(node.originalTotalSet.shopMoney.amount);\n                const discountedPrice = parseFloat(node.discountedTotalSet.shopMoney.amount);\n                const savings = (originalPrice - discountedPrice).toFixed(2);\n\n                const imageUrl = node.image && node.image.url ? node.image.url : 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';\n\n                let originalHtml = '-';\n                let savingsHtml = '';\n                \n                if (originalPrice > discountedPrice) {\n                   originalHtml = `<span class=\"price-original\">${originalPrice.toFixed(2)}€</span>`;\n                   savingsHtml = `<span class=\"savings-text\">Ahorraste ${savings}€</span>`;\n                }\n\n                rightColumn += `\n                  <tr>\n                    <td>\n                      <div class=\"product-cell\">\n                        <img src=\"${imageUrl}\" alt=\"${node.title}\" class=\"product-img\" onerror=\"this.style.display='none'\">\n                        <div>\n                          <strong>${node.title}</strong><br>\n                          <span style=\"font-size: 0.85em; color: #666;\">Cant: ${node.quantity}</span>\n                        </div>\n                      </div>\n                    </td>\n                    <td>${originalHtml}</td>\n                    <td>\n                      <span class=\"price-discount\">${discountedPrice.toFixed(2)}€</span>\n                      ${savingsHtml}\n                    </td>\n                  </tr>\n                `;\n              });\n              rightColumn += `</tbody></table>`;\n            }\n          });\n        }\n      } catch (error) {\n        console.log(\"Error leyendo pedidos GraphQL: \", error);\n      }\n\n      if (!hasUsedDiscounts) {\n         rightColumn += '<div class=\"no-data\" style=\"margin-top:15px;\"><p>Aún no has utilizado ningún descuento en tus compras.</p></div>';\n      }\n      \n      rightColumn += '</div>';\n\n      // --- UNIMOS TODO ---\n      const finalHtml = `\n        <div class=\"main-header\">\n          <h2>¡Hola, ${supabaseData.Nombre || 'Cliente'}!</h2>\n          <p>Bienvenido a tu área personal.</p>\n        </div>\n        <div class=\"container\">\n          ${leftColumn}\n          ${rightColumn}\n        </div>\n        <p class=\"footer-note\">El descuento solo se aplicará a artículos que no tengan descuento de antemano.</p>\n      `;\n\n      return finalHtml;\n    })()\n  }}\n\n</body>\n</html>",
         "options": {}
       },
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        3632,
-        -848
+        3024,
+        -1312
       ],
       "id": "ba3dd16e-f146-4321-8ca0-9d6e1903c0d4",
       "name": "Respond to Webhook"
@@ -6480,8 +6511,8 @@
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.6,
       "position": [
-        2928,
-        -752
+        2112,
+        -1216
       ],
       "id": "854c91f8-93f3-46f5-a1de-ec03fa9b4a3e",
       "name": "Select rows from a table",
@@ -6520,8 +6551,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.3,
       "position": [
-        3184,
-        -752
+        2368,
+        -1216
       ],
       "id": "ceec1aba-9719-4440-b3ec-a563293b9876",
       "name": "If"
@@ -6535,8 +6566,8 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.5,
       "position": [
-        3392,
-        -656
+        2576,
+        -1120
       ],
       "id": "f38e9265-197e-4c46-9dff-bcc9cd8b5d68",
       "name": "Respond to Webhook1"
@@ -6551,8 +6582,8 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        2720,
-        -752
+        1904,
+        -1216
       ],
       "id": "df362df3-7061-458d-9633-a1eb66b89be1",
       "name": "GraphQL",
@@ -6573,8 +6604,8 @@
       "type": "n8n-nodes-base.graphql",
       "typeVersion": 1.1,
       "position": [
-        3392,
-        -848
+        2576,
+        -1312
       ],
       "id": "8f06d485-00b0-4ce8-9588-856fc96b7742",
       "name": "GraphQL1",
@@ -6584,6 +6615,19 @@
           "name": "Token Informes Shopify"
         }
       }
+    },
+    {
+      "parameters": {
+        "jsCode": "const supabase = $('Select rows from a table').item.json;\n\n// Mapeo pedido → nombre de sucursal\nconst SUCURSALES = {\n  pedido_rules:        'Rules Outlet',\n  pedido_oakley:       'Rules Oakley',\n  pedido_thenorthface: 'Rules The North Face',\n  pedido_surfin:       'Surfin',\n  pedido_nuance:       'Nuance',\n  pedido_nuancelodge:  'Nuance Lodge',\n  pedido_melia:        'Meliá Sierra Nevada'\n};\n\n// Construir mapa: GID de pedido → nombre de sucursal\nconst orderMap = {};\nfor (const [key, nombre] of Object.entries(SUCURSALES)) {\n  if (supabase[key]) {\n    orderMap['gid://shopify/Order/' + supabase[key]] = nombre;\n  }\n}\n\n// Procesar pedidos de GraphQL1\nconst rawOrders = $('GraphQL1').item.json?.data?.nodes || [];\nconst pedidos = rawOrders\n  .filter(o => o !== null)\n  .map(order => {\n    const sucursal = orderMap[order.id] || 'Tienda';\n    const items = (order.lineItems?.edges || []).map(({ node: p }) => {\n      const orig = parseFloat(p.originalTotalSet?.shopMoney?.amount || 0);\n      const disc = parseFloat(p.discountedTotalSet?.shopMoney?.amount || 0);\n      return {\n        titulo:    p.title,\n        cantidad:  p.quantity,\n        imagen:    p.image?.url || null,\n        precio_original:   orig,\n        precio_descuento:  disc,\n        ahorro:            parseFloat((orig - disc).toFixed(2))\n      };\n    });\n    const totalAhorro = items.reduce((acc, i) => acc + i.ahorro, 0);\n    return {\n      id:       order.id,\n      nombre:   order.name,\n      sucursal: sucursal,\n      items:    items,\n      totalAhorro: parseFloat(totalAhorro.toFixed(2))\n    };\n  })\n  .filter(o => o.items.length > 0);\n\nconst totalAhorroGlobal = pedidos.reduce((acc, p) => acc + p.totalAhorro, 0);\n\nreturn [{\n  json: {\n    Nombre:               supabase.Nombre || '',\n    correo:               supabase.correo || '',\n    sucursal_rules:       parseInt(supabase.sucursal_rules || 0),\n    sucursal_oakley:      parseInt(supabase.sucursal_oakley || 0),\n    sucursal_thenorthface:parseInt(supabase.sucursal_thenorthface || 0),\n    sucursal_surfin:      parseInt(supabase.sucursal_surfin || 0),\n    sucursal_nuance:      parseInt(supabase.sucursal_nuance || 0),\n    sucursal_nuancelodge: parseInt(supabase.sucursal_nuancelodge || 0),\n    sucursal_melia:       parseInt(supabase.sucursal_melia || 0),\n    pedido_rules:         supabase.pedido_rules || null,\n    pedido_oakley:        supabase.pedido_oakley || null,\n    pedido_thenorthface:  supabase.pedido_thenorthface || null,\n    pedido_surfin:        supabase.pedido_surfin || null,\n    pedido_nuance:        supabase.pedido_nuance || null,\n    pedido_nuancelodge:   supabase.pedido_nuancelodge || null,\n    pedido_melia:         supabase.pedido_melia || null,\n    pedidos:              pedidos,\n    totalAhorroGlobal:    parseFloat(totalAhorroGlobal.toFixed(2))\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2800,
+        -1312
+      ],
+      "id": "12b4c9ff-3cef-4830-900b-b69993672c79",
+      "name": "Code in JavaScript"
     }
   ],
   "pinData": {
@@ -6631,50 +6675,50 @@
           "headers": {
             "connection": "upgrade",
             "host": "n8n.tailwind.es",
-            "x-forwarded-for": "34.38.39.3",
+            "x-forwarded-for": "34.79.248.68",
             "x-forwarded-proto": "https",
-            "content-length": "7847",
+            "content-length": "7120",
             "user-agent": "Shopify-Captain-Hook",
             "accept": "*/*",
             "accept-encoding": "gzip;q=1.0,deflate;q=0.6,identity;q=0.3",
             "content-type": "application/json",
             "x-shopify-api-version": "2026-01",
-            "x-shopify-event-id": "e451c30e-4e5b-427c-9afa-0d3fd127984f",
-            "x-shopify-hmac-sha256": "mC3Z1cZECldESzdgSTJIOtJAyw/yq3cUGLJMubkk2UI=",
-            "x-shopify-order-id": "7745283326299",
+            "x-shopify-event-id": "553458f6-81a4-4940-a43e-4b22dc67b2ef",
+            "x-shopify-hmac-sha256": "BeZpLBnaWLJDn1D0rgvDNBxuqtbgEidibndBTCq2lyQ=",
+            "x-shopify-order-id": "7854230700379",
             "x-shopify-shop-domain": "surfin-store-spain.myshopify.com",
             "x-shopify-test": "false",
             "x-shopify-topic": "orders/create",
-            "x-shopify-triggered-at": "2026-03-02T19:03:36.801180397Z",
-            "x-shopify-webhook-id": "2eecde6e-3431-5d7a-9e69-368fad6e3b36"
+            "x-shopify-triggered-at": "2026-03-25T19:04:05.445839442Z",
+            "x-shopify-webhook-id": "68c17342-f531-5b25-b057-527c71f88d3f"
           },
           "params": {},
           "query": {},
           "body": {
-            "id": 7745283326299,
-            "admin_graphql_api_id": "gid://shopify/Order/7745283326299",
+            "id": 7854230700379,
+            "admin_graphql_api_id": "gid://shopify/Order/7854230700379",
             "app_id": 129785,
-            "browser_ip": "83.60.113.27",
+            "browser_ip": "2.136.210.5",
             "buyer_accepts_marketing": false,
             "cancel_reason": null,
             "cancelled_at": null,
             "cart_token": null,
-            "checkout_id": 48474358579547,
-            "checkout_token": "637e468b-ef93-4cbe-a326-203ace64c2c3",
+            "checkout_id": 48652165513563,
+            "checkout_token": "7aaa628a-71ea-4402-aa11-2cb0abb1e972",
             "client_details": {
               "accept_language": null,
               "browser_height": null,
-              "browser_ip": "83.60.113.27",
+              "browser_ip": "2.136.210.5",
               "browser_width": null,
               "session_hash": null,
-              "user_agent": "Shopify POS/10.15.2/Android/15/Redmi/25040RP0AE/production"
+              "user_agent": "Shopify POS/10.15.1/Android/16/samsung/SM-X210R/production"
             },
-            "closed_at": "2026-03-02T20:03:37+01:00",
+            "closed_at": "2026-03-25T20:04:05+01:00",
             "company": null,
-            "confirmation_number": "J0LVCJC3A",
+            "confirmation_number": "PKX75NATN",
             "confirmed": true,
-            "contact_email": "fredericoduarte101@icloud.com",
-            "created_at": "2026-03-02T20:03:35+01:00",
+            "contact_email": "jmsoldado@gmail.com",
+            "created_at": "2026-03-25T20:04:04+01:00",
             "currency": "EUR",
             "current_shipping_price_set": {
               "shop_money": {
@@ -6686,38 +6730,38 @@
                 "currency_code": "EUR"
               }
             },
-            "current_subtotal_price": "81.00",
+            "current_subtotal_price": "260.00",
             "current_subtotal_price_set": {
               "shop_money": {
-                "amount": "81.00",
+                "amount": "260.00",
                 "currency_code": "EUR"
               },
               "presentment_money": {
-                "amount": "81.00",
+                "amount": "260.00",
                 "currency_code": "EUR"
               }
             },
             "current_total_additional_fees_set": null,
-            "current_total_discounts": "9.00",
+            "current_total_discounts": "0.00",
             "current_total_discounts_set": {
               "shop_money": {
-                "amount": "9.00",
+                "amount": "0.00",
                 "currency_code": "EUR"
               },
               "presentment_money": {
-                "amount": "9.00",
+                "amount": "0.00",
                 "currency_code": "EUR"
               }
             },
             "current_total_duties_set": null,
-            "current_total_price": "81.00",
+            "current_total_price": "260.00",
             "current_total_price_set": {
               "shop_money": {
-                "amount": "81.00",
+                "amount": "260.00",
                 "currency_code": "EUR"
               },
               "presentment_money": {
-                "amount": "81.00",
+                "amount": "260.00",
                 "currency_code": "EUR"
               }
             },
@@ -6733,52 +6777,46 @@
               }
             },
             "customer_locale": "es",
-            "device_id": 20,
-            "discount_codes": [
-              {
-                "code": "GRACIAS10",
-                "amount": "9.00",
-                "type": "percentage"
-              }
-            ],
+            "device_id": 7,
+            "discount_codes": [],
             "duties_included": false,
-            "email": "fredericoduarte101@icloud.com",
+            "email": "jmsoldado@gmail.com",
             "estimated_taxes": false,
             "financial_status": "paid",
             "fulfillment_status": "fulfilled",
             "landing_site": null,
             "landing_site_ref": null,
-            "location_id": 108915917147,
+            "location_id": 108916146523,
             "merchant_business_entity_id": "MTg3OTg3NjUwOTA3",
             "merchant_of_record_app_id": null,
-            "name": "#73529",
+            "name": "#74684",
             "note": null,
             "note_attributes": [],
-            "number": 72529,
-            "order_number": 73529,
-            "order_status_url": "https://nuance-store.com/87987650907/orders/107b304bcc2268a63059fbc5f7ac2b75/authenticate?key=6cf71a07ed1e5a6ccf5a7d42758dcdde",
+            "number": 73684,
+            "order_number": 74684,
+            "order_status_url": "https://nuance-store.com/87987650907/orders/06e723af59e0d5f0b39d0d38f8bd921c/authenticate?key=523ed9b610d6507f906844867a1ed397",
             "original_total_additional_fees_set": null,
             "original_total_duties_set": null,
             "payment_gateway_names": [
-              "Tarjeta"
+              "cash"
             ],
-            "phone": null,
+            "phone": "+34672496483",
             "po_number": null,
             "presentment_currency": "EUR",
-            "processed_at": "2026-03-02T20:03:35+01:00",
+            "processed_at": "2026-03-25T20:04:03+01:00",
             "reference": null,
             "referring_site": null,
-            "source_identifier": "108915917147-20-1335",
+            "source_identifier": "108916146523-7-1314",
             "source_name": "pos",
             "source_url": null,
-            "subtotal_price": "81.00",
+            "subtotal_price": "260.00",
             "subtotal_price_set": {
               "shop_money": {
-                "amount": "81.00",
+                "amount": "260.00",
                 "currency_code": "EUR"
               },
               "presentment_money": {
-                "amount": "81.00",
+                "amount": "260.00",
                 "currency_code": "EUR"
               }
             },
@@ -6787,7 +6825,7 @@
             "tax_lines": [],
             "taxes_included": true,
             "test": false,
-            "token": "107b304bcc2268a63059fbc5f7ac2b75",
+            "token": "06e723af59e0d5f0b39d0d38f8bd921c",
             "total_cash_rounding_payment_adjustment_set": {
               "shop_money": {
                 "amount": "0.00",
@@ -6808,37 +6846,37 @@
                 "currency_code": "EUR"
               }
             },
-            "total_discounts": "9.00",
+            "total_discounts": "0.00",
             "total_discounts_set": {
               "shop_money": {
-                "amount": "9.00",
+                "amount": "0.00",
                 "currency_code": "EUR"
               },
               "presentment_money": {
-                "amount": "9.00",
+                "amount": "0.00",
                 "currency_code": "EUR"
               }
             },
-            "total_line_items_price": "90.00",
+            "total_line_items_price": "260.00",
             "total_line_items_price_set": {
               "shop_money": {
-                "amount": "90.00",
+                "amount": "260.00",
                 "currency_code": "EUR"
               },
               "presentment_money": {
-                "amount": "90.00",
+                "amount": "260.00",
                 "currency_code": "EUR"
               }
             },
             "total_outstanding": "0.00",
-            "total_price": "81.00",
+            "total_price": "260.00",
             "total_price_set": {
               "shop_money": {
-                "amount": "81.00",
+                "amount": "260.00",
                 "currency_code": "EUR"
               },
               "presentment_money": {
-                "amount": "81.00",
+                "amount": "260.00",
                 "currency_code": "EUR"
               }
             },
@@ -6865,45 +6903,35 @@
             },
             "total_tip_received": "0.00",
             "total_weight": 0,
-            "updated_at": "2026-03-02T20:03:37+01:00",
+            "updated_at": "2026-03-25T20:04:05+01:00",
             "user_id": 127346573659,
             "billing_address": null,
             "customer": {
-              "id": 10271233507675,
-              "created_at": "2026-03-02T09:34:45+01:00",
-              "updated_at": "2026-03-02T20:03:36+01:00",
-              "first_name": "Frederico",
-              "last_name": "Duarte",
+              "id": 10057802711387,
+              "created_at": "2026-01-15T19:08:38+01:00",
+              "updated_at": "2026-03-25T20:04:05+01:00",
+              "first_name": "Juanmauel",
+              "last_name": "Soldado",
               "state": "disabled",
               "note": "",
               "verified_email": true,
               "multipass_identifier": null,
               "tax_exempt": false,
-              "email": "fredericoduarte101@icloud.com",
-              "phone": null,
+              "email": "jmsoldado@gmail.com",
+              "phone": "+34672496483",
               "currency": "EUR",
               "tax_exemptions": [],
-              "admin_graphql_api_id": "gid://shopify/Customer/10271233507675"
+              "admin_graphql_api_id": "gid://shopify/Customer/10057802711387"
             },
-            "discount_applications": [
-              {
-                "target_type": "line_item",
-                "type": "discount_code",
-                "value": "10.0",
-                "value_type": "percentage",
-                "allocation_method": "across",
-                "target_selection": "all",
-                "code": "GRACIAS10"
-              }
-            ],
+            "discount_applications": [],
             "fulfillments": [
               {
-                "id": 6777032704347,
-                "admin_graphql_api_id": "gid://shopify/Fulfillment/6777032704347",
-                "created_at": "2026-03-02T20:03:36+01:00",
-                "location_id": 108915917147,
-                "name": "#73529.1",
-                "order_id": 7745283326299,
+                "id": 6861258752347,
+                "admin_graphql_api_id": "gid://shopify/Fulfillment/6861258752347",
+                "created_at": "2026-03-25T20:04:05+01:00",
+                "location_id": 108916146523,
+                "name": "#74684.1",
+                "order_id": 7854230700379,
                 "origin_address": {},
                 "receipt": {},
                 "service": "manual",
@@ -6914,11 +6942,11 @@
                 "tracking_numbers": [],
                 "tracking_url": null,
                 "tracking_urls": [],
-                "updated_at": "2026-03-02T20:03:36+01:00",
+                "updated_at": "2026-03-25T20:04:05+01:00",
                 "line_items": [
                   {
-                    "id": 18604984271195,
-                    "admin_graphql_api_id": "gid://shopify/LineItem/18604984271195",
+                    "id": 18812892774747,
+                    "admin_graphql_api_id": "gid://shopify/LineItem/18812892774747",
                     "attributed_staffs": [],
                     "current_quantity": 1,
                     "fulfillable_quantity": 0,
@@ -6926,26 +6954,26 @@
                     "fulfillment_status": "fulfilled",
                     "gift_card": false,
                     "grams": 0,
-                    "name": "The North Face Jester Mochila - TNF Black Light Refractions/TNF Black / 28L",
-                    "price": "90.00",
+                    "name": "Oakley MOD5 Mips Casco - Midas Fleck / L",
+                    "price": "260.00",
                     "price_set": {
                       "shop_money": {
-                        "amount": "90.00",
+                        "amount": "260.00",
                         "currency_code": "EUR"
                       },
                       "presentment_money": {
-                        "amount": "90.00",
+                        "amount": "260.00",
                         "currency_code": "EUR"
                       }
                     },
                     "product_exists": true,
-                    "product_id": 10258297684315,
+                    "product_id": 10055346389339,
                     "properties": [],
                     "quantity": 1,
                     "requires_shipping": true,
-                    "sku": "51951567307099",
+                    "sku": "51926280995163",
                     "taxable": true,
-                    "title": "The North Face Jester Mochila",
+                    "title": "Oakley MOD5 Mips Casco",
                     "total_discount": "0.00",
                     "total_discount_set": {
                       "shop_money": {
@@ -6957,36 +6985,21 @@
                         "currency_code": "EUR"
                       }
                     },
-                    "variant_id": 51951567307099,
+                    "variant_id": 51926280995163,
                     "variant_inventory_management": "shopify",
-                    "variant_title": "TNF Black Light Refractions/TNF Black / 28L",
-                    "vendor": "The North Face",
+                    "variant_title": "Midas Fleck / L",
+                    "vendor": "Oakley",
                     "tax_lines": [],
                     "duties": [],
-                    "discount_allocations": [
-                      {
-                        "amount": "9.00",
-                        "amount_set": {
-                          "shop_money": {
-                            "amount": "9.00",
-                            "currency_code": "EUR"
-                          },
-                          "presentment_money": {
-                            "amount": "9.00",
-                            "currency_code": "EUR"
-                          }
-                        },
-                        "discount_application_index": 0
-                      }
-                    ]
+                    "discount_allocations": []
                   }
                 ]
               }
             ],
             "line_items": [
               {
-                "id": 18604984271195,
-                "admin_graphql_api_id": "gid://shopify/LineItem/18604984271195",
+                "id": 18812892774747,
+                "admin_graphql_api_id": "gid://shopify/LineItem/18812892774747",
                 "attributed_staffs": [],
                 "current_quantity": 1,
                 "fulfillable_quantity": 0,
@@ -6994,27 +7007,27 @@
                 "fulfillment_status": "fulfilled",
                 "gift_card": false,
                 "grams": 0,
-                "name": "The North Face Jester Mochila - TNF Black Light Refractions/TNF Black / 28L",
-                "price": "90.00",
+                "name": "Oakley MOD5 Mips Casco - Midas Fleck / L",
+                "price": "260.00",
                 "price_set": {
                   "shop_money": {
-                    "amount": "90.00",
+                    "amount": "260.00",
                     "currency_code": "EUR"
                   },
                   "presentment_money": {
-                    "amount": "90.00",
+                    "amount": "260.00",
                     "currency_code": "EUR"
                   }
                 },
                 "product_exists": true,
-                "product_id": 10258297684315,
+                "product_id": 10055346389339,
                 "properties": [],
                 "quantity": 1,
                 "requires_shipping": true,
                 "sales_line_item_group_id": null,
-                "sku": "51951567307099",
+                "sku": "51926280995163",
                 "taxable": true,
-                "title": "The North Face Jester Mochila",
+                "title": "Oakley MOD5 Mips Casco",
                 "total_discount": "0.00",
                 "total_discount_set": {
                   "shop_money": {
@@ -7026,28 +7039,13 @@
                     "currency_code": "EUR"
                   }
                 },
-                "variant_id": 51951567307099,
+                "variant_id": 51926280995163,
                 "variant_inventory_management": "shopify",
-                "variant_title": "TNF Black Light Refractions/TNF Black / 28L",
-                "vendor": "The North Face",
+                "variant_title": "Midas Fleck / L",
+                "vendor": "Oakley",
                 "tax_lines": [],
                 "duties": [],
-                "discount_allocations": [
-                  {
-                    "amount": "9.00",
-                    "amount_set": {
-                      "shop_money": {
-                        "amount": "9.00",
-                        "currency_code": "EUR"
-                      },
-                      "presentment_money": {
-                        "amount": "9.00",
-                        "currency_code": "EUR"
-                      }
-                    },
-                    "discount_application_index": 0
-                  }
-                ]
+                "discount_allocations": []
               }
             ],
             "payment_terms": null,
@@ -7070,7 +7068,7 @@
     "executionOrder": "v1",
     "timeSavedMode": "fixed",
     "callerPolicy": "workflowsFromSameOwner",
-    "availableInMCP": false,
+    "availableInMCP": true,
     "errorWorkflow": "e80tfOpD4TdBh8EF"
   },
   "shared": [
@@ -7089,6 +7087,6 @@
   },
   "tags": [],
   "triggerCount": 2,
-  "updatedAt": "2026-03-03T13:09:37.123Z",
-  "versionId": "7e81a3c4-a3fb-4b61-a878-2a4a57f34057"
+  "updatedAt": "2026-03-26T16:32:00.781Z",
+  "versionId": "353723e8-3698-40ce-bd93-5d67e2d525dc"
 }
