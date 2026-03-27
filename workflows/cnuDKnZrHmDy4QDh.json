@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-03-09T09:03:53.000Z",
-    "createdAt": "2026-03-09T09:03:50.525Z",
-    "versionId": "141e9fca-96cd-4011-8854-d51922849ca8",
+    "updatedAt": "2026-03-26T11:29:07.000Z",
+    "createdAt": "2026-03-26T11:28:32.485Z",
+    "versionId": "0b7aa2d8-9ee7-4670-a54b-2a23e90c59db",
     "workflowId": "cnuDKnZrHmDy4QDh",
     "nodes": [
       {
@@ -11,9 +11,8 @@
           "pollTimes": {
             "item": [
               {
-                "mode": "everyX",
-                "value": 5,
-                "unit": "minutes"
+                "mode": "everyHour",
+                "minute": 30
               }
             ]
           },
@@ -331,7 +330,7 @@
         "credentials": {
           "googleSheetsOAuth2Api": {
             "id": "RCuKUCifcA4jENcY",
-            "name": "Google Sheets account"
+            "name": "Google Sheets info@tailwind.es"
           }
         }
       },
@@ -571,7 +570,7 @@
         "credentials": {
           "googleSheetsOAuth2Api": {
             "id": "RCuKUCifcA4jENcY",
-            "name": "Google Sheets account"
+            "name": "Google Sheets info@tailwind.es"
           }
         }
       },
@@ -720,7 +719,7 @@
         "credentials": {
           "googleSheetsOAuth2Api": {
             "id": "RCuKUCifcA4jENcY",
-            "name": "Google Sheets account"
+            "name": "Google Sheets info@tailwind.es"
           }
         }
       },
@@ -945,7 +944,7 @@
         "credentials": {
           "googleSheetsOAuth2Api": {
             "id": "RCuKUCifcA4jENcY",
-            "name": "Google Sheets account"
+            "name": "Google Sheets info@tailwind.es"
           }
         }
       },
@@ -1001,7 +1000,7 @@
         "credentials": {
           "googleSheetsOAuth2Api": {
             "id": "RCuKUCifcA4jENcY",
-            "name": "Google Sheets account"
+            "name": "Google Sheets info@tailwind.es"
           }
         }
       },
@@ -1494,11 +1493,11 @@
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version 141e9fca",
+    "name": "Version 0b7aa2d8",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "141e9fca-96cd-4011-8854-d51922849ca8",
+  "activeVersionId": "0b7aa2d8-9ee7-4670-a54b-2a23e90c59db",
   "connections": {
     "Google Sheets Trigger": {
       "main": [
@@ -1793,9 +1792,8 @@
         "pollTimes": {
           "item": [
             {
-              "mode": "everyX",
-              "value": 5,
-              "unit": "minutes"
+              "mode": "everyHour",
+              "minute": 30
             }
           ]
         },
@@ -2113,7 +2111,7 @@
       "credentials": {
         "googleSheetsOAuth2Api": {
           "id": "RCuKUCifcA4jENcY",
-          "name": "Google Sheets account"
+          "name": "Google Sheets info@tailwind.es"
         }
       }
     },
@@ -2353,7 +2351,7 @@
       "credentials": {
         "googleSheetsOAuth2Api": {
           "id": "RCuKUCifcA4jENcY",
-          "name": "Google Sheets account"
+          "name": "Google Sheets info@tailwind.es"
         }
       }
     },
@@ -2502,7 +2500,7 @@
       "credentials": {
         "googleSheetsOAuth2Api": {
           "id": "RCuKUCifcA4jENcY",
-          "name": "Google Sheets account"
+          "name": "Google Sheets info@tailwind.es"
         }
       }
     },
@@ -2727,7 +2725,7 @@
       "credentials": {
         "googleSheetsOAuth2Api": {
           "id": "RCuKUCifcA4jENcY",
-          "name": "Google Sheets account"
+          "name": "Google Sheets info@tailwind.es"
         }
       }
     },
@@ -2783,7 +2781,7 @@
       "credentials": {
         "googleSheetsOAuth2Api": {
           "id": "RCuKUCifcA4jENcY",
-          "name": "Google Sheets account"
+          "name": "Google Sheets info@tailwind.es"
         }
       }
     },
@@ -3065,6 +3063,6 @@
   },
   "tags": [],
   "triggerCount": 4,
-  "updatedAt": "2026-03-09T09:03:50.523Z",
-  "versionId": "141e9fca-96cd-4011-8854-d51922849ca8"
+  "updatedAt": "2026-03-26T11:28:36.000Z",
+  "versionId": "0b7aa2d8-9ee7-4670-a54b-2a23e90c59db"
 }
