@@ -1,16 +1,1677 @@
 {
-  "active": false,
-  "activeVersion": null,
-  "activeVersionId": null,
-  "connections": {},
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-03-26T12:24:22.000Z",
+    "createdAt": "2026-03-26T12:24:21.350Z",
+    "versionId": "ee5e51d6-12d1-4b4c-8d40-2d8705389c4f",
+    "workflowId": "uyA7h7kvFsyUUOpr",
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "surfin-registro",
+          "responseMode": "responseNode",
+          "options": {}
+        },
+        "id": "f5c378d3-89ae-4d0a-96da-958744e2f702",
+        "name": "Webhook",
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2,
+        "position": [
+          -2240,
+          -384
+        ],
+        "webhookId": "surfin-registro"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "leftValue": "",
+              "typeValidation": "strict",
+              "version": 1
+            },
+            "conditions": [
+              {
+                "id": "c1",
+                "leftValue": "={{ $json.body.nombre }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "string",
+                  "operation": "notEmpty"
+                }
+              },
+              {
+                "id": "c2",
+                "leftValue": "={{ $json.body.correo }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "string",
+                  "operation": "notEmpty"
+                }
+              },
+              {
+                "id": "c3",
+                "leftValue": "={{ $json.body.telefono }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "string",
+                  "operation": "notEmpty"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "id": "6e63b192-da67-4da6-9967-d0edc676fe8d",
+        "name": "Validar campos",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2,
+        "position": [
+          -2016,
+          -384
+        ]
+      },
+      {
+        "parameters": {
+          "respondWith": "json",
+          "responseBody": "={{ JSON.stringify({ success: false, message: 'Faltan campos obligatorios (nombre, correo, telefono)' }) }}",
+          "options": {
+            "responseCode": 400
+          }
+        },
+        "id": "763d8a70-782a-4f99-9497-d2355bc5a502",
+        "name": "Error — campos vacíos",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1,
+        "position": [
+          -1792,
+          -224
+        ]
+      },
+      {
+        "parameters": {
+          "jsCode": "const body = $input.item.json.body;\n\nconst capitalizarNombre = (str) =>\n  str.trim().toLowerCase().replace(/\\b\\w/g, c => c.toUpperCase());\n\nconst normalizarTelefono = (str) =>\n  str.trim().replace(/[\\s\\-().]/g, '');\n\nreturn {\n  json: {\n    body: {\n      nombre:   capitalizarNombre(body.nombre),\n      correo:   body.correo.trim().toLowerCase(),\n      telefono: normalizarTelefono(body.telefono)\n    }\n  }\n};"
+        },
+        "id": "bc5fcc57-a605-4286-853d-7fdabccd7294",
+        "name": "Formatear datos",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          -1792,
+          -384
+        ]
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+          "query": "query buscarCliente($query: String!) {\n  customers(first: 1, query: $query) {\n    edges {\n      node {\n        id\n        email\n      }\n    }\n  }\n}",
+          "variables": "={\n  \"query\": \"email:{{ $json.body.correo }}\"\n}"
+        },
+        "id": "c21f56fc-dffe-43a8-b669-935199c5c934",
+        "name": "Shopify — Buscar cliente",
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          -1568,
+          -384
+        ],
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "THkhgrtze1uBo6Ft",
+            "name": "Token Informes Shopify"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "typeValidation": "strict"
+            },
+            "conditions": [
+              {
+                "id": "check-existe",
+                "leftValue": "={{ $json.data.customers.edges.length }}",
+                "rightValue": 0,
+                "operator": {
+                  "type": "number",
+                  "operation": "gt"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "id": "a6ab371b-5405-4a17-92ae-7d33dd9271df",
+        "name": "¿Existe en Shopify?",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2,
+        "position": [
+          -1344,
+          -384
+        ]
+      },
+      {
+        "parameters": {
+          "jsCode": "// Rama: cliente YA existía en Shopify\nconst gid = $input.item.json.data.customers.edges[0].node.id;\nconst numericId = gid.split('/').pop();\n\nreturn {\n  json: {\n    customer: { id: numericId }\n  }\n};"
+        },
+        "id": "2e7fa127-9124-488a-b7f8-b772fe49a98e",
+        "name": "Extraer ID existente",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          -1120,
+          -544
+        ]
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://rulesshop.myshopify.com/admin/api/2024-01/customers.json",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpHeaderAuth",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          },
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ JSON.stringify({ customer: { first_name: $('Formatear datos').item.json.body.nombre.split(' ')[0], last_name: $('Formatear datos').item.json.body.nombre.split(' ').slice(1).join(' ') || '', email: $('Formatear datos').item.json.body.correo, phone: $('Formatear datos').item.json.body.telefono } }) }}",
+          "options": {}
+        },
+        "id": "d35ad4d0-8966-442e-ad20-c5630491c8a8",
+        "name": "Shopify — Crear cliente",
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          -1120,
+          -224
+        ],
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "THkhgrtze1uBo6Ft",
+            "name": "Token Informes Shopify"
+          }
+        },
+        "onError": "continueErrorOutput"
+      },
+      {
+        "parameters": {
+          "respondWith": "json",
+          "responseBody": "={{ JSON.stringify({ success: false, message: 'Error al crear cliente en Shopify', error: $json }) }}",
+          "options": {
+            "responseCode": 500
+          }
+        },
+        "id": "27fc00dd-b8ce-4e4f-868c-df2cd8c63978",
+        "name": "Error — Shopify",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1,
+        "position": [
+          -896,
+          -64
+        ]
+      },
+      {
+        "parameters": {
+          "jsCode": "// Rama: cliente recién creado en Shopify\n// El HTTP Request devuelve customer.id como número directamente\nconst numericId = String($input.item.json.customer.id);\n\nreturn {\n  json: {\n    customer: { id: numericId }\n  }\n};"
+        },
+        "id": "6f811eb8-50fb-41e0-9fa3-7ae8f9fad614",
+        "name": "Extraer ID nuevo",
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          -896,
+          -224
+        ]
+      },
+      {
+        "parameters": {},
+        "id": "e918d33e-8fb6-48b0-9234-59f4ebae7572",
+        "name": "Merge",
+        "type": "n8n-nodes-base.merge",
+        "typeVersion": 3,
+        "position": [
+          -672,
+          -384
+        ]
+      },
+      {
+        "parameters": {
+          "authentication": "headerAuth",
+          "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+          "query": "=mutation metafieldsSet($metafields: [MetafieldsSetInput!]!) {\n  metafieldsSet(metafields: $metafields) {\n    metafields { id namespace key value }\n    userErrors { field message }\n  }\n}",
+          "variables": "={\n  \"metafields\": [\n    { \"ownerId\": \"gid://shopify/Customer/{{ $json.customer.id }}\", \"namespace\": \"custom\", \"key\": \"descuento_melia\",        \"value\": \"10\", \"type\": \"number_integer\" },\n    { \"ownerId\": \"gid://shopify/Customer/{{ $json.customer.id }}\", \"namespace\": \"custom\", \"key\": \"descuento_nuancelodge\",  \"value\": \"10\", \"type\": \"number_integer\" },\n    { \"ownerId\": \"gid://shopify/Customer/{{ $json.customer.id }}\", \"namespace\": \"custom\", \"key\": \"descuento_nuance\",       \"value\": \"10\", \"type\": \"number_integer\" },\n    { \"ownerId\": \"gid://shopify/Customer/{{ $json.customer.id }}\", \"namespace\": \"custom\", \"key\": \"descuento_surfin\",       \"value\": \"10\", \"type\": \"number_integer\" },\n    { \"ownerId\": \"gid://shopify/Customer/{{ $json.customer.id }}\", \"namespace\": \"custom\", \"key\": \"descuento_thenorthface\", \"value\": \"10\", \"type\": \"number_integer\" },\n    { \"ownerId\": \"gid://shopify/Customer/{{ $json.customer.id }}\", \"namespace\": \"custom\", \"key\": \"descuento_oakley\",       \"value\": \"10\", \"type\": \"number_integer\" },\n    { \"ownerId\": \"gid://shopify/Customer/{{ $json.customer.id }}\", \"namespace\": \"custom\", \"key\": \"descuento_rules\",        \"value\": \"10\", \"type\": \"number_integer\" }\n  ]\n}"
+        },
+        "id": "0d25e708-2800-4213-8dde-90d7c90fb81c",
+        "name": "GraphQL — Metafields",
+        "type": "n8n-nodes-base.graphql",
+        "typeVersion": 1.1,
+        "position": [
+          -448,
+          -384
+        ],
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "THkhgrtze1uBo6Ft",
+            "name": "Token Informes Shopify"
+          }
+        },
+        "onError": "continueErrorOutput"
+      },
+      {
+        "parameters": {
+          "respondWith": "json",
+          "responseBody": "={{ JSON.stringify({ success: false, message: 'Error al crear metafields en Shopify', error: $json }) }}",
+          "options": {
+            "responseCode": 500
+          }
+        },
+        "id": "2a6a6cd4-d132-4014-adff-e9735ae327db",
+        "name": "Error — Metafields",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1,
+        "position": [
+          -224,
+          -224
+        ]
+      },
+      {
+        "parameters": {
+          "operation": "select",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "Descuentos_Omnicanal",
+            "mode": "list",
+            "cachedResultName": "Descuentos_Omnicanal"
+          },
+          "where": {
+            "values": [
+              {
+                "column": "id_cliente",
+                "value": "={{ $('Merge').item.json.customer.id }}"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "id": "796bfee3-2793-4bd2-84a9-c44a70041473",
+        "name": "Supabase — Buscar cliente",
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.5,
+        "position": [
+          -224,
+          -384
+        ],
+        "alwaysOutputData": true,
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        },
+        "onError": "continueErrorOutput"
+      },
+      {
+        "parameters": {
+          "conditions": {
+            "options": {
+              "caseSensitive": true,
+              "typeValidation": "strict"
+            },
+            "conditions": [
+              {
+                "id": "check-supabase",
+                "leftValue": "={{ $json.id_cliente }}",
+                "rightValue": "",
+                "operator": {
+                  "type": "string",
+                  "operation": "exists"
+                }
+              }
+            ],
+            "combinator": "and"
+          },
+          "options": {}
+        },
+        "id": "7f749db1-e30d-48c3-99d0-ffc2dab92cfd",
+        "name": "¿Existe en Supabase?",
+        "type": "n8n-nodes-base.if",
+        "typeVersion": 2,
+        "position": [
+          0,
+          -384
+        ]
+      },
+      {
+        "parameters": {
+          "respondWith": "json",
+          "responseBody": "={{ JSON.stringify({ success: true, message: 'Cliente ya estaba registrado', shopify_id: $('Merge').item.json.customer.id }) }}",
+          "options": {
+            "responseCode": 200
+          }
+        },
+        "id": "c01e4c8c-598e-4ae1-baef-f4d1ff76baca",
+        "name": "Respuesta — ya registrado",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1,
+        "position": [
+          224,
+          -544
+        ]
+      },
+      {
+        "parameters": {
+          "operation": "upsert",
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "Descuentos_Omnicanal",
+            "mode": "list",
+            "cachedResultName": "Descuentos_Omnicanal"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "id_cliente": "={{ $('Merge').item.json.customer.id }}",
+              "Nombre": "={{ $('Formatear datos').item.json.body.nombre }}",
+              "correo": "={{ $('Formatear datos').item.json.body.correo }}",
+              "Teléfono": "={{ $('Formatear datos').item.json.body.telefono }}",
+              "sucursal_rules": 10,
+              "sucursal_oakley": 10,
+              "sucursal_thenorthface": 10,
+              "sucursal_surfin": 10,
+              "sucursal_nuance": 10,
+              "sucursal_nuancelodge": 10,
+              "sucursal_melia": 10,
+              "pedido_rules": 0,
+              "pedido_oakley": 0,
+              "pedido_thenorthface": 0,
+              "pedido_surfin": 0,
+              "pedido_nuance": 0,
+              "pedido_nuancelodge": 0,
+              "pedido_melia": 0
+            },
+            "matchingColumns": [
+              "id_cliente"
+            ],
+            "schema": [
+              {
+                "id": "correo",
+                "displayName": "correo",
+                "required": true,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": false
+              },
+              {
+                "id": "sucursal_rules",
+                "displayName": "sucursal_rules",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": false
+              },
+              {
+                "id": "sucursal_oakley",
+                "displayName": "sucursal_oakley",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": false
+              },
+              {
+                "id": "sucursal_thenorthface",
+                "displayName": "sucursal_thenorthface",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": false
+              },
+              {
+                "id": "sucursal_surfin",
+                "displayName": "sucursal_surfin",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": false
+              },
+              {
+                "id": "sucursal_nuance",
+                "displayName": "sucursal_nuance",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": false
+              },
+              {
+                "id": "sucursal_nuancelodge",
+                "displayName": "sucursal_nuancelodge",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": false
+              },
+              {
+                "id": "sucursal_melia",
+                "displayName": "sucursal_melia",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": false
+              },
+              {
+                "id": "id_cliente",
+                "displayName": "id_cliente",
+                "required": true,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "Nombre",
+                "displayName": "Nombre",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": false
+              },
+              {
+                "id": "Teléfono",
+                "displayName": "Teléfono",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": false
+              },
+              {
+                "id": "created_at",
+                "displayName": "created_at",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "dateTime",
+                "canBeUsedToMatch": false
+              },
+              {
+                "id": "pedido_rules",
+                "displayName": "pedido_rules",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": false
+              },
+              {
+                "id": "pedido_oakley",
+                "displayName": "pedido_oakley",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": false
+              },
+              {
+                "id": "pedido_thenorthface",
+                "displayName": "pedido_thenorthface",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": false
+              },
+              {
+                "id": "pedido_surfin",
+                "displayName": "pedido_surfin",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": false
+              },
+              {
+                "id": "pedido_nuance",
+                "displayName": "pedido_nuance",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": false
+              },
+              {
+                "id": "pedido_nuancelodge",
+                "displayName": "pedido_nuancelodge",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": false
+              },
+              {
+                "id": "pedido_melia",
+                "displayName": "pedido_melia",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "id": "e1034156-3f34-4cac-8594-56fd1c87ecaa",
+        "name": "Supabase — Insertar cliente (Postgres)",
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.5,
+        "position": [
+          224,
+          -224
+        ],
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        },
+        "onError": "continueErrorOutput"
+      },
+      {
+        "parameters": {
+          "respondWith": "json",
+          "responseBody": "={{ JSON.stringify({ success: false, message: 'Error al guardar en Supabase', error: $json }) }}",
+          "options": {
+            "responseCode": 500
+          }
+        },
+        "id": "ffb65616-7dfa-492b-a3c4-23cfed222461",
+        "name": "Error — Supabase",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1,
+        "position": [
+          448,
+          -64
+        ]
+      },
+      {
+        "parameters": {
+          "respondWith": "json",
+          "responseBody": "={{ JSON.stringify({ success: true, message: 'Cliente registrado correctamente', shopify_id: $('Merge').item.json.customer.id }) }}",
+          "options": {
+            "responseCode": 200
+          }
+        },
+        "id": "0fdb66e3-6655-4357-aac1-50d9db095e44",
+        "name": "Respuesta OK",
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1,
+        "position": [
+          448,
+          -224
+        ]
+      }
+    ],
+    "connections": {
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "Validar campos",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Validar campos": {
+        "main": [
+          [
+            {
+              "node": "Formatear datos",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Error — campos vacíos",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Formatear datos": {
+        "main": [
+          [
+            {
+              "node": "Shopify — Buscar cliente",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Shopify — Buscar cliente": {
+        "main": [
+          [
+            {
+              "node": "¿Existe en Shopify?",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "¿Existe en Shopify?": {
+        "main": [
+          [
+            {
+              "node": "Extraer ID existente",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Shopify — Crear cliente",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Extraer ID existente": {
+        "main": [
+          [
+            {
+              "node": "Merge",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Shopify — Crear cliente": {
+        "main": [
+          [
+            {
+              "node": "Extraer ID nuevo",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Error — Shopify",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Extraer ID nuevo": {
+        "main": [
+          [
+            {
+              "node": "Merge",
+              "type": "main",
+              "index": 1
+            }
+          ]
+        ]
+      },
+      "Merge": {
+        "main": [
+          [
+            {
+              "node": "GraphQL — Metafields",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "GraphQL — Metafields": {
+        "main": [
+          [
+            {
+              "node": "Supabase — Buscar cliente",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Error — Metafields",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Supabase — Buscar cliente": {
+        "main": [
+          [
+            {
+              "node": "¿Existe en Supabase?",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "¿Existe en Supabase?": {
+        "main": [
+          [
+            {
+              "node": "Respuesta — ya registrado",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Supabase — Insertar cliente (Postgres)",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Supabase — Insertar cliente (Postgres)": {
+        "main": [
+          [
+            {
+              "node": "Respuesta OK",
+              "type": "main",
+              "index": 0
+            }
+          ],
+          [
+            {
+              "node": "Error — Supabase",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Tailwind Media",
+    "name": "Version ee5e51d6",
+    "description": "",
+    "autosaved": false
+  },
+  "activeVersionId": "ee5e51d6-12d1-4b4c-8d40-2d8705389c4f",
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Validar campos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validar campos": {
+      "main": [
+        [
+          {
+            "node": "Formatear datos",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Error — campos vacíos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Formatear datos": {
+      "main": [
+        [
+          {
+            "node": "Shopify — Buscar cliente",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Shopify — Buscar cliente": {
+      "main": [
+        [
+          {
+            "node": "¿Existe en Shopify?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Existe en Shopify?": {
+      "main": [
+        [
+          {
+            "node": "Extraer ID existente",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Shopify — Crear cliente",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extraer ID existente": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Shopify — Crear cliente": {
+      "main": [
+        [
+          {
+            "node": "Extraer ID nuevo",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Error — Shopify",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extraer ID nuevo": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "GraphQL — Metafields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GraphQL — Metafields": {
+      "main": [
+        [
+          {
+            "node": "Supabase — Buscar cliente",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Error — Metafields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase — Buscar cliente": {
+      "main": [
+        [
+          {
+            "node": "¿Existe en Supabase?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Existe en Supabase?": {
+      "main": [
+        [
+          {
+            "node": "Respuesta — ya registrado",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Supabase — Insertar cliente (Postgres)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Supabase — Insertar cliente (Postgres)": {
+      "main": [
+        [
+          {
+            "node": "Respuesta OK",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Error — Supabase",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
   "createdAt": "2026-03-20T12:32:58.348Z",
   "id": "uyA7h7kvFsyUUOpr",
   "isArchived": false,
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "vacio",
-  "nodes": [],
+  "name": "Surfin — Registro de clientes v4 (Postgres)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "surfin-registro",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "f5c378d3-89ae-4d0a-96da-958744e2f702",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -2240,
+        -384
+      ],
+      "webhookId": "surfin-registro"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 1
+          },
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ $json.body.nombre }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty"
+              }
+            },
+            {
+              "id": "c2",
+              "leftValue": "={{ $json.body.correo }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty"
+              }
+            },
+            {
+              "id": "c3",
+              "leftValue": "={{ $json.body.telefono }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "6e63b192-da67-4da6-9967-d0edc676fe8d",
+      "name": "Validar campos",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -2016,
+        -384
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ success: false, message: 'Faltan campos obligatorios (nombre, correo, telefono)' }) }}",
+        "options": {
+          "responseCode": 400
+        }
+      },
+      "id": "763d8a70-782a-4f99-9497-d2355bc5a502",
+      "name": "Error — campos vacíos",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        -1792,
+        -224
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $input.item.json.body;\n\nconst capitalizarNombre = (str) =>\n  str.trim().toLowerCase().replace(/\\b\\w/g, c => c.toUpperCase());\n\nconst normalizarTelefono = (str) =>\n  str.trim().replace(/[\\s\\-().]/g, '');\n\nreturn {\n  json: {\n    body: {\n      nombre:   capitalizarNombre(body.nombre),\n      correo:   body.correo.trim().toLowerCase(),\n      telefono: normalizarTelefono(body.telefono)\n    }\n  }\n};"
+      },
+      "id": "bc5fcc57-a605-4286-853d-7fdabccd7294",
+      "name": "Formatear datos",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1792,
+        -384
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+        "query": "query buscarCliente($query: String!) {\n  customers(first: 1, query: $query) {\n    edges {\n      node {\n        id\n        email\n      }\n    }\n  }\n}",
+        "variables": "={\n  \"query\": \"email:{{ $json.body.correo }}\"\n}"
+      },
+      "id": "c21f56fc-dffe-43a8-b669-935199c5c934",
+      "name": "Shopify — Buscar cliente",
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        -1568,
+        -384
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THkhgrtze1uBo6Ft",
+          "name": "Token Informes Shopify"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "check-existe",
+              "leftValue": "={{ $json.data.customers.edges.length }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "a6ab371b-5405-4a17-92ae-7d33dd9271df",
+      "name": "¿Existe en Shopify?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -1344,
+        -384
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Rama: cliente YA existía en Shopify\nconst gid = $input.item.json.data.customers.edges[0].node.id;\nconst numericId = gid.split('/').pop();\n\nreturn {\n  json: {\n    customer: { id: numericId }\n  }\n};"
+      },
+      "id": "2e7fa127-9124-488a-b7f8-b772fe49a98e",
+      "name": "Extraer ID existente",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1120,
+        -544
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://rulesshop.myshopify.com/admin/api/2024-01/customers.json",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ customer: { first_name: $('Formatear datos').item.json.body.nombre.split(' ')[0], last_name: $('Formatear datos').item.json.body.nombre.split(' ').slice(1).join(' ') || '', email: $('Formatear datos').item.json.body.correo, phone: $('Formatear datos').item.json.body.telefono } }) }}",
+        "options": {}
+      },
+      "id": "d35ad4d0-8966-442e-ad20-c5630491c8a8",
+      "name": "Shopify — Crear cliente",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1120,
+        -224
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THkhgrtze1uBo6Ft",
+          "name": "Token Informes Shopify"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ success: false, message: 'Error al crear cliente en Shopify', error: $json }) }}",
+        "options": {
+          "responseCode": 500
+        }
+      },
+      "id": "27fc00dd-b8ce-4e4f-868c-df2cd8c63978",
+      "name": "Error — Shopify",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        -896,
+        -64
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Rama: cliente recién creado en Shopify\n// El HTTP Request devuelve customer.id como número directamente\nconst numericId = String($input.item.json.customer.id);\n\nreturn {\n  json: {\n    customer: { id: numericId }\n  }\n};"
+      },
+      "id": "6f811eb8-50fb-41e0-9fa3-7ae8f9fad614",
+      "name": "Extraer ID nuevo",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -896,
+        -224
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "e918d33e-8fb6-48b0-9234-59f4ebae7572",
+      "name": "Merge",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        -672,
+        -384
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "headerAuth",
+        "endpoint": "https://rulesshop.myshopify.com/admin/api/2026-01/graphql.json",
+        "query": "=mutation metafieldsSet($metafields: [MetafieldsSetInput!]!) {\n  metafieldsSet(metafields: $metafields) {\n    metafields { id namespace key value }\n    userErrors { field message }\n  }\n}",
+        "variables": "={\n  \"metafields\": [\n    { \"ownerId\": \"gid://shopify/Customer/{{ $json.customer.id }}\", \"namespace\": \"custom\", \"key\": \"descuento_melia\",        \"value\": \"10\", \"type\": \"number_integer\" },\n    { \"ownerId\": \"gid://shopify/Customer/{{ $json.customer.id }}\", \"namespace\": \"custom\", \"key\": \"descuento_nuancelodge\",  \"value\": \"10\", \"type\": \"number_integer\" },\n    { \"ownerId\": \"gid://shopify/Customer/{{ $json.customer.id }}\", \"namespace\": \"custom\", \"key\": \"descuento_nuance\",       \"value\": \"10\", \"type\": \"number_integer\" },\n    { \"ownerId\": \"gid://shopify/Customer/{{ $json.customer.id }}\", \"namespace\": \"custom\", \"key\": \"descuento_surfin\",       \"value\": \"10\", \"type\": \"number_integer\" },\n    { \"ownerId\": \"gid://shopify/Customer/{{ $json.customer.id }}\", \"namespace\": \"custom\", \"key\": \"descuento_thenorthface\", \"value\": \"10\", \"type\": \"number_integer\" },\n    { \"ownerId\": \"gid://shopify/Customer/{{ $json.customer.id }}\", \"namespace\": \"custom\", \"key\": \"descuento_oakley\",       \"value\": \"10\", \"type\": \"number_integer\" },\n    { \"ownerId\": \"gid://shopify/Customer/{{ $json.customer.id }}\", \"namespace\": \"custom\", \"key\": \"descuento_rules\",        \"value\": \"10\", \"type\": \"number_integer\" }\n  ]\n}"
+      },
+      "id": "0d25e708-2800-4213-8dde-90d7c90fb81c",
+      "name": "GraphQL — Metafields",
+      "type": "n8n-nodes-base.graphql",
+      "typeVersion": 1.1,
+      "position": [
+        -448,
+        -384
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "THkhgrtze1uBo6Ft",
+          "name": "Token Informes Shopify"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ success: false, message: 'Error al crear metafields en Shopify', error: $json }) }}",
+        "options": {
+          "responseCode": 500
+        }
+      },
+      "id": "2a6a6cd4-d132-4014-adff-e9735ae327db",
+      "name": "Error — Metafields",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        -224,
+        -224
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "Descuentos_Omnicanal",
+          "mode": "list",
+          "cachedResultName": "Descuentos_Omnicanal"
+        },
+        "where": {
+          "values": [
+            {
+              "column": "id_cliente",
+              "value": "={{ $('Merge').item.json.customer.id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "796bfee3-2793-4bd2-84a9-c44a70041473",
+      "name": "Supabase — Buscar cliente",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        -224,
+        -384
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "check-supabase",
+              "leftValue": "={{ $json.id_cliente }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "7f749db1-e30d-48c3-99d0-ffc2dab92cfd",
+      "name": "¿Existe en Supabase?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        0,
+        -384
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ success: true, message: 'Cliente ya estaba registrado', shopify_id: $('Merge').item.json.customer.id }) }}",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "id": "c01e4c8c-598e-4ae1-baef-f4d1ff76baca",
+      "name": "Respuesta — ya registrado",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        224,
+        -544
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "upsert",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "Descuentos_Omnicanal",
+          "mode": "list",
+          "cachedResultName": "Descuentos_Omnicanal"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id_cliente": "={{ $('Merge').item.json.customer.id }}",
+            "Nombre": "={{ $('Formatear datos').item.json.body.nombre }}",
+            "correo": "={{ $('Formatear datos').item.json.body.correo }}",
+            "Teléfono": "={{ $('Formatear datos').item.json.body.telefono }}",
+            "sucursal_rules": 10,
+            "sucursal_oakley": 10,
+            "sucursal_thenorthface": 10,
+            "sucursal_surfin": 10,
+            "sucursal_nuance": 10,
+            "sucursal_nuancelodge": 10,
+            "sucursal_melia": 10,
+            "pedido_rules": 0,
+            "pedido_oakley": 0,
+            "pedido_thenorthface": 0,
+            "pedido_surfin": 0,
+            "pedido_nuance": 0,
+            "pedido_nuancelodge": 0,
+            "pedido_melia": 0
+          },
+          "matchingColumns": [
+            "id_cliente"
+          ],
+          "schema": [
+            {
+              "id": "correo",
+              "displayName": "correo",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "sucursal_rules",
+              "displayName": "sucursal_rules",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "sucursal_oakley",
+              "displayName": "sucursal_oakley",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "sucursal_thenorthface",
+              "displayName": "sucursal_thenorthface",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "sucursal_surfin",
+              "displayName": "sucursal_surfin",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "sucursal_nuance",
+              "displayName": "sucursal_nuance",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "sucursal_nuancelodge",
+              "displayName": "sucursal_nuancelodge",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "sucursal_melia",
+              "displayName": "sucursal_melia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "id_cliente",
+              "displayName": "id_cliente",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Nombre",
+              "displayName": "Nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "Teléfono",
+              "displayName": "Teléfono",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "pedido_rules",
+              "displayName": "pedido_rules",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "pedido_oakley",
+              "displayName": "pedido_oakley",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "pedido_thenorthface",
+              "displayName": "pedido_thenorthface",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "pedido_surfin",
+              "displayName": "pedido_surfin",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "pedido_nuance",
+              "displayName": "pedido_nuance",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "pedido_nuancelodge",
+              "displayName": "pedido_nuancelodge",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": false
+            },
+            {
+              "id": "pedido_melia",
+              "displayName": "pedido_melia",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "e1034156-3f34-4cac-8594-56fd1c87ecaa",
+      "name": "Supabase — Insertar cliente (Postgres)",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        224,
+        -224
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ success: false, message: 'Error al guardar en Supabase', error: $json }) }}",
+        "options": {
+          "responseCode": 500
+        }
+      },
+      "id": "ffb65616-7dfa-492b-a3c4-23cfed222461",
+      "name": "Error — Supabase",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        448,
+        -64
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ success: true, message: 'Cliente registrado correctamente', shopify_id: $('Merge').item.json.customer.id }) }}",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "id": "0fdb66e3-6655-4357-aac1-50d9db095e44",
+      "name": "Respuesta OK",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        448,
+        -224
+      ]
+    }
+  ],
   "pinData": {},
   "settings": {
     "executionOrder": "v1",
@@ -29,7 +1690,7 @@
   ],
   "staticData": null,
   "tags": [],
-  "triggerCount": 3,
-  "updatedAt": "2026-03-20T15:09:02.689Z",
-  "versionId": "dc962475-4ea2-430f-b321-9f1983cecdf1"
+  "triggerCount": 1,
+  "updatedAt": "2026-03-26T12:24:21.348Z",
+  "versionId": "ee5e51d6-12d1-4b4c-8d40-2d8705389c4f"
 }
