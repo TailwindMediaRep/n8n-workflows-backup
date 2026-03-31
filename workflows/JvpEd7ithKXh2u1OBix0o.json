@@ -3,7 +3,18 @@
   "activeVersion": null,
   "activeVersionId": null,
   "connections": {
-    "When clicking ‘Execute workflow’": {
+    "When clicking 'Execute workflow'": {
+      "main": [
+        [
+          {
+            "node": "Limpiar chunks_temp",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limpiar chunks_temp": {
       "main": [
         [
           {
@@ -18,7 +29,25 @@
       "main": [
         [
           {
-            "node": "Loop Over Items",
+            "node": "Loop Over Files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Files": {
+      "main": [
+        [
+          {
+            "node": "Call 'embeding_2'",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Ver contenido",
             "type": "main",
             "index": 0
           }
@@ -29,74 +58,29 @@
       "main": [
         [
           {
-            "node": "dividir en chunks de 500",
+            "node": "Dividir en chunks",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Loop Over Items": {
+    "Dividir en chunks": {
       "main": [
-        [],
         [
           {
-            "node": "Ver contenido",
+            "node": "Guardar chunk en BD",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "dividir en chunks de 500": {
+    "Guardar chunk en BD": {
       "main": [
         [
           {
-            "node": "embeding",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "embeding": {
-      "main": [
-        [
-          {
-            "node": "mantener referencia",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "mantener referencia": {
-      "main": [
-        [
-          {
-            "node": "insertar en supabase",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "insertar en supabase": {
-      "main": [
-        [
-          {
-            "node": "Wait",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Wait": {
-      "main": [
-        [
-          {
-            "node": "Loop Over Items",
+            "node": "Loop Over Files",
             "type": "main",
             "index": 0
           }
@@ -107,7 +91,9 @@
   "createdAt": "2026-03-20T15:18:49.435Z",
   "id": "JvpEd7ithKXh2u1OBix0o",
   "isArchived": false,
-  "meta": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
   "name": "Embeding",
   "nodes": [
     {
@@ -115,11 +101,32 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -208,
-        -112
+        -640,
+        16
       ],
-      "id": "5cfbb482-a860-411e-a458-e0f187e3fe61",
-      "name": "When clicking ‘Execute workflow’"
+      "id": "3284ea42-7723-4c5e-9131-cc69a372a3d7",
+      "name": "When clicking 'Execute workflow'"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "TRUNCATE TABLE chunks_temp RESTART IDENTITY;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        -448,
+        16
+      ],
+      "id": "20c9fb32-78ec-4d33-9aa9-e60c0d42e241",
+      "name": "Limpiar chunks_temp",
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
+        }
+      }
     },
     {
       "parameters": {
@@ -146,11 +153,24 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        0,
-        -112
+        -240,
+        16
       ],
-      "id": "9f3307f0-58f5-42a6-8399-069267e3182e",
+      "id": "4eb8d253-3cff-48d4-be54-4db7859df7fd",
       "name": "Lista archivos"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -48,
+        16
+      ],
+      "id": "2b143872-f42d-4c70-adee-bc1a8d0d29dd",
+      "name": "Loop Over Files"
     },
     {
       "parameters": {
@@ -173,134 +193,117 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        464,
+        208,
         16
       ],
-      "id": "fc1e6d46-d033-4e06-9ae9-e5fee274016f",
+      "id": "6dcb8fa3-7bc5-4fbd-a448-4b87069290b6",
       "name": "Ver contenido"
     },
     {
       "parameters": {
-        "options": {}
-      },
-      "type": "n8n-nodes-base.splitInBatches",
-      "typeVersion": 3,
-      "position": [
-        224,
-        -112
-      ],
-      "id": "6ebd72dc-7610-4522-9ab3-0d75c230bc9c",
-      "name": "Loop Over Items"
-    },
-    {
-      "parameters": {
-        "jsCode": "const text = $input.first().json.data || '';\nconst filename = $input.first().json.name || 'unknown';\nconst chunkSize = 500;\nconst overlap = 50;\nconst chunks = [];\n\nfor (let i = 0; i < text.length; i += chunkSize - overlap) {\n  const chunk = text.slice(i, i + chunkSize);\n  if (chunk.trim().length > 0) {\n    chunks.push({\n      content: chunk,\n      metadata: {\n        source: filename,\n        chunk_index: chunks.length\n      }\n    });\n  }\n}\n\nreturn chunks.map(c => ({ json: c }));"
+        "jsCode": "const text = $input.first().json.data || '';\nconst filename = $input.first().json.name || 'unknown';\nconst chunkSize = 500;\nconst overlap = 50;\nconst chunks = [];\n\nfor (let i = 0; i < text.length; i += chunkSize - overlap) {\n  const chunk = text.slice(i, i + chunkSize);\n  if (chunk.trim().length > 0) {\n    chunks.push({\n      json: {\n        content: chunk,\n        source: filename,\n        chunk_index: chunks.length\n      }\n    });\n  }\n}\n\nreturn chunks;"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        672,
+        416,
         16
       ],
-      "id": "b7626bf7-9ea4-43be-94a9-84f9e53b7ee9",
-      "name": "dividir en chunks de 500"
+      "id": "864efa37-e834-4636-a211-3b35397851e5",
+      "name": "Dividir en chunks"
     },
     {
       "parameters": {
-        "method": "POST",
-        "url": "https://api.cohere.com/v2/embed",
-        "sendHeaders": true,
-        "headerParameters": {
-          "parameters": [
+        "schema": {
+          "__rl": true,
+          "value": "public",
+          "mode": "list"
+        },
+        "table": {
+          "__rl": true,
+          "value": "chunks_temp",
+          "mode": "list"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "content": "={{ $json.content }}",
+            "source": "={{ $json.source }}",
+            "chunk_index": "={{ $json.chunk_index }}"
+          },
+          "schema": [
             {
-              "name": "Authorization",
-              "value": "Bearer MOsdB9z63Xkfql0o65WTjhIdv7RGmpYT4OlPOWpW"
+              "id": "content",
+              "displayName": "content",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
             },
             {
-              "name": "Content-Type",
-              "value": "application/json"
+              "id": "source",
+              "displayName": "source",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "chunk_index",
+              "displayName": "chunk_index",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
             }
           ]
         },
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify({ \"model\": \"embed-multilingual-light-v3.0\", \"texts\": [$json.content], \"input_type\": \"search_document\", \"embedding_types\": [\"float\"] }) }}",
         "options": {}
       },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.3,
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
       "position": [
-        880,
+        608,
         16
       ],
-      "id": "c7c33e3d-cba0-4031-bf73-a96596843c25",
-      "name": "embeding"
+      "id": "1da9ce5b-a5f7-4337-90e5-eaef6ef7d5bf",
+      "name": "Guardar chunk en BD",
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
+        }
+      }
     },
     {
       "parameters": {
-        "jsCode": "const cohereOutput = $input.first().json;\nconst embedding = cohereOutput.embeddings.float[0];\n\nconst chunkData = $('dividir en chunks de 500').item.json;\n\n// Pausa de 2 segundos\nawait new Promise(resolve => setTimeout(resolve, 3000));\n\nreturn [{\n  json: {\n    content: chunkData.content,\n    metadata: chunkData.metadata,\n    embedding: embedding\n  }\n}];"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        1072,
-        16
-      ],
-      "id": "5a934f2c-4278-4152-beda-68cc1097be69",
-      "name": "mantener referencia"
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "=https://niucsjoaufrzpquicens.supabase.co/rest/v1/documents",
-        "sendHeaders": true,
-        "headerParameters": {
-          "parameters": [
-            {
-              "name": "Authorization",
-              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5pdWNzam9hdWZyenBxdWljZW5zIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MDIwMzk3NywiZXhwIjoyMDg1Nzc5OTc3fQ.O47K6zqyHxQVKWffIKW6GggqJ_YHpBw0YH3c-Cc5pCk"
-            },
-            {
-              "name": "apikey",
-              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5pdWNzam9hdWZyenBxdWljZW5zIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MDIwMzk3NywiZXhwIjoyMDg1Nzc5OTc3fQ.O47K6zqyHxQVKWffIKW6GggqJ_YHpBw0YH3c-Cc5pCk"
-            },
-            {
-              "name": "Content-Type",
-              "value": "application/json"
-            },
-            {
-              "name": "Prefer",
-              "value": "return=minimal"
-            }
-          ]
+        "workflowId": {
+          "__rl": true,
+          "value": "I5hwEZRzSwu0Ch3bOJOME",
+          "mode": "id",
+          "cachedResultUrl": "/workflow/I5hwEZRzSwu0Ch3bOJOME"
         },
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify({ \"content\": $json.content, \"metadata\": $json.metadata, \"embedding\": $json.embedding }) }}",
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
         "options": {}
       },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.3,
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
       "position": [
-        1280,
-        16
+        208,
+        -192
       ],
-      "id": "c59098a9-2c41-456f-8d2f-a5f947124936",
-      "name": "insertar en supabase"
-    },
-    {
-      "parameters": {
-        "amount": 2
-      },
-      "type": "n8n-nodes-base.wait",
-      "typeVersion": 1.1,
-      "position": [
-        1488,
-        16
-      ],
-      "id": "e66fffbd-5e8a-4257-a132-85d7a3288bfe",
-      "name": "Wait",
-      "webhookId": "ef843216-6031-4b86-b5c5-0a3fd2cf22ba"
+      "id": "abb4f58d-618c-4ab8-b184-0b83c9f82640",
+      "name": "Call 'embeding_2'"
     }
   ],
   "pinData": {},
@@ -320,6 +323,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2026-03-23T09:50:45.202Z",
-  "versionId": "8915d5a8-9b80-4266-a623-b2ac99dd5aec"
+  "updatedAt": "2026-03-30T11:34:38.965Z",
+  "versionId": "06263d9b-43cf-442b-9227-dd504a58af49"
 }
