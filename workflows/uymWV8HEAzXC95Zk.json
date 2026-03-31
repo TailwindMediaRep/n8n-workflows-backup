@@ -3,38 +3,11 @@
   "activeVersion": null,
   "activeVersionId": null,
   "connections": {
-    "When clicking ‘Execute workflow’": {
-      "main": [
-        []
-      ]
-    },
-    "HTTP Request": {
+    "When clicking 'Execute workflow'": {
       "main": [
         [
           {
-            "node": "Code in JavaScript",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Code in JavaScript": {
-      "main": [
-        [
-          {
-            "node": "Insert row",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Get row(s)": {
-      "main": [
-        [
-          {
-            "node": "Code in JavaScript1",
+            "node": "HTTP Request",
             "type": "main",
             "index": 0
           }
@@ -53,174 +26,38 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -64,
-        160
+        0,
+        -48
       ],
-      "id": "8120bade-8ba8-4d49-aa95-d638ee517b5a",
-      "name": "When clicking ‘Execute workflow’"
+      "id": "d5c22166-b128-40f1-898b-3d5d1f205ed6",
+      "name": "When clicking 'Execute workflow'"
     },
     {
       "parameters": {
-        "url": "https://maps.googleapis.com/maps/api/distancematrix/json",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpHeaderAuth",
-        "sendQuery": true,
-        "queryParameters": {
+        "method": "POST",
+        "url": "http://2.136.43.122:5000/embed",
+        "sendHeaders": true,
+        "headerParameters": {
           "parameters": [
             {
-              "name": "origins",
-              "value": "37.1773, -3.5986"
-            },
-            {
-              "name": "destinations",
-              "value": "Pradollano, Sierra Nevada"
-            },
-            {
-              "name": "departure_time",
-              "value": "now"
-            },
-            {
-              "name": "traffic_model",
-              "value": "best_guess"
+              "name": "Content-Type",
+              "value": "application/json"
             }
           ]
         },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{ \"texts\": [\"hola mundo esto es una prueba\"] }",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        160,
-        64
+        208,
+        -48
       ],
-      "id": "24d00402-569e-40bb-9d59-bc4a71925cde",
-      "name": "HTTP Request",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "qkAMlj9qGLqx3qqa",
-          "name": "Maps"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "jsCode": "// 1. Datos de entrada\nconst element = items[0].json.rows[0].elements[0];\nconst tiempoNormal = element.duration.value;\nconst tiempoTrafico = element.duration_in_traffic.value;\n\n// 2. Calcular retraso\nconst retrasoMinutos = Math.round((tiempoTrafico - tiempoNormal) / 60);\n\n// 3. CALCULO DE FLUJO (Personas que han entrado en los últimos 15 min)\nlet flujoPersonas = 0;\n\nif (retrasoMinutos < 10) {\n  // Tráfico muy fluido: Poca gente subiendo\n  flujoPersonas = 400; \n} else if (retrasoMinutos >= 10 && retrasoMinutos < 25) {\n  // Tráfico fluido normal (Verde/Amarillo): Flujo constante\n  flujoPersonas = 700;\n} else if (retrasoMinutos >= 25 && retrasoMinutos < 45) {\n  // Tráfico Denso (Naranja): Máxima capacidad de la vía en movimiento\n  flujoPersonas = 1000;\n} else {\n  // Colapso (Rojo): La carretera es un parking lleno de gente\n  flujoPersonas = 1300;\n}\n\n// 4. Fecha y Hora para el registro\nconst now = new Date();\nconst fecha = now.toLocaleDateString('es-ES');\nconst hora = now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });\n\nreturn [\n  {\n    json: {\n      fecha: fecha,\n      hora: hora,\n      retraso: retrasoMinutos,\n      personas_flujo: flujoPersonas\n    }\n  }\n];"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        336,
-        64
-      ],
-      "id": "43ef161c-0a2d-409d-86a5-20235e8020d8",
-      "name": "Code in JavaScript"
-    },
-    {
-      "parameters": {
-        "dataTableId": {
-          "__rl": true,
-          "value": "5y5JdpEzk6RRAMCR",
-          "mode": "list",
-          "cachedResultName": "Trafico_Sierra",
-          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/5y5JdpEzk6RRAMCR"
-        },
-        "columns": {
-          "mappingMode": "defineBelow",
-          "value": {
-            "Fecha": "={{ $json.fecha }}",
-            "Hora": "={{ $json.hora }}",
-            "Retraso_minutos": "={{ $json.retraso }}",
-            "Personas_Estimadas_15min": "={{ $json.personas_flujo }}"
-          },
-          "matchingColumns": [],
-          "schema": [
-            {
-              "id": "Fecha",
-              "displayName": "Fecha",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "readOnly": false,
-              "removed": false
-            },
-            {
-              "id": "Hora",
-              "displayName": "Hora",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "string",
-              "readOnly": false,
-              "removed": false
-            },
-            {
-              "id": "Retraso_minutos",
-              "displayName": "Retraso_minutos",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "number",
-              "readOnly": false,
-              "removed": false
-            },
-            {
-              "id": "Personas_Estimadas_15min",
-              "displayName": "Personas_Estimadas_15min",
-              "required": false,
-              "defaultMatch": false,
-              "display": true,
-              "type": "number",
-              "readOnly": false,
-              "removed": false
-            }
-          ],
-          "attemptToConvertTypes": false,
-          "convertFieldsToString": false
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.dataTable",
-      "typeVersion": 1.1,
-      "position": [
-        528,
-        64
-      ],
-      "id": "c7af029e-a0bf-40a3-b0c1-d49383f03325",
-      "name": "Insert row"
-    },
-    {
-      "parameters": {
-        "operation": "get",
-        "dataTableId": {
-          "__rl": true,
-          "value": "5y5JdpEzk6RRAMCR",
-          "mode": "list",
-          "cachedResultName": "Trafico_Sierra",
-          "cachedResultUrl": "/projects/x5UZcmGQw2OWHuXb/datatables/5y5JdpEzk6RRAMCR"
-        }
-      },
-      "type": "n8n-nodes-base.dataTable",
-      "typeVersion": 1.1,
-      "position": [
-        160,
-        240
-      ],
-      "id": "4d09815b-d521-4869-b00b-7ed513953fdd",
-      "name": "Get row(s)"
-    },
-    {
-      "parameters": {
-        "jsCode": "// Script para sumar el total\nlet totalPersonas = 0;\n\n// 'items' contiene todas las filas leídas del Excel\nfor (const item of items) {\n  totalPersonas += parseInt(item.json.Personas_Estimadas_15min);\n}\n\nreturn [{ json: { total_acumulado: totalPersonas } }];"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        320,
-        240
-      ],
-      "id": "d674f285-c3cf-46d5-a4eb-760700e1b9c1",
-      "name": "Code in JavaScript1"
+      "id": "cd388a60-ba8a-4bdb-b6a8-be1355a99c1e",
+      "name": "HTTP Request"
     }
   ],
   "pinData": {},
@@ -239,6 +76,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2026-01-22T10:03:53.106Z",
-  "versionId": "f79080b0-87fc-44cc-8b8e-6e85aed16d5c"
+  "updatedAt": "2026-03-30T11:22:14.184Z",
+  "versionId": "12c02cc6-4a2f-4de2-adda-b42c0784dab9"
 }
