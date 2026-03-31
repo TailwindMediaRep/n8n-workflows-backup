@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-03-26T11:29:07.000Z",
-    "createdAt": "2026-03-26T11:28:32.485Z",
-    "versionId": "0b7aa2d8-9ee7-4670-a54b-2a23e90c59db",
+    "updatedAt": "2026-03-30T07:56:55.000Z",
+    "createdAt": "2026-03-30T07:56:53.073Z",
+    "versionId": "b1d7faed-267e-40e6-bdb4-90c810b7ba06",
     "workflowId": "cnuDKnZrHmDy4QDh",
     "nodes": [
       {
@@ -36,7 +36,7 @@
         "type": "n8n-nodes-base.googleSheetsTrigger",
         "typeVersion": 1,
         "position": [
-          -800,
+          944,
           -272
         ],
         "id": "7ad34ec0-9110-48cf-90b6-691ccbf01cbd",
@@ -47,7 +47,8 @@
             "id": "4HkdJcbjLdqN2Ie3",
             "name": "Google Sheets Trigger info@tailwind.es"
           }
-        }
+        },
+        "disabled": true
       },
       {
         "parameters": {
@@ -56,25 +57,25 @@
               {
                 "id": "d56c1a5f-1dc2-4a0d-86fb-e47d652cbd19",
                 "name": "nombre_codificado",
-                "value": "={{ ($json[\"Nombre\"]) }}",
+                "value": "={{ $json.body[\"Nombre\"] }}",
                 "type": "string"
               },
               {
                 "id": "e4352ddf-8332-45d5-8e3b-397216fa0b9c",
                 "name": "apellido_codificado",
-                "value": "={{ $json[\"Apellido\"] }}",
+                "value": "={{ $json.body[\"Apellido\"] }}",
                 "type": "string"
               },
               {
                 "id": "d74065a3-f051-49f0-ae26-f4412aefdd88",
                 "name": "telefono",
-                "value": "={{ $json[\"Teléfono Móvil\"] }}",
+                "value": "={{ $json.body[\"Teléfono Móvil\"] }}",
                 "type": "number"
               },
               {
                 "id": "a50d5b0a-c301-4ff3-916e-8c2a0508d9ef",
                 "name": "link_aprobar",
-                "value": "=https://n8n.tailwind.es/webhook/gestion-profesor?email={{ $json[\"Correo Electrónico\"] }}&nombre={{ encodeURIComponent($json.Nombre) }}&apellido={{ encodeURIComponent($json.Apellido) }}&telefono={{ encodeURIComponent($json[\"Teléfono Móvil\"]) }}&expiracion={{ $now.plus({hours: 48}).toMillis() }}",
+                "value": "=https://n8n.tailwind.es/webhook/gestion-profesor?email={{ $json.body[\"Correo Electrónico\"] }}&nombre={{ encodeURIComponent($json.body[\"Nombre\"]) }}&apellido={{ encodeURIComponent($json.body[\"Apellido\"]) }}&telefono={{ encodeURIComponent($json.body[\"Teléfono Móvil\"]) }}&expiracion={{ $now.plus({hours: 48}).toMillis() }}",
                 "type": "string"
               }
             ]
@@ -133,13 +134,13 @@
           "url": "=https://services.leadconnectorhq.com/hooks/50G0wYa58T0KnxpEocxd/webhook-trigger/343b67dc-f4a0-4162-843d-9dd404db2b05",
           "sendBody": true,
           "specifyBody": "json",
-          "jsonBody": "={\n  \"nombre\": \"{{ $json.nombre_codificado }}\",\n  \"apellido\": \"{{ $json.apellido_codificado }}\",\n  \"nombre_completo\": \"{{ $json.nombre_codificado }} {{ $json.apellido_codificado }}\",\n  \"email\": \"{{ $('Google Sheets Trigger').item.json['Correo Electrónico'] }}\",\n  \"telefono\": \"{{ $('Google Sheets Trigger').item.json['Teléfono Móvil'] }}\",\n  \"doc_vida_laboral\": \"{{ $('Google Sheets Trigger').item.json['Adjuntar Vida Laboral Actual'] }}\",\n  \"doc_titulo\": \"{{ $('Google Sheets Trigger').item.json['Adjuntar Título / Certificación de Profesor'] }}\",\n  \"link_aprobar\": \"{{ $json.link_aprobar }}\"\n}\n",
+          "jsonBody": "={\n  \"nombre\": \"{{ $json.nombre_codificado }}\",\n  \"apellido\": \"{{ $json.apellido_codificado }}\",\n  \"nombre_completo\": \"{{ $json.nombre_codificado }} {{ $json.apellido_codificado }}\",\n  \"email\": \"{{ $('Webhook').item.json.body[\"Correo Electrónico\"] }}\",\n  \"telefono\": \"{{ $('Webhook').item.json.body[\"Teléfono Móvil\"] }}\",\n  \"doc_vida_laboral\": \"{{ $('Webhook').item.json.body[\"Adjuntar Vida Laboral Actual\"] }}\",\n  \"doc_titulo\": \"{{ $('Webhook').item.json.body[\"Adjuntar Título / Certificación de Profesor\"] }}\",\n  \"link_aprobar\": \"{{ $('Edit Fields').item.json.link_aprobar }}\"\n}",
           "options": {}
         },
         "type": "n8n-nodes-base.httpRequest",
         "typeVersion": 4.3,
         "position": [
-          -400,
+          -336,
           -272
         ],
         "id": "a6c03a51-6008-4851-940e-89f821e808d6",
@@ -1209,18 +1210,28 @@
         ],
         "id": "225be5cd-7d28-4a6e-96ae-d8a0d2429a64",
         "name": "Sticky Note4"
+      },
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "940478b4-42e3-4f8d-bc2b-da862a72fdf2",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -800,
+          -272
+        ],
+        "id": "f5febac2-465b-4eee-8b75-10352088f487",
+        "name": "Webhook",
+        "webhookId": "940478b4-42e3-4f8d-bc2b-da862a72fdf2"
       }
     ],
     "connections": {
       "Google Sheets Trigger": {
         "main": [
-          [
-            {
-              "node": "Edit Fields",
-              "type": "main",
-              "index": 0
-            }
-          ]
+          []
         ]
       },
       "Edit Fields": {
@@ -1490,24 +1501,29 @@
             }
           ]
         ]
+      },
+      "Webhook": {
+        "main": [
+          [
+            {
+              "node": "Edit Fields",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version 0b7aa2d8",
+    "name": "Version b1d7faed",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "0b7aa2d8-9ee7-4670-a54b-2a23e90c59db",
+  "activeVersionId": "b1d7faed-267e-40e6-bdb4-90c810b7ba06",
   "connections": {
     "Google Sheets Trigger": {
       "main": [
-        [
-          {
-            "node": "Edit Fields",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Edit Fields": {
@@ -1777,6 +1793,17 @@
           }
         ]
       ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-12-12T07:23:55.975Z",
@@ -1817,7 +1844,7 @@
       "type": "n8n-nodes-base.googleSheetsTrigger",
       "typeVersion": 1,
       "position": [
-        -800,
+        944,
         -272
       ],
       "id": "7ad34ec0-9110-48cf-90b6-691ccbf01cbd",
@@ -1828,7 +1855,8 @@
           "id": "4HkdJcbjLdqN2Ie3",
           "name": "Google Sheets Trigger info@tailwind.es"
         }
-      }
+      },
+      "disabled": true
     },
     {
       "parameters": {
@@ -1837,25 +1865,25 @@
             {
               "id": "d56c1a5f-1dc2-4a0d-86fb-e47d652cbd19",
               "name": "nombre_codificado",
-              "value": "={{ ($json[\"Nombre\"]) }}",
+              "value": "={{ $json.body[\"Nombre\"] }}",
               "type": "string"
             },
             {
               "id": "e4352ddf-8332-45d5-8e3b-397216fa0b9c",
               "name": "apellido_codificado",
-              "value": "={{ $json[\"Apellido\"] }}",
+              "value": "={{ $json.body[\"Apellido\"] }}",
               "type": "string"
             },
             {
               "id": "d74065a3-f051-49f0-ae26-f4412aefdd88",
               "name": "telefono",
-              "value": "={{ $json[\"Teléfono Móvil\"] }}",
+              "value": "={{ $json.body[\"Teléfono Móvil\"] }}",
               "type": "number"
             },
             {
               "id": "a50d5b0a-c301-4ff3-916e-8c2a0508d9ef",
               "name": "link_aprobar",
-              "value": "=https://n8n.tailwind.es/webhook/gestion-profesor?email={{ $json[\"Correo Electrónico\"] }}&nombre={{ encodeURIComponent($json.Nombre) }}&apellido={{ encodeURIComponent($json.Apellido) }}&telefono={{ encodeURIComponent($json[\"Teléfono Móvil\"]) }}&expiracion={{ $now.plus({hours: 48}).toMillis() }}",
+              "value": "=https://n8n.tailwind.es/webhook/gestion-profesor?email={{ $json.body[\"Correo Electrónico\"] }}&nombre={{ encodeURIComponent($json.body[\"Nombre\"]) }}&apellido={{ encodeURIComponent($json.body[\"Apellido\"]) }}&telefono={{ encodeURIComponent($json.body[\"Teléfono Móvil\"]) }}&expiracion={{ $now.plus({hours: 48}).toMillis() }}",
               "type": "string"
             }
           ]
@@ -1914,13 +1942,13 @@
         "url": "=https://services.leadconnectorhq.com/hooks/50G0wYa58T0KnxpEocxd/webhook-trigger/343b67dc-f4a0-4162-843d-9dd404db2b05",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"nombre\": \"{{ $json.nombre_codificado }}\",\n  \"apellido\": \"{{ $json.apellido_codificado }}\",\n  \"nombre_completo\": \"{{ $json.nombre_codificado }} {{ $json.apellido_codificado }}\",\n  \"email\": \"{{ $('Google Sheets Trigger').item.json['Correo Electrónico'] }}\",\n  \"telefono\": \"{{ $('Google Sheets Trigger').item.json['Teléfono Móvil'] }}\",\n  \"doc_vida_laboral\": \"{{ $('Google Sheets Trigger').item.json['Adjuntar Vida Laboral Actual'] }}\",\n  \"doc_titulo\": \"{{ $('Google Sheets Trigger').item.json['Adjuntar Título / Certificación de Profesor'] }}\",\n  \"link_aprobar\": \"{{ $json.link_aprobar }}\"\n}\n",
+        "jsonBody": "={\n  \"nombre\": \"{{ $json.nombre_codificado }}\",\n  \"apellido\": \"{{ $json.apellido_codificado }}\",\n  \"nombre_completo\": \"{{ $json.nombre_codificado }} {{ $json.apellido_codificado }}\",\n  \"email\": \"{{ $('Webhook').item.json.body[\"Correo Electrónico\"] }}\",\n  \"telefono\": \"{{ $('Webhook').item.json.body[\"Teléfono Móvil\"] }}\",\n  \"doc_vida_laboral\": \"{{ $('Webhook').item.json.body[\"Adjuntar Vida Laboral Actual\"] }}\",\n  \"doc_titulo\": \"{{ $('Webhook').item.json.body[\"Adjuntar Título / Certificación de Profesor\"] }}\",\n  \"link_aprobar\": \"{{ $('Edit Fields').item.json.link_aprobar }}\"\n}",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.3,
       "position": [
-        -400,
+        -336,
         -272
       ],
       "id": "a6c03a51-6008-4851-940e-89f821e808d6",
@@ -2990,50 +3018,30 @@
       ],
       "id": "225be5cd-7d28-4a6e-96ae-d8a0d2429a64",
       "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "940478b4-42e3-4f8d-bc2b-da862a72fdf2",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -800,
+        -272
+      ],
+      "id": "f5febac2-465b-4eee-8b75-10352088f487",
+      "name": "Webhook",
+      "webhookId": "940478b4-42e3-4f8d-bc2b-da862a72fdf2"
     }
   ],
-  "pinData": {
-    "Webhook_Aprobado": [
-      {
-        "json": {
-          "headers": {
-            "connection": "upgrade",
-            "host": "n8n.tailwind.es",
-            "x-forwarded-for": "81.38.171.75",
-            "x-forwarded-proto": "https",
-            "sec-fetch-dest": "document",
-            "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.3 Mobile/15E148 Safari/604.1",
-            "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-            "referer": "https://n8n.tailwind.es/webhook/gestion-profesor?email=miguelgarridosn@gmail.com&nombre=Jose%20Miguel&apellido=Lopez%20Garrido&telefono=%2B34676084491&expiracion=1772692546891",
-            "sec-fetch-site": "cross-site",
-            "sec-fetch-mode": "navigate",
-            "accept-language": "es-ES,es;q=0.9",
-            "priority": "u=0, i",
-            "accept-encoding": "gzip, deflate, br, zstd"
-          },
-          "params": {},
-          "query": {
-            "email": "miguelgarridosn@gmail.com",
-            "nombre": "Jose Miguel",
-            "apellido": "Lopez Garrido",
-            "telefono": " 34676084491",
-            "expiracion": "1772692546891"
-          },
-          "body": {},
-          "webhookUrl": "https://n8n.tailwind.es/webhook/aprobar-profesor",
-          "executionMode": "production"
-        },
-        "pairedItem": {
-          "item": 0
-        }
-      }
-    ]
-  },
+  "pinData": {},
   "settings": {
     "executionOrder": "v1",
     "timeSavedMode": "fixed",
     "callerPolicy": "workflowsFromSameOwner",
-    "availableInMCP": false,
+    "availableInMCP": true,
     "errorWorkflow": "e80tfOpD4TdBh8EF"
   },
   "shared": [
@@ -3063,6 +3071,6 @@
   },
   "tags": [],
   "triggerCount": 4,
-  "updatedAt": "2026-03-26T11:28:36.000Z",
-  "versionId": "0b7aa2d8-9ee7-4670-a54b-2a23e90c59db"
+  "updatedAt": "2026-03-30T07:57:03.242Z",
+  "versionId": "b1d7faed-267e-40e6-bdb4-90c810b7ba06"
 }
