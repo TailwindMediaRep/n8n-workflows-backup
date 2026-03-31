@@ -1,0 +1,480 @@
+{
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-03-30T11:50:17.000Z",
+    "createdAt": "2026-03-30T11:50:16.700Z",
+    "versionId": "386f2729-c155-440f-9d45-dc4e19008f65",
+    "workflowId": "I5hwEZRzSwu0Ch3bOJOME",
+    "nodes": [
+      {
+        "parameters": {},
+        "type": "n8n-nodes-base.executeWorkflowTrigger",
+        "typeVersion": 1,
+        "position": [
+          -752,
+          -320
+        ],
+        "id": "32cd1341-69f7-4552-a5f5-37a36f0f454c",
+        "name": "Execute Workflow Trigger"
+      },
+      {
+        "parameters": {
+          "operation": "executeQuery",
+          "query": "SELECT id, content, source, chunk_index FROM chunks_temp ORDER BY id;",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.5,
+        "position": [
+          -560,
+          -320
+        ],
+        "id": "348b7f59-4e70-4776-9f20-82c01f6c59f7",
+        "name": "Leer todos los chunks",
+        "credentials": {
+          "postgres": {
+            "id": "UPETCYNZNCReuZu8",
+            "name": "Postgres Supabase"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "batchSize": 32,
+          "options": {}
+        },
+        "type": "n8n-nodes-base.splitInBatches",
+        "typeVersion": 3,
+        "position": [
+          -352,
+          -320
+        ],
+        "id": "dcf387cb-8614-4990-af07-04ddc31c10b1",
+        "name": "Loop Over Chunks"
+      },
+      {
+        "parameters": {
+          "jsCode": "const items = $input.all();\nconst texts = items.map(i => i.json.content);\n\nreturn [{\n  json: {\n    texts: texts,\n    chunks: items.map(i => i.json)\n  }\n}];"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          -160,
+          -320
+        ],
+        "id": "14aeb651-bd43-4b3c-8865-5cff61295411",
+        "name": "Preparar batch"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "http://2.136.43.122:5000/embed",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          },
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ JSON.stringify({ \"texts\": $json.texts }) }}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          48,
+          -320
+        ],
+        "id": "a5853f98-53b8-47b8-8cd8-eed71567d4ef",
+        "name": "embeding"
+      },
+      {
+        "parameters": {
+          "jsCode": "const serverOutput = $input.first().json;\nconst embeddings = serverOutput.embeddings.float;\nconst chunks = $('Preparar batch').item.json.chunks;\n\nreturn chunks.map((chunk, i) => ({\n  json: {\n    content: chunk.content,\n    metadata: { source: chunk.source, chunk_index: chunk.chunk_index },\n    embedding: embeddings[i]\n  }\n}));"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          256,
+          -320
+        ],
+        "id": "31185926-f785-4594-8529-1714079c3d2b",
+        "name": "mantener referencia"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://niucsjoaufrzpquicens.supabase.co/rest/v1/documents",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5pdWNzam9hdWZyenBxdWljZW5zIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MDIwMzk3NywiZXhwIjoyMDg1Nzc5OTc3fQ.O47K6zqyHxQVKWffIKW6GggqJ_YHpBw0YH3c-Cc5pCk"
+              },
+              {
+                "name": "apikey",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5pdWNzam9hdWZyenBxdWljZW5zIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MDIwMzk3NywiZXhwIjoyMDg1Nzc5OTc3fQ.O47K6zqyHxQVKWffIKW6GggqJ_YHpBw0YH3c-Cc5pCk"
+              },
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "Prefer",
+                "value": "return=minimal"
+              }
+            ]
+          },
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={{ JSON.stringify({ \"content\": $json.content, \"metadata\": $json.metadata, \"embedding\": $json.embedding }) }}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.3,
+        "position": [
+          448,
+          -320
+        ],
+        "id": "adf26e42-429d-4c80-8ecc-9ed69a3a5833",
+        "name": "insertar en supabase"
+      }
+    ],
+    "connections": {
+      "Execute Workflow Trigger": {
+        "main": [
+          [
+            {
+              "node": "Leer todos los chunks",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Leer todos los chunks": {
+        "main": [
+          [
+            {
+              "node": "Loop Over Chunks",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Loop Over Chunks": {
+        "main": [
+          [],
+          [
+            {
+              "node": "Preparar batch",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Preparar batch": {
+        "main": [
+          [
+            {
+              "node": "embeding",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "embeding": {
+        "main": [
+          [
+            {
+              "node": "mantener referencia",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "mantener referencia": {
+        "main": [
+          [
+            {
+              "node": "insertar en supabase",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "insertar en supabase": {
+        "main": [
+          [
+            {
+              "node": "Loop Over Chunks",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Tailwind Media",
+    "name": "Version 386f2729",
+    "description": "",
+    "autosaved": false
+  },
+  "activeVersionId": "386f2729-c155-440f-9d45-dc4e19008f65",
+  "connections": {
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "Leer todos los chunks",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer todos los chunks": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Chunks",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Chunks": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Preparar batch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar batch": {
+      "main": [
+        [
+          {
+            "node": "embeding",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "embeding": {
+      "main": [
+        [
+          {
+            "node": "mantener referencia",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "mantener referencia": {
+      "main": [
+        [
+          {
+            "node": "insertar en supabase",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "insertar en supabase": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Chunks",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-03-30T09:43:17.626Z",
+  "id": "I5hwEZRzSwu0Ch3bOJOME",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "embeding_2",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        -752,
+        -320
+      ],
+      "id": "32cd1341-69f7-4552-a5f5-37a36f0f454c",
+      "name": "Execute Workflow Trigger"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT id, content, source, chunk_index FROM chunks_temp ORDER BY id;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        -560,
+        -320
+      ],
+      "id": "348b7f59-4e70-4776-9f20-82c01f6c59f7",
+      "name": "Leer todos los chunks",
+      "credentials": {
+        "postgres": {
+          "id": "UPETCYNZNCReuZu8",
+          "name": "Postgres Supabase"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "batchSize": 32,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -352,
+        -320
+      ],
+      "id": "dcf387cb-8614-4990-af07-04ddc31c10b1",
+      "name": "Loop Over Chunks"
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nconst texts = items.map(i => i.json.content);\n\nreturn [{\n  json: {\n    texts: texts,\n    chunks: items.map(i => i.json)\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -160,
+        -320
+      ],
+      "id": "14aeb651-bd43-4b3c-8865-5cff61295411",
+      "name": "Preparar batch"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://2.136.43.122:5000/embed",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ \"texts\": $json.texts }) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        48,
+        -320
+      ],
+      "id": "a5853f98-53b8-47b8-8cd8-eed71567d4ef",
+      "name": "embeding"
+    },
+    {
+      "parameters": {
+        "jsCode": "const serverOutput = $input.first().json;\nconst embeddings = serverOutput.embeddings.float;\nconst chunks = $('Preparar batch').item.json.chunks;\n\nreturn chunks.map((chunk, i) => ({\n  json: {\n    content: chunk.content,\n    metadata: { source: chunk.source, chunk_index: chunk.chunk_index },\n    embedding: embeddings[i]\n  }\n}));"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        256,
+        -320
+      ],
+      "id": "31185926-f785-4594-8529-1714079c3d2b",
+      "name": "mantener referencia"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://niucsjoaufrzpquicens.supabase.co/rest/v1/documents",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5pdWNzam9hdWZyenBxdWljZW5zIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MDIwMzk3NywiZXhwIjoyMDg1Nzc5OTc3fQ.O47K6zqyHxQVKWffIKW6GggqJ_YHpBw0YH3c-Cc5pCk"
+            },
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5pdWNzam9hdWZyenBxdWljZW5zIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MDIwMzk3NywiZXhwIjoyMDg1Nzc5OTc3fQ.O47K6zqyHxQVKWffIKW6GggqJ_YHpBw0YH3c-Cc5pCk"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Prefer",
+              "value": "return=minimal"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ \"content\": $json.content, \"metadata\": $json.metadata, \"embedding\": $json.embedding }) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        448,
+        -320
+      ],
+      "id": "adf26e42-429d-4c80-8ecc-9ed69a3a5833",
+      "name": "insertar en supabase"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-03-30T09:43:17.629Z",
+      "createdAt": "2026-03-30T09:43:17.629Z",
+      "role": "workflow:owner",
+      "workflowId": "I5hwEZRzSwu0Ch3bOJOME",
+      "projectId": "x5UZcmGQw2OWHuXb"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2026-03-30T11:50:16.694Z",
+  "versionId": "386f2729-c155-440f-9d45-dc4e19008f65"
+}
