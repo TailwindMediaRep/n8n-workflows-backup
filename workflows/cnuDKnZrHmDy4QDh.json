@@ -3036,7 +3036,43 @@
       "webhookId": "940478b4-42e3-4f8d-bc2b-da862a72fdf2"
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Webhook_Aprobado": [
+      {
+        "json": {
+          "headers": {
+            "connection": "upgrade",
+            "host": "n8n.tailwind.es",
+            "x-forwarded-for": "95.124.218.62",
+            "x-forwarded-proto": "https",
+            "sec-fetch-dest": "document",
+            "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.3 Mobile/15E148 Safari/604.1",
+            "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+            "referer": "https://n8n.tailwind.es/webhook/gestion-profesor?email=rociovina2005@gmail.com&nombre=Roc%C3%ADo&apellido=Vi%C3%B1a%20Rozas&telefono=684659781&expiracion=1775060725958",
+            "sec-fetch-site": "cross-site",
+            "sec-fetch-mode": "navigate",
+            "accept-language": "es-ES,es;q=0.9",
+            "priority": "u=0, i",
+            "accept-encoding": "gzip, deflate, br, zstd"
+          },
+          "params": {},
+          "query": {
+            "email": "rociovina2005@gmail.com",
+            "nombre": "Rocío",
+            "apellido": "Viña Rozas",
+            "telefono": "684659781",
+            "expiracion": "1775060725958"
+          },
+          "body": {},
+          "webhookUrl": "https://n8n.tailwind.es/webhook/aprobar-profesor",
+          "executionMode": "production"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1",
     "timeSavedMode": "fixed",
@@ -3071,6 +3107,6 @@
   },
   "tags": [],
   "triggerCount": 4,
-  "updatedAt": "2026-03-30T07:57:03.242Z",
+  "updatedAt": "2026-03-31T06:53:52.047Z",
   "versionId": "b1d7faed-267e-40e6-bdb4-90c810b7ba06"
 }
