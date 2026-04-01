@@ -1,0 +1,1183 @@
+{
+  "active": true,
+  "activeVersion": {
+    "updatedAt": "2026-03-31T10:38:40.000Z",
+    "createdAt": "2026-03-31T10:38:39.038Z",
+    "versionId": "72370f58-54ba-4d04-8e7d-4a2e8cf49590",
+    "workflowId": "mqSQLLnh8EL5j1n_EkasG",
+    "nodes": [
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "skatejam-rider",
+          "responseMode": "lastNode",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -240,
+          -320
+        ],
+        "id": "235f8e43-77af-4e2b-b558-977dbe22888b",
+        "name": "Webhook Rider",
+        "webhookId": "skatejam-rider-001"
+      },
+      {
+        "parameters": {
+          "jsCode": "// Body llega como string por mode: 'no-cors', hay que parsearlo\nconst raw = $input.first().json.body;\nconst body = typeof raw === 'string' ? JSON.parse(raw) : raw;\n\nconst nombre = (body.nombre || '').trim();\nconst apellidos = (body.apellidos || '').trim();\nconst nombreCompleto = `${nombre} ${apellidos}`.trim();\n\nreturn [{\n  json: {\n    nombre,\n    apellidos,\n    nombreCompleto,\n    email: (body.email || '').trim().toLowerCase(),\n    telefono: (body.telefono || '').trim(),\n    edad: body.edad || '',\n    nivel: body.nivel || 'no especificado',\n    mensaje: body.mensaje || '',\n    evento: 'Surfin Skate Jam 2026',\n    fecha_inscripcion: new Date().toISOString(),\n    tipo: 'rider'\n  }\n}];"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          0,
+          -320
+        ],
+        "id": "ff259a0a-cfaa-4e75-b771-0ce5f5baff77",
+        "name": "Procesar Datos Rider"
+      },
+      {
+        "parameters": {
+          "url": "=https://services.leadconnectorhq.com/contacts/",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpHeaderAuth",
+          "sendQuery": true,
+          "queryParameters": {
+            "parameters": [
+              {
+                "name": "locationId",
+                "value": "Mzc11LSCRrjBDJbxT1YK"
+              },
+              {
+                "name": "query",
+                "value": "={{ $json.email }}"
+              },
+              {
+                "name": "limit",
+                "value": "1"
+              }
+            ]
+          },
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "Version",
+                "value": "2021-07-28"
+              },
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          },
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"locationId\": \"Mzc11LSCRrjBDJbxT1YK\",\n  \"filters\": [\n    {\n      \"field\": \"email\",\n      \"operator\": \"=\",\n      \"value\": \"{{ $json.email }}\"\n    }\n  ]\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          240,
+          -432
+        ],
+        "id": "b471ab98-c216-4453-9446-2863d9ab948a",
+        "name": "Buscar Contacto Rider en GHL",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "rpI1C5OGO5YiJBbF",
+            "name": "ghl_surfinacademy_skatejam"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "// Tags nuevos del formulario — incluye edad y mensaje como tags\nconst nivel = $('Procesar Datos Rider').item.json.nivel;\nconst edad = $('Procesar Datos Rider').item.json.edad;\nconst mensaje = $('Procesar Datos Rider').item.json.mensaje;\n\nconst nuevosTags = [\n  'skatejam-rider',\n  'nivel-' + nivel,\n  'evento-2026',\n  'edad-' + edad\n];\n\n// Añadir mensaje solo si existe y no está vacío\nif (mensaje && mensaje.trim() !== '') {\n  nuevosTags.push('mensaje-' + mensaje.trim().toLowerCase().replace(/\\s+/g, '-'));\n}\n\n// Tags existentes en GHL (si el contacto ya existe)\nconst contactoExistente = $input.first().json?.contacts?.[0];\nconst tagsExistentes = contactoExistente?.tags || [];\n\n// Combinar sin duplicados\nconst tagsCombinados = [...new Set([...tagsExistentes, ...nuevosTags])];\n\nreturn [{\n  json: {\n    ...$('Procesar Datos Rider').item.json,\n    tags: tagsCombinados\n  }\n}];"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          480,
+          -432
+        ],
+        "id": "894776a9-ea9b-48a6-97be-26460bb12387",
+        "name": "Combinar Tags Rider"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://services.leadconnectorhq.com/contacts/upsert",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpHeaderAuth",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "Version",
+                "value": "2021-07-28"
+              }
+            ]
+          },
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"firstName\": \"{{ $json.nombre }}\",\n  \"lastName\": \"{{ $json.apellidos }}\",\n  \"email\": \"{{ $json.email }}\",\n  \"phone\": \"{{ $json.telefono }}\",\n  \"locationId\": \"Mzc11LSCRrjBDJbxT1YK\",\n  \"source\": \"Surfin Skate Jam - Web\",\n  \"tags\": {{ JSON.stringify($json.tags) }},\n  \"customFields\": [\n    {\n      \"id\": \"FIELD_ID_EDAD\",\n      \"value\": \"{{ $json.edad }}\"\n    },\n    {\n      \"id\": \"FIELD_ID_MENSAJE\",\n      \"value\": \"{{ $json.mensaje }}\"\n    }\n  ]\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          720,
+          -432
+        ],
+        "id": "d2405331-1ddb-4017-82f9-81742ceaf84c",
+        "name": "Crear Contacto en GHL",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "rpI1C5OGO5YiJBbF",
+            "name": "ghl_surfinacademy_skatejam"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "sendTo": "={{ $('Procesar Datos Rider').item.json.email }}",
+          "subject": "✅ ¡Inscripción confirmada! Surfin Skate Jam – 9 Mayo 2026",
+          "message": "=<div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #0a0a0a; color: #f0ede6; padding: 40px;\">\n\n  <div style=\"text-align: center; margin-bottom: 30px;\">\n    <h1 style=\"font-size: 2.5rem; letter-spacing: 4px; color: #f5c800; margin: 0;\">SURFIN</h1>\n    <h2 style=\"font-size: 1.2rem; letter-spacing: 6px; color: #888; margin: 5px 0 0;\">SKATE JAM 2026</h2>\n  </div>\n\n  <div style=\"border-top: 2px solid #f5c800; padding-top: 30px; margin-bottom: 30px;\">\n    <h3 style=\"color: #f5c800; font-size: 1rem; letter-spacing: 3px; text-transform: uppercase;\">¡Hola, {{ $('Procesar Datos Rider').item.json.nombre }}!</h3>\n    <p style=\"color: #ccc; line-height: 1.8;\">Tu inscripción al <strong style=\"color: #fff;\">Surfin Skate Jam</strong> ha sido recibida correctamente. Pronto nos pondremos en contacto contigo con todos los detalles del evento.</p>\n  </div>\n\n  <div style=\"background: #1a1a1a; padding: 20px; margin-bottom: 30px; border-left: 3px solid #f5c800;\">\n    <p style=\"margin: 0 0 8px; color: #888; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;\">RESUMEN DE INSCRIPCIÓN</p>\n    <p style=\"margin: 4px 0; color: #f0ede6;\">📅 <strong>Fecha:</strong> 9 de Mayo de 2026</p>\n    <p style=\"margin: 4px 0; color: #f0ede6;\">📍 <strong>Lugar:</strong> C. Zamora 123, Nave A – 18151 Ogíjares, Granada</p>\n    <p style=\"margin: 4px 0; color: #f0ede6;\">🛹 <strong>Nivel:</strong> {{ $('Procesar Datos Rider').item.json.nivel }}</p>\n    <p style=\"margin: 4px 0; color: #f0ede6;\">👤 <strong>Rider:</strong> {{ $('Procesar Datos Rider').item.json.nombreCompleto }}</p>\n  </div>\n\n  <div style=\"text-align: center; margin-bottom: 30px;\">\n    <a href=\"https://skatejam.surfin.es\" style=\"background: #f5c800; color: #0a0a0a; padding: 14px 32px; text-decoration: none; font-weight: bold; letter-spacing: 2px; font-size: 0.85rem; text-transform: uppercase; display: inline-block;\">VER DETALLES DEL EVENTO →</a>\n  </div>\n\n  <div style=\"border-top: 1px solid #333; padding-top: 20px; text-align: center;\">\n    <p style=\"color: #555; font-size: 0.75rem;\">¿Tienes alguna pregunta? Contacta con nosotros:</p>\n    <p style=\"color: #888; font-size: 0.8rem;\">📱 +34 682 23 76 33 · 🌐 www.surfin.es</p>\n  </div>\n\n</div>",
+          "options": {
+            "appendAttribution": false
+          }
+        },
+        "type": "n8n-nodes-base.gmail",
+        "typeVersion": 2.2,
+        "position": [
+          256,
+          -224
+        ],
+        "id": "3c769689-ace7-4de2-9e3e-c36059b14139",
+        "name": "Email Confirmación Rider",
+        "webhookId": "0611a9f5-f0bb-4c60-944b-bda9fb57588f",
+        "credentials": {
+          "gmailOAuth2": {
+            "id": "wR7U82S8bmDH4odC",
+            "name": "info@tailwind.es"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "sendTo": "gustavo@surfin.es",
+          "subject": "=🛹 Nuevo rider inscrito: {{ $('Procesar Datos Rider').item.json.nombreCompleto }}",
+          "message": "=<div style=\"font-family: Arial, sans-serif; max-width: 500px; padding: 20px; background: #f5f5f5;\">\n  <h2 style=\"color: #0a0a0a; border-bottom: 3px solid #f5c800; padding-bottom: 10px;\">🛹 Nuevo Rider Inscrito</h2>\n  <p><strong>Nombre:</strong> {{ $('Procesar Datos Rider').item.json.nombreCompleto }}</p>\n  <p><strong>Email:</strong> {{ $('Procesar Datos Rider').item.json.email }}</p>\n  <p><strong>Teléfono:</strong> {{ $('Procesar Datos Rider').item.json.telefono }}</p>\n  <p><strong>Edad:</strong> {{ $('Procesar Datos Rider').item.json.edad }}</p>\n  <p><strong>Nivel:</strong> {{ $('Procesar Datos Rider').item.json.nivel }}</p>\n  <p><strong>Mensaje:</strong> {{ $('Procesar Datos Rider').item.json.mensaje || 'Sin mensaje' }}</p>\n  <p><strong>Fecha inscripción:</strong> {{ $('Procesar Datos Rider').item.json.fecha_inscripcion }}</p>\n  <hr style=\"border-color: #f5c800;\">\n  <p style=\"color: #888; font-size: 0.8rem;\">Revisa el contacto en GoHighLevel para gestionar el seguimiento.</p>\n</div>",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.gmail",
+        "typeVersion": 2.2,
+        "position": [
+          256,
+          -48
+        ],
+        "id": "dce6911c-bad5-45cd-9a19-c913be17fd2f",
+        "name": "Notificación Interna Equipo",
+        "webhookId": "955cce04-6059-4994-923d-1094b5e79a43",
+        "credentials": {
+          "gmailOAuth2": {
+            "id": "wR7U82S8bmDH4odC",
+            "name": "info@tailwind.es"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "respondWith": "json",
+          "responseBody": "={ \"success\": true, \"message\": \"Inscripción recibida correctamente\" }",
+          "options": {
+            "responseCode": 200
+          }
+        },
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.5,
+        "position": [
+          960,
+          -432
+        ],
+        "id": "9872d015-4c5c-4ea6-bad2-1efd4dc8c36c",
+        "name": "Responder OK al Formulario"
+      },
+      {
+        "parameters": {
+          "httpMethod": "POST",
+          "path": "skatejam-sponsor",
+          "responseMode": "lastNode",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.webhook",
+        "typeVersion": 2.1,
+        "position": [
+          -224,
+          272
+        ],
+        "id": "dfa95751-0e15-421f-a31d-ebac2671df1a",
+        "name": "Webhook Sponsor",
+        "webhookId": "skatejam-sponsor-001"
+      },
+      {
+        "parameters": {
+          "jsCode": "// Body llega como string por mode: 'no-cors', hay que parsearlo\nconst raw = $input.first().json.body;\nconst body = typeof raw === 'string' ? JSON.parse(raw) : raw;\n\nconst planLabels = {\n  'general': 'Sponsor General – 500€',\n  'a': 'Sponsor A – 350€',\n  'b': 'Sponsor B – Productos',\n  'custom': 'Quiere hablar opciones'\n};\n\nconst plan = body.plan || 'no especificado';\n\nreturn [{\n  json: {\n    nombre:         (body.nombre || '').trim(),\n    empresa:        (body.empresa || '').trim(),\n    nombreCompleto: `${(body.nombre || '').trim()} – ${(body.empresa || '').trim()}`.replace(/ – $/, ''),\n    email:          (body.email || '').trim().toLowerCase(),\n    telefono:       (body.telefono || '').trim(),\n    plan,\n    planLabel:      planLabels[plan] || plan,\n    mensaje:        body.mensaje || '',\n    evento:         'Surfin Skate Jam 2026',\n    fecha_contacto: new Date().toISOString(),\n    tipo:           'sponsor'\n  }\n}];"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          16,
+          272
+        ],
+        "id": "8bf8b4b9-efdc-4df5-9178-035be673f975",
+        "name": "Procesar Datos Sponsor"
+      },
+      {
+        "parameters": {
+          "url": "=https://services.leadconnectorhq.com/contacts/",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpHeaderAuth",
+          "sendQuery": true,
+          "queryParameters": {
+            "parameters": [
+              {
+                "name": "locationId",
+                "value": "Mzc11LSCRrjBDJbxT1YK"
+              },
+              {
+                "name": "query",
+                "value": "={{ $json.email }}"
+              },
+              {
+                "name": "limit",
+                "value": "1"
+              }
+            ]
+          },
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "Version",
+                "value": "2021-07-28"
+              },
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          256,
+          160
+        ],
+        "id": "0bae3805-f548-4c29-a3d3-08191f71bbe0",
+        "name": "Buscar Contacto Sponsor en GHL",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "rpI1C5OGO5YiJBbF",
+            "name": "ghl_surfinacademy_skatejam"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "jsCode": "// Tags nuevos del formulario — incluye plan y mensaje como tags\nconst plan = $('Procesar Datos Sponsor').item.json.plan;\nconst mensaje = $('Procesar Datos Sponsor').item.json.mensaje;\nconst empresa = $('Procesar Datos Sponsor').item.json.empresa;\n\nconst nuevosTags = [\n  'skatejam-sponsor',\n  'plan-' + plan,\n  'evento-2026',\n  'pendiente-contacto'\n];\n\n// Añadir empresa como tag si existe\nif (empresa && empresa.trim() !== '') {\n  nuevosTags.push('empresa-' + empresa.trim().toLowerCase().replace(/\\s+/g, '-'));\n}\n\n// Añadir mensaje solo si existe y no está vacío\nif (mensaje && mensaje.trim() !== '') {\n  nuevosTags.push('mensaje-' + mensaje.trim().toLowerCase().replace(/\\s+/g, '-'));\n}\n\n// Tags existentes en GHL (si el contacto ya existe)\nconst contactoExistente = $input.first().json?.contacts?.[0];\nconst tagsExistentes = contactoExistente?.tags || [];\n\n// Combinar sin duplicados\nconst tagsCombinados = [...new Set([...tagsExistentes, ...nuevosTags])];\n\nreturn [{\n  json: {\n    ...$('Procesar Datos Sponsor').item.json,\n    tags: tagsCombinados\n  }\n}];"
+        },
+        "type": "n8n-nodes-base.code",
+        "typeVersion": 2,
+        "position": [
+          496,
+          160
+        ],
+        "id": "0fb8a557-fe5d-4afa-a4d9-005bbef4246e",
+        "name": "Combinar Tags Sponsor"
+      },
+      {
+        "parameters": {
+          "method": "POST",
+          "url": "https://services.leadconnectorhq.com/contacts/upsert",
+          "authentication": "genericCredentialType",
+          "genericAuthType": "httpHeaderAuth",
+          "sendHeaders": true,
+          "headerParameters": {
+            "parameters": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "Version",
+                "value": "2021-07-28"
+              }
+            ]
+          },
+          "sendBody": true,
+          "specifyBody": "json",
+          "jsonBody": "={\n  \"firstName\": \"{{ $json.nombre }}\",\n  \"lastName\": \"{{ $json.empresa }}\",\n  \"email\": \"{{ $json.email }}\",\n  \"phone\": \"{{ $json.telefono }}\",\n  \"companyName\": \"{{ $json.empresa }}\",\n  \"locationId\": \"Mzc11LSCRrjBDJbxT1YK\",\n  \"source\": \"Surfin Skate Jam - Web\",\n  \"tags\": {{ JSON.stringify($json.tags) }}\n}",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.httpRequest",
+        "typeVersion": 4.2,
+        "position": [
+          736,
+          160
+        ],
+        "id": "be30f196-a930-455c-967d-a0072c748e7f",
+        "name": "Crear Contacto Sponsor en GHL",
+        "credentials": {
+          "httpHeaderAuth": {
+            "id": "rpI1C5OGO5YiJBbF",
+            "name": "ghl_surfinacademy_skatejam"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "sendTo": "={{ $('Procesar Datos Sponsor').item.json.email }}",
+          "subject": "Hemos recibido tu solicitud – Surfin Skate Jam 2026",
+          "message": "=<div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #0a0a0a; color: #f0ede6; padding: 40px;\">\n\n  <div style=\"text-align: center; margin-bottom: 30px;\">\n    <h1 style=\"font-size: 2.5rem; letter-spacing: 4px; color: #f5c800; margin: 0;\">SURFIN</h1>\n    <h2 style=\"font-size: 1rem; letter-spacing: 6px; color: #888; margin: 5px 0 0;\">SKATE JAM 2026</h2>\n  </div>\n\n  <div style=\"border-top: 2px solid #f5c800; padding-top: 30px; margin-bottom: 30px;\">\n    <h3 style=\"color: #f5c800; font-size: 1rem; letter-spacing: 3px; text-transform: uppercase;\">¡Gracias por tu interés!</h3>\n    <p style=\"color: #ccc; line-height: 1.8;\">Hemos recibido tu solicitud de patrocinio para el <strong style=\"color: #fff;\">Surfin Skate Jam</strong>. Nuestro equipo revisará tu propuesta y se pondrá en contacto contigo en menos de 48 horas.</p>\n  </div>\n\n  <div style=\"background: #1a1a1a; padding: 20px; margin-bottom: 30px; border-left: 3px solid #f5c800;\">\n    <p style=\"margin: 0 0 8px; color: #888; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;\">TU SOLICITUD</p>\n    <p style=\"margin: 4px 0; color: #f0ede6;\">📋 <strong>Plan seleccionado:</strong> {{ $('Procesar Datos Sponsor').item.json.planLabel }}</p>\n    <p style=\"margin: 4px 0; color: #f0ede6;\">📅 <strong>Evento:</strong> 9 de Mayo de 2026</p>\n    <p style=\"margin: 4px 0; color: #f0ede6;\">📍 <strong>Lugar:</strong> C. Zamora 123, Nave A – Ogíjares, Granada</p>\n  </div>\n\n  <div style=\"background: #111; padding: 20px; margin-bottom: 30px;\">\n    <p style=\"margin: 0 0 10px; color: #f5c800; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;\">CONTACTO DIRECTO</p>\n    <p style=\"margin: 4px 0; color: #ccc;\">👤 <strong style=\"color:#fff;\">Gustavo Herrera</strong></p>\n    <p style=\"margin: 4px 0; color: #ccc;\">📱 +34 600 32 63 78</p>\n    <p style=\"margin: 4px 0; color: #ccc;\">🌐 www.surfin.es</p>\n  </div>\n\n  <div style=\"border-top: 1px solid #333; padding-top: 20px; text-align: center;\">\n    <a href=\"https://skatejam.surfin.es#patrocinio\" style=\"background: #f5c800; color: #0a0a0a; padding: 14px 32px; text-decoration: none; font-weight: bold; letter-spacing: 2px; font-size: 0.8rem; text-transform: uppercase; display: inline-block;\">VER PLANES DE PATROCINIO</a>\n  </div>\n\n</div>",
+          "options": {
+            "appendAttribution": false
+          }
+        },
+        "type": "n8n-nodes-base.gmail",
+        "typeVersion": 2.2,
+        "position": [
+          256,
+          336
+        ],
+        "id": "1495ed45-a44f-47b6-99be-4f671e2d482e",
+        "name": "Email Acuse al Sponsor",
+        "webhookId": "75735485-2e35-4f4a-b488-eda9e022359a",
+        "credentials": {
+          "gmailOAuth2": {
+            "id": "wR7U82S8bmDH4odC",
+            "name": "info@tailwind.es"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "sendTo": "gustavo@surfin.es",
+          "subject": "=🤝 NUEVO SPONSOR INTERESADO: {{ $('Procesar Datos Sponsor').item.json.nombreCompleto }} – {{ $('Procesar Datos Sponsor').item.json.planLabel }}",
+          "message": "=<div style=\"font-family: Arial, sans-serif; max-width: 500px; padding: 20px; background: #fff; border-top: 4px solid #f5c800;\">\n  <h2 style=\"color: #0a0a0a; margin-top: 0;\">🤝 Nuevo Sponsor Interesado</h2>\n  \n  <div style=\"background: #fff8e1; padding: 15px; border-radius: 4px; margin-bottom: 20px;\">\n    <p style=\"margin: 0; font-size: 1.1rem; font-weight: bold; color: #e65100;\">{{ $('Procesar Datos Sponsor').item.json.planLabel }}</p>\n  </div>\n\n  <table style=\"width: 100%; border-collapse: collapse;\">\n    <tr style=\"border-bottom: 1px solid #eee;\">\n      <td style=\"padding: 8px 0; color: #888; width: 35%;\">Nombre/Empresa</td>\n      <td style=\"padding: 8px 0; font-weight: bold;\">{{ $('Procesar Datos Sponsor').item.json.nombreCompleto }}</td>\n    </tr>\n    <tr style=\"border-bottom: 1px solid #eee;\">\n      <td style=\"padding: 8px 0; color: #888;\">Email</td>\n      <td style=\"padding: 8px 0;\"><a href=\"mailto:{{ $('Procesar Datos Sponsor').item.json.email }}\">{{ $('Procesar Datos Sponsor').item.json.email }}</a></td>\n    </tr>\n    <tr style=\"border-bottom: 1px solid #eee;\">\n      <td style=\"padding: 8px 0; color: #888;\">Teléfono</td>\n      <td style=\"padding: 8px 0;\"><a href=\"tel:{{ $('Procesar Datos Sponsor').item.json.telefono }}\">{{ $('Procesar Datos Sponsor').item.json.telefono }}</a></td>\n    </tr>\n    <tr style=\"border-bottom: 1px solid #eee;\">\n      <td style=\"padding: 8px 0; color: #888;\">Plan interés</td>\n      <td style=\"padding: 8px 0;\">{{ $('Procesar Datos Sponsor').item.json.planLabel }}</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 8px 0; color: #888;\">Mensaje</td>\n      <td style=\"padding: 8px 0;\">{{ $('Procesar Datos Sponsor').item.json.mensaje || '—' }}</td>\n    </tr>\n  </table>\n\n  <div style=\"margin-top: 20px; padding: 15px; background: #f5f5f5; border-radius: 4px;\">\n    <p style=\"margin: 0; font-size: 0.85rem; color: #555;\">⏰ Contactado el {{ $('Procesar Datos Sponsor').item.json.fecha_contacto }}</p>\n    <p style=\"margin: 8px 0 0; font-size: 0.85rem; color: #555;\">📋 Contacto creado en GoHighLevel con tag <strong>pendiente-contacto</strong>. Recuerda moverlo al pipeline de sponsors.</p>\n  </div>\n</div>",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.gmail",
+        "typeVersion": 2.2,
+        "position": [
+          256,
+          512
+        ],
+        "id": "fc606a0e-f3dd-4ba4-89bb-5fd542cddd21",
+        "name": "Alerta Urgente a Gustavo",
+        "webhookId": "31d87b94-ba7e-4a7f-bb37-4c944088b2bd",
+        "credentials": {
+          "gmailOAuth2": {
+            "id": "wR7U82S8bmDH4odC",
+            "name": "info@tailwind.es"
+          }
+        }
+      },
+      {
+        "parameters": {
+          "respondWith": "json",
+          "responseBody": "={ \"success\": true, \"message\": \"Solicitud recibida, nos ponemos en contacto pronto\" }",
+          "options": {
+            "responseCode": 200
+          }
+        },
+        "type": "n8n-nodes-base.respondToWebhook",
+        "typeVersion": 1.5,
+        "position": [
+          976,
+          160
+        ],
+        "id": "9455610c-bd6a-44b2-97e9-5722b0e268f5",
+        "name": "Responder OK al Formulario1"
+      }
+    ],
+    "connections": {
+      "Webhook Rider": {
+        "main": [
+          [
+            {
+              "node": "Procesar Datos Rider",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Procesar Datos Rider": {
+        "main": [
+          [
+            {
+              "node": "Buscar Contacto Rider en GHL",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Email Confirmación Rider",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Notificación Interna Equipo",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Buscar Contacto Rider en GHL": {
+        "main": [
+          [
+            {
+              "node": "Combinar Tags Rider",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Combinar Tags Rider": {
+        "main": [
+          [
+            {
+              "node": "Crear Contacto en GHL",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Crear Contacto en GHL": {
+        "main": [
+          [
+            {
+              "node": "Responder OK al Formulario",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Webhook Sponsor": {
+        "main": [
+          [
+            {
+              "node": "Procesar Datos Sponsor",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Procesar Datos Sponsor": {
+        "main": [
+          [
+            {
+              "node": "Buscar Contacto Sponsor en GHL",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Email Acuse al Sponsor",
+              "type": "main",
+              "index": 0
+            },
+            {
+              "node": "Alerta Urgente a Gustavo",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Buscar Contacto Sponsor en GHL": {
+        "main": [
+          [
+            {
+              "node": "Combinar Tags Sponsor",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Combinar Tags Sponsor": {
+        "main": [
+          [
+            {
+              "node": "Crear Contacto Sponsor en GHL",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Crear Contacto Sponsor en GHL": {
+        "main": [
+          [
+            {
+              "node": "Responder OK al Formulario1",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "authors": "Tailwind Media",
+    "name": "Version 72370f58",
+    "description": "",
+    "autosaved": false
+  },
+  "activeVersionId": "72370f58-54ba-4d04-8e7d-4a2e8cf49590",
+  "connections": {
+    "Webhook Rider": {
+      "main": [
+        [
+          {
+            "node": "Procesar Datos Rider",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Procesar Datos Rider": {
+      "main": [
+        [
+          {
+            "node": "Buscar Contacto Rider en GHL",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Email Confirmación Rider",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Notificación Interna Equipo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Buscar Contacto Rider en GHL": {
+      "main": [
+        [
+          {
+            "node": "Combinar Tags Rider",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Combinar Tags Rider": {
+      "main": [
+        [
+          {
+            "node": "Crear Contacto en GHL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Crear Contacto en GHL": {
+      "main": [
+        [
+          {
+            "node": "Responder OK al Formulario",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook Sponsor": {
+      "main": [
+        [
+          {
+            "node": "Procesar Datos Sponsor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Procesar Datos Sponsor": {
+      "main": [
+        [
+          {
+            "node": "Buscar Contacto Sponsor en GHL",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Email Acuse al Sponsor",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Alerta Urgente a Gustavo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Buscar Contacto Sponsor en GHL": {
+      "main": [
+        [
+          {
+            "node": "Combinar Tags Sponsor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Combinar Tags Sponsor": {
+      "main": [
+        [
+          {
+            "node": "Crear Contacto Sponsor en GHL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Crear Contacto Sponsor en GHL": {
+      "main": [
+        [
+          {
+            "node": "Responder OK al Formulario1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-03-31T08:35:17.625Z",
+  "id": "mqSQLLnh8EL5j1n_EkasG",
+  "isArchived": false,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "SkateJam_Sponsors_v2",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "skatejam-rider",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -240,
+        -320
+      ],
+      "id": "235f8e43-77af-4e2b-b558-977dbe22888b",
+      "name": "Webhook Rider",
+      "webhookId": "skatejam-rider-001"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Body llega como string por mode: 'no-cors', hay que parsearlo\nconst raw = $input.first().json.body;\nconst body = typeof raw === 'string' ? JSON.parse(raw) : raw;\n\nconst nombre = (body.nombre || '').trim();\nconst apellidos = (body.apellidos || '').trim();\nconst nombreCompleto = `${nombre} ${apellidos}`.trim();\n\nreturn [{\n  json: {\n    nombre,\n    apellidos,\n    nombreCompleto,\n    email: (body.email || '').trim().toLowerCase(),\n    telefono: (body.telefono || '').trim(),\n    edad: body.edad || '',\n    nivel: body.nivel || 'no especificado',\n    mensaje: body.mensaje || '',\n    evento: 'Surfin Skate Jam 2026',\n    fecha_inscripcion: new Date().toISOString(),\n    tipo: 'rider'\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        0,
+        -320
+      ],
+      "id": "ff259a0a-cfaa-4e75-b771-0ce5f5baff77",
+      "name": "Procesar Datos Rider"
+    },
+    {
+      "parameters": {
+        "url": "=https://services.leadconnectorhq.com/contacts/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "locationId",
+              "value": "Mzc11LSCRrjBDJbxT1YK"
+            },
+            {
+              "name": "query",
+              "value": "={{ $json.email }}"
+            },
+            {
+              "name": "limit",
+              "value": "1"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"locationId\": \"Mzc11LSCRrjBDJbxT1YK\",\n  \"filters\": [\n    {\n      \"field\": \"email\",\n      \"operator\": \"=\",\n      \"value\": \"{{ $json.email }}\"\n    }\n  ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        240,
+        -432
+      ],
+      "id": "b471ab98-c216-4453-9446-2863d9ab948a",
+      "name": "Buscar Contacto Rider en GHL",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "rpI1C5OGO5YiJBbF",
+          "name": "ghl_surfinacademy_skatejam"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Tags nuevos del formulario — incluye edad y mensaje como tags\nconst nivel = $('Procesar Datos Rider').item.json.nivel;\nconst edad = $('Procesar Datos Rider').item.json.edad;\nconst mensaje = $('Procesar Datos Rider').item.json.mensaje;\n\nconst nuevosTags = [\n  'skatejam-rider',\n  'nivel-' + nivel,\n  'evento-2026',\n  'edad-' + edad\n];\n\n// Añadir mensaje solo si existe y no está vacío\nif (mensaje && mensaje.trim() !== '') {\n  nuevosTags.push('mensaje-' + mensaje.trim().toLowerCase().replace(/\\s+/g, '-'));\n}\n\n// Tags existentes en GHL (si el contacto ya existe)\nconst contactoExistente = $input.first().json?.contacts?.[0];\nconst tagsExistentes = contactoExistente?.tags || [];\n\n// Combinar sin duplicados\nconst tagsCombinados = [...new Set([...tagsExistentes, ...nuevosTags])];\n\nreturn [{\n  json: {\n    ...$('Procesar Datos Rider').item.json,\n    tags: tagsCombinados\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        -432
+      ],
+      "id": "894776a9-ea9b-48a6-97be-26460bb12387",
+      "name": "Combinar Tags Rider"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://services.leadconnectorhq.com/contacts/upsert",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"firstName\": \"{{ $json.nombre }}\",\n  \"lastName\": \"{{ $json.apellidos }}\",\n  \"email\": \"{{ $json.email }}\",\n  \"phone\": \"{{ $json.telefono }}\",\n  \"locationId\": \"Mzc11LSCRrjBDJbxT1YK\",\n  \"source\": \"Surfin Skate Jam - Web\",\n  \"tags\": {{ JSON.stringify($json.tags) }},\n  \"customFields\": [\n    {\n      \"id\": \"FIELD_ID_EDAD\",\n      \"value\": \"{{ $json.edad }}\"\n    },\n    {\n      \"id\": \"FIELD_ID_MENSAJE\",\n      \"value\": \"{{ $json.mensaje }}\"\n    }\n  ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        720,
+        -432
+      ],
+      "id": "d2405331-1ddb-4017-82f9-81742ceaf84c",
+      "name": "Crear Contacto en GHL",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "rpI1C5OGO5YiJBbF",
+          "name": "ghl_surfinacademy_skatejam"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Procesar Datos Rider').item.json.email }}",
+        "subject": "✅ ¡Inscripción confirmada! Surfin Skate Jam – 9 Mayo 2026",
+        "message": "=<div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #0a0a0a; color: #f0ede6; padding: 40px;\">\n\n  <div style=\"text-align: center; margin-bottom: 30px;\">\n    <h1 style=\"font-size: 2.5rem; letter-spacing: 4px; color: #f5c800; margin: 0;\">SURFIN</h1>\n    <h2 style=\"font-size: 1.2rem; letter-spacing: 6px; color: #888; margin: 5px 0 0;\">SKATE JAM 2026</h2>\n  </div>\n\n  <div style=\"border-top: 2px solid #f5c800; padding-top: 30px; margin-bottom: 30px;\">\n    <h3 style=\"color: #f5c800; font-size: 1rem; letter-spacing: 3px; text-transform: uppercase;\">¡Hola, {{ $('Procesar Datos Rider').item.json.nombre }}!</h3>\n    <p style=\"color: #ccc; line-height: 1.8;\">Tu inscripción al <strong style=\"color: #fff;\">Surfin Skate Jam</strong> ha sido recibida correctamente. Pronto nos pondremos en contacto contigo con todos los detalles del evento.</p>\n  </div>\n\n  <div style=\"background: #1a1a1a; padding: 20px; margin-bottom: 30px; border-left: 3px solid #f5c800;\">\n    <p style=\"margin: 0 0 8px; color: #888; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;\">RESUMEN DE INSCRIPCIÓN</p>\n    <p style=\"margin: 4px 0; color: #f0ede6;\">📅 <strong>Fecha:</strong> 9 de Mayo de 2026</p>\n    <p style=\"margin: 4px 0; color: #f0ede6;\">📍 <strong>Lugar:</strong> C. Zamora 123, Nave A – 18151 Ogíjares, Granada</p>\n    <p style=\"margin: 4px 0; color: #f0ede6;\">🛹 <strong>Nivel:</strong> {{ $('Procesar Datos Rider').item.json.nivel }}</p>\n    <p style=\"margin: 4px 0; color: #f0ede6;\">👤 <strong>Rider:</strong> {{ $('Procesar Datos Rider').item.json.nombreCompleto }}</p>\n  </div>\n\n  <div style=\"text-align: center; margin-bottom: 30px;\">\n    <a href=\"https://skatejam.surfin.es\" style=\"background: #f5c800; color: #0a0a0a; padding: 14px 32px; text-decoration: none; font-weight: bold; letter-spacing: 2px; font-size: 0.85rem; text-transform: uppercase; display: inline-block;\">VER DETALLES DEL EVENTO →</a>\n  </div>\n\n  <div style=\"border-top: 1px solid #333; padding-top: 20px; text-align: center;\">\n    <p style=\"color: #555; font-size: 0.75rem;\">¿Tienes alguna pregunta? Contacta con nosotros:</p>\n    <p style=\"color: #888; font-size: 0.8rem;\">📱 +34 682 23 76 33 · 🌐 www.surfin.es</p>\n  </div>\n\n</div>",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        256,
+        -224
+      ],
+      "id": "3c769689-ace7-4de2-9e3e-c36059b14139",
+      "name": "Email Confirmación Rider",
+      "webhookId": "0611a9f5-f0bb-4c60-944b-bda9fb57588f",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "wR7U82S8bmDH4odC",
+          "name": "info@tailwind.es"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "gustavo@surfin.es",
+        "subject": "=🛹 Nuevo rider inscrito: {{ $('Procesar Datos Rider').item.json.nombreCompleto }}",
+        "message": "=<div style=\"font-family: Arial, sans-serif; max-width: 500px; padding: 20px; background: #f5f5f5;\">\n  <h2 style=\"color: #0a0a0a; border-bottom: 3px solid #f5c800; padding-bottom: 10px;\">🛹 Nuevo Rider Inscrito</h2>\n  <p><strong>Nombre:</strong> {{ $('Procesar Datos Rider').item.json.nombreCompleto }}</p>\n  <p><strong>Email:</strong> {{ $('Procesar Datos Rider').item.json.email }}</p>\n  <p><strong>Teléfono:</strong> {{ $('Procesar Datos Rider').item.json.telefono }}</p>\n  <p><strong>Edad:</strong> {{ $('Procesar Datos Rider').item.json.edad }}</p>\n  <p><strong>Nivel:</strong> {{ $('Procesar Datos Rider').item.json.nivel }}</p>\n  <p><strong>Mensaje:</strong> {{ $('Procesar Datos Rider').item.json.mensaje || 'Sin mensaje' }}</p>\n  <p><strong>Fecha inscripción:</strong> {{ $('Procesar Datos Rider').item.json.fecha_inscripcion }}</p>\n  <hr style=\"border-color: #f5c800;\">\n  <p style=\"color: #888; font-size: 0.8rem;\">Revisa el contacto en GoHighLevel para gestionar el seguimiento.</p>\n</div>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        256,
+        -48
+      ],
+      "id": "dce6911c-bad5-45cd-9a19-c913be17fd2f",
+      "name": "Notificación Interna Equipo",
+      "webhookId": "955cce04-6059-4994-923d-1094b5e79a43",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "wR7U82S8bmDH4odC",
+          "name": "info@tailwind.es"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={ \"success\": true, \"message\": \"Inscripción recibida correctamente\" }",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        960,
+        -432
+      ],
+      "id": "9872d015-4c5c-4ea6-bad2-1efd4dc8c36c",
+      "name": "Responder OK al Formulario"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "skatejam-sponsor",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -224,
+        272
+      ],
+      "id": "dfa95751-0e15-421f-a31d-ebac2671df1a",
+      "name": "Webhook Sponsor",
+      "webhookId": "skatejam-sponsor-001"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Body llega como string por mode: 'no-cors', hay que parsearlo\nconst raw = $input.first().json.body;\nconst body = typeof raw === 'string' ? JSON.parse(raw) : raw;\n\nconst planLabels = {\n  'general': 'Sponsor General – 500€',\n  'a': 'Sponsor A – 350€',\n  'b': 'Sponsor B – Productos',\n  'custom': 'Quiere hablar opciones'\n};\n\nconst plan = body.plan || 'no especificado';\n\nreturn [{\n  json: {\n    nombre:         (body.nombre || '').trim(),\n    empresa:        (body.empresa || '').trim(),\n    nombreCompleto: `${(body.nombre || '').trim()} – ${(body.empresa || '').trim()}`.replace(/ – $/, ''),\n    email:          (body.email || '').trim().toLowerCase(),\n    telefono:       (body.telefono || '').trim(),\n    plan,\n    planLabel:      planLabels[plan] || plan,\n    mensaje:        body.mensaje || '',\n    evento:         'Surfin Skate Jam 2026',\n    fecha_contacto: new Date().toISOString(),\n    tipo:           'sponsor'\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        16,
+        272
+      ],
+      "id": "8bf8b4b9-efdc-4df5-9178-035be673f975",
+      "name": "Procesar Datos Sponsor"
+    },
+    {
+      "parameters": {
+        "url": "=https://services.leadconnectorhq.com/contacts/",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "locationId",
+              "value": "Mzc11LSCRrjBDJbxT1YK"
+            },
+            {
+              "name": "query",
+              "value": "={{ $json.email }}"
+            },
+            {
+              "name": "limit",
+              "value": "1"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        256,
+        160
+      ],
+      "id": "0bae3805-f548-4c29-a3d3-08191f71bbe0",
+      "name": "Buscar Contacto Sponsor en GHL",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "rpI1C5OGO5YiJBbF",
+          "name": "ghl_surfinacademy_skatejam"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Tags nuevos del formulario — incluye plan y mensaje como tags\nconst plan = $('Procesar Datos Sponsor').item.json.plan;\nconst mensaje = $('Procesar Datos Sponsor').item.json.mensaje;\nconst empresa = $('Procesar Datos Sponsor').item.json.empresa;\n\nconst nuevosTags = [\n  'skatejam-sponsor',\n  'plan-' + plan,\n  'evento-2026',\n  'pendiente-contacto'\n];\n\n// Añadir empresa como tag si existe\nif (empresa && empresa.trim() !== '') {\n  nuevosTags.push('empresa-' + empresa.trim().toLowerCase().replace(/\\s+/g, '-'));\n}\n\n// Añadir mensaje solo si existe y no está vacío\nif (mensaje && mensaje.trim() !== '') {\n  nuevosTags.push('mensaje-' + mensaje.trim().toLowerCase().replace(/\\s+/g, '-'));\n}\n\n// Tags existentes en GHL (si el contacto ya existe)\nconst contactoExistente = $input.first().json?.contacts?.[0];\nconst tagsExistentes = contactoExistente?.tags || [];\n\n// Combinar sin duplicados\nconst tagsCombinados = [...new Set([...tagsExistentes, ...nuevosTags])];\n\nreturn [{\n  json: {\n    ...$('Procesar Datos Sponsor').item.json,\n    tags: tagsCombinados\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        496,
+        160
+      ],
+      "id": "0fb8a557-fe5d-4afa-a4d9-005bbef4246e",
+      "name": "Combinar Tags Sponsor"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://services.leadconnectorhq.com/contacts/upsert",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Version",
+              "value": "2021-07-28"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"firstName\": \"{{ $json.nombre }}\",\n  \"lastName\": \"{{ $json.empresa }}\",\n  \"email\": \"{{ $json.email }}\",\n  \"phone\": \"{{ $json.telefono }}\",\n  \"companyName\": \"{{ $json.empresa }}\",\n  \"locationId\": \"Mzc11LSCRrjBDJbxT1YK\",\n  \"source\": \"Surfin Skate Jam - Web\",\n  \"tags\": {{ JSON.stringify($json.tags) }}\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        736,
+        160
+      ],
+      "id": "be30f196-a930-455c-967d-a0072c748e7f",
+      "name": "Crear Contacto Sponsor en GHL",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "rpI1C5OGO5YiJBbF",
+          "name": "ghl_surfinacademy_skatejam"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Procesar Datos Sponsor').item.json.email }}",
+        "subject": "Hemos recibido tu solicitud – Surfin Skate Jam 2026",
+        "message": "=<div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #0a0a0a; color: #f0ede6; padding: 40px;\">\n\n  <div style=\"text-align: center; margin-bottom: 30px;\">\n    <h1 style=\"font-size: 2.5rem; letter-spacing: 4px; color: #f5c800; margin: 0;\">SURFIN</h1>\n    <h2 style=\"font-size: 1rem; letter-spacing: 6px; color: #888; margin: 5px 0 0;\">SKATE JAM 2026</h2>\n  </div>\n\n  <div style=\"border-top: 2px solid #f5c800; padding-top: 30px; margin-bottom: 30px;\">\n    <h3 style=\"color: #f5c800; font-size: 1rem; letter-spacing: 3px; text-transform: uppercase;\">¡Gracias por tu interés!</h3>\n    <p style=\"color: #ccc; line-height: 1.8;\">Hemos recibido tu solicitud de patrocinio para el <strong style=\"color: #fff;\">Surfin Skate Jam</strong>. Nuestro equipo revisará tu propuesta y se pondrá en contacto contigo en menos de 48 horas.</p>\n  </div>\n\n  <div style=\"background: #1a1a1a; padding: 20px; margin-bottom: 30px; border-left: 3px solid #f5c800;\">\n    <p style=\"margin: 0 0 8px; color: #888; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;\">TU SOLICITUD</p>\n    <p style=\"margin: 4px 0; color: #f0ede6;\">📋 <strong>Plan seleccionado:</strong> {{ $('Procesar Datos Sponsor').item.json.planLabel }}</p>\n    <p style=\"margin: 4px 0; color: #f0ede6;\">📅 <strong>Evento:</strong> 9 de Mayo de 2026</p>\n    <p style=\"margin: 4px 0; color: #f0ede6;\">📍 <strong>Lugar:</strong> C. Zamora 123, Nave A – Ogíjares, Granada</p>\n  </div>\n\n  <div style=\"background: #111; padding: 20px; margin-bottom: 30px;\">\n    <p style=\"margin: 0 0 10px; color: #f5c800; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;\">CONTACTO DIRECTO</p>\n    <p style=\"margin: 4px 0; color: #ccc;\">👤 <strong style=\"color:#fff;\">Gustavo Herrera</strong></p>\n    <p style=\"margin: 4px 0; color: #ccc;\">📱 +34 600 32 63 78</p>\n    <p style=\"margin: 4px 0; color: #ccc;\">🌐 www.surfin.es</p>\n  </div>\n\n  <div style=\"border-top: 1px solid #333; padding-top: 20px; text-align: center;\">\n    <a href=\"https://skatejam.surfin.es#patrocinio\" style=\"background: #f5c800; color: #0a0a0a; padding: 14px 32px; text-decoration: none; font-weight: bold; letter-spacing: 2px; font-size: 0.8rem; text-transform: uppercase; display: inline-block;\">VER PLANES DE PATROCINIO</a>\n  </div>\n\n</div>",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        256,
+        336
+      ],
+      "id": "1495ed45-a44f-47b6-99be-4f671e2d482e",
+      "name": "Email Acuse al Sponsor",
+      "webhookId": "75735485-2e35-4f4a-b488-eda9e022359a",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "wR7U82S8bmDH4odC",
+          "name": "info@tailwind.es"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "gustavo@surfin.es",
+        "subject": "=🤝 NUEVO SPONSOR INTERESADO: {{ $('Procesar Datos Sponsor').item.json.nombreCompleto }} – {{ $('Procesar Datos Sponsor').item.json.planLabel }}",
+        "message": "=<div style=\"font-family: Arial, sans-serif; max-width: 500px; padding: 20px; background: #fff; border-top: 4px solid #f5c800;\">\n  <h2 style=\"color: #0a0a0a; margin-top: 0;\">🤝 Nuevo Sponsor Interesado</h2>\n  \n  <div style=\"background: #fff8e1; padding: 15px; border-radius: 4px; margin-bottom: 20px;\">\n    <p style=\"margin: 0; font-size: 1.1rem; font-weight: bold; color: #e65100;\">{{ $('Procesar Datos Sponsor').item.json.planLabel }}</p>\n  </div>\n\n  <table style=\"width: 100%; border-collapse: collapse;\">\n    <tr style=\"border-bottom: 1px solid #eee;\">\n      <td style=\"padding: 8px 0; color: #888; width: 35%;\">Nombre/Empresa</td>\n      <td style=\"padding: 8px 0; font-weight: bold;\">{{ $('Procesar Datos Sponsor').item.json.nombreCompleto }}</td>\n    </tr>\n    <tr style=\"border-bottom: 1px solid #eee;\">\n      <td style=\"padding: 8px 0; color: #888;\">Email</td>\n      <td style=\"padding: 8px 0;\"><a href=\"mailto:{{ $('Procesar Datos Sponsor').item.json.email }}\">{{ $('Procesar Datos Sponsor').item.json.email }}</a></td>\n    </tr>\n    <tr style=\"border-bottom: 1px solid #eee;\">\n      <td style=\"padding: 8px 0; color: #888;\">Teléfono</td>\n      <td style=\"padding: 8px 0;\"><a href=\"tel:{{ $('Procesar Datos Sponsor').item.json.telefono }}\">{{ $('Procesar Datos Sponsor').item.json.telefono }}</a></td>\n    </tr>\n    <tr style=\"border-bottom: 1px solid #eee;\">\n      <td style=\"padding: 8px 0; color: #888;\">Plan interés</td>\n      <td style=\"padding: 8px 0;\">{{ $('Procesar Datos Sponsor').item.json.planLabel }}</td>\n    </tr>\n    <tr>\n      <td style=\"padding: 8px 0; color: #888;\">Mensaje</td>\n      <td style=\"padding: 8px 0;\">{{ $('Procesar Datos Sponsor').item.json.mensaje || '—' }}</td>\n    </tr>\n  </table>\n\n  <div style=\"margin-top: 20px; padding: 15px; background: #f5f5f5; border-radius: 4px;\">\n    <p style=\"margin: 0; font-size: 0.85rem; color: #555;\">⏰ Contactado el {{ $('Procesar Datos Sponsor').item.json.fecha_contacto }}</p>\n    <p style=\"margin: 8px 0 0; font-size: 0.85rem; color: #555;\">📋 Contacto creado en GoHighLevel con tag <strong>pendiente-contacto</strong>. Recuerda moverlo al pipeline de sponsors.</p>\n  </div>\n</div>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        256,
+        512
+      ],
+      "id": "fc606a0e-f3dd-4ba4-89bb-5fd542cddd21",
+      "name": "Alerta Urgente a Gustavo",
+      "webhookId": "31d87b94-ba7e-4a7f-bb37-4c944088b2bd",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "wR7U82S8bmDH4odC",
+          "name": "info@tailwind.es"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={ \"success\": true, \"message\": \"Solicitud recibida, nos ponemos en contacto pronto\" }",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        976,
+        160
+      ],
+      "id": "9455610c-bd6a-44b2-97e9-5722b0e268f5",
+      "name": "Responder OK al Formulario1"
+    }
+  ],
+  "pinData": {
+    "Webhook Rider": [
+      {
+        "json": {
+          "headers": {
+            "connection": "upgrade",
+            "host": "n8n.tailwind.es",
+            "x-forwarded-for": "2.136.43.122",
+            "x-forwarded-proto": "https",
+            "content-length": "258",
+            "sec-ch-ua-platform": "\"Linux\"",
+            "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+            "sec-ch-ua": "\"Chromium\";v=\"146\", \"Not-A.Brand\";v=\"24\", \"Brave\";v=\"146\"",
+            "content-type": "text/plain;charset=UTF-8",
+            "sec-ch-ua-mobile": "?0",
+            "accept": "*/*",
+            "sec-gpc": "1",
+            "accept-language": "es-ES,es;q=0.8",
+            "origin": "https://skatejam.surfin.es",
+            "sec-fetch-site": "cross-site",
+            "sec-fetch-mode": "no-cors",
+            "sec-fetch-dest": "empty",
+            "referer": "https://skatejam.surfin.es/",
+            "accept-encoding": "gzip, deflate, br, zstd"
+          },
+          "params": {},
+          "query": {},
+          "body": "{\"nombre\":\"Emiliano\",\"apellidos\":\"Martinez Verdecchia\",\"email\":\"emilianomartinezvrd@gmail.com\",\"telefono\":\"680866619\",\"edad\":\"20\",\"nivel\":\"pro\",\"mensaje\":\"SOYPRO\",\"tipo\":\"rider\",\"evento\":\"Surfin Skate Jam 2026\",\"fecha_inscripcion\":\"2026-03-31T09:58:41.914Z\"}",
+          "webhookUrl": "https://n8n.tailwind.es/webhook/skatejam-rider",
+          "executionMode": "production"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
+    "Webhook Sponsor": [
+      {
+        "json": {
+          "headers": {
+            "connection": "upgrade",
+            "host": "n8n.tailwind.es",
+            "x-forwarded-for": "2.136.43.122",
+            "x-forwarded-proto": "https",
+            "content-length": "219",
+            "sec-ch-ua-platform": "\"Linux\"",
+            "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+            "sec-ch-ua": "\"Chromium\";v=\"146\", \"Not-A.Brand\";v=\"24\", \"Brave\";v=\"146\"",
+            "content-type": "text/plain;charset=UTF-8",
+            "sec-ch-ua-mobile": "?0",
+            "accept": "*/*",
+            "sec-gpc": "1",
+            "accept-language": "es-ES,es;q=0.8",
+            "origin": "https://skatejam.surfin.es",
+            "sec-fetch-site": "cross-site",
+            "sec-fetch-mode": "no-cors",
+            "sec-fetch-dest": "empty",
+            "referer": "https://skatejam.surfin.es/",
+            "accept-encoding": "gzip, deflate, br, zstd"
+          },
+          "params": {},
+          "query": {},
+          "body": "{\"nombre\":\"EMI\",\"empresa\":\"TailwindMedia\",\"email\":\"info@tailwind.es\",\"telefono\":\"020202020\",\"plan\":\"a\",\"mensaje\":\"ESTO ES UNA PRUEAB\",\"tipo\":\"sponsor\",\"evento\":\"Surfin Skate Jam 2026\",\"fecha\":\"2026-03-31T10:23:48.694Z\"}",
+          "webhookUrl": "https://n8n.tailwind.es/webhook/skatejam-sponsor",
+          "executionMode": "production"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": true,
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-03-31T08:35:17.630Z",
+      "createdAt": "2026-03-31T08:35:17.630Z",
+      "role": "workflow:owner",
+      "workflowId": "mqSQLLnh8EL5j1n_EkasG",
+      "projectId": "x5UZcmGQw2OWHuXb"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 2,
+  "updatedAt": "2026-03-31T10:38:39.036Z",
+  "versionId": "72370f58-54ba-4d04-8e7d-4a2e8cf49590"
+}
