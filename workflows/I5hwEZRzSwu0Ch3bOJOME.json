@@ -1,9 +1,9 @@
 {
   "active": true,
   "activeVersion": {
-    "updatedAt": "2026-03-30T11:50:17.000Z",
-    "createdAt": "2026-03-30T11:50:16.700Z",
-    "versionId": "386f2729-c155-440f-9d45-dc4e19008f65",
+    "updatedAt": "2026-04-01T06:51:21.000Z",
+    "createdAt": "2026-04-01T06:51:19.823Z",
+    "versionId": "3bb5e997-accc-4b62-8781-8aab35b1a0fd",
     "workflowId": "I5hwEZRzSwu0Ch3bOJOME",
     "nodes": [
       {
@@ -40,7 +40,7 @@
       },
       {
         "parameters": {
-          "batchSize": 32,
+          "batchSize": 8,
           "options": {}
         },
         "type": "n8n-nodes-base.splitInBatches",
@@ -226,11 +226,11 @@
       }
     },
     "authors": "Tailwind Media",
-    "name": "Version 386f2729",
+    "name": "Version 3bb5e997",
     "description": "",
     "autosaved": false
   },
-  "activeVersionId": "386f2729-c155-440f-9d45-dc4e19008f65",
+  "activeVersionId": "3bb5e997-accc-4b62-8781-8aab35b1a0fd",
   "connections": {
     "Execute Workflow Trigger": {
       "main": [
@@ -317,7 +317,7 @@
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "embeding_2",
+  "name": "Embeding_2",
   "nodes": [
     {
       "parameters": {},
@@ -353,7 +353,7 @@
     },
     {
       "parameters": {
-        "batchSize": 32,
+        "batchSize": 8,
         "options": {}
       },
       "type": "n8n-nodes-base.splitInBatches",
@@ -475,6 +475,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2026-03-30T11:50:16.694Z",
-  "versionId": "386f2729-c155-440f-9d45-dc4e19008f65"
+  "updatedAt": "2026-04-01T10:42:24.544Z",
+  "versionId": "3bb5e997-accc-4b62-8781-8aab35b1a0fd"
 }
