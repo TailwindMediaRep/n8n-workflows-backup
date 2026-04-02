@@ -1,0 +1,433 @@
+{
+  "active": false,
+  "activeVersion": null,
+  "activeVersionId": null,
+  "connections": {
+    "Scheduler diario": {
+      "main": [
+        [
+          {
+            "node": "Lista archivos en Storage",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lista archivos en Storage": {
+      "main": [
+        [
+          {
+            "node": "Comparar archivos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fuentes ya embedidas": {
+      "main": [
+        [
+          {
+            "node": "Comparar archivos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Comparar archivos": {
+      "main": [
+        [
+          {
+            "node": "¿Hay archivos nuevos?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Hay archivos nuevos?": {
+      "main": [
+        [
+          {
+            "node": "Limpiar chunks_temp",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Sin archivos nuevos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limpiar chunks_temp": {
+      "main": [
+        [
+          {
+            "node": "Expandir archivos nuevos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Expandir archivos nuevos": {
+      "main": [
+        [
+          {
+            "node": "Loop Over New Files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over New Files": {
+      "main": [
+        [
+          {
+            "node": "Llamar Workflow Embeddings",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Ver contenido",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ver contenido": {
+      "main": [
+        [
+          {
+            "node": "Dividir en chunks",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Dividir en chunks": {
+      "main": [
+        [
+          {
+            "node": "Guardar chunk en BD",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guardar chunk en BD": {
+      "main": [
+        [
+          {
+            "node": "Loop Over New Files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2026-04-01T07:04:43.542Z",
+  "id": "94RkfftZnmuOzDpTuTGNN",
+  "isArchived": false,
+  "meta": null,
+  "name": "Manteniminento_embed",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 24
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -1024,
+        -64
+      ],
+      "id": "04fb986f-02d0-4d60-88e4-d1c8134161cc",
+      "name": "Scheduler diario"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://niucsjoaufrzpquicens.supabase.co/storage/v1/object/list/markdown-docs",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5pdWNzam9hdWZyenBxdWljZW5zIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MDIwMzk3NywiZXhwIjoyMDg1Nzc5OTc3fQ.O47K6zqyHxQVKWffIKW6GggqJ_YHpBw0YH3c-Cc5pCk"
+            },
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5pdWNzam9hdWZyenBxdWljZW5zIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MDIwMzk3NywiZXhwIjoyMDg1Nzc5OTc3fQ.O47K6zqyHxQVKWffIKW6GggqJ_YHpBw0YH3c-Cc5pCk"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"limit\": 1000,\n  \"offset\": 0,\n  \"prefix\": \"\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -816,
+        -64
+      ],
+      "id": "28d5a058-d431-4af9-a9dd-385288c63264",
+      "name": "Lista archivos en Storage"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT DISTINCT metadata->>'source' as source FROM documents;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        -816,
+        128
+      ],
+      "id": "cddac8c9-8137-4459-b302-55910b3681ac",
+      "name": "Fuentes ya embedidas"
+    },
+    {
+      "parameters": {
+        "jsCode": "const storageFiles = $('Lista archivos en Storage').all().map(i => i.json.name);\nconst embeddedSources = $('Fuentes ya embedidas').all().map(i => i.json.source);\n\nconst newFiles = storageFiles.filter(f => !embeddedSources.includes(f));\n\nif (newFiles.length === 0) {\n  return [{ json: { nuevos: 0, archivos: [] } }];\n}\n\nreturn [{ json: { nuevos: newFiles.length, archivos: newFiles } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -576,
+        32
+      ],
+      "id": "129402fe-63e2-4b79-90b9-c9eed8c41f1d",
+      "name": "Comparar archivos"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $json.nuevos }}",
+              "operation": "larger"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        -368,
+        32
+      ],
+      "id": "e52b8e67-2888-4543-b7c5-b83237065900",
+      "name": "¿Hay archivos nuevos?"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "TRUNCATE TABLE chunks_temp RESTART IDENTITY;",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        -176,
+        -64
+      ],
+      "id": "be017c9b-db69-47e7-97cd-7bdd73508c94",
+      "name": "Limpiar chunks_temp"
+    },
+    {
+      "parameters": {
+        "jsCode": "const archivos = $input.first().json.archivos;\nreturn archivos.map(nombre => ({ json: { name: nombre } }));"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        32,
+        -64
+      ],
+      "id": "5226cb2b-9efd-4d5e-833f-466f4c853c30",
+      "name": "Expandir archivos nuevos"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        224,
+        -64
+      ],
+      "id": "5603c39f-999b-49df-87cb-5bc837a9cdca",
+      "name": "Loop Over New Files"
+    },
+    {
+      "parameters": {
+        "url": "=https://niucsjoaufrzpquicens.supabase.co/storage/v1/object/markdown-docs/{{ $json.name }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5pdWNzam9hdWZyenBxdWljZW5zIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MDIwMzk3NywiZXhwIjoyMDg1Nzc5OTc3fQ.O47K6zqyHxQVKWffIKW6GggqJ_YHpBw0YH3c-Cc5pCk"
+            },
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5pdWNzam9hdWZyenBxdWljZW5zIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3MDIwMzk3NywiZXhwIjoyMDg1Nzc5OTc3fQ.O47K6zqyHxQVKWffIKW6GggqJ_YHpBw0YH3c-Cc5pCk"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        432,
+        -64
+      ],
+      "id": "b7217054-ffb0-4666-9d61-cb3e9f6196bc",
+      "name": "Ver contenido"
+    },
+    {
+      "parameters": {
+        "jsCode": "const text = $input.first().json.data || '';\nconst filename = $input.first().json.name || 'unknown';\nconst chunkSize = 500;\nconst overlap = 50;\nconst chunks = [];\n\nfor (let i = 0; i < text.length; i += chunkSize - overlap) {\n  const chunk = text.slice(i, i + chunkSize);\n  if (chunk.trim().length > 0) {\n    chunks.push({\n      json: {\n        content: chunk,\n        source: filename,\n        chunk_index: chunks.length\n      }\n    });\n  }\n}\n\nreturn chunks;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        640,
+        -64
+      ],
+      "id": "1e8b5741-15ec-40de-a279-642f5fe7f158",
+      "name": "Dividir en chunks"
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "value": "public",
+          "mode": "list"
+        },
+        "table": {
+          "__rl": true,
+          "value": "chunks_temp",
+          "mode": "list"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "content": "={{ $json.content }}",
+            "source": "={{ $json.source }}",
+            "chunk_index": "={{ $json.chunk_index }}"
+          },
+          "schema": [
+            {
+              "id": "content",
+              "displayName": "content",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "source",
+              "displayName": "source",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "chunk_index",
+              "displayName": "chunk_index",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        832,
+        -64
+      ],
+      "id": "a4c63e61-c205-44f1-8b2e-d93fa80890b7",
+      "name": "Guardar chunk en BD"
+    },
+    {
+      "parameters": {
+        "workflowId": "REEMPLAZA_CON_ID_WORKFLOW_2",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.1,
+      "position": [
+        432,
+        -272
+      ],
+      "id": "87c67e4e-cf8b-479d-b0cb-99f764a68b0c",
+      "name": "Llamar Workflow Embeddings"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        -368,
+        208
+      ],
+      "id": "6ab0cfcd-a9d3-4047-85f3-2b54f85dde8d",
+      "name": "Sin archivos nuevos"
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "shared": [
+    {
+      "updatedAt": "2026-04-01T07:04:43.551Z",
+      "createdAt": "2026-04-01T07:04:43.551Z",
+      "role": "workflow:owner",
+      "workflowId": "94RkfftZnmuOzDpTuTGNN",
+      "projectId": "x5UZcmGQw2OWHuXb"
+    }
+  ],
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2026-04-01T10:43:01.710Z",
+  "versionId": "0ccb7742-0db6-4037-9eaf-38e7c4b8c4d4"
+}
