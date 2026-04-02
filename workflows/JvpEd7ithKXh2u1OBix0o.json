@@ -201,7 +201,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const text = $input.first().json.data || '';\nconst filename = $input.first().json.name || 'unknown';\nconst chunkSize = 500;\nconst overlap = 50;\nconst chunks = [];\n\nfor (let i = 0; i < text.length; i += chunkSize - overlap) {\n  const chunk = text.slice(i, i + chunkSize);\n  if (chunk.trim().length > 0) {\n    chunks.push({\n      json: {\n        content: chunk,\n        source: filename,\n        chunk_index: chunks.length\n      }\n    });\n  }\n}\n\nreturn chunks;"
+        "jsCode": "const text = $input.first().json.data || '';\nconst filename = $('Loop Over Files').item.json.name || 'unknown';\nconst chunkSize = 500;\nconst overlap = 50;\nconst chunks = [];\n\nfor (let i = 0; i < text.length; i += chunkSize - overlap) {\n  const chunk = text.slice(i, i + chunkSize);\n  if (chunk.trim().length > 0) {\n    chunks.push({\n      json: {\n        content: chunk,\n        source: filename,\n        chunk_index: chunks.length\n      }\n    });\n  }\n}\n\nreturn chunks;"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -323,6 +323,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2026-03-30T11:34:38.965Z",
-  "versionId": "06263d9b-43cf-442b-9227-dd504a58af49"
+  "updatedAt": "2026-04-01T10:42:09.368Z",
+  "versionId": "b7fc63e1-8214-43cd-8562-4f0a7341baed"
 }
